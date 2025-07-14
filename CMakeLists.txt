@@ -22,7 +22,7 @@ endif()
 
 option(GEONKICK_LIMITED_VERSION "Enable geonkick limited version" OFF)
 option(GKICK_PLUGIN "Enable build for plugin" OFF)
-option(GKICK_PRESETS "Enable presets" ON)
+option(GKICK_PRESETS "Enable presets" OFF)
 
 if (GKICK_PLUGIN)
   option(GKICK_PLUGIN_LV2 "Enable build LV2 plugin" OFF)
