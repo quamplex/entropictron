@@ -35,6 +35,7 @@ EntWidget::EntWidget(RkMain& app,
         auto f = font();
         f.setSize(12);
         setFont(f);
+        show();
 }
 
 EntWidget::EntWidget(RkMain& app, Rk::WidgetFlags flags)
@@ -45,6 +46,7 @@ EntWidget::EntWidget(RkMain& app, Rk::WidgetFlags flags)
         auto f = font();
         f.setSize(12);
         setFont(f);
+        show();
 }
 
 EntWidget::EntWidget(EntWidget *parent, Rk::WidgetFlags flags)
@@ -55,6 +57,7 @@ EntWidget::EntWidget(EntWidget *parent, Rk::WidgetFlags flags)
         auto f = font();
         f.setSize(12);
         setFont(f);
+        show();
 }
 
 void EntWidget::paintEvent(RkPaintEvent *event)

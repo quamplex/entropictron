@@ -24,6 +24,7 @@
 #include "MainWindow.h"
 
 #include <RkLabel.h>
+#include <RkContainer.h>
 
 RK_DECLARE_IMAGE_RC(app_icon);
 
@@ -56,13 +57,36 @@ MainWindow::~MainWindow()
 
 bool MainWindow::createUi(void)
 {
-        auto logo = new RkLabel(this);
-        logo->setBackgroundColor(background());
-        RkImage image(MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT, RK_IMAGE_RC(app_icon));
-        logo->setSize(image.width(), image.height());
-        logo->setImage(image);
-        logo->show();
-        show();
+        // Main container
+        auto mainContainer = new RkContainer(this, Rk::Orientation::Vertical);
+        mainContainer->setSize(size() - RkSize(10, 10));
+        mainContainer->setPosition({5, 5});
+
+        // Main horizontal container
+        auto horizontalContainer = new RkContainer(this);
+        horizontalContainer->setSize({mainContainer->width(), 282});
+        mainContainer->addContainer(horizontalContainer);
+
+        // Noise 1 controls widget
+        auto noiseControlsWidget = new EntWidget(this);
+        noiseControlsWidget->setBackgroundColor(37, 43, 53);
+        noiseControlsWidget->setSize({314, horizontalContainer->height()});
+        horizontalContainer->addWidget(noiseControlsWidget);
+
+        // Noise 2 controls widget
+        horizontalContainer->addSpace(5);
+        noiseControlsWidget = new EntWidget(this);
+        noiseControlsWidget->setBackgroundColor(37, 43, 53);
+        noiseControlsWidget->setSize({314, horizontalContainer->height()});
+        horizontalContainer->addWidget(noiseControlsWidget);
+
+        // Global controls widget
+        horizontalContainer->addSpace(5);
+        auto globalControlsWidget = new EntWidget(this);
+        globalControlsWidget->setBackgroundColor(37, 43, 53);
+        globalControlsWidget->setSize({252, horizontalContainer->height()});
+        horizontalContainer->addWidget(globalControlsWidget);
+
         return true;
 }
 
