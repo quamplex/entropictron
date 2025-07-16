@@ -75,11 +75,11 @@ namespace fs = std::filesystem;
 #define GEONKICK_LOG_DEBUG(msg)
 #endif //  // GKICK_LIB_LOG_LEVEL_DEBUG
 
-namespace Geonkick
+namespace Entropictron
 {
         constexpr int defaultSampleRate = GEONKICK_DEFAULT_SAMPLE_RATE;
-        constexpr char appName[] = GEONKICK_NAME;
-        constexpr char applicationName[] = GEONKICK_APP_NAME;
+        constexpr char appName[] = "Entropictron";
+        constexpr char applicationName[] = "Entropictron";
         constexpr char applicationVersionStr[] = GEOKICK_VERSION_STRING;
         constexpr std::string_view defaultExportFormat = "flac24";
         constexpr int defaultBitDepth = 16;

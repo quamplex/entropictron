@@ -31,6 +31,6 @@
 //#include <RkLog.h>
 
 using namespace Steinberg;
-static const FUID GKickVstProcessorUID(0xE2CCA532, 0x90E963F0, 0x6415E139, 0x24E34C24);
+static const FUID GKickVstProcessorUID(0xE2DCA632, 0x90E963FA, 0x6415F139, 0x54E54C24);
 
 #endif // GEONKICK_VST_IDS_H

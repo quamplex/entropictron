@@ -1,12 +1,12 @@
 /**
  * File name: MainWindow.h
- * Project: Geonkick (A kick synthesizer)
+ * Project: Entropictron (A texture synthesizer)
  *
- * Copyright (C) 2017 Iurie Nistor
+ * Copyright (C) 2025 Iurie Nistor
  *
- * This file is part of Geonkick.
+ * This file is part of Entropictron.
  *
- * GeonKick is free software; you can redistribute it and/or modify
+ * Entropictron is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
@@ -21,58 +21,25 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef GEONGKICK_MAINWINDOW_H
-#define GEONGKICK_MAINWINDOW_H
+#ifndef ENT_MAINWINDOW_H
+#define ENT_MAINWINDOW_H
 
-#include "geonkick_widget.h"
-#include "FileBrowser.h"
-#include "kit_model.h"
+#include "EntWidget.h"
 
-class Oscillator;
-class GeonkickApi;
-class TopBar;
-class EnvelopeWidget;
-class ControlArea;
-class Limiter;
-class GeonkickModel;
-
-class MainWindow : public GeonkickWidget
+class MainWindow : public EntWidget
 {
  public:
+      explicit MainWindow(RkMain& app /*, EndDspProxy *dspProxy*/);
       explicit MainWindow(RkMain& app,
-                          GeonkickApi *api,
-                          const std::string &preset = std::string());
-      explicit MainWindow(RkMain& app,
-                          GeonkickApi *api,
+                          /* EndDspProxy *dspProxy*/
                           const RkNativeWindowInfo &info);
       ~MainWindow();
-      bool init(void);
       static RkSize getWindowSize();
-      RK_DECL_ACT(onScaleFactor, onScaleFactor(double factor), RK_ARG_TYPE(double), RK_ARG_VAL(factor));
 
  protected:
-      void shortcutEvent(RkKeyEvent *event) override;
-      void dropEvent(RkDropEvent *event) override;
-      void showFileBrowser();
-      void openPreset(const std::string &fileName);
-      void setPreset(const std::string &fileName);
-      void openPreset();
-      void resetToDefault();
-      void updateLimiter(KitModel::PercussionIndex index);
-      RK_DECL_ACT(updateGui, updateGui(), RK_ARG_TYPE(), RK_ARG_VAL());
-      void setSample(const std::string &file);
+        bool createUi(void);
 
  private:
-      void createViewState();
-      void createShortcuts();
-      GeonkickApi *geonkickApi;
-      TopBar *topBar;
-      EnvelopeWidget* envelopeWidget;
-      ControlArea* controlAreaWidget;
-      std::string presetName;
-      std::string currentWorkingPath;
-      Limiter *limiterWidget;
-      GeonkickModel *geonkickModel;
 };
 
-#endif // GEONKICK_MAINWINDOW_H
+#endif // ENT_MAINWINDOW_H

@@ -65,11 +65,10 @@ class GKickVstProcessor : public Vst::SingleComponentEffect {
         tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
         IPlugView* PLUGIN_API createView(FIDString name) SMTG_OVERRIDE;
         tresult PLUGIN_API setComponentState(IBStream* state) SMTG_OVERRIDE;
-        tresult PLUGIN_API setParamNormalized(ParamID tag, ParamValue value) SMTG_OVERRIDE;
 
   protected:
-        void readParameters(const Vst::ProcessData& data);
-        Entropictron entropictronDsp;
+        //        void readParameters(const Vst::ProcessData& data);
+        //Entropictron entropictronDsp;
         std::string stateData;
         std::unique_ptr<GeonkickApi> geonkickApi;
         std::vector<float*> channelsBuffers;

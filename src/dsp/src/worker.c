@@ -42,7 +42,7 @@ geonkick_worker_reference_count()
 enum geonkick_error
 geonkick_worker_create()
 {
-        if (geonkick_worker != NULL)
+        /*        if (geonkick_worker != NULL)
                 return GEONKICK_OK;
 
         geonkick_worker = (struct gkick_worker*)calloc(1, sizeof(struct gkick_worker));
@@ -54,14 +54,14 @@ geonkick_worker_create()
                 gkick_log_error("can't init worker condition variable");
 		return GEONKICK_ERROR;
 	}
-	geonkick_worker->cond_var_initilized = true;
+	geonkick_worker->cond_var_initilized = true;*/
 	return GEONKICK_OK;
 }
 
 enum geonkick_error
 geonkick_worker_start()
 {
-        if (!geonkick_worker)
+        /*        if (!geonkick_worker)
                 return GEONKICK_ERROR;
         if (geonkick_worker->running)
                 return GEONKICK_OK;
@@ -71,13 +71,13 @@ geonkick_worker_start()
                 gkick_log_error("can't create worker thread");
                 geonkick_worker->running = false;
                 return GEONKICK_ERROR;
-        }
+                }*/
         return GEONKICK_OK;
 }
 
 void geonkick_worker_destroy()
 {
-	if (geonkick_worker->running)
+	/*if (geonkick_worker->running)
 		geonkick_worker->running = false;
         pthread_mutex_lock(&geonkick_worker->lock);
         pthread_cond_signal(&geonkick_worker->condition_var);
@@ -91,22 +91,22 @@ void geonkick_worker_destroy()
 	geonkick_worker->cond_var_initilized = false;
 	pthread_mutex_unlock(&geonkick_worker->lock);
         free(geonkick_worker);
-        geonkick_worker = NULL;
+        geonkick_worker = NULL;*/
 }
 
 void geonkick_worker_add_instance(struct geonkick *instance)
 {
-        if (geonkick_worker->ref_count < GEONKICK_MAX_INSTANCES) {
+        /*        if (geonkick_worker->ref_count < GEONKICK_MAX_INSTANCES) {
                 pthread_mutex_lock(&geonkick_worker->lock);
                 instance->id = geonkick_worker->ref_count;
                 geonkick_worker->instances[geonkick_worker->ref_count++] = instance;
                 pthread_mutex_unlock(&geonkick_worker->lock);
-        }
+                }*/
 }
 
 void geonkick_worker_remove_instance(struct geonkick *instance)
 {
-        if (geonkick_worker->ref_count == 0)
+        /*        if (geonkick_worker->ref_count == 0)
                 return;
         pthread_mutex_lock(&geonkick_worker->lock);
         if (geonkick_worker->ref_count) {
@@ -115,39 +115,13 @@ void geonkick_worker_remove_instance(struct geonkick *instance)
                 geonkick_worker->instances[instance->id]->id = instance->id;
         }
         geonkick_worker->instances[--geonkick_worker->ref_count] = NULL;
-        pthread_mutex_unlock(&geonkick_worker->lock);
+        pthread_mutex_unlock(&geonkick_worker->lock);*/
 }
 
 void *geonkick_worker_thread(void *arg)
 {
-        while (geonkick_worker->running) {
-		/**
-                 * Ignore too many updates.
-                 * The last updates will be processed.
-                 */
-                geonkick_usleep(40000);
-                gkick_log_debug("process...");
-                pthread_mutex_lock(&geonkick_worker->lock);
-                for (size_t i = 0; geonkick_worker->instances[i] != NULL && i < GEONKICK_MAX_INSTANCES; i++)
-                        geonkick_process(geonkick_worker->instances[i]);
-
-                if (!geonkick_worker->running) {
-                        pthread_mutex_unlock(&geonkick_worker->lock);
-                        break;
-                }
-
-                gkick_log_debug("wait...");
-                pthread_cond_wait(&geonkick_worker->condition_var, &geonkick_worker->lock);
-                pthread_mutex_unlock(&geonkick_worker->lock);
-                gkick_log_debug("next");
-	}
-        gkick_log_debug("exit");
-        return NULL;
 }
 
 void geonkick_worker_wakeup()
 {
-        pthread_mutex_lock(&geonkick_worker->lock);
-        pthread_cond_signal(&geonkick_worker->condition_var);
-        pthread_mutex_unlock(&geonkick_worker->lock);
 }

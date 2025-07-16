@@ -47,7 +47,7 @@ bool ModuleExit (void)
 #endif // GEONKICK_OS_WINDOWS
 
 
-class MemoryGlitcherEffect
+/*class MemoryGlitcherEffect
 {
 public:
     MemoryGlitcherEffect(int sampleRate = 48000)
@@ -65,7 +65,7 @@ public:
         glitchCount = 0;
     }
 
-    void setParameters(float probability, float jumpMinMs, float jumpMaxMs, float glitchLenMs, int glitchRepeats)
+        void setParameters(float probability, float jumpMinMs, float jumpMaxMs, float glitchLenMs, int glitchRepeats)
     {
         glitchProbability = probability;
         jumpBackMinSamples = static_cast<int>(jumpMinMs * sampleRate / 1000.0f);
@@ -118,7 +118,7 @@ private:
 };
 
 
-MemoryGlitcherEffect glitchEffect;
+MemoryGlitcherEffect glitchEffect;*/
 
 
 GKickVstProcessor::GKickVstProcessor()
@@ -144,9 +144,9 @@ GKickVstProcessor::initialize(FUnknown* context)
         if (res != kResultTrue)
                 return res;
 
-        addAudioOutput(reinterpret_cast<const Steinberg::Vst::TChar*>(u"Stereo Out"),
+        /*addAudioOutput(reinterpret_cast<const Steinberg::Vst::TChar*>(u"Stereo Out"),
                        Vst::SpeakerArr::kStereo);
-        parameters.addParameter(STR16("Noise Type"),
+                parameters.addParameter(STR16("Noise Type"),
                                 nullptr,
                                 2,
                                 1.0,
@@ -163,7 +163,7 @@ GKickVstProcessor::initialize(FUnknown* context)
                                 0,
                                 1.0,
                                 Vst::ParameterInfo::kCanAutomate,
-                                1002);
+                                1002);*/
 
         return kResultTrue;
 }
@@ -180,6 +180,23 @@ GKickVstProcessor::setBusArrangements(Vst::SpeakerArrangement* inputs,
 tresult PLUGIN_API
 GKickVstProcessor::setupProcessing(Vst::ProcessSetup& setup)
 {
+         auto res = Vst::SingleComponentEffect::setupProcessing(setup);
+        if (res != kResultTrue)
+                return res;
+
+        if (!geonkickApi || sampleRate != setup.sampleRate) {
+                sampleRate = setup.sampleRate;
+                geonkickApi = std::make_unique<GeonkickApi>(sampleRate,
+                                                            GeonkickApi::InstanceType::Vst3);
+                if (!geonkickApi->init()) {
+                        geonkickApi = nullptr;
+                        GEONKICK_LOG_ERROR("can't init Geonkick API");
+                        return kResultFalse;
+                }
+
+                //	if (!stateData.empty())
+                //		  geonkickApi->setKitState(stateData);
+        }
         return Vst::SingleComponentEffect::setupProcessing(setup);
 }
 
@@ -191,7 +208,7 @@ GKickVstProcessor::setActive(TBool state)
 
 tresult PLUGIN_API GKickVstProcessor::process(Vst::ProcessData& data)
 {
-        if (!data.inputs || data.numInputs < 1 || !data.outputs || data.numOutputs < 1)
+        /*if (!data.inputs || data.numInputs < 1 || !data.outputs || data.numOutputs < 1)
                 return kResultOk;
 
         float* inL = data.inputs[0].channelBuffers32[0];
@@ -217,7 +234,7 @@ tresult PLUGIN_API GKickVstProcessor::process(Vst::ProcessData& data)
                 {
                         outL[i] = glitchEffect.processSample(inL[i]);
                         outR[i] = glitchEffect.processSample(inR[i]);
-                }
+                        }*/
 
         return kResultOk;
 }
@@ -225,7 +242,7 @@ tresult PLUGIN_API GKickVstProcessor::process(Vst::ProcessData& data)
 tresult PLUGIN_API
 GKickVstProcessor::setState(IBStream* state)
 {
-        if (state == nullptr)
+        /*if (state == nullptr)
                 return kResultTrue;
 
         if (state->seek(0, IBStream::kIBSeekEnd, 0) == kResultFalse) {
@@ -262,17 +279,17 @@ GKickVstProcessor::setState(IBStream* state)
 	if (!geonkickApi) {
 	  stateData = std::move(data);
 	} else {
-	  geonkickApi->setKitState(data);
-	  geonkickApi->notifyUpdateGui();
-	  geonkickApi->notifyKitUpdated();
-	}
+                // geonkickApi->setKitState(data);
+          // geonkickApi->notifyUpdateGui();
+          //  geonkickApi->notifyKitUpdated();
+          }*/
         return kResultOk;
 }
 
 tresult PLUGIN_API
 GKickVstProcessor::getState(IBStream* state)
 {
-        if (state == nullptr || geonkickApi == nullptr)
+        /*if (state == nullptr || geonkickApi == nullptr)
                 return kResultTrue;
 
         int32 nBytes = 0;
@@ -285,15 +302,15 @@ GKickVstProcessor::getState(IBStream* state)
         if (static_cast<decltype(nBytes)>(data.size()) != nBytes) {
                 GEONKICK_LOG_ERROR("error on saving the state");
                 return kResultFalse;
-        }
+                }*/
         return kResultOk;
 }
 
 IPlugView* PLUGIN_API
 GKickVstProcessor::createView(FIDString name)
 {
-        //        if (geonkickApi && name && std::string(name) == std::string("editor"))
-        //                return static_cast<IPlugView*>(new GKickVstEditor(this, geonkickApi.get()));
+        if (geonkickApi && name && std::string(name) == std::string("editor"))
+                return static_cast<IPlugView*>(new GKickVstEditor(this, geonkickApi.get()));
         return nullptr;
 }
 
@@ -303,7 +320,7 @@ GKickVstProcessor::setComponentState(IBStream* state)
         return kResultOk;
 }
 
-float
+        /*float
 GKickVstProcessor::getLastParamValueFromQueue(Steinberg::Vst::IParamValueQueue* queue,
                                                     float fallback)
 {
@@ -343,3 +360,4 @@ void GKickVstProcessor::readParameters(const Vst::ProcessData& data)
                 }
         }
 }
+        */

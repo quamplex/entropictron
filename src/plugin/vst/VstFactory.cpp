@@ -27,15 +27,15 @@
 #include "public.sdk/source/main/pluginfactory.h"
 #include "pluginterfaces/base/fplatform.h"
 
-#define gkickPluginName		"Nonsese"
-#define gkickOriginalFilename	"Nonsese.vst3"
+#define gkickPluginName		"Entropictron"
+#define gkickOriginalFilename	"Entropictron.vst3"
 #if SMTG_PLATFORM_64
-#define gkickFileDescription	gkickPluginName" Nonsese (64Bit)"
+#define gkickFileDescription	gkickPluginName" Entropictron (64Bit)"
 #else
-#define gkickFileDescription	gkickPluginName" Nonsese"
+#define gkickFileDescription	gkickPluginName" Entropictron"
 #endif
 #define gkickCompanyName	"Iurie Nistor"
-#define gkickCompanyWeb		"http://iurie.org/nonsense"
+#define gkickCompanyWeb		"http://iurie.org/Entropictron"
 #define gkickCompanyEmail	"iuriehn@gmail.com"
 #define gkickLegalCopyright	"Copyright (C) 2020 Iurie Nistor. Licensed under the GNU General Public License, Version 3"
 

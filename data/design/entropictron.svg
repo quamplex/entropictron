@@ -7,9 +7,33 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg5"
+   sodipodi:docname="entropictron.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1912"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2.64"
+     inkscape:cx="163.06818"
+     inkscape:cy="161.17424"
+     inkscape:window-width="1920"
+     inkscape:window-height="996"
+     inkscape:window-x="0"
+     inkscape:window-y="28"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g38312" />
   <defs
      id="defs2">
     <linearGradient
@@ -3644,14 +3668,42 @@
          values="0.318033 0.32 0.32 0.21747 0 0.318033 0.32 0.32 0.21747 0 0.318033 0.32 0.32 0.21747 0 0 0 0 1 0 "
          id="feColorMatrix16567-7" />
     </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter23586-3"
+       x="0"
+       y="0"
+       width="1"
+       height="1">
+      <feColorMatrix
+         values="0.318033 0.32 0.32 0.21747 0 0.318033 0.32 0.32 0.21747 0 0.318033 0.32 0.32 0.21747 0 0 0 0 1 0 "
+         id="feColorMatrix23584-6" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter23586-3-3"
+       x="0"
+       y="0"
+       width="1"
+       height="1">
+      <feColorMatrix
+         values="0.318033 0.32 0.32 0.21747 0 0.318033 0.32 0.32 0.21747 0 0.318033 0.32 0.32 0.21747 0 0 0 0 1 0 "
+         id="feColorMatrix23584-6-5" />
+    </filter>
   </defs>
   <g
-     id="layer1">
+     id="layer1"
+     inkscape:export-filename="../../src/resources/app_icon.png"
+     inkscape:export-xdpi="96"
+     inkscape:export-ydpi="96">
     <g
        id="g1164" />
     <g
        id="g38312"
-       transform="translate(3.2744188,27.01094)">
+       transform="translate(3.2744188,27.01094)"
+       inkscape:export-filename="../../src/resources/app_icon.png"
+       inkscape:export-xdpi="127.29252"
+       inkscape:export-ydpi="127.29252">
       <rect
          style="fill:#131313;fill-opacity:1;stroke:none;stroke-width:0.817172;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
          id="rect23506-9"
@@ -3701,14 +3753,14 @@
              y="231.10693">0.27</tspan></text>
         <text
            xml:space="preserve"
-           style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-           x="69.35643"
-           y="198.808"
+           style="font-weight:bold;font-size:4.16593px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.835416;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+           x="69.324608"
+           y="198.80005"
            id="text20130-57-1-96-5"><tspan
              id="tspan20128-4-99-7-5"
-             style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-             x="69.35643"
-             y="198.808">Cutoff</tspan></text>
+             style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.835416;stroke-opacity:1"
+             x="69.324608"
+             y="198.80005">Cutoff</tspan></text>
         <text
            xml:space="preserve"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:Quicksand;opacity:0.927555;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
@@ -3761,14 +3813,14 @@
              y="151.66032">Brightness</tspan></text>
         <text
            xml:space="preserve"
-           style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-           x="84.489746"
-           y="148.22382"
+           style="font-weight:bold;font-size:4.61697px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.925866;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+           x="84.396255"
+           y="147.97452"
            id="text20130-57-5-9"><tspan
              id="tspan20128-4-0-1"
-             style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-             x="84.489746"
-             y="148.22382">Dencity</tspan></text>
+             style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.925866;stroke-opacity:1"
+             x="84.396255"
+             y="147.97452">DENSITRYcity</tspan></text>
         <g
            id="g22453-5-9"
            transform="matrix(1.1930712,0,0,1.1930712,-15.989761,-19.999441)">
@@ -6632,6 +6684,17 @@
          y="1.3871239" />
       <text
          xml:space="preserve"
+         style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter23586-3-3)"
+         x="102.012"
+         y="-133.34911"
+         id="text20130-57-0-7-6"
+         transform="matrix(0.69600138,0,0,0.69600138,-5.283557,100.55477)"><tspan
+           id="tspan20128-4-3-5-2"
+           style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
+           x="102.012"
+           y="-133.34911">Gain</tspan></text>
+      <text
+         xml:space="preserve"
          style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter16513-2)"
          x="150.03058"
          y="-82.106918"
@@ -6698,17 +6761,6 @@
            y="-95.807663">1.0</tspan></text>
       <text
          xml:space="preserve"
-         style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter23574)"
-         x="165.28842"
-         y="-132.53333"
-         id="text20130-57-9-4-4"
-         transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
-           id="tspan20128-4-9-5-03"
-           style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-           x="165.28842"
-           y="-132.53333">Gain</tspan></text>
-      <text
-         xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:Quicksand;opacity:0.927555;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter23578)"
          x="104.32677"
          y="-95.33313"
@@ -6720,26 +6772,26 @@
            y="-95.33313">0.56</tspan></text>
       <text
          xml:space="preserve"
-         style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter23582)"
-         x="129.69534"
-         y="-129.9126"
-         id="text20130-57-9-37"
-         transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
-           id="tspan20128-4-9-0"
-           style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-           x="129.69534"
-           y="-129.9126">Brightness</tspan></text>
-      <text
-         xml:space="preserve"
          style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter23586)"
          x="102.012"
          y="-133.34911"
          id="text20130-57-0"
-         transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
+         transform="matrix(0.69600138,0,0,0.69600138,-37.85544,100.27873)"><tspan
            id="tspan20128-4-3"
            style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
            x="102.012"
            y="-133.34911">Dencity</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter23586-3)"
+         x="102.012"
+         y="-133.34911"
+         id="text20130-57-0-7"
+         transform="matrix(0.69600138,0,0,0.69600138,-24.554252,101.73959)"><tspan
+           id="tspan20128-4-3-5"
+           style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
+           x="102.012"
+           y="-133.34911">Brightness</tspan></text>
       <g
          id="g22453-4"
          transform="matrix(0.60618806,0,0,0.60618806,-16.801791,-77.878388)"

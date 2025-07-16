@@ -32,14 +32,14 @@ set(GKICK_VST_SOURCES
   ${GKICK_VST_DIR}/GKickVstEditor.cpp
   )
 
-set(target nonsense_vst)
+set(target entropictron_vst)
 
 link_directories(${PTHREAD_LIB_PATH})
 
 add_library(${target} SHARED ${GKICK_VST_HEADERS} ${GKICK_VST_SOURCES})
 
 set_target_properties(${target} PROPERTIES PREFIX "")
-set_target_properties(${target} PROPERTIES OUTPUT_NAME "Nonsense")
+set_target_properties(${target} PROPERTIES OUTPUT_NAME "Entropictron")
 if (CMAKE_SYSTEM_NAME MATCHES Windows)
     set_target_properties(${target} PROPERTIES SUFFIX ".dll")
 else ()
@@ -87,4 +87,4 @@ endif()
 
 add_dependencies(${target} geonkick_common)
 
-install(TARGETS ${target} DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/vst3/Nonsense.vst3/Contents/${GKICK_ARCHITECTURE}-linux)
+install(TARGETS ${target} DESTINATION ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/vst3/Entropictron.vst3/Contents/${GKICK_ARCHITECTURE}-linux)

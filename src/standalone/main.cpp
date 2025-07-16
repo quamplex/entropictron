@@ -22,7 +22,7 @@
  */
 
 #include "MainWindow.h"
-#include "geonkick_api.h"
+//#include "EndDspProxy.h"
 
 #include <RkMain.h>
 
@@ -32,22 +32,22 @@
 
 static geonkick* createDSP()
 {
-        geonkick* geonkickApi = nullptr;
-        if (geonkick_create(&geonkickApi, Geonkick::defaultSampleRate) != GEONKICK_OK) {
-                GEONKICK_LOG_ERROR("can't create geonkick API");
-                return nullptr;
-        }
+        //        EndDspProxy* dspProxy = nullptr;
+        //        if (ent_create(.....) != GEONKICK_OK) {
+        //                GEONKICK_LOG_ERROR("can't create geonkick API");
+        //                return nullptr;
+        //        }
 
-        return geonkickApi;
+        return nullptr/*dspProxy*/;
 }
 
 int main(int argc, char *argv[])
 {
-        auto dsp = createDSP();
-	if (!dsp) {
-                GEONKICK_LOG_ERROR("can't create DSP");
-		exit(EXIT_FAILURE);
-	}
+        //        auto dsp = createDSP();
+        //	if (!dsp) {
+        //                GEONKICK_LOG_ERROR("can't create DSP");
+        //		exit(EXIT_FAILURE);
+        //	}
 
 #ifdef GEONKICK_OS_GNU
 	if (mlockall(MCL_CURRENT) == -1) {
@@ -58,28 +58,17 @@ int main(int argc, char *argv[])
 #endif // GEONKICK_OS_GNU
 
         RkMain app(argc, argv);
-        std::string preset;
-        if (argc == 2)
-                preset = argv[1];
 
-        auto api = new GeonkickApi(Geonkick::defaultSampleRate,
-				   GeonkickApi::InstanceType::Standalone,
-		                   dsp);
-        api->setEventQueue(app.eventQueue());
-        api->setStandalone(true);
-        if (!api->init()) {
-                GEONKICK_LOG_ERROR("can't init API");
-                delete api;
-                exit(EXIT_FAILURE);
-        }
+        //auto api = new EntDspProxy(...);
+        //if (!api->init()) {
+        //        GEONKICK_LOG_ERROR("can't init API");
+        //delete api;
+        //exit(EXIT_FAILURE);
+        //}
 
-        auto window = new MainWindow(app, api, preset);
-        if (!window->init()) {
-                GEONKICK_LOG_ERROR("can't init main window");
-                exit(EXIT_FAILURE);
-        }
-
+        auto window = new MainWindow(app);
         auto res = app.exec();
+
 #ifdef GEONKICK_OS_GNU
         munlockall();
 #endif // GEONKICK_OS_GNU
