@@ -22,6 +22,7 @@
  */
 
 #include "MainWindow.h"
+#include "NoiseWidget.h"
 
 #include <RkLabel.h>
 #include <RkContainer.h>
@@ -68,17 +69,13 @@ bool MainWindow::createUi(void)
         mainContainer->addContainer(horizontalContainer);
 
         // Noise 1 controls widget
-        auto noiseControlsWidget = new EntWidget(this);
-        noiseControlsWidget->setBackgroundColor(37, 43, 53);
-        noiseControlsWidget->setSize({314, horizontalContainer->height()});
-        horizontalContainer->addWidget(noiseControlsWidget);
+        auto noiseWidget = new NoiseWidget(this);
+        horizontalContainer->addWidget(noiseWidget);
 
         // Noise 2 controls widget
         horizontalContainer->addSpace(5);
-        noiseControlsWidget = new EntWidget(this);
-        noiseControlsWidget->setBackgroundColor(37, 43, 53);
-        noiseControlsWidget->setSize({314, horizontalContainer->height()});
-        horizontalContainer->addWidget(noiseControlsWidget);
+        noiseWidget = new NoiseWidget(this);
+        horizontalContainer->addWidget(noiseWidget);
 
         // Global controls widget
         horizontalContainer->addSpace(5);

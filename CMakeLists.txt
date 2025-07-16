@@ -114,11 +114,13 @@ set(GKICK_PRESETS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/presets)
 set(GKICK_COMMON_HEADERS
   ${GKICK_COMMON_DIR}/globals.h
   ${GKICK_COMMON_DIR}/EntWidget.h
+  ${GKICK_COMMON_DIR}/NoiseWidget.h
   ${GKICK_COMMON_DIR}/MainWindow.h
 )
 
 set(GKICK_COMMON_SOURCES
   ${GKICK_COMMON_DIR}/EntWidget.cpp
+  ${GKICK_COMMON_DIR}/NoiseWidget.cpp
   ${GKICK_COMMON_DIR}/MainWindow.cpp
 )
 
