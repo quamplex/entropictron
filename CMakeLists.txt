@@ -247,16 +247,6 @@ if (GKICK_PLUGIN)
    add_subdirectory(${GKICK_COMMON_DIR}/plugin)
 endif (GKICK_PLUGIN)
 
-add_subdirectory(data)
-
-if (GKICK_PRESETS)
-   add_subdirectory(presets)
- endif (GKICK_PRESETS)
-
-if (GKICK_DOCUMENTATION)
-   add_subdirectory(doc)
- endif (GKICK_DOCUMENTATION)
-
 message(STATUS "------------ Summary ---------")
 
 if (GEONKICK_LIMITED_VERSION)
