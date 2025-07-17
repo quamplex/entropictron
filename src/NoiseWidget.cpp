@@ -25,12 +25,45 @@
 
 #include <RkLabel.h>
 #include <RkContainer.h>
+#include <RkButton.h>
+
+RK_DECLARE_IMAGE_RC(noise1_label);
+RK_DECLARE_IMAGE_RC(noise2_label);
+RK_DECLARE_IMAGE_RC(switch_button_on);
+RK_DECLARE_IMAGE_RC(switch_button_off);
 
 NoiseWidget::NoiseWidget(EntWidget* parent)
         : EntWidget(parent)
 {
         setFixedSize(314, 282);
         setBackgroundColor(37, 43, 53);
+
+        auto mainContianer = new RkContainer(this, Rk::Orientation::Vertical);
+        mainContianer->addSpace(8);
+
+        auto topContianer = new RkContainer(this, Rk::Orientation::Horizontal);
+        topContianer->setSize({width(), 14});
+        mainContianer->addContainer(topContianer);
+        topContianer->addSpace(100);
+
+        auto enableNoiseButton = new RkButton(this);
+        enableNoiseButton->setCheckable();
+        enableNoiseButton->setBackgroundColor(background());
+        enableNoiseButton->setSize(36, 16);
+        enableNoiseButton->setImage(RK_RC_IMAGE(switch_button_off),
+                                    RkButton::State::Unpressed);
+        enableNoiseButton->setImage(RK_RC_IMAGE(switch_button_on),
+                                    RkButton::State::Pressed);
+        enableNoiseButton->show();
+        topContianer->addWidget(enableNoiseButton);
+
+        // temp
+        static int i = 0;
+        auto label = new RkLabel(this, i++ ? RK_RC_IMAGE(noise2_label) : RK_RC_IMAGE(noise1_label));
+        label->show();
+        topContianer->addSpace(10);
+        topContianer->addWidget(label);
+
 }
 
 NoiseWidget::~NoiseWidget()

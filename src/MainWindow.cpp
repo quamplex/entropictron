@@ -27,8 +27,6 @@
 #include <RkLabel.h>
 #include <RkContainer.h>
 
-RK_DECLARE_IMAGE_RC(app_icon);
-
 constexpr int MAIN_WINDOW_WIDTH  = 900;
 constexpr int MAIN_WINDOW_HEIGHT = 352;
 
