@@ -1,6 +1,3 @@
-set(gkick_rc_png_files
-
-# === Common ===
-app_icon.png
+set(ent_rc_png_files
 
 )
