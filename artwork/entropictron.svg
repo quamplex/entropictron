@@ -3688,6 +3688,91 @@
          stdDeviation="0.22445774"
          id="feGaussianBlur8649-6-9-2" />
     </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter11328-0-6-7-2-3"
+       x="-0.099883399"
+       y="-0.11211712"
+       width="1.1997668"
+       height="1.2120005">
+      <feGaussianBlur
+         stdDeviation="1.4259673"
+         id="feGaussianBlur11330-9-8-5-4-6" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter7067-2-1-9-1-0-7"
+       x="-0.00376952"
+       y="-0.00376952"
+       width="1.007539"
+       height="1.007539">
+      <feGaussianBlur
+         stdDeviation="0.055925454"
+         id="feGaussianBlur7069-9-9-0-3-6-5" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter7063-7-6-6-7-2-3"
+       x="-0.043931655"
+       y="-0.043931655"
+       width="1.0878633"
+       height="1.0878633">
+      <feGaussianBlur
+         stdDeviation="0.65177998"
+         id="feGaussianBlur7065-0-2-8-8-9-5" />
+    </filter>
+    <radialGradient
+       xlink:href="#linearGradient3963"
+       id="radialGradient3965-5-7-0-9-6"
+       cx="86.184616"
+       cy="189.20352"
+       fx="86.184616"
+       fy="189.20352"
+       r="18.049473"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(2.681485,-2.681485,2.4867329,2.4867329,-616.56711,-50.025178)" />
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter7067-9-3-9-0-1"
+       x="-0.011200191"
+       y="-0.011200191"
+       width="1.0224004"
+       height="1.0224004">
+      <feGaussianBlur
+         stdDeviation="0.055925454"
+         id="feGaussianBlur7069-93-3-52-8-2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter7063-5-3-1-3-9"
+       x="-0.023746621"
+       y="-0.023746621"
+       width="1.0474932"
+       height="1.0474932">
+      <feGaussianBlur
+         stdDeviation="0.24981026"
+         id="feGaussianBlur7065-02-2-3-1-3" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter15066-9-6-2-1-6"
+       x="-0.1480226"
+       y="-2.5656008"
+       width="1.2960452"
+       height="6.1312016">
+      <feGaussianBlur
+         stdDeviation="0.60539479"
+         id="feGaussianBlur15068-4-5-7-0-0" />
+    </filter>
+    <linearGradient
+       xlink:href="#linearGradient7059"
+       id="linearGradient3836"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(128.15374,-265.65729)"
+       x1="43.456375"
+       y1="191.03983"
+       x2="65.766747"
+       y2="188.19928" />
   </defs>
   <g
      id="g1164" />
@@ -3699,15 +3784,15 @@
        id="rect23506-9"
        width="179.58636"
        height="70.225754"
-       x="13.707458"
-       y="-0.42440572" />
+       x="3.036345"
+       y="35.05975" />
     <rect
        style="fill:#252b35;fill-opacity:1;stroke-width:0.285152;stroke-linecap:round"
        id="rect4150-0"
        width="62.643211"
        height="56.183079"
-       x="15.327493"
-       y="1.3871239" />
+       x="4.6563802"
+       y="36.871281" />
     <g
        id="g25174-4-6"
        transform="matrix(0.50809043,0,0,0.50809043,54.902385,-67.75553)">
@@ -3716,111 +3801,111 @@
          id="rect4150-6-1"
          width="123.29146"
          height="110.57693"
-         x="47.245602"
-         y="136.00726" />
+         x="26.243214"
+         y="205.84554" />
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="132.50833"
-         y="199.466"
+         x="111.50594"
+         y="269.30426"
          id="text20130-57-1-9-1-0"><tspan
            id="tspan20128-4-99-0-5-4"
            style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-           x="132.50833"
-           y="199.466">Resonanse</tspan></text>
+           x="111.50594"
+           y="269.30426">Resonanse</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:Quicksand;opacity:0.927555;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="68.37748"
-         y="238.71326"
+         x="47.375092"
+         y="308.55151"
          id="text20130-57-9-9-7-5-2"><tspan
            id="tspan20128-4-9-3-82-4-2"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quicksand;-inkscape-font-specification:Quicksand;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-           x="68.37748"
-           y="238.71326">345 Hz</tspan></text>
+           x="47.375092"
+           y="308.55151">345 Hz</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:Quicksand;opacity:0.927555;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="138.44171"
-         y="231.10693"
+         x="117.43932"
+         y="300.94519"
          id="text20130-57-9-9-53-6-2"><tspan
            id="tspan20128-4-9-3-4-6-0"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quicksand;-inkscape-font-specification:Quicksand;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-           x="138.44171"
-           y="231.10693">0.27</tspan></text>
+           x="117.43932"
+           y="300.94519">0.27</tspan></text>
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.16593px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.835416;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="69.324608"
-         y="198.80005"
+         x="48.32222"
+         y="268.63831"
          id="text20130-57-1-96-5"><tspan
            id="tspan20128-4-99-7-5"
            style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.835416;stroke-opacity:1"
-           x="69.324608"
-           y="198.80005">Cutoff</tspan></text>
+           x="48.32222"
+           y="268.63831">Cutoff</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:Quicksand;opacity:0.927555;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="117.17097"
-         y="182.48642"
+         x="96.168579"
+         y="252.32469"
          id="text20130-57-9-9-5-5-2"><tspan
            id="tspan20128-4-9-3-7-6-9"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quicksand;-inkscape-font-specification:Quicksand;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-           x="117.17097"
-           y="182.48642">0.14</tspan></text>
+           x="96.168579"
+           y="252.32469">0.14</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:Quicksand;opacity:0.927555;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="149.58983"
-         y="185.76526"
+         x="128.58743"
+         y="255.60353"
          id="text20130-57-9-9-0-4-0"><tspan
            id="tspan20128-4-9-3-8-3-2"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quicksand;-inkscape-font-specification:Quicksand;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-           x="149.58983"
-           y="185.76526">1.0</tspan></text>
+           x="128.58743"
+           y="255.60353">1.0</tspan></text>
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="147.76617"
-         y="149.0396"
+         x="126.76379"
+         y="218.87787"
          id="text20130-57-9-4-0-8"><tspan
            id="tspan20128-4-9-5-0-3"
            style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-           x="147.76617"
-           y="149.0396">Gain</tspan></text>
+           x="126.76379"
+           y="218.87787">Gain</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:Quicksand;opacity:0.927555;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="86.80452"
-         y="186.23979"
+         x="65.802132"
+         y="256.07806"
          id="text20130-57-9-9-2-8"><tspan
            id="tspan20128-4-9-3-5-0"
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quicksand;-inkscape-font-specification:Quicksand;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-           x="86.80452"
-           y="186.23979">0.56</tspan></text>
+           x="65.802132"
+           y="256.07806">0.56</tspan></text>
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="112.17309"
-         y="151.66032"
+         x="91.1707"
+         y="221.4986"
          id="text20130-57-9-3-4"><tspan
            id="tspan20128-4-9-8-0"
            style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-           x="112.17309"
-           y="151.66032">Brightness</tspan></text>
+           x="91.1707"
+           y="221.4986">Brightness</tspan></text>
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.61697px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.925866;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="84.396255"
-         y="147.97452"
+         x="63.393867"
+         y="217.81279"
          id="text20130-57-5-9"><tspan
            id="tspan20128-4-0-1"
            style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.925866;stroke-opacity:1"
-           x="84.396255"
-           y="147.97452">DENSITRYcity</tspan></text>
+           x="63.393867"
+           y="217.81279">DENSITRYcity</tspan></text>
       <g
          id="g22453-5-9"
-         transform="matrix(1.1930712,0,0,1.1930712,-15.989761,-19.999441)">
+         transform="matrix(1.1930712,0,0,1.1930712,-36.99215,49.83883)">
         <g
            id="g1578-4-3-6-6"
            transform="matrix(0.8608828,0,0,0.70942386,10.765549,26.709897)">
@@ -3872,7 +3957,7 @@
       </g>
       <g
          id="g1572-9-2-8-9"
-         transform="matrix(1.3716893,0,0,1.2591158,-30.937431,52.399411)">
+         transform="matrix(1.3716893,0,0,1.2591158,-51.93982,122.23768)">
         <rect
            x="53.633308"
            y="168.09592"
@@ -3935,7 +4020,7 @@
       </g>
       <g
          id="g1578-4-8-1-9"
-         transform="matrix(0.87620344,0,0,0.80429409,53.263983,79.869297)">
+         transform="matrix(0.87620344,0,0,0.80429409,32.261594,149.70757)">
         <rect
            x="53.633308"
            y="168.09592"
@@ -3992,10 +4077,10 @@
          stroke="#2a2e34"
          id="rect18943-5-6-0-7-8-7"
          style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-7-7-8-5-5)"
-         transform="matrix(0.8067126,0,0,0.69300945,57.09921,90.819185)" />
+         transform="matrix(0.8067126,0,0,0.69300945,36.096821,160.65746)" />
       <rect
-         x="100.89607"
-         y="207.38193"
+         x="79.893684"
+         y="277.22018"
          width="14.876199"
          height="5.1432076"
          rx="1.2331684"
@@ -4015,7 +4100,7 @@
          stroke="#2a2e34"
          id="rect18943-3-8-3-2-7-3"
          style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient22669);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-0-1-1-1-5)"
-         transform="matrix(0.79051822,0,0,0.7080552,58.139496,96.172744)" />
+         transform="matrix(0.79051822,0,0,0.7080552,37.137107,166.01101)" />
       <rect
          x="45.344532"
          y="182.03563"
@@ -4027,7 +4112,7 @@
          stroke="#2a2e34"
          id="rect18943-1-6-6-5-6-8-1"
          style="opacity:0.961247;fill:#fbff00;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-9-0-4)"
-         transform="matrix(0.87620344,0,0,0.80429409,61.253452,60.936682)" />
+         transform="matrix(0.87620344,0,0,0.80429409,40.251063,130.77495)" />
       <text
          x="53.572674"
          y="186.56036"
@@ -4037,7 +4122,7 @@
          fill="#cccccc"
          id="text18945-7-2-1-5-4"
          style="fill:#000000;fill-opacity:1;stroke-width:0.311653;filter:url(#filter12290-0-8-9)"
-         transform="matrix(0.87620344,0,0,0.80429409,61.253452,60.936682)">LP</text>
+         transform="matrix(0.87620344,0,0,0.80429409,40.251063,130.77495)">LP</text>
       <text
          x="53.45475"
          y="186.42896"
@@ -4047,10 +4132,10 @@
          fill="#cccccc"
          id="text18945-7-2-6-0-1-6"
          style="fill:#373636;fill-opacity:1;stroke-width:0.311653;filter:url(#filter12324-8-4-2)"
-         transform="matrix(0.87620344,0,0,0.80429409,61.253452,60.936682)">LP</text>
+         transform="matrix(0.87620344,0,0,0.80429409,40.251063,130.77495)">LP</text>
       <g
          id="g22460-6-9"
-         transform="matrix(1.1930712,0,0,1.1930712,-15.989761,-20.195876)">
+         transform="matrix(1.1930712,0,0,1.1930712,-36.99215,49.642395)">
         <g
            id="g1578-4-09-4"
            transform="matrix(0.8608828,0,0,0.70942386,10.765549,33.224047)">
@@ -4102,7 +4187,7 @@
       </g>
       <g
          id="g22469-0-1"
-         transform="translate(19.0024,-14.18671)">
+         transform="translate(-1.9999885,55.651561)">
         <g
            id="g8595-1-2"
            style="opacity:0.795082;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter11328-5-1)"
@@ -4162,7 +4247,7 @@
       </g>
       <g
          id="g22469-3-1-3-8"
-         transform="translate(39.160547,34.34633)">
+         transform="translate(18.158158,104.1846)">
         <g
            id="g8595-5-7-2-6"
            style="opacity:0.795082;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter11328-0-41-0-8)"
@@ -4222,7 +4307,7 @@
       </g>
       <g
          id="g22469-3-2-0-8"
-         transform="matrix(1.3131142,0,0,1.3131142,-42.910369,-70.483042)">
+         transform="matrix(1.3131142,0,0,1.3131142,-63.912758,-0.64477138)">
         <g
            id="g8595-5-6-8-0"
            style="opacity:0.795082;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter11328-0-6-7-2)"
@@ -4282,7 +4367,7 @@
       </g>
       <g
          id="g22469-3-2-7-0-6"
-         transform="matrix(1.3131142,0,0,1.3131142,-58.9199,-18.534699)">
+         transform="matrix(1.3131142,0,0,1.3131142,-79.922289,51.303572)">
         <g
            id="g8595-5-6-6-5-8"
            style="opacity:0.795082;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter11328-0-6-5-3-3)"
@@ -4342,7 +4427,7 @@
       </g>
       <g
          id="g22469-3-8-4-7"
-         transform="matrix(1.2712136,0,0,1.2712136,22.756099,-62.695783)">
+         transform="matrix(1.2712136,0,0,1.2712136,1.7537105,7.1424876)">
         <g
            id="g8595-5-3-9-3"
            style="opacity:0.795082;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter11328-0-4-0-5)"
@@ -4401,8 +4486,8 @@
            transform="rotate(-45)" />
       </g>
       <rect
-         x="51.985043"
-         y="-190.89551"
+         x="30.982655"
+         y="-260.73376"
          width="112.74194"
          fill="#3a3f47"
          stroke="#2a2e34"
@@ -4413,26 +4498,26 @@
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.80502px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.963578;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="100.40525"
-         y="141.62045"
+         x="79.402863"
+         y="211.45872"
          id="text20130-6-7"><tspan
            id="tspan20128-0-9"
            style="fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.963578;stroke-opacity:1"
-           x="100.40525"
-           y="141.62045">NOISE 2</tspan></text>
+           x="79.402863"
+           y="211.45872">NOISE 2</tspan></text>
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.80502px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.963578;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="101.08404"
-         y="197.53403"
+         x="80.08165"
+         y="267.37228"
          id="text20130-7-4-6"><tspan
            id="tspan20128-8-5-0"
            style="fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.963578;stroke-opacity:1"
-           x="101.08404"
-           y="197.53403">FILTER </tspan></text>
+           x="80.08165"
+           y="267.37228">FILTER </tspan></text>
       <g
          id="g22446-8-4"
-         transform="matrix(1.1930712,0,0,1.1930712,-15.989761,-20.195876)">
+         transform="matrix(1.1930712,0,0,1.1930712,-36.99215,49.642395)">
         <g
            id="g22436-2-1"
            transform="translate(0.161251)">
@@ -4508,7 +4593,8 @@
         </g>
       </g>
       <g
-         id="g9392-24">
+         id="g9392-24"
+         transform="translate(-21.002389,69.838271)">
         <rect
            style="fill:#359c2c;fill-opacity:1;stroke-width:0.264598;stroke-linecap:square"
            id="rect1415-79"
@@ -4537,7 +4623,7 @@
       </g>
       <g
          id="g9392-5-3"
-         transform="translate(71.744785,-56.68298)">
+         transform="translate(50.742396,13.155291)">
         <rect
            style="fill:#359c2c;fill-opacity:1;stroke-width:0.264598;stroke-linecap:square"
            id="rect1415-3-0"
@@ -4566,7 +4652,7 @@
       </g>
       <g
          id="g9392-2-9"
-         transform="translate(-56.158608,-56.559781)">
+         transform="translate(-77.160997,13.27849)">
         <rect
            style="fill:#359c2c;fill-opacity:1;stroke-width:0.264598;stroke-linecap:square"
            id="rect1415-7-1"
@@ -4596,16 +4682,16 @@
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.80502px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.963578;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-         x="-45.281364"
-         y="141.52278"
+         x="-66.283752"
+         y="211.36105"
          id="text20130-6-7-3"><tspan
            id="tspan20128-0-9-6"
            style="fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.963578;stroke-opacity:1"
-           x="-45.281364"
-           y="141.52278">NOISE 1</tspan></text>
+           x="-66.283752"
+           y="211.36105">NOISE 1</tspan></text>
       <g
          id="g9392-26-2"
-         transform="translate(-61.503237,-0.0085849)">
+         transform="translate(-82.505626,69.829686)">
         <rect
            style="fill:#999a9b;fill-opacity:1;stroke-width:0.264598;stroke-linecap:square"
            id="rect1415-1-5"
@@ -4634,7 +4720,7 @@
       </g>
       <g
          id="g9392-2-9-3"
-         transform="translate(-66.244609,111.17626)">
+         transform="translate(-81.556688,258.07478)">
         <rect
            style="fill:#359c2c;fill-opacity:1;stroke-width:0.264598;stroke-linecap:square"
            id="rect1415-7-1-5"
@@ -4663,7 +4749,7 @@
       </g>
       <g
          id="g9392-26-2-7"
-         transform="translate(-66.917797,121.8029)">
+         transform="translate(-82.229876,268.70142)">
         <rect
            style="fill:#999a9b;fill-opacity:1;stroke-width:0.264598;stroke-linecap:square"
            id="rect1415-1-5-0"
@@ -4690,10 +4776,80 @@
              r="1.7508734" />
         </g>
       </g>
+      <rect
+         style="fill:#252b35;fill-opacity:1;stroke-width:0.561223;stroke-linecap:round"
+         id="rect4150-6-1-0"
+         width="123.29146"
+         height="110.57693"
+         x="115.09425"
+         y="365.55551" />
+      <g
+         id="g3932">
+        <g
+           id="g8595-5-6-8-0-2"
+           style="opacity:0.795082;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter11328-0-6-7-2-3)"
+           transform="matrix(0.84785784,0,0,0.84785784,-71.661636,251.2933)">
+          <circle
+             style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter7067-2-1-9-1-0-7)"
+             id="path1194-9-1-5-6-4-6"
+             cx="154.52518"
+             cy="188.24704"
+             r="17.803473" />
+          <circle
+             style="opacity:0.285897;mix-blend-mode:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.492;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter7063-7-6-6-7-2-3)"
+             id="path1194-5-3-7-8-7-7-1"
+             cx="189.65959"
+             cy="-74.617462"
+             r="17.803473"
+             transform="matrix(0,0.91796095,-0.91796095,0,85.883527,13.552475)" />
+        </g>
+        <circle
+           style="fill:url(#radialGradient3965-5-7-0-9-6);fill-opacity:1;stroke:#171717;stroke-width:0.529167;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter7067-9-3-9-0-1)"
+           id="path1194-4-7-5-6-8"
+           cx="85.034294"
+           cy="189.37067"
+           r="17.803473"
+           transform="matrix(0.84785784,0,0,0.84785784,-12.377515,250.33297)" />
+        <circle
+           style="opacity:0.107728;mix-blend-mode:normal;fill:none;fill-opacity:1;stroke:url(#linearGradient3836);stroke-width:0.492;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter7063-5-3-1-3-9)"
+           id="path1194-5-31-9-4-8-7"
+           cx="189.65959"
+           cy="-74.617462"
+           r="17.803473"
+           transform="matrix(0,0.7783004,-0.7783004,0,1.4935335,262.76814)" />
+      </g>
+      <g
+         id="g3936"
+         transform="translate(7.5439454,2.2633316)">
+        <rect
+           x="-229.96155"
+           y="345.7085"
+           width="13.113682"
+           height="0.75659519"
+           rx="0.41147476"
+           ry="0.41147476"
+           fill="#3a3f47"
+           stroke="#2a2e34"
+           id="rect18943-1-6-6-6-46-6-4-9-9"
+           style="fill:#87d800;fill-opacity:1;stroke-width:0.0664706;stroke-dasharray:none"
+           transform="rotate(-45)" />
+        <rect
+           x="-65.049988"
+           y="198.8779"
+           width="9.9867029"
+           height="0.57618386"
+           rx="0.31335795"
+           ry="0.31335795"
+           fill="#3a3f47"
+           stroke="#2a2e34"
+           id="rect18943-1-6-6-6-2-9-0-6-0-2"
+           style="opacity:0.927555;fill:#87d800;fill-opacity:1;stroke-width:0.0506206;stroke-dasharray:none;filter:url(#filter15066-9-6-2-1-6)"
+           transform="matrix(0.92851196,-0.92851196,0.92851196,0.92851196,-42.377045,161.94246)" />
+      </g>
     </g>
     <g
        id="g25174-6-3-9"
-       transform="matrix(0.50809043,0,0,0.45888246,120.60819,-82.148802)">
+       transform="matrix(0.50809043,0,0,0.45888246,109.93708,-46.664645)">
       <rect
          style="fill:#252b35;fill-opacity:1;stroke-width:0.497463;stroke-linecap:round"
          id="rect4150-5-7-3-4"
@@ -4707,11 +4863,11 @@
        id="rect23506-5-5"
        width="46.462238"
        height="38.756001"
-       x="143.71751"
-       y="11.239008" />
+       x="133.0464"
+       y="46.723164" />
     <rect
-       x="143.28358"
-       y="-9.8680916"
+       x="132.61247"
+       y="-45.352249"
        width="47.212185"
        fill="#3a3f47"
        stroke="#2a2e34"
@@ -4721,7 +4877,7 @@
        transform="scale(1,-1)" />
     <g
        id="g36142-3"
-       transform="matrix(1.1778458,0,0,1.1778458,-0.30739781,-211.5138)">
+       transform="matrix(1.1778458,0,0,1.1778458,-10.97851,-176.02964)">
       <g
          id="g1578-4-3-1-5"
          transform="matrix(0.43740631,0,0,0.36045147,124.3253,118.47934)">
@@ -4773,7 +4929,7 @@
     </g>
     <g
        id="g36135-9"
-       transform="matrix(1.1778458,0,0,1.1778458,-11.9095,-215.43586)">
+       transform="matrix(1.1778458,0,0,1.1778458,-22.580613,-179.9517)">
       <g
          id="g1578-4-9-9"
          transform="matrix(0.43740631,0,0,0.36045147,124.3253,121.70546)">
@@ -4825,7 +4981,7 @@
     </g>
     <g
        id="g36152-3"
-       transform="matrix(1.1778458,0,0,1.1778458,-22.932765,-207.58908)">
+       transform="matrix(1.1778458,0,0,1.1778458,-33.603878,-172.10492)">
       <g
          id="g22436-3-4"
          transform="matrix(0.50809043,0,0,0.50809043,118.93736,104.82464)">
@@ -4902,7 +5058,7 @@
     </g>
     <g
        id="g6827-3-2"
-       transform="matrix(1.7865139,0,0,1.3543905,-76.70896,-102.50128)">
+       transform="matrix(1.7865139,0,0,1.3543905,-87.380073,-67.017123)">
       <rect
          style="fill:#36823b;fill-opacity:1;stroke-width:0.131142;stroke-linecap:round"
          id="rect8019-43-4-9-1"
@@ -6557,178 +6713,178 @@
        id="rect48139-35"
        width="46.400352"
        height="3.5875766"
-       x="143.68951"
-       y="11.249664"
+       x="133.0184"
+       y="46.733822"
        ry="0.075320639" />
     <rect
        style="opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.184434;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
        id="rect48139-2-0"
        width="46.400352"
        height="3.5875766"
-       x="143.68951"
-       y="14.78124"
+       x="133.0184"
+       y="50.265396"
        ry="0.075320639" />
     <rect
        style="opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.184434;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
        id="rect48139-2-7-8"
        width="46.400352"
        height="3.5875766"
-       x="143.86514"
-       y="21.891499"
+       x="133.19403"
+       y="57.375656"
        ry="0.075320639" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.63877px;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.117;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
-       x="145.34731"
-       y="17.255693"
+       x="134.67619"
+       y="52.739849"
        id="text49131-1-0"><tspan
          id="tspan49129-6-4"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';stroke-width:0.117"
-         x="145.34731"
-         y="17.255693">My preset 1</tspan></text>
+         x="134.67619"
+         y="52.739849">My preset 1</tspan></text>
     <rect
        style="opacity:0.138878;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.184434;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
        id="rect48139-0-1"
        width="46.400352"
        height="3.5875766"
-       x="143.68951"
-       y="18.480673"
+       x="133.0184"
+       y="53.964828"
        ry="0.075320639" />
     <rect
        style="opacity:0.138878;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.184434;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
        id="rect48139-0-92-1"
        width="46.400352"
        height="3.5875766"
-       x="143.68951"
-       y="25.517977"
+       x="133.0184"
+       y="61.002132"
        ry="0.075320639" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.63877px;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.117;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
-       x="145.34731"
-       y="21.020714"
+       x="134.67619"
+       y="56.504871"
        id="text49131-4-3"><tspan
          id="tspan49129-9-5"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';stroke-width:0.117"
-         x="145.34731"
-         y="21.020714">My preset 1</tspan></text>
+         x="134.67619"
+         y="56.504871">My preset 1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.63877px;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.117;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
-       x="145.34731"
-       y="13.533009"
+       x="134.67619"
+       y="49.017166"
        id="text49131-9"><tspan
          id="tspan49129-3"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';stroke-width:0.117"
-         x="145.34731"
-         y="13.533009">My preset 1</tspan></text>
+         x="134.67619"
+         y="49.017166">My preset 1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.63877px;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.117;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
-       x="145.34731"
-       y="28.094835"
+       x="134.67619"
+       y="63.578991"
        id="text49131-1-9-4"><tspan
          id="tspan49129-6-8-1"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';stroke-width:0.117"
-         x="145.34731"
-         y="28.094835">My preset 1</tspan></text>
+         x="134.67619"
+         y="63.578991">My preset 1</tspan></text>
     <rect
        style="opacity:0.138878;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.184434;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
        id="rect48139-0-6-5"
        width="46.400352"
        height="3.5875766"
-       x="143.68951"
-       y="29.319811"
+       x="133.0184"
+       y="64.80397"
        ry="0.075320639" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.63877px;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.117;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
-       x="145.34731"
-       y="31.85985"
+       x="134.67619"
+       y="67.344009"
        id="text49131-4-2-0"><tspan
          id="tspan49129-9-2-8"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';stroke-width:0.117"
-         x="145.34731"
-         y="31.85985">My preset 1</tspan></text>
+         x="134.67619"
+         y="67.344009">My preset 1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.63877px;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.117;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
-       x="145.34731"
-       y="24.372149"
+       x="134.67619"
+       y="59.856304"
        id="text49131-5-3"><tspan
          id="tspan49129-2-5"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';stroke-width:0.117"
-         x="145.34731"
-         y="24.372149">My preset 1</tspan></text>
+         x="134.67619"
+         y="59.856304">My preset 1</tspan></text>
     <rect
        style="opacity:0.138878;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.184434;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
        id="rect48139-3-6"
        width="46.400352"
        height="3.5875766"
-       x="143.68951"
-       y="32.903244"
+       x="133.0184"
+       y="68.387398"
        ry="0.075320639" />
     <rect
        style="opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.184434;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
        id="rect48139-2-2-5"
        width="46.400352"
        height="3.5875766"
-       x="143.68951"
-       y="36.434814"
+       x="133.0184"
+       y="71.918968"
        ry="0.075320639" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.63877px;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.117;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
-       x="145.34731"
-       y="38.909275"
+       x="134.67619"
+       y="74.393433"
        id="text49131-1-7-9"><tspan
          id="tspan49129-6-3-9"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';stroke-width:0.117"
-         x="145.34731"
-         y="38.909275">My preset 1</tspan></text>
+         x="134.67619"
+         y="74.393433">My preset 1</tspan></text>
     <rect
        style="opacity:0.138878;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.184434;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
        id="rect48139-0-9-0"
        width="46.400352"
        height="3.5875766"
-       x="143.68951"
-       y="40.134247"
+       x="133.0184"
+       y="75.618401"
        ry="0.075320639" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.63877px;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.117;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
-       x="145.34731"
-       y="42.67429"
+       x="134.67619"
+       y="78.158447"
        id="text49131-4-0-7"><tspan
          id="tspan49129-9-1-6"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';stroke-width:0.117"
-         x="145.34731"
-         y="42.67429">My preset 1</tspan></text>
+         x="134.67619"
+         y="78.158447">My preset 1</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.63877px;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.117;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
-       x="145.34731"
-       y="35.186588"
+       x="134.67619"
+       y="70.670746"
        id="text49131-50-3"><tspan
          id="tspan49129-69-7"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Inter, sans-serif;-inkscape-font-specification:'Inter, sans-serif';stroke-width:0.117"
-         x="145.34731"
-         y="35.186588">My preset 1</tspan></text>
+         x="134.67619"
+         y="70.670746">My preset 1</tspan></text>
     <rect
        style="opacity:0.250777;fill:#dcdada;fill-opacity:1;stroke:none;stroke-width:0.184434;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
        id="rect48139-2-7-9-6"
        width="46.400352"
        height="3.5875766"
-       x="143.68951"
-       y="29.39533"
+       x="133.0184"
+       y="64.879486"
        ry="0.075320639" />
     <rect
        style="fill:#494948;fill-opacity:1;stroke:none;stroke-width:0.110886;stroke-linecap:square;stroke-dasharray:none;stroke-opacity:1"
        id="rect48139-2-9-1"
        width="38.824707"
        height="1.5498309"
-       x="11.245928"
-       y="-190.13385"
+       x="46.730083"
+       y="-179.46274"
        ry="0.03253847"
        transform="rotate(90)" />
     <rect
@@ -6736,8 +6892,8 @@
        id="rect48139-2-9-8-5"
        width="3.2405055"
        height="1.1471405"
-       x="16.806114"
-       y="-189.92514"
+       x="52.290272"
+       y="-179.25403"
        ry="0.024084045"
        transform="rotate(90)" />
     <text
@@ -6746,7 +6902,7 @@
        x="102.012"
        y="-133.34911"
        id="text20130-57-0-7-6"
-       transform="matrix(0.69600138,0,0,0.69600138,-5.283557,100.55477)"><tspan
+       transform="matrix(0.69600138,0,0,0.69600138,-15.95467,136.03893)"><tspan
          id="tspan20128-4-3-5-2"
          style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
          x="102.012"
@@ -6757,7 +6913,7 @@
        x="150.03058"
        y="-82.106918"
        id="text20130-57-1-9-6"
-       transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
+       transform="matrix(0.50809043,0,0,0.50809043,-28.251547,110.8318)"><tspan
          id="tspan20128-4-99-0-50"
          style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
          x="150.03058"
@@ -6768,7 +6924,7 @@
        x="85.899734"
        y="-42.859669"
        id="text20130-57-9-9-7-8"
-       transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
+       transform="matrix(0.50809043,0,0,0.50809043,-28.251547,110.8318)"><tspan
          id="tspan20128-4-9-3-82-1"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quicksand;-inkscape-font-specification:Quicksand;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
          x="85.899734"
@@ -6779,7 +6935,7 @@
        x="155.96396"
        y="-50.465992"
        id="text20130-57-9-9-53-2"
-       transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
+       transform="matrix(0.50809043,0,0,0.50809043,-28.251547,110.8318)"><tspan
          id="tspan20128-4-9-3-4-2"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quicksand;-inkscape-font-specification:Quicksand;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
          x="155.96396"
@@ -6790,7 +6946,7 @@
        x="86.878685"
        y="-82.764923"
        id="text20130-57-1-6"
-       transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
+       transform="matrix(0.50809043,0,0,0.50809043,-28.251547,110.8318)"><tspan
          id="tspan20128-4-99-9"
          style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
          x="86.878685"
@@ -6801,7 +6957,7 @@
        x="134.69322"
        y="-99.086502"
        id="text20130-57-9-9-5-1"
-       transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
+       transform="matrix(0.50809043,0,0,0.50809043,-28.251547,110.8318)"><tspan
          id="tspan20128-4-9-3-7-0"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quicksand;-inkscape-font-specification:Quicksand;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
          x="134.69322"
@@ -6812,7 +6968,7 @@
        x="167.11208"
        y="-95.807663"
        id="text20130-57-9-9-0-42"
-       transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
+       transform="matrix(0.50809043,0,0,0.50809043,-28.251547,110.8318)"><tspan
          id="tspan20128-4-9-3-8-7"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quicksand;-inkscape-font-specification:Quicksand;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
          x="167.11208"
@@ -6823,7 +6979,7 @@
        x="104.32677"
        y="-95.33313"
        id="text20130-57-9-9-28"
-       transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
+       transform="matrix(0.50809043,0,0,0.50809043,-28.251547,110.8318)"><tspan
          id="tspan20128-4-9-3-0"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Quicksand;-inkscape-font-specification:Quicksand;fill:#70cc51;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
          x="104.32677"
@@ -6834,25 +6990,25 @@
        x="102.012"
        y="-133.34911"
        id="text20130-57-0"
-       transform="matrix(0.69600138,0,0,0.69600138,-37.85544,100.27873)"><tspan
+       transform="matrix(0.69600138,0,0,0.69600138,-48.526553,135.76289)"><tspan
          id="tspan20128-4-3"
          style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
          x="102.012"
-         y="-133.34911">Dencity</tspan></text>
+         y="-133.34911">Density</tspan></text>
     <text
        xml:space="preserve"
        style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter23586-3)"
        x="102.012"
        y="-133.34911"
        id="text20130-57-0-7"
-       transform="matrix(0.69600138,0,0,0.69600138,-24.554252,101.73959)"><tspan
+       transform="matrix(0.69600138,0,0,0.69600138,-35.225365,137.22375)"><tspan
          id="tspan20128-4-3-5"
          style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
          x="102.012"
          y="-133.34911">Brightness</tspan></text>
     <g
        id="g22453-4"
-       transform="matrix(0.60618806,0,0,0.60618806,-16.801791,-77.878388)"
+       transform="matrix(0.60618806,0,0,0.60618806,-27.472904,-42.394231)"
        style="filter:url(#filter23590)">
       <g
          id="g1578-4-3-9"
@@ -6905,7 +7061,7 @@
     </g>
     <g
        id="g1572-9-2-2"
-       transform="matrix(0.69694221,0,0,0.63974469,-24.396559,-41.093225)"
+       transform="matrix(0.69694221,0,0,0.63974469,-35.067672,-5.6090681)"
        style="filter:url(#filter16529-4)">
       <rect
          x="53.633308"
@@ -6969,7 +7125,7 @@
     </g>
     <g
        id="g1578-4-8-9"
-       transform="matrix(0.44519058,0,0,0.40865413,18.385374,-27.136037)"
+       transform="matrix(0.44519058,0,0,0.40865413,7.7142614,8.3481199)"
        style="filter:url(#filter16533-3)">
       <rect
          x="53.633308"
@@ -7027,7 +7183,7 @@
        stroke="#2a2e34"
        id="rect18943-5-6-0-7-3"
        style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-7-7-8-8)"
-       transform="matrix(0.40988295,0,0,0.35211147,20.334016,-21.572503)" />
+       transform="matrix(0.40988295,0,0,0.35211147,9.6629034,13.911654)" />
     <rect
        x="118.41833"
        y="-74.190994"
@@ -7039,7 +7195,7 @@
        stroke="#2a2e34"
        id="rect18943-1-6-2-4"
        style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.1846;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter16541-4)"
-       transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)" />
+       transform="matrix(0.50809043,0,0,0.50809043,-28.251547,110.8318)" />
     <rect
        x="54.343487"
        y="157.40337"
@@ -7051,7 +7207,7 @@
        stroke="#2a2e34"
        id="rect18943-3-8-3-2-2"
        style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient22647);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-0-1-1-2)"
-       transform="matrix(0.40165474,0,0,0.35975607,20.862576,-18.852415)" />
+       transform="matrix(0.40165474,0,0,0.35975607,10.191463,16.631742)" />
     <rect
        x="45.344532"
        y="182.03563"
@@ -7063,7 +7219,7 @@
        stroke="#2a2e34"
        id="rect18943-1-6-6-5-6-2"
        style="opacity:0.961247;fill:#fbff00;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-9-9)"
-       transform="matrix(0.44519058,0,0,0.40865413,22.444747,-36.75552)" />
+       transform="matrix(0.44519058,0,0,0.40865413,11.773634,-1.2713631)" />
     <text
        x="53.572674"
        y="186.56036"
@@ -7073,7 +7229,7 @@
        fill="#cccccc"
        id="text18945-7-2-1-4"
        style="fill:#000000;fill-opacity:1;stroke-width:0.311653;filter:url(#filter12290-0-9)"
-       transform="matrix(0.44519058,0,0,0.40865413,22.444747,-36.75552)">LP</text>
+       transform="matrix(0.44519058,0,0,0.40865413,11.773634,-1.2713631)">LP</text>
     <text
        x="53.45475"
        y="186.42896"
@@ -7083,10 +7239,10 @@
        fill="#cccccc"
        id="text18945-7-2-6-0-5"
        style="fill:#373636;fill-opacity:1;stroke-width:0.311653;filter:url(#filter12324-8-8)"
-       transform="matrix(0.44519058,0,0,0.40865413,22.444747,-36.75552)">LP</text>
+       transform="matrix(0.44519058,0,0,0.40865413,11.773634,-1.2713631)">LP</text>
     <g
        id="g22460-1"
-       transform="matrix(0.60618806,0,0,0.60618806,-16.801791,-77.978197)"
+       transform="matrix(0.60618806,0,0,0.60618806,-27.472904,-42.49404)"
        style="filter:url(#filter23594)">
       <g
          id="g1578-4-7"
@@ -7139,7 +7295,7 @@
     </g>
     <g
        id="g22469-8"
-       transform="matrix(0.50809043,0,0,0.50809043,0.97739163,-74.924996)"
+       transform="matrix(0.50809043,0,0,0.50809043,-9.693721,-39.440839)"
        style="filter:url(#filter23598)">
       <g
          id="g8595-13"
@@ -7200,7 +7356,7 @@
     </g>
     <g
        id="g22469-3-1-7"
-       transform="matrix(0.50809043,0,0,0.50809043,11.219553,-50.265822)"
+       transform="matrix(0.50809043,0,0,0.50809043,0.54844039,-14.781665)"
        style="filter:url(#filter16561-7)">
       <g
          id="g8595-5-7-0"
@@ -7261,7 +7417,7 @@
     </g>
     <g
        id="g22469-3-2-8"
-       transform="matrix(0.66718076,0,0,0.66718076,-30.479894,-103.52862)"
+       transform="matrix(0.66718076,0,0,0.66718076,-41.151007,-68.044463)"
        style="filter:url(#filter23602)">
       <g
          id="g8595-5-6-5"
@@ -7322,7 +7478,7 @@
     </g>
     <g
        id="g22469-3-2-7-6"
-       transform="matrix(0.66718076,0,0,0.66718076,-38.614183,-77.134168)"
+       transform="matrix(0.66718076,0,0,0.66718076,-49.285296,-41.650011)"
        style="filter:url(#filter16565-4)">
       <g
          id="g8595-5-6-6-4"
@@ -7383,7 +7539,7 @@
     </g>
     <g
        id="g22469-3-8-1"
-       transform="matrix(0.64589146,0,0,0.64589146,2.8846102,-99.57199)"
+       transform="matrix(0.64589146,0,0,0.64589146,-7.7865024,-64.087833)"
        style="filter:url(#filter23606)">
       <g
          id="g8595-5-3-4"
@@ -7443,8 +7599,8 @@
          transform="rotate(-45)" />
     </g>
     <rect
-       x="17.735556"
-       y="-29.27532"
+       x="7.0644431"
+       y="-64.759476"
        width="57.283104"
        fill="#3a3f47"
        stroke="#2a2e34"
@@ -7458,7 +7614,7 @@
        x="117.92751"
        y="-139.95247"
        id="text20130-1"
-       transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
+       transform="matrix(0.50809043,0,0,0.50809043,-28.251547,110.8318)"><tspan
          id="tspan20128-2"
          style="fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.963578;stroke-opacity:1"
          x="117.92751"
@@ -7469,14 +7625,14 @@
        x="114.93935"
        y="-83.452744"
        id="text20130-7-2"
-       transform="matrix(0.50809043,0,0,0.50809043,-17.580434,75.347642)"><tspan
+       transform="matrix(0.50809043,0,0,0.50809043,-28.251547,110.8318)"><tspan
          id="tspan20128-8-1"
          style="fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.963578;stroke-opacity:1"
          x="114.93935"
          y="-83.452744">FILTER </tspan></text>
     <g
        id="g22446-5"
-       transform="matrix(0.60618806,0,0,0.60618806,-16.801791,-77.978197)"
+       transform="matrix(0.60618806,0,0,0.60618806,-27.472904,-42.49404)"
        style="filter:url(#filter23610)">
       <g
          id="g22436-0"
@@ -7555,7 +7711,7 @@
   </g>
   <g
      id="g37296"
-     transform="translate(3.2744188,27.01094)">
+     transform="translate(-7.041474,125.97787)">
     <g
        id="g28104"
        transform="translate(-0.88817787,2.7527767)">
@@ -7676,7 +7832,7 @@
            id="tspan20128-4"
            style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.343416;stroke-opacity:1"
            x="35.490284"
-           y="90.064178">Dencity</tspan></text>
+           y="90.064178">Density</tspan></text>
       <g
          id="g22453"
          transform="matrix(0.60618806,0,0,0.60618806,-15.562392,4.5915424)">
@@ -8481,7 +8637,7 @@
              id="tspan20128-4-0"
              style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
              x="84.489746"
-             y="148.22382">Dencity</tspan></text>
+             y="148.22382">Density</tspan></text>
         <g
            id="g22453-5"
            transform="matrix(1.1930712,0,0,1.1930712,-15.989761,-19.999441)">

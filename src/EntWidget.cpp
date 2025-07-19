@@ -73,6 +73,7 @@ void EntWidget::setBackgroundImage(const RkImage &img)
 {
         if (!img.isNull()) {
                 m_backgroundImage = img;
+                setFixedSize(m_backgroundImage.size());
                 update();
         }
 }

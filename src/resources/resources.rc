@@ -7,5 +7,13 @@ switch_button_off.png
 
 noise1_label.png
 noise2_label.png
-
+noise_density_knob_label.png
+noise_density_knob_bk.png
+noise_density_knob_marker.png
+noise_brightness_knob_label.png
+noise_brightness_knob_bk.png
+noise_brightness_knob_marker.png
+noise_gain_knob_label.png
+noise_gain_knob_bk.png
+noise_gain_knob_marker.png
 )

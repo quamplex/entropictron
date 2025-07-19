@@ -31,6 +31,15 @@ RK_DECLARE_IMAGE_RC(noise1_label);
 RK_DECLARE_IMAGE_RC(noise2_label);
 RK_DECLARE_IMAGE_RC(switch_button_on);
 RK_DECLARE_IMAGE_RC(switch_button_off);
+RK_DECLARE_IMAGE_RC(noise_density_knob_label);
+RK_DECLARE_IMAGE_RC(noise_density_knob_bk);
+RK_DECLARE_IMAGE_RC(noise_density_knob_marker);
+RK_DECLARE_IMAGE_RC(noise_brightness_knob_label);
+RK_DECLARE_IMAGE_RC(noise_brightness_knob_bk);
+RK_DECLARE_IMAGE_RC(noise_brightness_knob_marker);
+RK_DECLARE_IMAGE_RC(noise_gain_knob_label);
+RK_DECLARE_IMAGE_RC(noise_gain_knob_bk);
+RK_DECLARE_IMAGE_RC(noise_gain_knob_marker);
 
 NoiseWidget::NoiseWidget(EntWidget* parent)
         : EntWidget(parent)
@@ -64,8 +73,32 @@ NoiseWidget::NoiseWidget(EntWidget* parent)
         topContianer->addSpace(10);
         topContianer->addWidget(label);
 
+        createNoiseControls(mainContianer);
+
 }
 
 NoiseWidget::~NoiseWidget()
 {
+}
+
+void NoiseWidget::createNoiseControls()
+{
+        auto noiseControlsContianer = new RkContainer(this);
+        noiseControlsContianer->setSize(width(), 103);
+        mainLayout->addContianer(noiseControlsContianer);
+
+        auto densityKnob = new Knob(this, RK_RC_IMAGE(noise_density_knob_label));
+        densityKnob->setBackroundImage(RK_RC_IMAGE(noise_density_knob_bk));
+        densityKnob->setMarkerImage(RK_RC_IMAGE(noise_density_knob_marker));
+        noiseControlsContianer->addWidget(densityKnob);
+
+        auto birghtnessKnob = new Knob(this, RK_RC_IMAGE(noise_brightness_knob_label));
+        brightnessKnob->setBackroundImage(RK_RC_IMAGE(noise_brightness_knob_bk));
+        brightnessKnob->setMarkerImage(RK_RC_IMAGE(noise_brightness_knob_marker));
+        noiseControlsContianer->addWidget(brightnessKnob);
+
+        auto birghtnessKnob = new Knob(this, RK_RC_IMAGE(noise_gian_knob_label));
+        gianKnob->setBackroundImage(RK_RC_IMAGE(noise_gian_knob_bk));
+        gianKnob->setMarkerImage(RK_RC_IMAGE(noise_gian_knob_marker));
+        noiseControlsContianer->addWidget(gianKnob);
 }
