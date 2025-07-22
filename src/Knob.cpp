@@ -27,17 +27,34 @@ Knob::Knob(EntWidget* parent, const RkImage &label)
         : EntWidget(parent)
         , labelImage{label}
 {
-        updateKnobUi();
+        createView();
 }
 
 void Knob::setLabelImage(const RkImage &image)
 {
         labelImage = img;
-        updateKnobUi();
+        updateView();w
 }
 
 void Knob::setMakerImage(const RkImage &label)
 {
         markerImage = img;
-        updateKnobUi();
+        createView();
 }
+
+void Knob::createView()
+{
+}
+
+void Knob::updateView()
+{
+}
+
+void Knob::bindModel()
+{
+}
+
+void Knob::unbindModel()
+{
+}
+

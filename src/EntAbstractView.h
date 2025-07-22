@@ -1,5 +1,5 @@
 /**
- * File name: Knob.h
+ * File name: EntAbstractView.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,30 +21,27 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_KNOB_WIDGET_H
-#define ENT_KNOB_WIDGET_H
+#ifndef ENT_ABSTRACT_VIEW_H
+#define EMT_ABSTRACT_VIEW_H
 
-#include "EntAbstractView.h"
+#include "EntWidget.h"
 
-#include "RkImage.h"
+class AbstractModel;
 
-class Knob : public EntAbstractView
-{
-public:
-        explicit Knob(EntWidget* parent);
-        virtual ~Knob() = default;
-        void setLabelImage(const RkImage &img);
-        void setMakerImage(const RkImage &img);
-        void createView() override;
-        void updateView() override;
+class EntAbstractView: public EntWidget {
+ public:
+        explicit AbstractView(GeonkickWidget* parent, EntAbstractModel *model);
+        void setModel(EntAbstractModel *model);
+        EntAbstractModel* getModel() const;
+        virtual void createView() = 0;
+        virtual void updateView() = 0;
 
-protected:
-        void bindModel() override;
-        void unbindModel() override;
+ protected:
+        virtual void bindModel() = 0;
+        virtual void unbindModel() = 0;
 
-private:
-        RkImage labelImage;
-        RkImage markerImage;
+ private:
+        EntAbstractModel* viewModel;
 };
 
-#endif // ENT_KNOB_H
+#endif // ENT_ABSTRACT_VIEW_H
