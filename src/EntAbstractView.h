@@ -26,7 +26,7 @@
 
 #include "EntWidget.h"
 
-class AbstractModel;
+class EntAbstractModel;
 
 class EntAbstractView: public EntWidget {
  public:

@@ -24,7 +24,7 @@
 #include "Knob.h"
 
 Knob::Knob(EntWidget* parent, const RkImage &label)
-        : EntWidget(parent)
+        : EntAbstractView(parent)
         , labelImage{label}
 {
         createView();

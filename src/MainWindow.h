@@ -26,6 +26,8 @@
 
 #include "EntWidget.h"
 
+#include <RkMain.h>
+
 class MainWindow : public EntWidget
 {
  public:
