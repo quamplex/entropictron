@@ -26,8 +26,8 @@
 
 #include "globals.h"
 
-#include <RkWidget.h>
-#include <RkImage.h>
+#include "RkWidget.h"
+#include "RkImage.h"
 
 class RkPaintEvent;
 class RkNativeWindowInfo;

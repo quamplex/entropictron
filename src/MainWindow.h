@@ -26,7 +26,7 @@
 
 #include "EntWidget.h"
 
-#include <RkMain.h>
+#include "RkMain.h"
 
 class MainWindow : public EntWidget
 {

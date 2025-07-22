@@ -30,7 +30,7 @@
 #include <sys/mman.h>
 #endif // GEONKICK_OS_GNU
 
-static geonkick* createDSP()
+/*static geonkick* createDSP()
 {
         //        EndDspProxy* dspProxy = nullptr;
         //        if (ent_create(.....) != GEONKICK_OK) {
@@ -38,8 +38,8 @@ static geonkick* createDSP()
         //                return nullptr;
         //        }
 
-        return nullptr/*dspProxy*/;
-}
+        return dspProxy;
+        }/*/
 
 int main(int argc, char *argv[])
 {
@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
         //exit(EXIT_FAILURE);
         //}
 
-        auto window = new MainWindow(app);
+        [[maybe_unused]] auto window = new MainWindow(app);
         auto res = app.exec();
 
 #ifdef GEONKICK_OS_GNU
