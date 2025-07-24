@@ -24,27 +24,56 @@
 #ifndef ENT_KNOB_WIDGET_H
 #define ENT_KNOB_WIDGET_H
 
-#include "EntAbstractView.h"
+#include "EntWidget.h"
 
 #include "RkImage.h"
 
-class Knob : public EntAbstractView
+class Knob : public EntWidget
 {
 public:
+        enum RangeType: int {
+                Linear,
+                Logarithmic
+        };
+
         explicit Knob(EntWidget* parent);
         virtual ~Knob() = default;
         void setLabelImage(const RkImage &img);
+        void setKnobImage(const RkImage &img);
         void setMakerImage(const RkImage &img);
-        void createView() override;
-        void updateView() override;
+        void setRange(double from, double to);
+        void setRangeType(RangeType type);
+        RangeType getRangeType() const;
+        void setDefaultValue(double val);
+        void setCurrentValue(double val);
+        void rotateKnob(double degree);
+        RK_DECL_ACT(valueUpdated,
+                    valueUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
 
 protected:
-        void bindModel() override;
-        void unbindModel() override;
+   void paintEvent(RkPaintEvent *event) override;
+   void mouseButtonPressEvent(RkMouseEvent *event) override;
+   void mouseButtonReleaseEvent(RkMouseEvent *event) override;
+   void mouseMoveEvent(RkMouseEvent *event) override;
+   void mouseDoubleClickEvent(RkMouseEvent *event) override;
+   double valueToDegree(double val);
 
 private:
         RkImage labelImage;
+        RkImage knobImage;
         RkImage markerImage;
+        double rangeFrom;
+        double rangeTo;
+        RangeType rangeType;
+        double minimumDegree;
+        double maximumDegree;
+        double rangeDegree;
+        double knobValueDegree;
+        bool isSelected;
+        double defaultValue;
+        RkPoint lastPositionPoint;
 };
 
 #endif // ENT_KNOB_H
