@@ -41,6 +41,15 @@ RK_DECLARE_IMAGE_RC(noise_brightness_knob_marker);
 RK_DECLARE_IMAGE_RC(noise_gain_knob_label);
 RK_DECLARE_IMAGE_RC(noise_gain_knob_bk);
 RK_DECLARE_IMAGE_RC(noise_gain_knob_marker);
+RK_DECLARE_IMAGE_RC(noise_white_button);
+RK_DECLARE_IMAGE_RC(noise_white_button_hover);
+RK_DECLARE_IMAGE_RC(noise_white_button_on);
+RK_DECLARE_IMAGE_RC(noise_pink_button);
+RK_DECLARE_IMAGE_RC(noise_pink_button_hover);
+RK_DECLARE_IMAGE_RC(noise_pink_button_on);
+RK_DECLARE_IMAGE_RC(noise_brown_button);
+RK_DECLARE_IMAGE_RC(noise_brown_button_hover);
+RK_DECLARE_IMAGE_RC(noise_brown_button_on);
 
 NoiseWidget::NoiseWidget(EntWidget* parent)
         : EntWidget(parent)
@@ -85,15 +94,56 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
 {
         auto noiseControlsContainer = new RkContainer(this);
         noiseControlsContainer->setSize({width(), 103});
-        container->addSpace(10);
+        container->addSpace(20);
         container->addContainer(noiseControlsContainer);
+
+        auto noiseTypeContianer = new RkContainer(this, Rk::Orientation::Vertical);
+        noiseTypeContianer->setSize({40, 51});
+
+        auto whiteNoiseBotton = new RkButton(this);
+        whiteNoiseBotton->setImage(RK_RC_IMAGE(noise_white_button),
+                                   RkButton::State::Unpressed);
+        whiteNoiseBotton->setImage(RK_RC_IMAGE(noise_white_button_on),
+                                   RkButton::State::Pressed);
+        whiteNoiseBotton->setImage(RK_RC_IMAGE(noise_white_button_hover),
+                                   RkButton::State::UnpressedHover);
+        whiteNoiseBotton->setCheckable(true);
+        whiteNoiseBotton->setPressed(true);
+        whiteNoiseBotton->show();
+        noiseTypeContianer->addWidget(whiteNoiseBotton);
+
+        auto pinkNoiseBotton = new RkButton(this);
+        pinkNoiseBotton->setImage(RK_RC_IMAGE(noise_pink_button),
+                                   RkButton::State::Unpressed);
+        pinkNoiseBotton->setImage(RK_RC_IMAGE(noise_pink_button_on),
+                                   RkButton::State::Pressed);
+        pinkNoiseBotton->setImage(RK_RC_IMAGE(noise_pink_button_hover),
+                                   RkButton::State::UnpressedHover);
+        pinkNoiseBotton->setCheckable(true);
+        pinkNoiseBotton->setPressed(true);
+        pinkNoiseBotton->show();
+        noiseTypeContianer->addWidget(pinkNoiseBotton);
+
+        auto brownNoiseBotton = new RkButton(this);
+        brownNoiseBotton->setImage(RK_RC_IMAGE(noise_brown_button),
+                                   RkButton::State::Unpressed);
+        brownNoiseBotton->setImage(RK_RC_IMAGE(noise_brown_button_on),
+                                   RkButton::State::Pressed);
+        brownNoiseBotton->setImage(RK_RC_IMAGE(noise_brown_button_hover),
+                                   RkButton::State::UnpressedHover);
+        brownNoiseBotton->setCheckable(true);
+        brownNoiseBotton->setPressed(true);
+        brownNoiseBotton->show();
+        noiseTypeContianer->addWidget(brownNoiseBotton);
+
+        noiseControlsContainer->addContainer(noiseTypeContianer);
 
         auto densityKnob = new Knob(this, RK_RC_IMAGE(noise_density_knob_label));
         densityKnob->setKnobImage(RK_RC_IMAGE(noise_density_knob_bk));
         densityKnob->setMarkerImage(RK_RC_IMAGE(noise_density_knob_marker));
         noiseControlsContainer->addWidget(densityKnob);
 
-        /*auto brightnessKnob = new Knob(this, RK_RC_IMAGE(noise_brightness_knob_label));
+        auto brightnessKnob = new Knob(this, RK_RC_IMAGE(noise_brightness_knob_label));
         brightnessKnob->setKnobImage(RK_RC_IMAGE(noise_brightness_knob_bk));
         brightnessKnob->setMarkerImage(RK_RC_IMAGE(noise_brightness_knob_marker));
         noiseControlsContainer->addWidget(brightnessKnob);
@@ -101,5 +151,5 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
         auto gainKnob = new Knob(this, RK_RC_IMAGE(noise_gain_knob_label));
         gainKnob->setKnobImage(RK_RC_IMAGE(noise_gain_knob_bk));
         gainKnob->setMarkerImage(RK_RC_IMAGE(noise_gain_knob_marker));
-        noiseControlsContainer->addWidget(gainKnob);*/
+        noiseControlsContainer->addWidget(gainKnob);
 }

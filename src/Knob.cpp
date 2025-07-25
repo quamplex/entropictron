@@ -109,18 +109,18 @@ void Knob::paintEvent(RkPaintEvent *event)
         int yOffset = 0;
         if (!labelImage.isNull()) {
                 painter.drawImage(labelImage, {(width() - labelImage.width()) / 2, 0});
-                yOffset +=labelImage.height();
+                yOffset += labelImage.height();
         }
 
         // Draw kbob background static image
         if (!knobImage.isNull()) {
                 painter.drawImage(knobImage, {0, yOffset});
-                yOffset += knobImage.height() / 2 + 1;
+                yOffset += knobImage.height() / 2;
         }
 
         // Draw knob marker
         if (!markerImage.isNull()) {
-                auto translateOffset = RkPoint(width() / 2 + 2, yOffset);
+                auto translateOffset = RkPoint(width() / 2, yOffset);
                 painter.translate(translateOffset);
                 auto degree = (2 * M_PI / 360) * knobValueDegree;
                 painter.rotate(degree);
