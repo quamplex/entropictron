@@ -26,11 +26,16 @@
 
 #include "EntWidget.h"
 
+class RkContainer;
+
 class NoiseWidget : public EntWidget
 {
 public:
         explicit NoiseWidget(EntWidget* parent);
         ~NoiseWidget();
+
+protected:
+        void createNoiseControls(RkContainer *container);
 
 private:
 };

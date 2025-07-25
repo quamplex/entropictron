@@ -31,10 +31,8 @@
 class MainWindow : public EntWidget
 {
  public:
-      explicit MainWindow(RkMain& app /*, EndDspProxy *dspProxy*/);
-      explicit MainWindow(RkMain& app,
-                          /* EndDspProxy *dspProxy*/
-                          const RkNativeWindowInfo &info);
+      explicit MainWindow(RkMain& app);
+      explicit MainWindow(RkMain& app, const RkNativeWindowInfo &info);
       ~MainWindow();
       static RkSize getWindowSize();
 

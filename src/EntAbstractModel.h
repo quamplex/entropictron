@@ -24,7 +24,7 @@
 #ifndef ENT_ABSTRACT_MODEL_H
 #define ENT_ABSTRACT_MODEL_H
 
-#include <RkObject.h>
+#include "RkObject.h"
 
 class EntAbstractModel: public RkObject
 {

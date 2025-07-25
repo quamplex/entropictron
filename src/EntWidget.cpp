@@ -52,11 +52,9 @@ EntWidget::EntWidget(RkMain& app, Rk::WidgetFlags flags)
 EntWidget::EntWidget(EntWidget *parent, Rk::WidgetFlags flags)
         : RkWidget(parent, flags)
 {
-        setBackgroundColor(19, 19, 19);
-        setTextColor({204, 204, 204});
-        auto f = font();
-        f.setSize(12);
-        setFont(f);
+        setBackgroundColor(parent->background());
+        setTextColor(parent->textColor());
+        setFont(parent->font());
         show();
 }
 

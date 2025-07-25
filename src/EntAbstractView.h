@@ -30,7 +30,7 @@ class EntAbstractModel;
 
 class EntAbstractView: public EntWidget {
  public:
-        explicit AbstractView(GeonkickWidget* parent, EntAbstractModel *model);
+        explicit EntAbstractView(EntWidget* parent, EntAbstractModel *model);
         void setModel(EntAbstractModel *model);
         EntAbstractModel* getModel() const;
         virtual void createView() = 0;

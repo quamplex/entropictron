@@ -36,17 +36,17 @@ public:
                 Logarithmic
         };
 
-        explicit Knob(EntWidget* parent);
+        explicit Knob(EntWidget* parent, const RkImage &label);
         virtual ~Knob() = default;
         void setLabelImage(const RkImage &img);
         void setKnobImage(const RkImage &img);
-        void setMakerImage(const RkImage &img);
+        void setMarkerImage(const RkImage &img);
         void setRange(double from, double to);
         void setRangeType(RangeType type);
         RangeType getRangeType() const;
+        void setValue(double val);
+        double getValue(void) const;
         void setDefaultValue(double val);
-        void setCurrentValue(double val);
-        void rotateKnob(double degree);
         RK_DECL_ACT(valueUpdated,
                     valueUpdated(double value),
                     RK_ARG_TYPE(double),
@@ -58,7 +58,8 @@ protected:
    void mouseButtonReleaseEvent(RkMouseEvent *event) override;
    void mouseMoveEvent(RkMouseEvent *event) override;
    void mouseDoubleClickEvent(RkMouseEvent *event) override;
-   double valueToDegree(double val);
+   void rotateKnob(double degree);
+   double valueToDegree(double val) const;
 
 private:
         RkImage labelImage;

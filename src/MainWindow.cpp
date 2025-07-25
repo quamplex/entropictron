@@ -24,8 +24,8 @@
 #include "MainWindow.h"
 #include "NoiseWidget.h"
 
-#include <RkLabel.h>
-#include <RkContainer.h>
+#include "RkLabel.h"
+#include "RkContainer.h"
 
 constexpr int MAIN_WINDOW_WIDTH  = 900;
 constexpr int MAIN_WINDOW_HEIGHT = 352;

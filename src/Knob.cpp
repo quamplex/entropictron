@@ -1,4 +1,4 @@
-x/**
+/**
  * File name: Knob.h
  * Project: Entropictron (A texture synthesizer)
  *
@@ -23,35 +23,81 @@ x/**
 
 #include "Knob.h"
 
+#include "RkEvent.h"
+#include "RkPainter.h"
+
 Knob::Knob(EntWidget* parent, const RkImage &label)
         : EntWidget(parent)
         , labelImage{label}
         , rangeFrom{0}
         , rangeTo {0}
         , rangeType{RangeType::Linear}
-        , minimumDegree {0}
-        , maximumDegree {270}
+        , minimumDegree {45}
+        , maximumDegree {360 - 45}
         , rangeDegree{maximumDegree - minimumDegree}
         , knobValueDegree {minimumDegree}
-        , isSelected {flase};
+        , isSelected {false}
         , defaultValue {0}
 {
 }
 
-void Knob::setLabelImage(const RkImage &image)
+void Knob::setLabelImage(const RkImage &img)
 {
         labelImage = img;
-        updateSize();
+        setSize(knobImage.width(),  knobImage.height() + labelImage.height() + 5);
 }
 
-void Knob::setKnobImage(const RkImage &image)
+void Knob::setKnobImage(const RkImage &img)
 {
         knobImage = img;
+        setSize(knobImage.width(),  knobImage.height() + labelImage.height() + 5);
 }
 
-void Knob::setMakerImage(const RkImage &label)
+void Knob::setMarkerImage(const RkImage &img)
 {
         markerImage = img;
+}
+
+void Knob::setRange(double from, double to)
+{
+        rangeFrom = std::min(from, to);
+        rangeTo = std::max(from, to);
+}
+
+void Knob::setRangeType(RangeType type)
+{
+        rangeType = type;
+}
+
+Knob::RangeType Knob::getRangeType() const
+{
+        return rangeType;
+}
+
+void Knob::setValue(double val)
+{
+        knobValueDegree = valueToDegree(val);
+        update();
+}
+
+double Knob::getValue(void) const
+{
+        double k = (knobValueDegree - minimumDegree) / rangeDegree;
+        double val;
+        if (getRangeType() == RangeType::Logarithmic) {
+                double logVal = log10(rangeFrom) + k * (log10(rangeTo) - log10(rangeFrom));
+                val = pow(10, logVal);
+        } else {
+                val = rangeFrom + k * (rangeTo - rangeFrom);
+        }
+
+	return val;
+}
+
+void Knob::setDefaultValue(double val)
+{
+        defaultValue = val;
+        setValue(defaultValue);
 }
 
 void Knob::paintEvent(RkPaintEvent *event)
@@ -62,27 +108,27 @@ void Knob::paintEvent(RkPaintEvent *event)
         // Draw knob label
         int yOffset = 0;
         if (!labelImage.isNull()) {
-                painter.darImage(labelImage, (width() - labelImage.width()) / 2, 0);
-                yOffset +=labelImage.height() + 5;
+                painter.drawImage(labelImage, {(width() - labelImage.width()) / 2, 0});
+                yOffset +=labelImage.height();
         }
 
         // Draw kbob background static image
         if (!knobImage.isNull()) {
-                painter.drawImage(knobImage,
-                                  RkPoint(width() - knobImage.width() / 2, yOffset));
-                yOffset += knobImage.height() / 2;
+                painter.drawImage(knobImage, {0, yOffset});
+                yOffset += knobImage.height() / 2 + 1;
         }
 
         // Draw knob marker
         if (!markerImage.isNull()) {
-                painter.translate(RkPoint(width() / 2, yOffset));
+                auto translateOffset = RkPoint(width() / 2 + 2, yOffset);
+                painter.translate(translateOffset);
                 auto degree = (2 * M_PI / 360) * knobValueDegree;
                 painter.rotate(degree);
                 painter.drawImage(markerImage,
-                                  RkPoint(width() - markerImage.width() / 2,
-                                          yOffset - markerImage.height() / 2));
+                                  -markerImage.width() / 2,
+                                  -markerImage.height() / 2);
                 painter.rotate(-degree);
-                painter.translate(RkPoint(-width() / 2, -yOffset));
+                painter.translate(RkPoint() - translateOffset);
         }
 }
 
@@ -95,10 +141,10 @@ void Knob::mouseButtonPressEvent(RkMouseEvent *event)
                 return;
         }
 
-        if (!knobBackroundImage.isNull()) {
+        if (!knobImage.isNull()) {
                 int xCenter = width() / 2;
                 int yCenter = height() / 2;
-                int r = knobBackroundImage.width() / 2;
+                int r = knobImage.width() / 2;
                 if ((event->x() - xCenter) * (event->x() - xCenter) +
                     (event->y() - yCenter) * (event->y() - yCenter) <=  r * r)
                 {
@@ -127,7 +173,7 @@ void Knob::mouseMoveEvent(RkMouseEvent *event)
 
 void Knob::mouseDoubleClickEvent(RkMouseEvent *event)
 {
-        setCurrentValue(defaultValue);
+        setValue(defaultValue);
         action valueUpdated(defaultValue);
 }
 
@@ -154,59 +200,19 @@ double Knob::valueToDegree(double value) const
         if (std::fabs(rangeTo - rangeFrom) < std::numeric_limits<double>::epsilon())
                 return minimumDegree;
 
-        val = std::clamp(value, rangeFrom, rangeTo);
+        value = std::clamp(value, rangeFrom, rangeTo);
         auto offset = rangeTo - rangeFrom + 1.0;
         auto from = rangeFrom + offset;
         auto to = rangeTo + offset;
-        auto val = value + offset;
+        value += offset;
 
         double k = 0.0;
         if (getRangeType() == RangeType::Logarithmic)
-                k = (log10(val) - log10(calibRangeFrom)) / (log10(calibRangeTo) - log10(calibRangeFrom));
+                k = (log10(value) - log10(from)) / (log10(to) - log10(from));
         else
-                k = (val - calibRangeFrom) / (calibRangeTo - calibRangeFrom);
+                k = (value - from) / (to - from);
 
         return minimumDegree + k * rangeDegree;
 }
 
-double Knob::getValue(void) const
-{
-        double k = (knobValueDegree - minimumDegree) / rangeDegree;
-        double val;
-        if (getRangeType() == RangeType::Logarithmic) {
-                double logVal = log10(rangeFrom) + k * (log10(rangeTo) - log10(rangeFrom));
-                val = pow(10, logVal);
-        } else {
-                val = rangeFrom + k * (rangeTo - rangeFrom);
-        }
 
-	return val;
-}
-
-void Knob::setRange(double from, double to)
-{
-        rangeFrom = std::min(from, to);
-        rangeTo = std::max(from, to);
-}
-
-void Knob::setRangeType(RangeType type)
-{
-        rangeType = type;
-}
-
-Knob::RangeType Knob::getRangeType() const
-{
-        return rangeType;
-}
-
-void Knob::setDefaultValue(double val)
-{
-        defaultValue = val;
-        setCurrentValue(defaultValue);
-}
-
-void Knob::setCurrentValue(double val)
-{
-        knobValueDegree = valueToDegree(val);
-        update();
-}

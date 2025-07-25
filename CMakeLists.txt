@@ -20,6 +20,7 @@ else()
    option(GKICK_STANDALONE "Disable build for standalone" OFF)
 endif()
 
+set(REDKITE_INSTALL OFF CACHE BOOL "Disable Redkite install" FORCE)
 option(GEONKICK_LIMITED_VERSION "Enable geonkick limited version" OFF)
 option(GKICK_PLUGIN "Enable build for plugin" OFF)
 option(GKICK_PRESETS "Enable presets" OFF)
@@ -117,14 +118,16 @@ set(GKICK_COMMON_HEADERS
   ${GKICK_COMMON_DIR}/EntWidget.h
   ${GKICK_COMMON_DIR}/EntAbstractView.h
   ${GKICK_COMMON_DIR}/EntWidget.h
+  ${GKICK_COMMON_DIR}/Knob.h
   ${GKICK_COMMON_DIR}/NoiseWidget.h
   ${GKICK_COMMON_DIR}/MainWindow.h
 )
 
-set(GKICK_COMMON_SOURCE
+set(GKICK_COMMON_SOURCES
   ${GKICK_COMMON_DIR}/EntAbstractModel.cpp
   ${GKICK_COMMON_DIR}/EntWidget.cpp
   ${GKICK_COMMON_DIR}/EntAbstractView.cpp
+  ${GKICK_COMMON_DIR}/Knob.cpp
   ${GKICK_COMMON_DIR}/NoiseWidget.cpp
   ${GKICK_COMMON_DIR}/MainWindow.cpp
 )

@@ -7,7 +7,7 @@ add_executable(entropictron
 
 add_dependencies(entropictron api_standalone)
 add_dependencies(entropictron redkite)
-target_link_libraries(entropictron  geonkick_common api_standalone redkite)
+target_link_libraries(entropictron geonkick_common api_standalone redkite)
 if (CMAKE_SYSTEM_NAME MATCHES Windows)
     target_link_libraries(entropictron "-mwindows -lstdc++ -lstdc++fs -lsndfile -lm -lpthread")
 else()

@@ -1,12 +1,12 @@
 /**
  * File name: main.cpp
- * Project: Geonkick (A kick synthesizer)
+ * Project: Entropictron (A texture synthesizer)
  *
- * Copyright (C) 2017 Iurie Nistor
+ * Copyright (C) 2025 Iurie Nistor
  *
- * This file is part of Geonkick.
+ * This file is part of Entropictron.
  *
- * GeonKick is free software; you can redistribute it and/or modify
+ * Entropictron is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
@@ -24,7 +24,7 @@
 #include "MainWindow.h"
 //#include "EndDspProxy.h"
 
-#include <RkMain.h>
+#include "RkMain.h"
 
 #ifdef GEONKICK_OS_GNU
 #include <sys/mman.h>
@@ -65,7 +65,6 @@ int main(int argc, char *argv[])
         //delete api;
         //exit(EXIT_FAILURE);
         //}
-
         [[maybe_unused]] auto window = new MainWindow(app);
         auto res = app.exec();
 
