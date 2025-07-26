@@ -44,17 +44,20 @@ RK_DECLARE_IMAGE_RC(noise_gain_knob_marker);
 RK_DECLARE_IMAGE_RC(noise_white_button);
 RK_DECLARE_IMAGE_RC(noise_white_button_hover);
 RK_DECLARE_IMAGE_RC(noise_white_button_on);
+RK_DECLARE_IMAGE_RC(noise_white_button_hover_on);
 RK_DECLARE_IMAGE_RC(noise_pink_button);
 RK_DECLARE_IMAGE_RC(noise_pink_button_hover);
 RK_DECLARE_IMAGE_RC(noise_pink_button_on);
+RK_DECLARE_IMAGE_RC(noise_pink_button_hover_on);
 RK_DECLARE_IMAGE_RC(noise_brown_button);
 RK_DECLARE_IMAGE_RC(noise_brown_button_hover);
 RK_DECLARE_IMAGE_RC(noise_brown_button_on);
+RK_DECLARE_IMAGE_RC(noise_brown_button_hover_on);
 
 NoiseWidget::NoiseWidget(EntWidget* parent)
         : EntWidget(parent)
 {
-        setFixedSize(314, 282);
+        setFixedSize(350, 282);
         setBackgroundColor(37, 43, 53);
 
         auto mainContainer = new RkContainer(this, Rk::Orientation::Vertical);
@@ -98,7 +101,7 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
         container->addContainer(noiseControlsContainer);
 
         auto noiseTypeContianer = new RkContainer(this, Rk::Orientation::Vertical);
-        noiseTypeContianer->setSize({40, 51});
+        noiseTypeContianer->setSize({75, 96});
 
         auto whiteNoiseBotton = new RkButton(this);
         whiteNoiseBotton->setImage(RK_RC_IMAGE(noise_white_button),
@@ -107,8 +110,9 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
                                    RkButton::State::Pressed);
         whiteNoiseBotton->setImage(RK_RC_IMAGE(noise_white_button_hover),
                                    RkButton::State::UnpressedHover);
+        whiteNoiseBotton->setImage(RK_RC_IMAGE(noise_white_button_hover_on),
+                                   RkButton::State::PressedHover);
         whiteNoiseBotton->setCheckable(true);
-        whiteNoiseBotton->setPressed(true);
         whiteNoiseBotton->show();
         noiseTypeContianer->addWidget(whiteNoiseBotton);
 
@@ -118,9 +122,10 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
         pinkNoiseBotton->setImage(RK_RC_IMAGE(noise_pink_button_on),
                                    RkButton::State::Pressed);
         pinkNoiseBotton->setImage(RK_RC_IMAGE(noise_pink_button_hover),
-                                   RkButton::State::UnpressedHover);
+                                  RkButton::State::UnpressedHover);
+        pinkNoiseBotton->setImage(RK_RC_IMAGE(noise_pink_button_hover_on),
+                                  RkButton::State::PressedHover);
         pinkNoiseBotton->setCheckable(true);
-        pinkNoiseBotton->setPressed(true);
         pinkNoiseBotton->show();
         noiseTypeContianer->addWidget(pinkNoiseBotton);
 
@@ -131,8 +136,9 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
                                    RkButton::State::Pressed);
         brownNoiseBotton->setImage(RK_RC_IMAGE(noise_brown_button_hover),
                                    RkButton::State::UnpressedHover);
+        brownNoiseBotton->setImage(RK_RC_IMAGE(noise_brown_button_hover_on),
+                                   RkButton::State::PressedHover);
         brownNoiseBotton->setCheckable(true);
-        brownNoiseBotton->setPressed(true);
         brownNoiseBotton->show();
         noiseTypeContianer->addWidget(brownNoiseBotton);
 
