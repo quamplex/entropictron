@@ -1,12 +1,12 @@
 /**
- * File name: VstFactory.h
- * Project: Geonkick (A percussion synthesizer)
+ * File name: VstIds.h
+ * Project: Entropictron (A texture synthesizer)
  *
- * Copyright (C) 2019 Iurie Nistor 
+ * Copyright (C) 2025 Iurie Nistor
  *
- * This file is part of Geonkick.
+ * This file is part of Entropictron.
  *
- * GeonKick is free software; you can redistribute it and/or modify
+ * Entropictron is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
@@ -21,35 +21,35 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#include "GKickVstProcessor.h"
+#include "EntVstProcessor.h"
 #include "VstIds.h"
 
 #include "public.sdk/source/main/pluginfactory.h"
 #include "pluginterfaces/base/fplatform.h"
 
-#define gkickPluginName		"Entropictron"
-#define gkickOriginalFilename	"Entropictron.vst3"
+#define entPluginName		"Entropictron"
+#define entOriginalFilename	"Entropictron.vst3"
 #if SMTG_PLATFORM_64
-#define gkickFileDescription	gkickPluginName" Entropictron (64Bit)"
+#define entFileDescription	entPluginName" Entropictron (64Bit)"
 #else
-#define gkickFileDescription	gkickPluginName" Entropictron"
+#define entFileDescription	entPluginName" Entropictron"
 #endif
-#define gkickCompanyName	"Iurie Nistor"
-#define gkickCompanyWeb		"http://iurie.org/Entropictron"
-#define gkickCompanyEmail	"iuriehn@gmail.com"
-#define gkickLegalCopyright	"Copyright (C) 2020 Iurie Nistor. Licensed under the GNU General Public License, Version 3"
+#define entCompanyName	"Iurie Nistor"
+#define entCompanyWeb		"http://quamplex.com/entropictron"
+#define entCompanyEmail	"iuriehn@gmail.com"
+#define entLegalCopyright	"Copyright (C) 2020 Iurie Nistor. Licensed under the GNU General Public License, Version 3"
 
-BEGIN_FACTORY_DEF(gkickCompanyName, gkickCompanyWeb, gkickCompanyEmail)
+BEGIN_FACTORY_DEF(entCompanyName, entCompanyWeb, entCompanyEmail)
 
-DEF_CLASS2(INLINE_UID_FROM_FUID(GKickVstProcessorUID),
+DEF_CLASS2(INLINE_UID_FROM_FUID(EntVstProcessorUID),
            PClassInfo::kManyInstances,
            kVstAudioEffectClass,
-           gkickPluginName,
+           entPluginName,
            0,
            Vst::PlugType::kFx,
-           GEOKICK_VERSION_STRING,
+           ENT_VERSION_STRING,
            kVstVersionString,
-           GKickVstProcessor::createInstance)
+           EntVstProcessor::createInstance)
 
 END_FACTORY
 

@@ -18,18 +18,20 @@ add_subdirectory(${GKICK_VST_SDK_PATH} EXTERN)
 
 set(GKICK_VST_HEADERS
   ${GKICK_VST_SDK_PATH}/public.sdk/source/vst/vstcomponentbase.h
-  ${GKICK_VST_SDK_PATH}/public.sdk/source/vst/vstsinglecomponenteffect.h
+  ${GKICK_VST_SDK_PATH}/public.sdk/source/vst/vstaudioeffect.h
   ${GKICK_VST_DIR}/VstIds.h
-  ${GKICK_VST_DIR}/GKickVstProcessor.h
-  ${GKICK_VST_DIR}/GKickVstEditor.h
+  ${GKICK_VST_DIR}/EntVtsProcessor.h
+  ${GKICK_VST_DIR}/EntVtsController.h
+  ${GKICK_VST_DIR}/EntVtsPluginView.h
   )
 
 set(GKICK_VST_SOURCES
   ${GKICK_VST_SDK_PATH}/public.sdk/source/vst/vstcomponentbase.cpp
-  ${GKICK_VST_SDK_PATH}/public.sdk/source/vst/vstsinglecomponenteffect.cpp
+  ${GKICK_VST_SDK_PATH}/public.sdk/source/vst/vstaudioeffect.cpp
   ${GKICK_VST_DIR}/VstFactory.cpp
-  ${GKICK_VST_DIR}/GKickVstProcessor.cpp
-  ${GKICK_VST_DIR}/GKickVstEditor.cpp
+  ${GKICK_VST_DIR}/EntVtsProcessor.cpp
+  ${GKICK_VST_DIR}/EntVtsController.cpp
+  ${GKICK_VST_DIR}/EntVtsPluginView.cpp
   )
 
 set(target entropictron_vst)

@@ -1,5 +1,5 @@
 /**
- * File name: VstIds.h
+ * File name: EntVstController.cpp
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,14 +21,21 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_VST_IDS_H
-#define ENT_VST_IDS_H
+#include "EntVstController.h"
+#include "VstIds.h"
 
-#include "globals.h"
-
-#include "pluginterfaces/base/funknown.h"
+#include "public.sdk/source/vst/vsteditcontroller.h"
 
 using namespace Steinberg;
-static const FUID GKickVstProcessorUID(0xE2DCA632, 0x90E963FA, 0x6415F139, 0x54E54C24);
 
-#endif // ENT_VST_IDS_H
+static FUnknown* EntVstController::createInstance(void*)
+{
+        return new EntVstController();
+}
+
+tresult PLUGIN_API EntVstController::initialize(FUnknown* context)
+{
+        EditControllerEx1::initialize(context);
+        return kResultOk;
+}
+

@@ -1,5 +1,5 @@
 /**
- * File name: VstIds.h
+ * File name: EntVstPluginView.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,14 +21,35 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_VST_IDS_H
-#define ENT_VST_IDS_H
+#include "EntVstPluginView.h"
 
-#include "globals.h"
+EntVstPluginView::EntVstPluginView(Vst::EditController *controller)
+        : editController {controller}
+{
+}
 
-#include "pluginterfaces/base/funknown.h"
+tresult PLUGIN_API
+EntVstPluginView::isPlatformTypeSupported(Steinberg::FIDString type)
+{
+        if (strcmp(type, kPlatformTypeHWND) == 0 || strcmp(type, kPlatformTypeX11) == 0)
+                return kResultTrue;
+        return kResultFalse;
+}
 
-using namespace Steinberg;
-static const FUID GKickVstProcessorUID(0xE2DCA632, 0x90E963FA, 0x6415F139, 0x54E54C24);
+tresult PLUGIN_API
+EntVstPluginView::attached(void* parent, FIDString type)
+{
+        return Vst::IPlugView::attached(parent, type);
+}
 
-#endif // ENT_VST_IDS_H
+tresult PLUGIN_API
+EntVstPluginView::removed()
+{
+        return kResultOk;
+}
+
+tresult PLUGIN_API
+EntVstPluginView::getSize(ViewRect* newSize)
+{
+	return kResultOk;
+}
