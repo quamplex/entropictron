@@ -24,64 +24,64 @@
 #ifndef GKICK_ENVELOPE_H
 #define GKICK_ENVELOPE_H
 
-#include "geonkick_internal.h"
+#include "entropictron_internal.h"
 
-struct gkick_envelope_point {
-	struct gkick_envelope_point *prev;
-	struct gkick_envelope_point *next;
-	gkick_real x;
-	gkick_real y;
+struct ent_envelope_point {
+	struct ent_envelope_point *prev;
+	struct ent_envelope_point *next;
+	ent_real x;
+	ent_real y;
         bool is_control;
 };
 
-struct gkick_envelope {
-        enum gkick_envelope_apply_type apply_type;
-        enum gkick_envelope_curve_type curve_type;
+struct ent_envelope {
+        enum ent_envelope_apply_type apply_type;
+        enum ent_envelope_curve_type curve_type;
 	size_t npoints;
-	struct gkick_envelope_point *first;
-	struct gkick_envelope_point *last;
+	struct ent_envelope_point *first;
+	struct ent_envelope_point *last;
 };
 
-struct gkick_envelope*
-gkick_envelope_create(void);
+struct ent_envelope*
+ent_envelope_create(void);
 
-void gkick_envelope_set_apply_type(struct gkick_envelope* envelope,
-				   enum gkick_envelope_apply_type apply_type);
+void ent_envelope_set_apply_type(struct ent_envelope* envelope,
+				   enum ent_envelope_apply_type apply_type);
 
-enum gkick_envelope_apply_type
-gkick_envelope_get_apply_type(const struct gkick_envelope* envelope);
+enum ent_envelope_apply_type
+ent_envelope_get_apply_type(const struct ent_envelope* envelope);
 
-void gkick_envelope_set_curve_type(struct gkick_envelope* envelope,
-				   enum gkick_envelope_curve_type type);
+void ent_envelope_set_curve_type(struct ent_envelope* envelope,
+				   enum ent_envelope_curve_type type);
 
-enum gkick_envelope_curve_type
-gkick_envelope_get_curve_type(struct gkick_envelope* envelope);
+enum ent_envelope_curve_type
+ent_envelope_get_curve_type(struct ent_envelope* envelope);
 
-gkick_real
-gkick_envelope_get_value(const struct gkick_envelope* envelope,
-                         gkick_real xm);
+ent_real
+ent_envelope_get_value(const struct ent_envelope* envelope,
+                         ent_real xm);
 
-struct gkick_envelope_point*
-gkick_envelope_add_point(struct gkick_envelope *envelope,
-                         const struct gkick_envelope_point_info *point_info);
+struct ent_envelope_point*
+ent_envelope_add_point(struct ent_envelope *envelope,
+                         const struct ent_envelope_point_info *point_info);
 
-void gkick_envelope_destroy(struct gkick_envelope *envelope);
+void ent_envelope_destroy(struct ent_envelope *envelope);
 
-void gkick_envelope_get_points(struct gkick_envelope *env,
-                               struct gkick_envelope_point_info **buff,
+void ent_envelope_get_points(struct ent_envelope *env,
+                               struct ent_envelope_point_info **buff,
                                size_t *npoints);
 
-void gkick_envelope_set_points(struct gkick_envelope *env,
-			  const struct gkick_envelope_point_info *buff,
+void ent_envelope_set_points(struct ent_envelope *env,
+			  const struct ent_envelope_point_info *buff,
 			  size_t npoints);
 
-void gkick_envelope_clear(struct gkick_envelope* env);
+void ent_envelope_clear(struct ent_envelope* env);
 
-void gkick_envelope_remove_point(struct gkick_envelope *env,
+void ent_envelope_remove_point(struct ent_envelope *env,
                                  size_t index);
 
-void gkick_envelope_update_point(struct gkick_envelope *env,
+void ent_envelope_update_point(struct ent_envelope *env,
                                  size_t index,
-                                 const struct gkick_envelope_point_info *point_info);
+                                 const struct ent_envelope_point_info *point_info);
 
 #endif // GKICK_ENVELOPE_H

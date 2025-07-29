@@ -23,105 +23,105 @@
 
 #include "worker.h"
 
-struct gkick_worker *geonkick_worker = NULL;
+struct ent_worker *entropictron_worker = NULL;
 
 bool
-geonkick_worker_created()
+entropictron_worker_created()
 {
-        return geonkick_worker != NULL;
+        return entropictron_worker != NULL;
 }
 
 size_t
-geonkick_worker_reference_count()
+entropictron_worker_reference_count()
 {
-        if (geonkick_worker != NULL)
-                return geonkick_worker->ref_count;
+        if (entropictron_worker != NULL)
+                return entropictron_worker->ref_count;
         return 0;
 }
 
-enum geonkick_error
-geonkick_worker_create()
+enum entropictron_error
+entropictron_worker_create()
 {
-        /*        if (geonkick_worker != NULL)
-                return GEONKICK_OK;
+        /*        if (entropictron_worker != NULL)
+                return ENTROPICTRON_OK;
 
-        geonkick_worker = (struct gkick_worker*)calloc(1, sizeof(struct gkick_worker));
-	if (geonkick_worker == NULL)
-		return GEONKICK_ERROR_MEM_ALLOC;
+        entropictron_worker = (struct ent_worker*)calloc(1, sizeof(struct ent_worker));
+	if (entropictron_worker == NULL)
+		return ENTROPICTRON_ERROR_MEM_ALLOC;
 
-	geonkick_worker->running = false;
-        if (pthread_cond_init(&geonkick_worker->condition_var, NULL) != 0) {
-                gkick_log_error("can't init worker condition variable");
-		return GEONKICK_ERROR;
+	entropictron_worker->running = false;
+        if (pthread_cond_init(&entropictron_worker->condition_var, NULL) != 0) {
+                ent_log_error("can't init worker condition variable");
+		return ENTROPICTRON_ERROR;
 	}
-	geonkick_worker->cond_var_initilized = true;*/
-	return GEONKICK_OK;
+	entropictron_worker->cond_var_initilized = true;*/
+	return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-geonkick_worker_start()
+enum entropictron_error
+entropictron_worker_start()
 {
-        /*        if (!geonkick_worker)
-                return GEONKICK_ERROR;
-        if (geonkick_worker->running)
-                return GEONKICK_OK;
-        geonkick_worker->running = true;
-        if (pthread_create(&geonkick_worker->thread, NULL,
-                           &geonkick_worker_thread, NULL) != 0) {
-                gkick_log_error("can't create worker thread");
-                geonkick_worker->running = false;
-                return GEONKICK_ERROR;
+        /*        if (!entropictron_worker)
+                return ENTROPICTRON_ERROR;
+        if (entropictron_worker->running)
+                return ENTROPICTRON_OK;
+        entropictron_worker->running = true;
+        if (pthread_create(&entropictron_worker->thread, NULL,
+                           &entropictron_worker_thread, NULL) != 0) {
+                ent_log_error("can't create worker thread");
+                entropictron_worker->running = false;
+                return ENTROPICTRON_ERROR;
                 }*/
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-void geonkick_worker_destroy()
+void entropictron_worker_destroy()
 {
-	/*if (geonkick_worker->running)
-		geonkick_worker->running = false;
-        pthread_mutex_lock(&geonkick_worker->lock);
-        pthread_cond_signal(&geonkick_worker->condition_var);
-        pthread_mutex_unlock(&geonkick_worker->lock);
-        gkick_log_debug("join thread: %d", geonkick_worker->running);
-	pthread_join(geonkick_worker->thread, NULL);
+	/*if (entropictron_worker->running)
+		entropictron_worker->running = false;
+        pthread_mutex_lock(&entropictron_worker->lock);
+        pthread_cond_signal(&entropictron_worker->condition_var);
+        pthread_mutex_unlock(&entropictron_worker->lock);
+        ent_log_debug("join thread: %d", entropictron_worker->running);
+	pthread_join(entropictron_worker->thread, NULL);
 
-	pthread_mutex_lock(&geonkick_worker->lock);
-	if (geonkick_worker->cond_var_initilized)
-		pthread_cond_destroy(&geonkick_worker->condition_var);
-	geonkick_worker->cond_var_initilized = false;
-	pthread_mutex_unlock(&geonkick_worker->lock);
-        free(geonkick_worker);
-        geonkick_worker = NULL;*/
+	pthread_mutex_lock(&entropictron_worker->lock);
+	if (entropictron_worker->cond_var_initilized)
+		pthread_cond_destroy(&entropictron_worker->condition_var);
+	entropictron_worker->cond_var_initilized = false;
+	pthread_mutex_unlock(&entropictron_worker->lock);
+        free(entropictron_worker);
+        entropictron_worker = NULL;*/
 }
 
-void geonkick_worker_add_instance(struct geonkick *instance)
+void entropictron_worker_add_instance(struct entropictron *instance)
 {
-        /*        if (geonkick_worker->ref_count < GEONKICK_MAX_INSTANCES) {
-                pthread_mutex_lock(&geonkick_worker->lock);
-                instance->id = geonkick_worker->ref_count;
-                geonkick_worker->instances[geonkick_worker->ref_count++] = instance;
-                pthread_mutex_unlock(&geonkick_worker->lock);
+        /*        if (entropictron_worker->ref_count < ENTROPICTRON_MAX_INSTANCES) {
+                pthread_mutex_lock(&entropictron_worker->lock);
+                instance->id = entropictron_worker->ref_count;
+                entropictron_worker->instances[entropictron_worker->ref_count++] = instance;
+                pthread_mutex_unlock(&entropictron_worker->lock);
                 }*/
 }
 
-void geonkick_worker_remove_instance(struct geonkick *instance)
+void entropictron_worker_remove_instance(struct entropictron *instance)
 {
-        /*        if (geonkick_worker->ref_count == 0)
+        /*        if (entropictron_worker->ref_count == 0)
                 return;
-        pthread_mutex_lock(&geonkick_worker->lock);
-        if (geonkick_worker->ref_count) {
-                geonkick_worker->instances[instance->id] =
-                        geonkick_worker->instances[geonkick_worker->ref_count - 1];
-                geonkick_worker->instances[instance->id]->id = instance->id;
+        pthread_mutex_lock(&entropictron_worker->lock);
+        if (entropictron_worker->ref_count) {
+                entropictron_worker->instances[instance->id] =
+                        entropictron_worker->instances[entropictron_worker->ref_count - 1];
+                entropictron_worker->instances[instance->id]->id = instance->id;
         }
-        geonkick_worker->instances[--geonkick_worker->ref_count] = NULL;
-        pthread_mutex_unlock(&geonkick_worker->lock);*/
+        entropictron_worker->instances[--entropictron_worker->ref_count] = NULL;
+        pthread_mutex_unlock(&entropictron_worker->lock);*/
 }
 
-void *geonkick_worker_thread(void *arg)
+void *entropictron_worker_thread(void *arg)
 {
 }
 
-void geonkick_worker_wakeup()
+void entropictron_worker_wakeup()
 {
 }

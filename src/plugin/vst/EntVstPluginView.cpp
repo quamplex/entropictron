@@ -23,6 +23,8 @@
 
 #include "EntVstPluginView.h"
 
+using namespace Steinberg;
+
 EntVstPluginView::EntVstPluginView(Vst::EditController *controller)
         : editController {controller}
 {
@@ -31,22 +33,22 @@ EntVstPluginView::EntVstPluginView(Vst::EditController *controller)
 tresult PLUGIN_API
 EntVstPluginView::isPlatformTypeSupported(Steinberg::FIDString type)
 {
-        if (strcmp(type, kPlatformTypeHWND) == 0 || strcmp(type, kPlatformTypeX11) == 0)
-                return kResultTrue;
-        return kResultFalse;
+        //        if (strcmp(type, kPlatformTypeHWND) == 0 || strcmp(type, kPlatformTypeX11) == 0)
+        //return kResultTrue;
+        return kResultTrue;
 }
 
 tresult PLUGIN_API
 EntVstPluginView::attached(void* parent, FIDString type)
 {
-        return Vst::IPlugView::attached(parent, type);
+        return IPlugView::attached(parent, type);
 }
 
-tresult PLUGIN_API
+/*tresult PLUGIN_API
 EntVstPluginView::removed()
 {
         return kResultOk;
-}
+        }*/
 
 tresult PLUGIN_API
 EntVstPluginView::getSize(ViewRect* newSize)

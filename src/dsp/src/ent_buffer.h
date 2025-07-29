@@ -1,5 +1,5 @@
 /**
- * File name: gkick_buffer.h
+ * File name: ent_buffer.h
  * Project: Geonkick (A kick synthesizer)
  *
  * Copyright (C) 2018 Iurie Nistor 
@@ -24,10 +24,10 @@
 #ifndef GKICK_BUFFER_H
 #define GKICK_BUFFER_H
 
-#include "geonkick_internal.h"
+#include "entropictron_internal.h"
 
-struct gkick_buffer {
-        gkick_real *buff;
+struct ent_buffer {
+        ent_real *buff;
 
         /**
          * Real allocated fixed size, alwayse bigger than current size.
@@ -39,7 +39,7 @@ struct gkick_buffer {
          * Current position in the buffer.
          */
         size_t currentIndex;
-        gkick_real floatIndex;
+        ent_real floatIndex;
 
         /**
          * Current size of the buffer. Can change during
@@ -49,50 +49,50 @@ struct gkick_buffer {
 };
 
 void
-gkick_buffer_new(struct gkick_buffer **buffer, int size);
+ent_buffer_new(struct ent_buffer **buffer, int size);
 
 void
-gkick_buffer_free(struct gkick_buffer **buffer);
+ent_buffer_free(struct ent_buffer **buffer);
 
 void
-gkick_buffer_reset(struct gkick_buffer *buffer);
+ent_buffer_reset(struct ent_buffer *buffer);
 
 void
-gkick_buffer_set_data(struct gkick_buffer *buffer,
-                      const gkick_real *data,
+ent_buffer_set_data(struct ent_buffer *buffer,
+                      const ent_real *data,
                       size_t size);
 
 void
-gkick_buffer_set_at(struct gkick_buffer *buffer,
+ent_buffer_set_at(struct ent_buffer *buffer,
                     size_t index,
-                    gkick_real val);
+                    ent_real val);
 
-gkick_real
-gkick_buffer_get_at(struct gkick_buffer *buffer,
+ent_real
+ent_buffer_get_at(struct ent_buffer *buffer,
                     size_t index);
 
-gkick_real
-gkick_buffer_get_next(struct gkick_buffer *buffer);
+ent_real
+ent_buffer_get_next(struct ent_buffer *buffer);
 
-gkick_real
-gkick_buffer_stretch_get_next(struct gkick_buffer *buffer,
-                                         gkick_real factor);
+ent_real
+ent_buffer_stretch_get_next(struct ent_buffer *buffer,
+                                         ent_real factor);
 
 void
-gkick_buffer_set_size(struct gkick_buffer *buffer,
+ent_buffer_set_size(struct ent_buffer *buffer,
                       size_t size);
 
 size_t
-gkick_buffer_size(struct gkick_buffer *buffer);
+ent_buffer_size(struct ent_buffer *buffer);
 
 size_t
-gkick_buffer_index(struct gkick_buffer *buffer);
+ent_buffer_index(struct ent_buffer *buffer);
 
 void
-gkick_buffer_push_back(struct gkick_buffer *buffer,
-                       gkick_real val);
+ent_buffer_push_back(struct ent_buffer *buffer,
+                       ent_real val);
 
 bool
-gkick_buffer_is_end(struct gkick_buffer *buffer);
+ent_buffer_is_end(struct ent_buffer *buffer);
 
 #endif // GKICK_BUFFER_H

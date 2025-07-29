@@ -26,100 +26,100 @@
 
 #include "audio_output.h"
 
-struct gkick_mixer {
-	struct gkick_audio_output **audio_outputs;
+struct ent_mixer {
+	struct ent_audio_output **audio_outputs;
 	size_t connection_matrix[127];
         _Atomic int solo;
 	_Atomic int limiter;
         _Atomic short forced_midi_channel;
-        void (*limiter_callback) (void*, size_t index, gkick_real val);
+        void (*limiter_callback) (void*, size_t index, ent_real val);
         void *limiter_callback_arg;
         _Atomic size_t limiter_callback_index;
 };
 
-enum geonkick_error
-gkick_mixer_create(struct gkick_mixer **mixer);
+enum entropictron_error
+ent_mixer_create(struct ent_mixer **mixer);
 
-enum geonkick_error
-gkick_mixer_key_pressed(struct gkick_mixer *mixer,
-			struct gkick_note_info *note);
+enum entropictron_error
+ent_mixer_key_pressed(struct ent_mixer *mixer,
+			struct ent_note_info *note);
 
-enum geonkick_error
-gkick_mixer_tune_output(struct gkick_mixer *mixer,
+enum entropictron_error
+ent_mixer_tune_output(struct ent_mixer *mixer,
                         size_t index,
                         bool tune);
 
-enum geonkick_error
-gkick_mixer_is_output_tuned(struct gkick_mixer *mixer,
+enum entropictron_error
+ent_mixer_is_output_tuned(struct ent_mixer *mixer,
                             size_t index,
                             bool *tune);
 
-enum geonkick_error
-gkick_mixer_process(struct gkick_mixer *mixer,
+enum entropictron_error
+ent_mixer_process(struct ent_mixer *mixer,
                     float** out,
                     size_t offset,
                     size_t size);
 
 void
-gkick_mixer_set_leveler(struct gkick_mixer *mixer,
+ent_mixer_set_leveler(struct ent_mixer *mixer,
                         size_t index,
-                        gkick_real val);
+                        ent_real val);
 
-void gkick_mixer_apply_limiter(float *out_left,
+void ent_mixer_apply_limiter(float *out_left,
                                float *out_right,
                                size_t size,
                                float limiter);
 
 void
-gkick_mixer_free(struct gkick_mixer **mixer);
+ent_mixer_free(struct ent_mixer **mixer);
 
-enum geonkick_error
-gkick_mixer_limiter_set(struct gkick_mixer *mixer,
+enum entropictron_error
+ent_mixer_limiter_set(struct ent_mixer *mixer,
                         size_t index,
-                        gkick_real val);
+                        ent_real val);
 
-enum geonkick_error
-gkick_mixer_limiter_get(struct gkick_mixer *mixer,
+enum entropictron_error
+ent_mixer_limiter_get(struct ent_mixer *mixer,
                         size_t index,
-                        gkick_real *val);
+                        ent_real *val);
 
-enum geonkick_error
-gkick_mixer_mute(struct gkick_mixer *mixer, size_t id, bool b);
+enum entropictron_error
+ent_mixer_mute(struct ent_mixer *mixer, size_t id, bool b);
 
-enum geonkick_error
-gkick_mixer_is_muted(struct gkick_mixer *mixer, size_t id, bool *b);
+enum entropictron_error
+ent_mixer_is_muted(struct ent_mixer *mixer, size_t id, bool *b);
 
-enum geonkick_error
-gkick_mixer_solo(struct gkick_mixer *mixer, size_t id, bool b);
+enum entropictron_error
+ent_mixer_solo(struct ent_mixer *mixer, size_t id, bool b);
 
-enum geonkick_error
-gkick_mixer_is_solo(struct gkick_mixer *mixer, size_t id, bool *b);
+enum entropictron_error
+ent_mixer_is_solo(struct ent_mixer *mixer, size_t id, bool *b);
 
-enum geonkick_error
-gkick_mixer_set_limiter_callback(struct gkick_mixer *mixer,
-				 void (*callback)(void*, size_t index, gkick_real val),
+enum entropictron_error
+ent_mixer_set_limiter_callback(struct ent_mixer *mixer,
+				 void (*callback)(void*, size_t index, ent_real val),
 				 void *arg);
 
-enum geonkick_error
-gkick_mixer_mute(struct gkick_mixer *mixer, size_t id, bool b);
+enum entropictron_error
+ent_mixer_mute(struct ent_mixer *mixer, size_t id, bool b);
 
-enum geonkick_error
-gkick_mixer_force_midi_channel(struct gkick_mixer *mixer,
+enum entropictron_error
+ent_mixer_force_midi_channel(struct ent_mixer *mixer,
                                signed char channel,
                                bool force);
 
-enum geonkick_error
-gkick_mixer_get_forced_midi_channel(struct gkick_mixer *mixer,
+enum entropictron_error
+ent_mixer_get_forced_midi_channel(struct ent_mixer *mixer,
                                     signed char *channel,
                                     bool *force);
 
-enum geonkick_error
-gkick_mixer_enable_note_off(struct gkick_mixer *mixer,
+enum entropictron_error
+ent_mixer_enable_note_off(struct ent_mixer *mixer,
                             size_t id,
                             bool enable);
 
-enum geonkick_error
-gkick_mixer_note_off_enabled(struct gkick_mixer *mixer,
+enum entropictron_error
+ent_mixer_note_off_enabled(struct ent_mixer *mixer,
                              size_t id,
                              bool *enabled);
 

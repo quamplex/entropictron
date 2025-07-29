@@ -1,69 +1,65 @@
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
 
-set(GKICK_API_HEADERS
-	${GKICK_API_DIR}/src/audio_output.h
-	${GKICK_API_DIR}/src/distortion.h
-	${GKICK_API_DIR}/src/envelope.h
-	${GKICK_API_DIR}/src/filter.h
-	${GKICK_API_DIR}/src/geonkick.h
-	${GKICK_API_DIR}/src/geonkick_internal.h
-	${GKICK_API_DIR}/src/gkick_audio.h
-        ${GKICK_API_DIR}/src/mixer.h
-	${GKICK_API_DIR}/src/gkick_buffer.h
-        ${GKICK_API_DIR}/src/ring_buffer.h
-	${GKICK_API_DIR}/src/gkick_log.h
-	${GKICK_API_DIR}/src/oscillator.h
-	${GKICK_API_DIR}/src/synthesizer.h
-        ${GKICK_API_DIR}/src/worker.h)
+set(ENT_API_HEADERS
+	${ENT_API_DIR}/src/audio_output.h
+	${ENT_API_DIR}/src/distortion.h
+	${ENT_API_DIR}/src/envelope.h
+	${ENT_API_DIR}/src/filter.h
+	${ENT_API_DIR}/src/entropictron.h
+	${ENT_API_DIR}/src/entropictron_internal.h
+	${ENT_API_DIR}/src/ent_audio.h
+        ${ENT_API_DIR}/src/mixer.h
+	${ENT_API_DIR}/src/ent_buffer.h
+        ${ENT_API_DIR}/src/ring_buffer.h
+	${ENT_API_DIR}/src/ent_log.h
+	${ENT_API_DIR}/src/oscillator.h
+	${ENT_API_DIR}/src/synthesizer.h
+        ${ENT_API_DIR}/src/worker.h)
 
-if (GKICK_STANDALONE)
+if (ENT_STANDALONE)
   if (CMAKE_SYSTEM_NAME MATCHES Windows)
   	message(STATUS "No Jack implementation for Windows")
   else()
-        list(APPEND GKICK_API_HEADERS ${GKICK_API_DIR}/src/gkick_jack.h)
+        list(APPEND ENT_API_HEADERS ${ENT_API_DIR}/src/ent_jack.h)
   endif()
-endif(GKICK_STANDALONE)
+endif(ENT_STANDALONE)
 
-set(GKICK_API_SOURCES
-	${GKICK_API_DIR}/src/audio_output.c
-	${GKICK_API_DIR}/src/distortion.c
-	${GKICK_API_DIR}/src/envelope.c
-	${GKICK_API_DIR}/src/filter.c
-	${GKICK_API_DIR}/src/geonkick.c
-	${GKICK_API_DIR}/src/gkick_audio.c
-        ${GKICK_API_DIR}/src/mixer.c
-	${GKICK_API_DIR}/src/gkick_buffer.c
-        ${GKICK_API_DIR}/src/ring_buffer.c
-	${GKICK_API_DIR}/src/gkick_log.c
-	${GKICK_API_DIR}/src/oscillator.c
-	${GKICK_API_DIR}/src/synthesizer.c
-        ${GKICK_API_DIR}/src/worker.c)
+set(ENT_API_SOURCES
+	${ENT_API_DIR}/src/audio_output.c
+	${ENT_API_DIR}/src/distortion.c
+	${ENT_API_DIR}/src/envelope.c
+	${ENT_API_DIR}/src/filter.c
+	${ENT_API_DIR}/src/entropictron.c
+	${ENT_API_DIR}/src/ent_audio.c
+        ${ENT_API_DIR}/src/mixer.c
+	${ENT_API_DIR}/src/ent_buffer.c
+        ${ENT_API_DIR}/src/ring_buffer.c
+	${ENT_API_DIR}/src/ent_log.c
+	${ENT_API_DIR}/src/oscillator.c
+	${ENT_API_DIR}/src/synthesizer.c
+        ${ENT_API_DIR}/src/worker.c)
 
-if (GKICK_STANDALONE)
+if (ENT_STANDALONE)
   if (CMAKE_SYSTEM_NAME MATCHES Windows)
   	message(STATUS "No Jack implementation for Windows")
   else()
-       list(APPEND GKICK_API_SOURCES ${GKICK_API_DIR}/src/gkick_jack.c)
+       list(APPEND ENT_API_SOURCES ${ENT_API_DIR}/src/ent_jack.c)
   endif()
-endif(GKICK_STANDALONE)
+endif(ENT_STANDALONE)
 
-include_directories(${GKICK_API_DIR}/src)
+include_directories(${ENT_API_DIR}/src)
 
-if (GKICK_STANDALONE)
+if (ENT_STANDALONE)
 	add_library(api_standalone STATIC
-		${GKICK_API_HEADERS}
-		${GKICK_API_SOURCES})
-        target_compile_options(api_standalone PUBLIC ${GKICK_API_FLAGS})
-endif (GKICK_STANDALONE)
+		${ENT_API_HEADERS}
+		${ENT_API_SOURCES})
+        target_compile_options(api_standalone PUBLIC ${ENT_API_FLAGS})
+endif (ENT_STANDALONE)
 
-if (GKICK_PLUGIN)
-	add_library(api_plugin_single STATIC
-		${GKICK_API_HEADERS}
-		${GKICK_API_SOURCES})
-	target_compile_options(api_plugin_single PUBLIC ${GKICK_API_PLUGIN_SINGLE_FLAGS})
+if (ENT_PLUGIN)
    	add_library(api_plugin STATIC
-		${GKICK_API_HEADERS}
-		${GKICK_API_SOURCES})
-	target_compile_options(api_plugin PRIVATE ${GKICK_API_PLUGIN_FLAGS})
-endif (GKICK_PLUGIN)
+		${ENT_API_HEADERS}
+		${ENT_API_SOURCES})
+	target_compile_options(api_plugin PRIVATE ${ENT_API_PLUGIN_FLAGS})
+endif (ENT_PLUGIN)
 

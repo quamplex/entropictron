@@ -1,5 +1,5 @@
 /**
- * File name: geonkick_lv2.cpp
+ * File name: entropictron_lv2.cpp
  * Project: Geonkick (A kick synthesizer)
  *
  * Copyright (C) 2018 Iurie Nistor 
@@ -31,7 +31,7 @@
 #include <lv2/lv2plug.in/ns/ext/state/state.h>
 
 #include "MainWindow.h"
-#include "geonkick_api.h"
+#include "entropictron_api.h"
 #include "kit_state.h"
 #include "GeonkickConfig.h"
 
@@ -42,38 +42,38 @@
 #include <memory>
 #include <atomic>
 
-#ifdef GEONKICK_SINGLE
-#define GEONKICK_URI "http://geonkick.org/geonkick/single"
-#define GEONKICK_URI_UI "http://geonkick.org/geonkick/single#ui"
-#define GEONKICK_URI_STATE "http://geonkick.org/geonkick/single#state"
+#ifdef ENTROPICTRON_SINGLE
+#define ENTROPICTRON_URI "http://entropictron.org/entropictron/single"
+#define ENTROPICTRON_URI_UI "http://entropictron.org/entropictron/single#ui"
+#define ENTROPICTRON_URI_STATE "http://entropictron.org/entropictron/single#state"
 #else
-#define GEONKICK_URI "http://geonkick.org/geonkick"
-#define GEONKICK_URI_UI "http://geonkick.org/geonkick#ui"
-#define GEONKICK_URI_STATE "http://geonkick.org/geonkick#state"
-#endif // GEONKICK_SINGLE
-#define GEONKICK_URI_STATE_CHANGED "http://lv2plug.in/ns/ext/state#StateChanged"
+#define ENTROPICTRON_URI "http://entropictron.org/entropictron"
+#define ENTROPICTRON_URI_UI "http://entropictron.org/entropictron#ui"
+#define ENTROPICTRON_URI_STATE "http://entropictron.org/entropictron#state"
+#endif // ENTROPICTRON_SINGLE
+#define ENTROPICTRON_URI_STATE_CHANGED "http://lv2plug.in/ns/ext/state#StateChanged"
 
 class GeonkickLv2Plugin : public RkObject
 {
   public:
         GeonkickLv2Plugin(int sampleRate)
-                : geonkickApi{std::make_unique<GeonkickApi>(sampleRate, GeonkickApi::InstanceType::Lv2)}
+                : entropictronApi{std::make_unique<GeonkickApi>(sampleRate, GeonkickApi::InstanceType::Lv2)}
                 , midiIn{nullptr}
                 , notifyHostChannel{nullptr}
                 , atomInfo{0}
                 , kickIsUpdated{false}
         {
-                RK_ACT_BIND(geonkickApi.get(), kickUpdated, RK_ACT_ARGS(), this, kickUpdated());
-                RK_ACT_BIND(geonkickApi.get(), stateChanged, RK_ACT_ARGS(), this, kickUpdated());
+                RK_ACT_BIND(entropictronApi.get(), kickUpdated, RK_ACT_ARGS(), this, kickUpdated());
+                RK_ACT_BIND(entropictronApi.get(), stateChanged, RK_ACT_ARGS(), this, kickUpdated());
         }
 
         bool init()
         {
-                if (!geonkickApi->init()) {
-                        GEONKICK_LOG_ERROR("can't init DSP");
+                if (!entropictronApi->init()) {
+                        ENTROPICTRON_LOG_ERROR("can't init DSP");
                         return false;
                 }
-                outputChannels = std::vector<float*>(2 * geonkickApi->numberOfChannels(), nullptr);
+                outputChannels = std::vector<float*>(2 * entropictronApi->numberOfChannels(), nullptr);
                 return true;
         }
 
@@ -147,25 +147,25 @@ class GeonkickLv2Plugin : public RkObject
         {
                 RK_UNUSED(flags);
                 if (data.find("UiSettings") == std::string::npos) {
-                        GEONKICK_LOG_INFO("old plugin state version");
-                        geonkickApi->setKitState(data);
-                        geonkickApi->notifyUpdateGui();
-                        geonkickApi->notifyKitUpdated();
+                        ENTROPICTRON_LOG_INFO("old plugin state version");
+                        entropictronApi->setKitState(data);
+                        entropictronApi->notifyUpdateGui();
+                        entropictronApi->notifyKitUpdated();
                 } else {
-                        geonkickApi->setState(data);
-                        geonkickApi->notifyUpdateGui();
-                        geonkickApi->notifyKitUpdated();
+                        entropictronApi->setState(data);
+                        entropictronApi->notifyUpdateGui();
+                        entropictronApi->notifyKitUpdated();
                 }
         }
 
         std::string getStateData()
         {
-                return geonkickApi->getState();
+                return entropictronApi->getState();
         }
 
         GeonkickApi* getApi() const
         {
-                return geonkickApi.get();
+                return entropictronApi.get();
         }
 
         bool isNote(const uint8_t* buffer) const
@@ -189,7 +189,7 @@ class GeonkickLv2Plugin : public RkObject
                         size_t size = eventFrame - currentFrame;
 
                         if (size > 0 && size <= nsamples) {
-                                geonkickApi->process(outputChannels.data(), offset, size);
+                                entropictronApi->process(outputChannels.data(), offset, size);
                                 offset += size;
                         }
 
@@ -197,10 +197,10 @@ class GeonkickLv2Plugin : public RkObject
                         switch (lv2_midi_message_type(msg))
                         {
                                 case LV2_MIDI_MSG_NOTE_ON:
-                                        geonkickApi->setKeyPressed(true, msg[1], msg[2]);
+                                        entropictronApi->setKeyPressed(true, msg[1], msg[2]);
                                         break;
                                 case LV2_MIDI_MSG_NOTE_OFF:
-                                        geonkickApi->setKeyPressed(false, msg[1], msg[2]);
+                                        entropictronApi->setKeyPressed(false, msg[1], msg[2]);
                                         break;
                                 default:
                                         break;
@@ -210,7 +210,7 @@ class GeonkickLv2Plugin : public RkObject
                 }
 
                 if (currentFrame < nsamples)
-                        geonkickApi->process(outputChannels.data(), offset, nsamples - currentFrame);
+                        entropictronApi->process(outputChannels.data(), offset, nsamples - currentFrame);
 
                 if (isKickUpdated()) {
                         notifyHost();
@@ -258,7 +258,7 @@ protected:
         }
 
 private:
-        std::unique_ptr<GeonkickApi> geonkickApi;
+        std::unique_ptr<GeonkickApi> entropictronApi;
         LV2_Atom_Sequence *midiIn;
         LV2_Atom_Sequence *notifyHostChannel;
         std::vector<float*> outputChannels;
@@ -277,9 +277,9 @@ private:
 
 /**
  * Creates and shows an instance of Geonkick GUI that takes
- * the geonkick API instance as a pointer.
+ * the entropictron API instance as a pointer.
  */
-static LV2UI_Handle gkick_instantiate_ui(const LV2UI_Descriptor*   descriptor,
+static LV2UI_Handle ent_instantiate_ui(const LV2UI_Descriptor*   descriptor,
                                          const char*               plugin_uri,
                                          const char*               bundle_path,
                                          LV2UI_Write_Function      write_function,
@@ -287,7 +287,7 @@ static LV2UI_Handle gkick_instantiate_ui(const LV2UI_Descriptor*   descriptor,
                                          LV2UI_Widget*             widget,
                                          const LV2_Feature* const* features)
 {
-        GeonkickLv2Plugin *geonkickLv2PLugin = nullptr;
+        GeonkickLv2Plugin *entropictronLv2PLugin = nullptr;
         if (!features)
                 return nullptr;
         void *parent = nullptr;
@@ -301,26 +301,26 @@ static LV2UI_Handle gkick_instantiate_ui(const LV2UI_Descriptor*   descriptor,
                         resize = static_cast<LV2UI_Resize*>(feature->data);
 
                 if (std::string(feature->URI) == std::string(LV2_INSTANCE_ACCESS_URI)) {
-                        geonkickLv2PLugin = static_cast<GeonkickLv2Plugin*>(feature->data);
-                        if (!geonkickLv2PLugin)
+                        entropictronLv2PLugin = static_cast<GeonkickLv2Plugin*>(feature->data);
+                        if (!entropictronLv2PLugin)
                                 return nullptr;
                 }
                 features++;
         }
-#ifdef GEONKICK_OS_WINDOWS
+#ifdef ENTROPICTRON_OS_WINDOWS
 	auto info = rk_from_native_win(reinterpret_cast<HWND>(parent),
                                        rk_win_api_instance(),
                                        rk_win_api_class_name());
-#else // GEONKICK_OS_GNU
+#else // EONTRIPOCTRON_OS_GNU
         // Get the info about X Window parent window.
         const uintptr_t parentWinId = (uintptr_t)parent;
         Display* xDisplay = XOpenDisplay(nullptr);
         int screenNumber = DefaultScreen(xDisplay);
         auto info = rk_from_native_x11(xDisplay, screenNumber, parentWinId);
-#endif // GEONKICK_OS_GNU
+#endif // EONTRIPOCTRON_OS_GNU
         auto guiApp = new RkMain();
-        geonkickLv2PLugin->getApi()->setEventQueue(guiApp->eventQueue());
-        auto mainWidget = new MainWindow(*guiApp, geonkickLv2PLugin->getApi(), info);
+        entropictronLv2PLugin->getApi()->setEventQueue(guiApp->eventQueue());
+        auto mainWidget = new MainWindow(*guiApp, entropictronLv2PLugin->getApi(), info);
         RK_ACT_BINDL(mainWidget,
                      onScaleFactor,
                      RK_ACT_ARGS(double factor),
@@ -329,28 +329,28 @@ static LV2UI_Handle gkick_instantiate_ui(const LV2UI_Descriptor*   descriptor,
                                                mainWidget->height() * factor);
                      });
         if (!mainWidget->init()) {
-                GEONKICK_LOG_ERROR("can't init main window");
+                ENTROPICTRON_LOG_ERROR("can't init main window");
                 delete guiApp;
                 return nullptr;
         }
 
         auto winId = guiApp->nativeWindowInfo()->window;
-#ifdef GEONKICK_OS_WINDOWS
+#ifdef ENTROPICTRON_OS_WINDOWS
         *widget = reinterpret_cast<LV2UI_Widget>(winId);
-#else // GEONKICK_OS_GNU
+#else // EONTRIPOCTRON_OS_GNU
 	*widget = (LV2UI_Widget)static_cast<uintptr_t>(winId);
-#endif // GEONKICK_OS_GNU
+#endif // EONTRIPOCTRON_OS_GNU
         resize->ui_resize(resize->handle, mainWidget->width() * mainWidget->scaleFactor(),
                           mainWidget->height() * mainWidget->scaleFactor());
         return static_cast<LV2UI_Handle>(guiApp);
 }
 
-static void gkick_cleanup_ui(LV2UI_Handle handle)
+static void ent_cleanup_ui(LV2UI_Handle handle)
 {
         delete static_cast<RkMain*>(handle);
 }
 
-static void gkick_port_event_ui(LV2UI_Handle ui,
+static void ent_port_event_ui(LV2UI_Handle ui,
                                 uint32_t port_index,
                                 uint32_t buffer_size,
                                 uint32_t format,
@@ -358,46 +358,46 @@ static void gkick_port_event_ui(LV2UI_Handle ui,
 {
 }
 
-static int gkick_idle(LV2UI_Handle ui)
+static int ent_idle(LV2UI_Handle ui)
 {
         static_cast<RkMain*>(ui)->exec(false);
         return 0;
 }
 
-static const void* gkick_extension_data(const char* uri)
+static const void* ent_extension_data(const char* uri)
 {
-    static const LV2UI_Idle_Interface idleInterface = {gkick_idle};
+    static const LV2UI_Idle_Interface idleInterface = {ent_idle};
     if (std::string(uri) == std::string(LV2_UI__idleInterface))
             return &idleInterface;
     return nullptr;
 }
 
-static const LV2UI_Descriptor gkick_descriptor_ui = {
-	GEONKICK_URI_UI,
-	gkick_instantiate_ui,
-	gkick_cleanup_ui,
-	gkick_port_event_ui,
-	gkick_extension_data
+static const LV2UI_Descriptor ent_descriptor_ui = {
+	ENTROPICTRON_URI_UI,
+	ent_instantiate_ui,
+	ent_cleanup_ui,
+	ent_port_event_ui,
+	ent_extension_data
 };
 
 const LV2UI_Descriptor* lv2ui_descriptor(uint32_t index)
 {
 	switch (index)
         {
-	case 0:	return &gkick_descriptor_ui;
+	case 0:	return &ent_descriptor_ui;
 	default: return nullptr;
         }
 }
 
-static LV2_Handle gkick_instantiate(const LV2_Descriptor*     descriptor,
+static LV2_Handle ent_instantiate(const LV2_Descriptor*     descriptor,
                                     double                    rate,
                                     const char*               bundle_path,
                                     const LV2_Feature* const* features)
 {
-        auto geonkickLv2PLugin = new GeonkickLv2Plugin(rate);
-        if (!geonkickLv2PLugin->init()) {
-                GEONKICK_LOG_ERROR("can't create DSP instance");
-                delete geonkickLv2PLugin;
+        auto entropictronLv2PLugin = new GeonkickLv2Plugin(rate);
+        if (!entropictronLv2PLugin->init()) {
+                ENTROPICTRON_LOG_ERROR("can't create DSP instance");
+                delete entropictronLv2PLugin;
                 return nullptr;
         }
 
@@ -406,66 +406,66 @@ static LV2_Handle gkick_instantiate(const LV2_Descriptor*     descriptor,
                 if (std::string(feature->URI) == std::string(LV2_URID__map)) {
                         auto uridMap = static_cast<LV2_URID_Map*>(feature->data);
                         if (uridMap && uridMap->map && uridMap->handle) {
-                                geonkickLv2PLugin->setStateId(uridMap->map(uridMap->handle, GEONKICK_URI_STATE));
-                                geonkickLv2PLugin->setAtomChunkId(uridMap->map(uridMap->handle, LV2_ATOM__Chunk));
-                                geonkickLv2PLugin->setAtomSequence(uridMap->map(uridMap->handle, LV2_ATOM__Sequence));
-                                geonkickLv2PLugin->setAtomStateChanged(uridMap->map(uridMap->handle, GEONKICK_URI_STATE_CHANGED));
-                                geonkickLv2PLugin->setAtomObject(uridMap->map(uridMap->handle, LV2_ATOM__Object));
+                                entropictronLv2PLugin->setStateId(uridMap->map(uridMap->handle, ENTROPICTRON_URI_STATE));
+                                entropictronLv2PLugin->setAtomChunkId(uridMap->map(uridMap->handle, LV2_ATOM__Chunk));
+                                entropictronLv2PLugin->setAtomSequence(uridMap->map(uridMap->handle, LV2_ATOM__Sequence));
+                                entropictronLv2PLugin->setAtomStateChanged(uridMap->map(uridMap->handle, ENTROPICTRON_URI_STATE_CHANGED));
+                                entropictronLv2PLugin->setAtomObject(uridMap->map(uridMap->handle, LV2_ATOM__Object));
                         }
                         break;
                 }
                 features++;
         }
 
-        return static_cast<LV2_Handle>(geonkickLv2PLugin);
+        return static_cast<LV2_Handle>(entropictronLv2PLugin);
 }
 
-static void gkick_connect_port(LV2_Handle instance,
+static void ent_connect_port(LV2_Handle instance,
                                uint32_t   port,
                                void*      data)
 {
-        auto geonkickLv2PLugin = static_cast<GeonkickLv2Plugin*>(instance);
+        auto entropictronLv2PLugin = static_cast<GeonkickLv2Plugin*>(instance);
 	auto portNumber = static_cast<size_t>(port);
         if (portNumber == 0)
-                geonkickLv2PLugin->setMidiIn(static_cast<LV2_Atom_Sequence*>(data));
+                entropictronLv2PLugin->setMidiIn(static_cast<LV2_Atom_Sequence*>(data));
         else if (portNumber == 1)
-                geonkickLv2PLugin->setNotifyHostChannel(static_cast<LV2_Atom_Sequence*>(data));
+                entropictronLv2PLugin->setNotifyHostChannel(static_cast<LV2_Atom_Sequence*>(data));
         else if (portNumber > 1)
-                geonkickLv2PLugin->setAudioChannel(static_cast<float*>(data), portNumber - 2);
+                entropictronLv2PLugin->setAudioChannel(static_cast<float*>(data), portNumber - 2);
 }
 
-static void gkick_activate(LV2_Handle instance)
+static void ent_activate(LV2_Handle instance)
 {
 }
 
-static void gkick_run(LV2_Handle instance, uint32_t n_samples)
+static void ent_run(LV2_Handle instance, uint32_t n_samples)
 {
-       auto geonkickLv2PLugin = static_cast<GeonkickLv2Plugin*>(instance);
-       geonkickLv2PLugin->processSamples(n_samples);
+       auto entropictronLv2PLugin = static_cast<GeonkickLv2Plugin*>(instance);
+       entropictronLv2PLugin->processSamples(n_samples);
 }
 
-static void gkick_deactivate(LV2_Handle instance)
+static void ent_deactivate(LV2_Handle instance)
 {
 }
 
-static void gkick_cleaup(LV2_Handle instance)
+static void ent_cleaup(LV2_Handle instance)
 {
-        auto geonkickLv2PLugin = static_cast<GeonkickLv2Plugin*>(instance);
-        delete geonkickLv2PLugin;
+        auto entropictronLv2PLugin = static_cast<GeonkickLv2Plugin*>(instance);
+        delete entropictronLv2PLugin;
 }
 
 static LV2_State_Status
-gkick_state_save(LV2_Handle                instance,
+ent_state_save(LV2_Handle                instance,
                  LV2_State_Store_Function  store,
                  LV2_State_Handle          handle,
                  uint32_t                  flags,
                  const LV2_Feature* const* features)
 {
-        auto geonkickLv2PLugin = static_cast<GeonkickLv2Plugin*>(instance);
-        if (geonkickLv2PLugin){
-                std::string stateData = geonkickLv2PLugin->getStateData();
-                store(handle, geonkickLv2PLugin->getStateId(), stateData.data(),
-                      stateData.size(), geonkickLv2PLugin->getAtomChunkId(),
+        auto entropictronLv2PLugin = static_cast<GeonkickLv2Plugin*>(instance);
+        if (entropictronLv2PLugin){
+                std::string stateData = entropictronLv2PLugin->getStateData();
+                store(handle, entropictronLv2PLugin->getStateId(), stateData.data(),
+                      stateData.size(), entropictronLv2PLugin->getAtomChunkId(),
                       LV2_STATE_IS_POD | LV2_STATE_IS_PORTABLE);
         }
 
@@ -473,48 +473,48 @@ gkick_state_save(LV2_Handle                instance,
 }
 
 static LV2_State_Status
-gkick_state_restore(LV2_Handle                  instance,
+ent_state_restore(LV2_Handle                  instance,
                     LV2_State_Retrieve_Function retrieve,
                     LV2_State_Handle            handle,
                     uint32_t                    flags,
                     const LV2_Feature* const*   features)
 {
-        auto geonkickLv2PLugin = static_cast<GeonkickLv2Plugin*>(instance);
-        if (geonkickLv2PLugin) {
+        auto entropictronLv2PLugin = static_cast<GeonkickLv2Plugin*>(instance);
+        if (entropictronLv2PLugin) {
                 size_t size   = 0;
                 LV2_URID type = 0;
-                const char *data = (const char*)retrieve(handle, geonkickLv2PLugin->getStateId(),
+                const char *data = (const char*)retrieve(handle, entropictronLv2PLugin->getStateId(),
                                                          &size, &type, &flags);
                 if (data && size > 0)
-                        geonkickLv2PLugin->setStateData(std::string(data, size), flags);
+                        entropictronLv2PLugin->setStateData(std::string(data, size), flags);
         }
         return LV2_STATE_SUCCESS;
 }
 
-static const void* gkick_extention_data(const char* uri)
+static const void* ent_extention_data(const char* uri)
 {
-        static const LV2_State_Interface state = {gkick_state_save, gkick_state_restore};
+        static const LV2_State_Interface state = {ent_state_save, ent_state_restore};
         if (std::string(uri) == std::string(LV2_STATE__interface))
                 return &state;
         return nullptr;
 }
 
-static const LV2_Descriptor gkick_descriptor = {
-	GEONKICK_URI,
-	gkick_instantiate,
-	gkick_connect_port,
-	gkick_activate,
-	gkick_run,
-	gkick_deactivate,
-	gkick_cleaup,
-	gkick_extention_data,
+static const LV2_Descriptor ent_descriptor = {
+	ENTROPICTRON_URI,
+	ent_instantiate,
+	ent_connect_port,
+	ent_activate,
+	ent_run,
+	ent_deactivate,
+	ent_cleaup,
+	ent_extention_data,
 };
 
 const LV2_Descriptor* lv2_descriptor(uint32_t index)
 {
 	switch (index)
         {
-	case 0:  return &gkick_descriptor;
+	case 0:  return &ent_descriptor;
 	default: return nullptr;
 	}
 }

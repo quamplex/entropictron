@@ -28,9 +28,9 @@
 
 using namespace Steinberg;
 
-static FUnknown* EntVstController::createInstance(void*)
+FUnknown* EntVstController::createInstance(void*)
 {
-        return new EntVstController();
+        return static_cast<Vst::IEditController*>(new EntVstController());
 }
 
 tresult PLUGIN_API EntVstController::initialize(FUnknown* context)

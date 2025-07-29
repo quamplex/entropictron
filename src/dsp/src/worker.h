@@ -21,14 +21,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef GEONKICK_WORKER_H
-#define GEONKICK_WORKER_H
+#ifndef ENTROPICTRON_WORKER_H
+#define ENTROPICTRON_WORKER_H
 
-#include "geonkick_internal.h"
+#include "entropictron_internal.h"
 
-struct geonkick;
+struct entropictron;
 
-struct gkick_worker {
+struct ent_worker {
 	/* The worker thread. */
         pthread_t thread;
 
@@ -40,7 +40,7 @@ struct gkick_worker {
 	atomic_bool running;
 
         /* Geonkick instances. */
-        struct geonkick *instances[GEONKICK_MAX_INSTANCES];
+        struct entropictron *instances[ENTROPICTRON_MAX_INSTANCES];
 
         /* Reference count for Geonkick instances. */
         atomic_size_t ref_count;
@@ -48,26 +48,26 @@ struct gkick_worker {
 };
 
 bool
-geonkick_worker_created();
+entropictron_worker_created();
 
 size_t
-geonkick_worker_reference_count();
+entropictron_worker_reference_count();
 
-enum geonkick_error
-geonkick_worker_create();
+enum entropictron_error
+entropictron_worker_create();
 
-enum geonkick_error
-geonkick_worker_start();
+enum entropictron_error
+entropictron_worker_start();
 
-void geonkick_worker_destroy();
+void entropictron_worker_destroy();
 
-void geonkick_worker_add_instance(struct geonkick *instance);
+void entropictron_worker_add_instance(struct entropictron *instance);
 
-void geonkick_worker_remove_instance(struct geonkick *instance);
+void entropictron_worker_remove_instance(struct entropictron *instance);
 
-void *geonkick_worker_thread(void *arg);
+void *entropictron_worker_thread(void *arg);
 
-void geonkick_worker_wakeup();
+void entropictron_worker_wakeup();
 
 
-#endif // GEONKICK_WORKER_H
+#endif // ENTROPICTRON_WORKER_H

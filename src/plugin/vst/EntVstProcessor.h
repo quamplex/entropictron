@@ -32,10 +32,10 @@
 extern "C" {
 #endif // __cplusplus
 
-#ifndef GEONKICK_OS_WINDOWS
+#ifndef ENTROPICTRON_OS_WINDOWS
 __attribute__((visibility("default"))) bool ModuleEntry (void*);
 __attribute__((visibility("default"))) bool ModuleExit (void);
-#endif // GEONKICK_OS_WINDOWS
+#endif // ENTROPICTRON_OS_WINDOWS
 #ifdef __cplusplus
 }
 #endif // __cplusplus
@@ -61,7 +61,7 @@ class EntVstProcessor : public Vst::AudioEffect {
         tresult PLUGIN_API process(Vst::ProcessData& data) SMTG_OVERRIDE;
         tresult PLUGIN_API setState(IBStream* state) SMTG_OVERRIDE;
         tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
-        tresult PLUGIN_API setComponentState(IBStream* state) SMTG_OVERRIDE;
+        //        tresult PLUGIN_API setComponentState(IBStream* state) SMTG_OVERRIDE;
 
   protected:
 };

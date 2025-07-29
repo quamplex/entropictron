@@ -30,7 +30,7 @@
 #include "pluginterfaces/vst/ivstparameterchanges.h"
 #include "pluginterfaces/vst/ivstevents.h"
 
-#ifndef GEONKICK_OS_WINDOWS
+#ifndef ENTROPICTRON_OS_WINDOWS
 bool ModuleEntry (void*)
 {
         return true;
@@ -40,7 +40,7 @@ bool ModuleExit (void)
 {
         return true;
 }
-#endif // GEONKICK_OS_WINDOWS
+#endif // ENTROPICTRON_OS_WINDOWS
 
 EntVstProcessor::EntVstProcessor()
 {
@@ -59,13 +59,13 @@ FUnknown* EntVstProcessor::createInstance(void*)
 tresult PLUGIN_API
 EntVstProcessor::initialize(FUnknown* context)
 {
-        auto res = Vst::SingleComponentEffect::initialize(context);
+        auto res = Vst::AudioEffect::initialize(context);
         if (res != kResultTrue)
                 return res;
 
         addAudioOutput(reinterpret_cast<const Steinberg::Vst::TChar*>(u"Stereo Out"),
                        Vst::SpeakerArr::kStereo);
-        parameters.addParameter(STR16("Noise Type"),
+        /*parameters.addParameter(STR16("Noise Type"),
                                 nullptr,
                                 2,
                                 1.0,
@@ -88,7 +88,7 @@ EntVstProcessor::initialize(FUnknown* context)
                                 0,
                                 1.0,
                                 Vst::ParameterInfo::kCanAutomate,
-                                1002);
+                                1002);*/
 
         return kResultTrue;
 }
@@ -99,7 +99,7 @@ EntVstProcessor::setBusArrangements(Vst::SpeakerArrangement* inputs,
                                     Vst::SpeakerArrangement* outputs,
                                     int32 numOuts)
 {
-        return Vst::SingleComponentEffect::setBusArrangements(inputs,
+        return Vst::AudioEffect::setBusArrangements(inputs,
                                                               numIns,
                                                               outputs,
                                                               numOuts);
@@ -108,13 +108,13 @@ EntVstProcessor::setBusArrangements(Vst::SpeakerArrangement* inputs,
 tresult PLUGIN_API
 EntVstProcessor::setupProcessing(Vst::ProcessSetup& setup)
 {
-        return Vst::SingleComponentEffect::setupProcessing(setup);
+        return Vst::AudioEffect::setupProcessing(setup);
 }
 
 tresult PLUGIN_API
 EntVstProcessor::setActive(TBool state)
 {
-        return Vst::SingleComponentEffect::setActive(state);
+        return Vst::AudioEffect::setActive(state);
 }
 
 tresult PLUGIN_API
@@ -135,8 +135,8 @@ EntVstProcessor::getState(IBStream* state)
         return kResultOk;
 }
 
-tresult PLUGIN_API
+/*tresult PLUGIN_API
 EntVstProcessor::setComponentState(IBStream* state)
 {
         return kResultOk;
-}
+        }*/

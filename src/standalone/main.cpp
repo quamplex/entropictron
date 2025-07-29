@@ -26,15 +26,15 @@
 
 #include "RkMain.h"
 
-#ifdef GEONKICK_OS_GNU
+#ifdef EONTRIPOCTRON_OS_GNU
 #include <sys/mman.h>
-#endif // GEONKICK_OS_GNU
+#endif // EONTRIPOCTRON_OS_GNU
 
-/*static geonkick* createDSP()
+/*static entropictron* createDSP()
 {
         //        EndDspProxy* dspProxy = nullptr;
-        //        if (ent_create(.....) != GEONKICK_OK) {
-        //                GEONKICK_LOG_ERROR("can't create geonkick API");
+        //        if (ent_create(.....) != ENTROPICTRON_OK) {
+        //                ENTROPICTRON_LOG_ERROR("can't create entropictron API");
         //                return nullptr;
         //        }
 
@@ -45,32 +45,32 @@ int main(int argc, char *argv[])
 {
         //        auto dsp = createDSP();
         //	if (!dsp) {
-        //                GEONKICK_LOG_ERROR("can't create DSP");
+        //                ENTROPICTRON_LOG_ERROR("can't create DSP");
         //		exit(EXIT_FAILURE);
         //	}
 
-#ifdef GEONKICK_OS_GNU
+#ifdef EONTRIPOCTRON_OS_GNU
 	if (mlockall(MCL_CURRENT) == -1) {
-	        GEONKICK_LOG_INFO("can't lock memory. Please, check your "
+	        ENTROPICTRON_LOG_INFO("can't lock memory. Please, check your "
                                   << "system settings reladed locked memory"
                                   << "(https://jackaudio.org/faq/linux_rt_config.html)");
         }
-#endif // GEONKICK_OS_GNU
+#endif // EONTRIPOCTRON_OS_GNU
 
         RkMain app(argc, argv);
 
         //auto api = new EntDspProxy(...);
         //if (!api->init()) {
-        //        GEONKICK_LOG_ERROR("can't init API");
+        //        ENTROPICTRON_LOG_ERROR("can't init API");
         //delete api;
         //exit(EXIT_FAILURE);
         //}
         [[maybe_unused]] auto window = new MainWindow(app);
         auto res = app.exec();
 
-#ifdef GEONKICK_OS_GNU
+#ifdef EONTRIPOCTRON_OS_GNU
         munlockall();
-#endif // GEONKICK_OS_GNU
+#endif // EONTRIPOCTRON_OS_GNU
 
         return res;
 }

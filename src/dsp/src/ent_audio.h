@@ -1,5 +1,5 @@
 /**
- * File name: gkick_audio.h
+ * File name: ent_audio.h
  * Project: Geonkick (A kick synthesizer)
  *
  * Copyright (C) 2018 Iurie Nistor
@@ -24,64 +24,64 @@
 #ifndef GKICK_AUDIO_H
 #define GKICK_AUDIO_H
 
-#include "geonkick_internal.h"
+#include "entropictron_internal.h"
 
 struct audio_output;
-struct gkick_jack;
-struct gkick_mixer;
+struct ent_jack;
+struct ent_mixer;
 
-struct gkick_audio {
+struct ent_audio {
         int sample_rate;
-        struct gkick_audio_output *audio_outputs[GEONKICK_MAX_CHANNELS];
-	struct gkick_mixer *mixer;
-        struct gkick_jack *jack;
+        struct ent_audio_output *audio_outputs[ENTROPICTRON_MAX_CHANNELS];
+	struct ent_mixer *mixer;
+        struct ent_jack *jack;
 };
 
-enum geonkick_error
-gkick_audio_create(struct gkick_audio** audio, int sample_rate);
+enum entropictron_error
+ent_audio_create(struct ent_audio** audio, int sample_rate);
 
-enum geonkick_error
-gkick_start_audio(struct gkick_audio *audio);
+enum entropictron_error
+ent_start_audio(struct ent_audio *audio);
 
-void gkick_audio_free(struct gkick_audio** audio);
+void ent_audio_free(struct ent_audio** audio);
 
-enum geonkick_error
-gkick_audio_set_limiter_val(struct gkick_audio *audio,
+enum entropictron_error
+ent_audio_set_limiter_val(struct ent_audio *audio,
                             size_t index,
-                            gkick_real limit);
+                            ent_real limit);
 
-enum geonkick_error
-gkick_audio_get_limiter_val(struct gkick_audio *audio,
+enum entropictron_error
+ent_audio_get_limiter_val(struct ent_audio *audio,
                             size_t index,
-                            gkick_real *limit);
+                            ent_real *limit);
 
-enum geonkick_error
-gkick_audio_play(struct gkick_audio *audio,
+enum entropictron_error
+ent_audio_play(struct ent_audio *audio,
                  size_t id);
 
-enum geonkick_error
-gkick_audio_key_pressed(struct gkick_audio *audio,
+enum entropictron_error
+ent_audio_key_pressed(struct ent_audio *audio,
                         bool pressed,
                         int note,
                         int velocity);
 
-enum geonkick_error
-gkick_audio_process(struct gkick_audio *audio,
+enum entropictron_error
+ent_audio_process(struct ent_audio *audio,
                     float** out,
                     size_t channel,
                     size_t size);
 
-enum geonkick_error
-gkick_audio_set_limiter_callback(struct gkick_audio *audio,
-                                 void (*callback)(void*, size_t index, gkick_real val),
+enum entropictron_error
+ent_audio_set_limiter_callback(struct ent_audio *audio,
+                                 void (*callback)(void*, size_t index, ent_real val),
                                  void *arg);
 
-enum geonkick_error
-gkick_audio_enable_note_off(struct geonkick *kick,
+enum entropictron_error
+ent_audio_enable_note_off(struct entropictron *kick,
                             size_t id,
                             bool enable);
-enum geonkick_error
-gkick_audio_note_off_enabled(struct gkick_audio *audio,
+enum entropictron_error
+ent_audio_note_off_enabled(struct ent_audio *audio,
                              size_t id,
                              bool *enabled);
 

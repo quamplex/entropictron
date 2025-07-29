@@ -21,83 +21,83 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef GEONKICK_FILTER_H
-#define GEONKICK_FILTER_H
+#ifndef ENTROPICTRON_FILTER_H
+#define ENTROPICTRON_FILTER_H
 
-#include "geonkick_internal.h"
+#include "entropictron_internal.h"
 #include "envelope.h"
 
-#define GEONKICK_DEFAULT_FILTER_CUTOFF_FREQ (350.0f)
-#define GEONKICK_DEFAULT_FILTER_FACTOR      (1.0f)
+#define ENTROPICTRON_DEFAULT_FILTER_CUTOFF_FREQ (350.0f)
+#define ENTROPICTRON_DEFAULT_FILTER_FACTOR      (1.0f)
 
-struct gkick_filter {
-        enum gkick_filter_type type;
+struct ent_filter {
+        enum ent_filter_type type;
         int sample_rate;
 
         /* Filter cuttoff frequency. */
-        gkick_real cutoff_freq;
+        ent_real cutoff_freq;
 
         /* Filter damping factor. */
-        gkick_real factor;
+        ent_real factor;
 
         /* A queue of a three elements */
-        gkick_real queue_l[2];
-        gkick_real queue_b[2];
-        gkick_real queue_h[2];
+        ent_real queue_l[2];
+        ent_real queue_b[2];
+        ent_real queue_h[2];
         bool queue_empty;
 
         /* Filter coefficients. */
-        gkick_real coefficients[2];
+        ent_real coefficients[2];
 
         /* Filter cutoff envelope. */
-        struct gkick_envelope *cutoff_env;
-	struct gkick_envelope *q_env;
+        struct ent_envelope *cutoff_env;
+	struct ent_envelope *q_env;
         pthread_mutex_t lock;
 };
 
-enum geonkick_error
-gkick_filter_new(struct gkick_filter **filter, int sample_rate);
+enum entropictron_error
+ent_filter_new(struct ent_filter **filter, int sample_rate);
 
-enum geonkick_error
-gkick_filter_init(struct gkick_filter *filter);
+enum entropictron_error
+ent_filter_init(struct ent_filter *filter);
 
-void gkick_filter_free(struct gkick_filter **filter);
+void ent_filter_free(struct ent_filter **filter);
 
-void gkick_filter_lock(struct gkick_filter *filter);
+void ent_filter_lock(struct ent_filter *filter);
 
-void gkick_filter_unlock(struct gkick_filter *filter);
+void ent_filter_unlock(struct ent_filter *filter);
 
-enum geonkick_error
-gkick_filter_update_coefficents(struct gkick_filter *filter);
+enum entropictron_error
+ent_filter_update_coefficents(struct ent_filter *filter);
 
-enum geonkick_error
-gkick_filter_set_type(struct gkick_filter *filter,
-                      enum gkick_filter_type type);
+enum entropictron_error
+ent_filter_set_type(struct ent_filter *filter,
+                      enum ent_filter_type type);
 
-enum geonkick_error
-gkick_filter_get_type(struct gkick_filter *filter,
-                      enum gkick_filter_type *type);
+enum entropictron_error
+ent_filter_get_type(struct ent_filter *filter,
+                      enum ent_filter_type *type);
 
-enum geonkick_error
-gkick_filter_set_cutoff_freq(struct gkick_filter *filter,
-                             gkick_real cutoff);
+enum entropictron_error
+ent_filter_set_cutoff_freq(struct ent_filter *filter,
+                             ent_real cutoff);
 
-enum geonkick_error
-gkick_filter_set_factor(struct gkick_filter *filter,
-                        gkick_real factor);
+enum entropictron_error
+ent_filter_set_factor(struct ent_filter *filter,
+                        ent_real factor);
 
-enum geonkick_error
-gkick_filter_get_cutoff_freq(struct gkick_filter *filter,
-                             gkick_real *cutoff);
+enum entropictron_error
+ent_filter_get_cutoff_freq(struct ent_filter *filter,
+                             ent_real *cutoff);
 
-enum geonkick_error
-gkick_filter_get_factor(struct gkick_filter *filter,
-                        gkick_real *factor);
+enum entropictron_error
+ent_filter_get_factor(struct ent_filter *filter,
+                        ent_real *factor);
 
-enum geonkick_error
-gkick_filter_val(struct gkick_filter *filter,
-                 gkick_real in_val,
-                 gkick_real *out_val,
-                 gkick_real env_x);
+enum entropictron_error
+ent_filter_val(struct ent_filter *filter,
+                 ent_real in_val,
+                 ent_real *out_val,
+                 ent_real env_x);
 
-#endif // GEONKICK_FILTER_H
+#endif // ENTROPICTRON_FILTER_H

@@ -1,4 +1,4 @@
-set(gkick_rc_png_files
+set(ent_rc_png_files
 
 switch_button_on.png
 switch_button_off.png

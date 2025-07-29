@@ -2,14 +2,14 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
 
-<http://geonkick.org/geonkick>
+<http://entropictron.org/entropictron>
   a lv2:Plugin;
-  lv2:binary <geonkick_lv2.dll>;
-  rdfs:seeAlso <geonkick.ttl>.
+  lv2:binary <entropictron_lv2.dll>;
+  rdfs:seeAlso <entropictron.ttl>.
 
-<http://geonkick.org/geonkick/single>
+<http://entropictron.org/entropictron/single>
   a lv2:Plugin;
-  lv2:binary <geonkick_single_lv2.dll>;
-  rdfs:seeAlso <geonkick.ttl>.
+  lv2:binary <entropictron_single_lv2.dll>;
+  rdfs:seeAlso <entropictron.ttl>.
 
 

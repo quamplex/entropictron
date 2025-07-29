@@ -1,5 +1,5 @@
 /**
- * File name: geonkick_internal.h
+ * File name: entropictron_internal.h
  * Project: Geonkick (A kick synthesizer)
  *
  * Copyright (C) 2017 Iurie Nistor 
@@ -21,13 +21,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef GEONKICK_INTERNAL_H
-#define GEONKICK_INTERNAL_H
+#ifndef ENTROPICTRON_INTERNAL_H
+#define ENTROPICTRON_INTERNAL_H
 
-#include "geonkick.h"
+#include "entropictron.h"
 #include "synthesizer.h"
-#include "gkick_audio.h"
-#include "gkick_buffer.h"
+#include "ent_audio.h"
+#include "ent_buffer.h"
 
 #include <pthread.h>
 #include <stdatomic.h>
@@ -36,20 +36,20 @@
 #define GKICK_2PI 6.2831853f
 #define GKICK_LOG20 1.3010299f
 
-#define GEONKICK_MAX_INSTANCES 500
+#define ENTROPICTRON_MAX_INSTANCES 500
 
 #include "worker.h"
 
 /* Kick maximum length in seconds. */
-#define GEONKICK_MAX_LENGTH 4
+#define ENTROPICTRON_MAX_LENGTH 4
 
-struct geonkick {
+struct entropictron {
         size_t id;
         char name[30];
 	int sample_rate;
         /* The list of synths of available synths. */
-        struct gkick_synth *synths[GEONKICK_MAX_INSTRUMENTS];
-        struct gkick_audio *audio;
+        struct ent_synth *synths[ENTROPICTRON_MAX_INSTRUMENTS];
+        struct ent_audio *audio;
 
         /* Current controllable percussion index. */
         _Atomic size_t per_index;
@@ -61,30 +61,30 @@ struct geonkick {
          */
         atomic_bool synthesis_on;
         pthread_mutex_t lock;
-        struct gkick_worker *worker;
+        struct ent_worker *worker;
 };
 
 void
-geonkick_lock(struct geonkick *kick);
+entropictron_lock(struct entropictron *kick);
 
 void
-geonkick_unlock(struct geonkick *kick);
+entropictron_unlock(struct entropictron *kick);
 
 void
-geonkick_process(struct geonkick *kick);
+entropictron_process(struct entropictron *kick);
 
 void
-geonkick_wakeup(struct geonkick *kick);
+entropictron_wakeup(struct entropictron *kick);
 
 void
-geonkick_usleep(unsigned long int usecods);
+entropictron_usleep(unsigned long int usecods);
 
 int
-geonkick_rand(unsigned int *seed);
+entropictron_rand(unsigned int *seed);
 
 #define min(a, b) ((a) < (b) ? (a) : (b))
 
 #define GKICK_CLAMP(value, min_v, max_v) \
     ((value) < (min_v) ? (min_v) : ((value) > (max_v) ? (max_v) : (value)))
 
-#endif // GEONKICK_INTERNAL_H
+#endif // ENTROPICTRON_INTERNAL_H

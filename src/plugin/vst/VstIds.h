@@ -29,6 +29,6 @@
 #include "pluginterfaces/base/funknown.h"
 
 using namespace Steinberg;
-static const FUID GKickVstProcessorUID(0xE2DCA632, 0x90E963FA, 0x6415F139, 0x54E54C24);
+static const FUID EntVstProcessorUID(0xE2DCA632, 0x90E963FA, 0x6415F139, 0x54E54C24);
 
 #endif // ENT_VST_IDS_H

@@ -21,76 +21,76 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef GEONKICK_DISTORTION_H
-#define GEONKICK_DISTORTION_H
+#ifndef ENTROPICTRON_DISTORTION_H
+#define ENTROPICTRON_DISTORTION_H
 
-#include "geonkick_internal.h"
+#include "entropictron_internal.h"
 
 #include <pthread.h>
 
-struct gkick_distortion {
+struct ent_distortion {
         bool enabled;
         int sample_rate;
-        enum gkick_distortion_type type;
-	gkick_real in_limiter;
-        gkick_real out_limiter;
-        gkick_real drive;
-	struct gkick_envelope *drive_env;
-        struct gkick_envelope *volume_env;
+        enum ent_distortion_type type;
+	ent_real in_limiter;
+        ent_real out_limiter;
+        ent_real drive;
+	struct ent_envelope *drive_env;
+        struct ent_envelope *volume_env;
         pthread_mutex_t lock;
 };
 
-enum geonkick_error
-gkick_distortion_new(struct gkick_distortion **distortion, int sample_rate);
+enum entropictron_error
+ent_distortion_new(struct ent_distortion **distortion, int sample_rate);
 
-void gkick_distortion_free(struct gkick_distortion **distortion);
+void ent_distortion_free(struct ent_distortion **distortion);
 
-void gkick_distortion_lock(struct gkick_distortion *distortion);
+void ent_distortion_lock(struct ent_distortion *distortion);
 
-void gkick_distortion_unlock(struct gkick_distortion *distortion);
+void ent_distortion_unlock(struct ent_distortion *distortion);
 
-enum geonkick_error
-gkick_distortion_enable(struct gkick_distortion *distortion, bool enable);
+enum entropictron_error
+ent_distortion_enable(struct ent_distortion *distortion, bool enable);
 
-enum geonkick_error
-gkick_distortion_is_enabled(struct gkick_distortion *distortion, bool *enabled);
+enum entropictron_error
+ent_distortion_is_enabled(struct ent_distortion *distortion, bool *enabled);
 
-enum geonkick_error
-gkick_distortion_set_type(struct gkick_distortion *distortion,
-                          enum gkick_distortion_type type);
+enum entropictron_error
+ent_distortion_set_type(struct ent_distortion *distortion,
+                          enum ent_distortion_type type);
 
-enum geonkick_error
-gkick_distortion_get_type(struct gkick_distortion *distortion,
-                          enum gkick_distortion_type *type);
+enum entropictron_error
+ent_distortion_get_type(struct ent_distortion *distortion,
+                          enum ent_distortion_type *type);
 
-enum geonkick_error
-gkick_distortion_val(struct gkick_distortion *distortion,
-                     gkick_real in_val,
-                     gkick_real *out_val,
-		     gkick_real env_x);
+enum entropictron_error
+ent_distortion_val(struct ent_distortion *distortion,
+                     ent_real in_val,
+                     ent_real *out_val,
+		     ent_real env_x);
 
-enum geonkick_error
-gkick_distortion_set_out_limiter(struct gkick_distortion *distortion,
-                                 gkick_real value);
+enum entropictron_error
+ent_distortion_set_out_limiter(struct ent_distortion *distortion,
+                                 ent_real value);
 
-enum geonkick_error
-gkick_distortion_get_out_limiter(struct gkick_distortion *distortion,
-                                 gkick_real *value);
+enum entropictron_error
+ent_distortion_get_out_limiter(struct ent_distortion *distortion,
+                                 ent_real *value);
 
-enum geonkick_error
-gkick_distortion_set_in_limiter(struct gkick_distortion *distortion,
-                                gkick_real value);
+enum entropictron_error
+ent_distortion_set_in_limiter(struct ent_distortion *distortion,
+                                ent_real value);
 
-enum geonkick_error
-gkick_distortion_get_in_limiter(struct gkick_distortion *distortion,
-                                gkick_real *value);
+enum entropictron_error
+ent_distortion_get_in_limiter(struct ent_distortion *distortion,
+                                ent_real *value);
 
-enum geonkick_error
-gkick_distortion_set_drive(struct gkick_distortion *distortion,
-                           gkick_real drive);
+enum entropictron_error
+ent_distortion_set_drive(struct ent_distortion *distortion,
+                           ent_real drive);
 
-enum geonkick_error
-gkick_distortion_get_drive(struct gkick_distortion *distortion,
-                           gkick_real *drive);
+enum entropictron_error
+ent_distortion_get_drive(struct ent_distortion *distortion,
+                           ent_real *drive);
 
-#endif // GEONKICK_DISTORTION_H
+#endif // ENTROPICTRON_DISTORTION_H

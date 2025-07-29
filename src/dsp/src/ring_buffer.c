@@ -23,30 +23,30 @@
 
 #include "ring_buffer.h"
 
-enum geonkick_error
+enum entropictron_error
 ring_buffer_new(struct ring_buffer **ring,
                 int size)
 {
         if (ring == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
         *ring = (struct ring_buffer*)calloc(1, sizeof(struct ring_buffer));
         if (*ring == NULL) {
-                gkick_log_error("can't allocate memory");
-                return GEONKICK_ERROR;
+                ent_log_error("can't allocate memory");
+                return ENTROPICTRON_ERROR;
         }
         (*ring)->max_size = size;
         (*ring)->size     = (*ring)->max_size;
         (*ring)->index    = 0;
-        (*ring)->buff     = (gkick_real*)calloc(1, sizeof(gkick_real) * (*ring)->max_size);
+        (*ring)->buff     = (ent_real*)calloc(1, sizeof(ent_real) * (*ring)->max_size);
         if ((*ring)->buff == NULL) {
-                gkick_log_error("can't allocate memory");
+                ent_log_error("can't allocate memory");
                 ring_buffer_free(ring);
-                return GEONKICK_ERROR;
+                return ENTROPICTRON_ERROR;
         }
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
 void
@@ -64,20 +64,20 @@ void
 ring_buffer_reset(struct ring_buffer *ring)
 {
         ring->index = 0;
-        memset(ring->buff, 0, ring->size * sizeof(gkick_real));
+        memset(ring->buff, 0, ring->size * sizeof(ent_real));
 }
 
 void
 ring_buffer_add_value(struct ring_buffer *ring,
                            size_t index,
-                           gkick_real val)
+                           ent_real val)
 {
         ring->buff[(ring->index + index) % ring->size] += val;
 }
 
 void
 ring_buffer_get_data(struct ring_buffer *ring,
-                     gkick_real *data,
+                     ent_real *data,
                      size_t data_size)
 {
         if (data == NULL)
@@ -86,7 +86,7 @@ ring_buffer_get_data(struct ring_buffer *ring,
                 data[i] += ring->buff[(ring->index + i) % ring->size];
 }
 
-gkick_real
+ent_real
 ring_buffer_get_cur_data(struct ring_buffer *ring)
 {
         if (ring->size > 0 && ring->index < ring->size)

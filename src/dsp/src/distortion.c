@@ -24,18 +24,18 @@
 #include "distortion.h"
 #include "envelope.h"
 
-enum geonkick_error
-gkick_distortion_new(struct gkick_distortion **distortion, int sample_rate)
+enum entropictron_error
+ent_distortion_new(struct ent_distortion **distortion, int sample_rate)
 {
         if (distortion == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        *distortion = (struct gkick_distortion*)calloc(1, sizeof(struct gkick_distortion));
+        *distortion = (struct ent_distortion*)calloc(1, sizeof(struct ent_distortion));
         if (*distortion == NULL) {
-                gkick_log_error("can't allocate memory");
-                return GEONKICK_ERROR;
+                ent_log_error("can't allocate memory");
+                return ENTROPICTRON_ERROR;
         }
 	(*distortion)->drive_env   = NULL;
         (*distortion)->volume_env  = NULL;
@@ -43,179 +43,179 @@ gkick_distortion_new(struct gkick_distortion **distortion, int sample_rate)
         (*distortion)->in_limiter  = 1.0f;
         (*distortion)->out_limiter = 1.0f;
         (*distortion)->sample_rate = sample_rate;
-#if (GEONKICK_VERSION_MAJOR > 3)
+#if (ENTROPICTRON_VERSION_MAJOR > 3)
 #warning Remove backward compatibility.
-#endif // GEONKICK_VERSION_MAJOR
-        (*distortion)->type        = GEONKICK_DISTORTION_SOFT_CLIPPING_TANH;
+#endif // ENTROPICTRON_VERSION_MAJOR
+        (*distortion)->type        = ENTROPICTRON_DISTORTION_SOFT_CLIPPING_TANH;
 
-	struct gkick_envelope *env = gkick_envelope_create();
+	struct ent_envelope *env = ent_envelope_create();
 	if (env == NULL) {
-		gkick_log_error("can't create distortion drive envelope");
-		gkick_distortion_free(distortion);
-		return GEONKICK_ERROR;
+		ent_log_error("can't create distortion drive envelope");
+		ent_distortion_free(distortion);
+		return ENTROPICTRON_ERROR;
 	} else {
 		/* Add two default points. */
-                struct gkick_envelope_point_info info = {0.0f, 1.0f, false};
-		gkick_envelope_add_point(env, &info);
+                struct ent_envelope_point_info info = {0.0f, 1.0f, false};
+		ent_envelope_add_point(env, &info);
                 info.x = 1.0f;
-		gkick_envelope_add_point(env, &info);
+		ent_envelope_add_point(env, &info);
 		(*distortion)->drive_env = env;
 	}
 
-        env = gkick_envelope_create();
+        env = ent_envelope_create();
 	if (env == NULL) {
-		gkick_log_error("can't create distortion volume envelope");
-		gkick_distortion_free(distortion);
-		return GEONKICK_ERROR;
+		ent_log_error("can't create distortion volume envelope");
+		ent_distortion_free(distortion);
+		return ENTROPICTRON_ERROR;
 	} else {
 		/* Add two default points. */
-                struct gkick_envelope_point_info info = {0.0f, 1.0f, false};
-		gkick_envelope_add_point(env, &info);
+                struct ent_envelope_point_info info = {0.0f, 1.0f, false};
+		ent_envelope_add_point(env, &info);
                 info.x = 1.0f;
-		gkick_envelope_add_point(env, &info);
+		ent_envelope_add_point(env, &info);
 		(*distortion)->volume_env = env;
 	}
 
 
         if (pthread_mutex_init(&(*distortion)->lock, NULL) != 0) {
-                gkick_log_error("error on init mutex");
-                gkick_distortion_free(distortion);
-                return GEONKICK_ERROR;
+                ent_log_error("error on init mutex");
+                ent_distortion_free(distortion);
+                return ENTROPICTRON_ERROR;
 	}
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
 void
-gkick_distortion_free(struct gkick_distortion **distortion)
+ent_distortion_free(struct ent_distortion **distortion)
 {
         if (distortion != NULL && *distortion != NULL) {
 		if ((*distortion)->drive_env != NULL)
-			gkick_envelope_destroy((*distortion)->drive_env);
+			ent_envelope_destroy((*distortion)->drive_env);
                 if ((*distortion)->volume_env != NULL)
-                        gkick_envelope_destroy((*distortion)->volume_env);
+                        ent_envelope_destroy((*distortion)->volume_env);
                 pthread_mutex_destroy(&(*distortion)->lock);
                 free(*distortion);
                 *distortion = NULL;
         }
 }
 
-void gkick_distortion_lock(struct gkick_distortion *distortion)
+void ent_distortion_lock(struct ent_distortion *distortion)
 {
         pthread_mutex_lock(&distortion->lock);
 }
 
-void gkick_distortion_unlock(struct gkick_distortion *distortion)
+void ent_distortion_unlock(struct ent_distortion *distortion)
 {
         pthread_mutex_unlock(&distortion->lock);
 }
 
-enum geonkick_error
-gkick_distortion_enable(struct gkick_distortion *distortion, bool enable)
+enum entropictron_error
+ent_distortion_enable(struct ent_distortion *distortion, bool enable)
 {
-        gkick_distortion_lock(distortion);
+        ent_distortion_lock(distortion);
         distortion->enabled = enable;
-        gkick_distortion_unlock(distortion);
-        return GEONKICK_OK;
+        ent_distortion_unlock(distortion);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_distortion_is_enabled(struct gkick_distortion *distortion, bool *enabled)
+enum entropictron_error
+ent_distortion_is_enabled(struct ent_distortion *distortion, bool *enabled)
 {
-        gkick_distortion_lock(distortion);
+        ent_distortion_lock(distortion);
         *enabled = distortion->enabled;
-        gkick_distortion_unlock(distortion);
-        return GEONKICK_OK;
+        ent_distortion_unlock(distortion);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_distortion_set_type(struct gkick_distortion *distortion,
-                          enum gkick_distortion_type type)
+enum entropictron_error
+ent_distortion_set_type(struct ent_distortion *distortion,
+                          enum ent_distortion_type type)
 {
-        gkick_distortion_lock(distortion);
+        ent_distortion_lock(distortion);
         distortion->type = type;
-        gkick_distortion_unlock(distortion);
-        return GEONKICK_OK;
+        ent_distortion_unlock(distortion);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_distortion_get_type(struct gkick_distortion *distortion,
-                          enum gkick_distortion_type *type)
+enum entropictron_error
+ent_distortion_get_type(struct ent_distortion *distortion,
+                          enum ent_distortion_type *type)
 {
-        gkick_distortion_lock(distortion);
+        ent_distortion_lock(distortion);
         *type = distortion->type;
-        gkick_distortion_unlock(distortion);
-        return GEONKICK_OK;
+        ent_distortion_unlock(distortion);
+        return ENTROPICTRON_OK;
 }
 
 /* TODO: With old presets. In the next major release this to be removed. */
-#if (GEONKICK_VERSION_MAJOR > 3)
+#if (ENTROPICTRON_VERSION_MAJOR > 3)
 #warning Remove backward compatibility.
-#endif // GEONKICK_VERSION_MAJOR
-static void distortion_backward_compatible(struct gkick_distortion *distortion,
-                                           gkick_real in_val,
-                                           gkick_real *out_val,
-                                           gkick_real env_x)
+#endif // ENTROPICTRON_VERSION_MAJOR
+static void distortion_backward_compatible(struct ent_distortion *distortion,
+                                           ent_real in_val,
+                                           ent_real *out_val,
+                                           ent_real env_x)
 {
-	gkick_real x = distortion->in_limiter * in_val;
-	x *= 1.0f + (distortion->drive - 1.0f) * gkick_envelope_get_value(distortion->drive_env, env_x);
+	ent_real x = distortion->in_limiter * in_val;
+	x *= 1.0f + (distortion->drive - 1.0f) * ent_envelope_get_value(distortion->drive_env, env_x);
 
         x = GKICK_CLAMP(x, -1.0f, 1.0f);
         *out_val= (x < 0.0f ? -1.0f : 1.0f) * (1.0f - exp(-4.0f * log(10.0f) * fabs(x)));
-        *out_val *= distortion->out_limiter * gkick_envelope_get_value(distortion->volume_env, env_x);
+        *out_val *= distortion->out_limiter * ent_envelope_get_value(distortion->volume_env, env_x);
 }
 
-enum geonkick_error
-gkick_distortion_val(struct gkick_distortion *distortion,
-                     gkick_real in_val,
-                     gkick_real *out_val,
-                     gkick_real env_x)
+enum entropictron_error
+ent_distortion_val(struct ent_distortion *distortion,
+                     ent_real in_val,
+                     ent_real *out_val,
+                     ent_real env_x)
 {
-        gkick_distortion_lock(distortion);
-#if (GEONKICK_VERSION_MAJOR > 3)
+        ent_distortion_lock(distortion);
+#if (ENTROPICTRON_VERSION_MAJOR > 3)
 #warning Remove backward compatibility.
-#endif // GEONKICK_VERSION_MAJOR
-        if (distortion->type == GEONKICK_DISTORTION_BACKWARD_COMPATIBLE) {
+#endif // ENTROPICTRON_VERSION_MAJOR
+        if (distortion->type == ENTROPICTRON_DISTORTION_BACKWARD_COMPATIBLE) {
                 distortion_backward_compatible(distortion,
                                                in_val,
                                                out_val,
                                                env_x);
-                gkick_distortion_unlock(distortion);
-                return GEONKICK_OK;
+                ent_distortion_unlock(distortion);
+                return ENTROPICTRON_OK;
         }
 
-        gkick_real x = distortion->in_limiter * in_val;
-        gkick_real drive_env_val = gkick_envelope_get_value(distortion->drive_env, env_x);
-        gkick_real drive = distortion->drive * gkick_envelope_get_value(distortion->drive_env, env_x);
+        ent_real x = distortion->in_limiter * in_val;
+        ent_real drive_env_val = ent_envelope_get_value(distortion->drive_env, env_x);
+        ent_real drive = distortion->drive * ent_envelope_get_value(distortion->drive_env, env_x);
         switch (distortion->type) {
-        case GEONKICK_DISTORTION_HARD_CLIPPING:
+        case ENTROPICTRON_DISTORTION_HARD_CLIPPING:
                 *out_val = GKICK_CLAMP(x, -1.0f / drive, 1.0f / drive);
                 break;
-        case GEONKICK_DISTORTION_SOFT_CLIPPING_TANH:
+        case ENTROPICTRON_DISTORTION_SOFT_CLIPPING_TANH:
                 *out_val = tanh(drive * x);
                 break;
-        case GEONKICK_DISTORTION_ARCTAN:
+        case ENTROPICTRON_DISTORTION_ARCTAN:
                 *out_val = atan(drive * x);
                 break;
-        case GEONKICK_DISTORTION_EXPONENTIAL:
+        case ENTROPICTRON_DISTORTION_EXPONENTIAL:
                 *out_val = (x < 0.0f ? -1.0f : 1.0f) * (1.0f - exp(-drive * fabs(x)));
                 break;
-        case GEONKICK_DISTORTION_POLYNOMIAL:
+        case ENTROPICTRON_DISTORTION_POLYNOMIAL:
                 *out_val = x - (0.1f * drive * x * x * x) / 3.0f;
                 break;
-        case GEONKICK_DISTORTION_LOGARITHMIC:
+        case ENTROPICTRON_DISTORTION_LOGARITHMIC:
                 *out_val = log(1.0f + drive * fabs(x)) * (x < 0.0f ? -1.0f : 1.0f);
                 break;
-        case GEONKICK_DISTORTION_FOLDBACK:
+        case ENTROPICTRON_DISTORTION_FOLDBACK:
                 {
-                        gkick_real threshold = 1.0f;
+                        ent_real threshold = 1.0f;
                         *out_val = fabs(fmod(x + threshold, 2.0f * threshold) - threshold) - threshold;
                 }
                 break;
-        case GEONKICK_DISTORTION_HALF_WAVE_RECT:
+        case ENTROPICTRON_DISTORTION_HALF_WAVE_RECT:
                 *out_val = x > 0.0f ? x : 0.0f;
                 break;
-        case GEONKICK_DISTORTION_FULL_WAVE_RECT:
+        case ENTROPICTRON_DISTORTION_FULL_WAVE_RECT:
                 *out_val = fabs(x);
                 break;
         default:
@@ -223,67 +223,67 @@ gkick_distortion_val(struct gkick_distortion *distortion,
                 break;
         }
 
-        *out_val *= distortion->out_limiter * gkick_envelope_get_value(distortion->volume_env, env_x);
-        gkick_distortion_unlock(distortion);
-        return GEONKICK_OK;
+        *out_val *= distortion->out_limiter * ent_envelope_get_value(distortion->volume_env, env_x);
+        ent_distortion_unlock(distortion);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_distortion_set_out_limiter(struct gkick_distortion *distortion,
-                                 gkick_real value)
+enum entropictron_error
+ent_distortion_set_out_limiter(struct ent_distortion *distortion,
+                                 ent_real value)
 {
-        gkick_distortion_lock(distortion);
+        ent_distortion_lock(distortion);
         distortion->out_limiter = value;
-        gkick_distortion_unlock(distortion);
-        return GEONKICK_OK;
+        ent_distortion_unlock(distortion);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_distortion_get_out_limiter(struct gkick_distortion *distortion,
-                            gkick_real *value)
+enum entropictron_error
+ent_distortion_get_out_limiter(struct ent_distortion *distortion,
+                            ent_real *value)
 {
-        gkick_distortion_lock(distortion);
+        ent_distortion_lock(distortion);
         *value = distortion->out_limiter;
-        gkick_distortion_unlock(distortion);
-        return GEONKICK_OK;
+        ent_distortion_unlock(distortion);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_distortion_set_in_limiter(struct gkick_distortion *distortion,
-                                gkick_real value)
+enum entropictron_error
+ent_distortion_set_in_limiter(struct ent_distortion *distortion,
+                                ent_real value)
 {
-	gkick_distortion_lock(distortion);
+	ent_distortion_lock(distortion);
         distortion->in_limiter = value;
-        gkick_distortion_unlock(distortion);
-        return GEONKICK_OK;
+        ent_distortion_unlock(distortion);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_distortion_get_in_limiter(struct gkick_distortion *distortion,
-                                gkick_real *value)
+enum entropictron_error
+ent_distortion_get_in_limiter(struct ent_distortion *distortion,
+                                ent_real *value)
 {
-	gkick_distortion_lock(distortion);
+	ent_distortion_lock(distortion);
         *value = distortion->in_limiter;
-        gkick_distortion_unlock(distortion);
-        return GEONKICK_OK;
+        ent_distortion_unlock(distortion);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_distortion_set_drive(struct gkick_distortion *distortion,
-                           gkick_real drive)
+enum entropictron_error
+ent_distortion_set_drive(struct ent_distortion *distortion,
+                           ent_real drive)
 {
-        gkick_distortion_lock(distortion);
+        ent_distortion_lock(distortion);
         distortion->drive = drive;
-        gkick_distortion_unlock(distortion);
-        return GEONKICK_OK;
+        ent_distortion_unlock(distortion);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_distortion_get_drive(struct gkick_distortion *distortion,
-                           gkick_real *drive)
+enum entropictron_error
+ent_distortion_get_drive(struct ent_distortion *distortion,
+                           ent_real *drive)
 {
-        gkick_distortion_lock(distortion);
+        ent_distortion_lock(distortion);
         *drive = distortion->drive;
-        gkick_distortion_unlock(distortion);
-        return GEONKICK_OK;
+        ent_distortion_unlock(distortion);
+        return ENTROPICTRON_OK;
 }

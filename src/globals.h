@@ -21,10 +21,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef GEONKICK_GLOBALS_H
-#define GEONKICK_GLOBALS_H
+#ifndef ENTROPICTRON_GLOBALS_H
+#define ENTROPICTRON_GLOBALS_H
 
-#include "geonkick.h"
+#include "entropictron.h"
 #include "RkLog.h"
 
 #include <iostream>
@@ -55,29 +55,29 @@ namespace fs = std::filesystem;
 #include <RkObject.h>
 
 #ifdef GKICK_LOG_DEBUG_LEVEL
-#define GEONKICK_LOG_INFO(msg) std::cout << "[" << GEONKICK_NAME << "] " \
+#define ENTROPICTRON_LOG_INFO(msg) std::cout << "[" << ENTROPICTRON_NAME << "] " \
                                << " [" << std::this_thread::get_id() << "] " \
                                << __PRETTY_FUNCTION__ << "[INFO] " \
                                << msg << std::endl;
-#define GEONKICK_LOG_ERROR(msg) std::cout << "[" << GEONKICK_NAME << "] " \
+#define ENTROPICTRON_LOG_ERROR(msg) std::cout << "[" << ENTROPICTRON_NAME << "] " \
                                 << " [" << std::this_thread::get_id() << "] " \
                                 << __PRETTY_FUNCTION__ << "[ERROR] " \
                                 << msg << std::endl;
-#define GEONKICK_LOG_DEBUG(msg) std::cout << "[" << std::this_thread::get_id() << "][" << GEONKICK_NAME << "] " \
+#define ENTROPICTRON_LOG_DEBUG(msg) std::cout << "[" << std::this_thread::get_id() << "][" << ENTROPICTRON_NAME << "] " \
                                 << " [" << std::this_thread::get_id() << "] " \
                                 << __PRETTY_FUNCTION__ << "[DEBUG] " \
                                 << msg << std::endl;
 #else
-#define GEONKICK_LOG_INFO(msg) std::cout << "[" << GEONKICK_NAME << "] " \
+#define ENTROPICTRON_LOG_INFO(msg) std::cout << "[" << ENTROPICTRON_NAME << "] " \
                                << "[INFO] " << msg << std::endl;
-#define GEONKICK_LOG_ERROR(msg) std::cout << "[" << GEONKICK_NAME << "] " \
+#define ENTROPICTRON_LOG_ERROR(msg) std::cout << "[" << ENTROPICTRON_NAME << "] " \
                                << "[ERROR] " << msg << std::endl;
-#define GEONKICK_LOG_DEBUG(msg)
+#define ENTROPICTRON_LOG_DEBUG(msg)
 #endif //  // GKICK_LIB_LOG_LEVEL_DEBUG
 
 namespace Entropictron
 {
-        constexpr int defaultSampleRate = GEONKICK_DEFAULT_SAMPLE_RATE;
+        constexpr int defaultSampleRate = ENTROPICTRON_DEFAULT_SAMPLE_RATE;
         constexpr char appName[] = "Entropictron";
         constexpr char applicationName[] = "Entropictron";
         constexpr char applicationVersionStr[] = GEOKICK_VERSION_STRING;
@@ -124,8 +124,8 @@ namespace Entropictron
 namespace GeonkickTypes
 {
 using MidiKey = unsigned char;
-constexpr MidiKey geonkickAnyKey = GEONKICK_ANY_KEY;
-constexpr int geonkickAnyMidiChannel = GEONKICK_ANY_MIDI_CHANNEL;
+constexpr MidiKey entropictronAnyKey = ENTROPICTRON_ANY_KEY;
+constexpr int entropictronAnyMidiChannel = ENTROPICTRON_ANY_MIDI_CHANNEL;
 
 enum class Formats : int {
           Gkick  = 0,
@@ -138,4 +138,4 @@ enum class Formats : int {
 
 } // namespace GeonkickTypes
 
-#endif // GEONKICK_GLOBALS_H
+#endif // ENTROPICTRON_GLOBALS_H

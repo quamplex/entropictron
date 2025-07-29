@@ -21,8 +21,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_VST_EDITOR_H
-#define ENT_VST_EDITOR_H
+#ifndef ENT_VST_PLUGIN_VIEW_H
+#define ENT_VST_PLUGIN_VIEW_H
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
 #include "pluginterfaces/gui/iplugview.h"
@@ -37,15 +37,15 @@ using namespace Steinberg;
 using namespace Linux;
 #endif // ENTROPICTRON_OS_GNU
 
-class EntVstPluginView : public Vst::IPlugView {
+class EntVstPluginView : public IPlugView {
  public:
         EntVstPluginView(Vst::EditController *controller);
         tresult PLUGIN_API isPlatformTypeSupported(Steinberg::FIDString type) override;
         tresult PLUGIN_API attached(void* parent, FIDString type) override;
-        tresult PLUGIN_API removed() override;
+        //        tresult PLUGIN_API removed() override;
         tresult PLUGIN_API onWheel(float distance) override { return kNotImplemented; }
         tresult PLUGIN_API setFrame(Steinberg::IPlugFrame* frame) override { return kResultOk; }
-        tresult PLUGIN_API resizeView(Steinberg::ViewRect* newSize) override { return kResultOk; }
+        //        tresult PLUGIN_API resizeView(Steinberg::ViewRect* newSize) override { return kResultOk; }
         tresult PLUGIN_API canResize() override { return kResultFalse; }
         tresult PLUGIN_API removed() override;
         tresult PLUGIN_API getSize(ViewRect* newSize) override;
@@ -54,4 +54,4 @@ class EntVstPluginView : public Vst::IPlugView {
         Vst::EditController* editController;
 };
 
-#endif // ENT_PLUGIN_VIEW_H
+#endif // ENT_VST_PLUGIN_VIEW_H

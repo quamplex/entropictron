@@ -24,20 +24,20 @@
 #include "synthesizer.h"
 #include "oscillator.h"
 
-enum geonkick_error
-gkick_synth_new(struct gkick_synth **synth, int sample_rate)
+enum entropictron_error
+ent_synth_new(struct ent_synth **synth, int sample_rate)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        *synth = (struct gkick_synth*)calloc(1, sizeof(struct gkick_synth));
+        *synth = (struct ent_synth*)calloc(1, sizeof(struct ent_synth));
 	if (*synth == NULL) {
-                gkick_log_error("can't allocate memory");
-		return GEONKICK_ERROR_MEM_ALLOC;
+                ent_log_error("can't allocate memory");
+		return ENTROPICTRON_ERROR_MEM_ALLOC;
 	}
-	memset(*synth, 0, sizeof(struct gkick_synth));
+	memset(*synth, 0, sizeof(struct ent_synth));
 	(*synth)->sample_rate = sample_rate;
         (*synth)->length = 0.3f;
 	(*synth)->oscillators_number = GKICK_OSC_GROUPS_NUMBER * GKICK_OSC_GROUP_SIZE;
@@ -49,71 +49,71 @@ gkick_synth_new(struct gkick_synth **synth, int sample_rate)
         for (size_t i = 0; i < GKICK_OSC_GROUPS_NUMBER; i++)
                 (*synth)->osc_groups_amplitude[i] = 1.0f;
 
-        if (gkick_filter_new(&(*synth)->filter, (*synth)->sample_rate) != GEONKICK_OK) {
-                gkick_log_error("can't create filter");
-                gkick_synth_free(synth);
-		return GEONKICK_ERROR;
+        if (ent_filter_new(&(*synth)->filter, (*synth)->sample_rate) != ENTROPICTRON_OK) {
+                ent_log_error("can't create filter");
+                ent_synth_free(synth);
+		return ENTROPICTRON_ERROR;
         }
         (*synth)->filter_enabled = 0;
 
-        if (gkick_distortion_new(&(*synth)->distortion, (*synth)->sample_rate) != GEONKICK_OK) {
-                gkick_log_error("can't create distortion");
-                gkick_synth_free(synth);
-                return GEONKICK_ERROR;
+        if (ent_distortion_new(&(*synth)->distortion, (*synth)->sample_rate) != ENTROPICTRON_OK) {
+                ent_log_error("can't create distortion");
+                ent_synth_free(synth);
+                return ENTROPICTRON_ERROR;
         }
 
-        (*synth)->envelope = gkick_envelope_create();
+        (*synth)->envelope = ent_envelope_create();
         if ((*synth)->envelope == NULL) {
-                gkick_log_error("can't create envelope");
-                gkick_synth_free(synth);
-                return GEONKICK_ERROR;
+                ent_log_error("can't create envelope");
+                ent_synth_free(synth);
+                return ENTROPICTRON_ERROR;
         } else {
                 /* Add two default points. */
-                struct gkick_envelope_point_info info = {0.0f, 1.0f, false};
-                gkick_envelope_add_point((*synth)->envelope, &info);
+                struct ent_envelope_point_info info = {0.0f, 1.0f, false};
+                ent_envelope_add_point((*synth)->envelope, &info);
                 info.x = 1.0f;
-                gkick_envelope_add_point((*synth)->envelope, &info);
+                ent_envelope_add_point((*synth)->envelope, &info);
         }
 
         /* Create synthesizer kick buffer. */
-        struct gkick_buffer *buff;
-        gkick_buffer_new(&buff, (*synth)->sample_rate * GEONKICK_MAX_LENGTH);
+        struct ent_buffer *buff;
+        ent_buffer_new(&buff, (*synth)->sample_rate * ENTROPICTRON_MAX_LENGTH);
         if (buff == NULL) {
-                gkick_log_error("can't create synthesizer kick buffer");
-                gkick_synth_free(synth);
+                ent_log_error("can't create synthesizer kick buffer");
+                ent_synth_free(synth);
         }
-        gkick_buffer_set_size(buff, (size_t)((*synth)->length * (*synth)->sample_rate));
+        ent_buffer_set_size(buff, (size_t)((*synth)->length * (*synth)->sample_rate));
         (*synth)->buffer = buff;
 
-        if (gkick_synth_create_oscillators(*synth) != GEONKICK_OK) {
-                gkick_log_error("can't create oscillators");
-                gkick_synth_free(synth);
-                return GEONKICK_ERROR;
+        if (ent_synth_create_oscillators(*synth) != ENTROPICTRON_OK) {
+                ent_log_error("can't create oscillators");
+                ent_synth_free(synth);
+                return ENTROPICTRON_ERROR;
         }
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-void gkick_synth_free(struct gkick_synth **synth)
+void ent_synth_free(struct ent_synth **synth)
 {
         if (synth != NULL && *synth != NULL) {
                 if ((*synth)->oscillators != NULL) {
                         for (size_t i = 0; i < (*synth)->oscillators_number; i++)
-                                gkick_osc_free(&((*synth)->oscillators[i]));
+                                ent_osc_free(&((*synth)->oscillators[i]));
                         free((*synth)->oscillators);
                         (*synth)->oscillators = NULL;
 
                         if ((*synth)->buffer != NULL)
-                                gkick_buffer_free(&(*synth)->buffer);
+                                ent_buffer_free(&(*synth)->buffer);
 
                         if ((*synth)->filter)
-                                gkick_filter_free(&(*synth)->filter);
+                                ent_filter_free(&(*synth)->filter);
 
                         if ((*synth)->distortion)
-                                gkick_distortion_free(&(*synth)->distortion);
+                                ent_distortion_free(&(*synth)->distortion);
 
                         if ((*synth)->envelope) {
-                                gkick_envelope_destroy((*synth)->envelope);
+                                ent_envelope_destroy((*synth)->envelope);
                                 (*synth)->envelope = NULL;
                         }
                 }
@@ -124,51 +124,51 @@ void gkick_synth_free(struct gkick_synth **synth)
         }
 }
 
-void gkick_synth_lock(struct gkick_synth *synth)
+void ent_synth_lock(struct ent_synth *synth)
 {
         pthread_mutex_lock(&synth->lock);
 }
 
-void gkick_synth_unlock(struct gkick_synth *synth)
+void ent_synth_unlock(struct ent_synth *synth)
 {
         pthread_mutex_unlock(&synth->lock);
 }
 
-enum geonkick_error
-gkick_synth_create_oscillators(struct gkick_synth *synth)
+enum entropictron_error
+ent_synth_create_oscillators(struct ent_synth *synth)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
         size_t size;
         size_t i;
-        struct gkick_oscillator *osc;
+        struct ent_oscillator *osc;
 
-        size = sizeof(struct gkick_oscillator*) * synth->oscillators_number;
-        synth->oscillators = (struct gkick_oscillator**)malloc(size);
+        size = sizeof(struct ent_oscillator*) * synth->oscillators_number;
+        synth->oscillators = (struct ent_oscillator**)malloc(size);
 
         if (synth->oscillators == NULL)
-                return GEONKICK_ERROR_MEM_ALLOC;
+                return ENTROPICTRON_ERROR_MEM_ALLOC;
         memset(synth->oscillators, 0, size);
 
         for (i = 0; i < synth->oscillators_number; i++) {
-                osc = gkick_osc_create(synth->sample_rate);
+                osc = ent_osc_create(synth->sample_rate);
                 if (osc == NULL)
-                        return GEONKICK_ERROR;
+                        return ENTROPICTRON_ERROR;
                 synth->oscillators[i] = osc;
         }
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-struct gkick_oscillator*
-gkick_synth_get_oscillator(struct gkick_synth *synth,
+struct ent_oscillator*
+ent_synth_get_oscillator(struct ent_synth *synth,
                            size_t index)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
+                ent_log_error("wrong arguments");
                 return NULL;
         }
 
@@ -178,1174 +178,1174 @@ gkick_synth_get_oscillator(struct gkick_synth *synth,
         return NULL;
 }
 
-enum geonkick_error
-gkick_synth_get_oscillators_number(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_oscillators_number(struct ent_synth *synth,
                                    size_t *number)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
+        ent_synth_lock(synth);
         *number = synth->oscillators_number;
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_enable_oscillator(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_enable_oscillator(struct ent_synth *synth,
                               size_t index,
                               int enable)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-	struct gkick_oscillator* osc = gkick_synth_get_oscillator(synth, index);
+        ent_synth_lock(synth);
+	struct ent_oscillator* osc = ent_synth_get_oscillator(synth, index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 
         if (enable)
-                gkick_osc_set_state(osc, GEONKICK_OSC_STATE_ENABLED);
+                ent_osc_set_state(osc, ENTROPICTRON_OSC_STATE_ENABLED);
         else
-                gkick_osc_set_state(osc, GEONKICK_OSC_STATE_DISABLED);
+                ent_osc_set_state(osc, ENTROPICTRON_OSC_STATE_DISABLED);
 
         if (synth->osc_groups[index / GKICK_OSC_GROUP_SIZE])
                 synth->buffer_update = true;
 
-	gkick_synth_unlock(synth);
+	ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_osc_is_enabled(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_osc_is_enabled(struct ent_synth *synth,
                            size_t index,
                            int *enabled)
 {
-        struct gkick_oscillator* osc;
+        struct ent_oscillator* osc;
 
         if (synth == NULL || enabled == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-	osc = gkick_synth_get_oscillator(synth, index);
+        ent_synth_lock(synth);
+	osc = ent_synth_get_oscillator(synth, index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
-        *enabled = gkick_osc_enabled(osc);
-	gkick_synth_unlock(synth);
+        *enabled = ent_osc_enabled(osc);
+	ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_osc_set_fm(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_osc_set_fm(struct ent_synth *synth,
                        size_t index,
                        bool is_fm)
 {
-        gkick_synth_lock(synth);
-	struct gkick_oscillator* osc = gkick_synth_get_oscillator(synth, index);
+        ent_synth_lock(synth);
+	struct ent_oscillator* osc = ent_synth_get_oscillator(synth, index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 
         osc->is_fm = is_fm;
-        if (osc->state == GEONKICK_OSC_STATE_ENABLED)
+        if (osc->state == ENTROPICTRON_OSC_STATE_ENABLED)
                 synth->buffer_update = true;
 
-	gkick_synth_unlock(synth);
+	ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_osc_is_fm(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_osc_is_fm(struct ent_synth *synth,
                       size_t index,
                       bool *is_fm)
 {
-        gkick_synth_lock(synth);
-	struct gkick_oscillator* osc = gkick_synth_get_oscillator(synth, index);
+        ent_synth_lock(synth);
+	struct ent_oscillator* osc = ent_synth_get_oscillator(synth, index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 
         *is_fm = osc->is_fm;
-	gkick_synth_unlock(synth);
+	ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-struct gkick_envelope*
-gkick_synth_osc_get_env(struct gkick_synth *synth,
+struct ent_envelope*
+ent_synth_osc_get_env(struct ent_synth *synth,
                         size_t osc_index,
                         size_t env_index)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
+                ent_log_error("wrong arguments");
                 return NULL;
         }
 
-        struct gkick_oscillator *osc;
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        struct ent_oscillator *osc;
+        osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                 gkick_log_error("can't get oscillator %d", osc_index);
+                 ent_log_error("can't get oscillator %d", osc_index);
                  return NULL;
         }
 
-        return gkick_osc_get_envelope(osc, env_index);
+        return ent_osc_get_envelope(osc, env_index);
 }
 
-enum geonkick_error
-gkick_synth_osc_envelope_points(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_osc_envelope_points(struct ent_synth *synth,
                                 int osc_index,
                                 int env_index,
-                                struct gkick_envelope_point_info **buf,
+                                struct ent_envelope_point_info **buf,
                                 size_t *npoints)
 {
         if (synth == NULL || buf == NULL || npoints == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
         *npoints = 0;
         *buf = NULL;
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                gkick_log_error("can't get oscillator %d", osc_index);
-                gkick_synth_unlock(synth);
-                return GEONKICK_ERROR;
+                ent_log_error("can't get oscillator %d", osc_index);
+                ent_synth_unlock(synth);
+                return ENTROPICTRON_ERROR;
         }
-        gkick_osc_get_envelope_points(osc, env_index, buf, npoints);
-        gkick_synth_unlock(synth);
+        ent_osc_get_envelope_points(osc, env_index, buf, npoints);
+        ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_osc_envelope_set_points(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_osc_envelope_set_points(struct ent_synth *synth,
                                     int osc_index,
                                     int env_index,
-                                    const struct gkick_envelope_point_info *buf,
+                                    const struct ent_envelope_point_info *buf,
                                     size_t npoints)
 {
         if (synth == NULL || buf == NULL || npoints == 0) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                gkick_log_error("can't get oscillator %d", osc_index);
-                gkick_synth_unlock(synth);
-                return GEONKICK_ERROR;
+                ent_log_error("can't get oscillator %d", osc_index);
+                ent_synth_unlock(synth);
+                return ENTROPICTRON_ERROR;
         }
-        gkick_osc_set_envelope_points(osc, env_index, buf, npoints);
+        ent_osc_set_envelope_points(osc, env_index, buf, npoints);
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_osc_env_add_point(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_osc_env_add_point(struct ent_synth *synth,
                               int osc_index,
                               int env_index,
-                              struct gkick_envelope_point_info *point_info)
+                              struct ent_envelope_point_info *point_info)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                 gkick_log_error("can't get oscillator %d", osc_index);
-                 gkick_synth_unlock(synth);
-                 return GEONKICK_ERROR;
+                 ent_log_error("can't get oscillator %d", osc_index);
+                 ent_synth_unlock(synth);
+                 return ENTROPICTRON_ERROR;
         }
-        struct gkick_envelope *env = gkick_osc_get_envelope(osc, env_index);
+        struct ent_envelope *env = ent_osc_get_envelope(osc, env_index);
         if (env == NULL) {
-                gkick_synth_unlock(synth);
-                gkick_log_error("can't get envelope");
-                return GEONKICK_ERROR;
+                ent_synth_unlock(synth);
+                ent_log_error("can't get envelope");
+                return ENTROPICTRON_ERROR;
         }
-        if (gkick_envelope_add_point(env, point_info) == NULL) {
-                gkick_log_error("can't add envelope point");
-                gkick_synth_unlock(synth);
-                return GEONKICK_ERROR;
+        if (ent_envelope_add_point(env, point_info) == NULL) {
+                ent_log_error("can't add envelope point");
+                ent_synth_unlock(synth);
+                return ENTROPICTRON_ERROR;
         }
 
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
 
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_osc_env_remove_point(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_osc_env_remove_point(struct ent_synth *synth,
                                  size_t osc_index,
                                  size_t env_index,
                                  size_t index)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                 gkick_log_error("can't get oscillator %d", osc_index);
-                 gkick_synth_unlock(synth);
-                 return GEONKICK_ERROR;
+                 ent_log_error("can't get oscillator %d", osc_index);
+                 ent_synth_unlock(synth);
+                 return ENTROPICTRON_ERROR;
         }
-        struct gkick_envelope *env = gkick_osc_get_envelope(osc, env_index);
+        struct ent_envelope *env = ent_osc_get_envelope(osc, env_index);
         if (env == NULL) {
-                gkick_synth_unlock(synth);
-                gkick_log_error("can't get envelope");
-                return GEONKICK_ERROR;
+                ent_synth_unlock(synth);
+                ent_log_error("can't get envelope");
+                return ENTROPICTRON_ERROR;
         }
-        gkick_envelope_remove_point(env, index);
+        ent_envelope_remove_point(env, index);
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
 
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_osc_env_update_point(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_osc_env_update_point(struct ent_synth *synth,
                                  int osc_index,
                                  int env_index,
                                  int index,
-                                 struct gkick_envelope_point_info *point_info)
+                                 struct ent_envelope_point_info *point_info)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                 gkick_log_error("can't get oscillator %d", osc_index);
-                 gkick_synth_unlock(synth);
-                 return GEONKICK_ERROR;
+                 ent_log_error("can't get oscillator %d", osc_index);
+                 ent_synth_unlock(synth);
+                 return ENTROPICTRON_ERROR;
         }
 
-        struct gkick_envelope *env = gkick_osc_get_envelope(osc, env_index);
+        struct ent_envelope *env = ent_osc_get_envelope(osc, env_index);
         if (env == NULL) {
-                gkick_synth_unlock(synth);
-                gkick_log_error("can't get envelope");
-                return GEONKICK_ERROR;
+                ent_synth_unlock(synth);
+                ent_log_error("can't get envelope");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_envelope_update_point(env, index, point_info);
+        ent_envelope_update_point(env, index, point_info);
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-synth_osc_env_set_apply_type(struct gkick_synth *synth,
+enum entropictron_error
+synth_osc_env_set_apply_type(struct ent_synth *synth,
 			     size_t osc_index,
 			     size_t env_index,
-			     enum gkick_envelope_apply_type apply_type)
+			     enum ent_envelope_apply_type apply_type)
 {
 	if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-	        struct gkick_oscillator *osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+	        struct ent_oscillator *osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                 gkick_log_error("can't get oscillator %d", osc_index);
-                 gkick_synth_unlock(synth);
-                 return GEONKICK_ERROR;
+                 ent_log_error("can't get oscillator %d", osc_index);
+                 ent_synth_unlock(synth);
+                 return ENTROPICTRON_ERROR;
         }
 
-        struct gkick_envelope *env = gkick_osc_get_envelope(osc, env_index);
+        struct ent_envelope *env = ent_osc_get_envelope(osc, env_index);
         if (env == NULL) {
-                gkick_synth_unlock(synth);
-                gkick_log_error("can't get envelope");
-                return GEONKICK_ERROR;
+                ent_synth_unlock(synth);
+                ent_log_error("can't get envelope");
+                return ENTROPICTRON_ERROR;
         }
-        gkick_envelope_set_apply_type(env, apply_type);
-	osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_envelope_set_apply_type(env, apply_type);
+	osc = ent_synth_get_oscillator(synth, osc_index);
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-synth_osc_env_get_apply_type(struct gkick_synth *synth,
+enum entropictron_error
+synth_osc_env_get_apply_type(struct ent_synth *synth,
 			     size_t osc_index,
 			     size_t env_index,
-			     enum gkick_envelope_apply_type *apply_type)
+			     enum ent_envelope_apply_type *apply_type)
 {
 	if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-	struct gkick_envelope *env = gkick_synth_osc_get_env(synth, osc_index, env_index);
+        ent_synth_lock(synth);
+	struct ent_envelope *env = ent_synth_osc_get_env(synth, osc_index, env_index);
         if (env == NULL) {
-                gkick_synth_unlock(synth);
-                gkick_log_error("can't get envelope %d", env_index);
-                return GEONKICK_ERROR;
+                ent_synth_unlock(synth);
+                ent_log_error("can't get envelope %d", env_index);
+                return ENTROPICTRON_ERROR;
         }
-	*apply_type = gkick_envelope_get_apply_type(env);
-        gkick_synth_unlock(synth);
+	*apply_type = ent_envelope_get_apply_type(env);
+        ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_set_osc_function(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_set_osc_function(struct ent_synth *synth,
                              size_t osc_index,
-                             enum geonkick_osc_func_type type)
+                             enum entropictron_osc_func_type type)
 {
-        struct gkick_oscillator *osc;
+        struct ent_oscillator *osc;
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                gkick_log_error("can't get oscilaltor");
-                gkick_synth_unlock(synth);
-                return GEONKICK_ERROR;
+                ent_log_error("can't get oscilaltor");
+                ent_synth_unlock(synth);
+                return ENTROPICTRON_ERROR;
         } else {
                 osc->func = type;
         }
 
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-                    && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+                    && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
 
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_get_osc_function(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_osc_function(struct ent_synth *synth,
                              size_t osc_index,
-                             enum geonkick_osc_func_type *type)
+                             enum entropictron_osc_func_type *type)
 {
-        struct gkick_oscillator *osc;
+        struct ent_oscillator *osc;
 
         if (synth == NULL || type == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                gkick_log_error("can't get oscilaltor");
-                gkick_synth_unlock(synth);
-                return GEONKICK_ERROR;
+                ent_log_error("can't get oscilaltor");
+                ent_synth_unlock(synth);
+                return ENTROPICTRON_ERROR;
         } else {
                 *type = osc->func;
         }
 
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_set_osc_phase(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_set_osc_phase(struct ent_synth *synth,
                           size_t osc_index,
-                          gkick_real phase)
+                          ent_real phase)
 {
-        struct gkick_oscillator *osc;
+        struct ent_oscillator *osc;
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                gkick_log_error("can't get oscilaltor");
-                gkick_synth_unlock(synth);
-                return GEONKICK_ERROR;
+                ent_log_error("can't get oscilaltor");
+                ent_synth_unlock(synth);
+                return ENTROPICTRON_ERROR;
         } else {
                 osc->initial_phase = phase;
         }
 
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED)
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED)
                 synth->buffer_update = true;
 
-	gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+	ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_get_osc_phase(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_osc_phase(struct ent_synth *synth,
                           size_t osc_index,
-                          gkick_real *phase)
+                          ent_real *phase)
 {
-        struct gkick_oscillator *osc;
+        struct ent_oscillator *osc;
         if (synth == NULL || phase == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                gkick_log_error("can't get oscilaltor");
-                gkick_synth_unlock(synth);
-                return GEONKICK_ERROR;
+                ent_log_error("can't get oscilaltor");
+                ent_synth_unlock(synth);
+                return ENTROPICTRON_ERROR;
         } else {
                 *phase = osc->initial_phase;
         }
 
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_set_osc_seed(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_set_osc_seed(struct ent_synth *synth,
                          size_t osc_index,
                          unsigned int seed)
 {
-        struct gkick_oscillator *osc;
+        struct ent_oscillator *osc;
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                gkick_log_error("can't get oscilaltor");
-                gkick_synth_unlock(synth);
-                return GEONKICK_ERROR;
+                ent_log_error("can't get oscilaltor");
+                ent_synth_unlock(synth);
+                return ENTROPICTRON_ERROR;
         } else {
                 osc->seed = seed;
         }
 
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED)
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED)
                 synth->buffer_update = true;
 
-	gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+	ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_get_osc_seed(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_osc_seed(struct ent_synth *synth,
                          size_t osc_index,
                          unsigned *seed)
 {
-        struct gkick_oscillator *osc;
+        struct ent_oscillator *osc;
         if (synth == NULL || seed == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        osc = ent_synth_get_oscillator(synth, osc_index);
         if (osc == NULL) {
-                gkick_log_error("can't get oscilaltor");
-                gkick_synth_unlock(synth);
-                return GEONKICK_ERROR;
+                ent_log_error("can't get oscilaltor");
+                ent_synth_unlock(synth);
+                return ENTROPICTRON_ERROR;
         } else {
                 *seed = osc->seed;
         }
 
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
 
-enum geonkick_error
-gkick_synth_get_length(struct gkick_synth *synth,
-                       gkick_real *len)
+enum entropictron_error
+ent_synth_get_length(struct ent_synth *synth,
+                       ent_real *len)
 {
         if (synth == NULL || len == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
+        ent_synth_lock(synth);
         *len = synth->length;
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_set_length(struct gkick_synth *synth,
-                       gkick_real len)
+enum entropictron_error
+ent_synth_set_length(struct ent_synth *synth,
+                       ent_real len)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
+        ent_synth_lock(synth);
         synth->length = len;
-        gkick_buffer_set_size(synth->buffer, synth->length * synth->sample_rate);
+        ent_buffer_set_size(synth->buffer, synth->length * synth->sample_rate);
         synth->buffer_update = true;
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_kick_set_amplitude(struct gkick_synth *synth,
-                               gkick_real amplitude)
+enum entropictron_error
+ent_synth_kick_set_amplitude(struct ent_synth *synth,
+                               ent_real amplitude)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
+        ent_synth_lock(synth);
         synth->amplitude = amplitude;
         synth->buffer_update = true;
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_kick_get_amplitude(struct gkick_synth *synth,
-                               gkick_real *amplitude)
+enum entropictron_error
+ent_synth_kick_get_amplitude(struct ent_synth *synth,
+                               ent_real *amplitude)
 {
         if (synth == NULL || amplitude == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
+        ent_synth_lock(synth);
         *amplitude = synth->amplitude;
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-geonkick_synth_kick_filter_enable(struct gkick_synth *synth,
+enum entropictron_error
+entropictron_synth_kick_filter_enable(struct ent_synth *synth,
                                   int enable)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
+        ent_synth_lock(synth);
         synth->filter_enabled = enable;
         synth->buffer_update = true;
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-geonkick_synth_kick_filter_is_enabled(struct gkick_synth *synth,
+enum entropictron_error
+entropictron_synth_kick_filter_is_enabled(struct ent_synth *synth,
                                       int *enabled)
 {
         if (synth == NULL || enabled == NULL) {
-                return GEONKICK_ERROR;
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
+        ent_synth_lock(synth);
         *enabled = synth->filter_enabled;
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_kick_set_filter_frequency(struct gkick_synth *synth,
-                                      gkick_real frequency)
+enum entropictron_error
+ent_synth_kick_set_filter_frequency(struct ent_synth *synth,
+                                      ent_real frequency)
 {
-        enum geonkick_error res;
+        enum entropictron_error res;
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        res = gkick_filter_set_cutoff_freq(synth->filter, frequency);
+        ent_synth_lock(synth);
+        res = ent_filter_set_cutoff_freq(synth->filter, frequency);
         if (synth->filter_enabled)
                 synth->buffer_update = true;
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
         return res;
 }
 
-enum geonkick_error
-gkick_synth_kick_get_filter_frequency(struct gkick_synth *synth,
-                                      gkick_real *frequency)
+enum entropictron_error
+ent_synth_kick_get_filter_frequency(struct ent_synth *synth,
+                                      ent_real *frequency)
 {
         if (synth == NULL || frequency == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        return gkick_filter_get_cutoff_freq(synth->filter, frequency);
+        return ent_filter_get_cutoff_freq(synth->filter, frequency);
 }
 
-enum geonkick_error
-gkick_synth_kick_set_filter_factor(struct gkick_synth *synth,
-                                   gkick_real factor)
+enum entropictron_error
+ent_synth_kick_set_filter_factor(struct ent_synth *synth,
+                                   ent_real factor)
 {
-        enum geonkick_error res;
+        enum entropictron_error res;
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        res = gkick_filter_set_factor(synth->filter, factor);
+        ent_synth_lock(synth);
+        res = ent_filter_set_factor(synth->filter, factor);
         if (synth->filter_enabled)
                 synth->buffer_update = true;
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
         return res;
 }
 
-enum geonkick_error
-gkick_synth_kick_get_filter_factor(struct gkick_synth *synth,
-                                   gkick_real *factor)
+enum entropictron_error
+ent_synth_kick_get_filter_factor(struct ent_synth *synth,
+                                   ent_real *factor)
 {
         if (synth == NULL || factor == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        return gkick_filter_get_factor(synth->filter, factor);
+        return ent_filter_get_factor(synth->filter, factor);
 }
 
-enum geonkick_error
-gkick_synth_set_kick_filter_type(struct gkick_synth *synth,
-                                 enum gkick_filter_type type)
+enum entropictron_error
+ent_synth_set_kick_filter_type(struct ent_synth *synth,
+                                 enum ent_filter_type type)
 {
-        enum geonkick_error res;
+        enum entropictron_error res;
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        res = gkick_filter_set_type(synth->filter, type);
+        ent_synth_lock(synth);
+        res = ent_filter_set_type(synth->filter, type);
         if (synth->filter_enabled)
                 synth->buffer_update = true;
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
         return res;
 }
 
-enum geonkick_error
-gkick_synth_get_kick_filter_type(struct gkick_synth *synth,
-                                 enum gkick_filter_type *type)
+enum entropictron_error
+ent_synth_get_kick_filter_type(struct ent_synth *synth,
+                                 enum ent_filter_type *type)
 {
         if (synth == NULL || type == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        return gkick_filter_get_type(synth->filter, type);
+        return ent_filter_get_type(synth->filter, type);
 }
 
-struct gkick_envelope*
-synth_get_kick_envelope(struct gkick_synth *synth,
-			enum geonkick_envelope_type env_type)
+struct ent_envelope*
+synth_get_kick_envelope(struct ent_synth *synth,
+			enum entropictron_envelope_type env_type)
 {
 	switch(env_type) {
-	case GEONKICK_AMPLITUDE_ENVELOPE:
+	case ENTROPICTRON_AMPLITUDE_ENVELOPE:
                 return synth->envelope;
-	case GEONKICK_FILTER_CUTOFF_ENVELOPE:
+	case ENTROPICTRON_FILTER_CUTOFF_ENVELOPE:
                 return synth->filter->cutoff_env;
-	case GEONKICK_FILTER_Q_ENVELOPE:
+	case ENTROPICTRON_FILTER_Q_ENVELOPE:
                 return synth->filter->q_env;
-	case GEONKICK_DISTORTION_DRIVE_ENVELOPE:
+	case ENTROPICTRON_DISTORTION_DRIVE_ENVELOPE:
 		return synth->distortion->drive_env;
-	case GEONKICK_DISTORTION_VOLUME_ENVELOPE:
+	case ENTROPICTRON_DISTORTION_VOLUME_ENVELOPE:
                 return synth->distortion->volume_env;
 	default:
 		return NULL;
 	}
 }
 
-enum geonkick_error
-gkick_synth_kick_envelope_get_points(struct gkick_synth *synth,
-                                     enum geonkick_envelope_type env_type,
-                                     struct gkick_envelope_point_info **buf,
+enum entropictron_error
+ent_synth_kick_envelope_get_points(struct ent_synth *synth,
+                                     enum entropictron_envelope_type env_type,
+                                     struct ent_envelope_point_info **buf,
                                      size_t *npoints)
 {
         if (synth == NULL || buf == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
         *npoints = 0;
         *buf = NULL;
-        gkick_synth_lock(synth);
-	struct gkick_envelope *env = synth_get_kick_envelope(synth, env_type);
+        ent_synth_lock(synth);
+	struct ent_envelope *env = synth_get_kick_envelope(synth, env_type);
 	if (env != NULL)
-		gkick_envelope_get_points(env, buf, npoints);
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+		ent_envelope_get_points(env, buf, npoints);
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_kick_envelope_set_points(struct gkick_synth *synth,
-                                     enum geonkick_envelope_type env_type,
-                                     const struct gkick_envelope_point_info *buf,
+enum entropictron_error
+ent_synth_kick_envelope_set_points(struct ent_synth *synth,
+                                     enum entropictron_envelope_type env_type,
+                                     const struct ent_envelope_point_info *buf,
                                      size_t npoints)
 {
         if (synth == NULL || buf == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-	struct gkick_envelope *env = synth_get_kick_envelope(synth, env_type);
+        ent_synth_lock(synth);
+	struct ent_envelope *env = synth_get_kick_envelope(synth, env_type);
 	if (env != NULL)
-		gkick_envelope_set_points(env, buf, npoints);
+		ent_envelope_set_points(env, buf, npoints);
 
-	if (env_type == GEONKICK_AMPLITUDE_ENVELOPE
-            || ((env_type == GEONKICK_FILTER_Q_ENVELOPE
-		 || env_type == GEONKICK_FILTER_CUTOFF_ENVELOPE)
+	if (env_type == ENTROPICTRON_AMPLITUDE_ENVELOPE
+            || ((env_type == ENTROPICTRON_FILTER_Q_ENVELOPE
+		 || env_type == ENTROPICTRON_FILTER_CUTOFF_ENVELOPE)
                 && synth->filter_enabled)
-	    || ((env_type == GEONKICK_DISTORTION_DRIVE_ENVELOPE
-                 || env_type == GEONKICK_DISTORTION_VOLUME_ENVELOPE)
+	    || ((env_type == ENTROPICTRON_DISTORTION_DRIVE_ENVELOPE
+                 || env_type == ENTROPICTRON_DISTORTION_VOLUME_ENVELOPE)
                 && synth->distortion->enabled)) {
                 synth->buffer_update = true;
         }
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_kick_add_env_point(struct gkick_synth *synth,
-                               enum geonkick_envelope_type env_type,
-                               const struct gkick_envelope_point_info *point_info)
+enum entropictron_error
+ent_synth_kick_add_env_point(struct ent_synth *synth,
+                               enum entropictron_envelope_type env_type,
+                               const struct ent_envelope_point_info *point_info)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-	struct gkick_envelope *env = synth_get_kick_envelope(synth, env_type);
+        ent_synth_lock(synth);
+	struct ent_envelope *env = synth_get_kick_envelope(synth, env_type);
 	if (env != NULL)
-		gkick_envelope_add_point(env, point_info);
+		ent_envelope_add_point(env, point_info);
 
-        if (env_type == GEONKICK_AMPLITUDE_ENVELOPE
-            || ((env_type == GEONKICK_FILTER_CUTOFF_ENVELOPE
-		 || env_type == GEONKICK_FILTER_Q_ENVELOPE)
+        if (env_type == ENTROPICTRON_AMPLITUDE_ENVELOPE
+            || ((env_type == ENTROPICTRON_FILTER_CUTOFF_ENVELOPE
+		 || env_type == ENTROPICTRON_FILTER_Q_ENVELOPE)
                 && synth->filter_enabled)
-	    || ((env_type == GEONKICK_DISTORTION_DRIVE_ENVELOPE
-                 || env_type == GEONKICK_DISTORTION_VOLUME_ENVELOPE)
+	    || ((env_type == ENTROPICTRON_DISTORTION_DRIVE_ENVELOPE
+                 || env_type == ENTROPICTRON_DISTORTION_VOLUME_ENVELOPE)
                 && synth->distortion->enabled))
                 synth->buffer_update = true;
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_kick_remove_env_point(struct gkick_synth *synth,
-                                  enum geonkick_envelope_type env_type,
+enum entropictron_error
+ent_synth_kick_remove_env_point(struct ent_synth *synth,
+                                  enum entropictron_envelope_type env_type,
                                   size_t index)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-	struct gkick_envelope *env = synth_get_kick_envelope(synth, env_type);
+        ent_synth_lock(synth);
+	struct ent_envelope *env = synth_get_kick_envelope(synth, env_type);
 	if (env != NULL)
-		gkick_envelope_remove_point(env, index);
+		ent_envelope_remove_point(env, index);
 
-        if (env_type == GEONKICK_AMPLITUDE_ENVELOPE
-            || ((env_type == GEONKICK_FILTER_CUTOFF_ENVELOPE
-		|| env_type == GEONKICK_FILTER_Q_ENVELOPE)
+        if (env_type == ENTROPICTRON_AMPLITUDE_ENVELOPE
+            || ((env_type == ENTROPICTRON_FILTER_CUTOFF_ENVELOPE
+		|| env_type == ENTROPICTRON_FILTER_Q_ENVELOPE)
                 && synth->filter_enabled)
-	    || ((env_type == GEONKICK_DISTORTION_DRIVE_ENVELOPE
-                 || env_type == GEONKICK_DISTORTION_VOLUME_ENVELOPE)
+	    || ((env_type == ENTROPICTRON_DISTORTION_DRIVE_ENVELOPE
+                 || env_type == ENTROPICTRON_DISTORTION_VOLUME_ENVELOPE)
                 && synth->distortion->enabled)) {
                 synth->buffer_update = true;
         }
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_kick_update_env_point(struct gkick_synth *synth,
-                                  enum geonkick_envelope_type env_type,
+enum entropictron_error
+ent_synth_kick_update_env_point(struct ent_synth *synth,
+                                  enum entropictron_envelope_type env_type,
                                   size_t index,
-                                  const struct gkick_envelope_point_info *point_info)
+                                  const struct ent_envelope_point_info *point_info)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-	struct gkick_envelope *env = synth_get_kick_envelope(synth, env_type);
+        ent_synth_lock(synth);
+	struct ent_envelope *env = synth_get_kick_envelope(synth, env_type);
 	if (env != NULL)
-		gkick_envelope_update_point(env, index, point_info);
+		ent_envelope_update_point(env, index, point_info);
 
-        if (env_type == GEONKICK_AMPLITUDE_ENVELOPE
-            || ((env_type == GEONKICK_FILTER_CUTOFF_ENVELOPE
-		 || env_type == GEONKICK_FILTER_Q_ENVELOPE)
+        if (env_type == ENTROPICTRON_AMPLITUDE_ENVELOPE
+            || ((env_type == ENTROPICTRON_FILTER_CUTOFF_ENVELOPE
+		 || env_type == ENTROPICTRON_FILTER_Q_ENVELOPE)
                 && synth->filter_enabled)
-	    || ((env_type == GEONKICK_DISTORTION_DRIVE_ENVELOPE
-                 || env_type == GEONKICK_DISTORTION_VOLUME_ENVELOPE)
+	    || ((env_type == ENTROPICTRON_DISTORTION_DRIVE_ENVELOPE
+                 || env_type == ENTROPICTRON_DISTORTION_VOLUME_ENVELOPE)
                 && synth->distortion->enabled)) {
                 synth->buffer_update = true;
 	}
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-synth_kick_env_set_apply_type(struct gkick_synth *synth,
-			      enum geonkick_envelope_type env_type,
-			      enum gkick_envelope_apply_type apply_type)
+enum entropictron_error
+synth_kick_env_set_apply_type(struct ent_synth *synth,
+			      enum entropictron_envelope_type env_type,
+			      enum ent_envelope_apply_type apply_type)
 {
-        gkick_synth_lock(synth);
-        if (env_type == GEONKICK_FILTER_CUTOFF_ENVELOPE) {
-		gkick_envelope_set_apply_type(synth->filter->cutoff_env, apply_type);
+        ent_synth_lock(synth);
+        if (env_type == ENTROPICTRON_FILTER_CUTOFF_ENVELOPE) {
+		ent_envelope_set_apply_type(synth->filter->cutoff_env, apply_type);
 	}
 
-        if (env_type == GEONKICK_AMPLITUDE_ENVELOPE
-            || (env_type == GEONKICK_FILTER_CUTOFF_ENVELOPE
+        if (env_type == ENTROPICTRON_AMPLITUDE_ENVELOPE
+            || (env_type == ENTROPICTRON_FILTER_CUTOFF_ENVELOPE
                 && synth->filter_enabled)
-	    || ((env_type == GEONKICK_DISTORTION_DRIVE_ENVELOPE
-                 || env_type == GEONKICK_DISTORTION_VOLUME_ENVELOPE)
+	    || ((env_type == ENTROPICTRON_DISTORTION_DRIVE_ENVELOPE
+                 || env_type == ENTROPICTRON_DISTORTION_VOLUME_ENVELOPE)
                 && synth->distortion->enabled)) {
                 synth->buffer_update = true;
         }
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-synth_kick_env_get_apply_type(struct gkick_synth *synth,
-			      enum geonkick_envelope_type env_type,
-			      enum gkick_envelope_apply_type *apply_type)
+enum entropictron_error
+synth_kick_env_get_apply_type(struct ent_synth *synth,
+			      enum entropictron_envelope_type env_type,
+			      enum ent_envelope_apply_type *apply_type)
 {
-	gkick_synth_lock(synth);
+	ent_synth_lock(synth);
         switch (env_type) {
-        case GEONKICK_FILTER_CUTOFF_ENVELOPE:
-		*apply_type = gkick_envelope_get_apply_type(synth->filter->cutoff_env);
+        case ENTROPICTRON_FILTER_CUTOFF_ENVELOPE:
+		*apply_type = ent_envelope_get_apply_type(synth->filter->cutoff_env);
                 break;
         default:
-                *apply_type = GEONKICK_ENVELOPE_APPLY_LINEAR;
+                *apply_type = ENTROPICTRON_ENVELOPE_APPLY_LINEAR;
                 break;
         }
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_set_osc_frequency(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_set_osc_frequency(struct ent_synth *synth,
                              size_t osc_index,
-                             gkick_real v)
+                             ent_real v)
 {
-        struct gkick_oscillator* osc;
+        struct ent_oscillator* osc;
 
 	if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-		return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+		return ENTROPICTRON_ERROR;
 	}
 
-	gkick_synth_lock(synth);
-	osc = gkick_synth_get_oscillator(synth, osc_index);
+	ent_synth_lock(synth);
+	osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 	osc->frequency = v;
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
 
-	gkick_synth_unlock(synth);
-	return GEONKICK_OK;
+	ent_synth_unlock(synth);
+	return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_get_osc_frequency(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_osc_frequency(struct ent_synth *synth,
                              size_t osc_index,
-                             gkick_real *v)
+                             ent_real *v)
 {
 	if (synth == NULL || v == NULL) {
-                gkick_log_error("wrong arguments");
-		return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+		return ENTROPICTRON_ERROR;
 	}
 
-	gkick_synth_lock(synth);
-	struct gkick_oscillator* osc = gkick_synth_get_oscillator(synth, osc_index);
+	ent_synth_lock(synth);
+	struct ent_oscillator* osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 	*v = osc->frequency;
-	gkick_synth_unlock(synth);
-	return GEONKICK_OK;
+	ent_synth_unlock(synth);
+	return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_set_osc_pitch_shift(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_set_osc_pitch_shift(struct ent_synth *synth,
                                 size_t osc_index,
-                                gkick_real semitones)
+                                ent_real semitones)
 {
-        struct gkick_oscillator* osc;
+        struct ent_oscillator* osc;
 
 	if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-		return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+		return ENTROPICTRON_ERROR;
 	}
 
-	gkick_synth_lock(synth);
-	osc = gkick_synth_get_oscillator(synth, osc_index);
+	ent_synth_lock(synth);
+	osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 	osc->pitch_shift = semitones;
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
 
-	gkick_synth_unlock(synth);
-	return GEONKICK_OK;
+	ent_synth_unlock(synth);
+	return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_get_osc_pitch_shift(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_osc_pitch_shift(struct ent_synth *synth,
                                 size_t osc_index,
-                                gkick_real *semitones)
+                                ent_real *semitones)
 {
 	if (synth == NULL || semitones == NULL) {
-                gkick_log_error("wrong arguments");
-		return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+		return ENTROPICTRON_ERROR;
 	}
 
-	gkick_synth_lock(synth);
-	struct gkick_oscillator* osc = gkick_synth_get_oscillator(synth, osc_index);
+	ent_synth_lock(synth);
+	struct ent_oscillator* osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 	*semitones = osc->pitch_shift;
-	gkick_synth_unlock(synth);
-	return GEONKICK_OK;
+	ent_synth_unlock(synth);
+	return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_set_osc_noise_density(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_set_osc_noise_density(struct ent_synth *synth,
                                 size_t osc_index,
-                                gkick_real density)
+                                ent_real density)
 {
-        struct gkick_oscillator* osc;
+        struct ent_oscillator* osc;
 
 	if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-		return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+		return ENTROPICTRON_ERROR;
 	}
 
-	gkick_synth_lock(synth);
-	osc = gkick_synth_get_oscillator(synth, osc_index);
+	ent_synth_lock(synth);
+	osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 	osc->noise_density = density;
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
 
-	gkick_synth_unlock(synth);
-	return GEONKICK_OK;
+	ent_synth_unlock(synth);
+	return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_get_osc_noise_density(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_osc_noise_density(struct ent_synth *synth,
                                 size_t osc_index,
-                                gkick_real *density)
+                                ent_real *density)
 {
 	if (synth == NULL || density == NULL) {
-                gkick_log_error("wrong arguments");
-		return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+		return ENTROPICTRON_ERROR;
 	}
 
-	gkick_synth_lock(synth);
-	struct gkick_oscillator* osc = gkick_synth_get_oscillator(synth, osc_index);
+	ent_synth_lock(synth);
+	struct ent_oscillator* osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 	*density = osc->noise_density;
-	gkick_synth_unlock(synth);
-	return GEONKICK_OK;
+	ent_synth_unlock(synth);
+	return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_set_osc_amplitude(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_set_osc_amplitude(struct ent_synth *synth,
                               size_t osc_index,
-                              gkick_real v)
+                              ent_real v)
 {
 	if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-		return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+		return ENTROPICTRON_ERROR;
 	}
 
-	gkick_synth_lock(synth);
-        struct gkick_oscillator* osc = gkick_synth_get_oscillator(synth, osc_index);
+	ent_synth_lock(synth);
+        struct ent_oscillator* osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 	osc->amplitude = v;
 
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
 
-	gkick_synth_unlock(synth);
-	return GEONKICK_OK;
+	ent_synth_unlock(synth);
+	return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_get_osc_amplitude(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_osc_amplitude(struct ent_synth *synth,
                               size_t osc_index,
-                              gkick_real *v)
+                              ent_real *v)
 {
-        struct gkick_oscillator* osc;
+        struct ent_oscillator* osc;
 
 	if (synth == NULL || v == NULL) {
-                gkick_log_error("wrong arguments");
-		return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+		return ENTROPICTRON_ERROR;
 	}
 
-	gkick_synth_lock(synth);
-	osc = gkick_synth_get_oscillator(synth, osc_index);
+	ent_synth_lock(synth);
+	osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 	*v = osc->amplitude;
-	gkick_synth_unlock(synth);
+	ent_synth_unlock(synth);
 
-	return GEONKICK_OK;
+	return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_get_buffer_size(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_buffer_size(struct ent_synth *synth,
                             size_t *size)
 {
         if (synth == NULL || size == NULL) {
-                gkick_log_error("wrong arguments");
-		return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+		return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        *size = gkick_buffer_size(synth->buffer);
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_lock(synth);
+        *size = ent_buffer_size(synth->buffer);
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_get_buffer(struct gkick_synth *synth,
-                       gkick_real *buffer,
+enum entropictron_error
+ent_synth_get_buffer(struct ent_synth *synth,
+                       ent_real *buffer,
                        size_t size)
 {
 	if (synth == NULL || buffer == NULL) {
-                gkick_log_error("wrong arguments");
-		return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+		return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        size = min(gkick_buffer_size(synth->buffer), size);
-        memcpy(buffer, synth->buffer->buff, size * sizeof(gkick_real));
-        gkick_synth_unlock(synth);
+        ent_synth_lock(synth);
+        size = min(ent_buffer_size(synth->buffer), size);
+        memcpy(buffer, synth->buffer->buff, size * sizeof(ent_real));
+        ent_synth_unlock(synth);
 
-        return GEONKICK_ERROR;
+        return ENTROPICTRON_ERROR;
 }
 
 void
-gkick_synth_set_output(struct gkick_synth *synth,
-                       struct gkick_audio_output *output)
+ent_synth_set_output(struct ent_synth *synth,
+                       struct ent_audio_output *output)
 {
         if (synth == NULL || output == NULL) {
-                gkick_log_error("wrong argument");
+                ent_log_error("wrong argument");
                 return;
         }
         synth->output = output;
 }
 
-enum geonkick_error
-gkick_synth_process(struct gkick_synth *synth)
+enum entropictron_error
+ent_synth_process(struct ent_synth *synth)
 {
 	if (synth == NULL)
-		return GEONKICK_ERROR;
+		return ENTROPICTRON_ERROR;
 
-	gkick_synth_lock(synth);
+	ent_synth_lock(synth);
 	synth->buffer_update = false;
-        gkick_buffer_set_size(synth->buffer, synth->length * synth->sample_rate);
-	gkick_real dt = synth->length / gkick_buffer_size(synth->buffer);
-	gkick_synth_reset_oscillators(synth);
-	gkick_filter_init(synth->filter);
-	gkick_synth_unlock(synth);
+        ent_buffer_set_size(synth->buffer, synth->length * synth->sample_rate);
+	ent_real dt = synth->length / ent_buffer_size(synth->buffer);
+	ent_synth_reset_oscillators(synth);
+	ent_filter_init(synth->filter);
+	ent_synth_unlock(synth);
 
 	/* Synthesize the percussion into the synthesizer buffer. */
 	size_t i = 0;
@@ -1356,7 +1356,7 @@ gkick_synth_process(struct gkick_synth *synth)
                  * of the synthesizer parameters for too long time.
                  */
                 if (pthread_mutex_trylock(&synth->lock) != 0) {
-                        geonkick_usleep(50);
+                        entropictron_usleep(50);
                         /**
                          * Check how many tries for locking to avoind infinite loop.
                          * It should be maximum around 30ms.
@@ -1367,29 +1367,29 @@ gkick_synth_process(struct gkick_synth *synth)
                                 continue;
                 }
 
-		if (gkick_buffer_is_end((struct gkick_buffer*)synth->buffer)) {
-			gkick_synth_unlock(synth);
+		if (ent_buffer_is_end((struct ent_buffer*)synth->buffer)) {
+			ent_synth_unlock(synth);
 			break;
 		} else {
-			gkick_real val = gkick_synth_get_value(synth, (gkick_real)(i * dt));
+			ent_real val = ent_synth_get_value(synth, (ent_real)(i * dt));
 			if (isnan(val))
 				val = 0.0f;
 			else if (val > 1.0f)
 				val = 1.0f;
 			else if (val < -1.0f)
 				val = -1.0f;
-			gkick_buffer_push_back(synth->buffer, val);
+			ent_buffer_push_back(synth->buffer, val);
 			i++;
 		}
-                gkick_synth_unlock(synth);
+                ent_synth_unlock(synth);
 	}
 
-	gkick_synth_lock(synth);
+	ent_synth_lock(synth);
         if (synth->buffer_callback != NULL && synth->callback_args != NULL) {
-                gkick_log_debug("synth->buffer_callback");
+                ent_log_debug("synth->buffer_callback");
                 synth->buffer_callback(synth->callback_args,
                                        synth->buffer->buff,
-                                       gkick_buffer_size(synth->buffer),
+                                       ent_buffer_size(synth->buffer),
                                        synth->id);
         }
 
@@ -1399,511 +1399,511 @@ gkick_synth_process(struct gkick_synth *synth)
          * were updated during the synthesis.
          */
         if (!synth->buffer_update) {
-                gkick_audio_output_lock(synth->output);
-                struct gkick_buffer *buff = synth->output->updated_buffer;
+                ent_audio_output_lock(synth->output);
+                struct ent_buffer *buff = synth->output->updated_buffer;
                 synth->output->updated_buffer = synth->buffer;
                 synth->buffer = buff;
-                gkick_audio_output_unlock(synth->output);
+                ent_audio_output_unlock(synth->output);
         }
-	gkick_synth_unlock(synth);
+	ent_synth_unlock(synth);
 
-	return GEONKICK_OK;
+	return ENTROPICTRON_OK;
 }
 
-gkick_real
-gkick_synth_get_value(struct gkick_synth *synth,
-                      gkick_real t)
+ent_real
+ent_synth_get_value(struct ent_synth *synth,
+                      ent_real t)
 {
-        gkick_real val = 0.0f;
-        gkick_real env_x = 0.0f;
-        gkick_real fm_val = 0.0f;
+        ent_real val = 0.0f;
+        ent_real env_x = 0.0f;
+        ent_real fm_val = 0.0f;
         size_t n = synth->oscillators_number;
         for (size_t i = 0; i < n; i++) {
                 if (synth->osc_groups[i / GKICK_OSC_GROUP_SIZE]
-                    && gkick_osc_enabled(synth->oscillators[i])) {
+                    && ent_osc_enabled(synth->oscillators[i])) {
                         if (synth->oscillators[i]->is_fm
                             && i % 3 == 0 && i + 1 < n) {
-                                fm_val = gkick_osc_value(synth->oscillators[i],
+                                fm_val = ent_osc_value(synth->oscillators[i],
                                                          t,
                                                          synth->length);
                                 synth->oscillators[i + 1]->fm_input = fm_val;
                         } else {
-                                gkick_real group_ampl
+                                ent_real group_ampl
                                         = synth->osc_groups_amplitude[i / GKICK_OSC_GROUP_SIZE];
-                                val += group_ampl * gkick_osc_value(synth->oscillators[i],
+                                val += group_ampl * ent_osc_value(synth->oscillators[i],
                                                                     t,
                                                                     synth->length);
                         }
-                        gkick_osc_increment_phase(synth->oscillators[i], t, synth->length);
+                        ent_osc_increment_phase(synth->oscillators[i], t, synth->length);
                 }
         }
 
         env_x = t / synth->length;
-        val *= synth->amplitude * gkick_envelope_get_value(synth->envelope, env_x);
+        val *= synth->amplitude * ent_envelope_get_value(synth->envelope, env_x);
         if (synth->filter_enabled)
-                gkick_filter_val(synth->filter, val, &val, env_x);
+                ent_filter_val(synth->filter, val, &val, env_x);
 
         bool enabled = false;
-        gkick_distortion_is_enabled(synth->distortion, &enabled);
+        ent_distortion_is_enabled(synth->distortion, &enabled);
         if (enabled)
-                gkick_distortion_val(synth->distortion, val, &val, env_x);
+                ent_distortion_val(synth->distortion, val, &val, env_x);
 
         return val;
 }
 
 void
-gkick_synth_reset_oscillators(struct gkick_synth *synth)
+ent_synth_reset_oscillators(struct ent_synth *synth)
 {
         if (synth == NULL)
                 return;
 
         for (size_t i = 0; i < synth->oscillators_number; i++) {
-                struct gkick_oscillator *osc = synth->oscillators[i];
+                struct ent_oscillator *osc = synth->oscillators[i];
                 osc->phase = osc->initial_phase;
                 osc->fm_input = 0.0f;
                 osc->seedp = osc->seed;
-                gkick_filter_init(osc->filter);
+                ent_filter_init(osc->filter);
                 if (osc->sample != NULL)
-                        gkick_buffer_reset(osc->sample);
+                        ent_buffer_reset(osc->sample);
         }
 }
 
 int
-gkick_synth_is_update_buffer(struct gkick_synth *synth)
+ent_synth_is_update_buffer(struct ent_synth *synth)
 {
         return synth->buffer_update;
 }
 
-enum geonkick_error
-gkick_synth_set_osc_filter_type(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_set_osc_filter_type(struct ent_synth *synth,
                              size_t osc_index,
-                             enum gkick_filter_type type)
+                             enum ent_filter_type type)
 {
-        struct gkick_oscillator *osc;
-        enum geonkick_error res;
+        struct ent_oscillator *osc;
+        enum entropictron_error res;
 
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 
-        res = gkick_filter_set_type(osc->filter, type);
+        res = ent_filter_set_type(osc->filter, type);
         if (osc->filter_enabled
             && synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
 
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
 
         return res;
 }
 
-enum geonkick_error
-gkick_synth_get_osc_filter_type(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_osc_filter_type(struct ent_synth *synth,
                                 size_t osc_index,
-                                enum gkick_filter_type *type)
+                                enum ent_filter_type *type)
 {
         if (synth == NULL || type == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc;
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc;
+        osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 
-        enum geonkick_error res;
-        res = gkick_filter_get_type(osc->filter, type);
-        gkick_synth_unlock(synth);
+        enum entropictron_error res;
+        res = ent_filter_get_type(osc->filter, type);
+        ent_synth_unlock(synth);
 
         return res;
 }
 
-enum geonkick_error
-gkick_synth_set_osc_filter_cutoff(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_set_osc_filter_cutoff(struct ent_synth *synth,
                                   size_t osc_index,
-                                  gkick_real cutoff)
+                                  ent_real cutoff)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc;
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc;
+        osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
-        enum geonkick_error res;
-        res = gkick_filter_set_cutoff_freq(osc->filter, cutoff);
+        enum entropictron_error res;
+        res = ent_filter_set_cutoff_freq(osc->filter, cutoff);
         if (osc->filter_enabled
             && synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
 
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
         return res;
 }
 
-enum geonkick_error
-gkick_synth_get_osc_filter_cutoff(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_osc_filter_cutoff(struct ent_synth *synth,
                                   size_t osc_index,
-                                  gkick_real *cutoff)
+                                  ent_real *cutoff)
 {
         if (synth == NULL || cutoff == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc;
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc;
+        osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 
-        enum geonkick_error res;
-        res = gkick_filter_get_cutoff_freq(osc->filter, cutoff);
-        gkick_synth_unlock(synth);
+        enum entropictron_error res;
+        res = ent_filter_get_cutoff_freq(osc->filter, cutoff);
+        ent_synth_unlock(synth);
         return res;
 }
 
-enum geonkick_error
-gkick_synth_set_osc_filter_factor(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_set_osc_filter_factor(struct ent_synth *synth,
                                size_t osc_index,
-                               gkick_real factor)
+                               ent_real factor)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc;
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc;
+        osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 
-        enum geonkick_error res;
-        res = gkick_filter_set_factor(osc->filter, factor);
+        enum entropictron_error res;
+        res = ent_filter_set_factor(osc->filter, factor);
         if (osc->filter_enabled
             && synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
         return res;
 }
 
-enum geonkick_error
-gkick_synth_get_osc_filter_factor(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_get_osc_filter_factor(struct ent_synth *synth,
                                size_t osc_index,
-                               gkick_real *factor)
+                               ent_real *factor)
 {
         if (synth == NULL || factor == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc;
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc;
+        osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 
-        enum geonkick_error res;
-        res =  gkick_filter_get_factor(osc->filter, factor);
-        gkick_synth_unlock(synth);
+        enum entropictron_error res;
+        res =  ent_filter_get_factor(osc->filter, factor);
+        ent_synth_unlock(synth);
         return res;
 }
 
 
-enum geonkick_error
-gkick_synth_osc_enable_filter(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_osc_enable_filter(struct ent_synth *synth,
                               size_t osc_index,
                               int enable)
 {
         if (synth == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc;
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc;
+        osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 
         osc->filter_enabled = enable;
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED) {
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED) {
                 synth->buffer_update = true;
         }
 
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_osc_is_enabled_filter(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_osc_is_enabled_filter(struct ent_synth *synth,
                                   size_t osc_index,
                                   int *enabled)
 {
         if (synth == NULL || enabled == NULL) {
-                gkick_log_error("wrong arguments");
-                return GEONKICK_ERROR;
+                ent_log_error("wrong arguments");
+                return ENTROPICTRON_ERROR;
         }
 
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc;
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc;
+        osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
         *enabled = osc->filter_enabled;
-        gkick_synth_unlock(synth);
+        ent_synth_unlock(synth);
 
-        return GEONKICK_OK;
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_distortion_enable(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_distortion_enable(struct ent_synth *synth,
                               bool enable)
 {
 	synth->buffer_update = true;
-        return gkick_distortion_enable(synth->distortion,
+        return ent_distortion_enable(synth->distortion,
                                        enable);
 }
 
-enum geonkick_error
-gkick_synth_distortion_is_enabled(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_distortion_is_enabled(struct ent_synth *synth,
                                   bool *enabled)
 {
-        return gkick_distortion_is_enabled(synth->distortion,
+        return ent_distortion_is_enabled(synth->distortion,
                                            enabled);
 }
 
-enum geonkick_error
-gkick_synth_distortion_set_type(struct gkick_synth *synth,
-                                enum gkick_distortion_type type)
+enum entropictron_error
+ent_synth_distortion_set_type(struct ent_synth *synth,
+                                enum ent_distortion_type type)
 {
-        enum geonkick_error res;
-        gkick_distortion_set_type(synth->distortion, type);
+        enum entropictron_error res;
+        ent_distortion_set_type(synth->distortion, type);
 	bool enabled = false;
-        res = gkick_distortion_is_enabled(synth->distortion,
+        res = ent_distortion_is_enabled(synth->distortion,
                                                &enabled);
-        if (res == GEONKICK_OK && enabled)
+        if (res == ENTROPICTRON_OK && enabled)
                 synth->buffer_update = true;
         return res;
 }
 
-enum geonkick_error
-gkick_synth_distortion_get_type(struct gkick_synth *synth,
-                                enum gkick_distortion_type *type)
+enum entropictron_error
+ent_synth_distortion_get_type(struct ent_synth *synth,
+                                enum ent_distortion_type *type)
 {
-        return gkick_distortion_get_type(synth->distortion,
+        return ent_distortion_get_type(synth->distortion,
                                          type);
 }
 
-enum geonkick_error
-gkick_synth_distortion_set_in_limiter(struct gkick_synth *synth,
-                                      gkick_real value)
+enum entropictron_error
+ent_synth_distortion_set_in_limiter(struct ent_synth *synth,
+                                      ent_real value)
 {
-        enum geonkick_error res;
-        gkick_distortion_set_in_limiter(synth->distortion,
+        enum entropictron_error res;
+        ent_distortion_set_in_limiter(synth->distortion,
                                         value);
 	bool enabled = false;
-        res = gkick_distortion_is_enabled(synth->distortion,
+        res = ent_distortion_is_enabled(synth->distortion,
                                           &enabled);
-        if (res == GEONKICK_OK && enabled)
+        if (res == ENTROPICTRON_OK && enabled)
                 synth->buffer_update = true;
         return res;
 }
 
-enum geonkick_error
-gkick_synth_distortion_get_in_limiter(struct gkick_synth *synth,
-                                      gkick_real *value)
+enum entropictron_error
+ent_synth_distortion_get_in_limiter(struct ent_synth *synth,
+                                      ent_real *value)
 {
-	return gkick_distortion_get_in_limiter(synth->distortion,
+	return ent_distortion_get_in_limiter(synth->distortion,
                                                value);
 }
 
-enum geonkick_error
-gkick_synth_distortion_set_out_limiter(struct gkick_synth *synth, gkick_real value)
+enum entropictron_error
+ent_synth_distortion_set_out_limiter(struct ent_synth *synth, ent_real value)
 {
-        enum geonkick_error res;
+        enum entropictron_error res;
         bool enabled = false;
-        res = gkick_distortion_set_out_limiter(synth->distortion, value);
-        gkick_distortion_is_enabled(synth->distortion, &enabled);
-        if (res == GEONKICK_OK && enabled)
+        res = ent_distortion_set_out_limiter(synth->distortion, value);
+        ent_distortion_is_enabled(synth->distortion, &enabled);
+        if (res == ENTROPICTRON_OK && enabled)
                 synth->buffer_update = true;
         return res;
 }
 
-enum geonkick_error
-gkick_synth_distortion_get_out_limiter(struct gkick_synth *synth,
-                                       gkick_real *value)
+enum entropictron_error
+ent_synth_distortion_get_out_limiter(struct ent_synth *synth,
+                                       ent_real *value)
 {
-        return gkick_distortion_get_out_limiter(synth->distortion,
+        return ent_distortion_get_out_limiter(synth->distortion,
                                                 value);
 }
 
-enum geonkick_error
-gkick_synth_distortion_set_drive(struct gkick_synth *synth,
-                                 gkick_real drive)
+enum entropictron_error
+ent_synth_distortion_set_drive(struct ent_synth *synth,
+                                 ent_real drive)
 {
-        enum geonkick_error res;
+        enum entropictron_error res;
         bool enabled = false;
-        res = gkick_distortion_set_drive(synth->distortion, drive);
-        gkick_distortion_is_enabled(synth->distortion, &enabled);
-        if (res == GEONKICK_OK && enabled)
+        res = ent_distortion_set_drive(synth->distortion, drive);
+        ent_distortion_is_enabled(synth->distortion, &enabled);
+        if (res == ENTROPICTRON_OK && enabled)
                 synth->buffer_update = true;
         return res;
 }
 
-enum geonkick_error
-gkick_synth_distortion_get_drive(struct gkick_synth *synth,
-                                 gkick_real *drive)
+enum entropictron_error
+ent_synth_distortion_get_drive(struct ent_synth *synth,
+                                 ent_real *drive)
 {
-        return gkick_distortion_get_drive(synth->distortion, drive);
+        return ent_distortion_get_drive(synth->distortion, drive);
 }
 
-enum geonkick_error
-gkick_synth_enable_group(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_enable_group(struct ent_synth *synth,
                          size_t index,
                          bool enable)
 {
-        gkick_synth_lock(synth);
+        ent_synth_lock(synth);
         synth->osc_groups[index] = enable;
         synth->buffer_update = true;
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-gkick_synth_group_enabled(struct gkick_synth *synth,
+enum entropictron_error
+ent_synth_group_enabled(struct ent_synth *synth,
                           size_t index,
                           bool *enabled)
 {
-        gkick_synth_lock(synth);
+        ent_synth_lock(synth);
         *enabled = synth->osc_groups[index];
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-geonkick_synth_group_set_amplitude(struct gkick_synth *synth,
+enum entropictron_error
+entropictron_synth_group_set_amplitude(struct ent_synth *synth,
                                    size_t index,
-                                   gkick_real amplitude)
+                                   ent_real amplitude)
 {
-        gkick_synth_lock(synth);
+        ent_synth_lock(synth);
         synth->osc_groups_amplitude[index] = amplitude;
         synth->buffer_update = true;
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-geonkick_synth_group_get_amplitude(struct gkick_synth *synth,
+enum entropictron_error
+entropictron_synth_group_get_amplitude(struct ent_synth *synth,
                                    size_t index,
-                                   gkick_real *amplitude)
+                                   ent_real *amplitude)
 {
-        gkick_synth_lock(synth);
+        ent_synth_lock(synth);
         *amplitude = synth->osc_groups_amplitude[index];
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-geonkick_synth_set_osc_sample(struct gkick_synth *synth,
+enum entropictron_error
+entropictron_synth_set_osc_sample(struct ent_synth *synth,
                               size_t osc_index,
-                              const gkick_real *data,
+                              const ent_real *data,
                               size_t size)
 {
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc;
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc;
+        osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 
         if (osc->sample == NULL)
-                gkick_buffer_new(&osc->sample, osc->sample_rate * GEONKICK_MAX_LENGTH);
-        gkick_buffer_set_data(osc->sample, data, size);
-        gkick_buffer_reset(osc->sample);
+                ent_buffer_new(&osc->sample, osc->sample_rate * ENTROPICTRON_MAX_LENGTH);
+        ent_buffer_set_data(osc->sample, data, size);
+        ent_buffer_reset(osc->sample);
         if (synth->osc_groups[osc_index / GKICK_OSC_GROUP_SIZE]
-            && osc->state == GEONKICK_OSC_STATE_ENABLED)
+            && osc->state == ENTROPICTRON_OSC_STATE_ENABLED)
                 synth->buffer_update = true;
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }
 
-enum geonkick_error
-geonkick_synth_get_osc_sample(struct gkick_synth *synth,
+enum entropictron_error
+entropictron_synth_get_osc_sample(struct ent_synth *synth,
                               size_t osc_index,
-                              gkick_real **data,
+                              ent_real **data,
                               size_t *size)
 {
         *data = NULL;
         *size = 0;
-        gkick_synth_lock(synth);
-        struct gkick_oscillator *osc;
-        osc = gkick_synth_get_oscillator(synth, osc_index);
+        ent_synth_lock(synth);
+        struct ent_oscillator *osc;
+        osc = ent_synth_get_oscillator(synth, osc_index);
 	if (osc == NULL) {
-		gkick_log_error("can't get oscillator");
-		gkick_synth_unlock(synth);
-		return GEONKICK_ERROR;
+		ent_log_error("can't get oscillator");
+		ent_synth_unlock(synth);
+		return ENTROPICTRON_ERROR;
 	}
 
         if (osc->sample == NULL) {
-                gkick_synth_unlock(synth);
-                return GEONKICK_OK;
+                ent_synth_unlock(synth);
+                return ENTROPICTRON_OK;
         }
 
-        *size = gkick_buffer_size(osc->sample);
+        *size = ent_buffer_size(osc->sample);
         if (*size > 0) {
-                *data = (gkick_real*)malloc(sizeof(gkick_real) * (*size));
+                *data = (ent_real*)malloc(sizeof(ent_real) * (*size));
                 if (*data == NULL) {
-                        gkick_log_error("can't allocate memory");
+                        ent_log_error("can't allocate memory");
                         *size = 0;
-                        gkick_synth_unlock(synth);
-                        return GEONKICK_ERROR;
+                        ent_synth_unlock(synth);
+                        return ENTROPICTRON_ERROR;
                 }
-                memcpy(*data, osc->sample->buff, sizeof(gkick_real) * (*size));
+                memcpy(*data, osc->sample->buff, sizeof(ent_real) * (*size));
         }
-        gkick_synth_unlock(synth);
-        return GEONKICK_OK;
+        ent_synth_unlock(synth);
+        return ENTROPICTRON_OK;
 }

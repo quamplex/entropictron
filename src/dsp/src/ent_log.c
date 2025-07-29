@@ -1,5 +1,5 @@
 /**
- * File name: gkick_log.c
+ * File name: ent_log.c
  * Project: Geonkick (A kick synthesizer)
  *
  * Copyright (C) 2017 Iurie Nistor 
@@ -21,10 +21,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#include "gkick_log.h"
+#include "ent_log.h"
 
 void
-gkick_log_msg(const char *message, ...)
+ent_log_msg(const char *message, ...)
 {
         va_list args;
         va_start (args, message);
@@ -34,7 +34,7 @@ gkick_log_msg(const char *message, ...)
 }
 
 void
-gkick_msg_info(const char *msg, ...)
+ent_msg_info(const char *msg, ...)
 {
         va_list args;
         printf("Info: ");
@@ -46,7 +46,7 @@ gkick_msg_info(const char *msg, ...)
 
 
 void
-gkick_msg_error(const char *msg, ...)
+ent_msg_error(const char *msg, ...)
 {
         va_list args;
         printf("Error: ");

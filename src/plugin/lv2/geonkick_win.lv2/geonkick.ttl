@@ -1,6 +1,6 @@
 @prefix foaf:  <http://xmlns.com/foaf/0.1/> .
-@prefix ls: <http://geonkick.org/geonkick#> .
-@prefix ls: <http://geonkick.org/geonkick/single#> .
+@prefix ls: <http://entropictron.org/entropictron#> .
+@prefix ls: <http://entropictron.org/entropictron/single#> .
 @prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
 @prefix midi:  <http://lv2plug.in/ns/ext/midi#> .
 @prefix atom:  <http://lv2plug.in/ns/ext/atom#> .
@@ -11,28 +11,28 @@
 @prefix pg: <http://lv2plug.in/ns/ext/port-groups#> .
 @prefix urid: <http://lv2plug.in/ns/ext/urid#> .
 
-<http://geonkick.org/geonkick#author>
+<http://entropictron.org/entropictron#author>
 	a foaf:Person ;
 	foaf:name "Iurie Nistor" ;
 	foaf:mbox <mailto:iuriehn@gmail.com> ;
-	foaf:homepage <http://geonkick.org/> .
+	foaf:homepage <http://entropictron.org/> .
 
-<http://geonkick.org/geonkick>
+<http://entropictron.org/entropictron>
 	a doap:Project ;
-	doap:maintainer <http://geonkick.org/geonkick#author> ;
+	doap:maintainer <http://entropictron.org/entropictron#author> ;
 	doap:name "Geonkick" .
 
-<http://geonkick.org/geonkick>
+<http://entropictron.org/entropictron>
     a lv2:Plugin, lv2:InstrumentPlugin;
     doap:name "Geonkick";
-    lv2:project <http://geonkick.org/geonkick> ;
+    lv2:project <http://entropictron.org/entropictron> ;
     lv2:extensionData state:interface ;
     lv2:optionalFeature lv2:hardRTCapable ;
     lv2:requiredFeature urid:map ;
     lv2:minorVersion 20 ;
     lv2:microVersion 0 ;
     doap:license <https://www.gnu.org/licenses/gpl-3.0.en.html> ;
-    ui:ui <http://geonkick.org/geonkick#ui> ;
+    ui:ui <http://entropictron.org/entropictron#ui> ;
        lv2:port [
              a lv2:InputPort , atom:AtomPort ;
              atom:bufferType atom:Sequence ;
@@ -287,33 +287,33 @@
         pg:group ls:Audition
     ] .
 
-<http://geonkick.org/geonkick/single#author>
+<http://entropictron.org/entropictron/single#author>
 	a foaf:Person ;
 	foaf:name "Iurie Nistor" ;
 	foaf:mbox <mailto:iuriehn@gmail.com> ;
-	foaf:homepage <http://geonkick.org/> .
+	foaf:homepage <http://entropictron.org/> .
 
-<http://geonkick.org/geonkick/single>
+<http://entropictron.org/entropictron/single>
 	a doap:Project ;
-	doap:maintainer <http://geonkick.org/geonkick/single#author> ;
+	doap:maintainer <http://entropictron.org/entropictron/single#author> ;
 	doap:name "Geonkick Single" .
 
-<http://geonkick.org/geonkick/single>
+<http://entropictron.org/entropictron/single>
 	a doap:Project ;
-	doap:maintainer <http://geonkick.org/geonkick/single#author> ;
+	doap:maintainer <http://entropictron.org/entropictron/single#author> ;
 	doap:name "Geonkick Single" .
 
-<http://geonkick.org/geonkick/single>
+<http://entropictron.org/entropictron/single>
     a lv2:Plugin, lv2:InstrumentPlugin;
     doap:name "Geonkick Single";
-    lv2:project <http://geonkick.org/geonkick/single> ;
+    lv2:project <http://entropictron.org/entropictron/single> ;
     lv2:extensionData state:interface ;
     lv2:optionalFeature lv2:hardRTCapable ;
     lv2:requiredFeature urid:map ;
     lv2:minorVersion 20 ;
     lv2:microVersion 0 ;
     doap:license <https://www.gnu.org/licenses/gpl-3.0.en.html> ;
-    ui:ui <http://geonkick.org/geonkick/single#ui> ;
+    ui:ui <http://entropictron.org/entropictron/single#ui> ;
        lv2:port [
              a lv2:InputPort , atom:AtomPort ;
              atom:bufferType atom:Sequence ;
@@ -562,17 +562,17 @@ ls:Audition
         lv2:designation pg:right
     ].
 
-<http://geonkick.org/geonkick#ui>
+<http://entropictron.org/entropictron#ui>
     a ui:WindowsUI ;
     lv2:requiredFeature <http://lv2plug.in/ns/ext/instance-access> ;
     lv2:requiredFeature ui:idleInterface, ui:parent, ui:resize;
     lv2:extensionData ui:idleInterface;
-    ui:binary <geonkick_lv2.dll> .
+    ui:binary <entropictron_lv2.dll> .
 
-<http://geonkick.org/geonkick/single#ui>
+<http://entropictron.org/entropictron/single#ui>
     a ui:WindowsUI ;
     lv2:requiredFeature <http://lv2plug.in/ns/ext/instance-access> ;
     lv2:requiredFeature ui:idleInterface, ui:parent, ui:resize;
     lv2:extensionData ui:idleInterface;
-    ui:binary <geonkick_single_lv2.dll> .
+    ui:binary <entropictron_single_lv2.dll> .
 

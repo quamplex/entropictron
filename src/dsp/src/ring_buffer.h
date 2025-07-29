@@ -24,10 +24,10 @@
 #ifndef GKICK_RING_BUFFER_H
 #define GKICK_RING_BUFFER_H
 
-#include "geonkick_internal.h"
+#include "entropictron_internal.h"
 
 struct ring_buffer {
-        gkick_real *buff;
+        ent_real *buff;
 
         /**
          * Real allocated fixed size, alwayse bigger than current size.
@@ -47,7 +47,7 @@ struct ring_buffer {
         size_t index;
 };
 
-enum geonkick_error
+enum entropictron_error
 ring_buffer_new(struct ring_buffer **ring,
                 int size);
 
@@ -60,14 +60,14 @@ ring_buffer_reset(struct ring_buffer *ring);
 void
 ring_buffer_add_value(struct ring_buffer *ring,
                       size_t index,
-                      gkick_real val);
+                      ent_real val);
 
 void
 ring_buffer_get_data(struct ring_buffer *ring,
-                     gkick_real *data,
+                     ent_real *data,
                      size_t data_size);
 
-gkick_real
+ent_real
 ring_buffer_get_cur_data(struct ring_buffer *ring);
 
 void

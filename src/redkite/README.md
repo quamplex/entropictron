@@ -76,4 +76,4 @@ The toolkit can be used for embeddable UIs, such as audio plugins. It can also b
 
 ## Used by
 
-* Geonkick Synthesizer - https://geonkick.org
+* Geonkick Synthesizer - https://entropictron.org
