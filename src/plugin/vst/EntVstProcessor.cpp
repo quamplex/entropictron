@@ -44,7 +44,6 @@ bool ModuleExit (void)
 
 EntVstProcessor::EntVstProcessor()
 {
-        setControllerClass(FUID(0x12345678, 0x1234, 0x1234, 0x123456789abc));
 }
 
 EntVstProcessor::~EntVstProcessor()
@@ -62,6 +61,8 @@ EntVstProcessor::initialize(FUnknown* context)
         auto res = Vst::AudioEffect::initialize(context);
         if (res != kResultTrue)
                 return res;
+
+        setControllerClass(EntVstControllerUID);
 
         addAudioOutput(reinterpret_cast<const Steinberg::Vst::TChar*>(u"Stereo Out"),
                        Vst::SpeakerArr::kStereo);

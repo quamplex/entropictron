@@ -1,5 +1,5 @@
 /**
- * File name: VstIds.h
+ * File name: EntVstLoopTimer.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,14 +21,35 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_VST_IDS_H
-#define ENT_VST_IDS_H
+#ifndef ENT_VST_LOOP_TIMER_H
+#define ENT_VST_LOOP_TIMER_H
 
-#include "globals.h"
+#include "pluginterfaces/gui/iplugview.h"
 
-#include "pluginterfaces/base/funknown.h"
+#include <atomic>
+
+class RkMain;
 
 using namespace Steinberg;
-static const FUID EntVstProcessorUID (0x4C4302E9, 0xDFE24902, 0xB3B49DE4, 0x9C179F91);
-static const FUID EntVstControllerUID(0x8A3844E3, 0xBAF94A6F, 0x9D544306, 0x5CA27CFE);
-#endif // ENT_VST_IDS_H
+using namespace Linux;
+
+class EntVstLoopTimer: public ITimerHandler {
+ public:
+        explicit EntVstLoopTimer(IPlugFrame *frame);
+        virtual ~EntVstLoopTimer();
+        void registerTimer(RkMain *app);
+        void unregisterTimer();
+        tresult PLUGIN_API queryInterface (const TUID _iid, void **obj);
+        uint32 PLUGIN_API addRef() override;
+        uint32 PLUGIN_API release() override;
+
+ protected:
+        void PLUGIN_API onTimer() override;
+
+ private:
+        Steinberg::IPlugFrame* pluginFrame;
+        RkMain *guiApp;
+        std::atomic<uint32> countT;
+};
+
+#endif // ENT_VST_LOOP_TIMER_H

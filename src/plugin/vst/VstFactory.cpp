@@ -22,6 +22,7 @@
  */
 
 #include "EntVstProcessor.h"
+#include "EntVstController.h"
 #include "VstIds.h"
 
 #include "public.sdk/source/main/pluginfactory.h"
@@ -41,6 +42,7 @@
 
 BEGIN_FACTORY_DEF(entCompanyName, entCompanyWeb, entCompanyEmail)
 
+// Processor registration
 DEF_CLASS2(INLINE_UID_FROM_FUID(EntVstProcessorUID),
            PClassInfo::kManyInstances,
            kVstAudioEffectClass,
@@ -50,6 +52,17 @@ DEF_CLASS2(INLINE_UID_FROM_FUID(EntVstProcessorUID),
            ENTROPICTRON_VERSION_STRING,
            kVstVersionString,
            EntVstProcessor::createInstance)
+
+// Controller registration
+DEF_CLASS2(INLINE_UID_FROM_FUID(EntVstControllerUID),
+           PClassInfo::kManyInstances,
+           kVstComponentControllerClass,
+           entPluginName "Controller",
+           0,
+           "",
+           ENTROPICTRON_VERSION_STRING,
+           kVstVersionString,
+           EntVstController::createInstance)
 
 END_FACTORY
 

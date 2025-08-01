@@ -17,21 +17,19 @@ endif()
 add_subdirectory(${ENT_VST_SDK_PATH} EXTERN)
 
 set(ENT_VST_HEADERS
-  ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstcomponentbase.h
-  ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstaudioeffect.h
   ${ENT_VST_DIR}/VstIds.h
   ${ENT_VST_DIR}/EntVstProcessor.h
   ${ENT_VST_DIR}/EntVstController.h
   ${ENT_VST_DIR}/EntVstPluginView.h
+  ${ENT_VST_DIR}/EntVstLoopTimer.h
   )
 
 set(ENT_VST_SOURCES
-  ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstcomponentbase.cpp
-  ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstaudioeffect.cpp
   ${ENT_VST_DIR}/VstFactory.cpp
   ${ENT_VST_DIR}/EntVstProcessor.cpp
   ${ENT_VST_DIR}/EntVstController.cpp
   ${ENT_VST_DIR}/EntVstPluginView.cpp
+  ${ENT_VST_DIR}/EntVstLoopTimer.cpp
   )
 
 set(target entropictron_vst)

@@ -27,9 +27,14 @@
 #include "public.sdk/source/vst/vsteditcontroller.h"
 #include "pluginterfaces/gui/iplugview.h"
 
-#include <RkEvent.h>
+#include "RkEvent.h"
 
 #include <memory>
+#include <atomic>
+
+class MainWindow;
+class RkMain;
+class EntVstLoopTimer;
 
 using namespace Steinberg;
 
@@ -37,21 +42,35 @@ using namespace Steinberg;
 using namespace Linux;
 #endif // ENTROPICTRON_OS_GNU
 
-class EntVstPluginView : public IPlugView {
- public:
-        EntVstPluginView(Vst::EditController *controller);
-        tresult PLUGIN_API isPlatformTypeSupported(Steinberg::FIDString type) override;
-        tresult PLUGIN_API attached(void* parent, FIDString type) override;
-        //        tresult PLUGIN_API removed() override;
+class EntVstPluginView : public IPlugView
+{
+public:
+        explicit EntVstPluginView(Vst::EditController* controller);
+        virtual ~EntVstPluginView() = default;
+        tresult PLUGIN_API isPlatformTypeSupported(FIDString type) override;
         tresult PLUGIN_API onWheel(float distance) override { return kNotImplemented; }
-        tresult PLUGIN_API setFrame(Steinberg::IPlugFrame* frame) override { return kResultOk; }
-        //        tresult PLUGIN_API resizeView(Steinberg::ViewRect* newSize) override { return kResultOk; }
-        tresult PLUGIN_API canResize() override { return kResultFalse; }
+        tresult PLUGIN_API setFrame(IPlugFrame* frame) override;
+        tresult PLUGIN_API attached(void* parent, FIDString type) override;
         tresult PLUGIN_API removed() override;
+        tresult PLUGIN_API canResize() override { return kResultFalse; }
         tresult PLUGIN_API getSize(ViewRect* newSize) override;
+        tresult PLUGIN_API onKeyDown(char16 key, int16 keyCode, int16 modifiers) override;
+        tresult PLUGIN_API onKeyUp(char16 key, int16 keyCode, int16 modifiers) override;
+        tresult PLUGIN_API onSize(ViewRect* newSize) override;
+        tresult PLUGIN_API onFocus(TBool state) override;
+        tresult PLUGIN_API checkSizeConstraint(ViewRect* rect) override;
+        tresult PLUGIN_API queryInterface(const TUID iid, void** obj) override;
+        uint32 PLUGIN_API addRef() override;
+        uint32 PLUGIN_API release() override;
 
- private:
+private:
         Vst::EditController* editController;
+#ifdef ENTROPICTRON_OS_GNU
+        std::unique_ptr<EntVstLoopTimer> loopTimer;
+#endif
+        std::unique_ptr<RkMain> guiApp;
+        MainWindow* mainWindow;
+        std::atomic<uint32_t> refCount;
 };
 
 #endif // ENT_VST_PLUGIN_VIEW_H

@@ -22,6 +22,7 @@
  */
 
 #include "EntVstController.h"
+#include "EntVstPluginView.h"
 #include "VstIds.h"
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
@@ -33,9 +34,17 @@ FUnknown* EntVstController::createInstance(void*)
         return static_cast<Vst::IEditController*>(new EntVstController());
 }
 
-tresult PLUGIN_API EntVstController::initialize(FUnknown* context)
+tresult PLUGIN_API
+EntVstController::initialize(FUnknown* context)
 {
-        EditControllerEx1::initialize(context);
-        return kResultOk;
+        return EditControllerEx1::initialize(context);
+}
+
+IPlugView* PLUGIN_API
+EntVstController::createView(Steinberg::FIDString name)
+{
+        if (std::string_view{name} == std::string_view{Vst::ViewType::kEditor})
+                return new EntVstPluginView(this);
+    return nullptr;
 }
 

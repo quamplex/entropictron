@@ -25,6 +25,7 @@
 #define ENT_VST_CONTROLLER_H
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
+#include "pluginterfaces/gui/iplugview.h"
 
 using namespace Steinberg;
 
@@ -33,6 +34,7 @@ class EntVstController : public Vst::EditControllerEx1 {
         EntVstController() = default;
         static FUnknown* createInstance(void*);
         tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
+        IPlugView* PLUGIN_API createView(Steinberg::FIDString name) SMTG_OVERRIDE;
 };
 
 #endif // ENT_VST_CONTROLLER_H

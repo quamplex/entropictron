@@ -22,6 +22,11 @@
  */
 
 #include "EntVstPluginView.h"
+#include "MainWindow.h"
+#include "EntVstLoopTimer.h"
+
+#include "RkPlatform.h"
+#include "RkMain.h"
 
 using namespace Steinberg;
 
@@ -31,7 +36,7 @@ EntVstPluginView::EntVstPluginView(Vst::EditController *controller)
 }
 
 tresult PLUGIN_API
-EntVstPluginView::isPlatformTypeSupported(Steinberg::FIDString type)
+EntVstPluginView::isPlatformTypeSupported(FIDString type)
 {
         //        if (strcmp(type, kPlatformTypeHWND) == 0 || strcmp(type, kPlatformTypeX11) == 0)
         //return kResultTrue;
@@ -39,19 +44,107 @@ EntVstPluginView::isPlatformTypeSupported(Steinberg::FIDString type)
 }
 
 tresult PLUGIN_API
-EntVstPluginView::attached(void* parent, FIDString type)
+EntVstPluginView::setFrame(IPlugFrame* frame)
 {
+#ifdef ENTROPICTRON_OS_GNU
+        loopTimer = std::make_unique<EntVstLoopTimer>(frame);
+#endif // ENTROPICTRON_OS_GNU
+        return kResultOk;
+}
+
+tresult PLUGIN_API
+EntVstPluginView::attached(void *parent, FIDString type)
+{
+        guiApp = std::make_unique<RkMain>();
+
+#ifdef ENTROPICTRON_OS_WINDOWS
+        auto info = rk_from_native_win(reinterpret_cast<HWND>(parent),
+                                       rk_win_api_instance(),
+                                       rk_win_api_class_name());
+#else // ENTROPICTRON_OS_GNU
+        auto xDisplay = XOpenDisplay(nullptr);
+        if (!xDisplay)
+                return kResultFalse;
+        auto screenNumber = DefaultScreen(xDisplay);
+        auto info = rk_from_native_x11(xDisplay, screenNumber, reinterpret_cast<Window>(parent));
+#endif // ENTROPICTRON_OS_GNU
+
+        mainWindow = new MainWindow(*guiApp.get(), info);
+        mainWindow->show();
+        loopTimer->registerTimer(guiApp.get());
+
         return IPlugView::attached(parent, type);
 }
 
-/*tresult PLUGIN_API
+tresult PLUGIN_API
 EntVstPluginView::removed()
 {
+        loopTimer->unregisterTimer();
+        if (guiApp)
+                guiApp = nullptr;
         return kResultOk;
-        }*/
+}
 
 tresult PLUGIN_API
 EntVstPluginView::getSize(ViewRect* newSize)
 {
+        if (!newSize)
+		return kResultFalse;
+
+        auto winRect = MainWindow::getWindowSize();
+        newSize->left   = 0;
+	newSize->right  = winRect.width();
+	newSize->top    = 0;
+	newSize->bottom = winRect.height();
 	return kResultOk;
+}
+
+tresult PLUGIN_API EntVstPluginView::onKeyDown(char16 key, int16 keyCode, int16 modifiers)
+{
+    return kNotImplemented;
+}
+
+tresult PLUGIN_API EntVstPluginView::onKeyUp(char16 key, int16 keyCode, int16 modifiers)
+{
+    return kNotImplemented;
+}
+
+tresult PLUGIN_API EntVstPluginView::onSize(ViewRect* newSize)
+{
+    return kResultOk;
+}
+
+tresult PLUGIN_API EntVstPluginView::onFocus(TBool state)
+{
+    return kResultOk;
+}
+
+tresult PLUGIN_API EntVstPluginView::checkSizeConstraint(ViewRect* rect)
+{
+    return kResultOk;
+}
+
+tresult PLUGIN_API EntVstPluginView::queryInterface(const TUID iid, void** obj)
+{
+        if (FUnknownPrivate::iidEqual(iid, IPlugView::iid)) {
+                *obj = static_cast<IPlugView*>(this);
+                addRef();
+                return kResultOk;
+        }
+
+        *obj = nullptr;
+        return kNoInterface;
+}
+
+uint32 PLUGIN_API EntVstPluginView::addRef()
+{
+        return ++refCount;
+}
+
+uint32 PLUGIN_API EntVstPluginView::release()
+{
+        auto count = --refCount;
+        if (count == 0)
+                delete this;
+        return count;
 }
