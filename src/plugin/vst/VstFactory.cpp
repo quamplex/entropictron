@@ -35,7 +35,7 @@
 #else
 #define entFileDescription	entPluginName" Entropictron"
 #endif
-#define entCompanyName	"Iurie Nistor"
+#define entCompanyName	"Quamplex"
 #define entCompanyWeb		"http://quamplex.com/entropictron"
 #define entCompanyEmail	"iuriehn@gmail.com"
 #define entLegalCopyright	"Copyright (C) 2020 Iurie Nistor. Licensed under the GNU General Public License, Version 3"

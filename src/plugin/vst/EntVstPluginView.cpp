@@ -30,16 +30,14 @@
 
 using namespace Steinberg;
 
-EntVstPluginView::EntVstPluginView(Vst::EditController *controller)
-        : editController {controller}
+EntVstPluginView::EntVstPluginView(EditController *controller)
+        : EditorView(controller)
 {
 }
 
 tresult PLUGIN_API
 EntVstPluginView::isPlatformTypeSupported(FIDString type)
 {
-        //        if (strcmp(type, kPlatformTypeHWND) == 0 || strcmp(type, kPlatformTypeX11) == 0)
-        //return kResultTrue;
         return kResultTrue;
 }
 
@@ -53,7 +51,7 @@ EntVstPluginView::setFrame(IPlugFrame* frame)
 }
 
 tresult PLUGIN_API
-EntVstPluginView::attached(void *parent, FIDString type)
+EntVstPluginView::attached(void* parent, FIDString type)
 {
         guiApp = std::make_unique<RkMain>();
 
@@ -73,7 +71,7 @@ EntVstPluginView::attached(void *parent, FIDString type)
         mainWindow->show();
         loopTimer->registerTimer(guiApp.get());
 
-        return IPlugView::attached(parent, type);
+        return EditorView::attached(parent, type);
 }
 
 tresult PLUGIN_API
@@ -97,31 +95,6 @@ EntVstPluginView::getSize(ViewRect* newSize)
 	newSize->top    = 0;
 	newSize->bottom = winRect.height();
 	return kResultOk;
-}
-
-tresult PLUGIN_API EntVstPluginView::onKeyDown(char16 key, int16 keyCode, int16 modifiers)
-{
-    return kNotImplemented;
-}
-
-tresult PLUGIN_API EntVstPluginView::onKeyUp(char16 key, int16 keyCode, int16 modifiers)
-{
-    return kNotImplemented;
-}
-
-tresult PLUGIN_API EntVstPluginView::onSize(ViewRect* newSize)
-{
-    return kResultOk;
-}
-
-tresult PLUGIN_API EntVstPluginView::onFocus(TBool state)
-{
-    return kResultOk;
-}
-
-tresult PLUGIN_API EntVstPluginView::checkSizeConstraint(ViewRect* rect)
-{
-    return kResultOk;
 }
 
 tresult PLUGIN_API EntVstPluginView::queryInterface(const TUID iid, void** obj)

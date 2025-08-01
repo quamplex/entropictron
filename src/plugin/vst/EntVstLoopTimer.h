@@ -24,7 +24,7 @@
 #ifndef ENT_VST_LOOP_TIMER_H
 #define ENT_VST_LOOP_TIMER_H
 
-#include "pluginterfaces/gui/iplugview.h"
+#include "public.sdk/source/common/pluginview.h"
 
 #include <atomic>
 

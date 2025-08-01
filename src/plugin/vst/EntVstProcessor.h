@@ -41,12 +41,9 @@ __attribute__((visibility("default"))) bool ModuleExit (void);
 #endif // __cplusplus
 
 using namespace Steinberg;
+using namespace Steinberg::Vst;
 
-using Steinberg::Vst::ParamID;
-using Steinberg::Vst::ParamValue;
-using Steinberg::tresult;
-
-class EntVstProcessor : public Vst::AudioEffect {
+class EntVstProcessor : public AudioEffect {
   public:
         EntVstProcessor();
         ~EntVstProcessor();
@@ -54,14 +51,13 @@ class EntVstProcessor : public Vst::AudioEffect {
         tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
         tresult PLUGIN_API setBusArrangements(Vst::SpeakerArrangement* inputs,
                                               int32 numIns,
-                                              Vst::SpeakerArrangement* outputs,
+                                              SpeakerArrangement* outputs,
                                               int32 numOuts) SMTG_OVERRIDE;
-        tresult PLUGIN_API setupProcessing(Vst::ProcessSetup& setup) SMTG_OVERRIDE;
+        tresult PLUGIN_API setupProcessing(ProcessSetup& setup) SMTG_OVERRIDE;
         tresult PLUGIN_API setActive(TBool state) SMTG_OVERRIDE;
-        tresult PLUGIN_API process(Vst::ProcessData& data) SMTG_OVERRIDE;
+        tresult PLUGIN_API process(ProcessData& data) SMTG_OVERRIDE;
         tresult PLUGIN_API setState(IBStream* state) SMTG_OVERRIDE;
         tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
-        //        tresult PLUGIN_API setComponentState(IBStream* state) SMTG_OVERRIDE;
 
   protected:
 };

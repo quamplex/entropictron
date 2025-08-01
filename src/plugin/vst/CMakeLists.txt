@@ -1,8 +1,11 @@
 set(ENT_VST_DIR ${CMAKE_CURRENT_SOURCE_DIR})
+
 set(SMTG_ENABLE_VST3_HOSTING_EXAMPLES OFF CACHE BOOL "disable hosting examples")
 set(SMTG_ENABLE_VST3_PLUGIN_EXAMPLES OFF CACHE BOOL "disable plugin examples")
 set(SMTG_ENABLE_VSTGUI_SUPPORT OFF CACHE BOOL "disable vstgui examples")
+
 list(APPEND CMAKE_MODULE_PATH "${ENT_VST_SDK_PATH}/cmake/modules")
+
 include_directories(${ENT_VST_SDK_PATH})
 include_directories(${ENT_REDKITE_SDK_PATH}/include)
 link_directories(${ENT_REDKITE_SDK_PATH}/lib)
@@ -17,6 +20,8 @@ endif()
 add_subdirectory(${ENT_VST_SDK_PATH} EXTERN)
 
 set(ENT_VST_HEADERS
+  ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstcomponentbase.h
+  ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstaudioeffect.h
   ${ENT_VST_DIR}/VstIds.h
   ${ENT_VST_DIR}/EntVstProcessor.h
   ${ENT_VST_DIR}/EntVstController.h
@@ -25,6 +30,8 @@ set(ENT_VST_HEADERS
   )
 
 set(ENT_VST_SOURCES
+  ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstcomponentbase.cpp
+  ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstaudioeffect.cpp
   ${ENT_VST_DIR}/VstFactory.cpp
   ${ENT_VST_DIR}/EntVstProcessor.cpp
   ${ENT_VST_DIR}/EntVstController.cpp
@@ -48,6 +55,7 @@ endif ()
 
 target_link_libraries(${target} PRIVATE base sdk sdk_common pluginterfaces)
 target_link_libraries(${target} PRIVATE entropictron_common api_plugin redkite)
+#target_link_options(${target} PRIVATE -Wl,--no-undefined)
 
 if (CMAKE_SYSTEM_NAME MATCHES Windows)
 target_link_libraries(${target} PRIVATE

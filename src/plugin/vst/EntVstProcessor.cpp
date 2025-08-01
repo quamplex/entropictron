@@ -52,74 +52,74 @@ EntVstProcessor::~EntVstProcessor()
 
 FUnknown* EntVstProcessor::createInstance(void*)
 {
-        return static_cast<Vst::IAudioProcessor*>(new EntVstProcessor());
+        return static_cast<IAudioProcessor*>(new EntVstProcessor());
 }
 
 tresult PLUGIN_API
 EntVstProcessor::initialize(FUnknown* context)
 {
-        auto res = Vst::AudioEffect::initialize(context);
+        auto res = AudioEffect::initialize(context);
         if (res != kResultTrue)
                 return res;
 
         setControllerClass(EntVstControllerUID);
 
-        addAudioOutput(reinterpret_cast<const Steinberg::Vst::TChar*>(u"Stereo Out"),
-                       Vst::SpeakerArr::kStereo);
+        addAudioOutput(reinterpret_cast<const TChar*>(u"Stereo Out"),
+                       SpeakerArr::kStereo);
         /*parameters.addParameter(STR16("Noise Type"),
                                 nullptr,
                                 2,
                                 1.0,
-                                Vst::ParameterInfo::kCanAutomate,
+                                ParameterInfo::kCanAutomate,
                                 1000);
         parameters.addParameter(STR16("Gain"),
                                 nullptr,
                                 0,
                                 1.0,
-                                Vst::ParameterInfo::kCanAutomate,
+                                ParameterInfo::kCanAutomate,
                                 1001);
         parameters.addParameter(STR16("Brightness"),
                                 nullptr,
                                 0,
                                 1.0,
-                                Vst::ParameterInfo::kCanAutomate,
+                                ParameterInfo::kCanAutomate,
                                 1002);
         parameters.addParameter(STR16("Gain"),
                                 nullptr,
                                 0,
                                 1.0,
-                                Vst::ParameterInfo::kCanAutomate,
+                                ParameterInfo::kCanAutomate,
                                 1002);*/
 
         return kResultTrue;
 }
 
 tresult PLUGIN_API
-EntVstProcessor::setBusArrangements(Vst::SpeakerArrangement* inputs,
+EntVstProcessor::setBusArrangements(SpeakerArrangement* inputs,
                                     int32 numIns,
-                                    Vst::SpeakerArrangement* outputs,
+                                    SpeakerArrangement* outputs,
                                     int32 numOuts)
 {
-        return Vst::AudioEffect::setBusArrangements(inputs,
+        return AudioEffect::setBusArrangements(inputs,
                                                               numIns,
                                                               outputs,
                                                               numOuts);
 }
 
 tresult PLUGIN_API
-EntVstProcessor::setupProcessing(Vst::ProcessSetup& setup)
+EntVstProcessor::setupProcessing(ProcessSetup& setup)
 {
-        return Vst::AudioEffect::setupProcessing(setup);
+        return AudioEffect::setupProcessing(setup);
 }
 
 tresult PLUGIN_API
 EntVstProcessor::setActive(TBool state)
 {
-        return Vst::AudioEffect::setActive(state);
+        return AudioEffect::setActive(state);
 }
 
 tresult PLUGIN_API
-EntVstProcessor::process(Vst::ProcessData& data)
+EntVstProcessor::process(ProcessData& data)
 {
         return kResultOk;
 }
@@ -135,9 +135,3 @@ EntVstProcessor::getState(IBStream* state)
 {
         return kResultOk;
 }
-
-/*tresult PLUGIN_API
-EntVstProcessor::setComponentState(IBStream* state)
-{
-        return kResultOk;
-        }*/

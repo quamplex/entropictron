@@ -37,34 +37,27 @@ class RkMain;
 class EntVstLoopTimer;
 
 using namespace Steinberg;
+using namespace Steinberg::Vst;
 
 #ifdef ENTROPICTRON_OS_GNU
 using namespace Linux;
 #endif // ENTROPICTRON_OS_GNU
 
-class EntVstPluginView : public IPlugView
+class EntVstPluginView : public EditorView
 {
 public:
-        explicit EntVstPluginView(Vst::EditController* controller);
-        virtual ~EntVstPluginView() = default;
+        explicit EntVstPluginView(EditController* controller);
+        ~EntVstPluginView() = default;
         tresult PLUGIN_API isPlatformTypeSupported(FIDString type) override;
-        tresult PLUGIN_API onWheel(float distance) override { return kNotImplemented; }
         tresult PLUGIN_API setFrame(IPlugFrame* frame) override;
         tresult PLUGIN_API attached(void* parent, FIDString type) override;
         tresult PLUGIN_API removed() override;
-        tresult PLUGIN_API canResize() override { return kResultFalse; }
         tresult PLUGIN_API getSize(ViewRect* newSize) override;
-        tresult PLUGIN_API onKeyDown(char16 key, int16 keyCode, int16 modifiers) override;
-        tresult PLUGIN_API onKeyUp(char16 key, int16 keyCode, int16 modifiers) override;
-        tresult PLUGIN_API onSize(ViewRect* newSize) override;
-        tresult PLUGIN_API onFocus(TBool state) override;
-        tresult PLUGIN_API checkSizeConstraint(ViewRect* rect) override;
         tresult PLUGIN_API queryInterface(const TUID iid, void** obj) override;
         uint32 PLUGIN_API addRef() override;
         uint32 PLUGIN_API release() override;
 
 private:
-        Vst::EditController* editController;
 #ifdef ENTROPICTRON_OS_GNU
         std::unique_ptr<EntVstLoopTimer> loopTimer;
 #endif
