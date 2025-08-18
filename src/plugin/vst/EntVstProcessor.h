@@ -27,7 +27,6 @@
 #include "globals.h"
 #include "public.sdk/source/vst/vstaudioeffect.h"
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif // __cplusplus
@@ -42,6 +41,8 @@ __attribute__((visibility("default"))) bool ModuleExit (void);
 
 using namespace Steinberg;
 using namespace Steinberg::Vst;
+
+class DspWrapper;
 
 class EntVstProcessor : public AudioEffect {
   public:
@@ -60,6 +61,7 @@ class EntVstProcessor : public AudioEffect {
         tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
 
   protected:
+        std::unique_ptr<DspWrapper> entropictronDsp;
 };
 
 #endif // ENT_VST_PROCESSOR_H

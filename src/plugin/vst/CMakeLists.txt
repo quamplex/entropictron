@@ -29,6 +29,7 @@ set(ENT_VST_HEADERS
   ${ENT_VST_DIR}/EntVstLoopTimer.h
   )
 
+
 set(ENT_VST_SOURCES
   ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstcomponentbase.cpp
   ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstaudioeffect.cpp

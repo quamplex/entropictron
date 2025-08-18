@@ -24,6 +24,7 @@
 #include "EntVstProcessor.h"
 #include "EntVstPluginView.h"
 #include "VstIds.h"
+#include "DspWrapper.h"
 
 #include "base/source/fstreamer.h"
 #include "pluginterfaces/base/ibstream.h"
@@ -74,8 +75,9 @@ EntVstProcessor::initialize(FUnknown* context)
         if (res != kResultTrue)
                 return res;
 
-        setControllerClass(EntVstControllerUID);
+        entropictronDsp = std::make_unique<EntropictronDsp>();
 
+        setControllerClass(EntVstControllerUID);
         addAudioOutput(reinterpret_cast<const TChar*>(u"Stereo Out"),
                        SpeakerArr::kStereo);
         /*parameters.addParameter(STR16("Noise Type"),
@@ -121,6 +123,8 @@ EntVstProcessor::setBusArrangements(SpeakerArrangement* inputs,
 tresult PLUGIN_API
 EntVstProcessor::setupProcessing(ProcessSetup& setup)
 {
+        if (entropictronDsp)
+                entropictronDsp->setSampleRate(setup.sampleRate);
         return AudioEffect::setupProcessing(setup);
 }
 
