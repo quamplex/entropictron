@@ -8,6 +8,7 @@ list(APPEND CMAKE_MODULE_PATH "${ENT_VST_SDK_PATH}/cmake/modules")
 
 include_directories(${ENT_VST_SDK_PATH})
 include_directories(${ENT_REDKITE_SDK_PATH}/include)
+include_directories(${ENT_DSP_WRAPPER_DIR})
 link_directories(${ENT_REDKITE_SDK_PATH}/lib)
 
 get_filename_component(VST3SDK_FOLDER_NAME ${ENT_VST_SDK_PATH} NAME)
@@ -55,7 +56,7 @@ else ()
 endif ()
 
 target_link_libraries(${target} PRIVATE base sdk sdk_common pluginterfaces)
-target_link_libraries(${target} PRIVATE entropictron_common api_plugin redkite)
+target_link_libraries(${target} PRIVATE entropictron_common dsp_plugin redkite)
 #target_link_options(${target} PRIVATE -Wl,--no-undefined)
 
 if (CMAKE_SYSTEM_NAME MATCHES Windows)

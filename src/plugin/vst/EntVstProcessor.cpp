@@ -31,7 +31,6 @@
 #include "pluginterfaces/vst/ivstparameterchanges.h"
 #include "pluginterfaces/vst/ivstevents.h"
 
-
 static constexpr int MAX_EVENTS = 512;
 
 struct QueuedEvent {
@@ -75,7 +74,7 @@ EntVstProcessor::initialize(FUnknown* context)
         if (res != kResultTrue)
                 return res;
 
-        entropictronDsp = std::make_unique<EntropictronDsp>();
+        entropictronDsp = std::make_unique<DspWrapper>();
 
         setControllerClass(EntVstControllerUID);
         addAudioOutput(reinterpret_cast<const TChar*>(u"Stereo Out"),
@@ -108,6 +107,12 @@ EntVstProcessor::initialize(FUnknown* context)
         return kResultTrue;
 }
 
+tresult PLUGIN_API EntVstProcessor::terminate()
+{
+        entropictronDsp.reset();
+        return AudioEffect::terminate();
+}
+
 tresult PLUGIN_API
 EntVstProcessor::setBusArrangements(SpeakerArrangement* inputs,
                                     int32 numIns,
@@ -136,25 +141,8 @@ EntVstProcessor::setActive(TBool state)
 
 tresult PLUGIN_API
 EntVstProcessor::process(ProcessData& data)
-{
-#include <array>
-#include <algorithm> // for std::sort
-
-static constexpr int MAX_EVENTS = 512;
-
-struct QueuedEvent {
-    int32 sampleOffset;
-    enum class Type { NoteOn, NoteOff, Automation } type;
-    union {
-        struct { int32 pitch; float velocity; bool on; } note;
-        struct { Steinberg::Vst::ParamID pid; Steinberg::Vst::ParamValue value; } automation;
-    };
-};
-
- tresult PLUGIN_API EntVstProcessor::process(ProcessData& data)
  {
          using namespace Steinberg::Vst;
-
          if (!entropictronDsp || data.numSamples < 1)
                  return kResultOk;
 
@@ -163,8 +151,8 @@ struct QueuedEvent {
          int32 nMidiEvents = midiEvents ? midiEvents->getEventCount() : 0;
 
          // --- Collect automation events ---
-         InputParameterChanges* inputParams = data.inputParameterChanges;
-         int32 nAutomationEvents = 0;
+         auto inputParams = data.inputParameterChanges;
+         std::array<QueuedEvent, MAX_EVENTS> eventQueue;
          int eventCount = 0;
 
          // Insert MIDI events into queue
@@ -241,11 +229,10 @@ struct QueuedEvent {
 
          for (int i = 0; i < eventCount; ++i) {
                  size_t eventFrame = static_cast<size_t>(eventQueue[i].sampleOffset);
-                 if (eventFrame > data.numSamples)
+                 if (eventFrame > static_cast<size_t>(data.numSamples))
                          eventFrame = data.numSamples;
 
                  size_t chunkSize = eventFrame - currentFrame;
-
                  if (chunkSize > 0) {
                          entropictronDsp->process(buffer, chunkSize);
                          buffer[0] += chunkSize;
@@ -286,4 +273,8 @@ tresult PLUGIN_API
 EntVstProcessor::getState(IBStream* state)
 {
         return kResultOk;
+}
+
+void EntVstProcessor::updateParameters(ParamID pid, ParamValue value)
+{
 }

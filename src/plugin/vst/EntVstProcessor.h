@@ -45,11 +45,12 @@ using namespace Steinberg::Vst;
 class DspWrapper;
 
 class EntVstProcessor : public AudioEffect {
-  public:
+ public:
         EntVstProcessor();
         ~EntVstProcessor();
         static FUnknown* createInstance(void*);
         tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
+        tresult PLUGIN_API terminate() SMTG_OVERRIDE;
         tresult PLUGIN_API setBusArrangements(Vst::SpeakerArrangement* inputs,
                                               int32 numIns,
                                               SpeakerArrangement* outputs,
@@ -60,7 +61,10 @@ class EntVstProcessor : public AudioEffect {
         tresult PLUGIN_API setState(IBStream* state) SMTG_OVERRIDE;
         tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
 
-  protected:
+ protected:
+        void updateParameters(ParamID pid, ParamValue value);
+
+ private:
         std::unique_ptr<DspWrapper> entropictronDsp;
 };
 

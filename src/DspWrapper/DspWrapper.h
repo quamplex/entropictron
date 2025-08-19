@@ -31,7 +31,8 @@ public:
         ~DspWrapper();
         void setSampleRate(unsigned int srate);
         unsigned int getSampleRate() const;
-        void process(float** data);
+        void process(float** data, size_t size);
+        void pressKey(int pitch, int velocity, bool on = true);
 
 protected:
 

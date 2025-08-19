@@ -39,7 +39,7 @@ unsigned int DspWrapper::getSampleRate() const
 {
 }
 
-void DspWrapper::process(float** data)
+void DspWrapper::process(float** data, size_t size)
 {
 }
 
