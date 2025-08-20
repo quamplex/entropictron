@@ -79,31 +79,6 @@ EntVstProcessor::initialize(FUnknown* context)
         setControllerClass(EntVstControllerUID);
         addAudioOutput(reinterpret_cast<const TChar*>(u"Stereo Out"),
                        SpeakerArr::kStereo);
-        /*parameters.addParameter(STR16("Noise Type"),
-                                nullptr,
-                                2,
-                                1.0,
-                                ParameterInfo::kCanAutomate,
-                                1000);
-        parameters.addParameter(STR16("Gain"),
-                                nullptr,
-                                0,
-                                1.0,
-                                ParameterInfo::kCanAutomate,
-                                1001);
-        parameters.addParameter(STR16("Brightness"),
-                                nullptr,
-                                0,
-                                1.0,
-                                ParameterInfo::kCanAutomate,
-                                1002);
-        parameters.addParameter(STR16("Gain"),
-                                nullptr,
-                                0,
-                                1.0,
-                                ParameterInfo::kCanAutomate,
-                                1002);*/
-
         return kResultTrue;
 }
 

@@ -24,6 +24,7 @@ set(ENT_VST_HEADERS
   ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstcomponentbase.h
   ${ENT_VST_SDK_PATH}/public.sdk/source/vst/vstaudioeffect.h
   ${ENT_VST_DIR}/VstIds.h
+  ${ENT_VST_DIR}/EntVstParameters.h
   ${ENT_VST_DIR}/EntVstProcessor.h
   ${ENT_VST_DIR}/EntVstController.h
   ${ENT_VST_DIR}/EntVstPluginView.h

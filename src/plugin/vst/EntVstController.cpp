@@ -24,6 +24,7 @@
 #include "EntVstController.h"
 #include "EntVstPluginView.h"
 #include "VstIds.h"
+#include "EntVstParameters.h"
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
 
@@ -37,7 +38,47 @@ FUnknown* EntVstController::createInstance(void*)
 tresult PLUGIN_API
 EntVstController::initialize(FUnknown* context)
 {
-        return EditControllerEx1::initialize(context);
+    tresult result = EditControllerEx1::initialize(context);
+    if (result != kResultOk)
+        return result;
+
+    // Noise 1
+    parameters.addParameter(STR16("Noise 1 Enabled"),
+                            nullptr, 1, 0.0,
+                            0,
+                            ParametersId::Noise1EnabledId);
+    parameters.addParameter(STR16("Noise 1 Type"),
+                            nullptr, 2, 1.0,
+                            ParameterInfo::kCanAutomate,
+                            ParametersId::Noise1TypeId);
+    parameters.addParameter(STR16("Noise 1 Gain"),
+                            nullptr, 0, 1.0,
+                            ParameterInfo::kCanAutomate,
+                            ParametersId::Noise1GainId);
+    parameters.addParameter(STR16("Noise 1 Brightness"),
+                            nullptr, 0, 1.0,
+                            ParameterInfo::kCanAutomate,
+                            ParametersId::Noise1BrightnessId);
+
+    // Noise 2
+    parameters.addParameter(STR16("Noise 2 Enabled"),
+                            nullptr, 1, 0.0,
+                            0,
+                            ParametersId::Noise2EnabledId);
+    parameters.addParameter(STR16("Noise 2 Type"),
+                            nullptr, 2, 1.0,
+                            ParameterInfo::kCanAutomate,
+                            ParametersId::Noise2TypeId);
+    parameters.addParameter(STR16("Noise 2 Gain"),
+                            nullptr, 0, 1.0,
+                            ParameterInfo::kCanAutomate,
+                            ParametersId::Noise2GainId);
+    parameters.addParameter(STR16("Noise 2 Brightness"),
+                            nullptr, 0, 1.0,
+                            ParameterInfo::kCanAutomate,
+                            ParametersId::Noise2BrightnessId);
+
+    return result;
 }
 
 IPlugView* PLUGIN_API
