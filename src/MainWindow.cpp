@@ -26,6 +26,8 @@
 
 #include "RkLabel.h"
 #include "RkContainer.h"
+#include "DspProxy.h"
+#include "EntropictronModel.h"
 
 constexpr int MAIN_WINDOW_WIDTH  = 900;
 constexpr int MAIN_WINDOW_HEIGHT = 352;
@@ -40,9 +42,10 @@ MainWindow::MainWindow(RkMain& app /*, EndDspProxy *dspProxy*/)
 }
 
 MainWindow::MainWindow(RkMain& app,
-                       /* EndDspProxy *dspProxy*/
-                       const RkNativeWindowInfo &info)
+                       const RkNativeWindowInfo &info,
+                       DspProxy *dspProxy)
         : EntWidget(app, info)
+        , entropictronModel{new EntropictronModel(this, dspProxy)}
 {
         setTitle(Entropictron::applicationName);
         setName("MainWindow");

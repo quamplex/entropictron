@@ -28,11 +28,14 @@
 
 #include "RkMain.h"
 
+class DspProxy;
+class EntropictronModel;
+
 class MainWindow : public EntWidget
 {
  public:
       explicit MainWindow(RkMain& app);
-      explicit MainWindow(RkMain& app, const RkNativeWindowInfo &info);
+      explicit MainWindow(RkMain& app, const RkNativeWindowInfo &info, DspProxy *dspProxy);
       ~MainWindow();
       static RkSize getWindowSize();
 
@@ -40,6 +43,7 @@ class MainWindow : public EntWidget
         bool createUi(void);
 
  private:
+        EntropictronModel* entropictronModel;
 };
 
 #endif // ENT_MAINWINDOW_H
