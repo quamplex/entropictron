@@ -89,3 +89,23 @@ EntVstController::createView(Steinberg::FIDString name)
     return nullptr;
 }
 
+tresult EntVstController::setParamNormalized (ParamID tag, ParamValue value)
+{
+        auto result = EditControllerEx1::setParamNormalized(tag, value);
+        if (result != kResultOk)
+                return result;
+
+        if (!dspPorxy)
+                return kResultFalse;
+
+        switch(static_cast<ParametersId>(tag)) {
+        case: ParametersId::Noise1EnabledId:
+                action dspProxy->getNoise(0)->enabled(value == 1.0);
+                break;
+        case: ParametersId::Noise2EnabledId:
+                action dspProxy->getNoise(1)->enabled(value == 1.0);
+                break;
+        }
+
+        return result;
+}

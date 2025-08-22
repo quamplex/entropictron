@@ -24,6 +24,7 @@
 #include "EntVstPluginView.h"
 #include "MainWindow.h"
 #include "EntVstLoopTimer.h"
+#include "DspVstProxy.h"
 
 #include "RkPlatform.h"
 #include "RkMain.h"
@@ -67,7 +68,8 @@ EntVstPluginView::attached(void* parent, FIDString type)
         auto info = rk_from_native_x11(xDisplay, screenNumber, reinterpret_cast<Window>(parent));
 #endif // ENTROPICTRON_OS_GNU
 
-        mainWindow = new MainWindow(*guiApp.get(), info);
+        dspProxy = std::make_unique<DspProxyVst>(getController());
+        mainWindow = new MainWindow(*guiApp.get(), info, dspProxy.get());
         mainWindow->show();
         loopTimer->registerTimer(guiApp.get());
 
@@ -80,6 +82,7 @@ EntVstPluginView::removed()
         loopTimer->unregisterTimer();
         if (guiApp)
                 guiApp = nullptr;
+        dspProxy.reset();
         return kResultOk;
 }
 

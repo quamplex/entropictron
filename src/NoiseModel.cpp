@@ -1,5 +1,5 @@
 /**
- * File name: EntVstController.h
+ * File name: NoiseModel.cpp
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,23 +21,26 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_VST_CONTROLLER_H
-#define ENT_VST_CONTROLLER_H
+#include "NoiseModel.h"
+#include "DspNoiseProxy.h"
 
-#include "public.sdk/source/vst/vsteditcontroller.h"
-#include "pluginterfaces/gui/iplugview.h"
+NoiseModel::NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy)
+        : EntAbstractModel(parent)
+        , dspNoiseProxy {dspNoiseProxy}
+{
+        RK_ACT_BIND(dspNoiseProxy,
+                    enabled,
+                    RK_ACT_ARGS(bool b),
+                    this, enabled(b));
+}
 
-using namespace Steinberg;
+void NoiseModel::enable(bool b)
+{
+        if (dspNoiseProxy->enable(b))
+                action enabled(b);
+}
 
-class EntVstController : public Vst::EditControllerEx1 {
- public:
-        EntVstController() = default;
-        static FUnknown* createInstance(void*);
-        tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
-        IPlugView* PLUGIN_API createView(Steinberg::FIDString name) SMTG_OVERRIDE;
-
-protected:
-        tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
-};
-
-#endif // ENT_VST_CONTROLLER_H
+bool NoiseModel::isEnabled() const
+{
+        return dspNoiseProxy->isEenabled();
+}

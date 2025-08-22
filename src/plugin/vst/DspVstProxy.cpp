@@ -1,5 +1,5 @@
 /**
- * File name: EntVstController.h
+ * File name: DspProxyVst.cpp
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,23 +21,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_VST_CONTROLLER_H
-#define ENT_VST_CONTROLLER_H
+#include "DspProxyVst.h"
+#include "EntVstController.h"
 
-#include "public.sdk/source/vst/vsteditcontroller.h"
-#include "pluginterfaces/gui/iplugview.h"
-
-using namespace Steinberg;
-
-class EntVstController : public Vst::EditControllerEx1 {
- public:
-        EntVstController() = default;
-        static FUnknown* createInstance(void*);
-        tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
-        IPlugView* PLUGIN_API createView(Steinberg::FIDString name) SMTG_OVERRIDE;
-
-protected:
-        tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
-};
-
-#endif // ENT_VST_CONTROLLER_H
+DspProxyVst::DspProxyVst(EntVstController *controller)
+        : vstController{controller}
+        , dspNoise1Proxy {DspNoiseProxyVst(controller)}
+        , dspNoise2Proxy {DspNoiseProxyVst(controller)}
+{
+        vstController->setDspProxy(this);
+}

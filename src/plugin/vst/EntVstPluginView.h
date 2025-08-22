@@ -35,6 +35,7 @@
 class MainWindow;
 class RkMain;
 class EntVstLoopTimer;
+class DspProxyVst;
 
 using namespace Steinberg;
 using namespace Steinberg::Vst;
@@ -62,6 +63,7 @@ private:
         std::unique_ptr<EntVstLoopTimer> loopTimer;
 #endif
         std::unique_ptr<RkMain> guiApp;
+        std::unique_ptr<DspProxyVst> dspProxy;
         MainWindow* mainWindow;
         std::atomic<uint32_t> refCount;
 };
