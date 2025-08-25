@@ -1,5 +1,5 @@
 /**
- * File name: Parameters.h
+ * File name: DspNoiseProxyVst.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,30 +21,18 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_VST_PARMETERS_H
-#define ENT_VST_PARMETERS_H
+#ifndef DSP_NOISE_PROXY_VST_H
+#define DSP_NOISE_PROXY_VST_H
 
-#include "pluginterfaces/vst/vsttypes.h"
+#include "DspNoiseProxy.h"
 
-namesapce EntVst {
+class EntVstController;
 
-enum ParameterId : Steinberg::Vst::ParamID
-{
-    // Noise 1
-    Noise1EnabledId     = 1000,
-    Noise1TypeId        = 1001,
-    Noise1GainId        = 1002,
-    Noise1BrightnessId  = 1003,
-
-    // Noise 2
-    Noise2EnabledId     = 1100,
-    Noise2TypeId        = 1101,
-    Noise2GainId        = 1102,
-    Noise2BrightnessId  = 1103
+class DspNoiseProxyVst: public DspNoiseProxy {
+ public:
+        explicit DspNoiseProxyVst(EntVstController *controller, NoiseId id);
+ private:
+        EntVstController *vstController;
 };
 
-using ParamValue = std::variant<bool, int, float>;
-
-} // namesapce EntVst
-
-#endif // NT_VST_PARMETERS_H
+#endif // DSP_NOISE_PROXY_VST_H

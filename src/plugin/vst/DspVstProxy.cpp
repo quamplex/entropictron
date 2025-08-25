@@ -26,8 +26,24 @@
 
 DspProxyVst::DspProxyVst(EntVstController *controller)
         : vstController{controller}
-        , dspNoise1Proxy {DspNoiseProxyVst(controller)}
-        , dspNoise2Proxy {DspNoiseProxyVst(controller)}
+        , dspNoise1Proxy {new DspNoiseProxyVst(this,
+                                               controller,
+                                               DspProxyVst::NoiseId::Noise1)}
+        , dspNoise2Proxy {new DspNoiseProxyVst(this,
+                                               controller,
+                                               DspProxyVst::NoiseId::Noise2)}
 {
         vstController->setDspProxy(this);
+}
+
+DspNoiseProxy* DspProxyVst::DspProxyVstgetNoise(DspProxy::NoiseId id) const
+{
+        switch(id) {
+        case DspProxy::NoiseId::Noise1
+                return dspNoise1Proxy;
+        case DspProxy::NoiseId::Noise1
+                return dspNoise2Proxy;
+        default:
+                return nullptr;
+        }
 }

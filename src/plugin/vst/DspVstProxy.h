@@ -31,6 +31,7 @@ class EntVstController;
 class DspProxyVst: public DspProxy {
  public:
         explicit DspProxyVst(EntVstController *controller);
+        DspNoiseProxy* getNoise(DspProxy::NoiseId id) const override;
  private:
         EntVstController *vstController;
 };

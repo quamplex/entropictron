@@ -68,8 +68,9 @@ EntVstPluginView::attached(void* parent, FIDString type)
         auto info = rk_from_native_x11(xDisplay, screenNumber, reinterpret_cast<Window>(parent));
 #endif // ENTROPICTRON_OS_GNU
 
-        dspProxy = std::make_unique<DspProxyVst>(getController());
-        mainWindow = new MainWindow(*guiApp.get(), info, dspProxy.get());
+        mainWindow = new MainWindow(*guiApp.get(),
+                                    info,
+                                    new DspProxyVst(getController()));
         mainWindow->show();
         loopTimer->registerTimer(guiApp.get());
 
