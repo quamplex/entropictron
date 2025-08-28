@@ -26,13 +26,50 @@
 
 #include "DspProxy.h"
 
+#include "RkObject.h"
+
 class EntVstController;
 
-class DspNoiseProxyVst: public DspNoiseProxy {
+class DspNoiseProxy : public RkObject {
  public:
-        explicit DspNoiseProxyVst(EntVstController *controller);
- private:
-        EntVstController *vstController;
+        explicit DspNoiseProxy(NoiseId id = {});
+        explicit DspNoiseProxy(RkObject* parent, NoiseId id = {});
+        virtual ~DspNoiseProxy() = default;
+        void setNoiseId(NoiseId id);
+        NoiseId getNoiseId() const;
+        virtual void enable(bool b = true) = 0;
+        virtual bool isEnabled() const = 0;
+        virtual void setType(NoiseType type) = 0;
+        virtual NoiseType noiseType() const = 0;
+        virtual void setDensity(double value) = 0;
+        virtual double density() const = 0;
+        virtual void setBrightness(double value) = 0;
+        virtual double brightness() const = 0;
+        virtual void setGain(double value) = 0;
+        virtual double gain() const = 0;
+        RK_DECL_ACT(enabled,
+                    enabled(bool b),
+                    RK_ARG_TYPE(bool b),
+                    RK_ARG_VAL(b));
+        RK_DECL_ACT(typeUpdated,
+                    typeUpdated(NoiseType type),
+                    RK_ARG_TYPE(NoiseType),
+                    RK_ARG_VAL(type));
+        RK_DECL_ACT(densityUpdated,
+                    densityUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(bightnessUpdated,
+                    bightnessUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(gainUpdated,
+                    gainUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+
+private:
+        NoiseId noiseId;
 };
 
-#endif // DSP_PROXY_VST_H
+#endif // DSP_NOISE_PROXY_H

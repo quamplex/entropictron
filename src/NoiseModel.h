@@ -34,6 +34,34 @@ class NoiseModel: public EntAbstractModel
         explicit NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy);
         void enable(bool b = true);
         bool isEnabled() const;
+        void setType(NoiseType type);
+        NoiseType noiseType() const;
+        void setDensity(double value);
+        double density() const;
+        void setBrightness(double value);
+        double brightness() const;
+        void setGain(double value);
+        double gain() const;
+        RK_DECL_ACT(enabled,
+                    enabled(bool b),
+                    RK_ARG_TYPE(bool b),
+                    RK_ARG_VAL(b));
+        RK_DECL_ACT(typeUpdated,
+                    typeUpdated(NoiseType type),
+                    RK_ARG_TYPE(NoiseType),
+                    RK_ARG_VAL(type));
+        RK_DECL_ACT(densityUpdated,
+                    densityUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(bightnessUpdated,
+                    bightnessUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(gainUpdated,
+                    gainUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
 
  private:
         DspNoiseProxy *dspNoiseProxy;

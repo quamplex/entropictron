@@ -59,6 +59,46 @@ DspNoiseProxyVst::~DspNoiseProxyVst()
         }
 }
 
+void DspNoiseProxyVst::enable(bool b = true)
+{
+}
+
+bool DspNoiseProxyVst::isEnabled() const
+{
+}
+
+void DspNoiseProxyVst::setType(NoiseType type)
+{
+}
+
+NoiseType DspNoiseProxyVst::noiseType() const
+{
+}
+
+void DspNoiseProxyVst::setDensity(double value)
+{
+}
+
+double DspNoiseProxyVst::density() const
+{
+}
+
+void DspNoiseProxyVst::setBrightness(double value)
+{
+}
+
+double DspNoiseProxyVst::brightness() const
+{
+}
+
+void DspNoiseProxyVst::setGain(double value)
+{
+}
+
+double DspNoiseProxyVst::gain() const
+{
+}
+
 void DspNoiseProxyVst::onParameterChanged(ParamterId paramId,
                                           const ParameterValue &value)
 {
@@ -70,7 +110,7 @@ void DspNoiseProxyVst::onParameterChanged(ParamterId paramId,
 
         case ParamterId::Noise1TypeId:
         case ParamterId::Noise2TypeId:
-                actionType(value);
+                action typeUpdated();
             break;
 
         case ParamterId::Noise1GainId:

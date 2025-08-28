@@ -1,5 +1,5 @@
 /**
- * File name: DspNoiseProxyVst.h
+ * File name: DspNoiseProxy.cpp
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,33 +21,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef DSP_NOISE_PROXY_VST_H
-#define DSP_NOISE_PROXY_VST_H
-
 #include "DspNoiseProxy.h"
 
-class EntVstController;
+DspNoiseProxy::DspNoiseProxy(RkObject* parent, NoiseId id)
+        : DspNoiseProxy(parent)
+        , noiseId{id}
+{
+}
 
-class DspNoiseProxyVst: public DspNoiseProxy {
- public:
-        explicit DspNoiseProxyVst(EntVstController *controller, NoiseId id);
-        void enable(bool b = true);
-        bool isEnabled() const;
-        void setType(NoiseType type);
-        NoiseType noiseType() const;
-        void setDensity(double value);
-        double density() const;
-        void setBrightness(double value);
-        double brightness() const;
-        void setGain(double value);
-        double gain() const;
-
-protected:
-        void onParameterChanged(ParamterId paramId,
-                                const ParameterValue &value);
-
- private:
-        EntVstController *vstController;
-};
-
-#endif // DSP_NOISE_PROXY_VST_H
+DspNoiseProxy::NoiseId DspNoiseProxy::getNoiseId() const
+{
+        return noiseId;
+}
