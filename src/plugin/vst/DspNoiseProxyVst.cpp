@@ -27,7 +27,7 @@ using namespace EnVst;
 
 DspNoiseProxyVst::DspNoiseProxy(EntVstController *controller,  NoiseId id)
 {
-        auto paramCallback = [this](ParametersId paramId, const ParameterValue &value) {
+        auto paramCallback = [this](const ParametersId& paramId, const ParameterValue &value){
                 onParameterChanged(paramId, value);
         };
 
@@ -40,8 +40,8 @@ DspNoiseProxyVst::DspNoiseProxy(EntVstController *controller,  NoiseId id)
                            ParamterId::Noise2GainId, ParamterId::Noise2BrightnessId };
         }
 
-        for (auto param : params)
-                controller->setParamterCallback(paramCallback, param);
+        for (const auto& paramId : params)
+                controller->setParamterCallback(paramId, paramCallback);
 }
 
 DspNoiseProxyVst::~DspNoiseProxyVst()
@@ -99,31 +99,31 @@ double DspNoiseProxyVst::gain() const
 {
 }
 
-void DspNoiseProxyVst::onParameterChanged(ParamterId paramId,
+void DspNoiseProxyVst::onParameterChanged(const ParamterId &paramId,
                                           const ParameterValue &value)
 {
-    switch (paramId) {
+        switch (paramId) {
         case ParamterId::Noise1EnabledId:
         case ParamterId::Noise2EnabledId:
                 action enabled(...);
-            break;
+                break;
 
         case ParamterId::Noise1TypeId:
         case ParamterId::Noise2TypeId:
                 action typeUpdated();
-            break;
+                break;
 
         case ParamterId::Noise1GainId:
         case ParamterId::Noise2GainId:
-            actionGain(value);
-            break;
+                actionGain(value);
+                break;
 
         case ParamterId::Noise1BrightnessId:
         case ParamterId::Noise2BrightnessId:
-            actionBrightness(value);
-            break;
+                actionBrightness(value);
+                break;
 
         default:
-            break;
-    }
+                break;
+        }
 }

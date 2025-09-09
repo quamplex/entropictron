@@ -43,7 +43,7 @@ enum ParameterId : Steinberg::Vst::ParamID
     Noise2BrightnessId  = 1103
 };
 
-using ParamValue = std::variant<bool, int, float>;
+using ParameterValue = std::variant<bool, int, float, double>;
 
 } // namesapce EntVst
 

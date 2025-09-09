@@ -43,7 +43,7 @@ class DspNoiseProxyVst: public DspNoiseProxy {
         double gain() const;
 
 protected:
-        void onParameterChanged(ParamterId paramId,
+        void onParameterChanged(const ParamterId &paramId,
                                 const ParameterValue &value);
 
  private:

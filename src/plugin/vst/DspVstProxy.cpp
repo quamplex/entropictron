@@ -36,7 +36,7 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
         vstController->setDspProxy(this);
 }
 
-DspNoiseProxy* DspProxyVst::DspProxyVstgetNoise(DspProxy::NoiseId id) const
+DspNoiseProxy* DspProxyVst::getNoise(DspProxy::NoiseId id) const
 {
         switch(id) {
         case DspProxy::NoiseId::Noise1

@@ -89,23 +89,23 @@ EntVstController::createView(Steinberg::FIDString name)
     return nullptr;
 }
 
+void EntVstController::setParamterCallback(const ParameterId &paramId,
+                                           const ParameterCallback &callback)
+{
+        paramCallback.insert({paramId, callback});
+}
+
 tresult EntVstController::setParamNormalized (ParamID tag, ParamValue value)
 {
         auto result = EditControllerEx1::setParamNormalized(tag, value);
         if (result != kResultOk)
                 return result;
 
-        if (!dspPorxy)
-                return kResultFalse;
-
-        switch(static_cast<ParametersId>(tag)) {
-        case: ParametersId::Noise1EnabledId:
-                action dspProxy->getNoise(0)->enabled(value == 1.0);
-                break;
-        case: ParametersId::Noise2EnabledId:
-                action dspProxy->getNoise(1)->enabled(value == 1.0);
-                break;
+        auto parameterId = static_cast<ParamterId>(tag);
+        auto res = parmatersCallbacks.find(parameterId);
+        if (res != parmatersCallbacks.end()) {
+                for (const auto &callback: res.second)
+                        callback(parameterId, value);
         }
-
         return result;
 }

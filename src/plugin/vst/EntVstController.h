@@ -31,13 +31,21 @@ using namespace Steinberg;
 
 class EntVstController : public Vst::EditControllerEx1 {
  public:
+        using ParameterValue = EntVst::ParameterValue;
+        using ParameterId = EntVst::ParamterId;
+        using ParameterCallback = std::function<void(const ParametersId& paramId, const ParameterValue &value)>;
+
         EntVstController() = default;
         static FUnknown* createInstance(void*);
         tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
         IPlugView* PLUGIN_API createView(Steinberg::FIDString name) SMTG_OVERRIDE;
+        void setParamterCallback(const ParameterCallback &callback);
 
 protected:
         tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
+
+private:
+        ParameterCallback parameterCallback;
 };
 
 #endif // ENT_VST_CONTROLLER_H
