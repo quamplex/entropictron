@@ -33,7 +33,8 @@ class EntVstController : public Vst::EditControllerEx1 {
  public:
         using ParameterValue = EntVst::ParameterValue;
         using ParameterId = EntVst::ParamterId;
-        using ParameterCallback = std::function<void(const ParametersId& paramId, const ParameterValue &value)>;
+        using ParameterCallback = std::function<void(const ParametersId& paramId,
+                                                     const ParameterValue &value)>;
 
         EntVstController() = default;
         static FUnknown* createInstance(void*);

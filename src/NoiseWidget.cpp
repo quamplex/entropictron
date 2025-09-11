@@ -54,12 +54,21 @@ RK_DECLARE_IMAGE_RC(noise_brown_button_hover);
 RK_DECLARE_IMAGE_RC(noise_brown_button_on);
 RK_DECLARE_IMAGE_RC(noise_brown_button_hover_on);
 
-NoiseWidget::NoiseWidget(EntWidget* parent)
-        : EntWidget(parent)
+NoiseWidget::NoiseWidget(EntWidget* parent, NoiseModel* model)
+        : EntAbstractView(parent, model)
 {
         setFixedSize(350, 282);
         setBackgroundColor(37, 43, 53);
+        createView();
+        bindModel();
+}
 
+NoiseWidget::~NoiseWidget()
+{
+}
+
+void NoiseWidget::createView() override
+{
         auto mainContainer = new RkContainer(this, Rk::Orientation::Vertical);
         mainContainer->addSpace(8);
 
@@ -68,7 +77,7 @@ NoiseWidget::NoiseWidget(EntWidget* parent)
         mainContainer->addContainer(topContianer);
         topContianer->addSpace(100);
 
-        auto enableNoiseButton = new RkButton(this);
+        enableNoiseButton = new RkButton(this);
         enableNoiseButton->setCheckable();
         enableNoiseButton->setBackgroundColor(background());
         enableNoiseButton->setSize(36, 16);
@@ -79,31 +88,38 @@ NoiseWidget::NoiseWidget(EntWidget* parent)
         enableNoiseButton->show();
         topContianer->addWidget(enableNoiseButton);
 
-        // temp
-        static int i = 0;
-        auto label = new RkLabel(this, i++ ? RK_RC_IMAGE(noise2_label) : RK_RC_IMAGE(noise1_label));
-        label->show();
+        noiseLabel = new RkLabel(this, i++ ? RK_RC_IMAGE(noise2_label) : RK_RC_IMAGE(noise1_label));
         topContianer->addSpace(10);
         topContianer->addWidget(label);
 
         createNoiseControls(mainContainer);
+
+        updateView();
 }
 
-NoiseWidget::~NoiseWidget()
+void NoiseWidget::updateView()
 {
+        auto model = static_cast<NosieModel*>(getModel());
+        if (!model)
+                return;
+
+        if (model->getId() == NoiseModel::NoiseId::Noise1)
+                noiseLabel->setImage(RK_RC_IMAGE(noise1_label));
+        else
+                noiseLabel->setImage(RK_RC_IMAGE(noise2_label));
 }
 
 void NoiseWidget::createNoiseControls(RkContainer *container)
 {
-        auto noiseControlsContainer = new RkContainer(this);
+        noiseControlsContainer = new RkContainer(this);
         noiseControlsContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(noiseControlsContainer);
 
-        auto noiseTypeContianer = new RkContainer(this, Rk::Orientation::Vertical);
+        noiseTypeContianer = new RkContainer(this, Rk::Orientation::Vertical);
         noiseTypeContianer->setSize({75, 96});
 
-        auto whiteNoiseBotton = new RkButton(this);
+        whiteNoiseBotton = new RkButton(this);
         whiteNoiseBotton->setImage(RK_RC_IMAGE(noise_white_button),
                                    RkButton::State::Unpressed);
         whiteNoiseBotton->setImage(RK_RC_IMAGE(noise_white_button_on),
@@ -116,7 +132,7 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
         whiteNoiseBotton->show();
         noiseTypeContianer->addWidget(whiteNoiseBotton);
 
-        auto pinkNoiseBotton = new RkButton(this);
+        pinkNoiseBotton = new RkButton(this);
         pinkNoiseBotton->setImage(RK_RC_IMAGE(noise_pink_button),
                                    RkButton::State::Unpressed);
         pinkNoiseBotton->setImage(RK_RC_IMAGE(noise_pink_button_on),
@@ -129,7 +145,7 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
         pinkNoiseBotton->show();
         noiseTypeContianer->addWidget(pinkNoiseBotton);
 
-        auto brownNoiseBotton = new RkButton(this);
+        brownNoiseBotton = new RkButton(this);
         brownNoiseBotton->setImage(RK_RC_IMAGE(noise_brown_button),
                                    RkButton::State::Unpressed);
         brownNoiseBotton->setImage(RK_RC_IMAGE(noise_brown_button_on),
@@ -144,17 +160,17 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
 
         noiseControlsContainer->addContainer(noiseTypeContianer);
 
-        auto densityKnob = new Knob(this, RK_RC_IMAGE(noise_density_knob_label));
+        densityKnob = new Knob(this, RK_RC_IMAGE(noise_density_knob_label));
         densityKnob->setKnobImage(RK_RC_IMAGE(noise_density_knob_bk));
         densityKnob->setMarkerImage(RK_RC_IMAGE(noise_density_knob_marker));
         noiseControlsContainer->addWidget(densityKnob);
 
-        auto brightnessKnob = new Knob(this, RK_RC_IMAGE(noise_brightness_knob_label));
+        brightnessKnob = new Knob(this, RK_RC_IMAGE(noise_brightness_knob_label));
         brightnessKnob->setKnobImage(RK_RC_IMAGE(noise_brightness_knob_bk));
         brightnessKnob->setMarkerImage(RK_RC_IMAGE(noise_brightness_knob_marker));
         noiseControlsContainer->addWidget(brightnessKnob);
 
-        auto gainKnob = new Knob(this, RK_RC_IMAGE(noise_gain_knob_label));
+        gainKnob = new Knob(this, RK_RC_IMAGE(noise_gain_knob_label));
         gainKnob->setKnobImage(RK_RC_IMAGE(noise_gain_knob_bk));
         gainKnob->setMarkerImage(RK_RC_IMAGE(noise_gain_knob_marker));
         noiseControlsContainer->addWidget(gainKnob);

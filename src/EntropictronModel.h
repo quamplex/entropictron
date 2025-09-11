@@ -26,10 +26,15 @@
 
 #include "RkObject.h"
 
+class DspProxy;
+class NoiseModel;
+
 class EntropictronModel: public RkObject
 {
  public:
         explicit EntropictronModel(RkObject *parent, DspProxy *dspPorxy);
+        NoiseModel* getNoise1() const;
+        NoiseModel* getNoise2() const;
 
  private:
         DspProxy *dspProxy;

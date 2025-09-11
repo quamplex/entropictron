@@ -22,13 +22,24 @@
  */
 
 #include "EntropictronModel.h"
+#include "NoiseProxy.h"
 #include "NoiseModel.h"
 
 EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspPorxy)
         : RkObject(parent)
         , dspProxy{dspProxy}
-        , noise1Model{new NoiseModel(dspPorxy->getNoise(DspProxy::NoiseId::Noise1))}
-        , noise2Model{new NoiseModel(dspPorxy->getNoise(DspProxy::NoiseId::Noise2))}
+        , noise1Model{new NoiseModel(this, dspPorxy->getNoise(DspProxy::NoiseId::Noise1))}
+        , noise2Model{new NoiseModel(this, dspPorxy->getNoise(DspProxy::NoiseId::Noise2))}
 {
         dspProxy->setParent(this);
+}
+
+NoiseModel* EntropictronModel::getNoise1() const
+{
+        return  noise1Model;
+}
+
+NoiseModel* EntropictronModel::getNoise2() const
+{
+        return  noise2Model;
 }

@@ -24,20 +24,24 @@
 #ifndef ENT_NOISE_WIDGET_H
 #define ENT_NOISE_WIDGET_H
 
-#include "EntWidget.h"
+#include "EntAbstractView.h"
+
+class NoiseModel;
 
 class RkContainer;
 
-class NoiseWidget : public EntWidget
+class NoiseWidget : public EntAbstractView
 {
 public:
-        explicit NoiseWidget(EntWidget* parent);
+        explicit NoiseWidget(EntWidget* parent, NoiseModel* model);
         ~NoiseWidget();
+        void createView() override;
+        void updateView() override;
 
 protected:
+        void bindModel() override;
+        void unbindModel() override;
         void createNoiseControls(RkContainer *container);
-
-private:
 };
 
 #endif // NT_NOISE_WIDGET_H
