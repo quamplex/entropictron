@@ -28,8 +28,6 @@
 
 #include "RkObject.h"
 
-class EntVstController;
-
 class DspNoiseProxy : public RkObject {
  public:
         explicit DspNoiseProxy(NoiseId id = {});

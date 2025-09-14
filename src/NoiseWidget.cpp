@@ -107,6 +107,21 @@ void NoiseWidget::updateView()
                 noiseLabel->setImage(RK_RC_IMAGE(noise1_label));
         else
                 noiseLabel->setImage(RK_RC_IMAGE(noise2_label));
+
+        whiteNoiseBotton->setPressed(model->noiseType() == NoiseType::NoiseWhite);
+        pinkNoiseBotton->setPressed(model->noiseType() == NoiseType::NoisePink)
+        brownNoiseBotton->setPressed(model->noiseType() == NoiseType::NoiseBrown)
+        densityKnob->setValue(model->density());
+        brightnessKnob->setValue(model->density());
+        gainKnob->setValue(model->gain()));
+}
+
+void NoiseWidget::bindModel()
+{
+}
+
+void NoiseWidget::unbindModel()
+{
 }
 
 void NoiseWidget::createNoiseControls(RkContainer *container)
