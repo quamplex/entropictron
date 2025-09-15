@@ -24,6 +24,9 @@
 #ifndef ENT_DSP_WRAPER_H
 #define ENT_DSP_WRAPER_H
 
+struct entropictron;
+class DspWrapperNoise;
+
 class DspWrapper
 {
 public:
@@ -33,10 +36,14 @@ public:
         unsigned int getSampleRate() const;
         void process(float** data, size_t size);
         void pressKey(int pitch, int velocity, bool on = true);
+        DspWrapperNoise* getNoise(NoiseId id) const;
 
 protected:
 
 private:
+        struct entropictron *entropictronDsp;
+        std::uniqe_ptr<DspWrapperNoise> dspNoise1;
+        std::uniqe_ptr<DspWrapperNoise> dspNoise2;
 };
 
 #endif // ENT_DSP_WRAPER_H

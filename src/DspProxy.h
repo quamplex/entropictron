@@ -24,18 +24,15 @@
 #ifndef DSP_PROXY_H
 #define DSP_PROXY_H
 
+#include "GuiTypes.h"
+
 class DspNoiseProxy;
 
 class DspProxy {
  public:
-        class enum NoiseId: int {
-                Noise1 = 0,
-                Noise2
-        };
-
         explicit DspPorxy();
         virtual ~DspPorxy() = default;
-        virtual DspNoiseProxy* getNoise(DspProxy::NoiseId id) const = 0;
+        virtual DspNoiseProxy* getNoise(NoiseId id) const = 0;
 };
 
 #endif // DSP_PROXY_H

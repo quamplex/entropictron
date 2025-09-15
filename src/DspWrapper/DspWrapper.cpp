@@ -22,13 +22,19 @@
  */
 
 #include "DspWrapper.h"
+#include "DspWrapperNoise.h"
 
 DspWrapper::DspWrapper()
 {
+        entropictron_create(&entropictronDsp, ENTROPICTRON_DEFAULT_SAMPLE_RATE);
+        dspNoise1 = std::make_unique<DspWrapperNoise>(entropictronDsp);
+        dspNoise2 = std::make_unique<DspWrapperNoise>(entropictronDsp);
 }
 
 DspWrapper::~DspWrapper()
 {
+        if (entropictronDsp)
+                entropictron_free(&entropictronDsp);
 }
 
 void DspWrapper::setSampleRate(unsigned int srate)
@@ -41,5 +47,13 @@ unsigned int DspWrapper::getSampleRate() const
 
 void DspWrapper::process(float** data, size_t size)
 {
+}
+
+DspWrapperNoise* DspWrapper::getNoise(NoiseId id) const
+{
+        if (id == NoiseId::Noise1)
+                return dspNoise1;
+        else
+                return dspNoise2;
 }
 

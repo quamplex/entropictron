@@ -1,5 +1,5 @@
 /**
- * File name: Parameters.h
+ * File name: DspWrapperNoise.cpp
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,32 +21,53 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_VST_PARMETERS_H
-#define ENT_VST_PARMETERS_H
+#include "DspWrapperNoise.h"
 
-#include "pluginterfaces/vst/vsttypes.h"
-
-namesapce EntVst {
-
-enum ParameterId : Steinberg::Vst::ParamID
+DspWrapperNoise::DspWrapperNoise(struct entropictron *dsp)
+        : entropictronDsp {dsp}
 {
-    // Noise 1
-    Noise1EnabledId     = 1000,
-    Noise1TypeId        = 1001,
-    Noise1DensityId     = 1002,
-    Noise1BrightnessId  = 1003,
-    Noise1GainId        = 1004,
+}
 
-    // Noise 2
-    Noise2EnabledId     = 1000,
-    Noise2TypeId        = 1001,
-    Noise2DensityId     = 1002,
-    Noise2BrightnessId  = 1003,
-    Noise2GainId        = 1004
-};
+void DspWrapperNoise::enable(bool b)
+{
+}
 
-using ParameterValue = std::variant<bool, int, float, double>;
+bool DspWrapperNoise::isEnabled() const
+{
+}
 
-} // namesapce EntVst
+void DspWrapperNoise::setType(NoiseType type)
+{
+}
 
-#endif // NT_VST_PARMETERS_H
+NoiseType DspWrapperNoise::noiseType() const
+{
+        return NoiseType::WhiteNoise;
+}
+
+void DspWrapperNoise::setDensity(double value)
+{
+}
+
+double DspWrapperNoise::density() const
+{
+        return 0;
+}
+
+void DspWrapperNoise::setBrightness(double value)
+{
+}
+
+double DspWrapperNoise::brightness() const
+{
+        return 0;
+}
+
+void DspWrapperNoise::setGain(double value)
+{
+}
+
+double DspWrapperNoise::gain() const
+{
+        return 0;
+}

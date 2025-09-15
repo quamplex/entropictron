@@ -56,6 +56,7 @@ bool ModuleExit (void)
 
 EntVstProcessor::EntVstProcessor()
 {
+        initParamMap();
 }
 
 EntVstProcessor::~EntVstProcessor()
@@ -250,6 +251,45 @@ EntVstProcessor::getState(IBStream* state)
         return kResultOk;
 }
 
-void EntVstProcessor::updateParameters(ParamID pid, ParamValue value)
+void EntVstProcessor::updateParameters(ParamterId id, ParamValue value)
 {
+        if (auto it = paramMap.find(id); it != paramMap.end())
+                it->second(value);
+}
+
+void EntVstProcessor::initParamMap()
+{
+        // Noise 1
+        paramMap[ParameterId::Noise1EnabledId] = [this](const auto & v) {
+                entropictronDsp->getNoise(NoiseId::Noise1)->enable(std::get<bool>(v));
+        };
+        paramMap[ParameterId::Noise1TypeId] = [this](const auto & v) {
+                entropictronDsp->getNoise(NoiseId::Noise1)->setType(std::get<int>(v));
+        };
+        paramMap[ParameterId::Noise1DensityId] = [this](const auto & v) {
+                entropictronDsp->getNoise(NoiseId::Noise1)->setDensity(std::get<float>(v));
+        };
+        paramMap[ParameterId::Noise1BrightnessId] = [this](const auto & v) {
+                entropictronDsp->getNoise(NoiseId::Noise1)->setBrightenss(std::get<float>(v));
+        };
+        paramMap[ParameterId::Noise1GainId] = [this](const auto & v) {
+                entropictronDsp->getNoise(NoiseId::Noise1)->setGain(std::get<float>(v));
+        };
+
+        // Noise 2
+        paramMap[ParameterId::Noise1EnabledId] = [this](const auto & v) {
+                entropictronDsp->getNoise(NoiseId::Noise1)->enable(std::get<bool>(v));
+        };
+        paramMap[ParameterId::Noise1TypeId] = [this](const auto & v) {
+                entropictronDsp->getNoise(NoiseId::Noise1)->setType(std::get<int>(v));
+        };
+        paramMap[ParameterId::Noise1DensityId] = [this](const auto & v) {
+                entropictronDsp->getNoise(NoiseId::Noise1)->setDensity(std::get<float>(v));
+        };
+        paramMap[ParameterId::Noise1BrightnessId] = [this](const auto & v) {
+                entropictronDsp->getNoise(NoiseId::Noise1)->setBrightenss(std::get<float>(v));
+        };
+        paramMap[ParameterId::Noise1GainId] = [this](const auto & v) {
+                entropictronDsp->getNoise(NoiseId::Noise1)->setGain(std::get<float>(v));
+        };
 }

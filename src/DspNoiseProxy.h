@@ -24,8 +24,6 @@
 #ifndef DSP_NOISE_PROXY_H
 #define DSP_NOISE_PROXY_H
 
-#include "DspProxy.h"
-
 #include "RkObject.h"
 
 class DspNoiseProxy : public RkObject {

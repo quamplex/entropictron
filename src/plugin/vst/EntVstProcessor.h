@@ -62,9 +62,12 @@ class EntVstProcessor : public AudioEffect {
         tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
 
  protected:
+        using UpdateParamFunc = std::function<void(const ParameterValue&)>;
+        void initParamMap();
         void updateParameters(ParamID pid, ParamValue value);
 
  private:
+        std::unordered_map<ParameterId, UpdateParamFunc> paramMap;
         std::unique_ptr<DspWrapper> entropictronDsp;
 };
 

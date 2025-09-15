@@ -42,6 +42,7 @@ protected:
         void bindModel() override;
         void unbindModel() override;
         void createNoiseControls(RkContainer *container);
+        void setType(NoiseType type);
 };
 
 #endif // NT_NOISE_WIDGET_H

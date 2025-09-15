@@ -108,6 +108,7 @@ void NoiseWidget::updateView()
         else
                 noiseLabel->setImage(RK_RC_IMAGE(noise2_label));
 
+        enableNoiseButton->setPressed(model->enabled());
         whiteNoiseBotton->setPressed(model->noiseType() == NoiseType::NoiseWhite);
         pinkNoiseBotton->setPressed(model->noiseType() == NoiseType::NoisePink)
         brownNoiseBotton->setPressed(model->noiseType() == NoiseType::NoiseBrown)
@@ -118,10 +119,86 @@ void NoiseWidget::updateView()
 
 void NoiseWidget::bindModel()
 {
+        auto model = static_cast<NosieModel*>(getModel());
+        if (!model)
+                return;
+
+        RK_ACT_BIND(enableNoiseButton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    model,
+                    enable(b));
+        RK_ACT_BIND(whiteNoiseBotton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    this, setType(NoiseType::NoiseWhite));
+        RK_ACT_BIND(pinkNoiseBotton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    this, setType(NoiseType::NoisePink));
+        RK_ACT_BIND(brownNoiseBotton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    this, setType(NoiseType::NoiseBrown));
+        RK_ACT_BIND(densityKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setDensity(value));
+        RK_ACT_BIND(brightnessKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setBrightness(value));
+        RK_ACT_BIND(gainKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setGain(value));
+
+        RK_ACT_BIND(model,
+                    modelUpdated,
+                    RK_ACT_ARGS(),
+                    this,
+                    updateView());
+        RK_ACT_BIND(model,
+                    enabled,
+                    RK_ACT_ARGS(bool b),
+                    enableNoiseButton,
+                    setPressed(b));
+        RK_ACT_BIND(model,
+                    typeUpdated,
+                    RK_ACT_ARGS(NoiseType type),
+                    this,
+                    setType(type));
+        RK_ACT_BIND(model,
+                    densityUpdated,
+                    RK_ACT_ARGS(double value),
+                    this,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    brightnessUpdated,
+                    RK_ACT_ARGS(double value),
+                    this,
+                    setBrightness(value));
+        RK_ACT_BIND(model,
+                    gainUpdated,
+                    RK_ACT_ARGS(double value),
+                    this,
+                    setGain(value));
 }
 
 void NoiseWidget::unbindModel()
 {
+        auto model = getModel();
+        unbindObject(model);
+        enableNoiseButton->unbindObject(model);
+        whiteNoiseBotton->unbindObject(model);
+        pinkNoiseBotton->unbindObject(model);
+        brownNoiseBotton->unbindObject(model);
+        densityKnob->unbindObject(model);
+        brightnessKnob->unbindObject(model);
+        gainKnob->unbindObject(model);
 }
 
 void NoiseWidget::createNoiseControls(RkContainer *container)
@@ -189,4 +266,11 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
         gainKnob->setKnobImage(RK_RC_IMAGE(noise_gain_knob_bk));
         gainKnob->setMarkerImage(RK_RC_IMAGE(noise_gain_knob_marker));
         noiseControlsContainer->addWidget(gainKnob);
+}
+
+void NoiseWidget::setType(NoiseType type)
+{
+        auto model = static_cast<NosieModel*>(getModel());
+        if (model)
+                model->setType(type);
 }

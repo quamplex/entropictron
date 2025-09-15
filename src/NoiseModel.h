@@ -25,12 +25,12 @@
 #define ENT_NOISE_MODEL_H
 
 #include "EntAbstractModel.h"
-#include "DspNoiseProxy.h"
+
+class DspNoiseProxy;
 
 class NoiseModel: public EntAbstractModel
 {
  public:
-        using NoiseType = DspNoiseProxy::NoiseType;
         explicit NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy);
         void enable(bool b = true);
         bool isEnabled() const;
