@@ -89,10 +89,15 @@ EntVstController::createView(Steinberg::FIDString name)
     return nullptr;
 }
 
-void EntVstController::setParamterCallback(const ParameterId &paramId,
+void EntVstController::setParamterCallback(ParameterId paramId,
                                            const ParameterCallback &callback)
 {
-        paramCallback.insert({paramId, callback});
+        parametersCallbacks.insert({paramId, callback});
+}
+
+void EntVstController::removeParamterCallback(PrameterId id)
+{
+        parametersCallbacks.erase(id);
 }
 
 tresult EntVstController::setParamNormalized (ParamID tag, ParamValue value)
@@ -103,9 +108,7 @@ tresult EntVstController::setParamNormalized (ParamID tag, ParamValue value)
 
         auto parameterId = static_cast<ParamterId>(tag);
         auto res = parmatersCallbacks.find(parameterId);
-        if (res != parmatersCallbacks.end()) {
-                for (const auto &callback: res.second)
-                        callback(parameterId, value);
-        }
+        if (res != parmatersCallbacks.end())
+                res.second(parameterId, value);
         return result;
 }

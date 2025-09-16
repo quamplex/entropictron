@@ -26,6 +26,8 @@
 
 #include "DspNoiseProxy.h"
 
+using namespace EntVst;
+
 class EntVstController;
 
 class DspNoiseProxyVst: public DspNoiseProxy {
@@ -43,10 +45,9 @@ class DspNoiseProxyVst: public DspNoiseProxy {
         double gain() const override;
 
 protected:
-        void onParameterChanged(const ParamterId &paramId,
-                                const ParameterValue &value);
-
- private:
+        void onParameterChanged(ParamterId paramId,
+                                const ParamValue &value);
+private:
         EntVstController *vstController;
 };
 

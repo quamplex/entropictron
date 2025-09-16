@@ -45,8 +45,6 @@ enum ParameterId : Steinberg::Vst::ParamID
     Noise2GainId        = 1004
 };
 
-using ParameterValue = std::variant<bool, int, float, double>;
-
 } // namesapce EntVst
 
 #endif // NT_VST_PARMETERS_H

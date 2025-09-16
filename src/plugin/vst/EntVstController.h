@@ -33,20 +33,21 @@ class EntVstController : public Vst::EditControllerEx1 {
  public:
         using ParameterValue = EntVst::ParameterValue;
         using ParameterId = EntVst::ParamterId;
-        using ParameterCallback = std::function<void(const ParametersId& paramId,
-                                                     const ParameterValue &value)>;
 
         EntVstController() = default;
         static FUnknown* createInstance(void*);
         tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
         IPlugView* PLUGIN_API createView(Steinberg::FIDString name) SMTG_OVERRIDE;
-        void setParamterCallback(const ParameterCallback &callback);
 
 protected:
+        void setParamterCallback(PrameterId id, const ParameterCallback &callback);
+        void removeParamterCallback(PrameterId id);
+        using ParameterCallback = std::function<void(ParametersId paramId,
+                                                const ParameValue &value)>;
         tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
 
 private:
-        ParameterCallback parameterCallback;
+        std::unoredered_map<ParameterId, ParameterCallback> parametersCallbacks;
 };
 
 #endif // ENT_VST_CONTROLLER_H

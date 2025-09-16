@@ -23,8 +23,13 @@
 
 #include "DspNoiseProxy.h"
 
+DspNoiseProxy::DspNoiseProxy(NoiseId id)
+        , noiseId{id}
+{
+}
+
 DspNoiseProxy::DspNoiseProxy(RkObject* parent, NoiseId id)
-        : DspNoiseProxy(parent)
+        : RkObject(parent)
         , noiseId{id}
 {
 }
