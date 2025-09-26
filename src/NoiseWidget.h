@@ -25,10 +25,13 @@
 #define ENT_NOISE_WIDGET_H
 
 #include "EntAbstractView.h"
+#include "GuiTypes.h"
 
 class NoiseModel;
-
 class RkContainer;
+class RkButton;
+class RkLabel;
+class Knob;
 
 class NoiseWidget : public EntAbstractView
 {
@@ -43,6 +46,16 @@ protected:
         void unbindModel() override;
         void createNoiseControls(RkContainer *container);
         void setType(NoiseType type);
+
+private:
+        RkButton *enableNoiseButton;
+        RkLabel *noiseLabel;
+        RkButton *whiteNoiseButton;
+        RkButton *pinkNoiseButton;
+        RkButton *brownNoiseButton;
+        Knob *densityKnob;
+        Knob *brightnessKnob;
+        Knob *gainKnob;
 };
 
 #endif // NT_NOISE_WIDGET_H

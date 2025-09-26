@@ -116,9 +116,12 @@ set(ENT_PRESETS_DIR ${CMAKE_CURRENT_SOURCE_DIR}/presets)
 
 set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/globals.h
+  ${ENT_COMMON_DIR}/GuiTypes.h
   ${ENT_COMMON_DIR}/DspProxy.h
+  ${ENT_COMMON_DIR}/DspNoiseProxy.h
   ${ENT_COMMON_DIR}/EntAbstractModel.h
   ${ENT_COMMON_DIR}/EntropictronModel.h
+  ${ENT_COMMON_DIR}/NoiseModel.h
   ${ENT_COMMON_DIR}/EntWidget.h
   ${ENT_COMMON_DIR}/EntAbstractView.h
   ${ENT_COMMON_DIR}/EntWidget.h
@@ -129,8 +132,10 @@ set(ENT_COMMON_HEADERS
 
 set(ENT_COMMON_SOURCES
   ${ENT_COMMON_DIR}/DspProxy.cpp
+  ${ENT_COMMON_DIR}/DspNoiseProxy.cpp
   ${ENT_COMMON_DIR}/EntAbstractModel.cpp
   ${ENT_COMMON_DIR}/EntropictronModel.cpp
+  ${ENT_COMMON_DIR}/NoiseModel.cpp
   ${ENT_COMMON_DIR}/EntWidget.cpp
   ${ENT_COMMON_DIR}/EntAbstractView.cpp
   ${ENT_COMMON_DIR}/Knob.cpp
@@ -205,12 +210,14 @@ else ()
 endif ()
 
 include_directories(${ENT_DSP_DIR}/src)
+include_directories(${ENT_DSP_WRAPPER_DIR})
 include_directories(${ENT_REDKITE_DIR}/include)
 link_directories(${ENT_REDKITE_DIR})
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_definitions(-fPIC)
 add_subdirectory(${ENT_DSP_DIR})
+add_subdirectory(${ENT_DSP_WRAPPER_DIR})
 add_subdirectory(${ENT_REDKITE_DIR} redkite)
 include(${ENT_RC_DIR}/resources.rc)
 

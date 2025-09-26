@@ -29,6 +29,7 @@
 #include "public.sdk/source/vst/vsteditcontroller.h"
 
 using namespace Steinberg;
+using namespace EntVst;
 
 FUnknown* EntVstController::createInstance(void*)
 {
@@ -46,37 +47,37 @@ EntVstController::initialize(FUnknown* context)
     parameters.addParameter(STR16("Noise 1 Enabled"),
                             nullptr, 1, 0.0,
                             0,
-                            ParametersId::Noise1EnabledId);
+                            ParameterId::Noise1EnabledId);
     parameters.addParameter(STR16("Noise 1 Type"),
                             nullptr, 2, 1.0,
                             ParameterInfo::kCanAutomate,
-                            ParametersId::Noise1TypeId);
+                            ParameterId::Noise1TypeId);
     parameters.addParameter(STR16("Noise 1 Gain"),
                             nullptr, 0, 1.0,
                             ParameterInfo::kCanAutomate,
-                            ParametersId::Noise1GainId);
+                            ParameterId::Noise1GainId);
     parameters.addParameter(STR16("Noise 1 Brightness"),
                             nullptr, 0, 1.0,
                             ParameterInfo::kCanAutomate,
-                            ParametersId::Noise1BrightnessId);
+                            ParameterId::Noise1BrightnessId);
 
     // Noise 2
     parameters.addParameter(STR16("Noise 2 Enabled"),
                             nullptr, 1, 0.0,
                             0,
-                            ParametersId::Noise2EnabledId);
+                            ParameterId::Noise2EnabledId);
     parameters.addParameter(STR16("Noise 2 Type"),
                             nullptr, 2, 1.0,
                             ParameterInfo::kCanAutomate,
-                            ParametersId::Noise2TypeId);
+                            ParameterId::Noise2TypeId);
     parameters.addParameter(STR16("Noise 2 Gain"),
                             nullptr, 0, 1.0,
                             ParameterInfo::kCanAutomate,
-                            ParametersId::Noise2GainId);
+                            ParameterId::Noise2GainId);
     parameters.addParameter(STR16("Noise 2 Brightness"),
                             nullptr, 0, 1.0,
                             ParameterInfo::kCanAutomate,
-                            ParametersId::Noise2BrightnessId);
+                            ParameterId::Noise2BrightnessId);
 
     return result;
 }
@@ -95,7 +96,7 @@ void EntVstController::setParamterCallback(ParameterId paramId,
         parametersCallbacks.insert({paramId, callback});
 }
 
-void EntVstController::removeParamterCallback(PrameterId id)
+void EntVstController::removeParamterCallback(ParameterId id)
 {
         parametersCallbacks.erase(id);
 }
@@ -106,9 +107,9 @@ tresult EntVstController::setParamNormalized (ParamID tag, ParamValue value)
         if (result != kResultOk)
                 return result;
 
-        auto parameterId = static_cast<ParamterId>(tag);
-        auto res = parmatersCallbacks.find(parameterId);
-        if (res != parmatersCallbacks.end())
-                res.second(parameterId, value);
+        auto parameterId = static_cast<ParameterId>(tag);
+        auto res = parametersCallbacks.find(parameterId);
+        if (res != parametersCallbacks.end())
+                res->second(parameterId, value);
         return result;
 }

@@ -26,7 +26,7 @@
 
 #include "pluginterfaces/vst/vsttypes.h"
 
-namesapce EntVst {
+namespace EntVst {
 
 enum ParameterId : Steinberg::Vst::ParamID
 {

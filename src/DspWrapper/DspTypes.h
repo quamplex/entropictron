@@ -1,5 +1,5 @@
 /**
- * File name: Enums.h
+ * File name: DspTypes.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,14 +21,18 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-class enum NoiseId: int {
+#ifndef ENT_DSP_TYPES_H
+#define ENT_DSP_TYPES_H
+
+enum class NoiseId: int {
         Noise1,
         Noise2
 };
 
-class enum NoiseType: int {
+enum class NoiseType: int {
         WhiteNoise = 0,
         PinkNoise  = 1,
         BrownNoise = 2
 };
 
+#endif // ENT_DSP_TYPES_H

@@ -24,7 +24,7 @@
 #include "DspNoiseProxy.h"
 
 DspNoiseProxy::DspNoiseProxy(NoiseId id)
-        , noiseId{id}
+        : noiseId{id}
 {
 }
 
@@ -34,7 +34,7 @@ DspNoiseProxy::DspNoiseProxy(RkObject* parent, NoiseId id)
 {
 }
 
-DspNoiseProxy::NoiseId DspNoiseProxy::getNoiseId() const
+NoiseId DspNoiseProxy::getNoiseId() const
 {
         return noiseId;
 }

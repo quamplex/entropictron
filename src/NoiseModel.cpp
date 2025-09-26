@@ -37,17 +37,22 @@ NoiseModel::NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy)
                     RK_ACT_ARGS(NoiseType type),
                     this, typeUpdated(type));
         RK_ACT_BIND(dspNoiseProxy,
-                    denistyUpdated,
+                    densityUpdated,
                     RK_ACT_ARGS(double value),
-                    this, denistyUpdated(value));
+                    this, densityUpdated(value));
         RK_ACT_BIND(dspNoiseProxy,
-                    bightnessUpdated,
+                    brightnessUpdated,
                     RK_ACT_ARGS(double value),
-                    this, bightnessUpdated(value));
+                    this, brightnessUpdated(value));
         RK_ACT_BIND(dspNoiseProxy,
                     gainUpdated,
                     RK_ACT_ARGS(double value),
                     this, gainUpdated(value));
+}
+
+NoiseId NoiseModel::getId() const
+{
+        return dspNoiseProxy->getNoiseId();
 }
 
 void NoiseModel::enable(bool b)
@@ -58,16 +63,16 @@ void NoiseModel::enable(bool b)
 
 bool NoiseModel::isEnabled() const
 {
-        return dspNoiseProxy->isEenabled();
+        return dspNoiseProxy->isEnabled();
 }
 
-void NoiseModel::setType(NoiseModel::NoiseType type)
+void NoiseModel::setType(NoiseType type)
 {
         if (dspNoiseProxy->setType(type))
                 action typeUpdated(type);
 }
 
-NoiseModel::NoiseType NoiseModel::noiseType() const
+NoiseType NoiseModel::noiseType() const
 {
         return dspNoiseProxy->noiseType();
 }

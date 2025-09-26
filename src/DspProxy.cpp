@@ -23,7 +23,8 @@
 
 #include "DspProxy.h"
 
-DspProxy::DspPorxy()
+DspProxy::DspProxy(RkObject *parent)
+        : RkObject(parent)
 {
 }
 

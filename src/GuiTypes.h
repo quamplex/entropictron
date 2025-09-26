@@ -1,5 +1,5 @@
 /**
- * File name: DspWrapper.h
+ * File name: GuiTypes.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,32 +21,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_DSP_WRAPER_H
-#define ENT_DSP_WRAPER_H
+#ifndef ENT_GUI_TYPES_H
+#define ENT_GUI_TYPES_H
 
-#include "globals.h"
 #include "DspTypes.h"
 
-struct entropictron;
-class DspWrapperNoise;
-
-class DspWrapper
-{
-public:
-        explicit DspWrapper();
-        ~DspWrapper();
-        void setSampleRate(unsigned int srate);
-        int getSampleRate() const;
-        void process(float** data, size_t size);
-        void pressKey(int pitch, int velocity, bool on = true);
-        DspWrapperNoise* getNoise(NoiseId id) const;
-
-protected:
-
-private:
-        struct entropictron *entropictronDsp;
-        std::unique_ptr<DspWrapperNoise> dspNoise1;
-        std::unique_ptr<DspWrapperNoise> dspNoise2;
-};
-
-#endif // ENT_DSP_WRAPER_H
+#endif // ENT_GUI_TYPES_H

@@ -26,12 +26,14 @@
 
 #include "GuiTypes.h"
 
+#include "RkObject.h"
+
 class DspNoiseProxy;
 
-class DspProxy {
+class DspProxy : public RkObject {
  public:
-        explicit DspPorxy();
-        virtual ~DspPorxy() = default;
+        DspProxy(RkObject *parent = nullptr);
+        virtual ~DspProxy() = default;
         virtual DspNoiseProxy* getNoise(NoiseId id) const = 0;
 };
 

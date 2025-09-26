@@ -24,6 +24,10 @@
 #ifndef ENT_DSP_WRAPER_NOISE_H
 #define ENT_DSP_WRAPER_NOISE_H
 
+#include "DspTypes.h"
+
+struct entropictron;
+
 class DspWrapperNoise
 {
  public:

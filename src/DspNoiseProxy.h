@@ -25,23 +25,24 @@
 #define DSP_NOISE_PROXY_H
 
 #include "RkObject.h"
+#include "GuiTypes.h"
 
 class DspNoiseProxy : public RkObject {
  public:
-        explicit DspNoiseProxy(NoiseId id = {});
-        explicit DspNoiseProxy(RkObject* parent, NoiseId id = {});
+        explicit DspNoiseProxy(NoiseId id = NoiseId::Noise1);
+        explicit DspNoiseProxy(RkObject* parent, NoiseId id = NoiseId::Noise1);
         virtual ~DspNoiseProxy() = default;
         void setNoiseId(NoiseId id);
         NoiseId getNoiseId() const;
-        virtual void enable(bool b = true) = 0;
+        virtual bool enable(bool b = true) = 0;
         virtual bool isEnabled() const = 0;
-        virtual void setType(NoiseType type) = 0;
+        virtual bool setType(NoiseType type) = 0;
         virtual NoiseType noiseType() const = 0;
-        virtual void setDensity(double value) = 0;
+        virtual bool setDensity(double value) = 0;
         virtual double density() const = 0;
-        virtual void setBrightness(double value) = 0;
+        virtual bool setBrightness(double value) = 0;
         virtual double brightness() const = 0;
-        virtual void setGain(double value) = 0;
+        virtual bool setGain(double value) = 0;
         virtual double gain() const = 0;
         RK_DECL_ACT(enabled,
                     enabled(bool b),
@@ -55,8 +56,8 @@ class DspNoiseProxy : public RkObject {
                     densityUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
-        RK_DECL_ACT(bightnessUpdated,
-                    bightnessUpdated(double value),
+        RK_DECL_ACT(brightnessUpdated,
+                    brightnessUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
         RK_DECL_ACT(gainUpdated,

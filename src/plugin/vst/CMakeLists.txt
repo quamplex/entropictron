@@ -57,7 +57,7 @@ else ()
 endif ()
 
 target_link_libraries(${target} PRIVATE base sdk sdk_common pluginterfaces)
-target_link_libraries(${target} PRIVATE entropictron_common dsp_plugin redkite)
+target_link_libraries(${target} PRIVATE entropictron_common dsp_wrapper dsp_plugin redkite)
 #target_link_options(${target} PRIVATE -Wl,--no-undefined)
 
 if (CMAKE_SYSTEM_NAME MATCHES Windows)

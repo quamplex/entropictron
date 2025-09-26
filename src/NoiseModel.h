@@ -25,6 +25,7 @@
 #define ENT_NOISE_MODEL_H
 
 #include "EntAbstractModel.h"
+#include "GuiTypes.h"
 
 class DspNoiseProxy;
 
@@ -32,6 +33,7 @@ class NoiseModel: public EntAbstractModel
 {
  public:
         explicit NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy);
+        NoiseId getId() const;
         void enable(bool b = true);
         bool isEnabled() const;
         void setType(NoiseType type);
@@ -54,8 +56,8 @@ class NoiseModel: public EntAbstractModel
                     densityUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
-        RK_DECL_ACT(bightnessUpdated,
-                    bightnessUpdated(double value),
+        RK_DECL_ACT(brightnessUpdated,
+                    brightnessUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
         RK_DECL_ACT(gainUpdated,

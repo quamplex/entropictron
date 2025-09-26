@@ -25,6 +25,8 @@
 #define ENT_VST_PROCESSOR_H
 
 #include "globals.h"
+#include "EntVstParameters.h"
+
 #include "public.sdk/source/vst/vstaudioeffect.h"
 
 #ifdef __cplusplus
@@ -41,6 +43,7 @@ __attribute__((visibility("default"))) bool ModuleExit (void);
 
 using namespace Steinberg;
 using namespace Steinberg::Vst;
+using namespace EntVst;
 
 class DspWrapper;
 
@@ -62,9 +65,9 @@ class EntVstProcessor : public AudioEffect {
         tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
 
  protected:
-        using UpdateParamFunc = std::function<void(const ParameterValue&)>;
+        using UpdateParamFunc = std::function<void(const ParamValue&)>;
         void initParamMap();
-        void updateParameters(ParamID pid, ParamValue value);
+        void updateParameters(ParameterId pid, ParamValue value);
 
  private:
         std::unordered_map<ParameterId, UpdateParamFunc> paramMap;

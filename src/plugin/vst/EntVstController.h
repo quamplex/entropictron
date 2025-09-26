@@ -24,30 +24,34 @@
 #ifndef ENT_VST_CONTROLLER_H
 #define ENT_VST_CONTROLLER_H
 
+#include "EntVstParameters.h"
+
 #include "public.sdk/source/vst/vsteditcontroller.h"
 #include "pluginterfaces/gui/iplugview.h"
 
+#include <unordered_map>
+#include <functional>
+
 using namespace Steinberg;
+using namespace Steinberg::Vst;
+using namespace EntVst;
 
 class EntVstController : public Vst::EditControllerEx1 {
  public:
-        using ParameterValue = EntVst::ParameterValue;
-        using ParameterId = EntVst::ParamterId;
-
         EntVstController() = default;
         static FUnknown* createInstance(void*);
         tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
-        IPlugView* PLUGIN_API createView(Steinberg::FIDString name) SMTG_OVERRIDE;
+        IPlugView* PLUGIN_API createView(FIDString name) SMTG_OVERRIDE;
 
 protected:
-        void setParamterCallback(PrameterId id, const ParameterCallback &callback);
-        void removeParamterCallback(PrameterId id);
-        using ParameterCallback = std::function<void(ParametersId paramId,
-                                                const ParameValue &value)>;
+        using ParameterCallback = std::function<void(ParameterId paramId,
+                                                const ParamValue &value)>;
+        void setParamterCallback(ParameterId id, const ParameterCallback &callback);
+        void removeParamterCallback(ParameterId id);
         tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
 
 private:
-        std::unoredered_map<ParameterId, ParameterCallback> parametersCallbacks;
+        std::unordered_map<ParameterId, ParameterCallback> parametersCallbacks;
 };
 
 #endif // ENT_VST_CONTROLLER_H

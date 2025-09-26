@@ -33,15 +33,15 @@ class EntVstController;
 class DspNoiseProxyVst: public DspNoiseProxy {
  public:
         explicit DspNoiseProxyVst(EntVstController *controller, NoiseId id);
-        void enable(bool b = true) override;
+        bool enable(bool b = true) override;
         bool isEnabled() const override;
-        void setType(NoiseType type) override;
+        bool setType(NoiseType type) override;
         NoiseType noiseType() const override;
-        void setDensity(double value) override;
+        bool setDensity(double value) override;
         double density() const override;
-        void setBrightness(double value) override;
+        bool setBrightness(double value) override;
         double brightness() const override;
-        void setGain(double value) override;
+        bool setGain(double value) override;
         double gain() const override;
 
 protected:

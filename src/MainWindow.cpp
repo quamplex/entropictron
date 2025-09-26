@@ -70,13 +70,13 @@ bool MainWindow::createUi(void)
         mainContainer->addContainer(horizontalContainer);
 
         // Noise 1 controls widget
-        auto noiseWidget = new NoiseWidget(this, entropictronModel->getNoise1(noiseId));
+        auto noiseWidget = new NoiseWidget(this, entropictronModel->getNoise1());
         horizontalContainer->addWidget(noiseWidget);
 
         // Noise 2 controls widget
         horizontalContainer->addSpace(5);
-        noiseWidget = new NoiseWidget(this, entropictronModel->getNoise2(noiseId));
-        horizontalContainer->addWidget(noiseWidget,);
+        noiseWidget = new NoiseWidget(this, entropictronModel->getNoise2());
+        horizontalContainer->addWidget(noiseWidget);
 
         // Global controls widget
         horizontalContainer->addSpace(5);

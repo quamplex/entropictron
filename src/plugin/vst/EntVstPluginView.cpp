@@ -25,11 +25,13 @@
 #include "MainWindow.h"
 #include "EntVstLoopTimer.h"
 #include "DspVstProxy.h"
+#include "EntVstController.h"
 
 #include "RkPlatform.h"
 #include "RkMain.h"
 
 using namespace Steinberg;
+using namespace Steinberg::Vst;
 
 EntVstPluginView::EntVstPluginView(EditController *controller)
         : EditorView(controller)
@@ -68,9 +70,12 @@ EntVstPluginView::attached(void* parent, FIDString type)
         auto info = rk_from_native_x11(xDisplay, screenNumber, reinterpret_cast<Window>(parent));
 #endif // ENTROPICTRON_OS_GNU
 
-        mainWindow = new MainWindow(*guiApp.get(),
-                                    info,
-                                    new DspProxyVst(getController()));
+        auto controller = dynamic_cast<EntVstController*>(getController());
+        if (!controller)
+                return kResultFalse;
+
+        auto dspProxy = new DspProxyVst(controller);
+        mainWindow = new MainWindow(*guiApp.get(), info, dspProxy);
         mainWindow->show();
         loopTimer->registerTimer(guiApp.get());
 

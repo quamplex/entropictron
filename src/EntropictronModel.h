@@ -38,6 +38,8 @@ class EntropictronModel: public RkObject
 
  private:
         DspProxy *dspProxy;
+        NoiseModel *noise1Model;
+        NoiseModel *noise2Model;
 };
 
 #endif // ENTROPICTRON_MODEL_H

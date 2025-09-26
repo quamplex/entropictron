@@ -34,6 +34,7 @@ void DspWrapperNoise::enable(bool b)
 
 bool DspWrapperNoise::isEnabled() const
 {
+        return false;
 }
 
 void DspWrapperNoise::setType(NoiseType type)
