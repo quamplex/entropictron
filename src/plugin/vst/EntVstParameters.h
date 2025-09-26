@@ -38,11 +38,11 @@ enum ParameterId : Steinberg::Vst::ParamID
     Noise1GainId        = 1004,
 
     // Noise 2
-    Noise2EnabledId     = 1000,
-    Noise2TypeId        = 1001,
-    Noise2DensityId     = 1002,
-    Noise2BrightnessId  = 1003,
-    Noise2GainId        = 1004
+    Noise2EnabledId     = 2000,
+    Noise2TypeId        = 2001,
+    Noise2DensityId     = 2002,
+    Noise2BrightnessId  = 2003,
+    Noise2GainId        = 2004
 };
 
 } // namesapce EntVst

@@ -27,6 +27,7 @@
 #include "DspProxy.h"
 
 class EntVstController;
+class DspNoiseProxyVst;
 
 class DspProxyVst: public DspProxy {
  public:
@@ -34,6 +35,8 @@ class DspProxyVst: public DspProxy {
         DspNoiseProxy* getNoise(NoiseId id) const override;
  private:
         EntVstController *vstController;
+        DspNoiseProxyVst * dspNoise1Proxy;
+        DspNoiseProxyVst * dspNoise2Proxy;
 };
 
 #endif // DSP_PROXY_VST_H

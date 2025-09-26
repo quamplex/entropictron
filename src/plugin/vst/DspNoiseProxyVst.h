@@ -25,14 +25,19 @@
 #define DSP_NOISE_PROXY_VST_H
 
 #include "DspNoiseProxy.h"
+#include "EntVstParameters.h"
 
 using namespace EntVst;
+using namespace Steinberg::Vst;
 
 class EntVstController;
 
 class DspNoiseProxyVst: public DspNoiseProxy {
  public:
-        explicit DspNoiseProxyVst(EntVstController *controller, NoiseId id);
+        explicit DspNoiseProxyVst(RkObject* parent,
+                                  EntVstController *controller,
+                                  NoiseId id);
+        ~DspNoiseProxyVst();
         bool enable(bool b = true) override;
         bool isEnabled() const override;
         bool setType(NoiseType type) override;
@@ -45,8 +50,7 @@ class DspNoiseProxyVst: public DspNoiseProxy {
         double gain() const override;
 
 protected:
-        void onParameterChanged(ParamterId paramId,
-                                const ParamValue &value);
+        void onParameterChanged(ParameterId paramId, ParamValue value);
 private:
         EntVstController *vstController;
 };

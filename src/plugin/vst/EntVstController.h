@@ -38,16 +38,15 @@ using namespace EntVst;
 
 class EntVstController : public Vst::EditControllerEx1 {
  public:
+        using ParameterCallback = std::function<void(ParameterId paramId, ParamValue value)>;
         EntVstController() = default;
         static FUnknown* createInstance(void*);
         tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
         IPlugView* PLUGIN_API createView(FIDString name) SMTG_OVERRIDE;
-
-protected:
-        using ParameterCallback = std::function<void(ParameterId paramId,
-                                                const ParamValue &value)>;
         void setParamterCallback(ParameterId id, const ParameterCallback &callback);
         void removeParamterCallback(ParameterId id);
+
+protected:
         tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
 
 private:

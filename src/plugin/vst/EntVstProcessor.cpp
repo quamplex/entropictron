@@ -69,12 +69,14 @@ EntVstProcessor::~EntVstProcessor()
 
 FUnknown* EntVstProcessor::createInstance(void*)
 {
+        ENTROPICTRON_LOG_DEBUG("called");
         return static_cast<IAudioProcessor*>(new EntVstProcessor());
 }
 
 tresult PLUGIN_API
 EntVstProcessor::initialize(FUnknown* context)
 {
+        ENTROPICTRON_LOG_DEBUG("called");
         auto res = AudioEffect::initialize(context);
         if (res != kResultTrue)
                 return res;
@@ -108,6 +110,7 @@ EntVstProcessor::setBusArrangements(SpeakerArrangement* inputs,
 tresult PLUGIN_API
 EntVstProcessor::setupProcessing(ProcessSetup& setup)
 {
+        ENTROPICTRON_LOG_DEBUG("called");
         if (entropictronDsp)
                 entropictronDsp->setSampleRate(setup.sampleRate);
         return AudioEffect::setupProcessing(setup);
@@ -122,6 +125,7 @@ EntVstProcessor::setActive(TBool state)
 tresult PLUGIN_API
 EntVstProcessor::process(ProcessData& data)
  {
+         ENTROPICTRON_LOG_DEBUG("called");
          using namespace Steinberg::Vst;
          if (!entropictronDsp || data.numSamples < 1)
                  return kResultOk;

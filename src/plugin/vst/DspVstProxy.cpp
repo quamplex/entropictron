@@ -21,8 +21,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#include "DspProxyVst.h"
+#include "DspVstProxy.h"
 #include "EntVstController.h"
+#include "DspNoiseProxyVst.h"
 
 DspProxyVst::DspProxyVst(EntVstController *controller)
         : vstController{controller}
@@ -33,15 +34,14 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
                                                controller,
                                                NoiseId::Noise2)}
 {
-        vstController->setDspProxy(this);
 }
 
 DspNoiseProxy* DspProxyVst::getNoise(NoiseId id) const
 {
         switch(id) {
-        case NoiseId::Noise1
+        case NoiseId::Noise1:
                 return dspNoise1Proxy;
-        case NoiseId::Noise1
+        case NoiseId::Noise2:
                 return dspNoise2Proxy;
         default:
                 return nullptr;
