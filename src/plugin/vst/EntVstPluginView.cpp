@@ -56,6 +56,7 @@ EntVstPluginView::setFrame(IPlugFrame* frame)
 tresult PLUGIN_API
 EntVstPluginView::attached(void* parent, FIDString type)
 {
+        ENTROPICTRON_LOG_DEBUG("called");
         guiApp = std::make_unique<RkMain>();
 
 #ifdef ENTROPICTRON_OS_WINDOWS
@@ -75,6 +76,7 @@ EntVstPluginView::attached(void* parent, FIDString type)
                 return kResultFalse;
 
         auto dspProxy = new DspProxyVst(controller);
+        dspProxy->setName("DspProxyVst");
         mainWindow = new MainWindow(*guiApp.get(), info, dspProxy);
         mainWindow->show();
         loopTimer->registerTimer(guiApp.get());

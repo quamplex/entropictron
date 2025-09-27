@@ -24,6 +24,7 @@
 #ifndef ENT_GUI_TYPES_H
 #define ENT_GUI_TYPES_H
 
+#include "globals.h"
 #include "DspTypes.h"
 
 #endif // ENT_GUI_TYPES_H

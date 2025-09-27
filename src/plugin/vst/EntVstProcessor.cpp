@@ -34,6 +34,7 @@
 #include "pluginterfaces/vst/ivstevents.h"
 
 using namespace EntVst;
+using namespace Steinberg::Vst;
 
 static constexpr int MAX_EVENTS = 512;
 
@@ -91,6 +92,7 @@ EntVstProcessor::initialize(FUnknown* context)
 
 tresult PLUGIN_API EntVstProcessor::terminate()
 {
+        ENTROPICTRON_LOG_DEBUG("called");
         entropictronDsp.reset();
         return AudioEffect::terminate();
 }
@@ -101,6 +103,7 @@ EntVstProcessor::setBusArrangements(SpeakerArrangement* inputs,
                                     SpeakerArrangement* outputs,
                                     int32 numOuts)
 {
+        ENTROPICTRON_LOG_DEBUG("called");
         return AudioEffect::setBusArrangements(inputs,
                                                               numIns,
                                                               outputs,
@@ -125,8 +128,6 @@ EntVstProcessor::setActive(TBool state)
 tresult PLUGIN_API
 EntVstProcessor::process(ProcessData& data)
  {
-         ENTROPICTRON_LOG_DEBUG("called");
-         using namespace Steinberg::Vst;
          if (!entropictronDsp || data.numSamples < 1)
                  return kResultOk;
 
@@ -262,6 +263,7 @@ EntVstProcessor::getState(IBStream* state)
 
 void EntVstProcessor::updateParameters(ParameterId id, ParamValue value)
  {
+         ENTROPICTRON_LOG_DEBUG("called");
         if (auto it = paramMap.find(id); it != paramMap.end())
                 it->second(value);
 }

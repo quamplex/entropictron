@@ -32,7 +32,7 @@ class NoiseModel;
 class EntropictronModel: public RkObject
 {
  public:
-        explicit EntropictronModel(RkObject *parent, DspProxy *dspPorxy);
+        explicit EntropictronModel(RkObject *parent, DspProxy *dspProxy);
         NoiseModel* getNoise1() const;
         NoiseModel* getNoise2() const;
 

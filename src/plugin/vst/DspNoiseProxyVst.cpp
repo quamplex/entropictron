@@ -23,6 +23,7 @@
 
 #include "DspNoiseProxyVst.h"
 #include "EntVstController.h"
+#include "globals.h"
 
 #include <cmath>
 
@@ -41,11 +42,17 @@ DspNoiseProxyVst::DspNoiseProxyVst(RkObject* parent,
 
         std::vector<EntVst::ParameterId> params;
         if (getNoiseId() == NoiseId::Noise1) {
-                params = { ParameterId::Noise1EnabledId, ParameterId::Noise1TypeId,
-                           ParameterId::Noise1GainId, ParameterId::Noise1BrightnessId };
+                params = { ParameterId::Noise1EnabledId,
+                           ParameterId::Noise1TypeId,
+                           ParameterId::Noise1DensityId,
+                           ParameterId::Noise1GainId,
+                           ParameterId::Noise1BrightnessId };
         } else {
-                params = { ParameterId::Noise2EnabledId, ParameterId::Noise2TypeId,
-                           ParameterId::Noise2GainId, ParameterId::Noise2BrightnessId };
+                params = { ParameterId::Noise2EnabledId,
+                           ParameterId::Noise2TypeId,
+                           ParameterId::Noise2DensityId,
+                           ParameterId::Noise2GainId,
+                           ParameterId::Noise2BrightnessId };
         }
 
         for (const auto& paramId : params)
@@ -71,45 +78,47 @@ DspNoiseProxyVst::~DspNoiseProxyVst()
 
 bool DspNoiseProxyVst::enable(bool b)
 {
-    auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1EnabledId : ParameterId::Noise2EnabledId;
-    vstController->getComponentHandler()->beginEdit(id);
-    vstController->getComponentHandler()->performEdit(id, b ? 1.0 : 0.0);
-    vstController->getComponentHandler()->endEdit(id);
-    return true;
+        ENTROPICTRON_LOG_DEBUG("called");
+        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1EnabledId : ParameterId::Noise2EnabledId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, b ? 1.0 : 0.0);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
 }
 
 bool DspNoiseProxyVst::isEnabled() const
 {
-    auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1EnabledId : ParameterId::Noise2EnabledId;
-    return vstController->getParamNormalized(id) > 0.5;
+        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1EnabledId : ParameterId::Noise2EnabledId;
+        return vstController->getParamNormalized(id) > 0.5;
 }
 
 bool DspNoiseProxyVst::setType(NoiseType type)
 {
-    auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1TypeId : ParameterId::Noise2TypeId;
-    const double numNoiseTypes = static_cast<double>(ParameterId::Noise2TypeId);
-    double normalizedValue = static_cast<double>(type) / (numNoiseTypes - 1.0);
-    vstController->getComponentHandler()->beginEdit(id);
-    vstController->getComponentHandler()->performEdit(id, normalizedValue);
-    vstController->getComponentHandler()->endEdit(id);
-    return true;
+        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1TypeId : ParameterId::Noise2TypeId;
+        const double numNoiseTypes = static_cast<double>(ParameterId::Noise2TypeId);
+        double normalizedValue = static_cast<double>(type) / (numNoiseTypes - 1.0);
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, normalizedValue);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
 }
 
 NoiseType DspNoiseProxyVst::noiseType() const
 {
-    auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1TypeId : ParameterId::Noise2TypeId;
-    const double numNoiseTypes = static_cast<double>(ParameterId::Noise2TypeId);
-    double normalizedValue = vstController->getParamNormalized(id);
-    return static_cast<NoiseType>(static_cast<int>(std::round(normalizedValue * (numNoiseTypes - 1.0))));
+        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1TypeId : ParameterId::Noise2TypeId;
+        const double numNoiseTypes = static_cast<double>(ParameterId::Noise2TypeId);
+        double normalizedValue = vstController->getParamNormalized(id);
+        return static_cast<NoiseType>(static_cast<int>(std::round(normalizedValue * (numNoiseTypes - 1.0))));
 }
 
 bool DspNoiseProxyVst::setDensity(double value)
 {
-    auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1DensityId : ParameterId::Noise2DensityId;
-    vstController->getComponentHandler()->beginEdit(id);
-    vstController->getComponentHandler()->performEdit(id, value);
-    vstController->getComponentHandler()->endEdit(id);
-    return true;
+        //        ENTROPICTRON_LOG_DEBUG("called: " << value);
+        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1DensityId : ParameterId::Noise2DensityId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
 }
 
 double DspNoiseProxyVst::density() const
@@ -120,11 +129,12 @@ double DspNoiseProxyVst::density() const
 
 bool DspNoiseProxyVst::setBrightness(double value)
 {
-    auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1BrightnessId : ParameterId::Noise2BrightnessId;
-    vstController->getComponentHandler()->beginEdit(id);
-    vstController->getComponentHandler()->performEdit(id, value);
-    vstController->getComponentHandler()->endEdit(id);
-    return true;
+        ENTROPICTRON_LOG_DEBUG("called: " << value);
+        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1BrightnessId : ParameterId::Noise2BrightnessId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
 }
 
 double DspNoiseProxyVst::brightness() const
@@ -135,11 +145,12 @@ double DspNoiseProxyVst::brightness() const
 
 bool DspNoiseProxyVst::setGain(double value)
 {
-    auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1GainId : ParameterId::Noise2GainId;
-    vstController->getComponentHandler()->beginEdit(id);
-    vstController->getComponentHandler()->performEdit(id, value);
-    vstController->getComponentHandler()->endEdit(id);
-    return true;
+        ENTROPICTRON_LOG_DEBUG("called: " << value);
+        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1GainId : ParameterId::Noise2GainId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
 }
 
 double DspNoiseProxyVst::gain() const
@@ -150,6 +161,7 @@ double DspNoiseProxyVst::gain() const
 
 void DspNoiseProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
 {
+        ENTROPICTRON_LOG_DEBUG("called: " << static_cast<int>(paramId) << ": " << value);
         switch (paramId) {
         case ParameterId::Noise1EnabledId:
         case ParameterId::Noise2EnabledId:
@@ -158,6 +170,10 @@ void DspNoiseProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
         case ParameterId::Noise1TypeId:
         case ParameterId::Noise2TypeId:
                 action typeUpdated(static_cast<NoiseType>(value + 0.5));
+                break;
+        case ParameterId::Noise1DensityId:
+        case ParameterId::Noise2DensityId:
+                action densityUpdated(value);
                 break;
         case ParameterId::Noise1BrightnessId:
         case ParameterId::Noise2BrightnessId:

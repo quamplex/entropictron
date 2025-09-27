@@ -58,6 +58,7 @@ Rk::ObjectType RkObject::type() const
 void RkObject::setParent(RkObject *parentObj)
 {
         parentObj->addChild(this);
+        setEventQueue(parentObj->eventQueue());
 }
 
 RkObject* RkObject::parent() const

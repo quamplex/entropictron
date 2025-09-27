@@ -54,7 +54,7 @@ namespace fs = std::filesystem;
 
 #include <RkObject.h>
 
-#ifdef GKICK_LOG_DEBUG_LEVEL
+//#ifdef GKICK_LOG_DEBUG_LEVEL
 #define ENTROPICTRON_LOG_INFO(msg) std::cout << "[" << ENTROPICTRON_NAME << "] " \
                                << " [" << std::this_thread::get_id() << "] " \
                                << __PRETTY_FUNCTION__ << "[INFO] " \
@@ -67,13 +67,13 @@ namespace fs = std::filesystem;
                                 << " [" << std::this_thread::get_id() << "] " \
                                 << __PRETTY_FUNCTION__ << "[DEBUG] " \
                                 << msg << std::endl;
-#else
+/*#else
 #define ENTROPICTRON_LOG_INFO(msg) std::cout << "[" << ENTROPICTRON_NAME << "] " \
                                << "[INFO] " << msg << std::endl;
 #define ENTROPICTRON_LOG_ERROR(msg) std::cout << "[" << ENTROPICTRON_NAME << "] " \
                                << "[ERROR] " << msg << std::endl;
-#define ENTROPICTRON_LOG_DEBUG(msg)
-#endif //  // GKICK_LIB_LOG_LEVEL_DEBUG
+                               #define ENTROPICTRON_LOG_DEBUG(msg)*/
+//#endif //  // GKICK_LIB_LOG_LEVEL_DEBUG
 
 namespace Entropictron
 {

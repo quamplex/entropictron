@@ -40,10 +40,22 @@ class NoiseModel: public EntAbstractModel
         NoiseType noiseType() const;
         void setDensity(double value);
         double density() const;
+        void setDensityDefaultValue(double value);
+        double getDensityDefaultValue() const;
+        void setDensityRange(double from, double to);
+        std::pair<double, double> getDensityRange() const;
         void setBrightness(double value);
         double brightness() const;
+        void setBrightnessDefaultValue(double value);
+        double getBrightnessDefaultValue() const;
+        void setBrightnessRange(double from, double to);
+        std::pair<double, double> getBrightnessRange() const;
         void setGain(double value);
         double gain() const;
+        void setGainDefaultValue(double value);
+        double getGainDefaultValue() const;
+        void setGainRange(double from, double to);
+        std::pair<double, double> getGainRange() const;
         RK_DECL_ACT(enabled,
                     enabled(bool b),
                     RK_ARG_TYPE(bool b),
@@ -67,6 +79,12 @@ class NoiseModel: public EntAbstractModel
 
  private:
         DspNoiseProxy *dspNoiseProxy;
+        double desnityDefaultvalue;
+        double brightnessDefaultvalue;
+        double gainDefaultvalue;
+        std::pair<double, double> densityRange;
+        std::pair<double, double> brightnessRange;
+        std::pair<double, double> gainRange;
 };
 
 #endif // ENT_NOISE_MODEL_H

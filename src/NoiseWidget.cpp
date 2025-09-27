@@ -119,8 +119,20 @@ void NoiseWidget::updateView()
 
         enableNoiseButton->setPressed(model->isEnabled());
         setType(model->noiseType());
+
+        auto [densityFrom, densityTo] = model->getDensityRange();
+        densityKnob->setRange(densityFrom, densityTo);
         densityKnob->setValue(model->density());
+        densityKnob->setDefaultValue(model->getDensityDefaultValue());
+
+        auto [brightnessFrom, brightnessTo] = model->getBrightnessRange();
+        brightnessKnob->setRange(brightnessFrom, brightnessTo);
+        brightnessKnob->setDefaultValue(model->getBrightnessDefaultValue());
         brightnessKnob->setValue(model->brightness());
+
+        auto [gainFrom, gainTo] = model->getGainRange();
+        gainKnob->setRange(gainFrom, gainTo);
+        gainKnob->setDefaultValue(model->getGainDefaultValue());
         gainKnob->setValue(model->gain());
 }
 
