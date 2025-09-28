@@ -49,7 +49,7 @@ DEF_CLASS2(INLINE_UID_FROM_FUID(EntVstProcessorUID),
            entPluginName,
            0,
            Vst::PlugType::kFx,
-           ENTROPICTRON_VERSION_STRING,
+           ENT_VERSION_STRING,
            kVstVersionString,
            EntVstProcessor::createInstance)
 
@@ -60,7 +60,7 @@ DEF_CLASS2(INLINE_UID_FROM_FUID(EntVstControllerUID),
            entPluginName "Controller",
            0,
            "",
-           ENTROPICTRON_VERSION_STRING,
+           ENT_VERSION_STRING,
            kVstVersionString,
            EntVstController::createInstance)
 

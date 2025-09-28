@@ -55,15 +55,15 @@ namespace fs = std::filesystem;
 #include <RkObject.h>
 
 //#ifdef GKICK_LOG_DEBUG_LEVEL
-#define ENTROPICTRON_LOG_INFO(msg) std::cout << "[" << ENTROPICTRON_NAME << "] " \
+#define ENTROPICTRON_LOG_INFO(msg) std::cout << "[" << ENT_NAME << "] " \
                                << " [" << std::this_thread::get_id() << "] " \
                                << __PRETTY_FUNCTION__ << "[INFO] " \
                                << msg << std::endl;
-#define ENTROPICTRON_LOG_ERROR(msg) std::cout << "[" << ENTROPICTRON_NAME << "] " \
+#define ENTROPICTRON_LOG_ERROR(msg) std::cout << "[" << ENT_NAME << "] " \
                                 << " [" << std::this_thread::get_id() << "] " \
                                 << __PRETTY_FUNCTION__ << "[ERROR] " \
                                 << msg << std::endl;
-#define ENTROPICTRON_LOG_DEBUG(msg) std::cout << "[" << std::this_thread::get_id() << "][" << ENTROPICTRON_NAME << "] " \
+#define ENTROPICTRON_LOG_DEBUG(msg) std::cout << "[" << std::this_thread::get_id() << "][" << ENT_NAME << "] " \
                                 << " [" << std::this_thread::get_id() << "] " \
                                 << __PRETTY_FUNCTION__ << "[DEBUG] " \
                                 << msg << std::endl;
@@ -77,10 +77,10 @@ namespace fs = std::filesystem;
 
 namespace Entropictron
 {
-        constexpr int defaultSampleRate = ENTROPICTRON_DEFAULT_SAMPLE_RATE;
+        constexpr int defaultSampleRate = ENT_DEFAULT_SAMPLE_RATE;
         constexpr char appName[] = "Entropictron";
         constexpr char applicationName[] = "Entropictron";
-        constexpr char applicationVersionStr[] = GEOKICK_VERSION_STRING;
+        constexpr char applicationVersionStr[] = ENT_VERSION_STRING;
         constexpr std::string_view defaultExportFormat = "flac24";
         constexpr int defaultBitDepth = 16;
         constexpr double toDecibel(double val)
@@ -124,8 +124,8 @@ namespace Entropictron
 namespace GeonkickTypes
 {
 using MidiKey = unsigned char;
-constexpr MidiKey entropictronAnyKey = ENTROPICTRON_ANY_KEY;
-constexpr int entropictronAnyMidiChannel = ENTROPICTRON_ANY_MIDI_CHANNEL;
+constexpr MidiKey entropictronAnyKey = ENT_ANY_KEY;
+constexpr int entropictronAnyMidiChannel = ENT_ANY_MIDI_CHANNEL;
 
 enum class Formats : int {
           Gkick  = 0,

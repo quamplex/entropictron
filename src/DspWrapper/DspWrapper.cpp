@@ -26,33 +26,34 @@
 #include "DspWrapperNoise.h"
 
 DspWrapper::DspWrapper()
+        : entropictronDsp {nullptr}
 {
-        entropictron_create(&entropictronDsp, ENTROPICTRON_DEFAULT_SAMPLE_RATE);
+        ent_create(&entropictronDsp, ENT_DEFAULT_SAMPLE_RATE);
         dspNoise1 = std::make_unique<DspWrapperNoise>(entropictronDsp);
         dspNoise2 = std::make_unique<DspWrapperNoise>(entropictronDsp);
 }
 
 DspWrapper::~DspWrapper()
 {
-        if (entropictronDsp)
-                entropictron_free(&entropictronDsp);
+        ent_free(&entropictronDsp);
 }
 
 void DspWrapper::setSampleRate(unsigned int srate)
 {
+        ent_set_sample_rate(entropictronDsp, srate);
 }
 
 int DspWrapper::getSampleRate() const
 {
-        int sampleRate = ENTROPICTRON_DEFAULT_SAMPLE_RATE;
-        if (entropictronDsp)
-                entropictron_get_sample_rate(entropictronDsp, &sampleRate);
+        unsigned int sampleRate = Entropictron::defaultSampleRate;
+        ent_get_sample_rate(entropictronDsp, &sampleRate);
 
         return sampleRate;
 }
 
 void DspWrapper::process(float** data, size_t size)
 {
+        ent_process(entropictronDsp, data, size);
 }
 
 DspWrapperNoise* DspWrapper::getNoise(NoiseId id) const
