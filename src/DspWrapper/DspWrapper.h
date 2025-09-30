@@ -34,7 +34,6 @@ class DspWrapper
 {
 public:
         explicit DspWrapper();
-        ~DspWrapper();
         void setSampleRate(unsigned int srate);
         int getSampleRate() const;
         void process(float** data, size_t size);
@@ -44,7 +43,13 @@ public:
 protected:
 
 private:
-        struct entropictron *entropictronDsp;
+        struct DspDeleter {
+                void operator()(struct entropictron* dsp) const
+                {
+                        ent_free(&dsp);
+                }
+        };
+        std::unique_ptr<struct entropictron, DspDeleter> entropictronDsp;
         std::unique_ptr<DspWrapperNoise> dspNoise1;
         std::unique_ptr<DspWrapperNoise> dspNoise2;
 };

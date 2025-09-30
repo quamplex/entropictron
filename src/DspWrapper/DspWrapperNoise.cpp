@@ -23,52 +23,69 @@
 
 #include "DspWrapperNoise.h"
 
-DspWrapperNoise::DspWrapperNoise(struct entropictron *dsp)
-        : entropictronDsp {dsp}
+#include "ent_noise.h"
+
+DspWrapperNoise::DspWrapperNoise(struct ent_noise *dsp)
+        : noiseDsp {dsp}
 {
 }
 
 void DspWrapperNoise::enable(bool b)
 {
+        ent_noise_enable(noiseDsp, b);
 }
 
 bool DspWrapperNoise::isEnabled() const
 {
-        return false;
+        bool b = false;
+        ent_noise_is_enabled(noiseDsp, &b);
+        return b;
 }
 
 void DspWrapperNoise::setType(NoiseType type)
 {
+        ent_noise_set_type(noiseDsp, static_cast<enum ent_noise_type>(type));
 }
 
 NoiseType DspWrapperNoise::noiseType() const
 {
-        return NoiseType::WhiteNoise;
+        struct ent_noise_type type;
+        ent_noise_set_type(noiseDsp, &type);
+        return type;
 }
 
 void DspWrapperNoise::setDensity(double value)
 {
+        ent_noise_set_density(noiseDsp, value);
 }
 
 double DspWrapperNoise::density() const
 {
-        return 0;
+        float value;
+        ent_noise_set_density(noiseDsp, &value);
+        return value;
 }
 
 void DspWrapperNoise::setBrightness(double value)
 {
+        ent_noise_set_brightness(noiseDsp, value);
 }
 
 double DspWrapperNoise::brightness() const
 {
-        return 0;
+        float value;
+        ent_noise_set_brightness(noiseDsp, &value);
+        return value;
 }
 
 void DspWrapperNoise::setGain(double value)
 {
+        ent_noise_set_gain(noiseDsp, value);
 }
 
 double DspWrapperNoise::gain() const
 {
-        return 0;
+        float value;
+        ent_noise_set_gain(noiseDsp, &value);
+        return value;
 }

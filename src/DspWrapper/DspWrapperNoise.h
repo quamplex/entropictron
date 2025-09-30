@@ -26,12 +26,12 @@
 
 #include "DspTypes.h"
 
-struct entropictron;
+struct ent_noise;
 
 class DspWrapperNoise
 {
  public:
-        explicit DspWrapperNoise(struct entropictron *dsp);
+        explicit DspWrapperNoise(struct ent_noise *dsp);
         void enable(bool b = true);
         bool isEnabled() const;
         void setType(NoiseType type);
@@ -44,7 +44,7 @@ class DspWrapperNoise
         double gain() const;
 
  private:
-        struct entropictron *entropictronDsp;
+        struct ent_noise *noiseDsp;
 };
 
 #endif // ENT_DSP_WRAPER_NOISE_H

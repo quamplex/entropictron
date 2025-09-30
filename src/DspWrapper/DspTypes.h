@@ -1,4 +1,4 @@
-/**
+ /**
  * File name: DspTypes.h
  * Project: Entropictron (A texture synthesizer)
  *
