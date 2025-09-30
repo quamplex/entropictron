@@ -1,5 +1,5 @@
 /**
- * File name: entropictron.h
+ * File name: ent_defs.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,47 +21,42 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_H
-#define ENT_H
+#ifndef ENT_DEFS_H
+#define ENT_DEFS_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <stddef.h>
+#define ENT_UNUSED(expr) (void)expr
 
-#ifdef __FAST_MATH__
-#error -ffast-math disables nan detection needed by entropictron
-#endif
+#define ENT_DEFAULT_SAMPLE_RATE 48000
 
-#ifdef __STDC_NO_ATOMICS__
-#error atomic operations are not supported
-#endif
-
-#include "ent_defs.h"
-#include "ent_version.h"
-#include "ent_log.h"
-
-struct ent_noise;
-
-struct entropictron {
-	unsigned int sample_rate;
-        struct ent_noise* noise[2];
+enum ent_error {
+  	ENT_OK                    = 0,
+	ENT_ERROR                 = 1,
+	ENT_ERROR_MEM_ALLOC       = 2,
+	ENT_ERROR_WRONG_ARGUMENTS = 3
 };
 
-enum ent_error ent_create(struct entropictron **ent, unsigned int sample_rate);
+enum ent_key_state {
+        ENT_KEY_STATE_DEFAULT  = 0,
+        ENT_KEY_STATE_PRESSED  = 1,
+        ENT_KEY_STATE_RELEASED = 2
+};
 
-void ent_free(struct entropictron **ent);
+enum ent_channel_type {
+        ENT_CHANNEL_AUDIO_INPUT  = 0,
+        ENT_CHANNEL_AUDIO_OUTPUT = 1,
+        ENT_CHANNEL_MIDI_INPUT   = 2,
+        ENT_CHANNEL_MIDI_OUTPUT  = 3
+};
 
-enum ent_error ent_set_sample_rate(struct entropictron *ent, unsigned int rate);
-
-enum ent_error ent_get_sample_rate(struct entropictron *ent, unsigned int *sample_rate);
-
-enum ent_error ent_process(struct entropictron *ent, float** data, size_t size);
-
-struct ent_noise* ent_get_noise(struct entropictron *ent, size_t id);
+#define ENT_ANY_KEY (-1)
+#define ENT_ANY_MIDI_CHANNEL (-1)
+#define ENT_MAX_MIDI_CHANNELS (16)
 
 #ifdef __cplusplus
 }
 #endif
-#endif // ENTROPICTRON_H
+#endif // ENT_DEFS_H

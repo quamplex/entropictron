@@ -35,27 +35,43 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
 
 	(*ent)->sample_rate = sample_rate;
 
+        // Create noise
+        size_t num_noises = QX_ARRAY_SIZE(ent->noise);
+        for (size_t i = 0; i < num_noises; i++) {
+                (*ent)->noise[i] = ent_noise_create();
+                if ((*ent)->noise[i] == NULL) {
+                        eng_log_error("can't create noise");
+                        ent_free(ent);
+                        return ENT_ERROR;
+                }
+        }
+
 	return ENT_OK;
 }
 
 void ent_free(struct entropictron **ent)
 {
-    if (ent != NULL && *ent != NULL) {
-        free(*ent);
-        *ent = NULL;
-    }
+        if (ent != NULL && *ent != NULL) {
+                // Free noise
+                size_t num_noises = QX_ARRAY_SIZE(ent->noise);
+                for (size_t i = 0; i < num_noises; i++)
+                        ent_noise_free(&(*ent)->noise[i]);
+
+                free(*ent);
+                *ent = NULL;
+        }
 }
 
 enum ent_error
 ent_set_sample_rate(struct entropictron *ent, unsigned int rate)
 {
-    if (ent == NULL) {
-        ent_log_error("wrong arguments");
-        return ENT_ERROR;
-    }
+        if (ent == NULL) {
+                ent_log_error("wrong arguments");
+                return ENT_ERROR;
+        }
 
-    ent->sample_rate = rate;
-    return ENT_OK;
+        ent->sample_rate = rate;
+        return ENT_OK;
 }
 
 enum ent_error
@@ -73,5 +89,21 @@ ent_get_sample_rate(struct entropictron *ent, unsigned int *sample_rate)
 enum ent_error
 ent_process(struct entropictron *ent, float** data, size_t size)
 {
+        size_t num_noises = QX_ARRAY_SIZE(ent->noise);
+        for (size_t i = 0; i < num_noises; i++) {
+                struct ent_noise *noise = ent->noise[i];
+                if (noise->enabled)
+                        ent_noise_process(noise, data, size);
+        }
+
         return ENT_OK;
+}
+
+struct ent_noise*
+get_ent_noise(struct entropictron *ent, size_t id)
+{
+        if (id > 1)
+                return NULL;
+
+        return ent->noise[id];
 }

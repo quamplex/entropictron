@@ -1,12 +1,12 @@
 /**
  * File name: ent_log.h
- * Project: Geonkick (A kick synthesizer)
+ * Project: Entropictron (A texture synthesizer)
  *
- * Copyright (C) 2017 Iurie Nistor 
+ * Copyright (C) 2025 Iurie Nistor
  *
- * This file is part of Geonkick.
+ * This file is part of Entropictron.
  *
- * GeonKick is free software; you can redistribute it and/or modify
+ * Entropictron is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
@@ -21,8 +21,12 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef GKICK_LOG_H
-#define GKICK_LOG_H
+#ifndef ENT_LOG_H
+#define ENT_LOG_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -30,9 +34,9 @@
 void
 ent_log_msg(const char *message, ...);
 
-#ifdef GKICK_LIB_LOG_LEVEL_TRACE
-#define GKICK_LIB_LOG_LEVEL_DEBUG
-#ifdef GKICK_LIB_LOG_FUNCTION
+#ifdef ENT_LIB_LOG_LEVEL_TRACE
+#define ENT_LIB_LOG_LEVEL_DEBUG
+#ifdef ENT_LIB_LOG_FUNCTION
 #define ent_log_trace(message, ...) \
   ent_log_msg("[TRACE][%s] " message, __func__, ##__VA_ARGS__)
 #else
@@ -40,11 +44,11 @@ ent_log_msg(const char *message, ...);
 #endif
 #else
 #define ent_log_trace(message, ...)
-#endif /* GKICK_LIB_LOG_LEVEL_TRACE */
+#endif /* ENT_LIB_LOG_LEVEL_TRACE */
 
-#ifdef GKICK_LIB_LOG_LEVEL_DEBUG
-#define GKICK_LIB_LOG_LEVEL_INFO
-#ifdef GKICK_LIB_LOG_FUNCTION
+#ifdef ENT_LIB_LOG_LEVEL_DEBUG
+#define ENT_LIB_LOG_LEVEL_INFO
+#ifdef ENT_LIB_LOG_FUNCTION
 #define ent_log_debug(message, ...) \
   ent_log_msg("[DEBUG][%s] " message, __func__, ##__VA_ARGS__)
 #else
@@ -52,11 +56,11 @@ ent_log_msg(const char *message, ...);
   #endif
 #else
 #define ent_log_debug(message, ...)
-#endif /* GKICK_LIB_LOG_LEVEL_DEBUG */
+#endif /* ENT_LIB_LOG_LEVEL_DEBUG */
 
-#ifdef GKICK_LIB_LOG_LEVEL_INFO
-#define GKICK_LIB_LOG_LEVEL_WARNING
-#ifdef GKICK_LIB_LOG_FUNCTION
+#ifdef ENT_LIB_LOG_LEVEL_INFO
+#define ENT_LIB_LOG_LEVEL_WARNING
+#ifdef ENT_LIB_LOG_FUNCTION
 #define ent_log_info(message, ...) \
   ent_log_msg("[INFO][%s] " message, __func__, ##__VA_ARGS__)
 #else
@@ -64,11 +68,11 @@ ent_log_msg(const char *message, ...);
   #endif
 #else
 #define ent_log_info(message, ...)
-#endif /* GKICK_LIB_LOG_LEVEL_INFO */
+#endif /* ENT_LIB_LOG_LEVEL_INFO */
 
-#ifdef GKICK_LIB_LOG_LEVEL_WARNING
-  #define GKICK_LIB_LOG_LEVEL_ERROR
-#ifdef GKICK_LIB_LOG_FUNCTION
+#ifdef ENT_LIB_LOG_LEVEL_WARNING
+  #define ENT_LIB_LOG_LEVEL_ERROR
+#ifdef ENT_LIB_LOG_FUNCTION
 #define ent_log_warning(message, ...) \
   ent_log_msg("[WARNING][%s] " message, __func__, ##__VA_ARGS__)
 #else
@@ -76,11 +80,11 @@ ent_log_msg(const char *message, ...);
 #endif
 #else
 #define ent_log_warning(message, ...)
-#endif /* GKICK_LIB_LOG_LEVEL_WARNING */
+#endif /* ENT_LIB_LOG_LEVEL_WARNING */
 
-#ifdef GKICK_LIB_LOG_LEVEL_ERROR
-#define GKICK_LIB_LOG_LEVEL_CRITICAL
-#ifdef GKICK_LIB_LOG_FUNCTION
+#ifdef ENT_LIB_LOG_LEVEL_ERROR
+#define ENT_LIB_LOG_LEVEL_CRITICAL
+#ifdef ENT_LIB_LOG_FUNCTION
 #define ent_log_error(message, ...) \
   ent_log_msg("[ERROR][%s] " message, __func__, ##__VA_ARGS__)
 #else
@@ -88,10 +92,10 @@ ent_log_msg(const char *message, ...);
 #endif
 #else
 #define ent_log_error(message, ...)
-#endif /* GKICK_LIB_LOG_LEVEL_ERROR */
+#endif /* ENT_LIB_LOG_LEVEL_ERROR */
 
-#ifdef GKICK_LIB_LOG_LEVEL_CRITICAL
-#ifdef GKICK_LIB_LOG_FUNCTION
+#ifdef ENT_LIB_LOG_LEVEL_CRITICAL
+#ifdef ENT_LIB_LOG_FUNCTION
 #define ent_log_critical(message, ...) \
   ent_log_msg("[CRITICAL] " message, __func__, ##__VA_ARGS__)
 #else
@@ -100,6 +104,9 @@ ent_log_msg(const char *message, ...);
 #endif
 #else
 #define ent_log_critical(message, ...)
-#endif /* GKICK_LIB_LOG_LEVEL_CRITICAL */
+#endif /* ENT_LIB_LOG_LEVEL_CRITICAL */
 
+#ifdef __cplusplus
+}
 #endif
+#endif // ENT_LOG_H

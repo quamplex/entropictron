@@ -1,5 +1,5 @@
 /**
- * File name: entropictron.h
+ * File name: ent_noise.
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,47 +21,24 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_H
-#define ENT_H
+#ifndef ENT_NOISE_H
+#define ENT_NOISE_H
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#include <stddef.h>
-
-#ifdef __FAST_MATH__
-#error -ffast-math disables nan detection needed by entropictron
-#endif
-
-#ifdef __STDC_NO_ATOMICS__
-#error atomic operations are not supported
-#endif
-
-#include "ent_defs.h"
-#include "ent_version.h"
-#include "ent_log.h"
-
 struct ent_noise;
 
-struct entropictron {
-	unsigned int sample_rate;
-        struct ent_noise* noise[2];
-};
+struct ent_noise* ent_noise_create();
 
-enum ent_error ent_create(struct entropictron **ent, unsigned int sample_rate);
+void ent_noise_free(struct ent_noise **noise);
 
-void ent_free(struct entropictron **ent);
-
-enum ent_error ent_set_sample_rate(struct entropictron *ent, unsigned int rate);
-
-enum ent_error ent_get_sample_rate(struct entropictron *ent, unsigned int *sample_rate);
-
-enum ent_error ent_process(struct entropictron *ent, float** data, size_t size);
-
-struct ent_noise* ent_get_noise(struct entropictron *ent, size_t id);
+void ent_noise_process(struct ent_noise *noise,
+                       float *data,
+                       size_t size);
 
 #ifdef __cplusplus
 }
 #endif
-#endif // ENTROPICTRON_H
+#endif // ENT_NOISE_H
