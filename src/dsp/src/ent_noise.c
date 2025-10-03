@@ -36,11 +36,66 @@ struct ent_noise {
 
 struct ent_noise* ent_noise_create()
 {
-
 }
 
 void ent_noise_free(struct ent_noise **noise)
 {
+}
+
+enum ent_error ent_noise_enable(struct ent_noise *noise, bool b)
+{
+        noise->enabled = b;
+        return ENT_OK;
+}
+
+bool ent_noise_is_enabled(struct ent_noise *noise)
+{
+        return noise->enabled;
+}
+
+enum ent_error ent_noise_set_type(struct ent_noise *noise,
+                                  enum ent_noise_type type)
+{
+        noise->type = type;
+        return ENT_OK;
+}
+
+enum ent_noise_type ent_noise_get_type(struct ent_noise *noise)
+{
+        return noise->type;
+}
+
+enum ent_error ent_noise_set_density(struct ent_noise *noise, float density)
+{
+        noise->density = density;
+        return ENT_OK;
+}
+
+float ent_noise_get_density(struct ent_noise *noise)
+{
+        return noise->density;
+}
+
+enum ent_error ent_noise_set_brightness(struct ent_noise *noise, float brightness)
+{
+        noise->brightness = brightness;
+        return ENT_OK;
+}
+
+float ent_noise_get_brightness(struct ent_noise *noise)
+{
+        return noise->brightness;
+}
+
+enum ent_error ent_noise_set_gain(struct ent_noise *noise, float gain)
+{
+        noise->gain = gain;
+        return ENT_OK;
+}
+
+float ent_noise_get_gain(struct ent_noise *noise)
+{
+        return noise->gain;
 }
 
 void ent_noise_process(struct ent_noise *noise,

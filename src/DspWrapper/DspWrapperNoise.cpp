@@ -37,9 +37,7 @@ void DspWrapperNoise::enable(bool b)
 
 bool DspWrapperNoise::isEnabled() const
 {
-        bool b = false;
-        ent_noise_is_enabled(noiseDsp, &b);
-        return b;
+        return ent_noise_is_enabled(noiseDsp);
 }
 
 void DspWrapperNoise::setType(NoiseType type)
@@ -49,9 +47,7 @@ void DspWrapperNoise::setType(NoiseType type)
 
 NoiseType DspWrapperNoise::noiseType() const
 {
-        struct ent_noise_type type;
-        ent_noise_set_type(noiseDsp, &type);
-        return type;
+        return static_cast<NoiseType> (ent_noise_set_type(noiseDsp));
 }
 
 void DspWrapperNoise::setDensity(double value)
@@ -61,9 +57,7 @@ void DspWrapperNoise::setDensity(double value)
 
 double DspWrapperNoise::density() const
 {
-        float value;
-        ent_noise_set_density(noiseDsp, &value);
-        return value;
+        return ent_noise_get_density(noiseDsp);
 }
 
 void DspWrapperNoise::setBrightness(double value)
@@ -73,9 +67,7 @@ void DspWrapperNoise::setBrightness(double value)
 
 double DspWrapperNoise::brightness() const
 {
-        float value;
-        ent_noise_set_brightness(noiseDsp, &value);
-        return value;
+        return ent_noise_get_brightness(noiseDsp);
 }
 
 void DspWrapperNoise::setGain(double value)
@@ -85,7 +77,5 @@ void DspWrapperNoise::setGain(double value)
 
 double DspWrapperNoise::gain() const
 {
-        float value;
-        ent_noise_set_gain(noiseDsp, &value);
-        return value;
+        return ent_noise_get_gain(noiseDsp);
 }

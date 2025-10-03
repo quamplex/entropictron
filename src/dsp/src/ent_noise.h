@@ -28,11 +28,38 @@
 extern "C" {
 #endif
 
+enum ent_noise_type {
+        ENT_NOISE_TYPE_WHITE,
+        ENT_NOISE_TYPE_PINK,
+        ENT_NOISE_TYPE_BROWN,
+};
+
 struct ent_noise;
 
 struct ent_noise* ent_noise_create();
 
 void ent_noise_free(struct ent_noise **noise);
+
+enum ent_error ent_noise_enable(struct ent_noise *noise, bool b);
+
+bool ent_noise_is_enabled(struct ent_noise *noise);
+
+enum ent_error ent_noise_set_type(struct ent_noise *noise,
+                                  enum ent_noise_type type);
+
+enum ent_noise_type ent_noise_get_type(struct ent_noise *noise);
+
+enum ent_error ent_noise_set_density(struct ent_noise *noise, float density);
+
+float ent_noise_get_density(struct ent_noise *noise);
+
+enum ent_error ent_noise_set_brightness(struct ent_noise *noise, float brightness);
+
+float ent_noise_get_brightness(struct ent_noise *noise);
+
+enum ent_error ent_noise_set_gain(struct ent_noise *noise, float gain);
+
+float ent_noise_get_gain(struct ent_noise *noise);
 
 void ent_noise_process(struct ent_noise *noise,
                        float *data,
