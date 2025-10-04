@@ -28,13 +28,13 @@
 extern "C" {
 #endif
 
+#include "ent_defs.h"
+
 enum ent_noise_type {
         ENT_NOISE_TYPE_WHITE,
         ENT_NOISE_TYPE_PINK,
         ENT_NOISE_TYPE_BROWN,
 };
-
-struct ent_noise;
 
 struct ent_noise* ent_noise_create();
 
@@ -62,7 +62,7 @@ enum ent_error ent_noise_set_gain(struct ent_noise *noise, float gain);
 float ent_noise_get_gain(struct ent_noise *noise);
 
 void ent_noise_process(struct ent_noise *noise,
-                       float *data,
+                       float **data,
                        size_t size);
 
 #ifdef __cplusplus

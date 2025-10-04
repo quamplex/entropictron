@@ -24,6 +24,8 @@
 #ifndef ENT_DSP_TYPES_H
 #define ENT_DSP_TYPES_H
 
+#include "ent_noise.h"
+
 enum class NoiseId: int {
         Noise1,
         Noise2

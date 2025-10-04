@@ -103,11 +103,11 @@ EntVstProcessor::setBusArrangements(SpeakerArrangement* inputs,
                                     SpeakerArrangement* outputs,
                                     int32 numOuts)
 {
-        ENTROPICTRON_LOG_DEBUG("called");
+        ENTROPICTRON_LOG_DEBUG("numIns : " << numIns << ", numOuts: " << numOuts);
         return AudioEffect::setBusArrangements(inputs,
-                                                              numIns,
-                                                              outputs,
-                                                              numOuts);
+                                               numIns,
+                                               outputs,
+                                               numOuts);
 }
 
 tresult PLUGIN_API
@@ -272,6 +272,7 @@ void EntVstProcessor::initParamMap()
 {
         // Noise 1
         paramMap[ParameterId::Noise1EnabledId] = [this](ParamValue v) {
+                ENTROPICTRON_LOG_INFO("Noise2EnabledId: v: " << v);
                 entropictronDsp->getNoise(NoiseId::Noise1)->enable(v >= 0.5);
         };
         paramMap[ParameterId::Noise1TypeId] = [this](ParamValue v) {
@@ -289,6 +290,7 @@ void EntVstProcessor::initParamMap()
 
         // Noise 2
         paramMap[ParameterId::Noise2EnabledId] = [this](ParamValue v) {
+                ENTROPICTRON_LOG_INFO("Noise2EnabledId: v: " << v);
                 entropictronDsp->getNoise(NoiseId::Noise2)->enable(v >= 0.5);
         };
         paramMap[ParameterId::Noise2TypeId] = [this](ParamValue v) {

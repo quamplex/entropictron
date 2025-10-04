@@ -14,3 +14,4 @@ add_library(dsp_wrapper STATIC
 		${ENT_DSP_WRAPPER_HEADERS}
 		${ENT_DSP_WRAPPER_SOURCES})
 add_dependencies(dsp_wrapper dsp_plugin)
+target_link_libraries(dsp_wrapper PRIVATE dsp_plugin)

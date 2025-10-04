@@ -59,7 +59,7 @@ enum ent_error ent_get_sample_rate(struct entropictron *ent, unsigned int *sampl
 
 enum ent_error ent_process(struct entropictron *ent, float** data, size_t size);
 
-struct ent_noise* ent_get_noise(struct entropictron *ent, size_t id);
+struct ent_noise* ent_get_noise(struct entropictron *ent, int id);
 
 #ifdef __cplusplus
 }

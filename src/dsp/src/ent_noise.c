@@ -22,6 +22,7 @@
  */
 
 #include "ent_noise.h"
+#include "ent_log.h"
 
 #include "qx_randomizer.h"
 
@@ -31,15 +32,33 @@ struct ent_noise {
         float density;
         float brightness;
         float gain;
+        struct qx_randomizer prob_randomizer;
         struct qx_randomizer randomizer;
 };
 
-struct ent_noise* ent_noise_create()
+struct ent_noise* ent_noise_create(void)
 {
+        struct ent_noise* noise = calloc(1, sizeof(struct ent_noise));
+        if (!noise)
+                return NULL;
+
+        noise->enabled = false;
+        noise->type = ENT_NOISE_TYPE_WHITE;
+        noise->density = 1.0f;
+        noise->brightness = 1.0f;
+        noise->gain = 1.0f;
+        qx_randomizer_init(&noise->prob_randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
+        qx_randomizer_init(&noise->randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
+
+        return noise;
 }
 
 void ent_noise_free(struct ent_noise **noise)
 {
+        if (noise && *noise) {
+                free(*noise);
+                *noise = NULL;
+        }
 }
 
 enum ent_error ent_noise_enable(struct ent_noise *noise, bool b)
@@ -99,9 +118,20 @@ float ent_noise_get_gain(struct ent_noise *noise)
 }
 
 void ent_noise_process(struct ent_noise *noise,
-                       float *data,
+                       float **data,
                        size_t size)
 {
+        float threshold = 2.0f * noise->density - 1.0f;
+        for (size_t i = 0; i < size; i++) {
+                float val = 0.0f;
+                float prob = qx_randomizer_get_float(&noise->prob_randomizer);
+                if (prob <= threshold) {
+                        val = qx_randomizer_get_float(&noise->randomizer);
+                        val *= noise->gain;
+                }
 
+                data[0][i] += val;
+                data[1][i] += val;
+        }
 }
 

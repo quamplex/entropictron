@@ -78,11 +78,11 @@ DspNoiseProxyVst::~DspNoiseProxyVst()
 
 bool DspNoiseProxyVst::enable(bool b)
 {
-        ENTROPICTRON_LOG_DEBUG("called");
-        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1EnabledId : ParameterId::Noise2EnabledId;
-        vstController->getComponentHandler()->beginEdit(id);
-        vstController->getComponentHandler()->performEdit(id, b ? 1.0 : 0.0);
-        vstController->getComponentHandler()->endEdit(id);
+        ENTROPICTRON_LOG_DEBUG("called: ID : " << (int)getNoiseId());
+        auto paramId = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1EnabledId : ParameterId::Noise2EnabledId;
+        vstController->getComponentHandler()->beginEdit(paramId);
+        vstController->getComponentHandler()->performEdit(paramId, b ? 1.0 : 0.0);
+        vstController->getComponentHandler()->endEdit(paramId);
         return true;
 }
 

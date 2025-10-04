@@ -28,6 +28,8 @@
 extern "C" {
 #endif
 
+#include "ent_version.h"
+
 #define ENT_UNUSED(expr) (void)expr
 
 #define ENT_DEFAULT_SAMPLE_RATE 48000

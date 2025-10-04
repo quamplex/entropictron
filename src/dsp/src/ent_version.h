@@ -28,6 +28,10 @@
 extern "C" {
 #endif
 
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdlib.h>
+
 #define ENT_VERSION ENT_VERSION_HEX
 #define ENT_VERSION_MAJOR ((ENT_VERSION_HEX >> 16) & 0xFF)
 #define ENT_VERSION_MINOR ((ENT_VERSION_HEX >> 8) & 0xFF)

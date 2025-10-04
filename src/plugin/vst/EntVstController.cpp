@@ -46,7 +46,7 @@ EntVstController::initialize(FUnknown* context)
     // Noise 1
     parameters.addParameter(STR16("Noise 1 Enabled"),
                             nullptr, 1, 0.0,
-                            0,
+                            ParameterInfo::kCanAutomate,
                             ParameterId::Noise1EnabledId);
     parameters.addParameter(STR16("Noise 1 Type"),
                             nullptr, 2, 1.0,
@@ -68,7 +68,7 @@ EntVstController::initialize(FUnknown* context)
     // Noise 2
     parameters.addParameter(STR16("Noise 2 Enabled"),
                             nullptr, 1, 0.0,
-                            0,
+                            ParameterInfo::kCanAutomate,
                             ParameterId::Noise2EnabledId);
     parameters.addParameter(STR16("Noise 2 Type"),
                             nullptr, 2, 1.0,
@@ -111,7 +111,7 @@ void EntVstController::removeParamterCallback(ParameterId id)
 
 tresult EntVstController::setParamNormalized (ParamID tag, ParamValue value)
 {
-        ENTROPICTRON_LOG_DEBUG("called");
+        ENTROPICTRON_LOG_DEBUG("called : ID : " << (int ) tag << ": val: " << value);
         auto result = EditControllerEx1::setParamNormalized(tag, value);
         if (result != kResultOk)
                 return result;

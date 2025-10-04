@@ -30,35 +30,35 @@ DspWrapper::DspWrapper()
         // Create DSP
         struct entropictron* dsp = nullptr;
         ent_create(&dsp, ENT_DEFAULT_SAMPLE_RATE);
-        endtrpoctronDsp = std::unique_ptr<struct entropictron, DspDeleter>(dsp);
+        entropictronDsp = std::unique_ptr<struct entropictron, DspDeleter>(dsp);
 
         // Noise 1
-        auto noise = ent_get_noise(endtrpoctronDsp->get(),
-                                   NoiseId::Noise1);
+        auto noise = ent_get_noise(entropictronDsp.get(),
+                                   static_cast<int>(NoiseId::Noise1));
         dspNoise1 = std::make_unique<DspWrapperNoise>(noise);
 
         // Noise 2
-        noise = ent_get_noise(endtrpoctronDsp->get(),
-                              NoiseId::Noise1);
+        noise = ent_get_noise(entropictronDsp.get(),
+                              static_cast<int>(NoiseId::Noise2));
         dspNoise2 = std::make_unique<DspWrapperNoise>(noise);
 }
 
 void DspWrapper::setSampleRate(unsigned int srate)
 {
-        ent_set_sample_rate(entropictronDsp, srate);
+        ent_set_sample_rate(entropictronDsp.get(), srate);
 }
 
 int DspWrapper::getSampleRate() const
 {
         unsigned int sampleRate = Entropictron::defaultSampleRate;
-        ent_get_sample_rate(entropictronDsp, &sampleRate);
+        ent_get_sample_rate(entropictronDsp.get(), &sampleRate);
 
         return sampleRate;
 }
 
 void DspWrapper::process(float** data, size_t size)
 {
-        ent_process(entropictronDsp, data, size);
+        ent_process(entropictronDsp.get(), data, size);
 }
 
 DspWrapperNoise* DspWrapper::getNoise(NoiseId id) const
