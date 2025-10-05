@@ -122,8 +122,9 @@ void NoiseWidget::updateView()
 
         auto [densityFrom, densityTo] = model->getDensityRange();
         densityKnob->setRange(densityFrom, densityTo);
-        densityKnob->setValue(model->density());
+        densityKnob->setRangeType(Knob::RangeType::Logarithmic);
         densityKnob->setDefaultValue(model->getDensityDefaultValue());
+        densityKnob->setValue(model->density());
 
         auto [brightnessFrom, brightnessTo] = model->getBrightnessRange();
         brightnessKnob->setRange(brightnessFrom, brightnessTo);

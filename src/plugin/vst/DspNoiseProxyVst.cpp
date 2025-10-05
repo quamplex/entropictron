@@ -94,21 +94,19 @@ bool DspNoiseProxyVst::isEnabled() const
 
 bool DspNoiseProxyVst::setType(NoiseType type)
 {
-        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1TypeId : ParameterId::Noise2TypeId;
-        const double numNoiseTypes = static_cast<double>(ParameterId::Noise2TypeId);
-        double normalizedValue = static_cast<double>(type) / (numNoiseTypes - 1.0);
+        auto id = (getNoiseId() == NoiseId::Noise1) ?
+                ParameterId::Noise1TypeId : ParameterId::Noise2TypeId;
         vstController->getComponentHandler()->beginEdit(id);
-        vstController->getComponentHandler()->performEdit(id, normalizedValue);
+        vstController->getComponentHandler()->performEdit(id, noiseTypeToNormalized(type));
         vstController->getComponentHandler()->endEdit(id);
         return true;
 }
 
 NoiseType DspNoiseProxyVst::noiseType() const
 {
-        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1TypeId : ParameterId::Noise2TypeId;
-        const double numNoiseTypes = static_cast<double>(ParameterId::Noise2TypeId);
-        double normalizedValue = vstController->getParamNormalized(id);
-        return static_cast<NoiseType>(static_cast<int>(std::round(normalizedValue * (numNoiseTypes - 1.0))));
+        auto id = (getNoiseId() == NoiseId::Noise1) ?
+                ParameterId::Noise1TypeId : ParameterId::Noise2TypeId;
+        return noiseTypeFromNormalized(vstController->getParamNormalized(id));
 }
 
 bool DspNoiseProxyVst::setDensity(double value)
@@ -161,7 +159,6 @@ double DspNoiseProxyVst::gain() const
 
 void DspNoiseProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
 {
-        ENTROPICTRON_LOG_DEBUG("called: " << static_cast<int>(paramId) << ": " << value);
         switch (paramId) {
         case ParameterId::Noise1EnabledId:
         case ParameterId::Noise2EnabledId:
@@ -169,7 +166,7 @@ void DspNoiseProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
                 break;
         case ParameterId::Noise1TypeId:
         case ParameterId::Noise2TypeId:
-                action typeUpdated(static_cast<NoiseType>(value + 0.5));
+                action typeUpdated(noiseTypeFromNormalized(value));
                 break;
         case ParameterId::Noise1DensityId:
         case ParameterId::Noise2DensityId:
@@ -187,3 +184,17 @@ void DspNoiseProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
                 break;
         }
 }
+
+double DspNoiseProxyVst::noiseTypeToNormalized(NoiseType type) const
+{
+        auto numNoiseTypes = static_cast<double>(NoiseType::BrownNoise);
+        return static_cast<double>(type) / numNoiseTypes;
+}
+
+NoiseType DspNoiseProxyVst::noiseTypeFromNormalized(double value) const
+{
+        auto numNoiseTypes = static_cast<double>(NoiseType::BrownNoise);
+        return static_cast<NoiseType>(std::round(value * numNoiseTypes));
+}
+
+

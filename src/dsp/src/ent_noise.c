@@ -24,6 +24,7 @@
 #include "ent_noise.h"
 #include "ent_log.h"
 
+#include "qx_math.h"
 #include "qx_randomizer.h"
 
 struct ent_noise {
@@ -34,6 +35,12 @@ struct ent_noise {
         float gain;
         struct qx_randomizer prob_randomizer;
         struct qx_randomizer randomizer;
+
+        // Pink noise filter states
+        float b0, b1, b2;
+
+        // Brown noise state
+        float brown;
 };
 
 struct ent_noise* ent_noise_create(void)
@@ -76,6 +83,7 @@ enum ent_error ent_noise_set_type(struct ent_noise *noise,
                                   enum ent_noise_type type)
 {
         noise->type = type;
+        ent_log_error("type: %d", type);
         return ENT_OK;
 }
 
@@ -117,6 +125,38 @@ float ent_noise_get_gain(struct ent_noise *noise)
         return noise->gain;
 }
 
+inline static float ent_pink_noise(float white)
+{
+        static float b0, b1, b2;
+
+        b0 = 0.99765f * b0 + 0.0990460f * white;
+        b1 = 0.96300f * b1 + 0.2965164f * white;
+        b2 = 0.57000f * b2 + 1.0526913f * white;
+
+        float pink = b0 + b1 + b2 + 0.1848f * white;
+
+        return pink * 0.05f;
+}
+
+static inline float pink_from_white(struct ent_noise *noise, float white)
+{
+    // Paul Kellet 3-pole filter
+    noise->b0 = 0.99765f * noise->b0 + 0.0990460f * white;
+    noise->b1 = 0.96300f * noise->b1 + 0.2965164f * white;
+    noise->b2 = 0.57000f * noise->b2 + 1.0526913f * white;
+
+    float pink = noise->b0 + noise->b1 + noise->b2 + 0.1848f * white;
+
+    return pink * 0.05f;
+}
+
+static inline float brown_from_white(struct ent_noise *noise, float white)
+{
+        noise->brown += 0.02f * white;
+        noise->brown = qx_clamp_float(noise->brown, -1.0f, 1.0f);
+        return noise->brown * 0.5f;
+}
+
 void ent_noise_process(struct ent_noise *noise,
                        float **data,
                        size_t size)
@@ -128,6 +168,17 @@ void ent_noise_process(struct ent_noise *noise,
                 if (prob <= threshold) {
                         val = qx_randomizer_get_float(&noise->randomizer);
                         val *= noise->gain;
+                }
+
+                switch (noise->type) {
+                case ENT_NOISE_TYPE_PINK:
+                        val = pink_from_white(noise, val);
+                        break;
+                case ENT_NOISE_TYPE_BROWN:
+                        val = brown_from_white(noise, val);
+                        break;
+                default: // white
+                        break;
                 }
 
                 data[0][i] += val;

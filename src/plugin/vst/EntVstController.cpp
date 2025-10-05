@@ -49,7 +49,7 @@ EntVstController::initialize(FUnknown* context)
                             ParameterInfo::kCanAutomate,
                             ParameterId::Noise1EnabledId);
     parameters.addParameter(STR16("Noise 1 Type"),
-                            nullptr, 2, 1.0,
+                            nullptr, 2, 0.0,
                             ParameterInfo::kCanAutomate,
                             ParameterId::Noise1TypeId);
     parameters.addParameter(STR16("Noise 1 Density"),
@@ -71,7 +71,7 @@ EntVstController::initialize(FUnknown* context)
                             ParameterInfo::kCanAutomate,
                             ParameterId::Noise2EnabledId);
     parameters.addParameter(STR16("Noise 2 Type"),
-                            nullptr, 2, 1.0,
+                            nullptr, 2, 0.0,
                             ParameterInfo::kCanAutomate,
                             ParameterId::Noise2TypeId);
     parameters.addParameter(STR16("Noise 2 Density"),

@@ -51,6 +51,8 @@ class DspNoiseProxyVst: public DspNoiseProxy {
 
 protected:
         void onParameterChanged(ParameterId paramId, ParamValue value);
+        NoiseType noiseTypeFromNormalized(double value) const;
+        double noiseTypeToNormalized(NoiseType type) const;
 private:
         EntVstController *vstController;
 };

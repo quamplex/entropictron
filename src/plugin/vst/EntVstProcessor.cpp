@@ -276,7 +276,10 @@ void EntVstProcessor::initParamMap()
                 entropictronDsp->getNoise(NoiseId::Noise1)->enable(v >= 0.5);
         };
         paramMap[ParameterId::Noise1TypeId] = [this](ParamValue v) {
-                entropictronDsp->getNoise(NoiseId::Noise1)->setType(static_cast<NoiseType>(v + 0.5));
+                ENTROPICTRON_LOG_INFO("NOISE TYPE------------>: v: " << v);
+                auto n = static_cast<int>(NoiseType::BrownNoise);
+                auto type = static_cast<NoiseType>(v * n  + 0.5);
+                entropictronDsp->getNoise(NoiseId::Noise1)->setType(type);
         };
         paramMap[ParameterId::Noise1DensityId] = [this](ParamValue v) {
                 entropictronDsp->getNoise(NoiseId::Noise1)->setDensity(static_cast<float>(v));
@@ -294,7 +297,9 @@ void EntVstProcessor::initParamMap()
                 entropictronDsp->getNoise(NoiseId::Noise2)->enable(v >= 0.5);
         };
         paramMap[ParameterId::Noise2TypeId] = [this](ParamValue v) {
-                entropictronDsp->getNoise(NoiseId::Noise2)->setType(static_cast<NoiseType>(v + 0.5));
+                auto n = static_cast<int>(NoiseType::BrownNoise);
+                auto type = static_cast<NoiseType>(v * n  + 0.5);
+                entropictronDsp->getNoise(NoiseId::Noise2)->setType(type);
         };
         paramMap[ParameterId::Noise2DensityId] = [this](ParamValue v) {
                 entropictronDsp->getNoise(NoiseId::Noise2)->setDensity(static_cast<float>(v));
