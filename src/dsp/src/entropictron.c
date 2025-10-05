@@ -42,7 +42,7 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
         // Create noise
         size_t num_noises = QX_ARRAY_SIZE((*ent)->noise);
         for (size_t i = 0; i < num_noises; i++) {
-                (*ent)->noise[i] = ent_noise_create();
+                (*ent)->noise[i] = ent_noise_create(sample_rate);
                 if ((*ent)->noise[i] == NULL) {
                         ent_log_error("can't create noise");
                         ent_free(ent);
@@ -96,8 +96,8 @@ ent_process(struct entropictron *ent, float** data, size_t size)
         size_t num_noises = QX_ARRAY_SIZE(ent->noise);
         for (size_t i = 0; i < num_noises; i++) {
                 struct ent_noise *noise = ent->noise[i];
-                if (ent_noise_is_enabled(noise))
-                        ent_noise_process(noise, data, size);
+                //                if (ent_noise_is_enabled(noise))
+                ent_noise_process(noise, data, size);
         }
 
         return ENT_OK;

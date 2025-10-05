@@ -85,14 +85,14 @@ namespace Entropictron
         constexpr int defaultBitDepth = 16;
         constexpr double toDecibel(double val)
         {
-                if (val < std::numeric_limits<double>::min())
-                        return -80;
+                if (val < 1e-5)
+                        return -100;
                 return 20 * log10(val);
         }
 
         constexpr double fromDecibel(double decibel)
         {
-                if (decibel < -80)
+                if (decibel < -100.0)
                         return 0;
                 return pow(10,  decibel / 20);
         }

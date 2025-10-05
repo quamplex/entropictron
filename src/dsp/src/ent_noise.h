@@ -36,7 +36,7 @@ enum ent_noise_type {
         ENT_NOISE_TYPE_BROWN,
 };
 
-struct ent_noise* ent_noise_create();
+struct ent_noise* ent_noise_create(int sampler_rate);
 
 void ent_noise_free(struct ent_noise **noise);
 

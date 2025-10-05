@@ -26,6 +26,7 @@
 
 #include "qx_math.h"
 #include "qx_randomizer.h"
+#include "qx_fader.h"
 
 struct ent_noise {
 	bool enabled;
@@ -35,6 +36,7 @@ struct ent_noise {
         float gain;
         struct qx_randomizer prob_randomizer;
         struct qx_randomizer randomizer;
+        struct qx_fader fader;
 
         // Pink noise filter states
         float b0, b1, b2;
@@ -43,7 +45,7 @@ struct ent_noise {
         float brown;
 };
 
-struct ent_noise* ent_noise_create(void)
+struct ent_noise* ent_noise_create(int sampler_rate)
 {
         struct ent_noise* noise = calloc(1, sizeof(struct ent_noise));
         if (!noise)
@@ -54,8 +56,11 @@ struct ent_noise* ent_noise_create(void)
         noise->density = 1.0f;
         noise->brightness = 1.0f;
         noise->gain = 1.0f;
+        noise->brown = 0.0f;
+        noise->b0 = noise->b1 = noise->b2 = 0.0f;
         qx_randomizer_init(&noise->prob_randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
         qx_randomizer_init(&noise->randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
+        qx_fader_init(&noise->fader, 50, sampler_rate);
 
         return noise;
 }
@@ -71,6 +76,7 @@ void ent_noise_free(struct ent_noise **noise)
 enum ent_error ent_noise_enable(struct ent_noise *noise, bool b)
 {
         noise->enabled = b;
+        qx_fader_enable(&noise->fader, b);
         return ENT_OK;
 }
 
@@ -82,8 +88,20 @@ bool ent_noise_is_enabled(struct ent_noise *noise)
 enum ent_error ent_noise_set_type(struct ent_noise *noise,
                                   enum ent_noise_type type)
 {
+        if (noise->type == type)
+                return ENT_OK;
+
         noise->type = type;
-        ent_log_error("type: %d", type);
+        switch (noise->type) {
+        case ENT_NOISE_TYPE_PINK:
+                noise->b0 = noise->b1 = noise->b2 = 0.0f;
+                break;
+        case ENT_NOISE_TYPE_BROWN:
+                noise->brown = 0.0f;
+                break;
+        default: // white
+                break;
+                }
         return ENT_OK;
 }
 
@@ -180,6 +198,8 @@ void ent_noise_process(struct ent_noise *noise,
                 default: // white
                         break;
                 }
+
+                val = qx_fader_fade(&noise->fader, val);
 
                 data[0][i] += val;
                 data[1][i] += val;

@@ -32,7 +32,8 @@ NoiseModel::NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy)
         , gainDefaultvalue {1.0}
         , densityRange {0.0, 1.0}
         , brightnessRange {0.0, 1.0}
-        , gainRange {0.0, 1.0}
+        , gainRange {Entropictron::fromDecibel(-50), // -50dB
+                     Entropictron::fromDecibel(6)}   // +6dB
 {
         RK_ACT_BIND(dspNoiseProxy,
                     enabled,
@@ -85,6 +86,7 @@ NoiseType NoiseModel::noiseType() const
 
 void NoiseModel::setDensity(double value)
 {
+        ENTROPICTRON_LOG_DEBUG("value: " << value);
         if (dspNoiseProxy->setDensity(value))
                 action densityUpdated(value);
 }

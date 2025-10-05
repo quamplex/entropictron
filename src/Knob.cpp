@@ -180,18 +180,21 @@ void Knob::mouseDoubleClickEvent(RkMouseEvent *event)
 void Knob::rotateKnob(double degree)
 {
         knobValueDegree += degree;
-        if (knobValueDegree < minimumDegree)
-                knobValueDegree = minimumDegree;
-        else if (knobValueDegree > maximumDegree)
-                knobValueDegree = maximumDegree;
+        knobValueDegree = std::clamp(knobValueDegree, minimumDegree, maximumDegree);
 
         double k = (knobValueDegree - minimumDegree) / rangeDegree;
         if (getRangeType() == RangeType::Logarithmic) {
-                double logVal = log10(rangeFrom) + k * (log10(rangeTo) - log10(rangeFrom));
-                valueUpdated(pow(10, logVal));
+                if (rangeFrom <= 0.0) {
+                        constexpr double curve = 4.0;
+                        valueUpdated(std::pow(k, curve) * (rangeTo - rangeFrom) + rangeFrom);
+                } else {
+                        double logVal = std::log10(rangeFrom) + k * (std::log10(rangeTo) - std::log10(rangeFrom));
+                        valueUpdated(std::pow(10.0, logVal));
+                }
         } else {
                 valueUpdated(rangeFrom + k * (rangeTo - rangeFrom));
         }
+
         update();
 }
 
@@ -201,16 +204,25 @@ double Knob::valueToDegree(double value) const
                 return minimumDegree;
 
         value = std::clamp(value, rangeFrom, rangeTo);
-        auto offset = rangeTo - rangeFrom + 1.0;
-        auto from = rangeFrom + offset;
-        auto to = rangeTo + offset;
-        value += offset;
 
         double k = 0.0;
-        if (getRangeType() == RangeType::Logarithmic)
-                k = (log10(value) - log10(from)) / (log10(to) - log10(from));
-        else
-                k = (value - from) / (to - from);
+        if (getRangeType() == RangeType::Logarithmic) {
+                if (rangeFrom <= 0.0) {
+                        // pseudo-log (power) mapping for [0, 1]
+                        constexpr double curve = 4.0; // same curve as in rotateKnob()
+                        double norm = (value - rangeFrom) / (rangeTo - rangeFrom);
+                        k = std::pow(norm, 1.0 / curve);
+                } else {
+                        // true logarithmic mapping
+                        double logFrom = std::log10(rangeFrom);
+                        double logTo   = std::log10(rangeTo);
+                        double logVal  = std::log10(value);
+                        k = (logVal - logFrom) / (logTo - logFrom);
+                }
+        } else {
+                // linear mapping
+                k = (value - rangeFrom) / (rangeTo - rangeFrom);
+        }
 
         return minimumDegree + k * rangeDegree;
 }

@@ -4,6 +4,7 @@ set(QUAMPLEX_DSP_TOOLS_PATH ${ENT_DSP_DIR}/src/quamplex_dsp_tools)
 
 set(ENT_DSP_HEADERS
     ${QUAMPLEX_DSP_TOOLS_PATH}/qx_math.h
+    ${QUAMPLEX_DSP_TOOLS_PATH}/qx_fader.h
     ${QUAMPLEX_DSP_TOOLS_PATH}/qx_randomizer.h
     ${ENT_DSP_DIR}/src/ent_noise.h
     ${ENT_DSP_DIR}/src/entropictron.h

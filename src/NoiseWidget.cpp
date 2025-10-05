@@ -133,6 +133,7 @@ void NoiseWidget::updateView()
 
         auto [gainFrom, gainTo] = model->getGainRange();
         gainKnob->setRange(gainFrom, gainTo);
+        gainKnob->setRangeType(Knob::RangeType::Logarithmic);
         gainKnob->setDefaultValue(model->getGainDefaultValue());
         gainKnob->setValue(model->gain());
 }
