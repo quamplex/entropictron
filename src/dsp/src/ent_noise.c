@@ -23,12 +23,14 @@
 
 #include "ent_noise.h"
 #include "ent_log.h"
+#include "ent_shelf_filter.h"
 
 #include "qx_math.h"
 #include "qx_randomizer.h"
 #include "qx_fader.h"
 
 struct ent_noise {
+        int sample_rate;
 	bool enabled;
         enum ent_noise_type type;
         float density;
@@ -43,24 +45,33 @@ struct ent_noise {
 
         // Brown noise state
         float brown;
+
+        // Brightness shelf filter
+        struct ent_shelf_filter sh_filter_l;
+        struct ent_shelf_filter sh_filter_r;
+
+        float buffer[2][4096];
 };
 
-struct ent_noise* ent_noise_create(int sampler_rate)
+struct ent_noise* ent_noise_create(int sample_rate)
 {
         struct ent_noise* noise = calloc(1, sizeof(struct ent_noise));
         if (!noise)
                 return NULL;
 
+        noise->sample_rate = sample_rate;
         noise->enabled = false;
         noise->type = ENT_NOISE_TYPE_WHITE;
         noise->density = 1.0f;
-        noise->brightness = 1.0f;
+        noise->brightness = 0.0f;
         noise->gain = 1.0f;
         noise->brown = 0.0f;
         noise->b0 = noise->b1 = noise->b2 = 0.0f;
         qx_randomizer_init(&noise->prob_randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
         qx_randomizer_init(&noise->randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
-        qx_fader_init(&noise->fader, 50, sampler_rate);
+        qx_fader_init(&noise->fader, 50, noise->sample_rate);
+        ent_shelf_filter_init(&noise->sh_filter_l, noise->sample_rate, 8000.0f, 1.0f);
+        ent_shelf_filter_init(&noise->sh_filter_r, noise->sample_rate, 8000.0f, 1.0f);
 
         return noise;
 }
@@ -123,8 +134,26 @@ float ent_noise_get_density(struct ent_noise *noise)
 
 enum ent_error ent_noise_set_brightness(struct ent_noise *noise, float brightness)
 {
-        noise->brightness = brightness;
-        return ENT_OK;
+            // Clamp brightness to [0,1] using qx_clamp_float
+    noise->brightness = qx_clamp_float(brightness, 0.0f, 1.0f);
+
+    // Map brightness to cutoff (Hz)
+    float min_cutoff = 1000.0f;
+    float max_cutoff = 8000.0f;
+    float cutoff = min_cutoff + (max_cutoff - min_cutoff) * noise->brightness;
+
+    // Map brightness to linear gain
+    float min_gain = 1.0f;
+    float max_gain = 24.0f;
+    float gain = 24.0f;//min_gain + (max_gain - min_gain) * noise->brightness;
+
+    ent_log_error("Brightness = %f, cutoff = %f, gain = %f", noise->brightness, cutoff, gain);
+
+    // Update high-shelf filter for both channels
+    ent_shelf_filter_set_cutoff(&noise->sh_filter_l, noise->sample_rate, cutoff, gain);
+    ent_shelf_filter_set_cutoff(&noise->sh_filter_r, noise->sample_rate, cutoff, gain);
+
+    return ENT_OK;
 }
 
 float ent_noise_get_brightness(struct ent_noise *noise)
@@ -183,10 +212,8 @@ void ent_noise_process(struct ent_noise *noise,
         for (size_t i = 0; i < size; i++) {
                 float val = 0.0f;
                 float prob = qx_randomizer_get_float(&noise->prob_randomizer);
-                if (prob <= threshold) {
+                if (prob <= threshold)
                         val = qx_randomizer_get_float(&noise->randomizer);
-                        val *= noise->gain;
-                }
 
                 switch (noise->type) {
                 case ENT_NOISE_TYPE_PINK:
@@ -201,8 +228,18 @@ void ent_noise_process(struct ent_noise *noise,
 
                 val = qx_fader_fade(&noise->fader, val);
 
-                data[0][i] += val;
-                data[1][i] += val;
+                noise->buffer[0][i] = val;
+                noise->buffer[1][i] = val;
+        }
+
+        ent_shelf_filter_process(&noise->sh_filter_l, noise->buffer[0], size);
+        ent_shelf_filter_process(&noise->sh_filter_r, noise->buffer[1], size);
+
+        for (size_t i = 0; i < size; i++) {
+                float v = noise->buffer[0][i] * noise->gain
+                         / powf(10.0f, noise->sh_filter_r.gain / 20.0f);
+                data[0][i] += v;
+                data[1][i] += v;
         }
 }
 

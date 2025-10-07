@@ -28,7 +28,7 @@ NoiseModel::NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy)
         : EntAbstractModel(parent)
         , dspNoiseProxy {dspNoiseProxy}
         , desnityDefaultvalue {1.0}
-        , brightnessDefaultvalue {1.0}
+        , brightnessDefaultvalue {0.0}
         , gainDefaultvalue {1.0}
         , densityRange {0.0, 1.0}
         , brightnessRange {0.0, 1.0}

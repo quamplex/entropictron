@@ -33,8 +33,8 @@ enum class NoiseId: int {
 
 enum class NoiseType: int {
         WhiteNoise = ENT_NOISE_TYPE_WHITE,
-                PinkNoise  = ENT_NOISE_TYPE_PINK,
-                BrownNoise = ENT_NOISE_TYPE_BROWN
-                };
+        PinkNoise  = ENT_NOISE_TYPE_PINK,
+        BrownNoise = ENT_NOISE_TYPE_BROWN
+};
 
 #endif // ENT_DSP_TYPES_H

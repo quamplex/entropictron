@@ -57,7 +57,7 @@ EntVstController::initialize(FUnknown* context)
                             ParameterInfo::kCanAutomate,
                             ParameterId::Noise1DensityId);
     parameters.addParameter(STR16("Noise 1 Brightness"),
-                            nullptr, 0, 1.0,
+                            nullptr, 0, 0.0,
                             ParameterInfo::kCanAutomate,
                             ParameterId::Noise1BrightnessId);
     parameters.addParameter(STR16("Noise 1 Gain"),
@@ -79,7 +79,7 @@ EntVstController::initialize(FUnknown* context)
                             ParameterInfo::kCanAutomate,
                             ParameterId::Noise2DensityId);
     parameters.addParameter(STR16("Noise 2 Brightness"),
-                            nullptr, 0, 1.0,
+                            nullptr, 0, 0.0,
                             ParameterInfo::kCanAutomate,
                             ParameterId::Noise2BrightnessId);
     parameters.addParameter(STR16("Noise 2 Gain"),
