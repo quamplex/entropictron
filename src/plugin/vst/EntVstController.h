@@ -48,6 +48,7 @@ class EntVstController : public Vst::EditControllerEx1 {
 
 protected:
         tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
+        void addCrackleParameters();
 
 private:
         std::unordered_map<ParameterId, ParameterCallback> parametersCallbacks;

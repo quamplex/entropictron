@@ -26,6 +26,7 @@
 #include "VstIds.h"
 #include "DspWrapper.h"
 #include "DspWrapperNoise.h"
+#include "DspWrapperCrackle.h"
 #include "EntVstParameters.h"
 
 #include "base/source/fstreamer.h"
@@ -61,7 +62,7 @@ bool ModuleExit (void)
 
 EntVstProcessor::EntVstProcessor()
 {
-        initParamMap();
+        initParamMappings();
 }
 
 EntVstProcessor::~EntVstProcessor()
@@ -268,7 +269,13 @@ void EntVstProcessor::updateParameters(ParameterId id, ParamValue value)
                 it->second(value);
 }
 
-void EntVstProcessor::initParamMap()
+void EntVstProcessor::initParamMappings()
+{
+        initNoiseParamMappings();
+        initCrackleParamMappings();
+}
+
+void EntVstProcessor::initNoiseParamMappings()
 {
         // Noise 1
         paramMap[ParameterId::Noise1EnabledId] = [this](ParamValue v) {
@@ -311,3 +318,49 @@ void EntVstProcessor::initParamMap()
                 entropictronDsp->getNoise(NoiseId::Noise2)->setGain(static_cast<float>(v));
         };
 }
+
+void EntVstProcessor::initCrackleParamMappings()
+{
+    // Enabled
+    paramMap[ParameterId::CrackleEnabledId] = [this](ParamValue v) {
+        entropictronDsp->getCrackle()->enable(v > 0.5); // 0 = off, 1 = on
+    };
+
+    // Rate (0–100 Hz)
+    paramMap[ParameterId::CrackleRateId] = [this](ParamValue v) {
+        float rateHz = static_cast<float>(v) * 100.0f; // normalized → real Hz
+        entropictronDsp->getCrackle()->setRate(rateHz);
+    };
+
+    // Duration (1–50 ms)
+    paramMap[ParameterId::CrackleDurationId] = [this](ParamValue v) {
+        float durationMs = 1.0f + static_cast<float>(v) * (50.0f - 1.0f);
+        entropictronDsp->getCrackle()->setDuration(durationMs);
+    };
+
+    // Amplitude (0–1)
+    paramMap[ParameterId::CrackleAmplitudeId] = [this](ParamValue v) {
+        entropictronDsp->getCrackle()->setAmplitude(static_cast<float>(v));
+    };
+
+    // Randomness (0–100%)
+    paramMap[ParameterId::CrackleRandomnessId] = [this](ParamValue v) {
+        entropictronDsp->getCrackle()->setRandomness(static_cast<float>(v) * 100.0f);
+    };
+
+    // Brightness (0–1)
+    paramMap[ParameterId::CrackleBrightnessId] = [this](ParamValue v) {
+        entropictronDsp->getCrackle()->setBrightness(static_cast<float>(v));
+    };
+
+    // Envelope Shape (0–1)
+    paramMap[ParameterId::CrackleEnvelopeShapeId] = [this](ParamValue v) {
+        entropictronDsp->getCrackle()->setEnvelopeShape(static_cast<CrackleEnvelopeShape>(v));
+    };
+
+    // Stereo Spread (0–100%)
+    paramMap[ParameterId::CrackleStereoSpreadId] = [this](ParamValue v) {
+        entropictronDsp->getCrackle()->setStereoSpread(static_cast<float>(v) * 100.0f);
+    };
+}
+

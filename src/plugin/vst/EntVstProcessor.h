@@ -66,7 +66,9 @@ class EntVstProcessor : public AudioEffect {
 
  protected:
         using UpdateParamFunc = std::function<void(const ParamValue&)>;
-        void initParamMap();
+        void initParamMappings();
+        void initNoiseParamMappings();
+        void initCrackleParamMappings();
         void updateParameters(ParameterId pid, ParamValue value);
 
  private:

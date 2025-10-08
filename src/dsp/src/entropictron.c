@@ -23,9 +23,16 @@
 
 #include "entropictron.h"
 #include "ent_noise.h"
+#include "ent_crackle.h"
 #include "ent_log.h"
 
 #include "qx_math.h"
+
+struct entropictron {
+	unsigned int sample_rate;
+        struct ent_noise* noise[2];
+        struct ent_crackle *crackle;
+};
 
 enum ent_error
 ent_create(struct entropictron **ent, unsigned int sample_rate)
@@ -50,6 +57,13 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
                 }
         }
 
+        (*ent)->crackle = ent_crackle_create(sample_rate);
+        if ((*ent)->crackle == NULL) {
+                ent_log_error("can't create crackle");
+                ent_free(ent);
+                return ENT_ERROR;
+        }
+
 	return ENT_OK;
 }
 
@@ -60,6 +74,9 @@ void ent_free(struct entropictron **ent)
                 size_t num_noises = QX_ARRAY_SIZE((*ent)->noise);
                 for (size_t i = 0; i < num_noises; i++)
                         ent_noise_free(&(*ent)->noise[i]);
+
+                // Free crackle
+                ent_crackle_free(&(*ent)->crackle);
 
                 free(*ent);
                 *ent = NULL;
@@ -100,6 +117,8 @@ ent_process(struct entropictron *ent, float** data, size_t size)
                 ent_noise_process(noise, data, size);
         }
 
+        ent_crackle_process(ent->crackle, data, size);
+
         return ENT_OK;
 }
 
@@ -110,4 +129,10 @@ ent_get_noise(struct entropictron *ent, int id)
                 return NULL;
 
         return ent->noise[id];
+}
+
+struct ent_crackle*
+ent_get_crackle(struct entropictron *ent)
+{
+        return ent->crackle;
 }

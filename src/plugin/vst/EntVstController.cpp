@@ -87,7 +87,60 @@ EntVstController::initialize(FUnknown* context)
                             ParameterInfo::kCanAutomate,
                             ParameterId::Noise2GainId);
 
+    addCrackleParameters();
+
     return result;
+}
+
+void EntVstController::addCrackleParameters()
+{
+        // Crackle Enabled (On/Off)
+        parameters.addParameter(STR16("Crackle Enabled"),
+                                nullptr, 1, 0.0, // 0 = off, 1 = on
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::CrackleEnabledId);
+
+        // Rate (bursts per second)
+        parameters.addParameter(STR16("Crackle Rate"),
+                                nullptr, 100, 20.0, // 0–100 Hz, default 20
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::CrackleRateId);
+
+        // Duration (ms)
+        parameters.addParameter(STR16("Crackle Duration"),
+                                nullptr, 50, 20.0, // 1–50 ms, default 20
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::CrackleDurationId);
+
+        // Amplitude
+        parameters.addParameter(STR16("Crackle Amplitude"),
+                                nullptr, 1, 0.5, // 0–1 linear, default 0.5
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::CrackleAmplitudeId);
+
+        // Randomness
+        parameters.addParameter(STR16("Crackle Randomness"),
+                                nullptr, 100, 50.0, // 0–100%, default 50%
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::CrackleRandomnessId);
+
+        // Brightness
+        parameters.addParameter(STR16("Crackle Brightness"),
+                                nullptr, 1, 0.5, // 0–1, default 0.5
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::CrackleBrightnessId);
+
+        // Envelope Shape
+        parameters.addParameter(STR16("Crackle Envelope Shape"),
+                                nullptr, 1, 0.5, // 0–1, default 0.5
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::CrackleEnvelopeShapeId);
+
+        // Stereo Spread
+        parameters.addParameter(STR16("Crackle Stereo Spread"),
+                                nullptr, 100, 50.0, // 0–100%, default 50%
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::CrackleStereoSpreadId);
 }
 
 IPlugView* PLUGIN_API

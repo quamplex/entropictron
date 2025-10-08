@@ -25,6 +25,7 @@
 #define ENT_DSP_TYPES_H
 
 #include "ent_noise.h"
+#include "ent_crackle.h"
 
 enum class NoiseId: int {
         Noise1,
@@ -35,6 +36,12 @@ enum class NoiseType: int {
         WhiteNoise = ENT_NOISE_TYPE_WHITE,
         PinkNoise  = ENT_NOISE_TYPE_PINK,
         BrownNoise = ENT_NOISE_TYPE_BROWN
+};
+
+enum class CrackleEnvelopeShape : int {
+        Exponential = ENT_CRACKLE_ENV_EXPONENTIAL,
+        Linear      = ENT_CRACKLE_ENV_LINEAR,
+        Triangle    = ENT_CRACKLE_ENV_TRIANGLE
 };
 
 #endif // ENT_DSP_TYPES_H

@@ -43,11 +43,8 @@ extern "C" {
 #include "ent_log.h"
 
 struct ent_noise;
-
-struct entropictron {
-	unsigned int sample_rate;
-        struct ent_noise* noise[2];
-};
+struct ent_crackle;
+struct entropictron;
 
 enum ent_error ent_create(struct entropictron **ent, unsigned int sample_rate);
 
@@ -60,6 +57,8 @@ enum ent_error ent_get_sample_rate(struct entropictron *ent, unsigned int *sampl
 enum ent_error ent_process(struct entropictron *ent, float** data, size_t size);
 
 struct ent_noise* ent_get_noise(struct entropictron *ent, int id);
+
+struct ent_crackle* ent_get_crackle(struct entropictron *ent);
 
 #ifdef __cplusplus
 }

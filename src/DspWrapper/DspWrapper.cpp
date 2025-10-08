@@ -24,6 +24,7 @@
 #include "DspWrapper.h"
 #include "entropictron.h"
 #include "DspWrapperNoise.h"
+#include "DspWrapperCrackle.h"
 
 DspWrapper::DspWrapper()
 {
@@ -41,6 +42,10 @@ DspWrapper::DspWrapper()
         noise = ent_get_noise(entropictronDsp.get(),
                               static_cast<int>(NoiseId::Noise2));
         dspNoise2 = std::make_unique<DspWrapperNoise>(noise);
+
+        // Crackle
+        auto crackle = ent_get_crackle(entropictronDsp.get());
+        dspCrackle = std::make_unique<DspWrapperCrackle>(crackle);
 }
 
 void DspWrapper::setSampleRate(unsigned int srate)
@@ -68,4 +73,10 @@ DspWrapperNoise* DspWrapper::getNoise(NoiseId id) const
         else
                 return dspNoise2.get();
 }
+
+DspWrapperCrackle* DspWrapper::getCrackle() const
+{
+        return dspCrackle.get();
+}
+
 

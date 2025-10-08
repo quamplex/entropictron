@@ -42,7 +42,17 @@ enum ParameterId : Steinberg::Vst::ParamID
     Noise2TypeId        = 2001,
     Noise2DensityId     = 2002,
     Noise2BrightnessId  = 2003,
-    Noise2GainId        = 2004
+    Noise2GainId        = 2004,
+
+    // Crackle
+    CrackleEnabledId       = 20101,
+    CrackleRateId          = 20102,
+    CrackleDurationId      = 20103,
+    CrackleAmplitudeId     = 20104,
+    CrackleRandomnessId    = 20105,
+    CrackleBrightnessId    = 20106,
+    CrackleEnvelopeShapeId = 20107,
+    CrackleStereoSpreadId  = 20108
 };
 
 } // namesapce EntVst
