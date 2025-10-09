@@ -69,6 +69,7 @@ class EntVstProcessor : public AudioEffect {
         void initParamMappings();
         void initNoiseParamMappings();
         void initCrackleParamMappings();
+        void initGlitcherParamMappings();
         void updateParameters(ParameterId pid, ParamValue value);
 
  private:

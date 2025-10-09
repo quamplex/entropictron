@@ -88,6 +88,7 @@ EntVstController::initialize(FUnknown* context)
                             ParameterId::Noise2GainId);
 
     addCrackleParameters();
+    addGlitcherParameters();
 
     return result;
 }
@@ -141,6 +142,45 @@ void EntVstController::addCrackleParameters()
                                 nullptr, 100, 50.0, // 0–100%, default 50%
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::CrackleStereoSpreadId);
+}
+
+void EntVstController::addGlitcherParameters()
+{
+    // Glitch Enabled (On/Off)
+    parameters.addParameter(STR16("Glitch Enabled"),
+                            nullptr, 1, 0.0, // 0 = off, 1 = on
+                            ParameterInfo::kCanAutomate,
+                            ParameterId::GlitchEnabledId);
+
+    // Glitch Probability
+    parameters.addParameter(STR16("Glitch Probability"),
+                            STR16("%"), 100, 20.0, // 0–100%, default 20%
+                            ParameterInfo::kCanAutomate,
+                            ParameterId::GlitchProbabilityId);
+
+    // Jump Min Time (ms)
+    parameters.addParameter(STR16("Jump Min Time"),
+                            STR16("ms"), 2000, 100.0, // 0–2000 ms, default 100 ms
+                            ParameterInfo::kCanAutomate,
+                            ParameterId::GlitchJumpMinId);
+
+    // Jump Max Time (ms)
+    parameters.addParameter(STR16("Jump Max Time"),
+                            STR16("ms"), 5000, 1000.0, // 0–5000 ms, default 1000 ms
+                            ParameterInfo::kCanAutomate,
+                            ParameterId::GlitchJumpMaxId);
+
+    // Glitch Length (ms)
+    parameters.addParameter(STR16("Glitch Length"),
+                            STR16("ms"), 2000, 200.0, // 0–2000 ms, default 200 ms
+                            ParameterInfo::kCanAutomate,
+                            ParameterId::GlitchLengthId);
+
+    // Glitch Repeat Count
+    parameters.addParameter(STR16("Glitch Repeat Count"),
+                            nullptr, 10, 2.0, // 1–10 repeats, default 2
+                            ParameterInfo::kCanAutomate,
+                            ParameterId::GlitchRepeatCountId);
 }
 
 IPlugView* PLUGIN_API

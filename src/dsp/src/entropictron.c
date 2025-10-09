@@ -24,6 +24,7 @@
 #include "entropictron.h"
 #include "ent_noise.h"
 #include "ent_crackle.h"
+#include "ent_glitcher.h"
 #include "ent_log.h"
 
 #include "qx_math.h"
@@ -32,6 +33,7 @@ struct entropictron {
 	unsigned int sample_rate;
         struct ent_noise* noise[2];
         struct ent_crackle *crackle;
+        struct ent_glitcher *glitcher;
 };
 
 enum ent_error
@@ -64,6 +66,13 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
                 return ENT_ERROR;
         }
 
+        (*ent)->glitcher = ent_glitcher_create(sample_rate);
+        if ((*ent)->glitcher == NULL) {
+                ent_log_error("can't create glitcher");
+                ent_free(ent);
+                return ENT_ERROR;
+        }
+
 	return ENT_OK;
 }
 
@@ -77,6 +86,9 @@ void ent_free(struct entropictron **ent)
 
                 // Free crackle
                 ent_crackle_free(&(*ent)->crackle);
+
+                // Free glitcher
+                ent_glitcher_free(&(*ent)->glitcher);
 
                 free(*ent);
                 *ent = NULL;
@@ -110,14 +122,17 @@ ent_get_sample_rate(struct entropictron *ent, unsigned int *sample_rate)
 enum ent_error
 ent_process(struct entropictron *ent, float** data, size_t size)
 {
-        size_t num_noises = QX_ARRAY_SIZE(ent->noise);
+        float *in[2] = {data[0], data[1]};
+        float *out[2] = {data[2], data[3]};
+        /*size_t num_noises = QX_ARRAY_SIZE(ent->noise);
         for (size_t i = 0; i < num_noises; i++) {
                 struct ent_noise *noise = ent->noise[i];
                 //                if (ent_noise_is_enabled(noise))
-                ent_noise_process(noise, data, size);
-        }
+                ent_noise_process(noise, out, size);
+                }*/
 
-        ent_crackle_process(ent->crackle, data, size);
+        //ent_crackle_process(ent->crackle, out, size);
+        ent_glitcher_process(ent->glitcher, in, out, size);
 
         return ENT_OK;
 }
@@ -136,3 +151,10 @@ ent_get_crackle(struct entropictron *ent)
 {
         return ent->crackle;
 }
+
+struct ent_glitcher*
+ent_get_glitcher(struct entropictron *ent)
+{
+        return ent->glitcher;
+}
+

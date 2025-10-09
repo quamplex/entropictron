@@ -52,7 +52,15 @@ enum ParameterId : Steinberg::Vst::ParamID
     CrackleRandomnessId    = 20105,
     CrackleBrightnessId    = 20106,
     CrackleEnvelopeShapeId = 20107,
-    CrackleStereoSpreadId  = 20108
+    CrackleStereoSpreadId  = 20108,
+
+    // Glitcher
+    GlitchEnabledId        = 20201,
+    GlitchProbabilityId    = 20202,
+    GlitchJumpMinId        = 20203,
+    GlitchJumpMaxId        = 20204,
+    GlitchLengthId         = 20205,
+    GlitchRepeatCountId    = 20206,
 };
 
 } // namesapce EntVst
