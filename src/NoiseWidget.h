@@ -58,4 +58,4 @@ private:
         Knob *gainKnob;
 };
 
-#endif // NT_NOISE_WIDGET_H
+#endif // ENT_NOISE_WIDGET_H

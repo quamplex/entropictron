@@ -23,23 +23,15 @@
 
 #include "MainWindow.h"
 #include "NoiseWidget.h"
-
-#include "RkLabel.h"
-#include "RkContainer.h"
 #include "DspProxy.h"
 #include "EntropictronModel.h"
 
+#include "RkContainer.h"
+#include "RkLabel.h"
+#include "RkTabWidget.h"
+
 constexpr int MAIN_WINDOW_WIDTH  = 900;
 constexpr int MAIN_WINDOW_HEIGHT = 352;
-
-MainWindow::MainWindow(RkMain& app /*, EndDspProxy *dspProxy*/)
-        : EntWidget(app)
-{
-        setTitle(Entropictron::applicationName);
-        setName("MainWindow");
-        setFixedSize(MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
-        createUi();
-}
 
 MainWindow::MainWindow(RkMain& app,
                        const RkNativeWindowInfo &info,
@@ -50,6 +42,7 @@ MainWindow::MainWindow(RkMain& app,
         setTitle(Entropictron::applicationName);
         setName("MainWindow");
         setFixedSize(MAIN_WINDOW_WIDTH, MAIN_WINDOW_HEIGHT);
+        setBackgroundColor({20, 20, 20});
         createUi();
 }
 
@@ -69,14 +62,35 @@ bool MainWindow::createUi(void)
         horizontalContainer->setSize({mainContainer->width(), 282});
         mainContainer->addContainer(horizontalContainer);
 
+        auto moduleTabs = new RkTabWidget(this);
+        horizontalContainer->addWidget(moduleTabs);
+
         // Noise 1 controls widget
-        auto noiseWidget = new NoiseWidget(this, entropictronModel->getNoise1());
-        horizontalContainer->addWidget(noiseWidget);
+        auto noiseWidget = new NoiseWidget(moduleTabs, entropictronModel->getNoise1());
+        moduleTabs->addTab(noiseWidget, RK_RC_IMAGE(noise1_tab));
+
+        // Crackle 1
+        auto crackleWidget = new CrackleWidget(moduleTabs, entropictronModel->getCrackle1());
+        moduleTabs->addTab(crackleWidget, RK_RC_IMAGE(crackle1_tab));
+
+        // Glitch 1
+        auto glitchWidget = new GlitchWidget(moduleTabs, entropictronModel->getGlitch1());
+        moduleTabs->addTab(glitchWidget, RK_RC_IMAGE(glitch1_tab));
+
+        moduleTabs = new RkTabWidget(this);
+        horizontalContainer->addWidget(moduleTabs);
 
         // Noise 2 controls widget
-        horizontalContainer->addSpace(5);
-        noiseWidget = new NoiseWidget(this, entropictronModel->getNoise2());
-        horizontalContainer->addWidget(noiseWidget);
+        noiseWidget = new NoiseWidget(moduleTabs, entropictronModel->getNoise2());
+        moduleTabs->addTab(noiseWidget, RK_RC_IMAGE(noise2_tab));
+
+        // Crackle 2
+        crackleWidget = new CrackleWidget(moduleTabs, entropictronModel->getCrackle2());
+        moduleTabs->addTab(crackleWidget, RK_RC_IMAGE(crackle2_tab));
+
+        // Glitch 2
+        glitchWidget = new GlitchWidget(moduleTabs, entropictronModel->getGlitch2());
+        moduleTabs->addTab(glitchWidget, RK_RC_IMAGE(glitch2_tab));
 
         // Global controls widget
         horizontalContainer->addSpace(5);

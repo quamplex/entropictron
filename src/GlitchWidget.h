@@ -1,5 +1,5 @@
 /**
- * File name: MainWindow.h
+ * File name: GlitchWidget.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,30 +21,32 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef ENT_MAINWINDOW_H
-#define ENT_MAINWINDOW_H
+#ifndef ENT_GLITCH_WIDGET_H
+#define ENT_GLITCH_WIDGET_H
 
-#include "EntWidget.h"
+#include "EntAbstractView.h"
+#include "GuiTypes.h"
 
-#include "RkMain.h"
+class GlitchModel;
+class RkContainer;
+class RkButton;
+class RkLabel;
+class Knob;
 
-class DspProxy;
-class EntropictronModel;
-
-class MainWindow : public EntWidget
+class GlitchWidget : public EntAbstractView
 {
- public:
-      explicit MainWindow(RkMain& app,
-                          const RkNativeWindowInfo &info,
-                          DspProxy *dspProxy);
-      ~MainWindow();
-      static RkSize getWindowSize();
+public:
+        explicit GlitchWidget(EntWidget* parent, GlitchModel* model);
+        ~GlitchWidget();
+        void createView() override;
+        void updateView() override;
 
- protected:
-        bool createUi(void);
+protected:
+        void bindModel() override;
+        void unbindModel() override;
+        void createGlitchControls(RkContainer *container);
 
- private:
-        EntropictronModel* entropictronModel;
+private:
 };
 
-#endif // ENT_MAINWINDOW_H
+#endif // ENT_GLITCH_WIDGET_H
