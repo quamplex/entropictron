@@ -33,6 +33,18 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
         , dspNoise2Proxy {new DspNoiseProxyVst(this,
                                                controller,
                                                NoiseId::Noise2)}
+        , dspCrackle1Proxy {new DspCrackleProxyVst(this,
+                                                   controller,
+                                                   CrackleId::Crackle1)}
+        , dspCrackle2Proxy {new DspCrackleProxyVst(this,
+                                                   controller,
+                                                   CrackleId::Crackle2)}
+        , dspGlitch1Proxy {new DspGlitchProxyVst(this,
+                                                 controller,
+                                                 GlitchId::Glitch1)}
+        , dspGlitch2Proxy {new DspGlitchProxyVst(this,
+                                                 controller,
+                                                 GlitchId::Glitch2)}
 {
 }
 
@@ -43,6 +55,30 @@ DspNoiseProxy* DspProxyVst::getNoise(NoiseId id) const
                 return dspNoise1Proxy;
         case NoiseId::Noise2:
                 return dspNoise2Proxy;
+        default:
+                return nullptr;
+        }
+}
+
+DspCrackleProxy* DspProxyVst::getCrackle(CrackleId id) const
+{
+        switch(id) {
+        case CrackleId::Crackle1:
+                return dspCrackle1Proxy;
+        case CrackleId::Crackle2:
+                return dspCrackle2Proxy;
+        default:
+                return nullptr;
+        }
+}
+
+DspGlitchProxy* DspProxyVst::getGlitch(GlitchId id) const
+{
+        switch(id) {
+        case GlitchId::Glitch1:
+                return dspGlitch1Proxy;
+        case GlitchId::Glitch2:
+                return dspGlitch2Proxy;
         default:
                 return nullptr;
         }

@@ -24,7 +24,7 @@
 #include "entropictron.h"
 #include "ent_noise.h"
 #include "ent_crackle.h"
-#include "ent_glitcher.h"
+#include "ent_glitch.h"
 #include "ent_log.h"
 
 #include "qx_math.h"
@@ -33,7 +33,7 @@ struct entropictron {
 	unsigned int sample_rate;
         struct ent_noise* noise[2];
         struct ent_crackle *crackle;
-        struct ent_glitcher *glitcher;
+        struct ent_glitch *glitch;
 };
 
 enum ent_error
@@ -66,9 +66,9 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
                 return ENT_ERROR;
         }
 
-        (*ent)->glitcher = ent_glitcher_create(sample_rate);
-        if ((*ent)->glitcher == NULL) {
-                ent_log_error("can't create glitcher");
+        (*ent)->glitch = ent_glitch_create(sample_rate);
+        if ((*ent)->glitch == NULL) {
+                ent_log_error("can't create glitch");
                 ent_free(ent);
                 return ENT_ERROR;
         }
@@ -87,8 +87,8 @@ void ent_free(struct entropictron **ent)
                 // Free crackle
                 ent_crackle_free(&(*ent)->crackle);
 
-                // Free glitcher
-                ent_glitcher_free(&(*ent)->glitcher);
+                // Free glitch
+                ent_glitch_free(&(*ent)->glitch);
 
                 free(*ent);
                 *ent = NULL;
@@ -132,7 +132,7 @@ ent_process(struct entropictron *ent, float** data, size_t size)
                 }*/
 
         //ent_crackle_process(ent->crackle, out, size);
-        ent_glitcher_process(ent->glitcher, in, out, size);
+        ent_glitch_process(ent->glitch, in, out, size);
 
         return ENT_OK;
 }
@@ -152,9 +152,9 @@ ent_get_crackle(struct entropictron *ent)
         return ent->crackle;
 }
 
-struct ent_glitcher*
-ent_get_glitcher(struct entropictron *ent)
+struct ent_glitch*
+ent_get_glitch(struct entropictron *ent)
 {
-        return ent->glitcher;
+        return ent->glitch;
 }
 

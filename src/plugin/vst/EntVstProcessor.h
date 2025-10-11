@@ -1,4 +1,4 @@
-/**
+ /**
  * File name: EntVstProcessor.h
  * Project: Entropictron (A texture synthesizer)
  *
@@ -69,7 +69,7 @@ class EntVstProcessor : public AudioEffect {
         void initParamMappings();
         void initNoiseParamMappings();
         void initCrackleParamMappings();
-        void initGlitcherParamMappings();
+        void initGlitchParamMappings();
         void updateParameters(ParameterId pid, ParamValue value);
 
  private:

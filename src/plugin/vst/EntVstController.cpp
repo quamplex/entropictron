@@ -88,7 +88,7 @@ EntVstController::initialize(FUnknown* context)
                             ParameterId::Noise2GainId);
 
     addCrackleParameters();
-    addGlitcherParameters();
+    addGlitchParameters();
 
     return result;
 }
@@ -144,7 +144,7 @@ void EntVstController::addCrackleParameters()
                                 ParameterId::CrackleStereoSpreadId);
 }
 
-void EntVstController::addGlitcherParameters()
+void EntVstController::addGlitchParameters()
 {
     // Glitch Enabled (On/Off)
     parameters.addParameter(STR16("Glitch Enabled"),
@@ -204,7 +204,6 @@ void EntVstController::removeParamterCallback(ParameterId id)
 
 tresult EntVstController::setParamNormalized (ParamID tag, ParamValue value)
 {
-        ENTROPICTRON_LOG_DEBUG("called : ID : " << (int ) tag << ": val: " << value);
         auto result = EditControllerEx1::setParamNormalized(tag, value);
         if (result != kResultOk)
                 return result;

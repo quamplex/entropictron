@@ -30,7 +30,7 @@
 struct entropictron;
 class DspWrapperNoise;
 class DspWrapperCrackle;
-class DspWrapperGlitcher;
+class DspWrapperGlitch;
 
 class DspWrapper
 {
@@ -42,7 +42,7 @@ public:
         void pressKey(int pitch, int velocity, bool on = true);
         DspWrapperNoise* getNoise(NoiseId id) const;
         DspWrapperCrackle* getCrackle() const;
-        DspWrapperGlitcher* getGlitcher() const;
+        DspWrapperGlitch* getGlitch() const;
 
 protected:
 
@@ -57,7 +57,7 @@ private:
         std::unique_ptr<DspWrapperNoise> dspNoise1;
         std::unique_ptr<DspWrapperNoise> dspNoise2;
         std::unique_ptr<DspWrapperCrackle> dspCrackle;
-        std::unique_ptr<DspWrapperGlitcher> dspGlitcher;
+        std::unique_ptr<DspWrapperGlitch> dspGlitch;
 };
 
 #endif // ENT_DSP_WRAPER_H

@@ -2,13 +2,13 @@ set(ENT_DSP_WRAPPER_HEADERS
     ${ENT_DSP_WRAPPER_DIR}/DspTypes.h
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperNoise.h
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperCrackle.h
-    ${ENT_DSP_WRAPPER_DIR}/DspWrapperGlitcher.h
+    ${ENT_DSP_WRAPPER_DIR}/DspWrapperGlitch.h
     ${ENT_DSP_WRAPPER_DIR}/DspWrapper.h)
 
 set(ENT_DSP_WRAPPER_SOURCES
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperNoise.cpp
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperCrackle.cpp
-    ${ENT_DSP_WRAPPER_DIR}/DspWrapperGlitcher.cpp
+    ${ENT_DSP_WRAPPER_DIR}/DspWrapperGlitch.cpp
     ${ENT_DSP_WRAPPER_DIR}/DspWrapper.cpp)
 
 include_directories(${ENT_DSP_WRAPPER_DIR})

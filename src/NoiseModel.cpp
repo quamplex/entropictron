@@ -179,4 +179,3 @@ std::pair<double, double> NoiseModel::getGainRange() const
 }
 
 
-

@@ -1,5 +1,5 @@
 /**
- * File name: ent_glitcher.c
+ * File name: ent_glitch.c
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,13 +21,13 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#include "ent_glitcher.h"
+#include "ent_glitch.h"
 #include "ent_log.h"
 #include "qx_randomizer.h"
 
 #include <stdlib.h>
 
-struct ent_glitcher {
+struct ent_glitch {
         int sample_rate;
         bool enabled;
 
@@ -49,9 +49,9 @@ struct ent_glitcher {
         struct qx_randomizer randomizer;
 };
 
-struct ent_glitcher* ent_glitcher_create(int sample_rate)
+struct ent_glitch* ent_glitch_create(int sample_rate)
 {
-        struct ent_glitcher* g = calloc(1, sizeof(struct ent_glitcher));
+        struct ent_glitch* g = calloc(1, sizeof(struct ent_glitch));
         if (!g) return NULL;
 
         g->sample_rate = sample_rate;
@@ -76,7 +76,7 @@ struct ent_glitcher* ent_glitcher_create(int sample_rate)
         return g;
 }
 
-void ent_glitcher_free(struct ent_glitcher **g)
+void ent_glitch_free(struct ent_glitch **g)
 {
         if (g && *g) {
                 free((*g)->buffer[0]);
@@ -86,74 +86,74 @@ void ent_glitcher_free(struct ent_glitcher **g)
         }
 }
 
-enum ent_error ent_glitcher_enable(struct ent_glitcher *g, bool b)
+enum ent_error ent_glitch_enable(struct ent_glitch *g, bool b)
 {
         g->enabled = b;
         return ENT_OK;
 }
 
-bool ent_glitcher_is_enabled(struct ent_glitcher *g)
+bool ent_glitch_is_enabled(struct ent_glitch *g)
 {
         return g->enabled;
 }
 
-enum ent_error ent_glitcher_set_probability(struct ent_glitcher *g, float probability)
+enum ent_error ent_glitch_set_probability(struct ent_glitch *g, float probability)
 {
         g->probability = probability;
         return ENT_OK;
 }
 
-float ent_glitcher_get_probability(struct ent_glitcher *g)
+float ent_glitch_get_probability(struct ent_glitch *g)
 {
         return g->probability;
 }
 
-enum ent_error ent_glitcher_set_jump_min(struct ent_glitcher *g, float jump_min_ms)
+enum ent_error ent_glitch_set_jump_min(struct ent_glitch *g, float jump_min_ms)
 {
         g->jump_min_samples = (int)(jump_min_ms * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
 
-float ent_glitcher_get_jump_min(struct ent_glitcher *g)
+float ent_glitch_get_jump_min(struct ent_glitch *g)
 {
         return (float)g->jump_min_samples * 1000.0f / g->sample_rate;
 }
 
-enum ent_error ent_glitcher_set_jump_max(struct ent_glitcher *g, float jump_max_ms)
+enum ent_error ent_glitch_set_jump_max(struct ent_glitch *g, float jump_max_ms)
 {
         g->jump_max_samples = (int)(jump_max_ms * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
 
-float ent_glitcher_get_jump_max(struct ent_glitcher *g)
+float ent_glitch_get_jump_max(struct ent_glitch *g)
 {
         return (float)g->jump_max_samples * 1000.0f / g->sample_rate;
 }
 
-enum ent_error ent_glitcher_set_length(struct ent_glitcher *g, float length_ms)
+enum ent_error ent_glitch_set_length(struct ent_glitch *g, float length_ms)
 {
         g->glitch_length_samples = (int)(length_ms * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
 
-float ent_glitcher_get_length(struct ent_glitcher *g)
+float ent_glitch_get_length(struct ent_glitch *g)
 {
         return (float)g->glitch_length_samples * 1000.0f / g->sample_rate;
 }
 
-enum ent_error ent_glitcher_set_repeat_count(struct ent_glitcher *g, int repeats)
+enum ent_error ent_glitch_set_repeat_count(struct ent_glitch *g, int repeats)
 {
         g->glitch_repeat_count = repeats > 0 ? repeats : 1;
         ent_log_error("glitch_repeat_count: %f", g->glitch_repeat_count);
         return ENT_OK;
 }
 
-int ent_glitcher_get_repeat_count(struct ent_glitcher *g)
+int ent_glitch_get_repeat_count(struct ent_glitch *g)
 {
         return g->glitch_repeat_count;
 }
 
-void ent_glitcher_process(struct ent_glitcher *g,
+void ent_glitch_process(struct ent_glitch *g,
                           float **in,
                           float **out,
                           size_t size)

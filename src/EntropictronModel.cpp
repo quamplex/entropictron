@@ -23,14 +23,19 @@
 
 #include "EntropictronModel.h"
 #include "DspProxy.h"
-#include "DspNoiseProxy.h"
 #include "NoiseModel.h"
+#include "CrackleModel.h"
+#include "GlitchModel.h"
 
 EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
         : RkObject(parent)
         , dspProxy{dspProxy}
         , noise1Model{new NoiseModel(this, dspProxy->getNoise(NoiseId::Noise1))}
         , noise2Model{new NoiseModel(this, dspProxy->getNoise(NoiseId::Noise2))}
+        , crackle1Model{new CrackleModel(this, dspProxy->getCrackle(CrackleId::Crackle1))}
+        , crackle2Model{new CrackleModel(this, dspProxy->getCrackle(CrackleId::Crackle2))}
+        , glitch1Model{new GlitchModel(this, dspProxy->getGlitch(GlitchId::Glitch1))}
+        , glitch2Model{new GlitchModel(this, dspProxy->getGlitch(GlitchId::Glitch2))}
 {
         dspProxy->setParent(this);
 }
@@ -44,3 +49,25 @@ NoiseModel* EntropictronModel::getNoise2() const
 {
         return  noise2Model;
 }
+
+CrackleModel* EntropictronModel::getCrackle1() const
+{
+        return  crackle1Model;
+}
+
+CrackleModel* EntropictronModel::getCrackle2() const
+{
+        return  crackle2Model;
+}
+
+GlitchModel* EntropictronModel::getGlitch1() const
+{
+        return  glitch1Model;
+}
+
+GlitchModel* EntropictronModel::getGlitch2() const
+{
+        return  glitch2Model;
+}
+
+

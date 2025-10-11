@@ -44,7 +44,7 @@ extern "C" {
 
 struct ent_noise;
 struct ent_crackle;
-struct ent_glitcher;
+struct ent_glitch;
 struct entropictron;
 
 enum ent_error ent_create(struct entropictron **ent, unsigned int sample_rate);
@@ -61,7 +61,7 @@ struct ent_noise* ent_get_noise(struct entropictron *ent, int id);
 
 struct ent_crackle* ent_get_crackle(struct entropictron *ent);
 
-struct ent_glitcher* ent_get_glitcher(struct entropictron *ent);
+struct ent_glitch* ent_get_glitch(struct entropictron *ent);
 
 #ifdef __cplusplus
 }

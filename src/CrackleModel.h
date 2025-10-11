@@ -1,5 +1,5 @@
 /**
- * File name: DspProxy.h
+ * File name: CrackleModel.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,24 +21,28 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef DSP_PROXY_H
-#define DSP_PROXY_H
+#ifndef ENT_CRACKLE_MODEL_H
+#define ENT_CRACKLE_MODEL_H
 
+#include "EntAbstractModel.h"
 #include "GuiTypes.h"
 
-#include "RkObject.h"
-
-class DspNoiseProxy;
 class DspCrackleProxy;
-class DspGlitchProxy;
 
-class DspProxy : public RkObject {
+class CrackleModel: public EntAbstractModel
+{
  public:
-        DspProxy(RkObject *parent = nullptr);
-        virtual ~DspProxy() = default;
-        virtual DspNoiseProxy* getNoise(NoiseId id) const = 0;
-        virtual DspCrackleProxy* getCrackle(CrackleId id) const = 0;
-        virtual DspGlitchProxy* getGlitch(GlitchId id) const = 0;
+        explicit CrackleModel(RkObject *parent, DspCrackleProxy *dspCrackleProxy);
+        CrackleId getId() const;
+        void enable(bool b = true);
+        bool isEnabled() const;
+        RK_DECL_ACT(enabled,
+                    enabled(bool b),
+                    RK_ARG_TYPE(bool b),
+                    RK_ARG_VAL(b));
+
+ private:
+        DspCrackleProxy *dspCrackleProxy;
 };
 
-#endif // DSP_PROXY_H
+#endif // ENT_CRACKLE_MODEL_H

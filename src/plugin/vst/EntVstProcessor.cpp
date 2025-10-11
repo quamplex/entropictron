@@ -27,7 +27,7 @@
 #include "DspWrapper.h"
 #include "DspWrapperNoise.h"
 #include "DspWrapperCrackle.h"
-#include "DspWrapperGlitcher.h"
+#include "DspWrapperGlitch.h"
 #include "EntVstParameters.h"
 
 #include "base/source/fstreamer.h"
@@ -278,7 +278,7 @@ void EntVstProcessor::initParamMappings()
 {
         initNoiseParamMappings();
         initCrackleParamMappings();
-        initGlitcherParamMappings();
+        initGlitchParamMappings();
 }
 
 void EntVstProcessor::initNoiseParamMappings()
@@ -370,41 +370,41 @@ void EntVstProcessor::initCrackleParamMappings()
     };
 }
 
-void EntVstProcessor::initGlitcherParamMappings()
+void EntVstProcessor::initGlitchParamMappings()
 {
         // Enabled
         paramMap[ParameterId::GlitchEnabledId] = [this](ParamValue v) {
-                entropictronDsp->getGlitcher()->enable(v > 0.5); // 0 = off, 1 = on
+                entropictronDsp->getGlitch()->enable(v > 0.5); // 0 = off, 1 = on
         };
 
         // Glitch Probability (0–100%)
         paramMap[ParameterId::GlitchProbabilityId] = [this](ParamValue v) {
                 float prob = static_cast<float>(v) * 100.0f; // normalized → %
-                entropictronDsp->getGlitcher()->setProbability(prob);
+                entropictronDsp->getGlitch()->setProbability(prob);
         };
 
         // Jump Min Time (0–2000 ms)
         paramMap[ParameterId::GlitchJumpMinId] = [this](ParamValue v) {
                 float minMs = static_cast<float>(v) * 2000.0f; // normalized → ms
-                entropictronDsp->getGlitcher()->setJumpMin(minMs);
+                entropictronDsp->getGlitch()->setJumpMin(minMs);
         };
 
         // Jump Max Time (0–5000 ms)
         paramMap[ParameterId::GlitchJumpMaxId] = [this](ParamValue v) {
                 float maxMs = static_cast<float>(v) * 5000.0f; // normalized → ms
-                entropictronDsp->getGlitcher()->setJumpMax(maxMs);
+                entropictronDsp->getGlitch()->setJumpMax(maxMs);
         };
 
         // Glitch Length (0–2000 ms)
         paramMap[ParameterId::GlitchLengthId] = [this](ParamValue v) {
                 float lenMs = static_cast<float>(v) * 2000.0f; // normalized → ms
-                entropictronDsp->getGlitcher()->setLength(lenMs);
+                entropictronDsp->getGlitch()->setLength(lenMs);
         };
 
         // Glitch Repeat Count (1–10)
         paramMap[ParameterId::GlitchRepeatCountId] = [this](ParamValue v) {
                 int repeats = 1 + static_cast<int>(v * 9.0f); // normalized → 1–10
-                entropictronDsp->getGlitcher()->setRepeatCount(repeats);
+                entropictronDsp->getGlitch()->setRepeatCount(repeats);
         };
 }
 

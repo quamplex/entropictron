@@ -1,5 +1,5 @@
 /**
- * File name: DspProxy.h
+ * File name: ModuleWidgetTab.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,24 +21,29 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef DSP_PROXY_H
-#define DSP_PROXY_H
+#ifndef ENT_MODULE_WIDGET_TAB_H
+#define ENT_MODULE_WIDGET_TAB_H
 
+#include "EntWidget.h"
 #include "GuiTypes.h"
 
-#include "RkObject.h"
+class ModuleWidgetTab : public EntWidget
+{
+public:
+        explicit ModuleWidgetTab(EntWidget* parent,
+                                 EntropictronModel *model,
+                                 size_t id);
+        void showNoise();
+        void showCrackle();
+        void showGlitch();
 
-class DspNoiseProxy;
-class DspCrackleProxy;
-class DspGlitchProxy;
+protected:
+        void createTabButtons();
 
-class DspProxy : public RkObject {
- public:
-        DspProxy(RkObject *parent = nullptr);
-        virtual ~DspProxy() = default;
-        virtual DspNoiseProxy* getNoise(NoiseId id) const = 0;
-        virtual DspCrackleProxy* getCrackle(CrackleId id) const = 0;
-        virtual DspGlitchProxy* getGlitch(GlitchId id) const = 0;
+private:
+        size_t tabId;
+        EntropictronModel *entropictronModel;
+        EntWidget *moduleWidget;
 };
 
-#endif // DSP_PROXY_H
+#endif // ENT_MODULES_WIDGET_TAB_H

@@ -1,5 +1,5 @@
 /**
- * File name: DspProxy.h
+ * File name: DspCrackleProxyVst.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,24 +21,31 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef DSP_PROXY_H
-#define DSP_PROXY_H
+#ifndef DSP_CRACKLE_PROXY_VST_H
+#define DSP_CRACKLE_PROXY_VST_H
 
-#include "GuiTypes.h"
+#include "DspCrackleProxy.h"
+#include "EntVstParameters.h"
 
-#include "RkObject.h"
+using namespace EntVst;
+using namespace Steinberg::Vst;
 
-class DspNoiseProxy;
-class DspCrackleProxy;
-class DspGlitchProxy;
+class EntVstController;
 
-class DspProxy : public RkObject {
+class DspCrackleProxyVst: public DspCrackleProxy {
  public:
-        DspProxy(RkObject *parent = nullptr);
-        virtual ~DspProxy() = default;
-        virtual DspNoiseProxy* getNoise(NoiseId id) const = 0;
-        virtual DspCrackleProxy* getCrackle(CrackleId id) const = 0;
-        virtual DspGlitchProxy* getGlitch(GlitchId id) const = 0;
+        explicit DspCrackleProxyVst(RkObject* parent,
+                                    EntVstController *controller,
+                                    CrackleId id);
+        ~DspCrackleProxyVst();
+        bool enable(bool b = true) override;
+        bool isEnabled() const override;
+
+protected:
+        void onParameterChanged(ParameterId paramId, ParamValue value);
+
+ private:
+        EntVstController *vstController;
 };
 
-#endif // DSP_PROXY_H
+#endif // DSP_CRACKLE_PROXY_VST_H

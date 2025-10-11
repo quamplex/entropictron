@@ -28,15 +28,24 @@
 
 class EntVstController;
 class DspNoiseProxyVst;
+class DspCrackleProxyVst;
+class DspGlitchProxyVst;
 
 class DspProxyVst: public DspProxy {
  public:
         explicit DspProxyVst(EntVstController *controller);
         DspNoiseProxy* getNoise(NoiseId id) const override;
+        DspCrackleProxy* getCrackle(CrackleId id) const override;
+        DspGlitchProxy* getGlitch(GlitchId id) const override;
+
  private:
         EntVstController *vstController;
         DspNoiseProxyVst * dspNoise1Proxy;
         DspNoiseProxyVst * dspNoise2Proxy;
+        DspCrackleProxyVst * dspCrackle1Proxy;
+        DspCrackleProxyVst * dspCrackle2Proxy;
+        DspGlitchProxyVst * dspGlitch1Proxy;
+        DspGlitchProxyVst * dspGlitch2Proxy;
 };
 
 #endif // DSP_PROXY_VST_H

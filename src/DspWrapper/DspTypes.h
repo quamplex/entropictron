@@ -32,6 +32,16 @@ enum class NoiseId: int {
         Noise2
 };
 
+enum class CrackleId: int {
+        Crackle1,
+        Crackle2
+};
+
+enum class GlitchId: int {
+        Glitch1,
+        Glitch2
+};
+
 enum class NoiseType: int {
         WhiteNoise = ENT_NOISE_TYPE_WHITE,
         PinkNoise  = ENT_NOISE_TYPE_PINK,

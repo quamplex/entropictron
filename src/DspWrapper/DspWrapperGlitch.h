@@ -1,5 +1,5 @@
 /**
- * File name: DspProxy.h
+ * File name: DspWrapperGlitch.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,24 +21,32 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef DSP_PROXY_H
-#define DSP_PROXY_H
+#ifndef ENT_DSP_WRAPPER_GLITCH_H
+#define ENT_DSP_WRAPPER_GLITCH_H
 
-#include "GuiTypes.h"
+#include "DspTypes.h"
 
-#include "RkObject.h"
+struct ent_glitch;
 
-class DspNoiseProxy;
-class DspCrackleProxy;
-class DspGlitchProxy;
+class DspWrapperGlitch
+{
+public:
+    explicit DspWrapperGlitch(struct ent_glitch* dsp);
+    void enable(bool b = true);
+    bool isEnabled() const;
+    void setProbability(double value);
+    double probability() const;
+    void setJumpMin(double value);
+    double jumpMin() const;
+    void setJumpMax(double value);
+    double jumpMax() const;
+    void setLength(double value);
+    double length() const;
+    void setRepeatCount(int value);
+    int repeatCount() const;
 
-class DspProxy : public RkObject {
- public:
-        DspProxy(RkObject *parent = nullptr);
-        virtual ~DspProxy() = default;
-        virtual DspNoiseProxy* getNoise(NoiseId id) const = 0;
-        virtual DspCrackleProxy* getCrackle(CrackleId id) const = 0;
-        virtual DspGlitchProxy* getGlitch(GlitchId id) const = 0;
+private:
+    struct ent_glitch* glitchDsp;
 };
 
-#endif // DSP_PROXY_H
+#endif // ENT_DSP_WRAPPER_GLITCH_H
