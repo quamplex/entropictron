@@ -3,19 +3,38 @@ set(ent_rc_png_files
 switch_button_on.png
 switch_button_off.png
 
+# ---- Common Knobs -----
+
+knob_big_size_bk.png
+knob_big_size_marker.png
+knob_medium_size_bk.png
+knob_medium_size_marker.png
+
 # ---- NOISE -----
 
-noise1_label.png
-noise2_label.png
+noise_label.png
 noise_density_knob_label.png
-noise_density_knob_bk.png
-noise_density_knob_marker.png
 noise_brightness_knob_label.png
-noise_brightness_knob_bk.png
-noise_brightness_knob_marker.png
 noise_gain_knob_label.png
-noise_gain_knob_bk.png
-noise_gain_knob_marker.png
+
+# ---- CRAKCLE -----
+
+crackle_label.png
+crackle_rate_knob_label.png
+crackle_randomness_knob_label.png
+crackle_amplitude_knob_label.png
+crackle_brightness_knob_label.png
+crackle_duration_knob_label.png
+crackle_stereospread_knob_label.png
+
+# ---- GLITCH -----
+
+glitch_label.png
+glitch_repeats_knob_label.png
+glitch_probability_knob_label.png
+glitch_length_knob_label.png
+glitch_maxjump_knob_label.png
+glitch_minjump_knob_label.png
 
 noise_white_button.png
 noise_white_button_hover.png

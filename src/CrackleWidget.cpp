@@ -29,10 +29,19 @@
 #include "RkContainer.h"
 #include "RkButton.h"
 
-RK_DECLARE_IMAGE_RC(crackle1_label);
-RK_DECLARE_IMAGE_RC(crackle2_label);
+RK_DECLARE_IMAGE_RC(crackle_label);
 RK_DECLARE_IMAGE_RC(switch_button_on);
 RK_DECLARE_IMAGE_RC(switch_button_off);
+RK_DECLARE_IMAGE_RC(knob_big_size_bk);
+RK_DECLARE_IMAGE_RC(knob_big_size_marker);
+RK_DECLARE_IMAGE_RC(knob_medium_size_bk);
+RK_DECLARE_IMAGE_RC(knob_medium_size_marker);
+RK_DECLARE_IMAGE_RC(crackle_rate_knob_label);
+RK_DECLARE_IMAGE_RC(crackle_randomness_knob_label);
+RK_DECLARE_IMAGE_RC(crackle_amplitude_knob_label);
+RK_DECLARE_IMAGE_RC(crackle_brightness_knob_label);
+RK_DECLARE_IMAGE_RC(crackle_duration_knob_label);
+RK_DECLARE_IMAGE_RC(crackle_stereospread_knob_label);
 
 CrackleWidget::CrackleWidget(EntWidget* parent, CrackleModel* model)
         : EntAbstractView(parent, model)
@@ -85,11 +94,7 @@ void CrackleWidget::updateView()
         if (!model)
                 return;
 
-        if (model->getId() == CrackleId::Crackle1)
-                crackleLabel->setImage(RK_RC_IMAGE(crackle1_label));
-        else
-                crackleLabel->setImage(RK_RC_IMAGE(crackle2_label));
-
+        crackleLabel->setImage(RK_RC_IMAGE(crackle_label));
         enableCrackleButton->setPressed(model->isEnabled());
 }
 

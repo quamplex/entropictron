@@ -33,15 +33,13 @@ RK_DECLARE_IMAGE_RC(noise1_label);
 RK_DECLARE_IMAGE_RC(noise2_label);
 RK_DECLARE_IMAGE_RC(switch_button_on);
 RK_DECLARE_IMAGE_RC(switch_button_off);
+RK_DECLARE_IMAGE_RC(knob_big_size_bk);
+RK_DECLARE_IMAGE_RC(knob_big_size_marker);
+RK_DECLARE_IMAGE_RC(knob_medium_size_bk);
+RK_DECLARE_IMAGE_RC(knob_medium_size_marker);
 RK_DECLARE_IMAGE_RC(noise_density_knob_label);
-RK_DECLARE_IMAGE_RC(noise_density_knob_bk);
-RK_DECLARE_IMAGE_RC(noise_density_knob_marker);
 RK_DECLARE_IMAGE_RC(noise_brightness_knob_label);
-RK_DECLARE_IMAGE_RC(noise_brightness_knob_bk);
-RK_DECLARE_IMAGE_RC(noise_brightness_knob_marker);
 RK_DECLARE_IMAGE_RC(noise_gain_knob_label);
-RK_DECLARE_IMAGE_RC(noise_gain_knob_bk);
-RK_DECLARE_IMAGE_RC(noise_gain_knob_marker);
 RK_DECLARE_IMAGE_RC(noise_white_button);
 RK_DECLARE_IMAGE_RC(noise_white_button_hover);
 RK_DECLARE_IMAGE_RC(noise_white_button_on);
@@ -112,10 +110,7 @@ void NoiseWidget::updateView()
         if (!model)
                 return;
 
-        if (model->getId() == NoiseId::Noise1)
-                noiseLabel->setImage(RK_RC_IMAGE(noise1_label));
-        else
-                noiseLabel->setImage(RK_RC_IMAGE(noise2_label));
+        noiseLabel->setImage(RK_RC_IMAGE(noise_label));
 
         enableNoiseButton->setPressed(model->isEnabled());
         setType(model->noiseType());
@@ -274,18 +269,18 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
         noiseControlsContainer->addContainer(noiseTypeContianer);
 
         densityKnob = new Knob(this, RK_RC_IMAGE(noise_density_knob_label));
-        densityKnob->setKnobImage(RK_RC_IMAGE(noise_density_knob_bk));
-        densityKnob->setMarkerImage(RK_RC_IMAGE(noise_density_knob_marker));
+        densityKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_knob_bk));
+        densityKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_knob_marker));
         noiseControlsContainer->addWidget(densityKnob);
 
         brightnessKnob = new Knob(this, RK_RC_IMAGE(noise_brightness_knob_label));
-        brightnessKnob->setKnobImage(RK_RC_IMAGE(noise_brightness_knob_bk));
-        brightnessKnob->setMarkerImage(RK_RC_IMAGE(noise_brightness_knob_marker));
+        brightnessKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        brightnessKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         noiseControlsContainer->addWidget(brightnessKnob);
 
         gainKnob = new Knob(this, RK_RC_IMAGE(noise_gain_knob_label));
-        gainKnob->setKnobImage(RK_RC_IMAGE(noise_gain_knob_bk));
-        gainKnob->setMarkerImage(RK_RC_IMAGE(noise_gain_knob_marker));
+        gainKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_knob_bk));
+        gainKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_knob_marker));
         noiseControlsContainer->addWidget(gainKnob);
 }
 
