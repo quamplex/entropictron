@@ -47,6 +47,13 @@ protected:
         void createCrackleControls(RkContainer *container);
 
 private:
+        RkButton *enableCrackleButton;
+        Knob *rateKnob;
+        Knob *randomnessKnob;
+        Knob *amplitudeKnob;
+        Knob *brightnessKnob;
+        Knob *durationKnob;
+        Knob *sterespreadKnob;
 };
 
 #endif // ENT_CRACKLE_WIDGET_H

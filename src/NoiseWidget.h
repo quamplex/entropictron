@@ -49,7 +49,6 @@ protected:
 
 private:
         RkButton *enableNoiseButton;
-        RkLabel *noiseLabel;
         RkButton *whiteNoiseButton;
         RkButton *pinkNoiseButton;
         RkButton *brownNoiseButton;

@@ -56,7 +56,6 @@ RK_DECLARE_IMAGE_RC(noise_brown_button_hover_on);
 NoiseWidget::NoiseWidget(EntWidget* parent, NoiseModel* model)
         : EntAbstractView(parent, model)
         , enableNoiseButton {nullptr}
-        , noiseLabel {nullptr}
         , whiteNoiseButton {nullptr}
         , pinkNoiseButton {nullptr}
         , brownNoiseButton {nullptr}
@@ -95,7 +94,8 @@ void NoiseWidget::createView()
         enableNoiseButton->show();
         topContianer->addWidget(enableNoiseButton);
 
-        noiseLabel = new RkLabel(this);
+        auto noiseLabel = new RkLabel(this);
+        noiseLabel->setImage(RK_RC_IMAGE(noise_label));
         topContianer->addSpace(10);
         topContianer->addWidget(noiseLabel);
 
@@ -109,8 +109,6 @@ void NoiseWidget::updateView()
         auto model = static_cast<NoiseModel*>(getModel());
         if (!model)
                 return;
-
-        noiseLabel->setImage(RK_RC_IMAGE(noise_label));
 
         enableNoiseButton->setPressed(model->isEnabled());
         setType(model->noiseType());

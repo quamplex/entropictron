@@ -45,8 +45,13 @@ RK_DECLARE_IMAGE_RC(crackle_stereospread_knob_label);
 
 CrackleWidget::CrackleWidget(EntWidget* parent, CrackleModel* model)
         : EntAbstractView(parent, model)
-        , enableCrackleButton {nullptr}
-        , crackleLabel {nullptr}
+        , enableCrackleButton{nullptr}
+        , rateKnob{nullptr}
+        , randomnessKnob{nullptr}
+        , amplitudeKnob{nullptr}
+        , brightnessKnob{nullptr}
+        , durationKnob{nullptr}
+        , sterespreadKnob{nullptr}
 {
         setFixedSize(350, 282);
         setBackgroundColor(37, 43, 53);
@@ -96,6 +101,40 @@ void CrackleWidget::updateView()
 
         crackleLabel->setImage(RK_RC_IMAGE(crackle_label));
         enableCrackleButton->setPressed(model->isEnabled());
+
+        auto [rateFrom, rateTo] = model->getRateRange();
+        rateKnob->setRange(rateFrom, rateTo);
+        rateKnob->setDefaultValue(model->getRateDefaultValue());
+        rateKnob->setValue(model->rate());
+
+        auto [randomnessFrom, randomnessTo] = model->getRandomnessRange();
+        randomnessKnob->setRange(randomnessFrom, randomnessTo);
+        randomnessKnob->setRangeType(Knob::RangeType::Logarithmic);
+        randomnessKnob->setDefaultValue(model->getRandomnessDefaultValue());
+        randomnessKnob->setValue(model->randomness());
+
+        auto [amplitudeFrom, amplitudeTo] = model->getAmplitudeRange();
+        amplitudeKnob->setRange(amplitudeFrom, amplitudeTo);
+        amplitudeKnob->setRangeType(Knob::RangeType::Logarithmic);
+        amplitudeKnob->setDefaultValue(model->getAmplitudeDefaultValue());
+        amplitudeKnob->setValue(model->amplitude());
+
+        auto [brightnessFrom, brightnessTo] = model->getBrightnessRange();
+        brightnessKnob->setRange(brightnessFrom, brightnessTo);
+        brightnessKnob->setRangeType(Knob::RangeType::Logarithmic);
+        brightnessKnob->setDefaultValue(model->getBrightnessDefaultValue());
+        brightnessKnob->setValue(model->brightness());
+
+        auto [durationFrom, durationTo] = model->getDurationRange();
+        durationKnob->setRange(durationFrom, durationTo);
+        durationKnob->setRangeType(Knob::RangeType::Logarithmic);
+        durationKnob->setDefaultValue(model->getDurationDefaultValue());
+        durationKnob->setValue(model->duration());
+
+        auto [stereospreadFrom, stereospreadTo] = model->getStereospreadRange();
+        stereospreadKnob->setRange(stereospreadFrom, stereospreadTo);
+        stereospreadKnob->setDefaultValue(model->getStereospreadDefaultValue());
+        stereospreadKnob->setValue(model->stereospread());
 }
 
 void CrackleWidget::bindModel()
@@ -119,6 +158,36 @@ void CrackleWidget::bindModel()
                     RK_ACT_ARGS(bool b),
                     enableCrackleButton,
                     setPressed(b));
+        RK_ACT_BIND(rateKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setRate(value));
+        RK_ACT_BIND(randomnessKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setRandomness(value));
+        RK_ACT_BIND(amplitudeKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setAmplitude(value));
+        RK_ACT_BIND(brightnessKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setBrightness(value));
+        RK_ACT_BIND(durationKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setDuration(value));
+        RK_ACT_BIND(sterespreadKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setSterespread(value));
 }
 
 void CrackleWidget::unbindModel()
@@ -126,18 +195,100 @@ void CrackleWidget::unbindModel()
         auto model = getModel();
         unbindObject(model);
         enableCrackleButton->unbindObject(model);
-        whiteCrackleButton->unbindObject(model);
-        pinkCrackleButton->unbindObject(model);
-        brownCrackleButton->unbindObject(model);
-        densityKnob->unbindObject(model);
+        rateKnob->unbindObject(model);
+        randomnessKnob->unbindObject(model);
+        amplitudeKnob->unbindObject(model);
         brightnessKnob->unbindObject(model);
-        gainKnob->unbindObject(model);
+        durationKnob->unbindObject(model);
+        sterespreadKnob->unbindObject(model);
 }
 
 void CrackleWidget::createCrackleControls(RkContainer *container)
 {
-        auto crackleControlsContainer = new RkContainer(this);
+        // Rate, Randomness, Amplitude
+        auto horizontalContainer = new RkContainer(this);
         crackleControlsContainer->setSize({width(), 103});
         container->addSpace(20);
-        container->addContainer(crackleControlsContainer);
+        container->addContainer(horizontalContainer);
+
+        rateKnob = new Knob(this, RK_RC_IMAGE(crackle_rate_knob_label));
+        rateKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_knob_bk));
+        rateKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_knob_marker));
+        horizontalContainer->addWidget(rateKnob);
+
+        randomnessKnob = new Knob(this, RK_RC_IMAGE(crackle_randomness_knob_label));
+        randomnessKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        randomnessKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
+        horizontalContainer->addWidget(randomnessKnob);
+
+        amplitudeKnob = new Knob(this, RK_RC_IMAGE(crackle_amplitude_knob_label));
+        amplitudeKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_knob_bk));
+        amplitudeKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_knob_marker));
+        horizontalContainer->addWidget(amplitudeKnob);
+
+        // Envelope types
+        auto horizontalContainer = new RkContainer(this);
+        crackleControlsContainer->setSize({width(), 20});
+        container->addSpace(20);
+        container->addContainer(horizontalContainer);
+
+        exponentialEnvButton = new RkButton(this);
+        exponentialEnvButton->setImage(RK_RC_IMAGE(crackle_exp_env_button),
+                                   RkButton::State::Unpressed);
+        exponentialEnvButton->setImage(RK_RC_IMAGE(crackle_exp_env_button_on),
+                                   RkButton::State::Pressed);
+        exponentialEnvButton->setImage(RK_RC_IMAGE(crackle_exp_env_button_hover),
+                                   RkButton::State::UnpressedHover);
+        exponentialEnvButton->setImage(RK_RC_IMAGE(crackle_exp_env_button_hover_on),
+                                   RkButton::State::PressedHover);
+        exponentialEnvButton->setCheckable(true);
+        exponentialEnvButton->show();
+        horizontalContainer->addWidget(exponentialEnvButton);
+
+        linearEnvButton = new RkButton(this);
+        linearEnvButton->setImage(RK_RC_IMAGE(crackle_linear_env_button),
+                                   RkButton::State::Unpressed);
+        linearEnvButton->setImage(RK_RC_IMAGE(crackle_linear_env_button_on),
+                                   RkButton::State::Pressed);
+        linearEnvButton->setImage(RK_RC_IMAGE(crackle_linear_env_button_hover),
+                                   RkButton::State::UnpressedHover);
+        linearEnvButton->setImage(RK_RC_IMAGE(crackle_linear_env_button_hover_on),
+                                   RkButton::State::PressedHover);
+        linearEnvButton->setCheckable(true);
+        linearEnvButton->show();
+        horizontalContainer->addWidget(linearEnvButton);
+
+        tiangleEnvButton = new RkButton(this);
+        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env__button),
+                                   RkButton::State::Unpressed);
+        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env__button_on),
+                                   RkButton::State::Pressed);
+        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env__button_hover),
+                                   RkButton::State::UnpressedHover);
+        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env__button_hover_on),
+                                   RkButton::State::PressedHover);
+        tiangleEnvButton->setCheckable(true);
+        tiangleEnvButton->show();
+        horizontalContainer->addWidget(linearEnvButton);
+
+        // Brightness, Duraiton, Stere Spread
+        horizontalContainer = new RkContainer(this);
+        crackleControlsContainer->setSize({width(), 103});
+        container->addSpace(20);
+        container->addContainer(horizontalContainer);
+
+        brightnessKnob = new Knob(this, RK_RC_IMAGE(cracke_brightness_knob_label));
+        brightnessKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_knob_bk));
+        brightnessKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_knob_marker));
+        horizontalContainer->addWidget(brightnessKnob);
+
+        durationKnob = new Knob(this, RK_RC_IMAGE(cracke_duration_knob_label));
+        durationKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_knob_bk));
+        durationKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_knob_marker));
+        horizontalContainer->addWidget(durationKnob);
+
+        stereaspreadKnob = new Knob(this, RK_RC_IMAGE(cracke_stereaspread_knob_label));
+        stereaspreadKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_knob_bk));
+        stereaspreadKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_knob_marker));
+        horizontalContainer->addWidget(stereaspreadKnob);
 }
