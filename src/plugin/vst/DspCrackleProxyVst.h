@@ -40,6 +40,20 @@ class DspCrackleProxyVst: public DspCrackleProxy {
         ~DspCrackleProxyVst();
         bool enable(bool b = true) override;
         bool isEnabled() const override;
+        bool setRate(double value) override;
+        double rate() const override;
+        bool setDuration(double value) override;
+        double duration() const override;
+        bool setAmplitude(double value) override;
+        double amplitude() const override;
+        bool setRandomness(double value) override;
+        double randomness() const override;
+        bool setBrightness(double value) override;
+        double brightness() const override;
+        bool setEnvelopeShape(CrackleEnvelopeShape shape) override;
+        CrackleEnvelopeShape envelopeShape() const override;
+        bool setStereoSpread(double value) override;
+        double stereoSpread() const override;
 
 protected:
         void onParameterChanged(ParameterId paramId, ParamValue value);

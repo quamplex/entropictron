@@ -29,8 +29,8 @@ using namespace EntVst;
 using namespace Steinberg::Vst;
 
 DspCrackleProxyVst::DspCrackleProxyVst(RkObject* parent,
-                                   EntVstController *controller,
-                                   CrackleId id)
+                                       EntVstController *controller,
+                                       CrackleId id)
         : DspCrackleProxy(parent, id)
         , vstController{controller}
 {
@@ -40,9 +40,25 @@ DspCrackleProxyVst::DspCrackleProxyVst(RkObject* parent,
 
         std::vector<EntVst::ParameterId> params;
         if (getCrackleId() == CrackleId::Crackle1) {
-                params = { ParameterId::Crackle1EnabledId };
+                params = {
+                        ParameterId::Crackle1RateId,
+                        ParameterId::Crackle1DurationId,
+                        ParameterId::Crackle1AmplitudeId,
+                        ParameterId::Crackle1RandomnessId,
+                        ParameterId::Crackle1BrightnessId,
+                        ParameterId::Crackle1EnvelopeShapeId,
+                        ParameterId::Crackle1StereoSpreadId
+                };
         } else {
-                params = { ParameterId::Crackle2EnabledId};
+                params = {
+                        ParameterId::Crackle2RateId,
+                        ParameterId::Crackle2DurationId,
+                        ParameterId::Crackle2AmplitudeId,
+                        ParameterId::Crackle2RandomnessId,
+                        ParameterId::Crackle2BrightnessId,
+                        ParameterId::Crackle2EnvelopeShapeId,
+                        ParameterId::Crackle2StereoSpreadId
+                };
         }
 
         for (const auto& paramId : params)
@@ -52,9 +68,21 @@ DspCrackleProxyVst::DspCrackleProxyVst(RkObject* parent,
 DspCrackleProxyVst::~DspCrackleProxyVst()
 {
         if (getCrackleId() == CrackleId::Crackle1) {
-                vstController->removeParamterCallback(ParameterId::Crackle1EnabledId);
+                vstController->removeParamterCallback(ParameterId::Crackle1RateId);
+                vstController->removeParamterCallback(ParameterId::Crackle1DurationId);
+                vstController->removeParamterCallback(ParameterId::Crackle1AmplitudeId);
+                vstController->removeParamterCallback(ParameterId::Crackle1RandomnessId);
+                vstController->removeParamterCallback(ParameterId::Crackle1BrightnessId);
+                vstController->removeParamterCallback(ParameterId::Crackle1EnvelopeShapeId);
+                vstController->removeParamterCallback(ParameterId::Crackle1StereoSpreadId);
         } else {
-                vstController->removeParamterCallback(ParameterId::Crackle2EnabledId);
+                vstController->removeParamterCallback(ParameterId::Crackle2RateId);
+                vstController->removeParamterCallback(ParameterId::Crackle2DurationId);
+                vstController->removeParamterCallback(ParameterId::Crackle2AmplitudeId);
+                vstController->removeParamterCallback(ParameterId::Crackle2RandomnessId);
+                vstController->removeParamterCallback(ParameterId::Crackle2BrightnessId);
+                vstController->removeParamterCallback(ParameterId::Crackle2EnvelopeShapeId);
+                vstController->removeParamterCallback(ParameterId::Crackle2StereoSpreadId);
         }
 }
 
@@ -70,8 +98,130 @@ bool DspCrackleProxyVst::enable(bool b)
 
 bool DspCrackleProxyVst::isEnabled() const
 {
-        auto id = (getCrackleId() == CrackleId::Crackle1) ? ParameterId::Crackle1EnabledId : ParameterId::Crackle2EnabledId;
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1EnabledId : ParameterId::Crackle2EnabledId;
         return vstController->getParamNormalized(id) > 0.5;
+}
+
+bool DspCrackleProxyVst::setRate(double value)
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1RateId : ParameterId::Crackle2RateId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+double DspCrackleProxyVst::rate() const
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1RateId : ParameterId::Crackle2RateId;
+        return vstController->getParamNormalized(id);
+}
+
+bool DspCrackleProxyVst::setDuration(double value)
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1DurationId : ParameterId::Crackle2DurationId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+double DspCrackleProxyVst::duration() const
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1DurationId : ParameterId::Crackle2DurationId;
+        return vstController->getParamNormalized(id);
+}
+
+bool DspCrackleProxyVst::setAmplitude(double value)
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1AmplitudeId : ParameterId::Crackle2AmplitudeId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+double DspCrackleProxyVst::amplitude() const
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1AmplitudeId : ParameterId::Crackle2AmplitudeId;
+        return vstController->getParamNormalized(id);
+}
+
+bool DspCrackleProxyVst::setRandomness(double value)
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1RandomnessId : ParameterId::Crackle2RandomnessId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+double DspCrackleProxyVst::randomness() const
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1RandomnessId : ParameterId::Crackle2RandomnessId;
+        return vstController->getParamNormalized(id);
+}
+
+bool DspCrackleProxyVst::setBrightness(double value)
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1BrightnessId : ParameterId::Crackle2BrightnessId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+double DspCrackleProxyVst::brightness() const
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1BrightnessId : ParameterId::Crackle2BrightnessId;
+        return vstController->getParamNormalized(id);
+}
+
+bool DspCrackleProxyVst::setEnvelopeShape(CrackleEnvelopeShape shape)
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1EnvelopeShapeId : ParameterId::Crackle2EnvelopeShapeId;
+        double value = static_cast<double>(shape);
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+CrackleEnvelopeShape DspCrackleProxyVst::envelopeShape() const
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1EnvelopeShapeId : ParameterId::Crackle2EnvelopeShapeId;
+        double value = vstController->getParamNormalized(id);
+        return static_cast<CrackleEnvelopeShape>(value);
+}
+
+bool DspCrackleProxyVst::setStereoSpread(double value)
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1StereoSpreadId : ParameterId::Crackle2StereoSpreadId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+double DspCrackleProxyVst::stereoSpread() const
+{
+        auto id = (getCrackleId() == CrackleId::Crackle1) ?
+                ParameterId::Crackle1StereoSpreadId : ParameterId::Crackle2StereoSpreadId;
+        return vstController->getParamNormalized(id);
 }
 
 void DspCrackleProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
