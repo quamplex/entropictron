@@ -36,15 +36,15 @@ class DspGlitchProxy : public RkObject {
         virtual bool enable(bool b = true) = 0;
         virtual bool isEnabled() const = 0;
         virtual bool setRepeats(double value) = 0;
-        virtual double repeats(double value) const = 0;
+        virtual double repeats() const = 0;
         virtual bool setProbability(double value) = 0;
-        virtual double probability(double value) const = 0;
+        virtual double probability() const = 0;
         virtual bool setLength(double value) = 0;
-        virtual double lenth(double value) const = 0;
+        virtual double length() const = 0;
         virtual bool setMaxJump(double value) = 0;
-        virtual double maxJump(double value) const = 0;
+        virtual double maxJump() const = 0;
         virtual bool setMinJump(double value) = 0;
-        virtual double minJump(double value) const = 0;
+        virtual double minJump() const = 0;
 
         RK_DECL_ACT(enabled,
                     enabled(bool b),

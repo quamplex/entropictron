@@ -9,7 +9,7 @@ set(ENT_DSP_HEADERS
     ${ENT_DSP_DIR}/src/ent_shelf_filter.h
     ${ENT_DSP_DIR}/src/ent_noise.h
     ${ENT_DSP_DIR}/src/ent_crackle.h
-    ${ENT_DSP_DIR}/src/ent_glitcher.h
+    ${ENT_DSP_DIR}/src/ent_glitch.h
     ${ENT_DSP_DIR}/src/entropictron.h
     ${ENT_DSP_DIR}/src/ent_log.h)
 
@@ -18,7 +18,7 @@ set(ENT_DSP_SOURCES
     ${ENT_DSP_DIR}/src/ent_noise.c
     ${ENT_DSP_DIR}/src/ent_crackle.c
     ${ENT_DSP_DIR}/src/entropictron.c
-    ${ENT_DSP_DIR}/src/ent_glitcher.c
+    ${ENT_DSP_DIR}/src/ent_glitch.c
     ${ENT_DSP_DIR}/src/ent_log.c)
 
 include_directories(${QUAMPLEX_DSP_TOOLS_PATH})

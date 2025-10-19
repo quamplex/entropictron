@@ -243,8 +243,8 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
         container->addContainer(horizontalContainer);
 
         rateKnob = new Knob(this, RK_RC_IMAGE(crackle_rate_knob_label));
-        rateKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_knob_bk));
-        rateKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_knob_marker));
+        rateKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        rateKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         horizontalContainer->addWidget(rateKnob);
 
         randomnessKnob = new Knob(this, RK_RC_IMAGE(crackle_randomness_knob_label));
@@ -253,8 +253,8 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
         horizontalContainer->addWidget(randomnessKnob);
 
         amplitudeKnob = new Knob(this, RK_RC_IMAGE(crackle_amplitude_knob_label));
-        amplitudeKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_knob_bk));
-        amplitudeKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_knob_marker));
+        amplitudeKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        amplitudeKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         horizontalContainer->addWidget(amplitudeKnob);
 
         // Envelope types
@@ -290,13 +290,13 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
         horizontalContainer->addWidget(linearEnvButton);
 
         tiangleEnvButton = new RkButton(this);
-        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env__button),
+        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env_button),
                                    RkButton::State::Unpressed);
-        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env__button_on),
+        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env_button_on),
                                    RkButton::State::Pressed);
-        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env__button_hover),
+        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env_button_hover),
                                    RkButton::State::UnpressedHover);
-        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env__button_hover_on),
+        tiangleEnvButton->setImage(RK_RC_IMAGE(crackle_triangle_env_button_hover_on),
                                    RkButton::State::PressedHover);
         tiangleEnvButton->setCheckable(true);
         tiangleEnvButton->show();
@@ -309,17 +309,17 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
         container->addContainer(horizontalContainer);
 
         brightnessKnob = new Knob(this, RK_RC_IMAGE(cracke_brightness_knob_label));
-        brightnessKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_knob_bk));
-        brightnessKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_knob_marker));
+        brightnessKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        brightnessKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         horizontalContainer->addWidget(brightnessKnob);
 
         durationKnob = new Knob(this, RK_RC_IMAGE(cracke_duration_knob_label));
-        durationKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_knob_bk));
-        durationKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_knob_marker));
+        durationKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        durationKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         horizontalContainer->addWidget(durationKnob);
 
-        stereaspreadKnob = new Knob(this, RK_RC_IMAGE(cracke_stereaspread_knob_label));
-        stereaspreadKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_knob_bk));
-        stereaspreadKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_knob_marker));
+        stereaspreadKnob = new Knob(this, RK_RC_IMAGE(cracke_setreospread_knob_label));
+        stereaspreadKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        stereaspreadKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         horizontalContainer->addWidget(stereaspreadKnob);
 }

@@ -28,6 +28,8 @@
 
 class DspProxy;
 class NoiseModel;
+class CrackleModel;
+class GlitchModel;
 
 class EntropictronModel: public RkObject
 {
@@ -35,11 +37,19 @@ class EntropictronModel: public RkObject
         explicit EntropictronModel(RkObject *parent, DspProxy *dspProxy);
         NoiseModel* getNoise1() const;
         NoiseModel* getNoise2() const;
+        CrackleModel* getCrackle1() const;
+        CrackleModel* getCrackle2() const;
+        GlitchModel* getGlitch1() const;
+        GlitchModel* getGlitch2() const;
 
  private:
         DspProxy *dspProxy;
         NoiseModel *noise1Model;
         NoiseModel *noise2Model;
+        CrackleModel *crackle1Model;
+        CrackleModel *crackle2Model;
+        GlitchModel *glitch1Model;
+        GlitchModel *glitch2Model;
 };
 
 #endif // ENTROPICTRON_MODEL_H

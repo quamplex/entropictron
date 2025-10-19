@@ -36,16 +36,16 @@ class GlitchModel: public EntAbstractModel
         GlitchId getId() const;
         void enable(bool b = true);
         bool isEnabled() const;
-        bool setRepeats(double value);
-        double repeats(double value) const;
-        bool setProbability(double value);
-        double probability(double value) const;
-        bool setLength(double value);
-        double lenth(double value) const;
-        bool setMaxJump(double value);
-        double maxJump(double value) const;
-        bool setMinJump(double value);
-        double minJump(double value) const;
+        void setRepeats(double value);
+        double repeats() const;
+        void setProbability(double value);
+        double probability() const;
+        void setLength(double value);
+        double length() const;
+        void setMaxJump(double value);
+        double maxJump() const;
+        void setMinJump(double value);
+        double minJump() const;
         RK_DECL_ACT(enabled,
                     enabled(bool b),
                     RK_ARG_TYPE(bool b),

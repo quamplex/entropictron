@@ -38,16 +38,40 @@ class CrackleModel: public EntAbstractModel
         bool isEnabled() const;
         void setRate(double value);
         double rate() const;
+        void setRateDefaultValue(double value);
+        double getRateDefaultValue() const;
+        void setRateRange(double from, double to);
+        std::pair<double, double> getRateRange() const;
         void setRandomness(double value);
         double randomness() const;
+        void setRandomnessDefaultValue(double value);
+        double getRandomnessDefaultValue() const;
+        void setRandomnessRange(double from, double to);
+        std::pair<double, double> getRandomnessRange() const;
         void setAmplitude(double value);
         double amplitude() const;
+        void setAmplitudeDefaultValue(double value);
+        double getAmplitudeDefaultValue() const;
+        void setAmplitudeRange(double from, double to);
+        std::pair<double, double> getAmplitudeRange() const;
         void setBrightness(double value);
         double brightness() const;
+        void setBrightnessDefaultValue(double value);
+        double getBrightnessDefaultValue() const;
+        void setBrightnessRange(double from, double to);
+        std::pair<double, double> getBrightnessRange() const;
         void setDuration(double value);
         double duration() const;
+        void setDurationDefaultValue(double value);
+        double getDurationDefaultValue() const;
+        void setDurationRange(double from, double to);
+        std::pair<double, double> getDurationRange() const;
         void setStereospread(double value);
-        double stereopread() const;
+        double stereospread() const;
+        void setStereospreadDefaultValue(double value);
+        double getStereospreadDefaultValue() const;
+        void setStereospreadRange(double from, double to);
+        std::pair<double, double> getStereospreadRange() const;
 
         RK_DECL_ACT(enabled,
                     enabled(bool b),
@@ -73,13 +97,25 @@ class CrackleModel: public EntAbstractModel
                     durationUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
-        RK_DECL_ACT(srereospreadUpdated,
-                    srereospreadUpdated(double value),
+        RK_DECL_ACT(stereospreadUpdated,
+                    stereospreadUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
 
  private:
         DspCrackleProxy *dspCrackleProxy;
+        double rateDefaultvalue;
+        std::pair<double, double> rateRange;
+        double randomnessDefaultvalue;
+        std::pair<double, double> randomnessRange;
+        double amplitudeDefaultvalue;
+        std::pair<double, double> amplitudeRange;
+        double brightnessDefaultvalue;
+        std::pair<double, double> brightnessRange;
+        double durationDefaultvalue;
+        std::pair<double, double> durationRange;
+        double stereospreadDefaultvalue;
+        std::pair<double, double> stereospreadRange;
 };
 
 #endif // ENT_CRACKLE_MODEL_H

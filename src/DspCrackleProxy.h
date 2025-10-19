@@ -47,8 +47,8 @@ class DspCrackleProxy : public RkObject {
         virtual double brightness() const = 0;
         virtual bool setEnvelopeShape(CrackleEnvelopeShape shape) = 0;
         virtual CrackleEnvelopeShape envelopeShape() const = 0;
-        virtual bool setStereoSpread(double value) = 0;
-        virtual double stereoSpread() const = 0;
+        virtual bool setStereospread(double value) = 0;
+        virtual double stereospread() const = 0;
 
         RK_DECL_ACT(enabled,
                     enabled(bool b),
@@ -56,10 +56,6 @@ class DspCrackleProxy : public RkObject {
                     RK_ARG_VAL(b));
         RK_DECL_ACT(rateUpdated,
                     rateUpdated(double value),
-                    RK_ARG_TYPE(double),
-                    RK_ARG_VAL(value));
-        RK_DECL_ACT(durationUpdated,
-                    duraitonUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
         RK_DECL_ACT(durationUpdated,
@@ -76,6 +72,10 @@ class DspCrackleProxy : public RkObject {
                     RK_ARG_VAL(value));
         RK_DECL_ACT(brightnessUpdated,
                     brightnessUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(stereospreadUpdated,
+                    stereospreadUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
 
