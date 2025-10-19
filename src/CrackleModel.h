@@ -36,10 +36,47 @@ class CrackleModel: public EntAbstractModel
         CrackleId getId() const;
         void enable(bool b = true);
         bool isEnabled() const;
+        void setRate(double value);
+        double rate() const;
+        void setRandomness(double value);
+        double randomness() const;
+        void setAmplitude(double value);
+        double amplitude() const;
+        void setBrightness(double value);
+        double brightness() const;
+        void setDuration(double value);
+        double duration() const;
+        void setStereospread(double value);
+        double stereopread() const;
+
         RK_DECL_ACT(enabled,
                     enabled(bool b),
                     RK_ARG_TYPE(bool b),
                     RK_ARG_VAL(b));
+        RK_DECL_ACT(rateUpdated,
+                    rateUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(randomnessUpdated,
+                    randomnessUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(amplitudeUpdated,
+                    amplitudeUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(brightnessUpdated,
+                    brightnessUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(durationUpdated,
+                    durationUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(srereospreadUpdated,
+                    srereospreadUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
 
  private:
         DspCrackleProxy *dspCrackleProxy;

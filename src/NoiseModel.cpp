@@ -86,7 +86,6 @@ NoiseType NoiseModel::noiseType() const
 
 void NoiseModel::setDensity(double value)
 {
-        ENTROPICTRON_LOG_DEBUG("value: " << value);
         if (dspNoiseProxy->setDensity(value))
                 action densityUpdated(value);
 }

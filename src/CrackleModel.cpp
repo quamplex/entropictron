@@ -49,3 +49,69 @@ bool CrackleModel::isEnabled() const
 {
         return dspCrackleProxy->isEnabled();
 }
+
+void CrackleModel::setRate(double value)
+{
+        if (dspCrackleProxy->setRate(value))
+                action rateUpdated(value);
+}
+
+double CrackleModel::rate() const
+{
+        return dspCrackleProxy->rate();
+}
+
+void CrackleModel::setRandomness(double value)
+{
+        if (dspCrackleProxy->setRandomness(value))
+                action randomnessUpdated(value);
+}
+
+double CrackleModel::randomness() const
+{
+        return dspCrackleProxy->randomness();
+}
+
+void CrackleModel::setAmplitude(double value)
+{
+        if (dspCrackleProxy->setAmplitude(value))
+                action amplitudeUpdated(value);
+}
+
+double CrackleModel::amplitude() const
+{
+        return dspCrackleProxy->amplitude();
+}
+
+void CrackleModel::setBrightness(double value)
+{
+        if (dspCrackleProxy->setBrightness(value))
+                action brightnessUpdated(value);
+}
+
+double CrackleModel::brightness() const
+{
+        return dspCrackleProxy->brightness();
+}
+
+void CrackleModel::setDuration(double value)
+{
+        if (dspCrackleProxy->setDuration(value))
+                action durationUpdated(value);
+}
+
+double CrackleModel::duration() const
+{
+        return dspCrackleProxy->duration();
+}
+
+void CrackleModel::setStereospread(double value)
+{
+        if (dspCrackleProxy->setStereospread(value))
+                action stereospreadUpdated(value);
+}
+
+double CrackleModel::stereospread() const
+{
+        return dspCrackleProxy->stereospread();
+}

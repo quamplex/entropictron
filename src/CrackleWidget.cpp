@@ -148,16 +148,6 @@ void CrackleWidget::bindModel()
                     RK_ACT_ARGS(bool b),
                     model,
                     enable(b));
-        RK_ACT_BIND(model,
-                    modelUpdated,
-                    RK_ACT_ARGS(),
-                    this,
-                    updateView());
-        RK_ACT_BIND(model,
-                    enabled,
-                    RK_ACT_ARGS(bool b),
-                    enableCrackleButton,
-                    setPressed(b));
         RK_ACT_BIND(rateKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
@@ -188,6 +178,47 @@ void CrackleWidget::bindModel()
                     RK_ACT_ARGS(double value),
                     model,
                     setSterespread(value));
+
+        RK_ACT_BIND(model,
+                    enabled,
+                    RK_ACT_ARGS(bool b),
+                    enableCrackleButton,
+                    setPressed(b));
+        RK_ACT_BIND(model,
+                    modelUpdated,
+                    RK_ACT_ARGS(),
+                    this,
+                    updateView());
+        RK_ACT_BIND(model,
+                    rateUpdated,
+                    RK_ACT_ARGS(double value),
+                    rateKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    randomnessUpdated,
+                    RK_ACT_ARGS(double value),
+                    randomnessKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    amplitudeUpdated,
+                    RK_ACT_ARGS(double value),
+                    amplitudeKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    brightnessUpdated,
+                    RK_ACT_ARGS(double value),
+                    brightnessKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    durationUpdated,
+                    RK_ACT_ARGS(double value),
+                    durationKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    stereospreadUpdated,
+                    RK_ACT_ARGS(double value),
+                    stereospreadKnob,
+                    setValue(value));
 }
 
 void CrackleWidget::unbindModel()
