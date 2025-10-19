@@ -84,7 +84,8 @@ void CrackleWidget::createView()
         enableCrackleButton->show();
         topContianer->addWidget(enableCrackleButton);
 
-        crackleLabel = new RkLabel(this);
+        auto crackleLabel = new RkLabel(this);
+        crackleLabel->setImage(RK_RC_IMAGE(crackle_label));
         topContianer->addSpace(10);
         topContianer->addWidget(crackleLabel);
 
@@ -99,7 +100,6 @@ void CrackleWidget::updateView()
         if (!model)
                 return;
 
-        crackleLabel->setImage(RK_RC_IMAGE(crackle_label));
         enableCrackleButton->setPressed(model->isEnabled());
 
         auto [rateFrom, rateTo] = model->getRateRange();

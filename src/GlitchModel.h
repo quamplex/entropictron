@@ -36,10 +36,40 @@ class GlitchModel: public EntAbstractModel
         GlitchId getId() const;
         void enable(bool b = true);
         bool isEnabled() const;
+        bool setRepeats(double value);
+        double repeats(double value) const;
+        bool setProbability(double value);
+        double probability(double value) const;
+        bool setLength(double value);
+        double lenth(double value) const;
+        bool setMaxJump(double value);
+        double maxJump(double value) const;
+        bool setMinJump(double value);
+        double minJump(double value) const;
         RK_DECL_ACT(enabled,
                     enabled(bool b),
                     RK_ARG_TYPE(bool b),
                     RK_ARG_VAL(b));
+        RK_DECL_ACT(repeatsUpdated,
+                    repeatsUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(probabilityUpdated,
+                    probabilityUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(lengthUpdated,
+                    lengthUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(maxJumpUpdated,
+                    maxJumpUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(minJumpUpdated,
+                    minJumpUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
 
  private:
         DspGlitchProxy *dspGlitchProxy;

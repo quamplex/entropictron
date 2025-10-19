@@ -47,6 +47,12 @@ protected:
         void createGlitchControls(RkContainer *container);
 
 private:
+        RkButton *enableGlitchButton;
+        Knob *repeatsKnob;
+        Knob *probabilityKnob;
+        Knob *lengthKnob;
+        Knob *maxJumpKnob;
+        Knob *minJumpKnob;
 };
 
 #endif // ENT_GLITCH_WIDGET_H

@@ -35,10 +35,41 @@ class DspGlitchProxy : public RkObject {
         GlitchId getGlitchId() const;
         virtual bool enable(bool b = true) = 0;
         virtual bool isEnabled() const = 0;
+        virtual bool setRepeats(double value) = 0;
+        virtual double repeats(double value) const = 0;
+        virtual bool setProbability(double value) = 0;
+        virtual double probability(double value) const = 0;
+        virtual bool setLength(double value) = 0;
+        virtual double lenth(double value) const = 0;
+        virtual bool setMaxJump(double value) = 0;
+        virtual double maxJump(double value) const = 0;
+        virtual bool setMinJump(double value) = 0;
+        virtual double minJump(double value) const = 0;
+
         RK_DECL_ACT(enabled,
                     enabled(bool b),
                     RK_ARG_TYPE(bool b),
                     RK_ARG_VAL(b));
+        RK_DECL_ACT(repeatsUpdated,
+                    repeatsUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(probabilityUpdated,
+                    probabilityUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(lengthUpdated,
+                    lengthUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(maxJumpUpdated,
+                    maxJumpUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(minJumpUpdated,
+                    minJumpUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
 
 private:
         GlitchId glitchId;

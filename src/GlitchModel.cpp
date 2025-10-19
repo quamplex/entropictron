@@ -49,3 +49,59 @@ bool GlitchModel::isEnabled() const
 {
         return dspGlitchProxy->isEnabled();
 }
+
+void GlitchModel::setRepeats(double value)
+{
+        if (dspGlitchProxy->setRepeats(value))
+                action repeatsUpdated(value);
+}
+
+double GlitchModel::repeats() const
+{
+        return dspGlitchProxy->repeats();
+}
+
+void GlitchModel::setProbability(double value)
+{
+        if (dspGlitchProxy->setProbability(value))
+                action probabilityUpdated(value);
+}
+
+double GlitchModel::probability() const
+{
+        return dspGlitchProxy->probability();
+}
+
+void GlitchModel::setLength(double value)
+{
+        if (dspGlitchProxy->setLength(value))
+                action lengthUpdated(value);
+}
+
+double GlitchModel::length() const
+{
+        return dspGlitchProxy->length();
+}
+
+void GlitchModel::setMaxJump(double value)
+{
+        if (dspGlitchProxy->setMaxJump(value))
+                action maxJumpUpdated(value);
+}
+
+double GlitchModel::maxJump() const
+{
+        return dspGlitchProxy->maxJump();
+}
+
+void GlitchModel::setMinJump(double value)
+{
+        if (dspGlitchProxy->setMinJump(value))
+                action minJumpUpdated(value);
+}
+
+double GlitchModel::minJump() const
+{
+        return dspGlitchProxy->minJump();
+}
+
