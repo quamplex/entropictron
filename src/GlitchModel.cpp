@@ -61,6 +61,26 @@ double GlitchModel::repeats() const
         return dspGlitchProxy->repeats();
 }
 
+void CrackleModel::setRepeatsDefaultValue(double value)
+{
+        repeatsDefaultvalue = value;
+}
+
+double CrackleModel::getRepeatsDefaultValue() const
+{
+        return repeatsDefaultvalue;
+}
+
+void CrackleModel::setRepeatsRange(double from, double to)
+{
+        repeatsRange = {from, to};
+}
+
+std::pair<double, double> CrackleModel::getRepeatsRange() const
+{
+        return repeatsRange;
+}
+
 void GlitchModel::setProbability(double value)
 {
         if (dspGlitchProxy->setProbability(value))
@@ -70,6 +90,26 @@ void GlitchModel::setProbability(double value)
 double GlitchModel::probability() const
 {
         return dspGlitchProxy->probability();
+}
+
+void CrackleModel::setProbabilityDefaultValue(double value)
+{
+        probabilityDefaultvalue = value;
+}
+
+double CrackleModel::getProbabilityDefaultValue() const
+{
+        return probabilityDefaultvalue;
+}
+
+void CrackleModel::setProbabilityRange(double from, double to)
+{
+        probabilityRange = {from, to};
+}
+
+std::pair<double, double> CrackleModel::getProbabilityRange() const
+{
+        return probabilityRange;
 }
 
 void GlitchModel::setLength(double value)
@@ -83,6 +123,26 @@ double GlitchModel::length() const
         return dspGlitchProxy->length();
 }
 
+void CrackleModel::setLengthDefaultValue(double value)
+{
+        lengthDefaultvalue = value;
+}
+
+double CrackleModel::getLengthDefaultValue() const
+{
+        return lengthDefaultvalue;
+}
+
+void CrackleModel::setLengthRange(double from, double to)
+{
+        lengthRange = {from, to};
+}
+
+std::pair<double, double> CrackleModel::getLengthRange() const
+{
+        return lengthRange;
+}
+
 void GlitchModel::setMaxJump(double value)
 {
         if (dspGlitchProxy->setMaxJump(value))
@@ -92,6 +152,26 @@ void GlitchModel::setMaxJump(double value)
 double GlitchModel::maxJump() const
 {
         return dspGlitchProxy->maxJump();
+}
+
+void CrackleModel::setMaxJumpDefaultValue(double value)
+{
+        maxJumpDefaultvalue = value;
+}
+
+double CrackleModel::getMaxJumpDefaultValue() const
+{
+        return maxJumpDefaultvalue;
+}
+
+void CrackleModel::setMaxJumpRange(double from, double to)
+{
+        maxJumpRange = {from, to};
+}
+
+std::pair<double, double> CrackleModel::getMaxJumpRange() const
+{
+        return maxJumpRange;
 }
 
 void GlitchModel::setMinJump(double value)
@@ -105,3 +185,22 @@ double GlitchModel::minJump() const
         return dspGlitchProxy->minJump();
 }
 
+void CrackleModel::setMinJumpDefaultValue(double value)
+{
+        minJumpDefaultvalue = value;
+}
+
+double CrackleModel::getMinJumpDefaultValue() const
+{
+        return minJumpDefaultvalue;
+}
+
+void CrackleModel::setMinJumpRange(double from, double to)
+{
+        minJumpRange = {from, to};
+}
+
+std::pair<double, double> CrackleModel::getMinJumpRange() const
+{
+        return minJumpRange;
+}

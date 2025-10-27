@@ -32,13 +32,13 @@ CrackleModel::CrackleModel(RkObject *parent, DspCrackleProxy *dspCrackleProxy)
         , randomnessDefaultvalue{0.5}
         , randomnessRange{0.0, 1.0}
         , amplitudeDefaultvalue{1.0};
-        , amplitudeRange {Entropictron::fromDecibel(-50), // -50dB
-                          Entropictron::fromDecibel(6)}   // +6dB
+        , amplitudeRange{Entropictron::fromDecibel(-50), // -50dB
+                         Entropictron::fromDecibel(6)}   // +6dB
         , brightnessDefaultvalue{0.0}
         , brightnessRange{0.0, 1.0}
         , durationDefaultvalue{1.0}
-        , durationRange {0.05, 2.0}
-        , stereospreadDefaultvalue {1.0}
+        , durationRange{0.05, 2.0}
+        , stereospreadDefaultvalue{1.0}
         , stereospreadRange{0.0, 1.0}
 {
         RK_ACT_BIND(dspCrackleProxy,
@@ -76,19 +76,22 @@ double CrackleModel::rate() const
 
 void CrackleModel::setRateDefaultValue(double value)
 {
-        
+        rateDefaultvalue = value;
 }
 
 double CrackleModel::getRateDefaultValue() const
 {
+        return rateDefaultvalue;
 }
 
 void CrackleModel::setRateRange(double from, double to)
 {
+        rateRange = {from, to};
 }
 
 std::pair<double, double> CrackleModel::getRateRange() const
 {
+        return rateRange;
 }
 
 void CrackleModel::setRandomness(double value)
@@ -102,11 +105,25 @@ double CrackleModel::randomness() const
         return dspCrackleProxy->randomness();
 }
 
-        void setRateDefaultValue(double value);
-        double getRateDefaultValue() const;
-        void setRateRange(double from, double to);
-        std::pair<double, double> getRateRange() const;
+void CrackleModel::setRandomnessDefaultValue(double value)
+{
+        randomnessDefaultvalue = value;
+}
 
+double CrackleModel::getRandomnessDefaultValue() const
+{
+        return randomnessDefaultvalue;
+}
+
+void CrackleModel::setRandomnessRange(double from, double to)
+{
+        randomnessRange = {from, to};
+}
+
+std::pair<double, double> CrackleModel::getRandomnessRange() const
+{
+        return randomnessRange;
+}
 
 void CrackleModel::setAmplitude(double value)
 {
@@ -119,11 +136,25 @@ double CrackleModel::amplitude() const
         return dspCrackleProxy->amplitude();
 }
 
-        void setRateDefaultValue(double value);
-        double getRateDefaultValue() const;
-        void setRateRange(double from, double to);
-        std::pair<double, double> getRateRange() const;
+void CrackleModel::setAmplitudeDefaultValue(double value)
+{
+        amplitudeDefaultvalue = value;
+}
 
+double CrackleModel::getAmplitudeDefaultValue() const
+{
+        return amplitudeDefaultvalue;
+}
+
+void CrackleModel::setAmplitudeRange(double from, double to)
+{
+        amplitudeRange = {from, to};
+}
+
+std::pair<double, double> CrackleModel::getAmplitudeRange() const
+{
+        return amplitudeRange;
+}
 
 void CrackleModel::setBrightness(double value)
 {
@@ -136,11 +167,25 @@ double CrackleModel::brightness() const
         return dspCrackleProxy->brightness();
 }
 
-        void setRateDefaultValue(double value);
-        double getRateDefaultValue() const;
-        void setRateRange(double from, double to);
-        std::pair<double, double> getRateRange() const;
+void CrackleModel::setBrightnessDefaultValue(double value)
+{
+        brightnessDefaultvalue = value;
+}
 
+double CrackleModel::getBrightnessDefaultValue() const
+{
+        return brightnessDefaultvalue;
+}
+
+void CrackleModel::setBrightnessRange(double from, double to)
+{
+        brightnessRange = {from, to};
+}
+
+std::pair<double, double> CrackleModel::getBrightnessRange() const
+{
+        return brightnessRange;
+}
 
 void CrackleModel::setDuration(double value)
 {
@@ -153,11 +198,25 @@ double CrackleModel::duration() const
         return dspCrackleProxy->duration();
 }
 
-        void setRateDefaultValue(double value);
-        double getRateDefaultValue() const;
-        void setRateRange(double from, double to);
-        std::pair<double, double> getRateRange() const;
+void CrackleModel::setDurationDefaultValue(double value)
+{
+        durationDefaultvalue = value;
+}
 
+double CrackleModel::getDurationDefaultValue() const
+{
+        return durationDefaultvalue;
+}
+
+void CrackleModel::setDurationRange(double from, double to)
+{
+        durationRange = {from, to};
+}
+
+std::pair<double, double> CrackleModel::getDurationRange() const
+{
+        return durationRange;
+}
 
 void CrackleModel::setStereospread(double value)
 {
@@ -170,8 +229,22 @@ double CrackleModel::stereospread() const
         return dspCrackleProxy->stereospread();
 }
 
-        void setRateDefaultValue(double value);
-        double getRateDefaultValue() const;
-        void setRateRange(double from, double to);
-        std::pair<double, double> getRateRange() const;
+void CrackleModel::setStereospreadDefaultValue(double value)
+{
+        stereospreadDefaultvalue = value;
+}
 
+double CrackleModel::getStereospreadDefaultValue() const
+{
+        return stereospreadDefaultvalue;
+}
+
+void CrackleModel::setStereospreadRange(double from, double to)
+{
+        stereospreadRange = {from, to};
+}
+
+std::pair<double, double> CrackleModel::getStereospreadRange() const
+{
+        return stereospreadRange;
+}
