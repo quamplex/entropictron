@@ -31,7 +31,7 @@ CrackleModel::CrackleModel(RkObject *parent, DspCrackleProxy *dspCrackleProxy)
         , rateRange{0.0, 10.0}
         , randomnessDefaultvalue{0.5}
         , randomnessRange{0.0, 1.0}
-        , amplitudeDefaultvalue{1.0};
+        , amplitudeDefaultvalue{1.0}
         , amplitudeRange{Entropictron::fromDecibel(-50), // -50dB
                          Entropictron::fromDecibel(6)}   // +6dB
         , brightnessDefaultvalue{0.0}

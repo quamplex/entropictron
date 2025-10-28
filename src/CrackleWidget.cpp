@@ -42,6 +42,18 @@ RK_DECLARE_IMAGE_RC(crackle_amplitude_knob_label);
 RK_DECLARE_IMAGE_RC(crackle_brightness_knob_label);
 RK_DECLARE_IMAGE_RC(crackle_duration_knob_label);
 RK_DECLARE_IMAGE_RC(crackle_stereospread_knob_label);
+RK_DECLARE_IMAGE_RC(crackle_exp_env_button);
+RK_DECLARE_IMAGE_RC(crackle_exp_env_button_on);
+RK_DECLARE_IMAGE_RC(crackle_exp_env_button_hover);
+RK_DECLARE_IMAGE_RC(crackle_exp_env_button_hover_on);
+RK_DECLARE_IMAGE_RC(crackle_linear_env_button);
+RK_DECLARE_IMAGE_RC(crackle_linear_env_button_on);
+RK_DECLARE_IMAGE_RC(crackle_linear_env_button_hover);
+RK_DECLARE_IMAGE_RC(crackle_linear_env_button_hover_on);
+RK_DECLARE_IMAGE_RC(crackle_triangle_env_button);
+RK_DECLARE_IMAGE_RC(crackle_triangle_env_button_on);
+RK_DECLARE_IMAGE_RC(crackle_triangle_env_button_hover);
+RK_DECLARE_IMAGE_RC(crackle_triangle_env_button_hover_on);
 
 CrackleWidget::CrackleWidget(EntWidget* parent, CrackleModel* model)
         : EntAbstractView(parent, model)
@@ -51,7 +63,10 @@ CrackleWidget::CrackleWidget(EntWidget* parent, CrackleModel* model)
         , amplitudeKnob{nullptr}
         , brightnessKnob{nullptr}
         , durationKnob{nullptr}
-        , sterespreadKnob{nullptr}
+        , stereospreadKnob{nullptr}
+        , exponentialEnvButton{nullptr}
+        , linearEnvButton{nullptr}
+        , tiangleEnvButton{nullptr}
 {
         setFixedSize(350, 282);
         setBackgroundColor(37, 43, 53);
@@ -173,11 +188,11 @@ void CrackleWidget::bindModel()
                     RK_ACT_ARGS(double value),
                     model,
                     setDuration(value));
-        RK_ACT_BIND(sterespreadKnob,
+        RK_ACT_BIND(stereospreadKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
                     model,
-                    setSterespread(value));
+                    setStereospread(value));
 
         RK_ACT_BIND(model,
                     enabled,
@@ -231,14 +246,14 @@ void CrackleWidget::unbindModel()
         amplitudeKnob->unbindObject(model);
         brightnessKnob->unbindObject(model);
         durationKnob->unbindObject(model);
-        sterespreadKnob->unbindObject(model);
+        stereospreadKnob->unbindObject(model);
 }
 
 void CrackleWidget::createCrackleControls(RkContainer *container)
 {
         // Rate, Randomness, Amplitude
         auto horizontalContainer = new RkContainer(this);
-        crackleControlsContainer->setSize({width(), 103});
+        horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
 
@@ -258,8 +273,8 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
         horizontalContainer->addWidget(amplitudeKnob);
 
         // Envelope types
-        auto horizontalContainer = new RkContainer(this);
-        crackleControlsContainer->setSize({width(), 20});
+        horizontalContainer = new RkContainer(this);
+        horizontalContainer->setSize({width(), 20});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
 
@@ -304,7 +319,7 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
 
         // Brightness, Duraiton, Stere Spread
         horizontalContainer = new RkContainer(this);
-        crackleControlsContainer->setSize({width(), 103});
+        horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
 
@@ -318,8 +333,8 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
         durationKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         horizontalContainer->addWidget(durationKnob);
 
-        stereaspreadKnob = new Knob(this, RK_RC_IMAGE(cracke_setreospread_knob_label));
-        stereaspreadKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
-        stereaspreadKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
-        horizontalContainer->addWidget(stereaspreadKnob);
+        stereospreadKnob = new Knob(this, RK_RC_IMAGE(cracke_setreospread_knob_label));
+        stereospreadKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        stereospreadKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
+        horizontalContainer->addWidget(steroaspreadKnob);
 }

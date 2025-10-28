@@ -16,26 +16,6 @@ noise_label.png
 noise_density_knob_label.png
 noise_brightness_knob_label.png
 noise_gain_knob_label.png
-
-# ---- CRAKCLE -----
-
-crackle_label.png
-crackle_rate_knob_label.png
-crackle_randomness_knob_label.png
-crackle_amplitude_knob_label.png
-crackle_brightness_knob_label.png
-crackle_duration_knob_label.png
-crackle_stereospread_knob_label.png
-
-# ---- GLITCH -----
-
-glitch_label.png
-glitch_repeats_knob_label.png
-glitch_probability_knob_label.png
-glitch_length_knob_label.png
-glitch_maxjump_knob_label.png
-glitch_minjump_knob_label.png
-
 noise_white_button.png
 noise_white_button_hover.png
 noise_white_button_on.png
@@ -48,5 +28,36 @@ noise_brown_button.png
 noise_brown_button_hover.png
 noise_brown_button_on.png
 noise_brown_button_hover_on.png
+
+# ---- CRAKCLE -----
+
+crackle_label.png
+crackle_rate_knob_label.png
+crackle_randomness_knob_label.png
+crackle_amplitude_knob_label.png
+crackle_brightness_knob_label.png
+crackle_duration_knob_label.png
+crackle_stereospread_knob_label.png
+crackle_exp_env_button.png
+crackle_exp_env_button_on.png
+crackle_exp_env_button_hover.png
+crackle_exp_env_button_hover_on.png
+crackle_linear_env_button.png
+crackle_linear_env_button_on.png
+crackle_linear_env_button_hover.png
+crackle_linear_env_button_hover_on.png
+crackle_triangle_env_button.png
+crackle_triangle_env_button_on.png
+crackle_triangle_env_button_hover.png
+crackle_triangle_env_button_hover_on.png
+
+# ---- GLITCH -----
+
+glitch_label.png
+glitch_repeats_knob_label.png
+glitch_probability_knob_label.png
+glitch_length_knob_label.png
+glitch_maxjump_knob_label.png
+glitch_minjump_knob_label.png
 
 )

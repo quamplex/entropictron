@@ -53,7 +53,10 @@ private:
         Knob *amplitudeKnob;
         Knob *brightnessKnob;
         Knob *durationKnob;
-        Knob *sterespreadKnob;
+        Knob *stereospreadKnob;
+        RkButton *exponentialEnvButton;
+        RkButton *linearEnvButton;
+        RkButton *tiangleEnvButton;
 };
 
 #endif // ENT_CRACKLE_WIDGET_H
