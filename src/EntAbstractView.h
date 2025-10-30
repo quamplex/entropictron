@@ -22,7 +22,7 @@
  */
 
 #ifndef ENT_ABSTRACT_VIEW_H
-#define EMT_ABSTRACT_VIEW_H
+#define ENT_ABSTRACT_VIEW_H
 
 #include "EntWidget.h"
 

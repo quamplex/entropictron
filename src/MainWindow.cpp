@@ -25,6 +25,7 @@
 #include "NoiseWidget.h"
 #include "DspProxy.h"
 #include "EntropictronModel.h"
+#include "ModuleWidgetTab.h"
 
 #include "RkContainer.h"
 #include "RkLabel.h"
@@ -63,7 +64,7 @@ bool MainWindow::createUi(void)
         mainContainer->addContainer(horizontalContainer);
 
         for (int id = 0; id < 2; id++) {
-                auto moduleTabs = new ModuleWidgetTab(this, id);
+                auto moduleTabs = new ModuleWidgetTab(this, entropictronModel, id);
                 horizontalContainer->addWidget(moduleTabs);
         }
 

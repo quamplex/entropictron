@@ -284,127 +284,185 @@ void EntVstProcessor::initParamMappings()
 void EntVstProcessor::initNoiseParamMappings()
 {
         // Noise 1
-        paramMap[ParameterId::Noise1EnabledId] = [this](ParamValue v) {
-                ENTROPICTRON_LOG_INFO("Noise2EnabledId: v: " << v);
-                entropictronDsp->getNoise(NoiseId::Noise1)->enable(v >= 0.5);
+        auto noise = entropictronDsp->getNoise(NoiseId::Noise1);
+        paramMap[ParameterId::Noise1EnabledId] = [noise](ParamValue v) {
+                noise->enable(v >= 0.5);
         };
-        paramMap[ParameterId::Noise1TypeId] = [this](ParamValue v) {
-                ENTROPICTRON_LOG_INFO("NOISE TYPE------------>: v: " << v);
+        paramMap[ParameterId::Noise1TypeId] = [noise](ParamValue v) {
                 auto n = static_cast<int>(NoiseType::BrownNoise);
                 auto type = static_cast<NoiseType>(v * n  + 0.5);
-                entropictronDsp->getNoise(NoiseId::Noise1)->setType(type);
+                noise->setType(type);
         };
-        paramMap[ParameterId::Noise1DensityId] = [this](ParamValue v) {
-                entropictronDsp->getNoise(NoiseId::Noise1)->setDensity(static_cast<float>(v));
+        paramMap[ParameterId::Noise1DensityId] = [noise](ParamValue v) {
+                noise->setDensity(static_cast<float>(v));
         };
-        paramMap[ParameterId::Noise1BrightnessId] = [this](ParamValue v) {
-                entropictronDsp->getNoise(NoiseId::Noise1)->setBrightness(static_cast<float>(v));
+        paramMap[ParameterId::Noise1BrightnessId] = [noise](ParamValue v) {
+                noise->setBrightness(static_cast<float>(v));
         };
-        paramMap[ParameterId::Noise1GainId] = [this](ParamValue v) {
-                entropictronDsp->getNoise(NoiseId::Noise1)->setGain(static_cast<float>(v));
+        paramMap[ParameterId::Noise1GainId] = [noise](ParamValue v) {
+                noise->setGain(static_cast<float>(v));
         };
 
         // Noise 2
-        paramMap[ParameterId::Noise2EnabledId] = [this](ParamValue v) {
+        noise = entropictronDsp->getNoise(NoiseId::Noise2);
+        paramMap[ParameterId::Noise2EnabledId] = [noise](ParamValue v) {
                 ENTROPICTRON_LOG_INFO("Noise2EnabledId: v: " << v);
-                entropictronDsp->getNoise(NoiseId::Noise2)->enable(v >= 0.5);
+                noise->enable(v >= 0.5);
         };
-        paramMap[ParameterId::Noise2TypeId] = [this](ParamValue v) {
+        paramMap[ParameterId::Noise2TypeId] = [noise](ParamValue v) {
                 auto n = static_cast<int>(NoiseType::BrownNoise);
                 auto type = static_cast<NoiseType>(v * n  + 0.5);
-                entropictronDsp->getNoise(NoiseId::Noise2)->setType(type);
+                noise->setType(type);
         };
-        paramMap[ParameterId::Noise2DensityId] = [this](ParamValue v) {
-                entropictronDsp->getNoise(NoiseId::Noise2)->setDensity(static_cast<float>(v));
+        paramMap[ParameterId::Noise2DensityId] = [noise](ParamValue v) {
+                noise->setDensity(static_cast<float>(v));
         };
-        paramMap[ParameterId::Noise2BrightnessId] = [this](ParamValue v) {
-                entropictronDsp->getNoise(NoiseId::Noise2)->setBrightness(static_cast<float>(v));
+        paramMap[ParameterId::Noise2BrightnessId] = [noise](ParamValue v) {
+                noise->setBrightness(static_cast<float>(v));
         };
-        paramMap[ParameterId::Noise2GainId] = [this](ParamValue v) {
-                entropictronDsp->getNoise(NoiseId::Noise2)->setGain(static_cast<float>(v));
+        paramMap[ParameterId::Noise2GainId] = [noise](ParamValue v) {
+                noise->setGain(static_cast<float>(v));
         };
 }
 
 void EntVstProcessor::initCrackleParamMappings()
 {
-    // Enabled
-    paramMap[ParameterId::CrackleEnabledId] = [this](ParamValue v) {
-        entropictronDsp->getCrackle()->enable(v > 0.5); // 0 = off, 1 = on
-    };
+        // Crackle 1
+        auto crackle = entropictronDsp->getCrackle(CrackleId::Crackle1);
+        paramMap[ParameterId::Crackle1EnabledId] = [crackle](ParamValue v) {
+                crackle->enable(v > 0.5);
+        };
 
-    // Rate (0–100 Hz)
-    paramMap[ParameterId::CrackleRateId] = [this](ParamValue v) {
-        float rateHz = static_cast<float>(v) * 100.0f; // normalized → real Hz
-        entropictronDsp->getCrackle()->setRate(rateHz);
-    };
+        paramMap[ParameterId::Crackle1RateId] = [crackle](ParamValue v) {
+                float rateHz = static_cast<float>(v) * 100.0f;
+                crackle->setRate(rateHz);
+        };
 
-    // Duration (1–50 ms)
-    paramMap[ParameterId::CrackleDurationId] = [this](ParamValue v) {
-        float durationMs = 1.0f + static_cast<float>(v) * (50.0f - 1.0f);
-        entropictronDsp->getCrackle()->setDuration(durationMs);
-    };
+        paramMap[ParameterId::Crackle1DurationId] = [crackle](ParamValue v) {
+                float durationMs = 1.0f + static_cast<float>(v) * (50.0f - 1.0f);
+                crackle->setDuration(durationMs);
+        };
 
-    // Amplitude (0–1)
-    paramMap[ParameterId::CrackleAmplitudeId] = [this](ParamValue v) {
-        entropictronDsp->getCrackle()->setAmplitude(static_cast<float>(v));
-    };
+        paramMap[ParameterId::Crackle1AmplitudeId] = [crackle](ParamValue v) {
+                crackle->setAmplitude(static_cast<float>(v));
+        };
 
-    // Randomness (0–100%)
-    paramMap[ParameterId::CrackleRandomnessId] = [this](ParamValue v) {
-        entropictronDsp->getCrackle()->setRandomness(static_cast<float>(v) * 100.0f);
-    };
+        paramMap[ParameterId::Crackle1RandomnessId] = [crackle](ParamValue v) {
+                crackle->setRandomness(static_cast<float>(v) * 100.0f);
+        };
 
-    // Brightness (0–1)
-    paramMap[ParameterId::CrackleBrightnessId] = [this](ParamValue v) {
-        entropictronDsp->getCrackle()->setBrightness(static_cast<float>(v));
-    };
+        paramMap[ParameterId::Crackle1BrightnessId] = [crackle](ParamValue v) {
+                crackle->setBrightness(static_cast<float>(v));
+        };
 
-    // Envelope Shape (0–1)
-    paramMap[ParameterId::CrackleEnvelopeShapeId] = [this](ParamValue v) {
-        entropictronDsp->getCrackle()->setEnvelopeShape(static_cast<CrackleEnvelopeShape>(v));
-    };
+        paramMap[ParameterId::Crackle1EnvelopeShapeId] = [crackle](ParamValue v) {
+                crackle->setEnvelopeShape(static_cast<CrackleEnvelopeShape>(v));
+        };
 
-    // Stereo Spread (0–100%)
-    paramMap[ParameterId::CrackleStereoSpreadId] = [this](ParamValue v) {
-        entropictronDsp->getCrackle()->setStereoSpread(static_cast<float>(v) * 100.0f);
-    };
+        paramMap[ParameterId::Crackle1StereoSpreadId] = [crackle](ParamValue v) {
+                crackle->setStereoSpread(static_cast<float>(v) * 100.0f);
+        };
+
+        crackle = entropictronDsp->getCrackle(CrackleId::Crackle1);
+
+        // Crackle 2
+        paramMap[ParameterId::Crackle2EnabledId] = [crackle](ParamValue v) {
+                crackle->enable(v > 0.5);
+        };
+
+        paramMap[ParameterId::Crackle2RateId] = [crackle](ParamValue v) {
+                float rateHz = static_cast<float>(v) * 100.0f;
+                crackle->setRate(rateHz);
+        };
+
+        paramMap[ParameterId::Crackle2DurationId] = [crackle](ParamValue v) {
+                float durationMs = 1.0f + static_cast<float>(v) * (50.0f - 1.0f);
+                crackle->setDuration(durationMs);
+        };
+
+        paramMap[ParameterId::Crackle2AmplitudeId] = [crackle](ParamValue v) {
+                crackle->setAmplitude(static_cast<float>(v));
+        };
+
+        paramMap[ParameterId::Crackle2RandomnessId] = [crackle](ParamValue v) {
+                crackle->setRandomness(static_cast<float>(v) * 100.0f);
+        };
+
+        paramMap[ParameterId::Crackle2BrightnessId] = [crackle](ParamValue v) {
+                crackle->setBrightness(static_cast<float>(v));
+        };
+
+        paramMap[ParameterId::Crackle2EnvelopeShapeId] = [crackle](ParamValue v) {
+                crackle->setEnvelopeShape(static_cast<CrackleEnvelopeShape>(v));
+        };
+
+        paramMap[ParameterId::Crackle2StereoSpreadId] = [crackle](ParamValue v) {
+                crackle->setStereoSpread(static_cast<float>(v) * 100.0f);
+        };
 }
 
 void EntVstProcessor::initGlitchParamMappings()
 {
-        // Enabled
-        paramMap[ParameterId::GlitchEnabledId] = [this](ParamValue v) {
-                entropictronDsp->getGlitch()->enable(v > 0.5); // 0 = off, 1 = on
+        // Glitch 1
+        auto glitch = entropictronDsp->getGlitch(GlitchId::Glitch1);
+        paramMap[ParameterId::Glitch1EnabledId] = [glitch](ParamValue v) {
+                glitch->enable(v > 0.5);
         };
 
-        // Glitch Probability (0–100%)
-        paramMap[ParameterId::GlitchProbabilityId] = [this](ParamValue v) {
-                float prob = static_cast<float>(v) * 100.0f; // normalized → %
-                entropictronDsp->getGlitch()->setProbability(prob);
+        paramMap[ParameterId::Glitch1ProbabilityId] = [glitch](ParamValue v) {
+                float prob = static_cast<float>(v) * 100.0f;
+                glitch->setProbability(prob);
         };
 
-        // Jump Min Time (0–2000 ms)
-        paramMap[ParameterId::GlitchJumpMinId] = [this](ParamValue v) {
-                float minMs = static_cast<float>(v) * 2000.0f; // normalized → ms
-                entropictronDsp->getGlitch()->setJumpMin(minMs);
+        paramMap[ParameterId::Glitch1MinJumpId] = [glitch](ParamValue v) {
+                float minMs = static_cast<float>(v) * 2000.0f;
+                glitch->setJumpMin(minMs);
         };
 
-        // Jump Max Time (0–5000 ms)
-        paramMap[ParameterId::GlitchJumpMaxId] = [this](ParamValue v) {
-                float maxMs = static_cast<float>(v) * 5000.0f; // normalized → ms
-                entropictronDsp->getGlitch()->setJumpMax(maxMs);
+        paramMap[ParameterId::Glitch1MaxJumpId] = [glitch](ParamValue v) {
+                float maxMs = static_cast<float>(v) * 5000.0f;
+                glitch->setJumpMax(maxMs);
         };
 
-        // Glitch Length (0–2000 ms)
-        paramMap[ParameterId::GlitchLengthId] = [this](ParamValue v) {
-                float lenMs = static_cast<float>(v) * 2000.0f; // normalized → ms
-                entropictronDsp->getGlitch()->setLength(lenMs);
+        paramMap[ParameterId::Glitch1LengthId] = [glitch](ParamValue v) {
+                float lenMs = static_cast<float>(v) * 2000.0f;
+                glitch->setLength(lenMs);
         };
 
-        // Glitch Repeat Count (1–10)
-        paramMap[ParameterId::GlitchRepeatCountId] = [this](ParamValue v) {
-                int repeats = 1 + static_cast<int>(v * 9.0f); // normalized → 1–10
-                entropictronDsp->getGlitch()->setRepeatCount(repeats);
+        paramMap[ParameterId::Glitch1RepeatsId] = [glitch](ParamValue v) {
+                int repeats = 1 + static_cast<int>(v * 9.0f);
+                glitch->setRepeatCount(repeats);
+        };
+
+        // Glitch 2
+        glitch = entropictronDsp->getGlitch(GlitchId::Glitch2);
+        paramMap[ParameterId::Glitch2EnabledId] = [glitch](ParamValue v) {
+                glitch->enable(v > 0.5);
+        };
+
+        paramMap[ParameterId::Glitch2ProbabilityId] = [glitch](ParamValue v) {
+                float prob = static_cast<float>(v) * 100.0f;
+                glitch->setProbability(prob);
+        };
+
+        paramMap[ParameterId::Glitch2MinJumpId] = [glitch](ParamValue v) {
+                float minMs = static_cast<float>(v) * 2000.0f;
+                glitch->setJumpMin(minMs);
+        };
+
+        paramMap[ParameterId::Glitch2MaxJumpId] = [glitch](ParamValue v) {
+                float maxMs = static_cast<float>(v) * 5000.0f;
+                glitch->setJumpMax(maxMs);
+        };
+
+        paramMap[ParameterId::Glitch2LengthId] = [glitch](ParamValue v) {
+                float lenMs = static_cast<float>(v) * 2000.0f;
+                glitch->setLength(lenMs);
+        };
+
+        paramMap[ParameterId::Glitch2RepeatsId] = [glitch](ParamValue v) {
+                int repeats = 1 + static_cast<int>(v * 9.0f);
+                glitch->setRepeatCount(repeats);
         };
 }
 

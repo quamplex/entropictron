@@ -27,6 +27,8 @@
 #include "EntWidget.h"
 #include "GuiTypes.h"
 
+class EntropictronModel;
+
 class ModuleWidgetTab : public EntWidget
 {
 public:

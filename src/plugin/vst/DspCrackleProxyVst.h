@@ -52,8 +52,8 @@ class DspCrackleProxyVst: public DspCrackleProxy {
         double brightness() const override;
         bool setEnvelopeShape(CrackleEnvelopeShape shape) override;
         CrackleEnvelopeShape envelopeShape() const override;
-        bool setStereoSpread(double value) override;
-        double stereoSpread() const override;
+        bool setStereospread(double value) override;
+        double stereospread() const override;
 
 protected:
         void onParameterChanged(ParameterId paramId, ParamValue value);

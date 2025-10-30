@@ -22,7 +22,7 @@
  */
 
 #include "ModuleWidgetTab.h"
-#include "EntropitrconModel.h"
+#include "EntropictronModel.h"
 #include "NoiseWidget.h"
 #include "CrackleWidget.h"
 #include "GlitchWidget.h"
@@ -30,12 +30,15 @@
 #include "RkButton.h"
 #include "RkContainer.h"
 
+RK_DECLARE_IMAGE_RC(tab_noise_button);
 RK_DECLARE_IMAGE_RC(tab_noise_button_hover);
 RK_DECLARE_IMAGE_RC(tab_noise_button_on);
 RK_DECLARE_IMAGE_RC(tab_noise_button_hover_on);
+RK_DECLARE_IMAGE_RC(tab_crackle_button);
 RK_DECLARE_IMAGE_RC(tab_crackle_button_hover);
 RK_DECLARE_IMAGE_RC(tab_crackle_button_on);
 RK_DECLARE_IMAGE_RC(tab_crackle_button_hover_on);
+RK_DECLARE_IMAGE_RC(tab_glitch_button);
 RK_DECLARE_IMAGE_RC(tab_glitch_button_hover);
 RK_DECLARE_IMAGE_RC(tab_glitch_button_on);
 RK_DECLARE_IMAGE_RC(tab_glitch_button_hover_on);
@@ -44,8 +47,8 @@ ModuleWidgetTab::ModuleWidgetTab(EntWidget* parent,
                                  EntropictronModel *model,
                                  size_t id)
         : EntWidget(parent)
-        , entropictronModel{model}
         , tabId{id}
+        , entropictronModel{model}
         , moduleWidget {nullptr}
 {
         setFixedSize(350, 282);
@@ -53,10 +56,10 @@ ModuleWidgetTab::ModuleWidgetTab(EntWidget* parent,
         showNoise();
 }
 
-ModuleWidgetTab::createTabButtons()
+void ModuleWidgetTab::createTabButtons()
 {
-        auto tabButtonContianer = new RkContianer(this);
-        tabButtonContianer->setSize(width(), 20);
+        auto tabButtonContianer = new RkContainer(this);
+        tabButtonContianer->setSize({width(), 20});
 
         // Noise
         auto tabButton = new RkButton(this);
@@ -72,13 +75,13 @@ ModuleWidgetTab::createTabButtons()
         tabButton->show();
         tabButtonContianer->addWidget(tabButton);
         RK_ACT_BIND(tabButton,
-                    enabled,
+                    toggled,
                     RK_ACT_ARGS(bool b),
                     this,
                     showNoise());
 
         // Crackle
-        auto tabButton = new RkButton(this);
+        tabButton = new RkButton(this);
         tabButton->setImage(RK_RC_IMAGE(tab_crackle_button),
                             RkButton::State::Unpressed);
         tabButton->setImage(RK_RC_IMAGE(tab_crackle_button_on),
@@ -91,13 +94,13 @@ ModuleWidgetTab::createTabButtons()
         tabButton->show();
         tabButtonContianer->addWidget(tabButton);
         RK_ACT_BIND(tabButton,
-                    enabled,
+                    toggled,
                     RK_ACT_ARGS(bool b),
                     this,
                     showCrackle());
 
         // Glitch
-        auto tabButton = new RkButton(this);
+        tabButton = new RkButton(this);
         tabButton->setImage(RK_RC_IMAGE(tab_glitch_button),
                             RkButton::State::Unpressed);
         tabButton->setImage(RK_RC_IMAGE(tab_glitch_button_on),
@@ -110,35 +113,35 @@ ModuleWidgetTab::createTabButtons()
         tabButton->show();
         tabButtonContianer->addWidget(tabButton);
         RK_ACT_BIND(tabButton,
-                    enabled,
+                    toggled,
                     RK_ACT_ARGS(bool b),
                     this,
                     showGlitch());
 }
 
-ModuleWidgetTab::showNoise()
+void ModuleWidgetTab::showNoise()
 {
         delete moduleWidget;
         moduleWidget = new NoiseWidget(this,
                                        tabId ? entropictronModel->getNoise1()
                                        : entropictronModel->getNoise2());
-        moduleWidget->setPistion(0, 25);
+        moduleWidget->setPosition(0, 25);
 }
 
-ModuleWidgetTab::showCrackle()
+void ModuleWidgetTab::showCrackle()
 {
         delete moduleWidget;
         moduleWidget = new CrackleWidget(this,
                                          tabId ? entropictronModel->getCrackle1()
                                          : entropictronModel->getCrackle2());
-        moduleWidget->setPistion(0, 25);
+        moduleWidget->setPosition(0, 25);
 }
 
-ModuleWidgetTab::showGlitch()
+void ModuleWidgetTab::showGlitch()
 {
         delete moduleWidget;
         moduleWidget = new GlitchWidget(this,
                                         tabId ? entropictronModel->getGlitch1()
                                         : entropictronModel->getGlitch2());
-        moduleWidget->setPistion(0, 25);
+        moduleWidget->setPosition(0, 25);
 }

@@ -84,8 +84,8 @@ DspGlitchProxyVst::~DspGlitchProxyVst()
 
 bool DspGlitchProxyVst::enable(bool b)
 {
-        auto id; = (getGlitchId() == GlitchId::Glitch1) ?
-                           ParameterId::Glitch1EnabledId : ParameterId::Glitch2EnabledId;
+        auto id = (getGlitchId() == GlitchId::Glitch1) ?
+                  ParameterId::Glitch1EnabledId : ParameterId::Glitch2EnabledId;
         vstController->getComponentHandler()->beginEdit(id);
         vstController->getComponentHandler()->performEdit(id, b ? 1.0 : 0.0);
         vstController->getComponentHandler()->endEdit(id);
@@ -95,14 +95,14 @@ bool DspGlitchProxyVst::enable(bool b)
 bool DspGlitchProxyVst::isEnabled() const
 {
         auto id = (getGlitchId() == GlitchId::Glitch1) ?
-                ParameterId::Glitch1EnabledId : ParameterId::Glitch2EnabledId;
+                  ParameterId::Glitch1EnabledId : ParameterId::Glitch2EnabledId;
         return vstController->getParamNormalized(id) > 0.5;
 }
 
 bool DspGlitchProxyVst::setRepeats(double value)
 {
         auto id = (getGlitchId() == GlitchId::Glitch1) ?
-                ParameterId::Glitch1RepeatsId : ParameterId::Glitch2RepeatsId;
+                  ParameterId::Glitch1RepeatsId : ParameterId::Glitch2RepeatsId;
         vstController->getComponentHandler()->beginEdit(id);
         vstController->getComponentHandler()->performEdit(id, value);
         vstController->getComponentHandler()->endEdit(id);
@@ -112,14 +112,14 @@ bool DspGlitchProxyVst::setRepeats(double value)
 double DspGlitchProxyVst::repeats() const
 {
         auto id = (getGlitchId() == GlitchId::Glitch1) ?
-                ParameterId::Glitch1RepeatsId : ParameterId::Glitch2RepeatsId;
+                  ParameterId::Glitch1RepeatsId : ParameterId::Glitch2RepeatsId;
         return vstController->getParamNormalized(id);
 }
 
 bool DspGlitchProxyVst::setProbability(double value)
 {
         auto id = (getGlitchId() == GlitchId::Glitch1) ?
-                ParameterId::Glitch1ProbabilityId : ParameterId::Glitch2ProbabilityId;
+                  ParameterId::Glitch1ProbabilityId : ParameterId::Glitch2ProbabilityId;
         vstController->getComponentHandler()->beginEdit(id);
         vstController->getComponentHandler()->performEdit(id, value);
         vstController->getComponentHandler()->endEdit(id);
@@ -129,7 +129,7 @@ bool DspGlitchProxyVst::setProbability(double value)
 double DspGlitchProxyVst::probability() const
 {
         auto id = (getGlitchId() == GlitchId::Glitch1) ?
-                ParameterId::Glitch1ProbabilityId : ParameterId::Glitch2ProbabilityId;
+                  ParameterId::Glitch1ProbabilityId : ParameterId::Glitch2ProbabilityId;
         return vstController->getParamNormalized(id);
 }
 
@@ -146,13 +146,14 @@ bool DspGlitchProxyVst::setLength(double value)
 double DspGlitchProxyVst::length() const
 {
         auto id = (getGlitchId() == GlitchId::Glitch1) ?
-                ParameterId::Glitch1LengthId : ParameterId::Glitch2LengthId;
+                  ParameterId::Glitch1LengthId : ParameterId::Glitch2LengthId;
         return vstController->getParamNormalized(id);
 }
 
 bool DspGlitchProxyVst::setMaxJump(double value)
 {
-        auto id = (getGlitchId() == GlitchId::Glitch1) ? ParameterId::Glitch1MaxJumpId : ParameterId::Glitch2MaxJumpId;
+        auto id = (getGlitchId() == GlitchId::Glitch1) ?
+                  ParameterId::Glitch1MaxJumpId : ParameterId::Glitch2MaxJumpId;
         vstController->getComponentHandler()->beginEdit(id);
         vstController->getComponentHandler()->performEdit(id, value);
         vstController->getComponentHandler()->endEdit(id);
@@ -162,14 +163,14 @@ bool DspGlitchProxyVst::setMaxJump(double value)
 double DspGlitchProxyVst::maxJump() const
 {
         auto id = (getGlitchId() == GlitchId::Glitch1) ?
-                ParameterId::Glitch1MaxJumpId : ParameterId::Glitch2MaxJumpId;
+                  ParameterId::Glitch1MaxJumpId : ParameterId::Glitch2MaxJumpId;
         return vstController->getParamNormalized(id);
 }
 
 bool DspGlitchProxyVst::setMinJump(double value)
 {
         auto id = (getGlitchId() == GlitchId::Glitch1) ?
-                ParameterId::Glitch1MinJumpId : ParameterId::Glitch2MinJumpId;
+                  ParameterId::Glitch1MinJumpId : ParameterId::Glitch2MinJumpId;
         vstController->getComponentHandler()->beginEdit(id);
         vstController->getComponentHandler()->performEdit(id, value);
         vstController->getComponentHandler()->endEdit(id);
@@ -179,7 +180,7 @@ bool DspGlitchProxyVst::setMinJump(double value)
 double DspGlitchProxyVst::minJump() const
 {
         auto id = (getGlitchId() == GlitchId::Glitch1) ?
-                ParameterId::Glitch1MinJumpId : ParameterId::Glitch2MinJumpId;
+                  ParameterId::Glitch1MinJumpId : ParameterId::Glitch2MinJumpId;
         return vstController->getParamNormalized(id);
 }
 

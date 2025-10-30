@@ -31,36 +31,55 @@ namespace EntVst {
 enum ParameterId : Steinberg::Vst::ParamID
 {
     // Noise 1
-    Noise1EnabledId     = 1000,
-    Noise1TypeId        = 1001,
-    Noise1DensityId     = 1002,
-    Noise1BrightnessId  = 1003,
-    Noise1GainId        = 1004,
+    Noise1EnabledId     = 10101,
+    Noise1TypeId        = 10102,
+    Noise1DensityId     = 10103,
+    Noise1BrightnessId  = 10104,
+    Noise1GainId        = 10105,
 
     // Noise 2
-    Noise2EnabledId     = 2000,
-    Noise2TypeId        = 2001,
-    Noise2DensityId     = 2002,
-    Noise2BrightnessId  = 2003,
-    Noise2GainId        = 2004,
+    Noise2EnabledId     = 10201,
+    Noise2TypeId        = 10202,
+    Noise2DensityId     = 10203,
+    Noise2BrightnessId  = 10204,
+    Noise2GainId        = 10205,
 
-    // Crackle
-    CrackleEnabledId       = 20101,
-    CrackleRateId          = 20102,
-    CrackleDurationId      = 20103,
-    CrackleAmplitudeId     = 20104,
-    CrackleRandomnessId    = 20105,
-    CrackleBrightnessId    = 20106,
-    CrackleEnvelopeShapeId = 20107,
-    CrackleStereoSpreadId  = 20108,
+    // Crackle 1
+    Crackle1EnabledId       = 20101,
+    Crackle1RateId          = 20102,
+    Crackle1DurationId      = 20103,
+    Crackle1AmplitudeId     = 20104,
+    Crackle1RandomnessId    = 20105,
+    Crackle1BrightnessId    = 20106,
+    Crackle1EnvelopeShapeId = 20107,
+    Crackle1StereoSpreadId  = 20108,
 
-    // Glitcher
-    GlitchEnabledId        = 20201,
-    GlitchProbabilityId    = 20202,
-    GlitchJumpMinId        = 20203,
-    GlitchJumpMaxId        = 20204,
-    GlitchLengthId         = 20205,
-    GlitchRepeatCountId    = 20206,
+    // Crackle 2
+    Crackle2EnabledId       = 20201,
+    Crackle2RateId          = 20202,
+    Crackle2DurationId      = 20203,
+    Crackle2AmplitudeId     = 20204,
+    Crackle2RandomnessId    = 20205,
+    Crackle2BrightnessId    = 20206,
+    Crackle2EnvelopeShapeId = 20207,
+    Crackle2StereoSpreadId  = 20208,
+
+
+    // Glitcher 1
+    Glitch1EnabledId        = 30101,
+    Glitch1ProbabilityId    = 30102,
+    Glitch1MinJumpId        = 30103,
+    Glitch1MaxJumpId        = 30104,
+    Glitch1LengthId         = 30105,
+    Glitch1RepeatsId        = 30106,
+
+    // Glitcher 2
+    Glitch2EnabledId        = 30201,
+    Glitch2ProbabilityId    = 30202,
+    Glitch2MinJumpId        = 30203,
+    Glitch2MaxJumpId        = 30204,
+    Glitch2LengthId         = 30205,
+    Glitch2RepeatsId        = 30206,
 };
 
 } // namesapce EntVst

@@ -44,13 +44,25 @@ DspWrapper::DspWrapper()
                               static_cast<int>(NoiseId::Noise2));
         dspNoise2 = std::make_unique<DspWrapperNoise>(noise);
 
-        // Crackle
-        auto crackle = ent_get_crackle(entropictronDsp.get());
-        dspCrackle = std::make_unique<DspWrapperCrackle>(crackle);
+        // Crackle 1
+        auto crackle = ent_get_crackle(entropictronDsp.get(),
+                                       static_cast<int>(CrackleId::Crackle1));
+        dspCrackle1 = std::make_unique<DspWrapperCrackle>(crackle);
 
-        // Glitch
-        auto glitch = ent_get_glitch(entropictronDsp.get());
-        dspGlitch = std::make_unique<DspWrapperGlitch>(glitch);
+        // Crackle 2
+        crackle = ent_get_crackle(entropictronDsp.get(),
+                                  static_cast<int>(CrackleId::Crackle2));
+        dspCrackle2 = std::make_unique<DspWrapperCrackle>(crackle);
+
+        // Glitch 1
+        auto glitch = ent_get_glitch(entropictronDsp.get(),
+                                     static_cast<int>(GlitchId::Glitch1));
+        dspGlitch1 = std::make_unique<DspWrapperGlitch>(glitch);
+
+        // Glitch 2
+        glitch = ent_get_glitch(entropictronDsp.get(),
+                                static_cast<int>(GlitchId::Glitch2));
+        dspGlitch2 = std::make_unique<DspWrapperGlitch>(glitch);
 }
 
 void DspWrapper::setSampleRate(unsigned int srate)
@@ -79,14 +91,20 @@ DspWrapperNoise* DspWrapper::getNoise(NoiseId id) const
                 return dspNoise2.get();
 }
 
-DspWrapperCrackle* DspWrapper::getCrackle() const
+DspWrapperCrackle* DspWrapper::getCrackle(CrackleId id) const
 {
-        return dspCrackle.get();
+        if (id == CrackleId::Crackle1)
+                return dspCrackle1.get();
+        else
+                return dspCrackle2.get();
 }
 
-DspWrapperGlitch* DspWrapper::getGlitch() const
+DspWrapperGlitch* DspWrapper::getGlitch(GlitchId id) const
 {
-        return dspGlitch.get();
+        if (id == GlitchId::Glitch1)
+                return dspGlitch1.get();
+        else
+                return dspGlitch2.get();
 }
 
 

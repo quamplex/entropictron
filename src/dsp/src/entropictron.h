@@ -59,9 +59,9 @@ enum ent_error ent_process(struct entropictron *ent, float** data, size_t size);
 
 struct ent_noise* ent_get_noise(struct entropictron *ent, int id);
 
-struct ent_crackle* ent_get_crackle(struct entropictron *ent);
+struct ent_crackle* ent_get_crackle(struct entropictron *ent, int id);
 
-struct ent_glitch* ent_get_glitch(struct entropictron *ent);
+struct ent_glitch* ent_get_glitch(struct entropictron *ent, int id);
 
 #ifdef __cplusplus
 }

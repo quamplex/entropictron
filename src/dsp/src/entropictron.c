@@ -32,8 +32,8 @@
 struct entropictron {
 	unsigned int sample_rate;
         struct ent_noise* noise[2];
-        struct ent_crackle *crackle;
-        struct ent_glitch *glitch;
+        struct ent_crackle *crackle[2];
+        struct ent_glitch *glitch[2];
 };
 
 enum ent_error
@@ -59,18 +59,26 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
                 }
         }
 
-        (*ent)->crackle = ent_crackle_create(sample_rate);
-        if ((*ent)->crackle == NULL) {
-                ent_log_error("can't create crackle");
-                ent_free(ent);
-                return ENT_ERROR;
+        // Create crackle
+        size_t num_crackles = QX_ARRAY_SIZE((*ent)->crackle);
+        for (size_t i = 0; i < num_crackles; i++) {
+                (*ent)->crackle[i] = ent_crackle_create(sample_rate);
+                if ((*ent)->crackle[i] == NULL) {
+                        ent_log_error("can't create crackle");
+                        ent_free(ent);
+                        return ENT_ERROR;
+                }
         }
 
-        (*ent)->glitch = ent_glitch_create(sample_rate);
-        if ((*ent)->glitch == NULL) {
-                ent_log_error("can't create glitch");
-                ent_free(ent);
-                return ENT_ERROR;
+        // Create glitch
+        size_t num_glitchs = QX_ARRAY_SIZE((*ent)->glitch);
+        for (size_t i = 0; i < num_glitchs; i++) {
+                (*ent)->glitch[i] = ent_glitch_create(sample_rate);
+                if ((*ent)->glitch[i] == NULL) {
+                        ent_log_error("can't create glitch");
+                        ent_free(ent);
+                        return ENT_ERROR;
+                }
         }
 
 	return ENT_OK;
@@ -85,10 +93,14 @@ void ent_free(struct entropictron **ent)
                         ent_noise_free(&(*ent)->noise[i]);
 
                 // Free crackle
-                ent_crackle_free(&(*ent)->crackle);
+                size_t num_crackles = QX_ARRAY_SIZE((*ent)->crackle);
+                for (size_t i = 0; i < num_crackles; i++)
+                        ent_crackle_free(&(*ent)->crackle[i]);
 
                 // Free glitch
-                ent_glitch_free(&(*ent)->glitch);
+                size_t num_glitchs = QX_ARRAY_SIZE((*ent)->glitch);
+                for (size_t i = 0; i < num_glitchs; i++)
+                        ent_glitch_free(&(*ent)->glitch[i]);
 
                 free(*ent);
                 *ent = NULL;
@@ -132,7 +144,7 @@ ent_process(struct entropictron *ent, float** data, size_t size)
                 }*/
 
         //ent_crackle_process(ent->crackle, out, size);
-        ent_glitch_process(ent->glitch, in, out, size);
+        //ent_glitch_process(ent->glitch, in, out, size);
 
         return ENT_OK;
 }
@@ -147,14 +159,19 @@ ent_get_noise(struct entropictron *ent, int id)
 }
 
 struct ent_crackle*
-ent_get_crackle(struct entropictron *ent)
+ent_get_crackle(struct entropictron *ent, int id)
 {
-        return ent->crackle;
+        if (id > 1)
+                return NULL;
+
+        return ent->crackle[id];
 }
 
 struct ent_glitch*
-ent_get_glitch(struct entropictron *ent)
+ent_get_glitch(struct entropictron *ent, int id)
 {
-        return ent->glitch;
-}
+        if (id > 1)
+                return NULL;
 
+        return ent->glitch[id];
+}

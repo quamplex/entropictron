@@ -29,19 +29,18 @@
 #include "RkContainer.h"
 #include "RkButton.h"
 
-RK_DECLARE_IMAGE_RC(glitch1_label);
-RK_DECLARE_IMAGE_RC(glitch2_label);
+RK_DECLARE_IMAGE_RC(glitch_label);
 RK_DECLARE_IMAGE_RC(switch_button_on);
 RK_DECLARE_IMAGE_RC(switch_button_off);
 RK_DECLARE_IMAGE_RC(knob_big_size_bk);
 RK_DECLARE_IMAGE_RC(knob_big_size_marker);
 RK_DECLARE_IMAGE_RC(knob_medium_size_bk);
 RK_DECLARE_IMAGE_RC(knob_medium_size_marker);
-RK_DECLARE_IMAGE_RC(crackle_repeats_knob_label);
-RK_DECLARE_IMAGE_RC(crackle_probability_knob_label);
-RK_DECLARE_IMAGE_RC(crackle_lengh_knob_label);
-RK_DECLARE_IMAGE_RC(crackle_maxjump_knob_label);
-RK_DECLARE_IMAGE_RC(crackle_minjump_knob_label);
+RK_DECLARE_IMAGE_RC(glitch_repeats_knob_label);
+RK_DECLARE_IMAGE_RC(glitch_probability_knob_label);
+RK_DECLARE_IMAGE_RC(glitch_length_knob_label);
+RK_DECLARE_IMAGE_RC(glitch_maxjump_knob_label);
+RK_DECLARE_IMAGE_RC(glitch_minjump_knob_label);
 
 GlitchWidget::GlitchWidget(EntWidget* parent, GlitchModel* model)
         : EntAbstractView(parent, model)
@@ -178,29 +177,29 @@ void GlitchWidget::bindModel()
                     enableGlitchButton,
                     setPressed(b));
         RK_ACT_BIND(model,
-                    rateUpdated,
+                    repeatsUpdated,
                     RK_ACT_ARGS(double value),
-                    rateKnob,
+                    repeatsKnob,
                     setValue(value));
         RK_ACT_BIND(model,
-                    randomnessUpdated,
+                    probabilityUpdated,
                     RK_ACT_ARGS(double value),
-                    randomnessKnob,
+                    probabilityKnob,
                     setValue(value));
         RK_ACT_BIND(model,
-                    amplitudeUpdated,
+                    lengthUpdated,
                     RK_ACT_ARGS(double value),
-                    amplitudeKnob,
+                    lengthKnob,
                     setValue(value));
         RK_ACT_BIND(model,
-                    brightnessUpdated,
+                    maxJumpUpdated,
                     RK_ACT_ARGS(double value),
-                    brightnessKnob,
+                    maxJumpKnob,
                     setValue(value));
         RK_ACT_BIND(model,
-                    durationUpdated,
+                    minJumpUpdated,
                     RK_ACT_ARGS(double value),
-                    durationKnob,
+                    minJumpKnob,
                     setValue(value));
 }
 
@@ -224,34 +223,34 @@ void GlitchWidget::createGlitchControls(RkContainer *container)
         container->addSpace(20);
         container->addContainer(horizontalContainer);
 
-        repeatsKnob = new Knob(this, RK_RC_IMAGE(crackle_repeats_knob_label));
-        repeatsKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_knob_bk));
-        repeatsKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_knob_marker));
+        repeatsKnob = new Knob(this, RK_RC_IMAGE(glitch_repeats_knob_label));
+        repeatsKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        repeatsKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         horizontalContainer->addWidget(repeatsKnob);
 
-        probabilityKnob = new Knob(this, RK_RC_IMAGE(crackle_probability_knob_label));
+        probabilityKnob = new Knob(this, RK_RC_IMAGE(glitch_probability_knob_label));
         probabilityKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
         probabilityKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         horizontalContainer->addWidget(probabilityKnob);
 
-        lengthKnob = new Knob(this, RK_RC_IMAGE(crackle_length_knob_label));
-        lengthKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_knob_bk));
-        lengthKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_knob_marker));
+        lengthKnob = new Knob(this, RK_RC_IMAGE(glitch_length_knob_label));
+        lengthKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        lengthKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         horizontalContainer->addWidget(lengthKnob);
 
         // Max Jump, Min Jump
         horizontalContainer = new RkContainer(this);
-        crackleControlsContainer->setSize({width(), 103});
+        horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
 
-        maxJumpKnob = new Knob(this, RK_RC_IMAGE(cracke_maxJump_knob_label));
-        maxJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_knob_bk));
-        maxJumpKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_knob_marker));
+        maxJumpKnob = new Knob(this, RK_RC_IMAGE(glitch_maxjump_knob_label));
+        maxJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        maxJumpKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         horizontalContainer->addWidget(maxJumpKnob);
 
-        minJumpKnob = new Knob(this, RK_RC_IMAGE(cracke_minJump_knob_label));
-        minJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_knob_bk));
-        minJumpKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_knob_marker));
+        minJumpKnob = new Knob(this, RK_RC_IMAGE(glitch_minjump_knob_label));
+        minJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        minJumpKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         horizontalContainer->addWidget(minJumpKnob);
 }

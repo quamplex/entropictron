@@ -10,6 +10,21 @@ knob_big_size_marker.png
 knob_medium_size_bk.png
 knob_medium_size_marker.png
 
+# ---- Modules Widget Tabs ---
+
+tab_noise_button.png
+tab_noise_button_hover.png
+tab_noise_button_on.png
+tab_noise_button_hover_on.png
+tab_crackle_button.png
+tab_crackle_button_hover.png
+tab_crackle_button_on.png
+tab_crackle_button_hover_on.png
+tab_glitch_button.png
+tab_glitch_button_hover.png
+tab_glitch_button_on.png
+tab_glitch_button_hover_on.png
+
 # ---- NOISE -----
 
 noise_label.png

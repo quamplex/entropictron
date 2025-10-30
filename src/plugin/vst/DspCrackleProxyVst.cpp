@@ -207,7 +207,7 @@ CrackleEnvelopeShape DspCrackleProxyVst::envelopeShape() const
         return static_cast<CrackleEnvelopeShape>(value);
 }
 
-bool DspCrackleProxyVst::setStereoSpread(double value)
+bool DspCrackleProxyVst::setStereospread(double value)
 {
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1StereoSpreadId : ParameterId::Crackle2StereoSpreadId;
@@ -217,7 +217,7 @@ bool DspCrackleProxyVst::setStereoSpread(double value)
         return true;
 }
 
-double DspCrackleProxyVst::stereoSpread() const
+double DspCrackleProxyVst::stereospread() const
 {
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1StereoSpreadId : ParameterId::Crackle2StereoSpreadId;

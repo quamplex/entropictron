@@ -24,6 +24,8 @@
 #include "DspVstProxy.h"
 #include "EntVstController.h"
 #include "DspNoiseProxyVst.h"
+#include "DspCrackleProxyVst.h"
+#include "DspGlitchProxyVst.h"
 
 DspProxyVst::DspProxyVst(EntVstController *controller)
         : vstController{controller}

@@ -323,18 +323,18 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
         container->addSpace(20);
         container->addContainer(horizontalContainer);
 
-        brightnessKnob = new Knob(this, RK_RC_IMAGE(cracke_brightness_knob_label));
+        brightnessKnob = new Knob(this, RK_RC_IMAGE(crackle_brightness_knob_label));
         brightnessKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
         brightnessKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         horizontalContainer->addWidget(brightnessKnob);
 
-        durationKnob = new Knob(this, RK_RC_IMAGE(cracke_duration_knob_label));
+        durationKnob = new Knob(this, RK_RC_IMAGE(crackle_duration_knob_label));
         durationKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
         durationKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         horizontalContainer->addWidget(durationKnob);
 
-        stereospreadKnob = new Knob(this, RK_RC_IMAGE(cracke_setreospread_knob_label));
+        stereospreadKnob = new Knob(this, RK_RC_IMAGE(crackle_stereospread_knob_label));
         stereospreadKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
         stereospreadKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
-        horizontalContainer->addWidget(steroaspreadKnob);
+        horizontalContainer->addWidget(stereospreadKnob);
 }

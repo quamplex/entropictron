@@ -41,8 +41,8 @@ public:
         void process(float** data, size_t size);
         void pressKey(int pitch, int velocity, bool on = true);
         DspWrapperNoise* getNoise(NoiseId id) const;
-        DspWrapperCrackle* getCrackle() const;
-        DspWrapperGlitch* getGlitch() const;
+        DspWrapperCrackle* getCrackle(CrackleId id) const;
+        DspWrapperGlitch* getGlitch(GlitchId id) const;
 
 protected:
 
@@ -56,8 +56,10 @@ private:
         std::unique_ptr<struct entropictron, DspDeleter> entropictronDsp;
         std::unique_ptr<DspWrapperNoise> dspNoise1;
         std::unique_ptr<DspWrapperNoise> dspNoise2;
-        std::unique_ptr<DspWrapperCrackle> dspCrackle;
-        std::unique_ptr<DspWrapperGlitch> dspGlitch;
+        std::unique_ptr<DspWrapperCrackle> dspCrackle1;
+        std::unique_ptr<DspWrapperCrackle> dspCrackle2;
+        std::unique_ptr<DspWrapperGlitch> dspGlitch1;
+        std::unique_ptr<DspWrapperGlitch> dspGlitch2;
 };
 
 #endif // ENT_DSP_WRAPER_H
