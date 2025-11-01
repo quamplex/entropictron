@@ -50,6 +50,9 @@ ModuleWidgetTab::ModuleWidgetTab(EntWidget* parent,
         , tabId{id}
         , entropictronModel{model}
         , moduleWidget {nullptr}
+        , noiseTabButton {nullptr}
+        , crackleTabButton {nullptr}
+        , glitchTabButton {nullptr}
 {
         setFixedSize(350, 282);
         createTabButtons();
@@ -62,57 +65,57 @@ void ModuleWidgetTab::createTabButtons()
         tabButtonContianer->setSize({width(), 20});
 
         // Noise
-        auto tabButton = new RkButton(this);
-        tabButton->setImage(RK_RC_IMAGE(tab_noise_button),
+        noiseTabButton = new RkButton(this);
+        noiseTabButton->setImage(RK_RC_IMAGE(tab_noise_button),
                             RkButton::State::Unpressed);
-        tabButton->setImage(RK_RC_IMAGE(tab_noise_button_on),
+        noiseTabButton->setImage(RK_RC_IMAGE(tab_noise_button_on),
                             RkButton::State::Pressed);
-        tabButton->setImage(RK_RC_IMAGE(tab_noise_button_hover),
+        noiseTabButton->setImage(RK_RC_IMAGE(tab_noise_button_hover),
                             RkButton::State::UnpressedHover);
-        tabButton->setImage(RK_RC_IMAGE(tab_noise_button_on),
+        noiseTabButton->setImage(RK_RC_IMAGE(tab_noise_button_hover_on),
                             RkButton::State::PressedHover);
-        tabButton->setCheckable(true);
-        tabButton->show();
-        tabButtonContianer->addWidget(tabButton);
-        RK_ACT_BIND(tabButton,
+        noiseTabButton->setCheckable(true);
+        noiseTabButton->show();
+        tabButtonContianer->addWidget(noiseTabButton);
+        RK_ACT_BIND(noiseTabButton,
                     toggled,
                     RK_ACT_ARGS(bool b),
                     this,
                     showNoise());
 
         // Crackle
-        tabButton = new RkButton(this);
-        tabButton->setImage(RK_RC_IMAGE(tab_crackle_button),
+        crackleTabButton = new RkButton(this);
+        crackleTabButton->setImage(RK_RC_IMAGE(tab_crackle_button),
                             RkButton::State::Unpressed);
-        tabButton->setImage(RK_RC_IMAGE(tab_crackle_button_on),
+        crackleTabButton->setImage(RK_RC_IMAGE(tab_crackle_button_on),
                             RkButton::State::Pressed);
-        tabButton->setImage(RK_RC_IMAGE(tab_crackle_button_hover),
+        crackleTabButton->setImage(RK_RC_IMAGE(tab_crackle_button_hover),
                             RkButton::State::UnpressedHover);
-        tabButton->setImage(RK_RC_IMAGE(tab_crackle_button_on),
+        crackleTabButton->setImage(RK_RC_IMAGE(tab_crackle_button_hover_on),
                             RkButton::State::PressedHover);
-        tabButton->setCheckable(true);
-        tabButton->show();
-        tabButtonContianer->addWidget(tabButton);
-        RK_ACT_BIND(tabButton,
+        crackleTabButton->setCheckable(true);
+        crackleTabButton->show();
+        tabButtonContianer->addWidget(crackleTabButton);
+        RK_ACT_BIND(crackleTabButton,
                     toggled,
                     RK_ACT_ARGS(bool b),
                     this,
                     showCrackle());
 
         // Glitch
-        tabButton = new RkButton(this);
-        tabButton->setImage(RK_RC_IMAGE(tab_glitch_button),
+        glitchTabButton = new RkButton(this);
+        glitchTabButton->setImage(RK_RC_IMAGE(tab_glitch_button),
                             RkButton::State::Unpressed);
-        tabButton->setImage(RK_RC_IMAGE(tab_glitch_button_on),
+        glitchTabButton->setImage(RK_RC_IMAGE(tab_glitch_button_on),
                             RkButton::State::Pressed);
-        tabButton->setImage(RK_RC_IMAGE(tab_glitch_button_hover),
+        glitchTabButton->setImage(RK_RC_IMAGE(tab_glitch_button_hover),
                             RkButton::State::UnpressedHover);
-        tabButton->setImage(RK_RC_IMAGE(tab_glitch_button_on),
+        glitchTabButton->setImage(RK_RC_IMAGE(tab_glitch_button_hover_on),
                             RkButton::State::PressedHover);
-        tabButton->setCheckable(true);
-        tabButton->show();
-        tabButtonContianer->addWidget(tabButton);
-        RK_ACT_BIND(tabButton,
+        glitchTabButton->setCheckable(true);
+        glitchTabButton->show();
+        tabButtonContianer->addWidget(glitchTabButton);
+        RK_ACT_BIND(glitchTabButton,
                     toggled,
                     RK_ACT_ARGS(bool b),
                     this,
@@ -121,6 +124,10 @@ void ModuleWidgetTab::createTabButtons()
 
 void ModuleWidgetTab::showNoise()
 {
+        noiseTabButton->setPressed(true);
+        crackleTabButton->setPressed(false);
+        glitchTabButton->setPressed(false);
+
         delete moduleWidget;
         moduleWidget = new NoiseWidget(this,
                                        tabId ? entropictronModel->getNoise1()
@@ -130,6 +137,10 @@ void ModuleWidgetTab::showNoise()
 
 void ModuleWidgetTab::showCrackle()
 {
+        noiseTabButton->setPressed(false);
+        crackleTabButton->setPressed(true);
+        glitchTabButton->setPressed(false);
+
         delete moduleWidget;
         moduleWidget = new CrackleWidget(this,
                                          tabId ? entropictronModel->getCrackle1()
@@ -139,6 +150,10 @@ void ModuleWidgetTab::showCrackle()
 
 void ModuleWidgetTab::showGlitch()
 {
+        noiseTabButton->setPressed(false);
+        crackleTabButton->setPressed(false);
+        glitchTabButton->setPressed(true);
+
         delete moduleWidget;
         moduleWidget = new GlitchWidget(this,
                                         tabId ? entropictronModel->getGlitch1()

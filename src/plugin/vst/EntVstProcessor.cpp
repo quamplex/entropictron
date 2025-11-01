@@ -62,7 +62,9 @@ bool ModuleExit (void)
 #endif // ENTROPICTRON_OS_WINDOWS
 
 EntVstProcessor::EntVstProcessor()
+        :  entropictronDsp {std::make_unique<DspWrapper>()}
 {
+        ENTROPICTRON_LOG_DEBUG("called");
         initParamMappings();
 }
 
@@ -81,10 +83,12 @@ EntVstProcessor::initialize(FUnknown* context)
 {
         ENTROPICTRON_LOG_DEBUG("called");
         auto res = AudioEffect::initialize(context);
-        if (res != kResultTrue)
+        if (res != kResultTrue) {
+                ENTROPICTRON_LOG_ERROR("called1");
                 return res;
+        }
 
-        entropictronDsp = std::make_unique<DspWrapper>();
+        ENTROPICTRON_LOG_DEBUG("called1");
 
         setControllerClass(EntVstControllerUID);
         addAudioInput(reinterpret_cast<const TChar*>(u"Stereo In"),
@@ -283,11 +287,15 @@ void EntVstProcessor::initParamMappings()
 
 void EntVstProcessor::initNoiseParamMappings()
 {
+        ENTROPICTRON_LOG_DEBUG("called");
         // Noise 1
         auto noise = entropictronDsp->getNoise(NoiseId::Noise1);
+        ENTROPICTRON_LOG_DEBUG("called-0.1");
         paramMap[ParameterId::Noise1EnabledId] = [noise](ParamValue v) {
+                ENTROPICTRON_LOG_DEBUG("called-0.2");
                 noise->enable(v >= 0.5);
         };
+        ENTROPICTRON_LOG_DEBUG("called-0.3");
         paramMap[ParameterId::Noise1TypeId] = [noise](ParamValue v) {
                 auto n = static_cast<int>(NoiseType::BrownNoise);
                 auto type = static_cast<NoiseType>(v * n  + 0.5);
@@ -303,6 +311,7 @@ void EntVstProcessor::initNoiseParamMappings()
                 noise->setGain(static_cast<float>(v));
         };
 
+        ENTROPICTRON_LOG_DEBUG("called1");
         // Noise 2
         noise = entropictronDsp->getNoise(NoiseId::Noise2);
         paramMap[ParameterId::Noise2EnabledId] = [noise](ParamValue v) {
@@ -323,10 +332,12 @@ void EntVstProcessor::initNoiseParamMappings()
         paramMap[ParameterId::Noise2GainId] = [noise](ParamValue v) {
                 noise->setGain(static_cast<float>(v));
         };
+        ENTROPICTRON_LOG_DEBUG("END");
 }
 
 void EntVstProcessor::initCrackleParamMappings()
 {
+        ENTROPICTRON_LOG_DEBUG("called");
         // Crackle 1
         auto crackle = entropictronDsp->getCrackle(CrackleId::Crackle1);
         paramMap[ParameterId::Crackle1EnabledId] = [crackle](ParamValue v) {
@@ -403,6 +414,7 @@ void EntVstProcessor::initCrackleParamMappings()
 
 void EntVstProcessor::initGlitchParamMappings()
 {
+        ENTROPICTRON_LOG_DEBUG("called");
         // Glitch 1
         auto glitch = entropictronDsp->getGlitch(GlitchId::Glitch1);
         paramMap[ParameterId::Glitch1EnabledId] = [glitch](ParamValue v) {

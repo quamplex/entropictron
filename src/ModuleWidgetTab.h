@@ -28,6 +28,7 @@
 #include "GuiTypes.h"
 
 class EntropictronModel;
+class RkButton;
 
 class ModuleWidgetTab : public EntWidget
 {
@@ -46,6 +47,9 @@ private:
         size_t tabId;
         EntropictronModel *entropictronModel;
         EntWidget *moduleWidget;
+        RkButton *noiseTabButton;
+        RkButton *crackleTabButton;
+        RkButton *glitchTabButton;
 };
 
 #endif // ENT_MODULES_WIDGET_TAB_H
