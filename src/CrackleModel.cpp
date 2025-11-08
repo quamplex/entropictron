@@ -156,6 +156,17 @@ std::pair<double, double> CrackleModel::getAmplitudeRange() const
         return amplitudeRange;
 }
 
+void CrackleModel::setEnvelopeShape(CrackleEnvelopeShape shape)
+{
+        if (dspCrackleProxy->setEnvelopeShape(shape))
+                action envelopeShapeUpdated(shape);
+}
+
+CrackleEnvelopeShape CrackleModel::envelopeShape() const
+{
+        return dspCrackleProxy->envelopeShape();
+}
+
 void CrackleModel::setBrightness(double value)
 {
         if (dspCrackleProxy->setBrightness(value))

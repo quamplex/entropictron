@@ -68,7 +68,7 @@ CrackleWidget::CrackleWidget(EntWidget* parent, CrackleModel* model)
         , linearEnvButton{nullptr}
         , tiangleEnvButton{nullptr}
 {
-        setFixedSize(350, 282);
+        setFixedSize(350, 302);
         setBackgroundColor(37, 43, 53);
         createView();
         bindModel();
@@ -100,9 +100,11 @@ void CrackleWidget::createView()
         topContianer->addWidget(enableCrackleButton);
 
         auto crackleLabel = new RkLabel(this);
+        crackleLabel->setBackgroundColor(background());
         crackleLabel->setImage(RK_RC_IMAGE(crackle_label));
         topContianer->addSpace(10);
         topContianer->addWidget(crackleLabel);
+        crackleLabel->show();
 
         createCrackleControls(mainContainer);
 
@@ -116,6 +118,7 @@ void CrackleWidget::updateView()
                 return;
 
         enableCrackleButton->setPressed(model->isEnabled());
+        setEnvelopeShape(model->envelopeShape());
 
         auto [rateFrom, rateTo] = model->getRateRange();
         rateKnob->setRange(rateFrom, rateTo);
@@ -178,6 +181,18 @@ void CrackleWidget::bindModel()
                     RK_ACT_ARGS(double value),
                     model,
                     setAmplitude(value));
+        RK_ACT_BIND(exponentialEnvButton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    model, setEnvelopeShape(CrackleEnvelopeShape::Exponential));
+        RK_ACT_BIND(linearEnvButton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    model, setEnvelopeShape(CrackleEnvelopeShape::Linear));
+        RK_ACT_BIND(tiangleEnvButton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    model, setEnvelopeShape(CrackleEnvelopeShape::Triangle));
         RK_ACT_BIND(brightnessKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
@@ -220,6 +235,11 @@ void CrackleWidget::bindModel()
                     amplitudeKnob,
                     setValue(value));
         RK_ACT_BIND(model,
+                    envelopeShapeUpdated,
+                    RK_ACT_ARGS(CrackleEnvelopeShape shape),
+                    this,
+                    setEnvelopeShape(shape));
+        RK_ACT_BIND(model,
                     brightnessUpdated,
                     RK_ACT_ARGS(double value),
                     brightnessKnob,
@@ -256,6 +276,7 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
         horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
+        horizontalContainer->addSpace(46);
 
         rateKnob = new Knob(this, RK_RC_IMAGE(crackle_rate_knob_label));
         rateKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
@@ -275,8 +296,9 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
         // Envelope types
         horizontalContainer = new RkContainer(this);
         horizontalContainer->setSize({width(), 20});
-        container->addSpace(20);
+        container->addSpace(5);
         container->addContainer(horizontalContainer);
+        horizontalContainer->addSpace(92);
 
         exponentialEnvButton = new RkButton(this);
         exponentialEnvButton->setImage(RK_RC_IMAGE(crackle_exp_env_button),
@@ -315,13 +337,14 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
                                    RkButton::State::PressedHover);
         tiangleEnvButton->setCheckable(true);
         tiangleEnvButton->show();
-        horizontalContainer->addWidget(linearEnvButton);
+        horizontalContainer->addWidget(tiangleEnvButton);
 
         // Brightness, Duraiton, Stere Spread
         horizontalContainer = new RkContainer(this);
         horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
+        horizontalContainer->addSpace(57);
 
         brightnessKnob = new Knob(this, RK_RC_IMAGE(crackle_brightness_knob_label));
         brightnessKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
@@ -337,4 +360,12 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
         stereospreadKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
         stereospreadKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         horizontalContainer->addWidget(stereospreadKnob);
+}
+
+
+void CrackleWidget::setEnvelopeShape(CrackleEnvelopeShape shape)
+{
+        exponentialEnvButton->setPressed(shape == CrackleEnvelopeShape::Exponential);
+        linearEnvButton->setPressed(shape == CrackleEnvelopeShape::Linear);
+        tiangleEnvButton->setPressed(shape == CrackleEnvelopeShape::Triangle);
 }

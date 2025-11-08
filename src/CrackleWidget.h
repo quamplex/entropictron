@@ -45,6 +45,7 @@ protected:
         void bindModel() override;
         void unbindModel() override;
         void createCrackleControls(RkContainer *container);
+        void setEnvelopeShape(CrackleEnvelopeShape shape);
 
 private:
         RkButton *enableCrackleButton;

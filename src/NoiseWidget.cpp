@@ -62,7 +62,7 @@ NoiseWidget::NoiseWidget(EntWidget* parent, NoiseModel* model)
         , brightnessKnob {nullptr}
         , gainKnob {nullptr}
 {
-        setFixedSize(350, 282);
+        setFixedSize(350, 302);
         setBackgroundColor(37, 43, 53);
         createView();
         bindModel();
@@ -93,9 +93,11 @@ void NoiseWidget::createView()
         enableNoiseButton->show();
         topContianer->addWidget(enableNoiseButton);
 
-        auto noiseLabel = new RkLabel(this);
-        noiseLabel->setImage(RK_RC_IMAGE(noise_label));
         topContianer->addSpace(10);
+        auto noiseLabel = new RkLabel(this);
+        noiseLabel->setBackgroundColor(background());
+        noiseLabel->setImage(RK_RC_IMAGE(noise_label));
+        noiseLabel->show();
         topContianer->addWidget(noiseLabel);
 
         createNoiseControls(mainContainer);

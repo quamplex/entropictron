@@ -54,6 +54,8 @@ class CrackleModel: public EntAbstractModel
         double getAmplitudeDefaultValue() const;
         void setAmplitudeRange(double from, double to);
         std::pair<double, double> getAmplitudeRange() const;
+        void setEnvelopeShape(CrackleEnvelopeShape shape);
+        CrackleEnvelopeShape envelopeShape() const;
         void setBrightness(double value);
         double brightness() const;
         void setBrightnessDefaultValue(double value);
@@ -89,6 +91,10 @@ class CrackleModel: public EntAbstractModel
                     amplitudeUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
+        RK_DECL_ACT(envelopeShapeUpdated,
+                    envelopeShapeUpdated(CrackleEnvelopeShape shape),
+                    RK_ARG_TYPE(CrackleEnvelopeShape),
+                    RK_ARG_VAL(shape));
         RK_DECL_ACT(brightnessUpdated,
                     brightnessUpdated(double value),
                     RK_ARG_TYPE(double),

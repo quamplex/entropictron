@@ -51,7 +51,7 @@ GlitchWidget::GlitchWidget(EntWidget* parent, GlitchModel* model)
         , maxJumpKnob{nullptr}
         , minJumpKnob{nullptr}
 {
-        setFixedSize(350, 282);
+        setFixedSize(350, 302);
         setBackgroundColor(37, 43, 53);
         createView();
         bindModel();
@@ -83,6 +83,7 @@ void GlitchWidget::createView()
         topContianer->addWidget(enableGlitchButton);
 
         auto glitchLabel = new RkLabel(this);
+        glitchLabel->setBackgroundColor(background());
         glitchLabel->setImage(RK_RC_IMAGE(glitch_label));
         topContianer->addSpace(10);
         topContianer->addWidget(glitchLabel);

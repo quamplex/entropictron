@@ -62,7 +62,7 @@ ModuleWidgetTab::ModuleWidgetTab(EntWidget* parent,
 void ModuleWidgetTab::createTabButtons()
 {
         auto tabButtonContianer = new RkContainer(this);
-        tabButtonContianer->setSize({width(), 20});
+        tabButtonContianer->setSize({width(), 24});
 
         // Noise
         noiseTabButton = new RkButton(this);
@@ -132,7 +132,7 @@ void ModuleWidgetTab::showNoise()
         moduleWidget = new NoiseWidget(this,
                                        tabId ? entropictronModel->getNoise1()
                                        : entropictronModel->getNoise2());
-        moduleWidget->setPosition(0, 25);
+        moduleWidget->setPosition(0, 24);
 }
 
 void ModuleWidgetTab::showCrackle()
@@ -145,7 +145,7 @@ void ModuleWidgetTab::showCrackle()
         moduleWidget = new CrackleWidget(this,
                                          tabId ? entropictronModel->getCrackle1()
                                          : entropictronModel->getCrackle2());
-        moduleWidget->setPosition(0, 25);
+        moduleWidget->setPosition(0, 24);
 }
 
 void ModuleWidgetTab::showGlitch()
@@ -158,5 +158,5 @@ void ModuleWidgetTab::showGlitch()
         moduleWidget = new GlitchWidget(this,
                                         tabId ? entropictronModel->getGlitch1()
                                         : entropictronModel->getGlitch2());
-        moduleWidget->setPosition(0, 25);
+        moduleWidget->setPosition(0, 24);
 }

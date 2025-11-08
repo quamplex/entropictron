@@ -65,6 +65,7 @@ bool MainWindow::createUi(void)
 
         for (int id = 0; id < 2; id++) {
                 auto moduleTabs = new ModuleWidgetTab(this, entropictronModel, id);
+                horizontalContainer->addSpace(10);
                 horizontalContainer->addWidget(moduleTabs);
         }
 
