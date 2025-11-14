@@ -11559,12 +11559,12 @@
     <filter
        style="color-interpolation-filters:sRGB"
        id="filter6448-1-9-0-2-5-2"
-       x="-0.19422723"
-       y="-0.51567722"
-       width="1.3884545"
-       height="2.0313544">
+       x="-0.082324645"
+       y="-0.21857359"
+       width="1.1646493"
+       height="1.4371472">
       <feGaussianBlur
-         stdDeviation="1.3281853"
+         stdDeviation="0.53656683"
          id="feGaussianBlur6450-5-2-2-1-5-9" />
     </filter>
     <filter
@@ -11773,12 +11773,12 @@
     <filter
        style="color-interpolation-filters:sRGB"
        id="filter6448-1-9-0-2-5-2-2"
-       x="-0.19422723"
-       y="-0.51567722"
-       width="1.3884545"
-       height="2.0313544">
+       x="-0.082324645"
+       y="-0.21857359"
+       width="1.1646493"
+       height="1.4371472">
       <feGaussianBlur
-         stdDeviation="1.3281853"
+         stdDeviation="0.53656683"
          id="feGaussianBlur6450-5-2-2-1-5-9-4" />
     </filter>
     <filter
@@ -11837,12 +11837,12 @@
     <filter
        style="color-interpolation-filters:sRGB"
        id="filter6448-1-9-0-2-5-2-2-1"
-       x="-0.19422723"
-       y="-0.51567722"
-       width="1.3884545"
-       height="2.0313544">
+       x="-0.082324645"
+       y="-0.21857359"
+       width="1.1646493"
+       height="1.4371472">
       <feGaussianBlur
-         stdDeviation="1.3281853"
+         stdDeviation="0.53656683"
          id="feGaussianBlur6450-5-2-2-1-5-9-4-1" />
     </filter>
     <filter
@@ -11892,12 +11892,12 @@
     <filter
        style="color-interpolation-filters:sRGB"
        id="filter6448-1-9-0-2-5-2-8"
-       x="-0.19422723"
-       y="-0.51567722"
-       width="1.3884545"
-       height="2.0313544">
+       x="-0.082324645"
+       y="-0.21857359"
+       width="1.1646493"
+       height="1.4371472">
       <feGaussianBlur
-         stdDeviation="1.3281853"
+         stdDeviation="0.53656683"
          id="feGaussianBlur6450-5-2-2-1-5-9-6" />
     </filter>
     <filter
@@ -12049,12 +12049,12 @@
     <filter
        style="color-interpolation-filters:sRGB"
        id="filter6448-1-9-0-2-5-2-2-8"
-       x="-0.19422723"
-       y="-0.51567722"
-       width="1.3884545"
-       height="2.0313544">
+       x="-0.082324645"
+       y="-0.21857359"
+       width="1.1646493"
+       height="1.4371472">
       <feGaussianBlur
-         stdDeviation="1.3281853"
+         stdDeviation="0.53656683"
          id="feGaussianBlur6450-5-2-2-1-5-9-4-2" />
     </filter>
     <filter
@@ -12104,12 +12104,12 @@
     <filter
        style="color-interpolation-filters:sRGB"
        id="filter6448-1-9-0-2-5-2-5"
-       x="-0.19422723"
-       y="-0.51567722"
-       width="1.3884545"
-       height="2.0313544">
+       x="-0.082324645"
+       y="-0.21857359"
+       width="1.1646493"
+       height="1.4371472">
       <feGaussianBlur
-         stdDeviation="1.3281853"
+         stdDeviation="0.53656683"
          id="feGaussianBlur6450-5-2-2-1-5-9-9" />
     </filter>
     <filter
@@ -16869,39 +16869,6 @@
      id="rect18943-1-6-6-6-2-9-0-6-0-2"
      style="opacity:0.927555;fill:#87d800;fill-opacity:1;stroke-width:0.0506206;stroke-dasharray:none;filter:url(#filter15066-9-6-2-1-6)"
      transform="matrix(0,0.48946234,-0.48946234,0,146.20791,113.76868)" />
-  <text
-     xml:space="preserve"
-     style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter23586-36)"
-     x="102.012"
-     y="-133.34911"
-     id="text20130-57-0-5"
-     transform="matrix(0.49221653,0,0,0.49221653,-14.696237,133.50319)"><tspan
-       id="tspan20128-4-3-3"
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-       x="102.012"
-       y="-133.34911">Density</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter23586-3-5)"
-     x="102.012"
-     y="-133.34911"
-     id="text20130-57-0-7-2"
-     transform="matrix(0.49221653,0,0,0.49221653,-7.4758888,133.59273)"><tspan
-       id="tspan20128-4-3-5-9"
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-       x="102.012"
-       y="-133.34911">Brightness</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-weight:bold;font-size:3.37045px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter23586-3-3-9)"
-     x="102.012"
-     y="-133.34911"
-     id="text20130-57-0-7-6-6"
-     transform="matrix(0.49221653,0,0,0.49221653,2.5461772,137.4738)"><tspan
-       id="tspan20128-4-3-5-2-0"
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.675895;stroke-opacity:1"
-       x="102.012"
-       y="-133.34911">Gain</tspan></text>
   <g
      id="g1578-4-3-6-6-6"
      transform="matrix(0.36906045,0,0,0.30413,12.842235,21.707425)">
@@ -25952,56 +25919,6 @@
   </g>
   <text
      xml:space="preserve"
-     style="font-weight:bold;font-size:0.913361px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-     x="79.323174"
-     y="246.4639"
-     id="text20130-57-9-0-6-0-7"><tspan
-       id="tspan20128-4-9-9-6-9-0"
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
-       x="79.323174"
-       y="246.4639">Repeats</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-     x="77.725868"
-     y="248.48355"
-     id="text20130-57-5-90-2-9"><tspan
-       id="tspan20128-4-0-2-8-3"
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
-       x="77.725868"
-       y="248.48355">Probability</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-weight:bold;font-size:0.913361px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-     x="85.51796"
-     y="247.74971"
-     id="text20130-57-9-0-9-2-6"><tspan
-       id="tspan20128-4-9-9-5-4-0"
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
-       x="85.51796"
-       y="247.74971">Length</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-     x="87.742249"
-     y="250.4671"
-     id="text20130-57-9-4-0-9-0-3-6"><tspan
-       id="tspan20128-4-9-5-0-7-2-8-2"
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
-       x="87.742249"
-       y="250.4671">Max Jump</tspan></text>
-  <text
-     xml:space="preserve"
-     style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-     x="70.056992"
-     y="249.54135"
-     id="text20130-57-9-4-0-9-05-6"><tspan
-       id="tspan20128-4-9-5-0-7-5-1"
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
-       x="70.056992"
-       y="249.54135">Min Jump</tspan></text>
-  <text
-     xml:space="preserve"
      style="font-weight:bold;font-size:1.30212px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.261121;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
      x="62.198048"
      y="248.7594"
@@ -27446,4 +27363,140 @@
        id="g22436-5-14-8-9-3-8-2"
        transform="translate(27.418749,0.55574971)" />
   </g>
+  <rect
+     style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+     id="rect4499-56-3"
+     width="6.186358"
+     height="1.0093144"
+     x="48.720715"
+     y="69.364731" />
+  <rect
+     style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+     id="rect4499-56-9-6"
+     width="6.186358"
+     height="1.0093144"
+     x="48.720718"
+     y="67.990067" />
+  <rect
+     style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+     id="rect4499-56-0-7"
+     width="6.186358"
+     height="1.0093144"
+     x="48.720715"
+     y="65.91481" />
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="50.159336"
+     y="66.656487"
+     id="text20130-57-5-90-3-5"><tspan
+       id="tspan20128-4-0-2-6-3"
+       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+       x="50.159336"
+       y="66.656487">Density</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:0.913361px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="50.836601"
+     y="70.193176"
+     id="text20130-57-9-0-1-1-3"><tspan
+       id="tspan20128-4-9-9-0-2-6"
+       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+       x="50.836601"
+       y="70.193176">Gain</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:0.913361px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="49.469753"
+     y="68.741333"
+     id="text20130-57-9-0-6-8-0"><tspan
+       id="tspan20128-4-9-9-6-7-6"
+       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+       x="49.469753"
+       y="68.741333">Brightness</tspan></text>
+  <rect
+     style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+     id="rect4499-56-9-1"
+     width="6.186358"
+     height="1.0093144"
+     x="80.520401"
+     y="247.12279" />
+  <rect
+     style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+     id="rect4499-56-0-8"
+     width="6.186358"
+     height="1.0093144"
+     x="80.520401"
+     y="241.53053" />
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="81.76722"
+     y="242.26353"
+     id="text20130-57-5-90-3-7"><tspan
+       id="tspan20128-4-0-2-6-9"
+       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+       x="81.76722"
+       y="242.26353">Repeats</tspan></text>
+  <rect
+     style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+     id="rect4499-56-7-2"
+     width="6.186358"
+     height="1.0093144"
+     x="80.520401"
+     y="242.81496" />
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:0.913361px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="81.212357"
+     y="243.56622"
+     id="text20130-57-9-0-9-7-0"><tspan
+       id="tspan20128-4-9-9-5-5-2"
+       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+       x="81.212357"
+       y="243.56622">Porbability</tspan></text>
+  <rect
+     style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+     id="rect4499-56-2-3"
+     width="6.186358"
+     height="1.0093144"
+     x="80.520401"
+     y="244.23376" />
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="82.071823"
+     y="244.98503"
+     id="text20130-57-9-4-0-9-3-7"><tspan
+       id="tspan20128-4-9-5-0-7-56-5"
+       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+       x="82.071823"
+       y="244.98503">Length</tspan></text>
+  <rect
+     style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+     id="rect4499-56-1-9"
+     width="6.186358"
+     height="1.0093144"
+     x="80.520401"
+     y="245.71577" />
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="81.487724"
+     y="246.45746"
+     id="text20130-57-9-4-0-9-0-2-2"><tspan
+       id="tspan20128-4-9-5-0-7-2-9-2"
+       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+       x="81.487724"
+       y="246.45746">Min Jump</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:0.913361px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="81.360771"
+     y="247.85625"
+     id="text20130-57-9-0-6-8-7"><tspan
+       id="tspan20128-4-9-9-6-7-3"
+       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+       x="81.360771"
+       y="247.85625">Max Jump</tspan></text>
 </svg>

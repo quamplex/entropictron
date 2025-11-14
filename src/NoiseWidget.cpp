@@ -24,6 +24,8 @@
 #include "NoiseWidget.h"
 #include "Knob.h"
 #include "NoiseModel.h"
+#include "FilterModel.h"
+#include "NoiseFilterView.h"
 
 #include "RkLabel.h"
 #include "RkContainer.h"
@@ -39,6 +41,9 @@ RK_DECLARE_IMAGE_RC(knob_medium_size_marker);
 RK_DECLARE_IMAGE_RC(noise_density_knob_label);
 RK_DECLARE_IMAGE_RC(noise_brightness_knob_label);
 RK_DECLARE_IMAGE_RC(noise_gain_knob_label);
+RK_DECLARE_IMAGE_RC(noise_cutoff_knob_label);
+RK_DECLARE_IMAGE_RC(noise_resonance_knob_label);
+RK_DECLARE_IMAGE_RC(noise_stereo_knob_label);
 RK_DECLARE_IMAGE_RC(noise_white_button);
 RK_DECLARE_IMAGE_RC(noise_white_button_hover);
 RK_DECLARE_IMAGE_RC(noise_white_button_on);
@@ -51,16 +56,36 @@ RK_DECLARE_IMAGE_RC(noise_brown_button);
 RK_DECLARE_IMAGE_RC(noise_brown_button_hover);
 RK_DECLARE_IMAGE_RC(noise_brown_button_on);
 RK_DECLARE_IMAGE_RC(noise_brown_button_hover_on);
+RK_DECLARE_IMAGE_RC(noise_lowpass_button);
+RK_DECLARE_IMAGE_RC(noise_lowpass_button_hover);
+RK_DECLARE_IMAGE_RC(noise_lowpass_button_on);
+RK_DECLARE_IMAGE_RC(noise_lowpass_button_hover_on);
+RK_DECLARE_IMAGE_RC(noise_bandpass_button);
+RK_DECLARE_IMAGE_RC(noise_bandpass_button_hover);
+RK_DECLARE_IMAGE_RC(noise_bandpass_button_on);
+RK_DECLARE_IMAGE_RC(noise_bandpass_button_hover_on);
+RK_DECLARE_IMAGE_RC(noise_high_button);
+RK_DECLARE_IMAGE_RC(noise_high_button_hover);
+RK_DECLARE_IMAGE_RC(noise_high_button_on);
+RK_DECLARE_IMAGE_RC(noise_high_button_hover_on);
 
 NoiseWidget::NoiseWidget(EntWidget* parent, NoiseModel* model)
         : EntAbstractView(parent, model)
-        , enableNoiseButton {nullptr}
-        , whiteNoiseButton {nullptr}
-        , pinkNoiseButton {nullptr}
-        , brownNoiseButton {nullptr}
-        , densityKnob {nullptr}
-        , brightnessKnob {nullptr}
-        , gainKnob {nullptr}
+        , enableNoiseButton{nullptr}
+        , whiteNoiseButton{nullptr}
+        , pinkNoiseButton{nullptr}
+        , brownNoiseButton{nullptr}
+        , densityKnob{nullptr}
+        , brightnessKnob{nullptr}
+        , gainKnob{nullptr}
+        , cutOffKnob{nullptr}
+        , resonanceKnob{nullptr}
+        , stereoKnob{nullptr}
+        , lowPassButton{nullptr}
+        , bandPassButton{nullptr}
+        , highPassButton{nullptr}
+        , cutOffKnob{nullptr}
+        , resonanceKnob{nullptr}
 {
         setFixedSize(350, 302);
         setBackgroundColor(37, 43, 53);
@@ -80,7 +105,7 @@ void NoiseWidget::createView()
         auto topContianer = new RkContainer(this, Rk::Orientation::Horizontal);
         topContianer->setSize({width(), 14});
         mainContainer->addContainer(topContianer);
-        topContianer->addSpace(100);
+        topContianer->addSpace(132);
 
         enableNoiseButton = new RkButton(this);
         enableNoiseButton->setCheckable();
@@ -100,6 +125,7 @@ void NoiseWidget::createView()
         noiseLabel->show();
         topContianer->addWidget(noiseLabel);
 
+        mainContainer->addSpace(5);
         createNoiseControls(mainContainer);
 
         updateView();
@@ -130,6 +156,26 @@ void NoiseWidget::updateView()
         gainKnob->setRangeType(Knob::RangeType::Logarithmic);
         gainKnob->setDefaultValue(model->getGainDefaultValue());
         gainKnob->setValue(model->gain());
+
+        auto [stereoFrom, stereoTo] = model->getStereoRange();
+        stereoKnob->setRange(stereoFrom, stereoTo);
+        stereoKnob->setRangeType(Knob::RangeType::Logarithmic);
+        stereoKnob->setDefaultValue(model->getStereoDefaultValue());
+        stereoKnob->setValue(model->stereo());
+
+        setFilterType(model->filterType());
+
+        auto [cutOffFrom, cutOffTo] = model->getCutOffRange();
+        cutOffKnob->setRange(cutOffFrom, cutOffTo);
+        cutOffKnob->setRangeType(Knob::RangeType::Logarithmic);
+        cutOffKnob->setDefaultValue(model->getCutOffDefaultValue());
+        cutOffKnob->setValue(model->cutOff());
+
+        auto [resonanceFrom, resonanceTo] = model->getResonanceRange();
+        resonanceKnob->setRange(resonanceFrom, resonanceTo);
+        resonanceKnob->setRangeType(Knob::RangeType::Logarithmic);
+        resonanceKnob->setDefaultValue(model->getResonanceDefaultValue());
+        resonanceKnob->setValue(model->resonance());
 }
 
 void NoiseWidget::bindModel()
@@ -170,6 +216,33 @@ void NoiseWidget::bindModel()
                     RK_ACT_ARGS(double value),
                     model,
                     setGain(value));
+        RK_ACT_BIND(stereoKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setStereo(value));
+        RK_ACT_BIND(lowPassButton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    model, setFilterType(FilterType::LowPass));
+        RK_ACT_BIND(pinkNoiseButton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    model, setFilterType(FilterType::BandPass));
+        RK_ACT_BIND(brownNoiseButton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    model, setFilterType(FilterType::HighPass));
+        RK_ACT_BIND(cutOffKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setCutOff(value));
+        RK_ACT_BIND(resonanceKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setResonance(value));
 
         RK_ACT_BIND(model,
                     modelUpdated,
@@ -201,6 +274,26 @@ void NoiseWidget::bindModel()
                     RK_ACT_ARGS(double value),
                     gainKnob,
                     setValue(value));
+        RK_ACT_BIND(model,
+                    stereoUpdated,
+                    RK_ACT_ARGS(double value),
+                    stereoKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    filterTypeUpdated,
+                    RK_ACT_ARGS(FilterType type),
+                    this,
+                    setFilterType(type));
+        RK_ACT_BIND(model,
+                    cutOffUpdated,
+                    RK_ACT_ARGS(double value),
+                    cutOffKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    resonanceUpdated,
+                    RK_ACT_ARGS(double value),
+                    resonanceKnob,
+                    setValue(value));
 }
 
 void NoiseWidget::unbindModel()
@@ -214,14 +307,20 @@ void NoiseWidget::unbindModel()
         densityKnob->unbindObject(model);
         brightnessKnob->unbindObject(model);
         gainKnob->unbindObject(model);
+        stereoKnob->unbindObject(model);
+        cutOffKnob->unbindObject(model);
+        resonanceKnob->unbindObject(model);
+        lowPassButton->unbindObject(model);
+        bandPassButton->unbindObject(model);
+        highPassButton->unbindObject(model);
 }
 
 void NoiseWidget::createNoiseControls(RkContainer *container)
 {
-        auto noiseControlsContainer = new RkContainer(this);
-        noiseControlsContainer->setSize({width(), 103});
+        auto horizontalContainer = new RkContainer(this);
+        horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
-        container->addContainer(noiseControlsContainer);
+        container->addContainer(horizontalContainer);
 
         auto noiseTypeContianer = new RkContainer(this, Rk::Orientation::Vertical);
         noiseTypeContianer->setSize({75, 96});
@@ -265,22 +364,86 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
         brownNoiseButton->show();
         noiseTypeContianer->addWidget(brownNoiseButton);
 
-        noiseControlsContainer->addContainer(noiseTypeContianer);
+        horizontalContainer->addContainer(noiseTypeContianer);
 
         densityKnob = new Knob(this, RK_RC_IMAGE(noise_density_knob_label));
         densityKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
         densityKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
-        noiseControlsContainer->addWidget(densityKnob);
+        horizontalContainer->addWidget(densityKnob);
 
         brightnessKnob = new Knob(this, RK_RC_IMAGE(noise_brightness_knob_label));
         brightnessKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
         brightnessKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
-        noiseControlsContainer->addWidget(brightnessKnob);
+        horizontalContainer->addWidget(brightnessKnob);
 
         gainKnob = new Knob(this, RK_RC_IMAGE(noise_gain_knob_label));
         gainKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
         gainKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
-        noiseControlsContainer->addWidget(gainKnob);
+        horizontalContainer->addWidget(gainKnob);
+
+        horizontalContainer = new RkContainer(this);
+        horizontalContainer->setSize({width(), 103});
+        container->addSpace(20);
+        container->addContainer(horizontalContainer);
+        horizontalContainer->addSpace(57);
+
+        stereoKnob = new Knob(this, RK_RC_IMAGE(noise_stereo_knob_label));
+        stereoKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        stereoKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
+        horizontalContainer->addWidget(stereoKnob);
+
+        auto verticalContainer = new RkContainer(this);
+        verticalContainer->setSize({60, horizontalContainer->height()});
+        horizontalContainer->addContainer(verticalContainer);
+
+        lowPassButton = new RkButton(this);
+        lowPassButton->setImage(RK_RC_IMAGE(noise_lowpass_button),
+                                       RkButton::State::Unpressed);
+        lowPassButton->setImage(RK_RC_IMAGE(noise_lowpass_button_on),
+                                       RkButton::State::Pressed);
+        lowPassButton->setImage(RK_RC_IMAGE(noise_lowpass_button_hover),
+                                       RkButton::State::UnpressedHover);
+        lowPassButton->setImage(RK_RC_IMAGE(noise_lowpass_button_hover_on),
+                                       RkButton::State::PressedHover);
+        lowPassButton->setCheckable(true);
+        lowPassButton->show();
+        verticalContainer->addWidget(lowPassButton);
+
+        bandPassButton = new RkButton(this);
+        bandPassButton->setImage(RK_RC_IMAGE(noise_bandpass_button),
+                                  RkButton::State::Unpressed);
+        bandPassButton->setImage(RK_RC_IMAGE(noise_bandpass_button_on),
+                                  RkButton::State::Pressed);
+        bandPassButton->setImage(RK_RC_IMAGE(noise_bandpass_button_hover),
+                                  RkButton::State::UnpressedHover);
+        bandPassButton->setImage(RK_RC_IMAGE(noise_bandpass_button_hover_on),
+                                  RkButton::State::PressedHover);
+        bandPassButton->setCheckable(true);
+        bandPassButton->show();
+        verticalContainer->addWidget(bandPassButton);
+
+        highPassButton = new RkButton(this);
+        highPassButton->setImage(RK_RC_IMAGE(noise_highpass_button),
+                                   RkButton::State::Unpressed);
+        highPassButton->setImage(RK_RC_IMAGE(noise_highpass_button_on),
+                                   RkButton::State::Pressed);
+        highPassButton->setImage(RK_RC_IMAGE(noise_highpass_button_hover),
+                                   RkButton::State::UnpressedHover);
+        highPassButton->setImage(RK_RC_IMAGE(noise_highpass_button_hover_on),
+                                   RkButton::State::PressedHover);
+        highPassButton->setCheckable(true);
+        highPassButton->show();
+        verticalContainer->addWidget(highPassButton);
+
+        cutOffKnob = new Knob(this, RK_RC_IMAGE(noise_cutoff_knob_label));
+        cutOffKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        cutOffKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        horizontalContainer->addWidget(cutOffKnob);
+
+        resonanceKnob = new Knob(this, RK_RC_IMAGE(noise_resonance_knob_label));
+        resonanceKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        resonanceKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
+        horizontalContainer->addWidget(resonanceKnob);
 }
 
 void NoiseWidget::setType(NoiseType type)
@@ -289,3 +452,11 @@ void NoiseWidget::setType(NoiseType type)
         pinkNoiseButton->setPressed(type == NoiseType::PinkNoise);
         brownNoiseButton->setPressed(type == NoiseType::BrownNoise);
 }
+
+void NoiseWidget::setFilterType(FilterType type)
+{
+        lowPassButton->setPressed(type == FilterType::LowPass);
+        bandPassButton->setPressed(type == FilterType::BandPass);
+        highPassButton->setPressed(type == FilterType::HighPass);
+}
+

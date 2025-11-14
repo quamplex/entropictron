@@ -85,3 +85,29 @@ double DspWrapperNoise::gain() const
 {
         return ent_noise_get_gain(noiseDsp);
 }
+
+double DspWrapperNoise::stereo() const
+{
+        return ent_noise_get_stereo(noiseDsp);
+}
+
+void DspWrapperNoise::setFilerType(FilterType type)
+{
+        ent_noise_set_filer_type(noiseDsp, static_cast<enum ent_filer_type>(type));
+}
+
+FilerType DspWrapperNoise::filterType() const
+{
+        return static_cast<FilterType> (ent_noise_get_filter_type(noiseDsp));
+}
+
+double DspWrapperNoise::cutOff() const
+{
+        return ent_noise_get_cutoff(noiseDsp);
+}
+
+double DspWrapperNoise::resonance() const
+{
+        return ent_noise_get_resonance(noiseDsp);
+}
+

@@ -48,6 +48,12 @@ enum class NoiseType: int {
         BrownNoise = ENT_NOISE_TYPE_BROWN
 };
 
+enum class FilterType: int {
+        LowPass  = ENT_FILTER_TYPE_LOWPASS,
+        BandPass = ENT_FILTER_TYPE_BANDPASS,
+        HighPass = ENT_FILTER_TYPE_HIGHPASS
+};
+
 enum class CrackleEnvelopeShape : int {
         Exponential = ENT_CRACKLE_ENV_EXPONENTIAL,
         Linear      = ENT_CRACKLE_ENV_LINEAR,

@@ -86,7 +86,7 @@ void CrackleWidget::createView()
         auto topContianer = new RkContainer(this, Rk::Orientation::Horizontal);
         topContianer->setSize({width(), 14});
         mainContainer->addContainer(topContianer);
-        topContianer->addSpace(100);
+        topContianer->addSpace(122);
 
         enableCrackleButton = new RkButton(this);
         enableCrackleButton->setCheckable();
@@ -99,12 +99,12 @@ void CrackleWidget::createView()
         enableCrackleButton->show();
         topContianer->addWidget(enableCrackleButton);
 
+        topContianer->addSpace(10);
         auto crackleLabel = new RkLabel(this);
         crackleLabel->setBackgroundColor(background());
         crackleLabel->setImage(RK_RC_IMAGE(crackle_label));
-        topContianer->addSpace(10);
-        topContianer->addWidget(crackleLabel);
         crackleLabel->show();
+        topContianer->addWidget(crackleLabel);
 
         createCrackleControls(mainContainer);
 
@@ -339,7 +339,7 @@ void CrackleWidget::createCrackleControls(RkContainer *container)
         tiangleEnvButton->show();
         horizontalContainer->addWidget(tiangleEnvButton);
 
-        // Brightness, Duraiton, Stere Spread
+        // Brightness, Duraiton, Stereo Spread
         horizontalContainer = new RkContainer(this);
         horizontalContainer->setSize({width(), 103});
         container->addSpace(20);

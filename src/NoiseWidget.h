@@ -55,6 +55,12 @@ private:
         Knob *densityKnob;
         Knob *brightnessKnob;
         Knob *gainKnob;
+        Knob *stereoKnob;
+        RkButton *lowPassButton;
+        RkButton *bandPassButton;
+        RkButton *highPassButton;
+        Knob *cutOffKnob;
+        Knob *resonanceKnob;
 };
 
 #endif // ENT_NOISE_WIDGET_H

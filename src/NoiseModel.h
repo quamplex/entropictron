@@ -56,6 +56,25 @@ class NoiseModel: public EntAbstractModel
         double getGainDefaultValue() const;
         void setGainRange(double from, double to);
         std::pair<double, double> getGainRange() const;
+        void setStereo(double value);
+        double stereo() const;
+        void setStereoDefaultValue(double value);
+        double getStereoDefaultValue() const;
+        void setStereoRange(double from, double to);
+        std::pair<double, double> getStereoRange() const;
+        void setCutOff(double value);
+        double cutOff() const;
+        void setCutOffDefaultValue(double value);
+        double getCutOffDefaultValue() const;
+        void setCutOffRange(double from, double to);
+        std::pair<double, double> getCutOffRange() const;
+        void setResonance(double value);
+        double resonance() const;
+        void setResonanceDefaultValue(double value);
+        double getResonanceDefaultValue() const;
+        void setResonanceRange(double from, double to);
+        std::pair<double, double> getResonanceRange() const;
+
         RK_DECL_ACT(enabled,
                     enabled(bool b),
                     RK_ARG_TYPE(bool b),
@@ -76,15 +95,37 @@ class NoiseModel: public EntAbstractModel
                     gainUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
+        RK_DECL_ACT(stereoUpdated,
+                    stereoUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(filterTypeUpdated,
+                    filterTypeUpdated(FilterType type),
+                    RK_ARG_TYPE(FilterType),
+                    RK_ARG_VAL(type));
+        RK_DECL_ACT(cutOffUpdated,
+                    cutOffUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(resonanceUpdated,
+                    resonanceUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
 
  private:
         DspNoiseProxy *dspNoiseProxy;
         double desnityDefaultvalue;
         double brightnessDefaultvalue;
         double gainDefaultvalue;
+        double stereoDefaultvalue;
+        double cutOffDefaultvalue;
+        double resonanceDefaultvalue;
         std::pair<double, double> densityRange;
         std::pair<double, double> brightnessRange;
         std::pair<double, double> gainRange;
+        std::pair<double, double> stereoRange;
+        std::pair<double, double> cutOffRange;
+        std::pair<double, double> resonanceRange;
 };
 
 #endif // ENT_NOISE_MODEL_H

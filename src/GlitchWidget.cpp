@@ -69,7 +69,7 @@ void GlitchWidget::createView()
         auto topContianer = new RkContainer(this, Rk::Orientation::Horizontal);
         topContianer->setSize({width(), 14});
         mainContainer->addContainer(topContianer);
-        topContianer->addSpace(100);
+        topContianer->addSpace(128);
 
         enableGlitchButton = new RkButton(this);
         enableGlitchButton->setCheckable();
@@ -82,12 +82,14 @@ void GlitchWidget::createView()
         enableGlitchButton->show();
         topContianer->addWidget(enableGlitchButton);
 
+        topContianer->addSpace(10);
         auto glitchLabel = new RkLabel(this);
         glitchLabel->setBackgroundColor(background());
         glitchLabel->setImage(RK_RC_IMAGE(glitch_label));
-        topContianer->addSpace(10);
+        glitchLabel->show();
         topContianer->addWidget(glitchLabel);
 
+        mainContainer->addSpace(5);
         createGlitchControls(mainContainer);
 
         updateView();
@@ -223,6 +225,7 @@ void GlitchWidget::createGlitchControls(RkContainer *container)
         horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
+        horizontalContainer->addSpace(57);
 
         repeatsKnob = new Knob(this, RK_RC_IMAGE(glitch_repeats_knob_label));
         repeatsKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
@@ -244,6 +247,7 @@ void GlitchWidget::createGlitchControls(RkContainer *container)
         horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
+        horizontalContainer->addSpace(82);
 
         maxJumpKnob = new Knob(this, RK_RC_IMAGE(glitch_maxjump_knob_label));
         maxJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
