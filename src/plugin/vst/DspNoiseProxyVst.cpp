@@ -46,13 +46,21 @@ DspNoiseProxyVst::DspNoiseProxyVst(RkObject* parent,
                            ParameterId::Noise1TypeId,
                            ParameterId::Noise1DensityId,
                            ParameterId::Noise1GainId,
-                           ParameterId::Noise1BrightnessId };
+                           ParameterId::Noise1BrightnessId,
+                           ParameterId::Noise1StereoId,
+                           ParameterId::Noise1FilerTypeId,
+                           ParameterId::Noise1CutOffId,
+                           ParameterId::Noise1ResonanceId};
         } else {
                 params = { ParameterId::Noise2EnabledId,
                            ParameterId::Noise2TypeId,
                            ParameterId::Noise2DensityId,
                            ParameterId::Noise2GainId,
-                           ParameterId::Noise2BrightnessId };
+                           ParameterId::Noise2BrightnessId,
+                           ParameterId::Noise1StereoId,
+                           ParameterId::Noise1FilerTypeId,
+                           ParameterId::Noise1CutOffId,
+                           ParameterId::Noise1ResonanceId};
         }
 
         for (const auto& paramId : params)
@@ -67,19 +75,27 @@ DspNoiseProxyVst::~DspNoiseProxyVst()
                 vstController->removeParamterCallback(ParameterId::Noise1DensityId);
                 vstController->removeParamterCallback(ParameterId::Noise1BrightnessId);
                 vstController->removeParamterCallback(ParameterId::Noise1GainId);
+                vstController->removeParamterCallback(ParameterId::Noise1StereoId);
+                vstController->removeParamterCallback(ParameterId::Noise1FilterTypeId);
+                vstController->removeParamterCallback(ParameterId::Noise1CutOffId);
+                vstController->removeParamterCallback(ParameterId::Noise1ResonanceId);
         } else {
                 vstController->removeParamterCallback(ParameterId::Noise2EnabledId);
                 vstController->removeParamterCallback(ParameterId::Noise2TypeId);
                 vstController->removeParamterCallback(ParameterId::Noise2DensityId);
                 vstController->removeParamterCallback(ParameterId::Noise2BrightnessId);
                 vstController->removeParamterCallback(ParameterId::Noise2GainId);
+                vstController->removeParamterCallback(ParameterId::Noise2StereoId);
+                vstController->removeParamterCallback(ParameterId::Noise2FilterTypeId);
+                vstController->removeParamterCallback(ParameterId::Noise2CutOffId);
+                vstController->removeParamterCallback(ParameterId::Noise2ResonanceId);
         }
 }
 
 bool DspNoiseProxyVst::enable(bool b)
 {
-        ENTROPICTRON_LOG_DEBUG("called: ID : " << (int)getNoiseId());
-        auto paramId = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1EnabledId : ParameterId::Noise2EnabledId;
+        auto paramId = (getNoiseId() == NoiseId::Noise1) ?
+                ParameterId::Noise1EnabledId : ParameterId::Noise2EnabledId;
         vstController->getComponentHandler()->beginEdit(paramId);
         vstController->getComponentHandler()->performEdit(paramId, b ? 1.0 : 0.0);
         vstController->getComponentHandler()->endEdit(paramId);
@@ -111,8 +127,8 @@ NoiseType DspNoiseProxyVst::noiseType() const
 
 bool DspNoiseProxyVst::setDensity(double value)
 {
-        //        ENTROPICTRON_LOG_DEBUG("called: " << value);
-        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1DensityId : ParameterId::Noise2DensityId;
+        auto id = (getNoiseId() == NoiseId::Noise1) ?
+                ParameterId::Noise1DensityId : ParameterId::Noise2DensityId;
         vstController->getComponentHandler()->beginEdit(id);
         vstController->getComponentHandler()->performEdit(id, value);
         vstController->getComponentHandler()->endEdit(id);
@@ -121,14 +137,16 @@ bool DspNoiseProxyVst::setDensity(double value)
 
 double DspNoiseProxyVst::density() const
 {
-    auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1DensityId : ParameterId::Noise2DensityId;
+    auto id = (getNoiseId() == NoiseId::Noise1) ?
+            ParameterId::Noise1DensityId : ParameterId::Noise2DensityId;
     return vstController->getParamNormalized(id);
 }
 
 bool DspNoiseProxyVst::setBrightness(double value)
 {
         ENTROPICTRON_LOG_DEBUG("called: " << value);
-        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1BrightnessId : ParameterId::Noise2BrightnessId;
+        auto id = (getNoiseId() == NoiseId::Noise1) ?
+                ParameterId::Noise1BrightnessId : ParameterId::Noise2BrightnessId;
         vstController->getComponentHandler()->beginEdit(id);
         vstController->getComponentHandler()->performEdit(id, value);
         vstController->getComponentHandler()->endEdit(id);
@@ -137,14 +155,16 @@ bool DspNoiseProxyVst::setBrightness(double value)
 
 double DspNoiseProxyVst::brightness() const
 {
-    auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1BrightnessId : ParameterId::Noise2BrightnessId;
+    auto id = (getNoiseId() == NoiseId::Noise1) ?
+            ParameterId::Noise1BrightnessId : ParameterId::Noise2BrightnessId;
     return vstController->getParamNormalized(id);
 }
 
 bool DspNoiseProxyVst::setGain(double value)
 {
         ENTROPICTRON_LOG_DEBUG("called: " << value);
-        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1GainId : ParameterId::Noise2GainId;
+        auto id = (getNoiseId() == NoiseId::Noise1) ?
+                ParameterId::Noise1GainId : ParameterId::Noise2GainId;
         vstController->getComponentHandler()->beginEdit(id);
         vstController->getComponentHandler()->performEdit(id, value);
         vstController->getComponentHandler()->endEdit(id);
@@ -153,7 +173,77 @@ bool DspNoiseProxyVst::setGain(double value)
 
 double DspNoiseProxyVst::gain() const
 {
-    auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1GainId : ParameterId::Noise2GainId;
+    auto id = (getNoiseId() == NoiseId::Noise1) ?
+            ParameterId::Noise1GainId : ParameterId::Noise2GainId;
+    return vstController->getParamNormalized(id);
+}
+
+bool DspNoiseProxyVst::setStereo(double value)
+{
+        ENTROPICTRON_LOG_DEBUG("called: " << value);
+        auto id = (getNoiseId() == NoiseId::Noise1) ?
+                ParameterId::Noise1StereoId : ParameterId::Noise2StereoId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+double DspNoiseProxyVst::stereo() const
+{
+    auto id = (getNoiseId() == NoiseId::Noise1) ?
+            ParameterId::Noise1StereoId : ParameterId::Noise2StereoId;
+    return vstController->getParamNormalized(id);
+}
+
+bool DspNoiseProxyVst::setType(FilterType type)
+{
+        auto id = (getNoiseId() == NoiseId::Noise1) ?
+                ParameterId::Noise1FilterTypeId : ParameterId::Noise2FilterTypeId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, filterTypeToNormalized(type));
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+FilterType DspNoiseProxyVst::filterType() const
+{
+        auto id = (getNoiseId() == NoiseId::Noise1) ?
+                ParameterId::Noise1FilterTypeId : ParameterId::Noise1FilterTypeId;
+        return filterTypeFromNormalized(vstController->getParamNormalized(id));
+}
+
+bool DspNoiseProxyVst::setCutOff(double value)
+{
+        ENTROPICTRON_LOG_DEBUG("called: " << value);
+        auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1CutOffId : ParameterId::Noise2CutOffId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+double DspNoiseProxyVst::cutOff() const
+{
+    auto id = (getNoiseId() == NoiseId::Noise1) ?
+            ParameterId::Noise1CutOffId : ParameterId::Noise2CutOffId;
+    return vstController->getParamNormalized(id);
+}
+
+bool DspNoiseProxyVst::setResonance(double value)
+{
+        auto id = (getNoiseId() == NoiseId::Noise1) ?
+                ParameterId::Noise1ResonanceId : ParameterId::Noise2ResonanceId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+double DspNoiseProxyVst::resonance() const
+{
+    auto id = (getNoiseId() == NoiseId::Noise1) ?
+            ParameterId::Noise1ResonanceId : ParameterId::Noise2ResonanceId;
     return vstController->getParamNormalized(id);
 }
 
@@ -180,6 +270,22 @@ void DspNoiseProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
         case ParameterId::Noise2GainId:
                 action gainUpdated(value);
                 break;
+        case ParameterId::Noise1StereoId:
+        case ParameterId::Noise2StereoId:
+                action stereoUpdated(value);
+                break;
+        case ParameterId::Noise1FilterTypeId:
+        case ParameterId::Noise2FilterTypeId:
+                action filterTypeUpdated(value);
+                break;
+        case ParameterId::Noise1CutOffId:
+        case ParameterId::Noise2CutOffId:
+                action cutOffUpdated(value);
+                break;
+        case ParameterId::Noise1ResonanceId:
+        case ParameterId::Noise2ResonanceId:
+                action resonanceUpdated(value);
+                break;
         default:
                 break;
         }
@@ -196,5 +302,18 @@ NoiseType DspNoiseProxyVst::noiseTypeFromNormalized(double value) const
         auto numNoiseTypes = static_cast<double>(NoiseType::BrownNoise);
         return static_cast<NoiseType>(std::round(value * numNoiseTypes));
 }
+
+double DspNoiseProxyVst::filterTypeToNormalized(FilterType type) const
+{
+        auto numFilterTypes = static_cast<double>(FilterType::HighPass);
+        return static_cast<double>(type) / numFilterTypes;
+}
+
+FilterType DspNoiseProxyVst::filterTypeFromNormalized(double value) const
+{
+        auto numFilterTypes = static_cast<double>(FilterType::HighPass);
+        return static_cast<FilterType>(std::round(value * numFilterTypes));
+}
+
 
 

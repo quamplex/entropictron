@@ -24,6 +24,7 @@
 #include "ent_noise.h"
 #include "ent_log.h"
 #include "ent_shelf_filter.h"
+#include "ent_filter.h"
 
 #include "qx_math.h"
 #include "qx_randomizer.h"
@@ -36,6 +37,8 @@ struct ent_noise {
         float density;
         float brightness;
         float gain;
+        float stereo;
+        struct ent_filter filter;
         struct qx_randomizer prob_randomizer;
         struct qx_randomizer randomizer;
         struct qx_fader fader;
@@ -170,6 +173,49 @@ enum ent_error ent_noise_set_gain(struct ent_noise *noise, float gain)
 float ent_noise_get_gain(struct ent_noise *noise)
 {
         return noise->gain;
+}
+
+enum ent_error ent_noise_set_stereo(struct ent_noise *noise, float stereo)
+{
+        noise->stereo = stereo;
+        return ENT_OK;
+}
+
+float ent_noise_get_stereo(struct ent_noise *noise)
+{
+        return noise->stereo;
+}
+
+enum ent_error ent_noise_set_filter_type(struct ent_noise *noise, enum ent_filter_type type)
+{
+        return ent_filter_set_type(noise->filter, type);
+}
+
+enum ent_filter_type ent_noise_get_filter_type(struct ent_noise *noise)
+{
+        return ent_filter_get_type(noise->filter);
+}
+
+enum ent_error ent_noise_set_cutoff(struct ent_noise *noise, float cutoff)
+{
+        noise->cutoff = cutoff;
+        return ENT_OK;
+}
+
+float ent_noise_get_cutoff(struct ent_noise *noise)
+{
+        return noise->cutoff;
+}
+
+enum ent_error ent_noise_set_resonance(struct ent_noise *noise, float resonance)
+{
+        noise->resonance = resonance;
+        return ENT_OK;
+}
+
+float ent_noise_get_resonance(struct ent_noise *noise)
+{
+        return noise->resonance;
 }
 
 inline static float ent_pink_noise(float white)

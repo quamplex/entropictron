@@ -61,6 +61,25 @@ enum ent_error ent_noise_set_gain(struct ent_noise *noise, float gain);
 
 float ent_noise_get_gain(struct ent_noise *noise);
 
+enum ent_error ent_noise_set_stereo(struct ent_noise *noise, float stereo);
+
+float ent_noise_get_stereo(struct ent_noise *noise);
+
+enum ent_error
+ent_noise_set_filter_type(struct ent_noise *noise,
+                          enum ent_filter_type type);
+
+enum ent_filter_type
+ent_noise_get_filter_type(struct ent_noise *noise);
+
+enum ent_error ent_noise_set_cutoff(struct ent_noise *noise, float cutoff);
+
+float ent_noise_get_cutoff(struct ent_noise *noise);
+
+enum ent_error ent_noise_set_resonance(struct ent_noise *noise, float resonance);
+
+float ent_noise_get_resonance(struct ent_noise *noise);
+
 void ent_noise_process(struct ent_noise *noise,
                        float **data,
                        size_t size);

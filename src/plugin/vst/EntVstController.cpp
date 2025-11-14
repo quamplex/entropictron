@@ -73,6 +73,22 @@ void EntVstController::addNoiseParameters()
                                 nullptr, 0, 1.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise1GainId);
+        parameters.addParameter(STR16("Noise 1 Stereo"),
+                                nullptr, 0, 1.0,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::Noise1GainId);
+        parameters.addParameter(STR16("Noise 1 Filter Type"),
+                                nullptr, 2, 0.0,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::Noise1GainId);
+        parameters.addParameter(STR16("Noise 1 CutOff"),
+                                nullptr, 0, 1.0,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::Noise1GainId);
+        parameters.addParameter(STR16("Noise 1 Resonance"),
+                                nullptr, 0, 1.0,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::Noise1GainId);
 
         // Noise 2
         parameters.addParameter(STR16("Noise 2 Enabled"),
@@ -92,6 +108,22 @@ void EntVstController::addNoiseParameters()
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2BrightnessId);
         parameters.addParameter(STR16("Noise 2 Gain"),
+                                nullptr, 0, 1.0,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::Noise2GainId);
+        parameters.addParameter(STR16("Noise 2 Stereo"),
+                                nullptr, 0, 1.0,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::Noise2GainId);
+        parameters.addParameter(STR16("Noise 2 Filter Type"),
+                                nullptr, 2, 0.0,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::Noise2GainId);
+        parameters.addParameter(STR16("Noise 2 CutOff"),
+                                nullptr, 0, 1.0,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::Noise2GainId);
+        parameters.addParameter(STR16("Noise 2 Resonance"),
                                 nullptr, 0, 1.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2GainId);

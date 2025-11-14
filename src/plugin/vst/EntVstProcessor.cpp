@@ -310,6 +310,20 @@ void EntVstProcessor::initNoiseParamMappings()
         paramMap[ParameterId::Noise1GainId] = [noise](ParamValue v) {
                 noise->setGain(static_cast<float>(v));
         };
+        paramMap[ParameterId::Noise1StereoId] = [noise](ParamValue v) {
+                noise->setStereo(static_cast<float>(v));
+        };
+        paramMap[ParameterId::Noise1FilerTyped] = [noise](ParamValue v) {
+                auto n = static_cast<int>(FilterType::HighPass);
+                auto type = static_cast<NoiseType>(v * n  + 0.5);
+                noise->setFilerType(type);
+        };
+        paramMap[ParameterId::Noise1CutOffId] = [noise](ParamValue v) {
+                noise->setCutOff(static_cast<float>(v));
+        };
+        paramMap[ParameterId::Noise1ResonanceId] = [noise](ParamValue v) {
+                noise->setResonance(static_cast<float>(v));
+        };
 
         ENTROPICTRON_LOG_DEBUG("called1");
         // Noise 2
@@ -332,6 +346,21 @@ void EntVstProcessor::initNoiseParamMappings()
         paramMap[ParameterId::Noise2GainId] = [noise](ParamValue v) {
                 noise->setGain(static_cast<float>(v));
         };
+        paramMap[ParameterId::Noise2StereoId] = [noise](ParamValue v) {
+                noise->setStereo(static_cast<float>(v));
+        };
+        paramMap[ParameterId::Noise2FilerTyped] = [noise](ParamValue v) {
+                auto n = static_cast<int>(FilterType::HighPass);
+                auto type = static_cast<NoiseType>(v * n  + 0.5);
+                noise->setFilerType(type);
+        };
+        paramMap[ParameterId::Noise2CutOffId] = [noise](ParamValue v) {
+                noise->setCutOff(static_cast<float>(v));
+        };
+        paramMap[ParameterId::Noise2ResonanceId] = [noise](ParamValue v) {
+                noise->setResonance(static_cast<float>(v));
+        };
+
         ENTROPICTRON_LOG_DEBUG("END");
 }
 
