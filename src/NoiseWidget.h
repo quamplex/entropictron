@@ -46,6 +46,7 @@ protected:
         void unbindModel() override;
         void createNoiseControls(RkContainer *container);
         void setType(NoiseType type);
+        void setFilterType(FilterType type);
 
 private:
         RkButton *enableNoiseButton;

@@ -27,18 +27,18 @@
 NoiseModel::NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy)
         : EntAbstractModel(parent)
         , dspNoiseProxy {dspNoiseProxy}
-        , desnityDefaultvalue {1.0}
-        , brightnessDefaultvalue {0.0}
-        , gainDefaultvalue {1.0}
-        , stereoDefaultvalue {1.0}
-        , cutoffDefaultvalue {20.0}
-        , resonanceDefaultvalue {1.0}
+        , desnityDefaultValue {1.0}
+        , brightnessDefaultValue {0.0}
+        , gainDefaultValue {1.0}
+        , stereoDefaultValue {1.0}
+        , cutOffDefaultValue {20.0}
+        , resonanceDefaultValue {1.0}
         , densityRange {0.0, 1.0}
         , brightnessRange {0.0, 1.0}
         , gainRange {Entropictron::fromDecibel(-50), // -50dB
                      Entropictron::fromDecibel(6)}   // +6dB
         , stereoRange {0.0, 1.0}
-        , cutoffRange {20, 18000} // Hz
+        , cutOffRange {20, 18000} // Hz
         , resonanceRange {0.0, 1.0}
 {
         RK_ACT_BIND(dspNoiseProxy,
@@ -119,12 +119,12 @@ double NoiseModel::density() const
 
 void NoiseModel::setDensityDefaultValue(double value)
 {
-        desnityDefaultvalue = value;
+        desnityDefaultValue = value;
 }
 
 double NoiseModel::getDensityDefaultValue() const
 {
-        return desnityDefaultvalue;
+        return desnityDefaultValue;
 }
 
 void NoiseModel::setDensityRange(double from, double to)
@@ -150,12 +150,12 @@ double NoiseModel::brightness() const
 
 void NoiseModel::setBrightnessDefaultValue(double value)
 {
-        brightnessDefaultvalue = value;
+        brightnessDefaultValue = value;
 }
 
 double NoiseModel::getBrightnessDefaultValue() const
 {
-        return brightnessDefaultvalue;
+        return brightnessDefaultValue;
 }
 
 void NoiseModel::setBrightnessRange(double from, double to)
@@ -181,12 +181,12 @@ double NoiseModel::gain() const
 
 void NoiseModel::setGainDefaultValue(double value)
 {
-        gainDefaultvalue = value;
+        gainDefaultValue = value;
 }
 
 double NoiseModel::getGainDefaultValue() const
 {
-        return gainDefaultvalue;
+        return gainDefaultValue;
 }
 
 void NoiseModel::setGainRange(double from, double to)
@@ -212,12 +212,12 @@ double NoiseModel::stereo() const
 
 void NoiseModel::setStereoDefaultValue(double value)
 {
-        stereoDefaultvalue = value;
+        stereoDefaultValue = value;
 }
 
 double NoiseModel::getStereoDefaultValue() const
 {
-        return stereoDefaultvalue;
+        return stereoDefaultValue;
 }
 
 void NoiseModel::setStereoRange(double from, double to)
@@ -228,6 +228,17 @@ void NoiseModel::setStereoRange(double from, double to)
 std::pair<double, double> NoiseModel::getStereoRange() const
 {
         return stereoRange;
+}
+
+void NoiseModel::setFilterType(FilterType type)
+{
+        if (dspNoiseProxy->setFilterType(type))
+                action filterTypeUpdated(type);
+}
+
+FilterType NoiseModel::filterType() const
+{
+        return dspNoiseProxy->filterType();
 }
 
 void NoiseModel::setCutOff(double value)
@@ -243,12 +254,12 @@ double NoiseModel::cutOff() const
 
 void NoiseModel::setCutOffDefaultValue(double value)
 {
-        cutOffDefaultvalue = value;
+        cutOffDefaultValue = value;
 }
 
 double NoiseModel::getCutOffDefaultValue() const
 {
-        return cutOffDefaultvalue;
+        return cutOffDefaultValue;
 }
 
 void NoiseModel::setCutOffRange(double from, double to)
@@ -274,12 +285,12 @@ double NoiseModel::resonance() const
 
 void NoiseModel::setResonanceDefaultValue(double value)
 {
-        resonanceDefaultvalue = value;
+        resonanceDefaultValue = value;
 }
 
 double NoiseModel::getResonanceDefaultValue() const
 {
-        return resonanceDefaultvalue;
+        return resonanceDefaultValue;
 }
 
 void NoiseModel::setResonanceRange(double from, double to)

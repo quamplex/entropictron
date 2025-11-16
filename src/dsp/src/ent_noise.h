@@ -29,12 +29,15 @@ extern "C" {
 #endif
 
 #include "ent_defs.h"
+#include "ent_filter.h"
 
 enum ent_noise_type {
         ENT_NOISE_TYPE_WHITE,
         ENT_NOISE_TYPE_PINK,
         ENT_NOISE_TYPE_BROWN,
 };
+
+struct ent_noise;
 
 struct ent_noise* ent_noise_create(int sample_rate);
 

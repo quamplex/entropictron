@@ -21,126 +21,50 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#include "ent_shelf_filter.h"
-#include <math.h>
-
+#include "ent_filter.h"
 #include "ent_log.h"
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846  // π – the magical circle constant
-#endif
+#include "qx_math.h"
 
-// Initialize high-shelf filter with linear gain
-void ent_shelf_filter_init(struct ent_shelf_filter* filter,
-                           float sample_rate,
-                           float cut_off,
-                           float gain)
+void ent_filter_init(struct ent_filter* filter,
+                     float sample_rate,
+                     float cut_off,
+                     float gain)
 {
-        filter->gain = gain;
-        float A = powf(10.0f, gain / 40.0f);
-        float w0 = 2.0f * M_PI * cut_off / sample_rate;
-        float cosw0 = cosf(w0);
-        float sinw0 = sinf(w0);
-        float alpha = sinw0 / 2.0f * sqrtf((A + 1/A) * 1.0f + 2.0f); // shelf factor = 1
-
-        ent_log_error("A: %f", A);
-        ent_log_error("w0: %f", w0);
-        ent_log_error("cosw0: %f", cosw0);
-        ent_log_error("sinw0: %f", sinw0);
-        ent_log_error("alpha: %f", alpha);
-
-        float b0 =    A * ((A+1) + (A-1)*cosw0 + 2*sqrtf(A)*alpha);
-        float b1 = -2*A * ((A-1) + (A+1)*cosw0);
-        float b2 =    A * ((A+1) + (A-1)*cosw0 - 2*sqrtf(A)*alpha);
-        float a0 =        (A+1) - (A-1)*cosw0 + 2*sqrtf(A)*alpha;
-        float a1 =  2 * ((A-1) - (A+1)*cosw0);
-        float a2 =        (A+1) - (A-1)*cosw0 - 2*sqrtf(A)*alpha;
-
-        ent_log_error("BEFORE: b0: %f", b0);
-        ent_log_error("BEFORE: b1: %f", b1);
-        ent_log_error("BEFORE: b2: %f", b2);
-        ent_log_error("BEFORE: a0: %f", a0);
-        ent_log_error("BEFORE: a1: %f", a1);
-        ent_log_error("BEFORE: a2: %f", a2);
-
-        // Normalize coefficients
-        filter->b0 = b0 / a0;
-        filter->b1 = b1 / a0;
-        filter->b2 = b2 / a0;
-        filter->a1 = a1 / a0;
-        filter->a2 = a2 / a0;
-
-        ent_log_error("AFTER : b0: %f", filter->b0);
-        ent_log_error("AFTER : b1: %f", filter->b1);
-        ent_log_error("AFTER : b2: %f", filter->b2);
-        ent_log_error("AFTER : a1: %f", filter->a1);
-        ent_log_error("AFTER : a2: %f", filter->a2);
-
-        // Clear Direct Form II Transposed state
-        filter->z1 = 0.0f;
-        filter->z2 = 0.0f;
 }
 
-// Dynamically update cutoff and gain without resetting state
-void ent_shelf_filter_set_cutoff(struct ent_shelf_filter* filter,
-                                 float sample_rate,
-                                 float cut_off,
-                                 float gain) // linear gain
+void ent_filter_set_type(struct ent_filter* filter,
+                         enum ent_filter_type type)
 {
-        filter->gain = gain;
-        float A = powf(10.0f, gain / 40.0f);
-        float w0 = 2.0f * M_PI * cut_off / sample_rate;
-        float cosw0 = cosf(w0);
-        float sinw0 = sinf(w0);
-        float alpha = sinw0 / 2.0f * sqrtf((A + 1/A) * 1.0f + 2.0f);
-
-        float b0 =    A * ((A+1) + (A-1)*cosw0 + 2*sqrtf(A)*alpha);
-        float b1 = -2*A * ((A-1) + (A+1)*cosw0);
-        float b2 =    A * ((A+1) + (A-1)*cosw0 - 2*sqrtf(A)*alpha);
-        float a0 =        (A+1) - (A-1)*cosw0 + 2*sqrtf(A)*alpha;
-        float a1 =  2 * ((A-1) - (A+1)*cosw0);
-        float a2 =        (A+1) - (A-1)*cosw0 - 2*sqrtf(A)*alpha;
-
-
-        ent_log_error("BEFORE ------------");
-        ent_log_error("b0: %f", b0);
-        ent_log_error("b1: %f", b1);
-        ent_log_error("b2: %f", b2);
-        ent_log_error("a0: %f", a0);
-        ent_log_error("a1: %f", a1);
-        ent_log_error("a2: %f", a2);
-
-        // Normalize coefficients
-        filter->b0 = b0 / a0;
-        filter->b1 = b1 / a0;
-        filter->b2 = b2 / a0;
-        filter->a1 = a1 / a0;
-        filter->a2 = a2 / a0;
-
-        ent_log_error("AFTER ------------");
-        ent_log_error("b0: %f", filter->b0);
-        ent_log_error("b1: %f", filter->b1);
-        ent_log_error("b2: %f", filter->b2);
-        ent_log_error("a1: %f", filter->a1);
-        ent_log_error("a2: %f", filter->a2);
-
-
-        // Keep z1/z2 unchanged → smooth transitions
 }
 
-// Process buffer with Direct Form II Transposed
-void ent_shelf_filter_process(struct ent_shelf_filter* filter,
-                              float *data,
-                              size_t size)
+enum ent_filter_type ent_filter_get_type(struct ent_filter* filter)
 {
-        for (size_t i = 0; i < size; ++i) {
-                float in = data[i];
-
-                float out = filter->b0 * in + filter->z1;
-                filter->z1 = filter->b1 * in - filter->a1 * out + filter->z2;
-                filter->z2 = filter->b2 * in - filter->a2 * out;
-
-                data[i] = out;
-        }
+        return ENT_FILTER_TYPE_LOWPASS;
 }
 
+void ent_filter_set_cutoff(struct ent_filter* filter,
+                           float cut_off)
+{
+}
+
+float ent_filter_get_cutoff(struct ent_filter* filter)
+{
+        return 0.0f;
+}
+
+void ent_filter_set_resonance(struct ent_filter* filter,
+                           float cut_off)
+{
+}
+
+float ent_filter_get_resonance(struct ent_filter* filter)
+{
+        return 0.0f;
+}
+
+void ent_filter_process(struct ent_filter* filter,
+                        float *data,
+                        size_t size)
+{
+}

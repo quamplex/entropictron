@@ -62,6 +62,8 @@ class NoiseModel: public EntAbstractModel
         double getStereoDefaultValue() const;
         void setStereoRange(double from, double to);
         std::pair<double, double> getStereoRange() const;
+        void setFilterType(FilterType type);
+        FilterType filterType() const;
         void setCutOff(double value);
         double cutOff() const;
         void setCutOffDefaultValue(double value);
@@ -114,12 +116,12 @@ class NoiseModel: public EntAbstractModel
 
  private:
         DspNoiseProxy *dspNoiseProxy;
-        double desnityDefaultvalue;
-        double brightnessDefaultvalue;
-        double gainDefaultvalue;
-        double stereoDefaultvalue;
-        double cutOffDefaultvalue;
-        double resonanceDefaultvalue;
+        double desnityDefaultValue;
+        double brightnessDefaultValue;
+        double gainDefaultValue;
+        double stereoDefaultValue;
+        double cutOffDefaultValue;
+        double resonanceDefaultValue;
         std::pair<double, double> densityRange;
         std::pair<double, double> brightnessRange;
         std::pair<double, double> gainRange;

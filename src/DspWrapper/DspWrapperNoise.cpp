@@ -91,12 +91,12 @@ double DspWrapperNoise::stereo() const
         return ent_noise_get_stereo(noiseDsp);
 }
 
-void DspWrapperNoise::setFilerType(FilterType type)
+void DspWrapperNoise::setFilterType(FilterType type)
 {
-        ent_noise_set_filer_type(noiseDsp, static_cast<enum ent_filer_type>(type));
+        ent_noise_set_filter_type(noiseDsp, static_cast<enum ent_filter_type>(type));
 }
 
-FilerType DspWrapperNoise::filterType() const
+FilterType DspWrapperNoise::filterType() const
 {
         return static_cast<FilterType> (ent_noise_get_filter_type(noiseDsp));
 }

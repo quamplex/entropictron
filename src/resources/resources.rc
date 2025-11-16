@@ -31,6 +31,9 @@ noise_label.png
 noise_density_knob_label.png
 noise_brightness_knob_label.png
 noise_gain_knob_label.png
+noise_stereo_knob_label.png
+noise_cutoff_knob_label.png
+noise_resonance_knob_label.png
 noise_white_button.png
 noise_white_button_hover.png
 noise_white_button_on.png
@@ -43,6 +46,18 @@ noise_brown_button.png
 noise_brown_button_hover.png
 noise_brown_button_on.png
 noise_brown_button_hover_on.png
+noise_lowpass_button.png
+noise_lowpass_button_hover.png
+noise_lowpass_button_on.png
+noise_lowpass_button_hover_on.png
+noise_bandpass_button.png
+noise_bandpass_button_hover.png
+noise_bandpass_button_on.png
+noise_bandpass_button_hover_on.png
+noise_highpass_button.png
+noise_highpass_button_hover.png
+noise_highpass_button_on.png
+noise_highpass_button_hover_on.png
 
 # ---- CRAKCLE -----
 

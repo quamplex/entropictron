@@ -48,7 +48,7 @@ DspNoiseProxyVst::DspNoiseProxyVst(RkObject* parent,
                            ParameterId::Noise1GainId,
                            ParameterId::Noise1BrightnessId,
                            ParameterId::Noise1StereoId,
-                           ParameterId::Noise1FilerTypeId,
+                           ParameterId::Noise1FilterTypeId,
                            ParameterId::Noise1CutOffId,
                            ParameterId::Noise1ResonanceId};
         } else {
@@ -58,7 +58,7 @@ DspNoiseProxyVst::DspNoiseProxyVst(RkObject* parent,
                            ParameterId::Noise2GainId,
                            ParameterId::Noise2BrightnessId,
                            ParameterId::Noise1StereoId,
-                           ParameterId::Noise1FilerTypeId,
+                           ParameterId::Noise1FilterTypeId,
                            ParameterId::Noise1CutOffId,
                            ParameterId::Noise1ResonanceId};
         }
@@ -196,7 +196,7 @@ double DspNoiseProxyVst::stereo() const
     return vstController->getParamNormalized(id);
 }
 
-bool DspNoiseProxyVst::setType(FilterType type)
+bool DspNoiseProxyVst::setFilterType(FilterType type)
 {
         auto id = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1FilterTypeId : ParameterId::Noise2FilterTypeId;
@@ -276,7 +276,7 @@ void DspNoiseProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
                 break;
         case ParameterId::Noise1FilterTypeId:
         case ParameterId::Noise2FilterTypeId:
-                action filterTypeUpdated(value);
+                action filterTypeUpdated(filterTypeFromNormalized(value));
                 break;
         case ParameterId::Noise1CutOffId:
         case ParameterId::Noise2CutOffId:

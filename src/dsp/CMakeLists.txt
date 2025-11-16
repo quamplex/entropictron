@@ -7,6 +7,7 @@ set(ENT_DSP_HEADERS
     ${QUAMPLEX_DSP_TOOLS_PATH}/qx_fader.h
     ${QUAMPLEX_DSP_TOOLS_PATH}/qx_randomizer.h
     ${ENT_DSP_DIR}/src/ent_shelf_filter.h
+    ${ENT_DSP_DIR}/src/ent_filter.h
     ${ENT_DSP_DIR}/src/ent_noise.h
     ${ENT_DSP_DIR}/src/ent_crackle.h
     ${ENT_DSP_DIR}/src/ent_glitch.h
@@ -15,6 +16,7 @@ set(ENT_DSP_HEADERS
 
 set(ENT_DSP_SOURCES
     ${ENT_DSP_DIR}/src/ent_shelf_filter.c
+    ${ENT_DSP_DIR}/src/ent_filter.c
     ${ENT_DSP_DIR}/src/ent_noise.c
     ${ENT_DSP_DIR}/src/ent_crackle.c
     ${ENT_DSP_DIR}/src/entropictron.c
@@ -30,4 +32,3 @@ if (ENT_PLUGIN)
 		${ENT_DSP_SOURCES})
 	target_compile_options(dsp_plugin PRIVATE ${ENT_DSP_PLUGIN_FLAGS})
 endif (ENT_PLUGIN)
-

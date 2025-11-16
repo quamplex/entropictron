@@ -313,10 +313,10 @@ void EntVstProcessor::initNoiseParamMappings()
         paramMap[ParameterId::Noise1StereoId] = [noise](ParamValue v) {
                 noise->setStereo(static_cast<float>(v));
         };
-        paramMap[ParameterId::Noise1FilerTyped] = [noise](ParamValue v) {
+        paramMap[ParameterId::Noise1FilterTypeId] = [noise](ParamValue v) {
                 auto n = static_cast<int>(FilterType::HighPass);
-                auto type = static_cast<NoiseType>(v * n  + 0.5);
-                noise->setFilerType(type);
+                auto type = static_cast<FilterType>(v * n  + 0.5);
+                noise->setFilterType(type);
         };
         paramMap[ParameterId::Noise1CutOffId] = [noise](ParamValue v) {
                 noise->setCutOff(static_cast<float>(v));
@@ -349,10 +349,10 @@ void EntVstProcessor::initNoiseParamMappings()
         paramMap[ParameterId::Noise2StereoId] = [noise](ParamValue v) {
                 noise->setStereo(static_cast<float>(v));
         };
-        paramMap[ParameterId::Noise2FilerTyped] = [noise](ParamValue v) {
+        paramMap[ParameterId::Noise2FilterTypeId] = [noise](ParamValue v) {
                 auto n = static_cast<int>(FilterType::HighPass);
-                auto type = static_cast<NoiseType>(v * n  + 0.5);
-                noise->setFilerType(type);
+                auto type = static_cast<FilterType>(v * n  + 0.5);
+                noise->setFilterType(type);
         };
         paramMap[ParameterId::Noise2CutOffId] = [noise](ParamValue v) {
                 noise->setCutOff(static_cast<float>(v));

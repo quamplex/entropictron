@@ -44,12 +44,12 @@ class DspWrapperNoise
         double gain() const;
         void setStereo(double value);
         double stereo() const;
+        void setFilterType(FilterType type);
+        FilterType filterType() const;
         void setCutOff(double value);
         double cutOff() const;
         void setResonance(double value);
         double resonance() const;
-        void setFilterType(FilterType type);
-        NoiseType filterType() const;
 
  private:
         struct ent_noise *noiseDsp;

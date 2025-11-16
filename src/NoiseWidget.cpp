@@ -24,8 +24,6 @@
 #include "NoiseWidget.h"
 #include "Knob.h"
 #include "NoiseModel.h"
-#include "FilterModel.h"
-#include "NoiseFilterView.h"
 
 #include "RkLabel.h"
 #include "RkContainer.h"
@@ -41,9 +39,9 @@ RK_DECLARE_IMAGE_RC(knob_medium_size_marker);
 RK_DECLARE_IMAGE_RC(noise_density_knob_label);
 RK_DECLARE_IMAGE_RC(noise_brightness_knob_label);
 RK_DECLARE_IMAGE_RC(noise_gain_knob_label);
+RK_DECLARE_IMAGE_RC(noise_stereo_knob_label);
 RK_DECLARE_IMAGE_RC(noise_cutoff_knob_label);
 RK_DECLARE_IMAGE_RC(noise_resonance_knob_label);
-RK_DECLARE_IMAGE_RC(noise_stereo_knob_label);
 RK_DECLARE_IMAGE_RC(noise_white_button);
 RK_DECLARE_IMAGE_RC(noise_white_button_hover);
 RK_DECLARE_IMAGE_RC(noise_white_button_on);
@@ -64,10 +62,10 @@ RK_DECLARE_IMAGE_RC(noise_bandpass_button);
 RK_DECLARE_IMAGE_RC(noise_bandpass_button_hover);
 RK_DECLARE_IMAGE_RC(noise_bandpass_button_on);
 RK_DECLARE_IMAGE_RC(noise_bandpass_button_hover_on);
-RK_DECLARE_IMAGE_RC(noise_high_button);
-RK_DECLARE_IMAGE_RC(noise_high_button_hover);
-RK_DECLARE_IMAGE_RC(noise_high_button_on);
-RK_DECLARE_IMAGE_RC(noise_high_button_hover_on);
+RK_DECLARE_IMAGE_RC(noise_highpass_button);
+RK_DECLARE_IMAGE_RC(noise_highpass_button_hover);
+RK_DECLARE_IMAGE_RC(noise_highpass_button_on);
+RK_DECLARE_IMAGE_RC(noise_highpass_button_hover_on);
 
 NoiseWidget::NoiseWidget(EntWidget* parent, NoiseModel* model)
         : EntAbstractView(parent, model)
@@ -78,8 +76,6 @@ NoiseWidget::NoiseWidget(EntWidget* parent, NoiseModel* model)
         , densityKnob{nullptr}
         , brightnessKnob{nullptr}
         , gainKnob{nullptr}
-        , cutOffKnob{nullptr}
-        , resonanceKnob{nullptr}
         , stereoKnob{nullptr}
         , lowPassButton{nullptr}
         , bandPassButton{nullptr}
@@ -225,11 +221,11 @@ void NoiseWidget::bindModel()
                     toggled,
                     RK_ACT_ARGS(bool b),
                     model, setFilterType(FilterType::LowPass));
-        RK_ACT_BIND(pinkNoiseButton,
+        RK_ACT_BIND(bandPassButton,
                     toggled,
                     RK_ACT_ARGS(bool b),
                     model, setFilterType(FilterType::BandPass));
-        RK_ACT_BIND(brownNoiseButton,
+        RK_ACT_BIND(highPassButton,
                     toggled,
                     RK_ACT_ARGS(bool b),
                     model, setFilterType(FilterType::HighPass));
@@ -385,17 +381,18 @@ void NoiseWidget::createNoiseControls(RkContainer *container)
         horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
-        horizontalContainer->addSpace(57);
+        horizontalContainer->addSpace(29);
 
         stereoKnob = new Knob(this, RK_RC_IMAGE(noise_stereo_knob_label));
         stereoKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
         stereoKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         horizontalContainer->addWidget(stereoKnob);
 
-        auto verticalContainer = new RkContainer(this);
+        auto verticalContainer = new RkContainer(this, Rk::Orientation::Vertical);
         verticalContainer->setSize({60, horizontalContainer->height()});
         horizontalContainer->addContainer(verticalContainer);
 
+        verticalContainer->addSpace(15);
         lowPassButton = new RkButton(this);
         lowPassButton->setImage(RK_RC_IMAGE(noise_lowpass_button),
                                        RkButton::State::Unpressed);
@@ -455,6 +452,7 @@ void NoiseWidget::setType(NoiseType type)
 
 void NoiseWidget::setFilterType(FilterType type)
 {
+        ENTROPICTRON_LOG_INFO("setFilterType");
         lowPassButton->setPressed(type == FilterType::LowPass);
         bandPassButton->setPressed(type == FilterType::BandPass);
         highPassButton->setPressed(type == FilterType::HighPass);

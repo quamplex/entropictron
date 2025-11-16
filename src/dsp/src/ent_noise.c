@@ -38,7 +38,6 @@ struct ent_noise {
         float brightness;
         float gain;
         float stereo;
-        struct ent_filter filter;
         struct qx_randomizer prob_randomizer;
         struct qx_randomizer randomizer;
         struct qx_fader fader;
@@ -52,6 +51,9 @@ struct ent_noise {
         // Brightness shelf filter
         struct ent_shelf_filter sh_filter_l;
         struct ent_shelf_filter sh_filter_r;
+
+        // Low, band, high pass filter
+        struct ent_filter filter;
 
         float buffer[2][4096];
 };
@@ -188,34 +190,35 @@ float ent_noise_get_stereo(struct ent_noise *noise)
 
 enum ent_error ent_noise_set_filter_type(struct ent_noise *noise, enum ent_filter_type type)
 {
-        return ent_filter_set_type(noise->filter, type);
+        ent_filter_set_type(&noise->filter, type);
+        return ENT_OK;
 }
 
 enum ent_filter_type ent_noise_get_filter_type(struct ent_noise *noise)
 {
-        return ent_filter_get_type(noise->filter);
+        return ent_filter_get_type(&noise->filter);
 }
 
 enum ent_error ent_noise_set_cutoff(struct ent_noise *noise, float cutoff)
 {
-        noise->cutoff = cutoff;
+        ent_filter_set_cutoff(&noise->filter, cutoff);
         return ENT_OK;
 }
 
 float ent_noise_get_cutoff(struct ent_noise *noise)
 {
-        return noise->cutoff;
+        return ent_filter_get_cutoff(&noise->filter);
 }
 
 enum ent_error ent_noise_set_resonance(struct ent_noise *noise, float resonance)
 {
-        noise->resonance = resonance;
+        ent_filter_set_resonance(&noise->filter, resonance);
         return ENT_OK;
 }
 
 float ent_noise_get_resonance(struct ent_noise *noise)
 {
-        return noise->resonance;
+        return ent_filter_get_resonance(&noise->filter);
 }
 
 inline static float ent_pink_noise(float white)

@@ -51,7 +51,7 @@ class DspNoiseProxyVst: public DspNoiseProxy {
         bool setStereo(double value) override;
         double stereo() const override;
         bool setFilterType(FilterType type) override;
-        FilerType filterType() const override;
+        FilterType filterType() const override;
         bool setCutOff(double value) override;
         double cutOff() const override;
         bool setResonance(double value) override;
@@ -62,7 +62,7 @@ protected:
         NoiseType noiseTypeFromNormalized(double value) const;
         double noiseTypeToNormalized(NoiseType type) const;
         double filterTypeToNormalized(FilterType type) const;
-        NoiseType filterTypeFromNormalized(double value) const;
+        FilterType filterTypeFromNormalized(double value) const;
 private:
         EntVstController *vstController;
 };
