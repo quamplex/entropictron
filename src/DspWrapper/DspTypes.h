@@ -60,4 +60,10 @@ enum class CrackleEnvelopeShape : int {
         Triangle    = ENT_CRACKLE_ENV_TRIANGLE
 };
 
+enum class PlayMode : int {
+    PlaybackMode = ENT_PLAY_MODE_PLAYBACK,
+    HoldMode     = ENT_PLAY_MODE_HOLD,
+    OnMode       = ENT_PLAY_MODE_ON
+};
+
 #endif // ENT_DSP_TYPES_H

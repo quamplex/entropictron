@@ -26,6 +26,7 @@
 #include "DspProxy.h"
 #include "EntropictronModel.h"
 #include "ModuleWidgetTab.h"
+#include "GlobalControlsWidget.h"
 
 #include "RkContainer.h"
 #include "RkLabel.h"
@@ -71,7 +72,7 @@ bool MainWindow::createUi(void)
 
         // Global controls widget
         horizontalContainer->addSpace(5);
-        auto globalControlsWidget = new EntWidget(this);
+        auto globalControlsWidget = new GlobalControlsWidget(this, entropictronModel);
         globalControlsWidget->setBackgroundColor(37, 43, 53);
         globalControlsWidget->setSize({252, horizontalContainer->height()});
         horizontalContainer->addWidget(globalControlsWidget);
