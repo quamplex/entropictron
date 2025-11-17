@@ -28,6 +28,7 @@
 
 class EntropictronModel;
 class RkContainer;
+class RkButton;
 
 class GlobalControlsWidget : public EntWidget
 {

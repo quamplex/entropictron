@@ -10,6 +10,12 @@ knob_big_size_marker.png
 knob_medium_size_bk.png
 knob_medium_size_marker.png
 
+# --- Global Controls ---
+
+play_mode_hold.png
+play_mode_on.png
+pay_mode_playback.png
+
 # ---- Modules Widget Tabs ---
 
 tab_noise_button.png

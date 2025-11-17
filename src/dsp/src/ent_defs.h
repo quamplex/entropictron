@@ -54,6 +54,12 @@ enum ent_channel_type {
         ENT_CHANNEL_MIDI_OUTPUT  = 3
 };
 
+enum ent_play_mode {
+        ENT_PLAY_MODE_PLAYBACK = 0,
+        ENT_PLAY_MODE_HOLD     = 1,
+        ENT_PLAY_MODE_ON       = 2
+};
+
 #define ENT_ANY_KEY (-1)
 #define ENT_ANY_MIDI_CHANNEL (-1)
 #define ENT_MAX_MIDI_CHANNELS (16)

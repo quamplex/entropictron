@@ -73,8 +73,6 @@ bool MainWindow::createUi(void)
         // Global controls widget
         horizontalContainer->addSpace(5);
         auto globalControlsWidget = new GlobalControlsWidget(this, entropictronModel);
-        globalControlsWidget->setBackgroundColor(37, 43, 53);
-        globalControlsWidget->setSize({252, horizontalContainer->height()});
         horizontalContainer->addWidget(globalControlsWidget);
 
         return true;

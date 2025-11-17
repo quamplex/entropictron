@@ -134,6 +134,7 @@ set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/CrackleWidget.h
   ${ENT_COMMON_DIR}/GlitchWidget.h
   ${ENT_COMMON_DIR}/ModuleWidgetTab.h
+  ${ENT_COMMON_DIR}/GlobalControlsWidget.h
   ${ENT_COMMON_DIR}/MainWindow.h
 )
 
@@ -154,6 +155,7 @@ set(ENT_COMMON_SOURCES
   ${ENT_COMMON_DIR}/CrackleWidget.cpp
   ${ENT_COMMON_DIR}/GlitchWidget.cpp
   ${ENT_COMMON_DIR}/ModuleWidgetTab.cpp
+  ${ENT_COMMON_DIR}/GlobalControlsWidget.cpp
   ${ENT_COMMON_DIR}/MainWindow.cpp
 )
 
