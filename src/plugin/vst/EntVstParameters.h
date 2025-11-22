@@ -30,6 +30,9 @@ namespace EntVst {
 
 enum ParameterId : Steinberg::Vst::ParamID
 {
+    // Play mode
+    PlayModeId = 1000,
+
     // Noise 1
     Noise1EnabledId     = 10101,
     Noise1TypeId        = 10102,

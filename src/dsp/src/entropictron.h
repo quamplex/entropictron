@@ -55,6 +55,10 @@ enum ent_error ent_set_sample_rate(struct entropictron *ent, unsigned int rate);
 
 enum ent_error ent_get_sample_rate(struct entropictron *ent, unsigned int *sample_rate);
 
+enum ent_error ent_set_play_mode(struct entropictron *ent, enum ent_play_mode mode);
+
+enum ent_play_mode ent_get_play_mode(struct entropictron *ent);
+
 enum ent_error ent_process(struct entropictron *ent, float** data, size_t size);
 
 struct ent_noise* ent_get_noise(struct entropictron *ent, int id);

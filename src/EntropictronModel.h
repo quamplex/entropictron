@@ -24,6 +24,7 @@
 #ifndef ENTROPICTRON_MODEL_H
 #define ENTROPICTRON_MODEL_H
 
+#include "GuiTypes.h"
 #include "RkObject.h"
 
 class DspProxy;
@@ -35,12 +36,19 @@ class EntropictronModel: public RkObject
 {
  public:
         explicit EntropictronModel(RkObject *parent, DspProxy *dspProxy);
+        void setPlayMode(PlayMode mode);
+        PlayMode playMode() const;
         NoiseModel* getNoise1() const;
         NoiseModel* getNoise2() const;
         CrackleModel* getCrackle1() const;
         CrackleModel* getCrackle2() const;
         GlitchModel* getGlitch1() const;
         GlitchModel* getGlitch2() const;
+
+        RK_DECL_ACT(playModeUpdated,
+                    playModeUpdated(PlayMode mode),
+                    RK_ARG_TYPE(PlayMode),
+                    RK_ARG_VAL(mode));
 
  private:
         DspProxy *dspProxy;

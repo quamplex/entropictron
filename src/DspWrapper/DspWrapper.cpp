@@ -79,6 +79,17 @@ int DspWrapper::getSampleRate() const
         return sampleRate;
 }
 
+void DspWrapper::setPlayMode(PlayMode mode)
+{
+        ent_set_play_mode(entropictronDsp.get(),
+                          static_cast<enum ent_play_mode>(mode));
+}
+
+PlayMode DspWrapper::playMode() const
+{
+        return static_cast<PlayMode>(ent_get_play_mode(entropictronDsp.get()));
+}
+
 void DspWrapper::process(float** data, size_t size)
 {
         ent_process(entropictronDsp.get(), data, size);

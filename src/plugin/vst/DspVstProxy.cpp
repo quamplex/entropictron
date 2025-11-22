@@ -48,6 +48,26 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
                                                  controller,
                                                  GlitchId::Glitch2)}
 {
+        auto paramCallback = [this](ParameterId paramId, ParamValue value){
+                onParameterChanged(paramId, value);
+        };
+
+        vstController->setParamterCallback(ParameterId::PlayModeId, paramCallback);
+}
+
+bool DspProxyVst::setPlayMode(PlayMode mode)
+{
+        vstController->getComponentHandler()->beginEdit(ParameterId::PlayModeId);
+        vstController->getComponentHandler()->performEdit(ParameterId::PlayModeId,
+                                                          playModeToNormalized(mode));
+        vstController->getComponentHandler()->endEdit(ParameterId::PlayModeId);
+        return true;
+}
+
+PlayMode DspProxyVst::playMode() const
+{
+        auto id = ParameterId::PlayModeId;
+        return playModeFromNormalized(vstController->getParamNormalized(id));
 }
 
 DspNoiseProxy* DspProxyVst::getNoise(NoiseId id) const
@@ -84,4 +104,28 @@ DspGlitchProxy* DspProxyVst::getGlitch(GlitchId id) const
         default:
                 return nullptr;
         }
+}
+
+void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
+{
+        switch (paramId) {
+        case ParameterId::PlayModeId:
+                action playModeUpdated(playModeFromNormalized(value));
+                break;
+        default:
+                break;
+        }
+}
+
+double DspProxyVst::playModeToNormalized(PlayMode mode) const
+{
+        auto numPlayModes = static_cast<double>(PlayMode::OnMode);
+        return static_cast<double>(mode) / numPlayModes;
+}
+
+PlayMode DspProxyVst::playModeFromNormalized(double value) const
+{
+        ENTROPICTRON_LOG_INFO("PLAY_MODE: " << value);
+        auto numPlayModes = static_cast<double>(PlayMode::OnMode);
+        return static_cast<PlayMode>(std::round(value * numPlayModes));
 }

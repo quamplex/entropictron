@@ -54,18 +54,21 @@ ModuleWidgetTab::ModuleWidgetTab(EntWidget* parent,
         , crackleTabButton {nullptr}
         , glitchTabButton {nullptr}
 {
-        setFixedSize(350, 282);
+        setFixedSize(350, 331);
         createTabButtons();
         showNoise();
 }
 
 void ModuleWidgetTab::createTabButtons()
 {
-        auto tabButtonContianer = new RkContainer(this);
-        tabButtonContianer->setSize({width(), 24});
+        auto tabButtonWidget = new EntWidget(this);
+        tabButtonWidget->setBackgroundColor(37, 43, 53);
+        tabButtonWidget->setSize({width(), 24});
+        auto tabButtonContianer = new RkContainer(tabButtonWidget);
 
         // Noise
-        noiseTabButton = new RkButton(this);
+        noiseTabButton = new RkButton(tabButtonWidget);
+        noiseTabButton->setBackgroundColor(tabButtonWidget->background());
         noiseTabButton->setImage(RK_RC_IMAGE(tab_noise_button),
                             RkButton::State::Unpressed);
         noiseTabButton->setImage(RK_RC_IMAGE(tab_noise_button_on),
@@ -84,7 +87,8 @@ void ModuleWidgetTab::createTabButtons()
                     showNoise());
 
         // Crackle
-        crackleTabButton = new RkButton(this);
+        crackleTabButton = new RkButton(tabButtonWidget);
+        crackleTabButton->setBackgroundColor(tabButtonWidget->background());
         crackleTabButton->setImage(RK_RC_IMAGE(tab_crackle_button),
                             RkButton::State::Unpressed);
         crackleTabButton->setImage(RK_RC_IMAGE(tab_crackle_button_on),
@@ -103,7 +107,8 @@ void ModuleWidgetTab::createTabButtons()
                     showCrackle());
 
         // Glitch
-        glitchTabButton = new RkButton(this);
+        glitchTabButton = new RkButton(tabButtonWidget);
+        glitchTabButton->setBackgroundColor(tabButtonWidget->background());
         glitchTabButton->setImage(RK_RC_IMAGE(tab_glitch_button),
                             RkButton::State::Unpressed);
         glitchTabButton->setImage(RK_RC_IMAGE(tab_glitch_button_on),
@@ -132,7 +137,7 @@ void ModuleWidgetTab::showNoise()
         moduleWidget = new NoiseWidget(this,
                                        tabId ? entropictronModel->getNoise1()
                                        : entropictronModel->getNoise2());
-        moduleWidget->setPosition(0, 24);
+        moduleWidget->setPosition(0, 29);
 }
 
 void ModuleWidgetTab::showCrackle()
@@ -145,7 +150,7 @@ void ModuleWidgetTab::showCrackle()
         moduleWidget = new CrackleWidget(this,
                                          tabId ? entropictronModel->getCrackle1()
                                          : entropictronModel->getCrackle2());
-        moduleWidget->setPosition(0, 24);
+        moduleWidget->setPosition(0, 29);
 }
 
 void ModuleWidgetTab::showGlitch()
@@ -158,5 +163,5 @@ void ModuleWidgetTab::showGlitch()
         moduleWidget = new GlitchWidget(this,
                                         tabId ? entropictronModel->getGlitch1()
                                         : entropictronModel->getGlitch2());
-        moduleWidget->setPosition(0, 24);
+        moduleWidget->setPosition(0, 29);
 }

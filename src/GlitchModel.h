@@ -68,7 +68,7 @@ class GlitchModel: public EntAbstractModel
         std::pair<double, double> getMinJumpRange() const;
         RK_DECL_ACT(enabled,
                     enabled(bool b),
-                    RK_ARG_TYPE(bool b),
+                    RK_ARG_TYPE(bool),
                     RK_ARG_VAL(b));
         RK_DECL_ACT(repeatsUpdated,
                     repeatsUpdated(double value),

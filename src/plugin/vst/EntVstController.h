@@ -25,6 +25,7 @@
 #define ENT_VST_CONTROLLER_H
 
 #include "EntVstParameters.h"
+#include "GuiTypes.h"
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
 #include "pluginterfaces/gui/iplugview.h"

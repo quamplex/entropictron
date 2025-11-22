@@ -36,9 +36,16 @@ class DspProxy : public RkObject {
  public:
         DspProxy(RkObject *parent = nullptr);
         virtual ~DspProxy() = default;
+        virtual bool setPlayMode(PlayMode mode) = 0;
+        virtual PlayMode playMode() const = 0;
         virtual DspNoiseProxy* getNoise(NoiseId id) const = 0;
         virtual DspCrackleProxy* getCrackle(CrackleId id) const = 0;
         virtual DspGlitchProxy* getGlitch(GlitchId id) const = 0;
+
+        RK_DECL_ACT(playModeUpdated,
+                    playModeUpdated(PlayMode mode),
+                    RK_ARG_TYPE(PlayMode),
+                    RK_ARG_VAL(mode));
 };
 
 #endif // DSP_PROXY_H

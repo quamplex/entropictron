@@ -24,6 +24,7 @@
 #ifndef ENT_GLOBAL_CONTROLS_WIDGET_H
 #define ENT_GLOBAL_CONTROLS_WIDGET_H
 
+#include "GuiTypes.h"
 #include "EntWidget.h"
 
 class EntropictronModel;
@@ -41,9 +42,10 @@ protected:
         void setPlayMode(PlayMode mode);
 
 private:
-        RkButton *playbackButton;
-        RkButton *holdButton;
-        RkButton *onButton;
+        EntropictronModel *entModel;
+        RkButton *playbackModeButton;
+        RkButton *holdModeButton;
+        RkButton *onModeButton;
 };
 
 #endif // ENT_GLOBAL_CONTROLS_WIDGET_H

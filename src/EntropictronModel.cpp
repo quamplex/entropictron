@@ -38,6 +38,23 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
         , glitch2Model{new GlitchModel(this, dspProxy->getGlitch(GlitchId::Glitch2))}
 {
         dspProxy->setParent(this);
+
+        RK_ACT_BIND(dspProxy,
+                    playModeUpdated,
+                    RK_ACT_ARGS(PlayMode mode),
+                    this, playModeUpdated(mode));
+}
+
+void EntropictronModel::setPlayMode(PlayMode mode)
+{
+        if (dspProxy->setPlayMode(mode)) {
+                action playModeUpdated(mode);
+        }
+}
+
+PlayMode EntropictronModel::playMode() const
+{
+        return dspProxy->playMode();
 }
 
 NoiseModel* EntropictronModel::getNoise1() const

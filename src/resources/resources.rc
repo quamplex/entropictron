@@ -12,9 +12,18 @@ knob_medium_size_marker.png
 
 # --- Global Controls ---
 
+play_mode_playback.png
+play_mode_playback_hover.png
+play_mode_playback_on.png
+play_mode_playback_hover_on.png
 play_mode_hold.png
+play_mode_hold_hover.png
+play_mode_hold_on.png
+play_mode_hold_hover_on.png
 play_mode_on.png
-pay_mode_playback.png
+play_mode_on_hover.png
+play_mode_on_on.png
+play_mode_on_hover_on.png
 
 # ---- Modules Widget Tabs ---
 

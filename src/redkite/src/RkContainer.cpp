@@ -146,6 +146,11 @@ Rk::Orientation RkContainer::orientation() const
 	return containerOrientation;
 }
 
+void RkContainer::setSize(int w, int h)
+{
+        setSize({w, h});
+}
+
 void RkContainer::setSize(const RkSize &s)
 {
         if (s == size())

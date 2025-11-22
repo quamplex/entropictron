@@ -280,6 +280,10 @@ void EntVstProcessor::updateParameters(ParameterId id, ParamValue value)
 
 void EntVstProcessor::initParamMappings()
 {
+        paramMap[ParameterId::PlayModeId] = [this](ParamValue v) {
+                entropictronDsp->setPlayMode(static_cast<PlayMode>(v));
+        };
+
         initNoiseParamMappings();
         initCrackleParamMappings();
         initGlitchParamMappings();

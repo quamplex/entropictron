@@ -131,6 +131,16 @@ ent_get_sample_rate(struct entropictron *ent, unsigned int *sample_rate)
         return ENT_OK;
 }
 
+enum ent_error ent_set_play_mode(struct entropictron *ent, enum ent_play_mode mode)
+{
+        return ENT_OK;
+}
+
+enum ent_play_mode ent_get_play_mode(struct entropictron *ent)
+{
+        return ENT_PLAY_MODE_PLAYBACK;
+}
+
 enum ent_error
 ent_process(struct entropictron *ent, float** data, size_t size)
 {

@@ -40,6 +40,8 @@ public:
         int getSampleRate() const;
         void process(float** data, size_t size);
         void pressKey(int pitch, int velocity, bool on = true);
+        void setPlayMode(PlayMode mode);
+        PlayMode playMode() const;
         DspWrapperNoise* getNoise(NoiseId id) const;
         DspWrapperCrackle* getCrackle(CrackleId id) const;
         DspWrapperGlitch* getGlitch(GlitchId id) const;

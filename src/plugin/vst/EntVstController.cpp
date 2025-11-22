@@ -52,6 +52,11 @@ EntVstController::initialize(FUnknown* context)
 
 void EntVstController::addNoiseParameters()
 {
+        parameters.addParameter(STR16("Play Mode"),
+                                nullptr, 1.0, 0.0,
+                                ParameterInfo::kIsHidden,
+                                ParameterId::PlayModeId);
+
         // Noise 1
         parameters.addParameter(STR16("Noise 1 Enabled"),
                                 nullptr, 1, 0.0,
@@ -308,7 +313,7 @@ EntVstController::createView(Steinberg::FIDString name)
 {
         if (std::string_view{name} == std::string_view{Vst::ViewType::kEditor})
                 return new EntVstPluginView(this);
-    return nullptr;
+        return nullptr;
 }
 
 void EntVstController::setParamterCallback(ParameterId paramId,

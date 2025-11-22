@@ -32,8 +32,8 @@
 #include "RkLabel.h"
 #include "RkTabWidget.h"
 
-constexpr int MAIN_WINDOW_WIDTH  = 900;
-constexpr int MAIN_WINDOW_HEIGHT = 352;
+constexpr int MAIN_WINDOW_WIDTH  = 970;
+constexpr int MAIN_WINDOW_HEIGHT = 341;
 
 MainWindow::MainWindow(RkMain& app,
                        const RkNativeWindowInfo &info,
@@ -56,17 +56,17 @@ bool MainWindow::createUi(void)
 {
         // Main container
         auto mainContainer = new RkContainer(this, Rk::Orientation::Vertical);
-        mainContainer->setSize(size() - RkSize(10, 10));
-        mainContainer->setPosition({5, 5});
+        mainContainer->setSize(size());
+        mainContainer->addSpace(5);
 
         // Main horizontal container
         auto horizontalContainer = new RkContainer(this);
-        horizontalContainer->setSize({mainContainer->width(), 282});
+        horizontalContainer->setSize({mainContainer->width(), 331});
         mainContainer->addContainer(horizontalContainer);
 
         for (int id = 0; id < 2; id++) {
                 auto moduleTabs = new ModuleWidgetTab(this, entropictronModel, id);
-                horizontalContainer->addSpace(10);
+                horizontalContainer->addSpace(5);
                 horizontalContainer->addWidget(moduleTabs);
         }
 
