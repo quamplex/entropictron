@@ -1,5 +1,5 @@
 /**
- * File name: RkFlowContainer.h
+ * File name: RkScroolbar.h
  * Project: Redkite (A small GUI toolkit)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -21,23 +21,34 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef RK_FLOW_CONTAINER_H
-#define RK_FLOW_CONTAINER_H
+#ifndef RK_SCROOLBAR_H
+#define RK_SCROOLBAR_H
 
-#include "RkContainer.h"
 #include "RkWidget.h"
 
-class RkFlowContainer : public RkContainer {
+class RkScroolbar : public RkWidget {
  public:
-        explicit RkFlowContainer(RkWidget *parent);
+        explicit RkScroolbar(RkWidget *parent);
         ~RkFlowContainer() = default;
+        void setContentSize(int val);
+        int getContentSize() const;
+        void setPageSize(int val);
+        int getPageSize() const;
+        void setScroolStep(int val);
+        int getScroolStep() const;
+        void setPageScroolStep(int val);
+        int getPageScroolStep() const;
 
  protected:
-        void layout() override;
+        void resizeEvent(RkResizeEvent *event) override;
 
  private:
-        RK_DISABLE_COPY(RkFlowContainer);
-        RK_DISABLE_MOVE(RkFlowContainer);
+        int contentSize;
+        int pageSize;
+        int scroolStep;
+        int pageScroolStep;
+        RkButton *sliderButton;
+        RkButton *upButton;
+        RkButton *downButton;
 };
 
-#endif // RK_FLOW_CONTAINER_H

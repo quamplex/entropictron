@@ -23,6 +23,11 @@
 
 #include "PresetList.h"
 
+PresetList::PresetList()
+{
+        loadFromDefaultPath();
+}
+
 bool PresetList::loadFromDefaultPath()
 {
         presets.clear();
@@ -37,19 +42,9 @@ bool PresetList::loadFromDefaultPath()
                         continue;
 
                 if (entry.path().extension() == ".entp") {
-                        std::ifstream file(entry.path());
-                        if (!file.is_open()) {
-                                ENT_LOG_ERROR("Failed to open preset file: " << entry.path());
-                                continue;
-                        }
-
-                        std::stringstream ss;
-                        ss << file.rdbuf();
-                        std::string jsonStr = ss.str();
-
                         auto state = std::make_unique<EntState>();
-                        if (!state->fromJson(jsonStr)) {
-                                ENT_LOG_ERROR("Failed to parse preset: " << entry.path());
+                        if (!state.loadFromFile(entry.path())) {
+                                ENT_LOG_ERROR("Failed to load preset file: " << entry.path());
                                 continue;
                         }
 

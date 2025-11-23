@@ -70,10 +70,12 @@ class EntState
         Crackle crackle;
         Glitch glitch;
 
-        void setPlaymode(int v);
+        void setPlaymode(int mode);
         int getPlaymode() const;
         std::string toJson() const;
         bool fromJson(const std::string& jsonStr);
+        bool saveToFile(const std::filesystem::path& filepath) const;
+        bool loadFromFile(const std::filesystem::path& filepath);
 
  protected:
         void writeNoise(rapidjson::Value& modulesArray,

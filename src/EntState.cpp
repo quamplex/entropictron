@@ -28,9 +28,9 @@
 
 using namespace rapidjson;
 
-void EntState::setPlaymode(int v)
+void EntState::setPlaymode(int mode)
 {
-        playMode = v;
+        playMode = mode;
 }
 
 int EntState::getPlaymode() const
@@ -103,6 +103,27 @@ bool EntState::fromJson(const std::string& jsonStr)
         }
 
         return true;
+}
+
+bool EntState::saveToFile(const std::filesystem::path& filepath) const
+{
+        std::ofstream ofs(filepath, std::ios::trunc);
+        if (!ofs.is_open())
+                return false;
+
+        ofs << toJson();
+        return true;
+}
+
+bool EntState::loadFromFile(const std::filesystem::path& filepath)
+{
+        std::ifstream ifs(filepath);
+        if (!ifs.is_open())
+                return false;
+
+        std::string jsonStr((std::istreambuf_iterator<char>(ifs)),
+                            std::istreambuf_iterator<char>());
+        return fromJson(jsonStr);
 }
 
 void EntState::writeNoise(Value& modulesArray,

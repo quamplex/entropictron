@@ -37,6 +37,7 @@ public:
         void setPresetList(const std::unique_ptr<PresetList> &list);
 
 protected:
+        void updateListView();
         void showScroolbar();
         void removeScroolbar();
         void scroolContent(int offset);
@@ -46,6 +47,7 @@ protected:
         int getIndex(int x, int y) const;
 
 private:
+        std::unique_ptr<PresetList> presetList;
         int rowHeight;
         int offsetIndex;
         int pageSize;

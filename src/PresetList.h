@@ -32,7 +32,7 @@
 class PresetList
 {
 public:
-        PresetList() = default;
+        PresetList();
         bool loadFromDefaultPath();
         const std::vector<std::unique_ptr<EntState>>& getPresets() const;
         size_t size() const;

@@ -29,6 +29,7 @@
 
 PresetWidget::PresetWidget(EntWidget* parent)
         : EntWidget(parent)
+        , presetList {std::make_unique<PresetList>()}
         , rowHeight{16}
         , offsetIndex{0}
         , pageSize{0}
@@ -38,11 +39,11 @@ PresetWidget::PresetWidget(EntWidget* parent)
 {
         setFixedSize(240, 288);
         setBackgroundColor(22, 22, 22);
+        updateListView();
 }
 
-void PresetWidget::setPresetList(const std::unique_ptr<PresetList> &list)
+void PresetWidget::updateListView()
 {
-        presetList = list;
         offsetIndex = 0;
         selectedIndex = -1;
         hoverIndex = -1;
@@ -51,6 +52,13 @@ void PresetWidget::setPresetList(const std::unique_ptr<PresetList> &list)
                 showScroolbar();
         else
                 removeScroolbar();
+        update();
+}
+
+void PresetWidget::setPresetList(const std::unique_ptr<PresetList> &list)
+{
+        presetList = list;
+        updateListView();
 }
 
 void PresetWidget::showScroolbar()

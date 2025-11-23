@@ -184,8 +184,24 @@ class RkMoveEvent: public RkEvent {
 
 class RkResizeEvent: public RkEvent {
 public:
-      RkResizeEvent() : RkEvent(Type::Resize) {
-      }
+        RkResizeEvent(const RkSize &size = {}) :
+                RkEvent(Type::Resize)
+                , sizeValue {size}
+        {
+        }
+
+        void setSize(const RkSize &s)
+        {
+                sizeValue = s;
+        }
+
+        const RkSize& size() const
+        {
+                return sizeValue;
+        }
+
+private:
+        RkSize sizeValue;
 };
 
 class RkPaintEvent: public RkEvent {
