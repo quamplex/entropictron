@@ -135,6 +135,9 @@ set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/GlitchWidget.h
   ${ENT_COMMON_DIR}/ModuleWidgetTab.h
   ${ENT_COMMON_DIR}/GlobalControlsWidget.h
+  ${ENT_COMMON_DIR}/EntState.h
+  ${ENT_COMMON_DIR}/PresetList.h
+  ${ENT_COMMON_DIR}/PresetWidget.h
   ${ENT_COMMON_DIR}/MainWindow.h
 )
 
@@ -156,6 +159,9 @@ set(ENT_COMMON_SOURCES
   ${ENT_COMMON_DIR}/GlitchWidget.cpp
   ${ENT_COMMON_DIR}/ModuleWidgetTab.cpp
   ${ENT_COMMON_DIR}/GlobalControlsWidget.cpp
+  ${ENT_COMMON_DIR}/EntState.cpp
+  ${ENT_COMMON_DIR}/PresetList.cpp
+  ${ENT_COMMON_DIR}/PresetWidget.cpp
   ${ENT_COMMON_DIR}/MainWindow.cpp
 )
 

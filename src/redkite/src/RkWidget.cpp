@@ -675,3 +675,4 @@ double RkWidget::scaleFactor() const
 {
         return RK_IMPL_PTR(this)->scaleFactor();
 }
+

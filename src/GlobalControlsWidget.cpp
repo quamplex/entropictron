@@ -23,6 +23,7 @@
 
 #include "GlobalControlsWidget.h"
 #include "EntropictronModel.h"
+#include "PresetWidget.h"
 
 #include "RkContainer.h"
 #include "RkButton.h"
@@ -50,8 +51,11 @@ GlobalControlsWidget::GlobalControlsWidget(EntWidget* parent, EntropictronModel*
         setBackgroundColor(37, 43, 53);
         setFixedSize(250, 331);
 
-        auto mainContiner = new RkContainer(this, Rk::Orientation::Vertical);
-        createPlayModeControls(mainContiner);
+        auto mainContainer = new RkContainer(this, Rk::Orientation::Vertical);
+        mainContainer->addSpace(5);
+        createPlayModeControls(mainContainer);
+        mainContainer->addSpace(5);
+        mainContainer->addWidget(new PresetWidget(this));
 }
 
 void GlobalControlsWidget::createPlayModeControls(RkContainer *container)

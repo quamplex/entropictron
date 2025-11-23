@@ -21,8 +21,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef DSP_NOISE_PROXY_H
-#define DSP_NOISE_PROXY_H
+#ifndef ENT_NOISE_PROXY_H
+#define ENT_NOISE_PROXY_H
 
 #include "RkObject.h"
 #include "GuiTypes.h"
@@ -93,4 +93,4 @@ private:
         NoiseId noiseId;
 };
 
-#endif // DSP_NOISE_PROXY_H
+#endif // ENT_NOISE_PROXY_H
