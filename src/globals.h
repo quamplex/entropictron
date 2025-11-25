@@ -55,22 +55,23 @@ namespace fs = std::filesystem;
 #include <RkObject.h>
 
 //#ifdef GKICK_LOG_DEBUG_LEVEL
-#define ENTROPICTRON_LOG_INFO(msg) std::cout << "[" << ENT_NAME << "] " \
-                               << " [" << std::this_thread::get_id() << "] " \
-                               << __PRETTY_FUNCTION__ << "[INFO] " \
-                               << msg << std::endl;
-#define ENTROPICTRON_LOG_ERROR(msg) std::cout << "[" << ENT_NAME << "] " \
-                                << " [" << std::this_thread::get_id() << "] " \
-                                << __PRETTY_FUNCTION__ << "[ERROR] " \
-                                << msg << std::endl;
-#define ENTROPICTRON_LOG_DEBUG(msg) std::cout << "[" << std::this_thread::get_id() << "][" << ENT_NAME << "] " \
-                                << " [" << std::this_thread::get_id() << "] " \
-                                << __PRETTY_FUNCTION__ << "[DEBUG] " \
-                                << msg << std::endl;
+#define ENTROPICTRON_LOG_INFO(msg) std::cerr << "[" << ENT_NAME << "] " \
+        << " [" << std::this_thread::get_id() << "] "                   \
+        << __PRETTY_FUNCTION__ << "[INFO] "                             \
+        << msg << std::endl;
+#define ENTROPICTRON_LOG_ERROR(msg) std::cerr << "[" << ENT_NAME << "] " \
+        << " [" << std::this_thread::get_id() << "] "                    \
+        << __PRETTY_FUNCTION__ << "[ERROR] "                             \
+        << msg << std::endl;
+#define ENTROPICTRON_LOG_DEBUG(msg) std::cerr << "[" \
+        << std::this_thread::get_id() << "][" << ENT_NAME << "] "       \
+        << " [" << std::this_thread::get_id() << "] "                   \
+        << __PRETTY_FUNCTION__ << "[DEBUG] "                            \
+        << msg << std::endl;
 /*#else
-#define ENTROPICTRON_LOG_INFO(msg) std::cout << "[" << ENTROPICTRON_NAME << "] " \
+#define ENTROPICTRON_LOG_INFO(msg) std::cerr << "[" << ENTROPICTRON_NAME << "] " \
                                << "[INFO] " << msg << std::endl;
-#define ENTROPICTRON_LOG_ERROR(msg) std::cout << "[" << ENTROPICTRON_NAME << "] " \
+#define ENTROPICTRON_LOG_ERROR(msg) std::cerr << "[" << ENTROPICTRON_NAME << "] " \
                                << "[ERROR] " << msg << std::endl;
                                #define ENTROPICTRON_LOG_DEBUG(msg)*/
 //#endif //  // GKICK_LIB_LOG_LEVEL_DEBUG

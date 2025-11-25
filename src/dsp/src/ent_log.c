@@ -2,7 +2,7 @@
  * File name: ent_log.c
  * Project: Geonkick (A kick synthesizer)
  *
- * Copyright (C) 2017 Iurie Nistor 
+ * Copyright (C) 2017 Iurie Nistor
  *
  * This file is part of Geonkick.
  *
@@ -26,32 +26,32 @@
 void
 ent_log_msg(const char *message, ...)
 {
-        va_list args;
-        va_start (args, message);
-        vprintf (message, args);
-        va_end (args);
-        printf("\n");
+    va_list args;
+    va_start(args, message);
+    vfprintf(stderr, message, args);
+    va_end(args);
+    fprintf(stderr, "\n");
 }
 
 void
 ent_msg_info(const char *msg, ...)
 {
-        va_list args;
-        printf("Info: ");
-        va_start (args, msg);
-        vprintf (msg, args);
-        va_end (args);
-        printf("\n");
+    va_list args;
+    fprintf(stderr, "Info: ");
+    va_start(args, msg);
+    vfprintf(stderr, msg, args);
+    va_end(args);
+    fprintf(stderr, "\n");
 }
-
 
 void
 ent_msg_error(const char *msg, ...)
 {
-        va_list args;
-        printf("Error: ");
-        va_start (args, msg);
-        vprintf (msg, args);
-        va_end (args);
-        printf("\n");
+    va_list args;
+    fprintf(stderr, "Error: ");
+    va_start(args, msg);
+    vfprintf(stderr, msg, args);
+    va_end(args);
+    fprintf(stderr, "\n");
 }
+
