@@ -144,7 +144,7 @@ double DspNoiseProxyVst::density() const
 
 bool DspNoiseProxyVst::setBrightness(double value)
 {
-        ENTROPICTRON_LOG_DEBUG("called: " << value);
+        ENT_LOG_DEBUG("called: " << value);
         auto id = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1BrightnessId : ParameterId::Noise2BrightnessId;
         vstController->getComponentHandler()->beginEdit(id);
@@ -162,7 +162,7 @@ double DspNoiseProxyVst::brightness() const
 
 bool DspNoiseProxyVst::setGain(double value)
 {
-        ENTROPICTRON_LOG_DEBUG("called: " << value);
+        ENT_LOG_DEBUG("called: " << value);
         auto id = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1GainId : ParameterId::Noise2GainId;
         vstController->getComponentHandler()->beginEdit(id);
@@ -180,7 +180,7 @@ double DspNoiseProxyVst::gain() const
 
 bool DspNoiseProxyVst::setStereo(double value)
 {
-        ENTROPICTRON_LOG_DEBUG("called: " << value);
+        ENT_LOG_DEBUG("called: " << value);
         auto id = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1StereoId : ParameterId::Noise2StereoId;
         vstController->getComponentHandler()->beginEdit(id);
@@ -215,7 +215,7 @@ FilterType DspNoiseProxyVst::filterType() const
 
 bool DspNoiseProxyVst::setCutOff(double value)
 {
-        ENTROPICTRON_LOG_DEBUG("called: " << value);
+        ENT_LOG_DEBUG("called: " << value);
         auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1CutOffId : ParameterId::Noise2CutOffId;
         vstController->getComponentHandler()->beginEdit(id);
         vstController->getComponentHandler()->performEdit(id, value);

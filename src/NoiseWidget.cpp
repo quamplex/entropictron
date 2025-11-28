@@ -452,7 +452,6 @@ void NoiseWidget::setType(NoiseType type)
 
 void NoiseWidget::setFilterType(FilterType type)
 {
-        ENTROPICTRON_LOG_INFO("setFilterType");
         lowPassButton->setPressed(type == FilterType::LowPass);
         bandPassButton->setPressed(type == FilterType::BandPass);
         highPassButton->setPressed(type == FilterType::HighPass);

@@ -261,6 +261,9 @@ void RkWidget::RkWidgetImpl::event(RkEvent *event)
                 break;
                 RK_LOG_DEBUG("RkEvent::Type::Unknown:" << title());
         }
+
+        if (!event->isAccepted())
+                parent()->event(event);
 }
 
 void RkWidget::RkWidgetImpl::processPaintEvent(RkPaintEvent* event)

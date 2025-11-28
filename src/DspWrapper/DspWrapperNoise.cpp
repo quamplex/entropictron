@@ -33,7 +33,7 @@ DspWrapperNoise::DspWrapperNoise(struct ent_noise *dsp)
 
 void DspWrapperNoise::enable(bool b)
 {
-        ENTROPICTRON_LOG_DEBUG("called:" << b);
+        ENT_LOG_DEBUG("called:" << b);
         ent_noise_enable(noiseDsp, b);
 }
 
@@ -44,7 +44,7 @@ bool DspWrapperNoise::isEnabled() const
 
 void DspWrapperNoise::setType(NoiseType type)
 {
-        ENTROPICTRON_LOG_DEBUG("called: " << static_cast<int>(type));
+        ENT_LOG_DEBUG("called: " << static_cast<int>(type));
         ent_noise_set_type(noiseDsp, static_cast<enum ent_noise_type>(type));
 }
 
@@ -55,7 +55,7 @@ NoiseType DspWrapperNoise::noiseType() const
 
 void DspWrapperNoise::setDensity(double value)
 {
-        ENTROPICTRON_LOG_DEBUG("called:" << value);
+        ENT_LOG_DEBUG("called:" << value);
         ent_noise_set_density(noiseDsp, value);
 }
 
@@ -66,7 +66,7 @@ double DspWrapperNoise::density() const
 
 void DspWrapperNoise::setBrightness(double value)
 {
-        ENTROPICTRON_LOG_DEBUG("called:" << value);
+        ENT_LOG_DEBUG("called:" << value);
         ent_noise_set_brightness(noiseDsp, value);
 }
 
@@ -77,7 +77,7 @@ double DspWrapperNoise::brightness() const
 
 void DspWrapperNoise::setGain(double value)
 {
-        ENTROPICTRON_LOG_DEBUG("called:" << value);
+        ENT_LOG_DEBUG("called:" << value);
         ent_noise_set_gain(noiseDsp, value);
 }
 

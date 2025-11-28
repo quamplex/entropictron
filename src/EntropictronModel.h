@@ -31,11 +31,13 @@ class DspProxy;
 class NoiseModel;
 class CrackleModel;
 class GlitchModel;
+class EntState;
 
 class EntropictronModel: public RkObject
 {
  public:
         explicit EntropictronModel(RkObject *parent, DspProxy *dspProxy);
+        bool loadPreset(const EntState *preset);
         void setPlayMode(PlayMode mode);
         PlayMode playMode() const;
         NoiseModel* getNoise1() const;

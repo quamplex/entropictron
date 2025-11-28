@@ -24,6 +24,7 @@
 #ifndef ENT_STATE_H
 #define ENT_STATE_H
 
+#include "globals.h"
 #include "DspTypes.h"
 
 #include <rapidjson/document.h>
@@ -70,8 +71,16 @@ class EntState
         Crackle crackle;
         Glitch glitch;
 
-        void setPlaymode(int mode);
-        int getPlaymode() const;
+        void setName(const std::string_view &name);
+        std::string getName() const;
+        void setAuthor(const std::string_view &author);
+        std::string getAuthor() const;
+        void setAuthorURL(const std::string_view &url);
+        std::string getAuthorURL() const;
+        void setLicense(const std::string_view &license);
+        std::string getLicense() const;
+        void setPlayMode(int mode);
+        int getPlayMode() const;
         std::string toJson() const;
         bool fromJson(const std::string& jsonStr);
         bool saveToFile(const std::filesystem::path& filepath) const;
@@ -90,6 +99,10 @@ class EntState
 
  private:
 
+        std::string presetName;
+        std::string presetAuthor;
+        std::string presetAuthorURL;
+        std::string presetLicense;
         int playMode = 0;
 };
 

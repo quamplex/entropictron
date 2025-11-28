@@ -88,7 +88,7 @@ DspCrackleProxyVst::~DspCrackleProxyVst()
 
 bool DspCrackleProxyVst::enable(bool b)
 {
-        ENTROPICTRON_LOG_DEBUG("called: ID : " << (int)getCrackleId());
+        ENT_LOG_DEBUG("called: ID : " << (int)getCrackleId());
         auto paramId = (getCrackleId() == CrackleId::Crackle1) ? ParameterId::Crackle1EnabledId : ParameterId::Crackle2EnabledId;
         vstController->getComponentHandler()->beginEdit(paramId);
         vstController->getComponentHandler()->performEdit(paramId, b ? 1.0 : 0.0);

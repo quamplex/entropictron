@@ -26,10 +26,12 @@
 
 #include "RkWidget.h"
 
+class RkButton;
+
 class RkScroolbar : public RkWidget {
  public:
         explicit RkScroolbar(RkWidget *parent);
-        ~RkFlowContainer() = default;
+        ~RkScroolbar() = default;
         void setContentSize(int val);
         int getContentSize() const;
         void setPageSize(int val);
@@ -38,11 +40,25 @@ class RkScroolbar : public RkWidget {
         int getScroolStep() const;
         void setPageScroolStep(int val);
         int getPageScroolStep() const;
+        void setScrool(int val);
+
+        RK_DECL_ACT(onScrool,
+                    onScrool(int offset),
+                    RK_ARG_TYPE(int),
+                    RK_ARG_VAL(offset));
 
  protected:
         void resizeEvent(RkResizeEvent *event) override;
+        void mouseButtonPressEvent(RkMouseEvent *event) override;
+        int getSliderPosition() const;
+        void scroolUp();
+        void scroolDown();
+        void scroolPageUp();
+        void scroolPageDown();
+        void onSliderPositionChanged();
 
  private:
+        std::pair<int, int> scroolRange;
         int contentSize;
         int pageSize;
         int scroolStep;
@@ -50,5 +66,7 @@ class RkScroolbar : public RkWidget {
         RkButton *sliderButton;
         RkButton *upButton;
         RkButton *downButton;
+        int scroolOffset;
 };
 
+#endif // RK_SCROOLBAR_H

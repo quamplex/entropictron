@@ -30,7 +30,7 @@ PresetList::PresetList()
 
 bool PresetList::loadFromDefaultPath()
 {
-        presets.clear();
+        presetList.clear();
 
         if (!std::filesystem::exists(presetFolder)) {
                 std::cerr << "Preset folder does not exist: " << presetFolder << "\n";
@@ -43,16 +43,23 @@ bool PresetList::loadFromDefaultPath()
 
                 if (entry.path().extension() == ".entp") {
                         auto state = std::make_unique<EntState>();
-                        if (!state.loadFromFile(entry.path())) {
-                                ENT_LOG_ERROR("Failed to load preset file: " << entry.path());
+                        if (!state->loadFromFile(entry.path())) {
+                                ENT_LOG_ERROR("Failed to load preset file: "
+                                              << entry.path().string());
                                 continue;
                         }
 
-                        presets.push_back(std::move(state));
+                        presetList.push_back(std::move(state));
                 }
         }
 
-        return !presets.empty();
+        std::ranges::sort(presetList,
+                          std::less{},
+                          [](const std::unique_ptr<EntState>& p) {
+                                  return p->getName();
+                          });
+
+        return !presetList.empty();
 }
 
 const std::vector<std::unique_ptr<EntState>>& PresetList::getPresets() const

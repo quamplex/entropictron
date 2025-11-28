@@ -55,7 +55,7 @@ GlobalControlsWidget::GlobalControlsWidget(EntWidget* parent, EntropictronModel*
         mainContainer->addSpace(5);
         createPlayModeControls(mainContainer);
         mainContainer->addSpace(5);
-        mainContainer->addWidget(new PresetWidget(this));
+        mainContainer->addWidget(new PresetWidget(this, entModel));
 }
 
 void GlobalControlsWidget::createPlayModeControls(RkContainer *container)
@@ -133,7 +133,6 @@ void GlobalControlsWidget::createPlayModeControls(RkContainer *container)
 
 void GlobalControlsWidget::setPlayMode(PlayMode mode)
 {
-        ENTROPICTRON_LOG_INFO("mode: " << (int)mode);
         playbackModeButton->setPressed(mode == PlayMode::PlaybackMode);
         holdModeButton->setPressed(mode == PlayMode::HoldMode);
         onModeButton->setPressed(mode == PlayMode::OnMode);

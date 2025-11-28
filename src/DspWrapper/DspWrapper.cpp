@@ -63,7 +63,7 @@ DspWrapper::DspWrapper()
         glitch = ent_get_glitch(entropictronDsp.get(),
                                 static_cast<int>(GlitchId::Glitch2));
         dspGlitch2 = std::make_unique<DspWrapperGlitch>(glitch);
-        ENTROPICTRON_LOG_DEBUG("called");
+        ENT_LOG_DEBUG("called");
 }
 
 void DspWrapper::setSampleRate(unsigned int srate)
@@ -97,7 +97,7 @@ void DspWrapper::process(float** data, size_t size)
 
 DspWrapperNoise* DspWrapper::getNoise(NoiseId id) const
 {
-        ENTROPICTRON_LOG_DEBUG("called[]");
+        ENT_LOG_DEBUG("called[]");
         if (id == NoiseId::Noise1)
                 return dspNoise1.get();
         else

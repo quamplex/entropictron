@@ -28,13 +28,14 @@
 
 class PresetList;
 class RkScroolbar;
+class EntropictronModel;
 
 class PresetWidget : public EntWidget
 {
 public:
-        explicit PresetWidget(EntWidget* parent);
+        explicit PresetWidget(EntWidget* parent, EntropictronModel *model);
         ~PresetWidget() = default;
-        void setPresetList(const std::unique_ptr<PresetList> &list);
+        void setPresetList(std::unique_ptr<PresetList> list);
 
 protected:
         void updateListView();
@@ -47,11 +48,15 @@ protected:
         int getIndex(int x, int y) const;
 
 private:
+        EntropictronModel *entModel;
         std::unique_ptr<PresetList> presetList;
+        int padding;
         int rowHeight;
         int offsetIndex;
         int pageSize;
         RkScroolbar *scroolbar;
+        int selectedIndex;
+        int hoverIndex;
 };
 
 #endif // ENT_PRESET_WIDGET_H

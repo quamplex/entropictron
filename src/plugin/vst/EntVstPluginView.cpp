@@ -56,7 +56,7 @@ EntVstPluginView::setFrame(IPlugFrame* frame)
 tresult PLUGIN_API
 EntVstPluginView::attached(void* parent, FIDString type)
 {
-        ENTROPICTRON_LOG_DEBUG("called");
+        ENT_LOG_DEBUG("called");
         guiApp = std::make_unique<RkMain>();
 
 #ifdef ENTROPICTRON_OS_WINDOWS

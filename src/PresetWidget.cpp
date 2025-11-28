@@ -23,14 +23,19 @@
 
 #include "PresetWidget.h"
 #include "PresetList.h"
+#include "EntState.h"
+#include "EntropictronModel.h"
 
 #include "RkPainter.h"
 #include "RkScroolbar.h"
+#include "RkEvent.h"
 
-PresetWidget::PresetWidget(EntWidget* parent)
+PresetWidget::PresetWidget(EntWidget* parent, EntropictronModel *model)
         : EntWidget(parent)
-        , presetList {std::make_unique<PresetList>()}
-        , rowHeight{16}
+        , entModel{model}
+        , presetList{std::make_unique<PresetList>()}
+        , padding{5}
+        , rowHeight{18}
         , offsetIndex{0}
         , pageSize{0}
         , scroolbar{nullptr}
@@ -39,6 +44,7 @@ PresetWidget::PresetWidget(EntWidget* parent)
 {
         setFixedSize(240, 288);
         setBackgroundColor(22, 22, 22);
+        setTextColor({180, 180, 180});
         updateListView();
 }
 
@@ -48,25 +54,27 @@ void PresetWidget::updateListView()
         selectedIndex = -1;
         hoverIndex = -1;
         pageSize = height() / rowHeight;
-        if (presetList.size() > pageSize)
+
+        if (static_cast<int>(presetList->size()) > pageSize)
                 showScroolbar();
         else
                 removeScroolbar();
+
         update();
 }
 
-void PresetWidget::setPresetList(const std::unique_ptr<PresetList> &list)
+void PresetWidget::setPresetList(std::unique_ptr<PresetList> list)
 {
-        presetList = list;
+        presetList = std::move(list);
         updateListView();
 }
 
 void PresetWidget::showScroolbar()
 {
-        scroolbar = new RkSroollbar(this);
-        scroolbar->setSize(20, height());
+        scroolbar = new RkScroolbar(this);
+        scroolbar->setSize(16, height());
         scroolbar->setPosition(width() - scroolbar->width(), 0);
-        scroolbar->setRange(0, presetList->size() - pageSize);
+        scroolbar->setContentSize(presetList->size());
         scroolbar->setPageSize(pageSize);
         RK_ACT_BIND(scroolbar,
                     onScrool,
@@ -81,9 +89,12 @@ void PresetWidget::removeScroolbar()
         scroolbar = nullptr;
 }
 
-PresetWidget::scroolContent(int offset)
+void PresetWidget::scroolContent(int offset)
 {
-        offsetIndex = offset;
+        offsetIndex = std::clamp(offset, 0, static_cast<int>(presetList->size()) - pageSize);
+        if (scroolbar)
+                scroolbar->setScrool(offsetIndex);
+        hoverIndex = -1;
         update();
 }
 
@@ -93,32 +104,47 @@ void PresetWidget::paintEvent([[maybe_unused]] RkPaintEvent *event)
                 return;
 
         RkPainter painter(this);
-        auto defaultPen = painter.pen();
         int rowY = 0;
-        for (auto i = offsetIndex; i < offsetIndex + pageSize && i < presetList->size(); i++) {
+        int listSize = static_cast<int>(presetList->size());
+        for (auto i = offsetIndex; i < offsetIndex + pageSize && i < listSize; i++) {
                 const auto *preset = presetList->getPreset(i);
                 if (!preset)
                         continue;
 
-                auto rowColor = defaultPen.color();
-                if (selectedIndex == i)
-                        rowColor = RkColor(255, 255, 255);
-                if (hoverIndex == i)
-                        rowColor = RkColor(230, 230, 230);
+                auto rowColor = (i - offsetIndex) % 2 ? RkColor(22, 22, 22) : RkColor(35, 35, 35);
+                auto txtColor = textColor();
 
-                if (rowColor != painter.pen().color()) {
-                        auto pen = defaultPen;
-                        pen.setColor(rowColor);
-                        painter.setPen(pen);
+                if (hoverIndex == i) {
+                        txtColor = RkColor(255, 255, 255);
+                        rowColor = rowColor + 5;
                 }
-                painter.drawText(0, rowY, preset->getName());
+                if (selectedIndex == i) {
+                        rowColor = {100, 100, 255};
+                        txtColor = RkColor(255, 255, 255);
+                }
+
+                auto pen = painter.pen();
+                pen.setColor(txtColor);
+
+                RkRect texRect(padding, rowY, width() - padding, rowHeight);
+                RkRect rawRect(0, rowY, width(), rowHeight);
+                painter.fillRect(rawRect, rowColor);
+                painter.setPen(pen);
+                painter.drawText(texRect, preset->getName(), Rk::Alignment::AlignLeft);
 
                 rowY += rowHeight;
         }
 }
 
-void PresetWidget::mouseButtonPressEvent(RkMouseEvent *event) override
+void PresetWidget::mouseButtonPressEvent(RkMouseEvent *event)
 {
+        if (event->button() == RkMouseEvent::ButtonType::WheelUp
+            || event->button() == RkMouseEvent::ButtonType::WheelDown) {
+                auto delta = event->button() == RkMouseEvent::ButtonType::WheelUp ? -1 : 1;
+                scroolContent(offsetIndex + delta);
+                return;
+        }
+
         if (event->button() == RkMouseEvent::ButtonType::Left) {
                 auto index = getIndex(event->x(), event->y());
                 const auto *selectedPreset = presetList->getPreset(index);
@@ -127,10 +153,9 @@ void PresetWidget::mouseButtonPressEvent(RkMouseEvent *event) override
                         update();
                 }
 	}
-
 }
 
-void PresetWidget::mouseMoveEvent(RkMouseEvent *event) override
+void PresetWidget::mouseMoveEvent(RkMouseEvent *event)
 {
         auto index = getIndex(event->x(), event->y());
         const auto *selectedPreset = presetList->getPreset(index);
@@ -147,7 +172,7 @@ int PresetWidget::getIndex(int x, int y) const
 
         auto index = y / rowHeight;
         if (static_cast<size_t>(index) < presetList->size())
-                return index;
+                return index + offsetIndex;
 
         return -1;
 }

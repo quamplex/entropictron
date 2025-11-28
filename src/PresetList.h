@@ -29,6 +29,8 @@
 
 #include "RkObject.h"
 
+class EntState;
+
 class PresetList
 {
 public:
@@ -36,10 +38,10 @@ public:
         bool loadFromDefaultPath();
         const std::vector<std::unique_ptr<EntState>>& getPresets() const;
         size_t size() const;
-        const EntState& getPreset(size_t index) const;
+        const EntState* getPreset(size_t index) const;
 
 private:
-        std::vector<std::unique_ptr<EntState>> presetsList;
+        std::vector<std::unique_ptr<EntState>> presetList;
         std::filesystem::path presetFolder = "/usr/local/share/entropictron/presets";
 };
 

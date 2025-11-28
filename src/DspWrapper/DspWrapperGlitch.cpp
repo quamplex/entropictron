@@ -33,7 +33,7 @@ DspWrapperGlitch::DspWrapperGlitch(struct ent_glitch* dsp)
 
 void DspWrapperGlitch::enable(bool b)
 {
-    ENTROPICTRON_LOG_DEBUG("called: " << b);
+    ENT_LOG_DEBUG("called: " << b);
     ent_glitch_enable(glitchDsp, b);
 }
 
@@ -44,7 +44,7 @@ bool DspWrapperGlitch::isEnabled() const
 
 void DspWrapperGlitch::setProbability(double value)
 {
-    ENTROPICTRON_LOG_DEBUG("called: " << value);
+    ENT_LOG_DEBUG("called: " << value);
     ent_glitch_set_probability(glitchDsp, value);
 }
 
@@ -55,7 +55,7 @@ double DspWrapperGlitch::probability() const
 
 void DspWrapperGlitch::setJumpMin(double value)
 {
-    ENTROPICTRON_LOG_DEBUG("called: " << value);
+    ENT_LOG_DEBUG("called: " << value);
     ent_glitch_set_jump_min(glitchDsp, value);
 }
 
@@ -66,7 +66,7 @@ double DspWrapperGlitch::jumpMin() const
 
 void DspWrapperGlitch::setJumpMax(double value)
 {
-    ENTROPICTRON_LOG_DEBUG("called: " << value);
+    ENT_LOG_DEBUG("called: " << value);
     ent_glitch_set_jump_max(glitchDsp, value);
 }
 
@@ -77,7 +77,7 @@ double DspWrapperGlitch::jumpMax() const
 
 void DspWrapperGlitch::setLength(double value)
 {
-    ENTROPICTRON_LOG_DEBUG("called: " << value);
+    ENT_LOG_DEBUG("called: " << value);
     ent_glitch_set_length(glitchDsp, value);
 }
 
@@ -88,7 +88,7 @@ double DspWrapperGlitch::length() const
 
 void DspWrapperGlitch::setRepeatCount(int value)
 {
-    ENTROPICTRON_LOG_DEBUG("called: " << value);
+    ENT_LOG_DEBUG("called: " << value);
     ent_glitch_set_repeat_count(glitchDsp, value);
 }
 

@@ -123,7 +123,8 @@ set(RK_HEADERS
   ${RK_INCLUDE_PATH}/RkContainerWidgetItem.h
   ${RK_INCLUDE_PATH}/RkContainer.h
   ${RK_INCLUDE_PATH}/RkFlowContainer.h
-  ${RK_INCLUDE_PATH}/RkTransition.h)
+  ${RK_INCLUDE_PATH}/RkTransition.h
+  ${RK_INCLUDE_PATH}/RkScroolbar.h)
 
 set(RK_HEADERS_IMPL
   ${RK_INCLUDE_PATH}/impl/RkObjectImpl.h
@@ -198,7 +199,8 @@ set(RK_SOURCES
   ${RK_SRC_PATH}/RkImageImpl.cpp
   ${RK_SRC_PATH}/RkPainterImpl.cpp
   ${RK_SRC_PATH}/RkContainer.cpp
-  ${RK_SRC_PATH}/RkFlowContainer.cpp)
+  ${RK_SRC_PATH}/RkFlowContainer.cpp
+  ${RK_SRC_PATH}/RkScroolbar.cpp)
 
 if (CMAKE_SYSTEM_NAME MATCHES Windows)
   set(RK_SOURCES_PLATFORM

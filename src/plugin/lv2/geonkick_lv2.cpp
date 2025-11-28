@@ -70,7 +70,7 @@ class GeonkickLv2Plugin : public RkObject
         bool init()
         {
                 if (!entropictronApi->init()) {
-                        ENTROPICTRON_LOG_ERROR("can't init DSP");
+                        ENT_LOG_ERROR("can't init DSP");
                         return false;
                 }
                 outputChannels = std::vector<float*>(2 * entropictronApi->numberOfChannels(), nullptr);
@@ -147,7 +147,7 @@ class GeonkickLv2Plugin : public RkObject
         {
                 RK_UNUSED(flags);
                 if (data.find("UiSettings") == std::string::npos) {
-                        ENTROPICTRON_LOG_INFO("old plugin state version");
+                        ENT_LOG_INFO("old plugin state version");
                         entropictronApi->setKitState(data);
                         entropictronApi->notifyUpdateGui();
                         entropictronApi->notifyKitUpdated();
@@ -329,7 +329,7 @@ static LV2UI_Handle ent_instantiate_ui(const LV2UI_Descriptor*   descriptor,
                                                mainWidget->height() * factor);
                      });
         if (!mainWidget->init()) {
-                ENTROPICTRON_LOG_ERROR("can't init main window");
+                ENT_LOG_ERROR("can't init main window");
                 delete guiApp;
                 return nullptr;
         }
@@ -396,7 +396,7 @@ static LV2_Handle ent_instantiate(const LV2_Descriptor*     descriptor,
 {
         auto entropictronLv2PLugin = new GeonkickLv2Plugin(rate);
         if (!entropictronLv2PLugin->init()) {
-                ENTROPICTRON_LOG_ERROR("can't create DSP instance");
+                ENT_LOG_ERROR("can't create DSP instance");
                 delete entropictronLv2PLugin;
                 return nullptr;
         }

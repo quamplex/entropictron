@@ -26,6 +26,7 @@
 #include "NoiseModel.h"
 #include "CrackleModel.h"
 #include "GlitchModel.h"
+#include "EntState.h"
 
 EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
         : RkObject(parent)
@@ -43,6 +44,17 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
                     playModeUpdated,
                     RK_ACT_ARGS(PlayMode mode),
                     this, playModeUpdated(mode));
+}
+
+bool EntropictronModel::loadPreset(const EntState *preset)
+{
+        ENT_LOG_INFO("load preset: " << preset->getName());
+        noise1Model->enable(preset->noise.enabled);
+        noise1Model->setDensity(preset->noise.density);
+        noise2Model->enable(preset->noise.enabled);
+        noise2Model->setDensity(preset->noise.density);
+
+        return true;
 }
 
 void EntropictronModel::setPlayMode(PlayMode mode)

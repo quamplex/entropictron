@@ -125,7 +125,7 @@ double DspProxyVst::playModeToNormalized(PlayMode mode) const
 
 PlayMode DspProxyVst::playModeFromNormalized(double value) const
 {
-        ENTROPICTRON_LOG_INFO("PLAY_MODE: " << value);
+        ENT_LOG_INFO("PLAY_MODE: " << value);
         auto numPlayModes = static_cast<double>(PlayMode::OnMode);
         return static_cast<PlayMode>(std::round(value * numPlayModes));
 }

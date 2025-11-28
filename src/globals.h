@@ -55,31 +55,31 @@ namespace fs = std::filesystem;
 #include <RkObject.h>
 
 //#ifdef GKICK_LOG_DEBUG_LEVEL
-#define ENTROPICTRON_LOG_INFO(msg) std::cerr << "[" << ENT_NAME << "] " \
-        << " [" << std::this_thread::get_id() << "] "                   \
-        << __PRETTY_FUNCTION__ << "[INFO] "                             \
+#define ENT_LOG_INFO(msg) std::cerr << "[" << ENT_NAME << "] "    \
+        << " [" << std::this_thread::get_id() << "] "             \
+        << __PRETTY_FUNCTION__ << "[INFO] "                       \
         << msg << std::endl;
-#define ENTROPICTRON_LOG_ERROR(msg) std::cerr << "[" << ENT_NAME << "] " \
-        << " [" << std::this_thread::get_id() << "] "                    \
-        << __PRETTY_FUNCTION__ << "[ERROR] "                             \
+#define ENT_LOG_ERROR(msg) std::cerr << "[" << ENT_NAME << "] "   \
+        << " [" << std::this_thread::get_id() << "] "             \
+        << __PRETTY_FUNCTION__ << "[ERROR] "                      \
         << msg << std::endl;
-#define ENTROPICTRON_LOG_DEBUG(msg) std::cerr << "[" \
-        << std::this_thread::get_id() << "][" << ENT_NAME << "] "       \
-        << " [" << std::this_thread::get_id() << "] "                   \
-        << __PRETTY_FUNCTION__ << "[DEBUG] "                            \
+#define ENT_LOG_DEBUG(msg) std::cerr << "[" \
+        << std::this_thread::get_id() << "][" << ENT_NAME << "] " \
+        << " [" << std::this_thread::get_id() << "] "             \
+        << __PRETTY_FUNCTION__ << "[DEBUG] "                      \
         << msg << std::endl;
 /*#else
-#define ENTROPICTRON_LOG_INFO(msg) std::cerr << "[" << ENTROPICTRON_NAME << "] " \
+#define ENT_LOG_INFO(msg) std::cerr << "[" << ENTROPICTRON_NAME << "] " \
                                << "[INFO] " << msg << std::endl;
-#define ENTROPICTRON_LOG_ERROR(msg) std::cerr << "[" << ENTROPICTRON_NAME << "] " \
+#define ENT_LOG_ERROR(msg) std::cerr << "[" << ENTROPICTRON_NAME << "] " \
                                << "[ERROR] " << msg << std::endl;
-                               #define ENTROPICTRON_LOG_DEBUG(msg)*/
+                               #define ENT_LOG_DEBUG(msg)*/
 //#endif //  // GKICK_LIB_LOG_LEVEL_DEBUG
 
 namespace Entropictron
 {
+        constexpr int applicationVersion = ENT_VERSION;
         constexpr int defaultSampleRate = ENT_DEFAULT_SAMPLE_RATE;
-        constexpr char appName[] = "Entropictron";
         constexpr char applicationName[] = "Entropictron";
         constexpr char applicationVersionStr[] = ENT_VERSION_STRING;
         constexpr std::string_view defaultExportFormat = "flac24";

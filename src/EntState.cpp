@@ -28,12 +28,52 @@
 
 using namespace rapidjson;
 
-void EntState::setPlaymode(int mode)
+void EntState::setName(const std::string_view &name)
+{
+        presetName = name;
+}
+
+std::string EntState::getName() const
+{
+        return presetName;
+}
+
+void EntState::setAuthor(const std::string_view &author)
+{
+        presetAuthor = author;
+}
+
+std::string EntState::getAuthor() const
+{
+        return presetAuthor;
+}
+
+void EntState::setAuthorURL(const std::string_view &url)
+{
+        presetAuthorURL = url;
+}
+
+std::string EntState::getAuthorURL() const
+{
+        return presetAuthorURL;
+}
+
+void EntState::setLicense(const std::string_view &license)
+{
+        presetLicense = license;
+}
+
+std::string EntState::getLicense() const
+{
+        return presetLicense;
+}
+
+void EntState::setPlayMode(int mode)
 {
         playMode = mode;
 }
 
-int EntState::getPlaymode() const
+int EntState::getPlayMode() const
 {
         return playMode;
 }
@@ -44,19 +84,21 @@ std::string EntState::toJson() const
         doc.SetObject();
         auto& a = doc.GetAllocator();
 
-        // Static metadata
-        doc.AddMember("application_name", "Entropictron", a);
-        doc.AddMember("application_version", "0x010000", a);
+        doc.AddMember("application_name", Entropictron::applicationName, a);
+        doc.AddMember("application_version", Entropictron::applicationVersion, a);
 
         // Preset metadata
-        doc.AddMember("preset_name", "Unnamed", a);
-        doc.AddMember("preset_version", 1, a);
-        doc.AddMember("author", "", a);
-        doc.AddMember("authorURL", "", a);
-        doc.AddMember("license", "", a);
+        doc.AddMember("preset_name",
+                      rapidjson::Value(getName().c_str(), a), a);
+        doc.AddMember("author",
+                      rapidjson::Value(getAuthor().c_str(), a), a);
+        doc.AddMember("authorURL",
+                      rapidjson::Value(getAuthorURL().c_str(), a), a);
+        doc.AddMember("license",
+                      rapidjson::Value(getLicense().c_str(), a), a);
 
         Value global(kObjectType);
-        global.AddMember("playmode", playmode, a);
+        global.AddMember("playmode", getPlayMode(), a);
         doc.AddMember("global", global, a);
 
         Value modules(kArrayType);
@@ -76,33 +118,50 @@ std::string EntState::toJson() const
 
 bool EntState::fromJson(const std::string& jsonStr)
 {
-        Document doc;
-        if (doc.Parse(jsonStr.c_str()).HasParseError())
-                return false;
+    Document doc;
+    if (doc.Parse(jsonStr.c_str()).HasParseError())
+        return false;
 
-        if (!doc.HasMember("global") || !doc.HasMember("modules"))
-                return false;
+    // --- Preset metadata ---
+    if (doc.HasMember("preset_name") && doc["preset_name"].IsString())
+            setName(doc["preset_name"].GetString());
 
-        playmode = doc["global"]["playmode"].GetInt();
+    if (doc.HasMember("author") && doc["author"].IsString())
+            setAuthor(doc["author"].GetString());
 
-        const auto& mods = doc["modules"];
-        for (auto& m : mods.GetArray()) {
-                int id = m["id"].GetInt();
-                switch (id) {
-                case 1:
-                        readNoise(m);
-                        break;
-                case 2:
-                        readCrackle(m);
-                        break;
-                case 3:
-                        readGlitch(m);
-                        break;
-                default: break;
-                }
+    if (doc.HasMember("authorURL") && doc["authorURL"].IsString())
+            setAuthorURL(doc["authorURL"].GetString());
+
+    if (doc.HasMember("license") && doc["license"].IsString())
+            setLicense(doc["license"].GetString());
+
+    // --- Global section ---
+    if (!doc.HasMember("global") || !doc["global"].IsObject())
+        return false;
+
+    const auto& global = doc["global"];
+
+    if (global.HasMember("playmode") && global["playmode"].IsInt())
+            setPlayMode(global["playmode"].GetInt());
+
+    // --- Modules ---
+    if (!doc.HasMember("modules") || !doc["modules"].IsArray())
+        return false;
+
+    for (const auto& m : doc["modules"].GetArray()) {
+        if (!m.HasMember("id") || !m["id"].IsInt())
+            continue;
+
+        int id = m["id"].GetInt();
+        switch (id) {
+        case 1: readNoise(m);   break;
+        case 2: readCrackle(m); break;
+        case 3: readGlitch(m);  break;
+        default: break; // ignore unknown future modules
         }
+    }
 
-        return true;
+    return true;
 }
 
 bool EntState::saveToFile(const std::filesystem::path& filepath) const
@@ -198,7 +257,7 @@ void EntState::readCrackle(const Value& m)
         crackle.stereo      = m["stereo"].GetDouble();
 }
 
-void EntState::readModule3(const Value& m)
+void EntState::readGlitch(const Value& m)
 {
         glitch.enabled     = m["enabled"].GetBool();
         glitch.repeats     = m["repeats"].GetInt();
