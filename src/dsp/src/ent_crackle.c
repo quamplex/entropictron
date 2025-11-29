@@ -58,7 +58,7 @@ struct ent_crackle* ent_crackle_create(int sample_rate)
 
         c->sample_rate = sample_rate;
         c->enabled = false;
-        c->rate = 10.0f;
+        c->rate = 20.0f;
         c->duration = 1.0f;
         c->amplitude = 1.0f;
         c->randomness = 0.5f;
@@ -214,22 +214,22 @@ void ent_crackle_process(struct ent_crackle *c, float **data, size_t size)
                                 break;
                         }
                         case ENT_CRACKLE_ENV_LINEAR:
-                                val *= c->burst_amplitude * (1.0f - t);
+                                val = c->burst_amplitude * (1.0f - t);
                                 break;
                         case ENT_CRACKLE_ENV_TRIANGLE:
-                                val *= c->burst_amplitude * (1.0f - fabsf(2.0f * t - 1.0f));
+                                val = c->burst_amplitude * (1.0f - fabsf(2.0f * t - 1.0f));
                                 break;
                         default:
+                                val = 0.0f;
                                 break;
                         }
 
                         c->burst_index++;
                         if (c->burst_index >= burst_samples)
-                                c->burst_index = 0; // burst ends
+                                c->burst_index = 0;
                 } else {
-                        // Only trigger a new burst if not in a burst
                         float sparse_prob = fabs(qx_randomizer_get_float(&c->prob_randomizer));
-                        if (sparse_prob <= 1.0f / (c->rate + 1.0f)) {
+                        if (sparse_prob <= c->rate / c->sample_rate) {
                                 c->burst_index = 1; // first sample of burst
                                 float amp_random = qx_randomizer_get_float(&c->randomizer);
                                 c->burst_amplitude = amp_random * c->amplitude;

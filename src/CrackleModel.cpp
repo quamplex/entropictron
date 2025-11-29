@@ -27,8 +27,8 @@
 CrackleModel::CrackleModel(RkObject *parent, DspCrackleProxy *dspCrackleProxy)
         : EntAbstractModel(parent)
         , dspCrackleProxy {dspCrackleProxy}
-        , rateDefaultvalue{10.0}
-        , rateRange{0.0, 10.0}
+        , rateDefaultvalue{20.0}
+        , rateRange{0.5, 100.0}
         , randomnessDefaultvalue{0.5}
         , randomnessRange{0.0, 1.0}
         , amplitudeDefaultvalue{1.0}

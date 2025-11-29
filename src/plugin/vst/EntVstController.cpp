@@ -143,8 +143,10 @@ void EntVstController::addCrackleParameters()
                                 ParameterId::Crackle1EnabledId);
 
         // Rate (bursts per second)
+        auto rateDefalutNormalized = (20 - 0.5) / (100 - 0.5);
         parameters.addParameter(STR16("Crackle1 Rate"),
-                                nullptr, 100, 20.0, // 0–100 Hz, default 20
+                                nullptr, 200, rateDefalutNormalized,
+                                // 0–100 Hz, default 20Hz
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1RateId);
 

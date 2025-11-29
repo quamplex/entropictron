@@ -122,6 +122,7 @@ void CrackleWidget::updateView()
 
         auto [rateFrom, rateTo] = model->getRateRange();
         rateKnob->setRange(rateFrom, rateTo);
+        rateKnob->setRangeType(Knob::RangeType::Logarithmic);
         rateKnob->setDefaultValue(model->getRateDefaultValue());
         rateKnob->setValue(model->rate());
 

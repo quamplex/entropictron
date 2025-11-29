@@ -67,7 +67,8 @@ enum ent_error ent_crackle_set_brightness(struct ent_crackle *c, float brightnes
 
 float ent_crackle_get_brightness(struct ent_crackle *c);
 
-enum ent_error ent_crackle_set_envelope_shape(struct ent_crackle *c, enum ent_crackle_envelope shape);
+enum ent_error ent_crackle_set_envelope_shape(struct ent_crackle *c,
+                                              enum ent_crackle_envelope shape);
 
 enum ent_crackle_envelope ent_crackle_get_envelope_shape(struct ent_crackle *c);
 

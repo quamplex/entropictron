@@ -105,9 +105,11 @@ bool DspCrackleProxyVst::isEnabled() const
 
 bool DspCrackleProxyVst::setRate(double value)
 {
+        ENT_LOG_INFO("value: " << value);
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1RateId : ParameterId::Crackle2RateId;
         vstController->getComponentHandler()->beginEdit(id);
+        value = (value - 0.5) / (100 - 0.5);
         vstController->getComponentHandler()->performEdit(id, value);
         vstController->getComponentHandler()->endEdit(id);
         return true;
@@ -117,7 +119,7 @@ double DspCrackleProxyVst::rate() const
 {
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1RateId : ParameterId::Crackle2RateId;
-        return vstController->getParamNormalized(id);
+        return 0.5 + (100 - 0.5) * vstController->getParamNormalized(id);
 }
 
 bool DspCrackleProxyVst::setDuration(double value)
