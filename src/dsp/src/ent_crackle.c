@@ -57,7 +57,7 @@ struct ent_crackle* ent_crackle_create(int sample_rate)
                 return NULL;
 
         c->sample_rate = sample_rate;
-        c->enabled = true;
+        c->enabled = false;
         c->rate = 10.0f;
         c->duration = 1.0f;
         c->amplitude = 1.0f;
@@ -88,7 +88,7 @@ void ent_crackle_free(struct ent_crackle **c)
 
 enum ent_error ent_crackle_enable(struct ent_crackle *c, bool b)
 {
-        c->enabled = true;
+        c->enabled = b;
         qx_fader_enable(&c->fader, b);
         return ENT_OK;
 }
@@ -100,6 +100,7 @@ bool ent_crackle_is_enabled(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_rate(struct ent_crackle *c, float rate)
 {
+        ent_log_info("RATE: %f", rate);
         c->rate = rate;
         return ENT_OK;
 }
@@ -176,7 +177,7 @@ enum ent_crackle_envelope ent_crackle_get_envelope_shape(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_stereo_spread(struct ent_crackle *c, float spread)
 {
-        //c->stereo_spread = spread;
+        c->stereo_spread = spread;
         return ENT_OK;
 }
 
@@ -213,10 +214,10 @@ void ent_crackle_process(struct ent_crackle *c, float **data, size_t size)
                                 break;
                         }
                         case ENT_CRACKLE_ENV_LINEAR:
-                                //val *= c->burst_amplitude * (1.0f - t);
+                                val *= c->burst_amplitude * (1.0f - t);
                                 break;
                         case ENT_CRACKLE_ENV_TRIANGLE:
-                                //val *= c->burst_amplitude * (1.0f - fabsf(2.0f * t - 1.0f));
+                                val *= c->burst_amplitude * (1.0f - fabsf(2.0f * t - 1.0f));
                                 break;
                         default:
                                 break;
@@ -228,7 +229,7 @@ void ent_crackle_process(struct ent_crackle *c, float **data, size_t size)
                 } else {
                         // Only trigger a new burst if not in a burst
                         float sparse_prob = fabs(qx_randomizer_get_float(&c->prob_randomizer));
-                        if (sparse_prob <= 0.0001) {
+                        if (sparse_prob <= 1.0f / (c->rate + 1.0f)) {
                                 c->burst_index = 1; // first sample of burst
                                 float amp_random = qx_randomizer_get_float(&c->randomizer);
                                 c->burst_amplitude = amp_random * c->amplitude;

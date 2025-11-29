@@ -146,18 +146,27 @@ ent_process(struct entropictron *ent, float** data, size_t size)
 {
         float *in[2] = {data[0], data[1]};
         float *out[2] = {data[2], data[3]};
-        size_t num_noises = QX_ARRAY_SIZE(ent->noise);
-        for (size_t i = 0; i < num_noises; i++) {
+
+        size_t n = QX_ARRAY_SIZE(ent->noise);
+        for (size_t i = 0; i < n; i++) {
                 struct ent_noise *noise = ent->noise[i];
                 if (ent_noise_is_enabled(noise))
                         ent_noise_process(noise, out, size);
+        }
+
+        n = QX_ARRAY_SIZE(ent->crackle);
+        for (size_t i = 0; i < n; i++) {
                 struct ent_crackle *crackle = ent->crackle[i];
                 if (ent_crackle_is_enabled(crackle))
                         ent_crackle_process(crackle, out, size);
         }
 
-        //ent_crackle_process(ent->crackle, out, size);
-        //ent_glitch_process(ent->glitch, in, out, size);
+        /*n = QX_ARRAY_SIZE(ent->glitch);
+        for (size_t i = 0; i < n; i++) {
+                struct ent_glitch *glitch = ent->glitch[i];
+                if (ent_glitch_is_enabled(glitch))
+                        ent_glitch_process(glitch, in, out, size);
+                        }*/
 
         return ENT_OK;
 }

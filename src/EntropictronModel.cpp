@@ -75,7 +75,7 @@ bool EntropictronModel::loadPreset(const EntState *preset)
                 crackle[i]->setStereospread(preset->crackle[i].stereo);
         }
 
-        /*std::vector<GlitchModel*> glitch = {glitch1Model, glitch2Model};
+        std::vector<GlitchModel*> glitch = {glitch1Model, glitch2Model};
         for (size_t i = 0; i < glitch.size(); i++) {
                 glitch[i]->enable(preset->glitch[i].enabled);
                 glitch[i]->setRepeats(preset->glitch[i].repeats);
@@ -83,7 +83,7 @@ bool EntropictronModel::loadPreset(const EntState *preset)
                 glitch[i]->setLength(preset->glitch[i].length);
                 glitch[i]->setMinJump(preset->glitch[i].min_jump);
                 glitch[i]->setMaxJump(preset->glitch[i].max_jump);
-                }*/
+        }
 
         return true;
 }
