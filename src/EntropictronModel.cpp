@@ -49,10 +49,10 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
 bool EntropictronModel::loadPreset(const EntState *preset)
 {
         ENT_LOG_INFO("load preset: " << preset->getName());
-        noise1Model->enable(preset->noise.enabled);
-        noise1Model->setDensity(preset->noise.density);
-        noise2Model->enable(preset->noise.enabled);
-        noise2Model->setDensity(preset->noise.density);
+        noise1Model->enable(preset->noise[0].enabled);
+        noise1Model->setDensity(preset->noise[0].density);
+        noise2Model->enable(preset->noise[1].enabled);
+        noise2Model->setDensity(preset->noise[1].density);
 
         return true;
 }

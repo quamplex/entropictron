@@ -78,27 +78,30 @@ int EntState::getPlayMode() const
         return playMode;
 }
 
-std::string EntState::toJson() const
+std::string EntState::toJson(bool asPreset) const
 {
         Document doc;
         doc.SetObject();
         auto& a = doc.GetAllocator();
 
-        doc.AddMember("application_name", Entropictron::applicationName, a);
-        doc.AddMember("application_version", Entropictron::applicationVersion, a);
+        if (asPreset) {
+                doc.AddMember("application_name", Entropictron::applicationName, a);
+                doc.AddMember("application_version", Entropictron::applicationVersion, a);
 
-        // Preset metadata
-        doc.AddMember("preset_name",
-                      rapidjson::Value(getName().c_str(), a), a);
-        doc.AddMember("author",
-                      rapidjson::Value(getAuthor().c_str(), a), a);
-        doc.AddMember("authorURL",
-                      rapidjson::Value(getAuthorURL().c_str(), a), a);
-        doc.AddMember("license",
-                      rapidjson::Value(getLicense().c_str(), a), a);
+                // Preset metadata
+                doc.AddMember("preset_name",
+                              rapidjson::Value(getName().c_str(), a), a);
+                doc.AddMember("author",
+                              rapidjson::Value(getAuthor().c_str(), a), a);
+                doc.AddMember("authorURL",
+                              rapidjson::Value(getAuthorURL().c_str(), a), a);
+                doc.AddMember("license",
+                              rapidjson::Value(getLicense().c_str(), a), a);
+        }
 
         Value global(kObjectType);
-        global.AddMember("playmode", getPlayMode(), a);
+        if (!asPreset)
+                global.AddMember("playmode", getPlayMode(), a);
         doc.AddMember("global", global, a);
 
         Value modules(kArrayType);
@@ -152,13 +155,16 @@ bool EntState::fromJson(const std::string& jsonStr)
         if (!m.HasMember("id") || !m["id"].IsInt())
             continue;
 
-        int id = m["id"].GetInt();
-        switch (id) {
-        case 1: readNoise(m);   break;
-        case 2: readCrackle(m); break;
-        case 3: readGlitch(m);  break;
-        default: break; // ignore unknown future modules
-        }
+        if (!m.HasMember("name") || !m["name"].IsString())
+                continue;
+
+        std::string moduleName = m["name"].GetString();
+        if (moduleName == "noise")
+                readNoise(m, m["id"].GetInt());
+        else if (moduleName == "crackle")
+                readCrackle(m, m["id"].GetInt());
+        else if (moduleName == "glitch")
+                readGlitch(m, m["id"].GetInt());
     }
 
     return true;
@@ -170,7 +176,7 @@ bool EntState::saveToFile(const std::filesystem::path& filepath) const
         if (!ofs.is_open())
                 return false;
 
-        ofs << toJson();
+        ofs << toJson(true);
         return true;
 }
 
@@ -188,81 +194,99 @@ bool EntState::loadFromFile(const std::filesystem::path& filepath)
 void EntState::writeNoise(Value& modulesArray,
                           Document::AllocatorType& a) const
 {
-        Value m(kObjectType);
-        m.AddMember("id", noise.id, a);
-        m.AddMember("enabled", noise.enabled, a);
-        m.AddMember("type", noise.type, a);
-        m.AddMember("density", noise.density, a);
-        m.AddMember("brightness", noise.brightness, a);
-        m.AddMember("gain", noise.gain, a);
-        m.AddMember("stereo", noise.stereo, a);
-        m.AddMember("filter_type", noise.filter_type, a);
-        m.AddMember("cutoff", noise.cutoff, a);
-        m.AddMember("resonance", noise.resonance, a);
-        modulesArray.PushBack(m, a);
+        for (size_t i = 0; i < std::size(noise); i++) {
+                Value m(kObjectType);
+                m.AddMember("id", i, a);
+                m.AddMember("name", "noise", a);
+                m.AddMember("enabled", noise[i].enabled, a);
+                m.AddMember("type", noise[i].type, a);
+                m.AddMember("density", noise[i].density, a);
+                m.AddMember("brightness", noise[i].brightness, a);
+                m.AddMember("gain", noise[i].gain, a);
+                m.AddMember("stereo", noise[i].stereo, a);
+                m.AddMember("filter_type", noise[i].filter_type, a);
+                m.AddMember("cutoff", noise[i].cutoff, a);
+                m.AddMember("resonance", noise[i].resonance, a);
+                modulesArray.PushBack(m, a);
+        }
 }
 
 void EntState::writeCrackle(Value& modulesArray,
                             Document::AllocatorType& a) const
 {
-        Value m(kObjectType);
-        m.AddMember("id", crackle.id, a);
-        m.AddMember("enabled", crackle.enabled, a);
-        m.AddMember("rate", crackle.rate, a);
-        m.AddMember("randomness", crackle.randomness, a);
-        m.AddMember("amplitude", crackle.amplitude, a);
-        m.AddMember("env_type", crackle.env_type, a);
-        m.AddMember("brightness", crackle.brightness, a);
-        m.AddMember("duration", crackle.duration, a);
-        m.AddMember("stereo", crackle.stereo, a);
-        modulesArray.PushBack(m, a);
+        for (size_t i = 0; i < std::size(noise); i++) {
+                Value m(kObjectType);
+                m.AddMember("id", i, a);
+                m.AddMember("name", "crackle", a);
+                m.AddMember("enabled", crackle[i].enabled, a);
+                m.AddMember("rate", crackle[i].rate, a);
+                m.AddMember("randomness", crackle[i].randomness, a);
+                m.AddMember("amplitude", crackle[i].amplitude, a);
+                m.AddMember("env_type", crackle[i].env_type, a);
+                m.AddMember("brightness", crackle[i].brightness, a);
+                m.AddMember("duration", crackle[i].duration, a);
+                m.AddMember("stereo", crackle[i].stereo, a);
+                modulesArray.PushBack(m, a);
+        }
 }
 
 void EntState::writeGlitch(Value& modulesArray,
                            Document::AllocatorType& a) const
 {
-        Value m(kObjectType);
-        m.AddMember("id", glitch.id, a);
-        m.AddMember("enabled", glitch.enabled, a);
-        m.AddMember("repeats", glitch.repeats, a);
-        m.AddMember("probability", glitch.probability, a);
-        m.AddMember("length", glitch.length, a);
-        m.AddMember("min_jump", glitch.min_jump, a);
-        m.AddMember("max_jump", glitch.max_jump, a);
-        modulesArray.PushBack(m, a);
+        for (size_t i = 0; i < std::size(noise); i++) {
+                Value m(kObjectType);
+                m.AddMember("id", i, a);
+                m.AddMember("name", "glitch", a);
+                m.AddMember("enabled", glitch[i].enabled, a);
+                m.AddMember("repeats", glitch[i].repeats, a);
+                m.AddMember("probability", glitch[i].probability, a);
+                m.AddMember("length", glitch[i].length, a);
+                m.AddMember("min_jump", glitch[i].min_jump, a);
+                m.AddMember("max_jump", glitch[i].max_jump, a);
+                modulesArray.PushBack(m, a);
+        }
 }
 
-void EntState::readNoise(const Value& m)
+void EntState::readNoise(const Value& m, size_t id)
 {
-        noise.enabled     = m["enabled"].GetBool();
-        noise.type        = m["type"].GetInt();
-        noise.density     = m["density"].GetDouble();
-        noise.brightness  = m["brightness"].GetDouble();
-        noise.gain        = m["gain"].GetDouble();
-        noise.stereo      = m["stereo"].GetDouble();
-        noise.filter_type = m["filter_type"].GetInt();
-        noise.cutoff      = m["cutoff"].GetDouble();
-        noise.resonance   = m["resonance"].GetDouble();
+        if (id >= std::size(noise))
+                return;
+
+        noise[id].enabled     = m["enabled"].GetBool();
+        noise[id].type        = m["type"].GetInt();
+        noise[id].density     = m["density"].GetDouble();
+        noise[id].brightness  = m["brightness"].GetDouble();
+        noise[id].gain        = m["gain"].GetDouble();
+        noise[id].stereo      = m["stereo"].GetDouble();
+        noise[id].filter_type = m["filter_type"].GetInt();
+        noise[id].cutoff      = m["cutoff"].GetDouble();
+        noise[id].resonance   = m["resonance"].GetDouble();
 }
 
-void EntState::readCrackle(const Value& m)
+void EntState::readCrackle(const Value& m, size_t id)
 {
-        crackle.enabled     = m["enabled"].GetBool();
-        crackle.rate        = m["rate"].GetDouble();
-        crackle.randomness  = m["randomness"].GetDouble();
-        crackle.amplitude   = m["amplitude"].GetDouble();
-        crackle.env_type    = m["env_type"].GetInt();
-        crackle.brightness  = m["brightness"].GetDouble();
-        crackle.duration    = m["duration"].GetDouble();
-        crackle.stereo      = m["stereo"].GetDouble();
+        if (id >= std::size(crackle))
+                return;
+
+        crackle[id].enabled     = m["enabled"].GetBool();
+        crackle[id].rate        = m["rate"].GetDouble();
+        crackle[id].randomness  = m["randomness"].GetDouble();
+        crackle[id].amplitude   = m["amplitude"].GetDouble();
+        crackle[id].env_type    = m["env_type"].GetInt();
+        crackle[id].brightness  = m["brightness"].GetDouble();
+        crackle[id].duration    = m["duration"].GetDouble();
+        crackle[id].stereo      = m["stereo"].GetDouble();
 }
 
-void EntState::readGlitch(const Value& m)
+void EntState::readGlitch(const Value& m, size_t id)
 {
-        glitch.enabled     = m["enabled"].GetBool();
-        glitch.repeats     = m["repeats"].GetInt();
-        glitch.probability = m["probability"].GetDouble();
-        glitch.length      = m["length"].GetDouble();
-        glitch.min_jump    = m["min_jump"].GetDouble();
-        glitch.max_jump    = m["max_jump"].GetDouble();
+        if (id >= std::size(glitch))
+                return;
+
+        glitch[id].enabled     = m["enabled"].GetBool();
+        glitch[id].repeats     = m["repeats"].GetInt();
+        glitch[id].probability = m["probability"].GetDouble();
+        glitch[id].length      = m["length"].GetDouble();
+        glitch[id].min_jump    = m["min_jump"].GetDouble();
+        glitch[id].max_jump    = m["max_jump"].GetDouble();
 }

@@ -67,9 +67,9 @@ class EntState
                 double max_jump = 0.0;
         };
 
-        Noise noise;
-        Crackle crackle;
-        Glitch glitch;
+        Noise noise[2];
+        Crackle crackle[2];
+        Glitch glitch[2];
 
         void setName(const std::string_view &name);
         std::string getName() const;
@@ -81,7 +81,7 @@ class EntState
         std::string getLicense() const;
         void setPlayMode(int mode);
         int getPlayMode() const;
-        std::string toJson() const;
+        std::string toJson(bool asPreset = false) const;
         bool fromJson(const std::string& jsonStr);
         bool saveToFile(const std::filesystem::path& filepath) const;
         bool loadFromFile(const std::filesystem::path& filepath);
@@ -93,12 +93,11 @@ class EntState
                           rapidjson::Document::AllocatorType& a) const;
         void writeGlitch(rapidjson::Value& modulesArray,
                          rapidjson::Document::AllocatorType& a) const;
-        void readNoise(const rapidjson::Value& m);
-        void readCrackle(const rapidjson::Value& m);
-        void readGlitch(const rapidjson::Value& m);
+        void readNoise(const rapidjson::Value& m, size_t id);
+        void readCrackle(const rapidjson::Value& m, size_t id);
+        void readGlitch(const rapidjson::Value& m, size_t id);
 
  private:
-
         std::string presetName;
         std::string presetAuthor;
         std::string presetAuthorURL;
