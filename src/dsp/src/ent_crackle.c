@@ -95,12 +95,12 @@ enum ent_error ent_crackle_enable(struct ent_crackle *c, bool b)
 
 bool ent_crackle_is_enabled(struct ent_crackle *c)
 {
-        return true;//c->enabled;
+        return c->enabled;
 }
 
 enum ent_error ent_crackle_set_rate(struct ent_crackle *c, float rate)
 {
-        //        c->rate = rate;
+        c->rate = rate;
         return ENT_OK;
 }
 
@@ -111,7 +111,7 @@ float ent_crackle_get_rate(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_duration(struct ent_crackle *c, float duration)
 {
-        //        c->duration = duration;
+        c->duration = duration;
         return ENT_OK;
 }
 
@@ -122,7 +122,7 @@ float ent_crackle_get_duration(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_amplitude(struct ent_crackle *c, float amplitude)
 {
-        //        c->amplitude = amplitude;
+        c->amplitude = amplitude;
         return ENT_OK;
 }
 
@@ -133,7 +133,7 @@ float ent_crackle_get_amplitude(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_randomness(struct ent_crackle *c, float randomness)
 {
-        //c->randomness = randomness;
+        c->randomness = randomness;
         return ENT_OK;
 }
 
@@ -144,7 +144,7 @@ float ent_crackle_get_randomness(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_brightness(struct ent_crackle *c, float brightness)
 {
-        /*c->brightness = qx_clamp_float(brightness, 0.0f, 1.0f);
+        c->brightness = qx_clamp_float(brightness, 0.0f, 1.0f);
 
         float min_cutoff = 1000.0f;
         float max_cutoff = 8000.0f;
@@ -152,7 +152,7 @@ enum ent_error ent_crackle_set_brightness(struct ent_crackle *c, float brightnes
         float gain = 1.0f + 23.0f * c->brightness;
 
         ent_shelf_filter_set_cutoff(&c->sh_filter_l, c->sample_rate, cutoff, gain);
-        ent_shelf_filter_set_cutoff(&c->sh_filter_r, c->sample_rate, cutoff, gain);*/
+        ent_shelf_filter_set_cutoff(&c->sh_filter_r, c->sample_rate, cutoff, gain);
 
         return ENT_OK;
 }
@@ -166,7 +166,7 @@ enum ent_error ent_crackle_set_envelope_shape(struct ent_crackle *c,
 {
         if (shape >= ENT_CRACKLE_ENV_NUM_TYPES)
                 return ENT_ERROR_WRONG_ARGUMENTS;
-        //        c->envelope_shape = shape;
+        c->envelope_shape = shape;
         return ENT_OK;
 }
 enum ent_crackle_envelope ent_crackle_get_envelope_shape(struct ent_crackle *c)

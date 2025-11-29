@@ -253,12 +253,12 @@ void EntState::readNoise(const Value& m, size_t id)
                 return;
 
         noise[id].enabled     = m["enabled"].GetBool();
-        noise[id].type        = m["type"].GetInt();
+        noise[id].type        = std::clamp(m["type"].GetInt(), 0, 2);
         noise[id].density     = m["density"].GetDouble();
         noise[id].brightness  = m["brightness"].GetDouble();
         noise[id].gain        = m["gain"].GetDouble();
         noise[id].stereo      = m["stereo"].GetDouble();
-        noise[id].filter_type = m["filter_type"].GetInt();
+        noise[id].filter_type = std::clamp(m["filter_type"].GetInt(), 0, 2);
         noise[id].cutoff      = m["cutoff"].GetDouble();
         noise[id].resonance   = m["resonance"].GetDouble();
 }
@@ -272,7 +272,7 @@ void EntState::readCrackle(const Value& m, size_t id)
         crackle[id].rate        = m["rate"].GetDouble();
         crackle[id].randomness  = m["randomness"].GetDouble();
         crackle[id].amplitude   = m["amplitude"].GetDouble();
-        crackle[id].env_type    = m["env_type"].GetInt();
+        crackle[id].env_type    = std::clamp(m["env_type"].GetInt(), 0, 2);
         crackle[id].brightness  = m["brightness"].GetDouble();
         crackle[id].duration    = m["duration"].GetDouble();
         crackle[id].stereo      = m["stereo"].GetDouble();

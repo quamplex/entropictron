@@ -49,10 +49,41 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
 bool EntropictronModel::loadPreset(const EntState *preset)
 {
         ENT_LOG_INFO("load preset: " << preset->getName());
-        noise1Model->enable(preset->noise[0].enabled);
-        noise1Model->setDensity(preset->noise[0].density);
-        noise2Model->enable(preset->noise[1].enabled);
-        noise2Model->setDensity(preset->noise[1].density);
+        std::vector<NoiseModel*> noise = {noise1Model, noise2Model};
+        for (size_t i = 0; i < noise.size(); i++) {
+                noise[i]->enable(preset->noise[i].enabled);
+                noise[i]->setType(static_cast<NoiseType>(preset->noise[i].type));
+                noise[i]->setDensity(preset->noise[i].density);
+                noise[i]->setBrightness(preset->noise[i].brightness);
+                noise[i]->setGain(preset->noise[i].gain);
+                noise[i]->setStereo(preset->noise[i].stereo);
+                noise[i]->setFilterType(static_cast<FilterType>(preset->noise[i].filter_type));
+                noise[i]->setCutOff(preset->noise[i].cutoff);
+                noise[i]->setResonance(preset->noise[i].resonance);
+        }
+
+        std::vector<CrackleModel*> crackle = {crackle1Model, crackle2Model};
+        for (size_t i = 0; i < crackle.size(); i++) {
+                crackle[i]->enable(preset->crackle[i].enabled);
+                crackle[i]->setRate(preset->crackle[i].rate);
+                crackle[i]->setRandomness(preset->crackle[i].randomness);
+                crackle[i]->setAmplitude(preset->crackle[i].amplitude);
+                auto type = static_cast<CrackleEnvelopeShape>(preset->crackle[i].env_type);
+                crackle[i]->setEnvelopeShape(type);
+                crackle[i]->setBrightness(preset->crackle[i].brightness);
+                crackle[i]->setDuration(preset->crackle[i].duration);
+                crackle[i]->setStereospread(preset->crackle[i].stereo);
+        }
+
+        /*std::vector<GlitchModel*> glitch = {glitch1Model, glitch2Model};
+        for (size_t i = 0; i < glitch.size(); i++) {
+                glitch[i]->enable(preset->glitch[i].enabled);
+                glitch[i]->setRepeats(preset->glitch[i].repeats);
+                glitch[i]->setProbability(preset->glitch[i].probability);
+                glitch[i]->setLength(preset->glitch[i].length);
+                glitch[i]->setMinJump(preset->glitch[i].min_jump);
+                glitch[i]->setMaxJump(preset->glitch[i].max_jump);
+                }*/
 
         return true;
 }
