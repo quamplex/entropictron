@@ -403,7 +403,7 @@ void EntVstProcessor::initCrackleParamMappings()
         };
 
         paramMap[ParameterId::Crackle1StereoSpreadId] = [crackle](ParamValue v) {
-                crackle->setStereoSpread(static_cast<float>(v) * 100.0f);
+                crackle->setStereoSpread(static_cast<float>(v));
         };
 
         crackle = entropictronDsp->getCrackle(CrackleId::Crackle2);
@@ -438,7 +438,7 @@ void EntVstProcessor::initCrackleParamMappings()
         };
 
         paramMap[ParameterId::Crackle2StereoSpreadId] = [crackle](ParamValue v) {
-                crackle->setStereoSpread(static_cast<float>(v) * 100.0f);
+                crackle->setStereoSpread(static_cast<float>(v));
         };
 }
 

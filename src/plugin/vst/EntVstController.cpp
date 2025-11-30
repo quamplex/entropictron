@@ -165,7 +165,7 @@ void EntVstController::addCrackleParameters()
 
         // Randomness
         parameters.addParameter(STR16("Crackle1 Randomness"),
-                                nullptr, 100, 0.5, // 0–100%, default 50%
+                                nullptr, 100, 0.5, // 1–100%, default 50%
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1RandomnessId);
 
@@ -183,7 +183,7 @@ void EntVstController::addCrackleParameters()
 
         // Stereo Spread
         parameters.addParameter(STR16("Crackle1 Stereo Spread"),
-                                nullptr, 100, 50.0, // 0–100%, default 50%
+                                nullptr, 100, 0.0, // 0.0–1.0, default 0.0
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1StereoSpreadId);
 
@@ -195,7 +195,7 @@ void EntVstController::addCrackleParameters()
 
         // Rate (bursts per second)
         parameters.addParameter(STR16("Crackle2 Rate"),
-                                nullptr, 100, 20.0, // 0–100 Hz, default 20
+                                nullptr, 100, rateDefalutNormalized, // 0–100 Hz, default 20
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2RateId);
 
@@ -214,7 +214,7 @@ void EntVstController::addCrackleParameters()
 
         // Randomness
         parameters.addParameter(STR16("Crackle2 Randomness"),
-                                nullptr, 100, 0.5, // 0–100%, default 50%
+                                nullptr, 100, 0.5, // 1–100%, default 50%
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2RandomnessId);
 
@@ -232,7 +232,7 @@ void EntVstController::addCrackleParameters()
 
         // Stereo Spread
         parameters.addParameter(STR16("Crackle2 Stereo Spread"),
-                                nullptr, 100, 50.0, // 0–100%, default 50%
+                                nullptr, 100, 0.0, // 0.0–1.0, default 0.0
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2StereoSpreadId);
 }
