@@ -378,13 +378,12 @@ void EntVstProcessor::initCrackleParamMappings()
         };
 
         paramMap[ParameterId::Crackle1RateId] = [crackle](ParamValue v) {
-                // 0.5 - 100Hz
+                // 0.5 - 150Hz
                 crackle->setRate(0.5 + (100.0 - 0.5) * v);
         };
 
         paramMap[ParameterId::Crackle1DurationId] = [crackle](ParamValue v) {
-                float durationMs = 1.0f + static_cast<float>(v) * (50.0f - 1.0f);
-                crackle->setDuration(durationMs);
+                crackle->setDuration((50.0 - 0.1) * v + 0.1);
         };
 
         paramMap[ParameterId::Crackle1AmplitudeId] = [crackle](ParamValue v) {
@@ -392,7 +391,7 @@ void EntVstProcessor::initCrackleParamMappings()
         };
 
         paramMap[ParameterId::Crackle1RandomnessId] = [crackle](ParamValue v) {
-                crackle->setRandomness(static_cast<float>(v) * 100.0f);
+                crackle->setRandomness(static_cast<float>(v));
         };
 
         paramMap[ParameterId::Crackle1BrightnessId] = [crackle](ParamValue v) {
@@ -415,12 +414,11 @@ void EntVstProcessor::initCrackleParamMappings()
         };
 
         paramMap[ParameterId::Crackle2RateId] = [crackle](ParamValue v) {
-                crackle->setRate(0.5 + (100.0 - 0.5) * v);
+                crackle->setRate(0.5 + (150.0 - 0.5) * v);
         };
 
         paramMap[ParameterId::Crackle2DurationId] = [crackle](ParamValue v) {
-                float durationMs = 1.0f + static_cast<float>(v) * (50.0f - 1.0f);
-                crackle->setDuration(durationMs);
+                crackle->setDuration((50.0 - 0.1) * v + 0.1);
         };
 
         paramMap[ParameterId::Crackle2AmplitudeId] = [crackle](ParamValue v) {
@@ -428,7 +426,7 @@ void EntVstProcessor::initCrackleParamMappings()
         };
 
         paramMap[ParameterId::Crackle2RandomnessId] = [crackle](ParamValue v) {
-                crackle->setRandomness(static_cast<float>(v) * 100.0f);
+                crackle->setRandomness(static_cast<float>(v));
         };
 
         paramMap[ParameterId::Crackle2BrightnessId] = [crackle](ParamValue v) {

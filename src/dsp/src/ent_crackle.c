@@ -47,6 +47,7 @@ struct ent_crackle {
         struct ent_shelf_filter sh_filter_r;
         float buffer[2][4096];
         size_t burst_index;
+        size_t burst_samples;
         float burst_amplitude;
 };
 
@@ -56,10 +57,13 @@ struct ent_crackle* ent_crackle_create(int sample_rate)
         if (!c)
                 return NULL;
 
+        qx_randomizer_init(&c->prob_randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
+        qx_randomizer_init(&c->randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
+
         c->sample_rate = sample_rate;
         c->enabled = false;
-        c->rate = 20.0f;
-        c->duration = 1.0f;
+        c->rate = 20.0f; // 0.5 - 150Hz, default 20Hz
+        ent_crackle_set_duration(c, 0.1); //0.1-50ms
         c->amplitude = 1.0f;
         c->randomness = 0.5f;
         c->brightness = 0.5f;
@@ -68,8 +72,6 @@ struct ent_crackle* ent_crackle_create(int sample_rate)
         c->burst_index = 0;
         c->burst_amplitude = 0.0f;
 
-        qx_randomizer_init(&c->prob_randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
-        qx_randomizer_init(&c->randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
         qx_fader_init(&c->fader, 50, c->sample_rate);
 
         ent_shelf_filter_init(&c->sh_filter_l, c->sample_rate, 8000.0f, 1.0f);
@@ -100,7 +102,6 @@ bool ent_crackle_is_enabled(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_rate(struct ent_crackle *c, float rate)
 {
-        ent_log_info("RATE: %f", rate);
         c->rate = rate;
         return ENT_OK;
 }
@@ -112,7 +113,10 @@ float ent_crackle_get_rate(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_duration(struct ent_crackle *c, float duration)
 {
+        ent_log_info("DURATION: %f", duration);
         c->duration = duration;
+        //float rad_duration = c->duration - (50.0f - 0.1f) * fabs(qx_randomizer_get_float(&c->randomizer));
+        c->burst_samples = (c->duration / 1000.0f) * c->sample_rate;
         return ENT_OK;
 }
 
@@ -150,13 +154,17 @@ enum ent_error ent_crackle_set_brightness(struct ent_crackle *c, float brightnes
         float min_cutoff = 1000.0f;
         float max_cutoff = 8000.0f;
         float cutoff = min_cutoff + (max_cutoff - min_cutoff) * c->brightness;
-        float gain = 1.0f + 23.0f * c->brightness;
+
+        float min_gain = 1.0f;
+        float max_gain = 24.0f;
+        float gain = 24.0f;
 
         ent_shelf_filter_set_cutoff(&c->sh_filter_l, c->sample_rate, cutoff, gain);
         ent_shelf_filter_set_cutoff(&c->sh_filter_r, c->sample_rate, cutoff, gain);
 
         return ENT_OK;
 }
+
 float ent_crackle_get_brightness(struct ent_crackle *c)
 {
         return c->brightness;
@@ -188,8 +196,6 @@ float ent_crackle_get_stereo_spread(struct ent_crackle *c)
 
 void ent_crackle_process(struct ent_crackle *c, float **data, size_t size)
 {
-        float burst_samples = (c->duration / 1000.0f) * c->sample_rate;
-
         float val = 0.0f;
         for (size_t i = 0; i < size; i++) {
                 // Step 1: Micro noise based on density
@@ -200,7 +206,7 @@ void ent_crackle_process(struct ent_crackle *c, float **data, size_t size)
                 // Step 2: Burst handling
                 if (c->burst_index > 0) {
                         // Apply envelope
-                        float t = (float)c->burst_index / burst_samples;
+                        float t = (float)c->burst_index / c->burst_samples;
                         switch(c->envelope_shape) {
                         case ENT_CRACKLE_ENV_EXPONENTIAL:
                         {
@@ -225,32 +231,35 @@ void ent_crackle_process(struct ent_crackle *c, float **data, size_t size)
                         }
 
                         c->burst_index++;
-                        if (c->burst_index >= burst_samples)
+                        if (c->burst_index >= c->burst_samples)
                                 c->burst_index = 0;
                 } else {
                         float sparse_prob = fabs(qx_randomizer_get_float(&c->prob_randomizer));
                         if (sparse_prob <= c->rate / c->sample_rate) {
                                 c->burst_index = 1; // first sample of burst
-                                float amp_random = qx_randomizer_get_float(&c->randomizer);
-                                c->burst_amplitude = amp_random * c->amplitude;
+                                // Calculate random amplitude.
+                                float rand_val = qx_randomizer_get_float(&c->randomizer);
+                                float ampl_sign = rand_val >= 0 ? 1.0f : -1.0f;
+                                float amp_random = 1.0f - fabs(rand_val) * c->randomness;
+                                c->burst_amplitude = ampl_sign * amp_random * c->amplitude;
                         } else {
                                 c->burst_index = 0; // first sample of burst
                                 c->burst_amplitude = 0.0;
                         }
-                        val = c->burst_amplitude; // apply first sample of burst
+
+                        //float rad_duration = c->duration - (50.0f - 0.1f) * fabs(qx_randomizer_get_float(&c->randomizer));
+                        //c->burst_samples = rad_duration / 1000.0f * c->sample_rate;
+                        val *= c->burst_amplitude; // apply first sample of burst
                 }
 
-                // Apply fader if needed
-                //val = qx_fader_fade(&c->fader, val);
+                val = qx_fader_fade(&c->fader, val);
 
-                // Copy to internal buffer
                 c->buffer[0][i] = val;
                 c->buffer[1][i] = val;
         }
 
-        // Apply brightness (high-shelf filter)
-        //        ent_shelf_filter_process(&c->sh_filter_l, c->buffer[0], size);
-        //        ent_shelf_filter_process(&c->sh_filter_r, c->buffer[1], size);
+        ent_shelf_filter_process(&c->sh_filter_l, c->buffer[0], size);
+        ent_shelf_filter_process(&c->sh_filter_r, c->buffer[1], size);
 
         // Mix to output
         for (size_t i = 0; i < size; i++) {

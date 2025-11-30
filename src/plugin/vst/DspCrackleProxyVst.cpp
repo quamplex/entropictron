@@ -109,7 +109,7 @@ bool DspCrackleProxyVst::setRate(double value)
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1RateId : ParameterId::Crackle2RateId;
         vstController->getComponentHandler()->beginEdit(id);
-        value = (value - 0.5) / (100 - 0.5);
+        value = (value - 0.5) / (150 - 0.5);
         vstController->getComponentHandler()->performEdit(id, value);
         vstController->getComponentHandler()->endEdit(id);
         return true;
@@ -119,7 +119,7 @@ double DspCrackleProxyVst::rate() const
 {
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1RateId : ParameterId::Crackle2RateId;
-        return 0.5 + (100 - 0.5) * vstController->getParamNormalized(id);
+        return 0.5 + (150 - 0.5) * vstController->getParamNormalized(id);
 }
 
 bool DspCrackleProxyVst::setDuration(double value)
@@ -127,6 +127,7 @@ bool DspCrackleProxyVst::setDuration(double value)
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1DurationId : ParameterId::Crackle2DurationId;
         vstController->getComponentHandler()->beginEdit(id);
+        value = (value - 0.1) / (50 - 0.1);
         vstController->getComponentHandler()->performEdit(id, value);
         vstController->getComponentHandler()->endEdit(id);
         return true;
@@ -136,7 +137,7 @@ double DspCrackleProxyVst::duration() const
 {
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1DurationId : ParameterId::Crackle2DurationId;
-        return vstController->getParamNormalized(id);
+        return (50 - 0.1) * vstController->getParamNormalized(id) + 0.1;
 }
 
 bool DspCrackleProxyVst::setAmplitude(double value)
@@ -232,6 +233,18 @@ void DspCrackleProxyVst::onParameterChanged(ParameterId paramId, ParamValue valu
         case ParameterId::Crackle1EnabledId:
         case ParameterId::Crackle2EnabledId:
                 action enabled(value > 0.5);
+                break;
+        case ParameterId::Crackle1RateId:
+        case ParameterId::Crackle2RateId:
+                action rateUpdated(0.5 + (150 - 0.5) * value);
+                break;
+        case ParameterId::Crackle1RandomnessId:
+        case ParameterId::Crackle2RandomnessId:
+                action rateUpdated(value);
+                break;
+        case ParameterId::Crackle1DurationId:
+        case ParameterId::Crackle2DurationId:
+                action durationUpdated((50 - 0.1) * value + 0.1);
                 break;
         default:
                 break;

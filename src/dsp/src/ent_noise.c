@@ -68,7 +68,7 @@ struct ent_noise* ent_noise_create(int sample_rate)
         noise->enabled = false;
         noise->type = ENT_NOISE_TYPE_WHITE;
         noise->density = 1.0f;
-        noise->brightness = 0.0f;
+        noise->brightness = 0.5f;
         noise->gain = 1.0f;
         noise->brown = 0.0f;
         noise->b0 = noise->b1 = noise->b2 = 0.0f;
@@ -142,17 +142,13 @@ enum ent_error ent_noise_set_brightness(struct ent_noise *noise, float brightnes
             // Clamp brightness to [0,1] using qx_clamp_float
     noise->brightness = qx_clamp_float(brightness, 0.0f, 1.0f);
 
-    // Map brightness to cutoff (Hz)
     float min_cutoff = 1000.0f;
     float max_cutoff = 8000.0f;
     float cutoff = min_cutoff + (max_cutoff - min_cutoff) * noise->brightness;
 
-    // Map brightness to linear gain
     float min_gain = 1.0f;
     float max_gain = 24.0f;
-    float gain = 24.0f;//min_gain + (max_gain - min_gain) * noise->brightness;
-
-    ent_log_error("Brightness = %f, cutoff = %f, gain = %f", noise->brightness, cutoff, gain);
+    float gain = 24.0f;
 
     // Update high-shelf filter for both channels
     ent_shelf_filter_set_cutoff(&noise->sh_filter_l, noise->sample_rate, cutoff, gain);
