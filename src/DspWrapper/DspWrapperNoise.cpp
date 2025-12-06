@@ -86,9 +86,24 @@ double DspWrapperNoise::gain() const
         return ent_noise_get_gain(noiseDsp);
 }
 
+void DspWrapperNoise::setStereo(double value)
+{
+        ent_noise_set_stereo(noiseDsp, value);
+}
+
 double DspWrapperNoise::stereo() const
 {
         return ent_noise_get_stereo(noiseDsp);
+}
+
+void DspWrapperNoise::enableFilter(bool b)
+{
+        ent_noise_filter_enable(noiseDsp, b);
+}
+
+bool DspWrapperNoise::isFilterEnabled() const
+{
+        return ent_noise_filter_is_enabled(noiseDsp);
 }
 
 void DspWrapperNoise::setFilterType(FilterType type)
@@ -101,9 +116,19 @@ FilterType DspWrapperNoise::filterType() const
         return static_cast<FilterType> (ent_noise_get_filter_type(noiseDsp));
 }
 
+void DspWrapperNoise::setCutOff(double value)
+{
+        ent_noise_set_cutoff(noiseDsp, value);
+}
+
 double DspWrapperNoise::cutOff() const
 {
         return ent_noise_get_cutoff(noiseDsp);
+}
+
+void DspWrapperNoise::setResonance(double value)
+{
+        ent_noise_set_resonance(noiseDsp, value);
 }
 
 double DspWrapperNoise::resonance() const

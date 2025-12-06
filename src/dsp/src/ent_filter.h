@@ -33,10 +33,16 @@ enum ent_filter_type {
 };
 
 struct ent_filter {
-    // Parameters
-    enum ent_filter_type type;
-    float cutoff;
-    float resonance;
+        enum ent_filter_type type;
+        float cutoff;
+        float resonance;
+        int sample_rate;
+        float ic1eq[2];
+        float ic2eq[2];
+        float g;
+        float k;
+        float denom;
+        bool isnan_val;
 };
 
 void ent_filter_init(struct ent_filter* filter,
@@ -60,7 +66,7 @@ void ent_filter_set_resonance(struct ent_filter* filter,
 float ent_filter_get_resonance(struct ent_filter* filter);
 
 void ent_filter_process(struct ent_filter* filter,
-                        float *data,
+                        float **data,
                         size_t size);
 
 #endif // ENT_FILTER_H

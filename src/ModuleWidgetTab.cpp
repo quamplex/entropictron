@@ -135,7 +135,7 @@ void ModuleWidgetTab::showNoise()
 
         delete moduleWidget;
         moduleWidget = new NoiseWidget(this,
-                                       tabId ? entropictronModel->getNoise1()
+                                       tabId == 0 ? entropictronModel->getNoise1()
                                        : entropictronModel->getNoise2());
         moduleWidget->setPosition(0, 29);
 }
@@ -148,7 +148,7 @@ void ModuleWidgetTab::showCrackle()
 
         delete moduleWidget;
         moduleWidget = new CrackleWidget(this,
-                                         tabId ? entropictronModel->getCrackle1()
+                                         tabId == 0 ? entropictronModel->getCrackle1()
                                          : entropictronModel->getCrackle2());
         moduleWidget->setPosition(0, 29);
 }
@@ -161,7 +161,7 @@ void ModuleWidgetTab::showGlitch()
 
         delete moduleWidget;
         moduleWidget = new GlitchWidget(this,
-                                        tabId ? entropictronModel->getGlitch1()
+                                        tabId == 0 ? entropictronModel->getGlitch1()
                                         : entropictronModel->getGlitch2());
         moduleWidget->setPosition(0, 29);
 }

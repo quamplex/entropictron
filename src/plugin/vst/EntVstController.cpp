@@ -25,6 +25,7 @@
 #include "EntVstPluginView.h"
 #include "VstIds.h"
 #include "EntVstParameters.h"
+#include "DspNoiseProxyVst.h"
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
 
@@ -53,92 +54,107 @@ EntVstController::initialize(FUnknown* context)
 void EntVstController::addNoiseParameters()
 {
         parameters.addParameter(STR16("Play Mode"),
-                                nullptr, 1.0, 0.0,
+                                nullptr, 3, 0.0,
                                 ParameterInfo::kIsHidden,
                                 ParameterId::PlayModeId);
 
         // Noise 1
         parameters.addParameter(STR16("Noise 1 Enabled"),
-                                nullptr, 1, 0.0,
+                                nullptr, 2, 0.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise1EnabledId);
         parameters.addParameter(STR16("Noise 1 Type"),
-                                nullptr, 2, 0.0,
+                                nullptr, 3, 0.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise1TypeId);
         parameters.addParameter(STR16("Noise 1 Density"),
-                                nullptr, 0, 1.0,
+                                STR16("%"), 0, 1.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise1DensityId);
         parameters.addParameter(STR16("Noise 1 Brightness"),
-                                nullptr, 0, 0.0,
+                                STR16("%"), 0, 0.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise1BrightnessId);
         parameters.addParameter(STR16("Noise 1 Gain"),
-                                nullptr, 0, 1.0,
+                                STR16("dB"), 0,
+                                // -50db...+6db, 0db
+                                DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(0)),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise1GainId);
         parameters.addParameter(STR16("Noise 1 Stereo"),
-                                nullptr, 0, 1.0,
+                                STR16("%"), 0, 1.0,
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Noise1GainId);
-        parameters.addParameter(STR16("Noise 1 Filter Type"),
+                                ParameterId::Noise1StereoId);
+        parameters.addParameter(STR16("Noise 1 Enable Filter"),
                                 nullptr, 2, 0.0,
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Noise1GainId);
+                                ParameterId::Noise1FilterEnableId);
+        parameters.addParameter(STR16("Noise 1 Filter Type"),
+                                nullptr, 3, 0.0,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::Noise1FilterTypeId);
         parameters.addParameter(STR16("Noise 1 CutOff"),
-                                nullptr, 0, 1.0,
+                                STR16("Hz"),
+                                0,
+                                // 20 - 18000 Hz, default 800Hz
+                                (800.0 - 20.0) / (18000.0 - 20.0),
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Noise1GainId);
+                                ParameterId::Noise1CutOffId);
         parameters.addParameter(STR16("Noise 1 Resonance"),
-                                nullptr, 0, 1.0,
+                                STR16("Q"), 0, 1.0,
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Noise1GainId);
+                                ParameterId::Noise1ResonanceId);
 
         // Noise 2
         parameters.addParameter(STR16("Noise 2 Enabled"),
-                                nullptr, 1, 0.0,
+                                nullptr, 2, 0.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2EnabledId);
         parameters.addParameter(STR16("Noise 2 Type"),
-                                nullptr, 2, 0.0,
+                                nullptr, 3, 0.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2TypeId);
         parameters.addParameter(STR16("Noise 2 Density"),
-                                nullptr, 0, 1.0,
+                                STR16("%"), 0, 1.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2DensityId);
         parameters.addParameter(STR16("Noise 2 Brightness"),
-                                nullptr, 0, 0.0,
+                                STR16("%"), 0, 0.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2BrightnessId);
         parameters.addParameter(STR16("Noise 2 Gain"),
-                                nullptr, 0, 1.0,
+                                STR16("dB"), 0,
+                                // -50db...+6db, 0db
+                                DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(0)),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2GainId);
         parameters.addParameter(STR16("Noise 2 Stereo"),
-                                nullptr, 0, 1.0,
+                                STR16("%"), 0, 1.0,
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Noise2GainId);
-        parameters.addParameter(STR16("Noise 2 Filter Type"),
+                                ParameterId::Noise2StereoId);
+        parameters.addParameter(STR16("Noise 2 Enable Filter"),
                                 nullptr, 2, 0.0,
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Noise2GainId);
+                                ParameterId::Noise2FilterEnableId);
+        parameters.addParameter(STR16("Noise 2 Filter Type"),
+                                nullptr, 3, 0.0,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::Noise2FilterTypeId);
         parameters.addParameter(STR16("Noise 2 CutOff"),
-                                nullptr, 0, 1.0,
+                                STR16("Hz"), 0, 1.0,
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Noise2GainId);
+                                ParameterId::Noise2CutOffId);
         parameters.addParameter(STR16("Noise 2 Resonance"),
-                                nullptr, 0, 1.0,
+                                STR16("Q"), 0, 1.0,
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Noise2GainId);
+                                ParameterId::Noise2ResonanceId);
 }
 
 void EntVstController::addCrackleParameters()
 {
         // Crackle1 Enabled (On/Off)
         parameters.addParameter(STR16("Crackle1 Enabled"),
-                                nullptr, 1, 0.0, // 0 = off, 1 = on
+                                nullptr, 2, 0.0, // 0 = off, 1 = on
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1EnabledId);
 
@@ -146,32 +162,32 @@ void EntVstController::addCrackleParameters()
         auto rateDefalutNormalized = (20 - 0.5) / (150 - 0.5);
         parameters.addParameter(STR16("Crackle1 Rate"),
                                 nullptr,
-                                200, rateDefalutNormalized, // 0–150 Hz, default 20Hz
+                                0, rateDefalutNormalized, // 0–150 Hz, default 20Hz
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1RateId);
 
         // Duration (ms)
         parameters.addParameter(STR16("Crackle1 Duration"),
-                                nullptr, 500,
+                                nullptr, 0,
                                 (1.0 - 0.1) / (50.0 - 0.1), // 0.1–50 ms, default 1.0ms
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1DurationId);
 
         // Amplitude
         parameters.addParameter(STR16("Crackle1 Amplitude"),
-                                nullptr, 1, 0.5, // 0–1 linear, default 0.5
+                                nullptr, 0, 0.5, // 0–1 linear, default 0.5
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1AmplitudeId);
 
         // Randomness
         parameters.addParameter(STR16("Crackle1 Randomness"),
-                                nullptr, 100, 0.5, // 1–100%, default 50%
+                                nullptr, 0, 0.5, // 1–100%, default 50%
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1RandomnessId);
 
         // Brightness
         parameters.addParameter(STR16("Crackle1 Brightness"),
-                                nullptr, 1, 0.5, // 0–1, default 0.5
+                                nullptr, 0, 0.5, // 0–1, default 0.5
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1BrightnessId);
 
@@ -183,44 +199,44 @@ void EntVstController::addCrackleParameters()
 
         // Stereo Spread
         parameters.addParameter(STR16("Crackle1 Stereo Spread"),
-                                nullptr, 100, 0.0, // 0.0–1.0, default 0.0
+                                nullptr, 0, 0.0, // 0.0–1.0, default 0.0
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1StereoSpreadId);
 
         // Crackle2 Enabled (On/Off)
         parameters.addParameter(STR16("Crackle2 Enabled"),
-                                nullptr, 1, 0.0, // 0 = off, 1 = on
+                                nullptr, 2, 0.0, // 0 = off, 1 = on
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2EnabledId);
 
         // Rate (bursts per second)
         parameters.addParameter(STR16("Crackle2 Rate"),
-                                nullptr, 100, rateDefalutNormalized, // 0–100 Hz, default 20
+                                nullptr, 0, rateDefalutNormalized, // 0–100 Hz, default 20
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2RateId);
 
         // Duration (ms)
         parameters.addParameter(STR16("Crackle2 Duration"),
-                                nullptr, 50,
+                                nullptr, 0,
                                 (1.0 - 0.1) / (50.0 - 0.1), // 1–50 ms, default 20
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2DurationId);
 
         // Amplitude
         parameters.addParameter(STR16("Crackle2 Amplitude"),
-                                nullptr, 1, 0.5, // 0–1 linear, default 0.5
+                                nullptr, 0, 0.5, // 0–1 linear, default 0.5
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2AmplitudeId);
 
         // Randomness
         parameters.addParameter(STR16("Crackle2 Randomness"),
-                                nullptr, 100, 0.5, // 1–100%, default 50%
+                                nullptr, 0, 0.5, // 1–100%, default 50%
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2RandomnessId);
 
         // Brightness
         parameters.addParameter(STR16("Crackle2 Brightness"),
-                                nullptr, 1, 0.5, // 0–1, default 0.5
+                                nullptr, 0, 0.5, // 0–1, default 0.5
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2BrightnessId);
 
@@ -232,7 +248,7 @@ void EntVstController::addCrackleParameters()
 
         // Stereo Spread
         parameters.addParameter(STR16("Crackle2 Stereo Spread"),
-                                nullptr, 100, 0.0, // 0.0–1.0, default 0.0
+                                nullptr, 0, 0.0, // 0.0–1.0, default 0.0
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2StereoSpreadId);
 }
@@ -241,73 +257,73 @@ void EntVstController::addGlitchParameters()
 {
     // Glitch1 Enabled (On/Off)
     parameters.addParameter(STR16("Glitch1 Enabled"),
-                            nullptr, 1, 0.0, // 0 = off, 1 = on
+                            nullptr, 2, 0.0, // 0 = off, 1 = on
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch1EnabledId);
 
     // Glitch1 Probability
     parameters.addParameter(STR16("Glitch1 Probability"),
-                            STR16("%"), 100, 20.0, // 0–100%, default 20%
+                            STR16("%"), 0, 0.2, // 0–100%, default 20%
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch1ProbabilityId);
 
     // Min Jump Time (ms)
     parameters.addParameter(STR16("Min Jump Time"),
-                            STR16("ms"), 2000, 100.0, // 0–2000 ms, default 100 ms
+                            STR16("ms"), 0, 0.05, // 0–2000 ms, default 100 ms
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch1MinJumpId);
 
     // Max Jump Time (ms)
     parameters.addParameter(STR16("Max Jum Time"),
-                            STR16("ms"), 5000, 1000.0, // 0–5000 ms, default 1000 ms
+                            STR16("ms"), 0, 0.2, // 0–5000 ms, default 1000 ms
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch1MaxJumpId);
 
     // Glitch1 Length (ms)
     parameters.addParameter(STR16("Glitch1 Length"),
-                            STR16("ms"), 2000, 200.0, // 0–2000 ms, default 200 ms
+                            STR16("ms"), 0, 0.1, // 0–2000 ms, default 200 ms
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch1LengthId);
 
     // Glitch1 Repeats
     parameters.addParameter(STR16("Glitch1 Repeats"),
-                            nullptr, 10, 2.0, // 1–10 repeats, default 2
+                            nullptr, 10, 0.2, // 1–10 repeats, default 2
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch1RepeatsId);
 
     // Glitch2 Enabled (On/Off)
     parameters.addParameter(STR16("Glitch2 Enabled"),
-                            nullptr, 1, 0.0, // 0 = off, 1 = on
+                            nullptr, 2, 0.0, // 0 = off, 1 = on
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch2EnabledId);
 
     // Glitch2 Probability
     parameters.addParameter(STR16("Glitch2 Probability"),
-                            STR16("%"), 100, 20.0, // 0–100%, default 20%
+                            STR16("%"), 0, 0.2, // 0–100%, default 20%
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch2ProbabilityId);
 
     // Min Jum Time (ms)
     parameters.addParameter(STR16("Min Jump Time"),
-                            STR16("ms"), 2000, 100.0, // 0–2000 ms, default 100 ms
+                            STR16("ms"), 0, 0.05, // 0–2000 ms, default 100 ms
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch2MinJumpId);
 
     // Max Jump Time (ms)
     parameters.addParameter(STR16("Max Jump Time"),
-                            STR16("ms"), 5000, 1000.0, // 0–5000 ms, default 1000 ms
+                            STR16("ms"), 0, 0.2, // 0–5000 ms, default 1000 ms
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch2MaxJumpId);
 
     // Glitch2 Length (ms)
     parameters.addParameter(STR16("Glitch2 Length"),
-                            STR16("ms"), 2000, 200.0, // 0–2000 ms, default 200 ms
+                            STR16("ms"), 0, 0.1, // 0–2000 ms, default 200 ms
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch2LengthId);
 
     // Glitch2 Repeats
     parameters.addParameter(STR16("Glitch2 Repeats"),
-                            nullptr, 10, 2.0, // 1–10 repeats, default 2
+                            nullptr, 10, 0.2, // 1–10 repeats, default 2
                             ParameterInfo::kCanAutomate,
                             ParameterId::Glitch2RepeatsId);
 }

@@ -29,9 +29,9 @@ NoiseModel::NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy)
         , dspNoiseProxy {dspNoiseProxy}
         , desnityDefaultValue {1.0}
         , brightnessDefaultValue {0.0}
-        , gainDefaultValue {1.0}
+        , gainDefaultValue {Entropictron::fromDecibel(0)}
         , stereoDefaultValue {1.0}
-        , cutOffDefaultValue {20.0}
+        , cutOffDefaultValue {800.0}
         , resonanceDefaultValue {1.0}
         , densityRange {0.0, 1.0}
         , brightnessRange {0.0, 1.0}
@@ -65,6 +65,10 @@ NoiseModel::NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy)
                     stereoUpdated,
                     RK_ACT_ARGS(double value),
                     this, stereoUpdated(value));
+        RK_ACT_BIND(dspNoiseProxy,
+                    filterEnabled,
+                    RK_ACT_ARGS(bool b),
+                    this, filterEnabled(b));
         RK_ACT_BIND(dspNoiseProxy,
                     filterTypeUpdated,
                     RK_ACT_ARGS(FilterType type),
@@ -228,6 +232,17 @@ void NoiseModel::setStereoRange(double from, double to)
 std::pair<double, double> NoiseModel::getStereoRange() const
 {
         return stereoRange;
+}
+
+void NoiseModel::enableFilter(bool b)
+{
+        if (dspNoiseProxy->enableFilter(b))
+                action filterEnabled(b);
+}
+
+bool NoiseModel::isFilterEnabled() const
+{
+        return dspNoiseProxy->isFilterEnabled();
 }
 
 void NoiseModel::setFilterType(FilterType type)

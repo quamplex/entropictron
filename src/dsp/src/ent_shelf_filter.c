@@ -43,12 +43,6 @@ void ent_shelf_filter_init(struct ent_shelf_filter* filter,
         float sinw0 = sinf(w0);
         float alpha = sinw0 / 2.0f * sqrtf((A + 1/A) * 1.0f + 2.0f); // shelf factor = 1
 
-        ent_log_error("A: %f", A);
-        ent_log_error("w0: %f", w0);
-        ent_log_error("cosw0: %f", cosw0);
-        ent_log_error("sinw0: %f", sinw0);
-        ent_log_error("alpha: %f", alpha);
-
         float b0 =    A * ((A+1) + (A-1)*cosw0 + 2*sqrtf(A)*alpha);
         float b1 = -2*A * ((A-1) + (A+1)*cosw0);
         float b2 =    A * ((A+1) + (A-1)*cosw0 - 2*sqrtf(A)*alpha);
@@ -56,25 +50,12 @@ void ent_shelf_filter_init(struct ent_shelf_filter* filter,
         float a1 =  2 * ((A-1) - (A+1)*cosw0);
         float a2 =        (A+1) - (A-1)*cosw0 - 2*sqrtf(A)*alpha;
 
-        ent_log_error("BEFORE: b0: %f", b0);
-        ent_log_error("BEFORE: b1: %f", b1);
-        ent_log_error("BEFORE: b2: %f", b2);
-        ent_log_error("BEFORE: a0: %f", a0);
-        ent_log_error("BEFORE: a1: %f", a1);
-        ent_log_error("BEFORE: a2: %f", a2);
-
         // Normalize coefficients
         filter->b0 = b0 / a0;
         filter->b1 = b1 / a0;
         filter->b2 = b2 / a0;
         filter->a1 = a1 / a0;
         filter->a2 = a2 / a0;
-
-        ent_log_error("AFTER : b0: %f", filter->b0);
-        ent_log_error("AFTER : b1: %f", filter->b1);
-        ent_log_error("AFTER : b2: %f", filter->b2);
-        ent_log_error("AFTER : a1: %f", filter->a1);
-        ent_log_error("AFTER : a2: %f", filter->a2);
 
         // Clear Direct Form II Transposed state
         filter->z1 = 0.0f;
@@ -101,31 +82,12 @@ void ent_shelf_filter_set_cutoff(struct ent_shelf_filter* filter,
         float a1 =  2 * ((A-1) - (A+1)*cosw0);
         float a2 =        (A+1) - (A-1)*cosw0 - 2*sqrtf(A)*alpha;
 
-
-        ent_log_error("BEFORE ------------");
-        ent_log_error("b0: %f", b0);
-        ent_log_error("b1: %f", b1);
-        ent_log_error("b2: %f", b2);
-        ent_log_error("a0: %f", a0);
-        ent_log_error("a1: %f", a1);
-        ent_log_error("a2: %f", a2);
-
         // Normalize coefficients
         filter->b0 = b0 / a0;
         filter->b1 = b1 / a0;
         filter->b2 = b2 / a0;
         filter->a1 = a1 / a0;
         filter->a2 = a2 / a0;
-
-        ent_log_error("AFTER ------------");
-        ent_log_error("b0: %f", filter->b0);
-        ent_log_error("b1: %f", filter->b1);
-        ent_log_error("b2: %f", filter->b2);
-        ent_log_error("a1: %f", filter->a1);
-        ent_log_error("a2: %f", filter->a2);
-
-
-        // Keep z1/z2 unchanged → smooth transitions
 }
 
 // Process buffer with Direct Form II Transposed

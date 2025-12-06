@@ -35,8 +35,7 @@ struct ent_shelf_filter {
 
     // Filter state
     float z1, z2;
-
-        float gain;
+    float gain;
 };
 
 

@@ -21,50 +21,187 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
+#include <math.h>
+#include <string.h>
 #include "ent_filter.h"
 #include "ent_log.h"
-
 #include "qx_math.h"
+
+static inline float q_max_from_cutoff(float Qmin,
+                                      float Qmax,
+                                      float C,
+                                      float fs)
+{
+        if (C <= 0.0f)
+                return Qmax;
+        if (C >= fs * 0.5f)
+                return Qmin;          /* Nyquist → min Q */
+
+        float k = 5.0f;
+
+        /* ---------- normalise cutoff (0 … 1) ----------------------- */
+        float c = C / (fs * 0.5f);    /* c ∈ (0,1) */
+
+        /* ---------- pre‑compute exponentials ------------------------ */
+        float exp_k = expf(-k);                 // constant for given k
+        float denom = 1.0f - exp_k;             // >0 because k>0
+        float num   = expf(-k * c) - exp_k;     // varies with c
+
+        /* ---------- scaled‑exponential mapping --------------------- */
+        float Q = Qmin + (Qmax - Qmin) * (num / denom);
+
+        return qx_clamp_float(Q, Qmin, Qmax);
+}
+
+/** Update internal filter coefficients */
+static void ent_filter_update_coeffs(struct ent_filter* filter)
+{
+        filter->isnan_val = false;
+
+        float Qmin = 0.1f;
+        float Qmax = 5.0f;
+        float Q = q_max_from_cutoff(Qmin,
+                                    Qmin + filter->resonance * (Qmax - Qmin),
+                                    filter->cutoff,
+                                    filter->sample_rate);
+
+        float fc = qx_clamp_float(filter->cutoff, 20.0f, 0.49f * filter->sample_rate);
+        filter->g = tanf((float)M_PI * fc / filter->sample_rate);
+        filter->k = 1.0f / Q;
+
+        filter->denom = 1.0f + filter->g * (filter->g + filter->k);
+
+        ent_log_info("----------------");
+        ent_log_info("cutoff: %f", filter->cutoff);
+        ent_log_info("resonance: %f", filter->resonance);
+        ent_log_info("fc: %f", fc);
+        ent_log_info("Qmax: = %f", Qmax);
+        ent_log_info("Q: = %f", Q);
+        ent_log_info("g: = %f", filter->g);
+        ent_log_info("k: = %f", filter->k);
+        ent_log_info("denom: %f", filter->denom);
+}
 
 void ent_filter_init(struct ent_filter* filter,
                      float sample_rate,
                      float cut_off,
-                     float gain)
+                     float resonance)
 {
+        memset(filter, 0, sizeof(*filter));
+
+        filter->sample_rate = sample_rate;
+        filter->cutoff = cut_off;
+        filter->resonance = resonance;
+        filter->type = ENT_FILTER_TYPE_LOWPASS;
+        filter->isnan_val = false;
+
+        filter->ic1eq[0] = filter->ic1eq[1] = 0.0f;
+        filter->ic2eq[0] = filter->ic2eq[1] = 0.0f;
+
+        ent_filter_update_coeffs(filter);
 }
 
 void ent_filter_set_type(struct ent_filter* filter,
                          enum ent_filter_type type)
 {
+        ent_log_info("TYPE: %f", (int)type);
+        filter->type = type;
 }
 
 enum ent_filter_type ent_filter_get_type(struct ent_filter* filter)
 {
-        return ENT_FILTER_TYPE_LOWPASS;
+        return filter->type;
 }
 
 void ent_filter_set_cutoff(struct ent_filter* filter,
                            float cut_off)
 {
+        filter->cutoff = cut_off;
+        ent_filter_update_coeffs(filter);
 }
 
 float ent_filter_get_cutoff(struct ent_filter* filter)
 {
-        return 0.0f;
+        return filter->cutoff;
 }
 
 void ent_filter_set_resonance(struct ent_filter* filter,
-                           float cut_off)
+                              float resonance)
 {
+        filter->resonance = resonance;
+        ent_filter_update_coeffs(filter);
 }
 
 float ent_filter_get_resonance(struct ent_filter* filter)
 {
-        return 0.0f;
+        return filter->resonance;
 }
 
 void ent_filter_process(struct ent_filter* filter,
-                        float *data,
+                        float **data,
                         size_t size)
 {
+        const float g = filter->g;
+        const float k = filter->k;
+        const float denom = filter->denom;
+
+        float *L = data[0];
+        float *R = data[1];
+
+        //if (filter->isnan_val)
+        //        return;
+
+        for (size_t i = 0; i < size; i++) {
+                /* Left channel */
+                {
+                        float v0 = L[i];
+
+                        float v1 = (v0 - k * filter->ic1eq[0] - filter->ic2eq[0]) / denom;
+                        float v2 = filter->ic1eq[0] + g * v1;
+                        float v3 = filter->ic2eq[0] + g * v2;
+
+                        filter->ic1eq[0] = 2.0f * v2 - filter->ic1eq[0];
+                        filter->ic2eq[0] = 2.0f * v3 - filter->ic2eq[0];
+
+                        switch (filter->type) {
+                        case ENT_FILTER_TYPE_LOWPASS:  L[i] = v3;
+                                break;
+                        case ENT_FILTER_TYPE_BANDPASS: L[i] = v2;
+                                break;
+                        case ENT_FILTER_TYPE_HIGHPASS: L[i] = v0 - k * v2 - v3;
+                                break;
+                        default: L[i] = v3;
+                                break;
+                        }
+                }
+
+                /* Right channel */
+                {
+                        float v0 = R[i];
+
+                        float v1 = (v0 - k * filter->ic1eq[1] - filter->ic2eq[1]) / denom;
+                        float v2 = filter->ic1eq[1] + g * v1;
+                        float v3 = filter->ic2eq[1] + g * v2;
+
+                        filter->ic1eq[1] = 2.0f * v2 - filter->ic1eq[1];
+                        filter->ic2eq[1] = 2.0f * v3 - filter->ic2eq[1];
+
+                        switch (filter->type) {
+                        case ENT_FILTER_TYPE_LOWPASS:  R[i] = v3;
+                                break;
+                        case ENT_FILTER_TYPE_BANDPASS: R[i] = v2;
+                                break;
+                        case ENT_FILTER_TYPE_HIGHPASS: R[i] = v0 - k * v2 - v3;
+                                break;
+                        default: R[i] = v3;
+                                break;
+                        }
+                }
+        }
+
+        for (size_t i = 0; i < size; i++) {
+                L[i] = qx_clamp_float(L[i], -1.0f, 1.0f);
+                R[i] = qx_clamp_float(R[i], -1.0f, 1.0f);
+        }
 }
+

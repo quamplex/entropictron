@@ -46,9 +46,9 @@ class EntVstController : public Vst::EditControllerEx1 {
         IPlugView* PLUGIN_API createView(FIDString name) SMTG_OVERRIDE;
         void setParamterCallback(ParameterId id, const ParameterCallback &callback);
         void removeParamterCallback(ParameterId id);
+        tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
 
 protected:
-        tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
         void addNoiseParameters();
         void addCrackleParameters();
         void addGlitchParameters();

@@ -29,6 +29,7 @@
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
 #include "EntVstParameters.h"
+#include "DspNoiseProxyVst.h"
 
 #include "base/source/fstreamer.h"
 #include "pluginterfaces/base/ibstream.h"
@@ -301,9 +302,7 @@ void EntVstProcessor::initNoiseParamMappings()
         };
         ENT_LOG_DEBUG("called-0.3");
         paramMap[ParameterId::Noise1TypeId] = [noise](ParamValue v) {
-                auto n = static_cast<int>(NoiseType::BrownNoise);
-                auto type = static_cast<NoiseType>(v * n  + 0.5);
-                noise->setType(type);
+                noise->setType(DspNoiseProxyVst::noiseTypeFromNormalized(v));
         };
         paramMap[ParameterId::Noise1DensityId] = [noise](ParamValue v) {
                 noise->setDensity(static_cast<float>(v));
@@ -312,34 +311,31 @@ void EntVstProcessor::initNoiseParamMappings()
                 noise->setBrightness(static_cast<float>(v));
         };
         paramMap[ParameterId::Noise1GainId] = [noise](ParamValue v) {
-                noise->setGain(static_cast<float>(v));
+                noise->setGain(DspNoiseProxyVst::gainFromNormalized(v));
         };
         paramMap[ParameterId::Noise1StereoId] = [noise](ParamValue v) {
-                noise->setStereo(static_cast<float>(v));
+                noise->setStereo(v);
+        };
+        paramMap[ParameterId::Noise1FilterEnableId] = [noise](ParamValue v) {
+                noise->enableFilter(v >= 0.5);
         };
         paramMap[ParameterId::Noise1FilterTypeId] = [noise](ParamValue v) {
-                auto n = static_cast<int>(FilterType::HighPass);
-                auto type = static_cast<FilterType>(v * n  + 0.5);
-                noise->setFilterType(type);
+                noise->setFilterType(DspNoiseProxyVst::filterTypeFromNormalized(v));
         };
         paramMap[ParameterId::Noise1CutOffId] = [noise](ParamValue v) {
-                noise->setCutOff(static_cast<float>(v));
+                noise->setCutOff(DspNoiseProxyVst::cutoffFromNormalized(v));
         };
         paramMap[ParameterId::Noise1ResonanceId] = [noise](ParamValue v) {
                 noise->setResonance(static_cast<float>(v));
         };
 
-        ENT_LOG_DEBUG("called1");
         // Noise 2
         noise = entropictronDsp->getNoise(NoiseId::Noise2);
         paramMap[ParameterId::Noise2EnabledId] = [noise](ParamValue v) {
-                ENT_LOG_INFO("Noise2EnabledId: v: " << v);
                 noise->enable(v >= 0.5);
         };
         paramMap[ParameterId::Noise2TypeId] = [noise](ParamValue v) {
-                auto n = static_cast<int>(NoiseType::BrownNoise);
-                auto type = static_cast<NoiseType>(v * n  + 0.5);
-                noise->setType(type);
+                noise->setType(DspNoiseProxyVst::noiseTypeFromNormalized(v));
         };
         paramMap[ParameterId::Noise2DensityId] = [noise](ParamValue v) {
                 noise->setDensity(static_cast<float>(v));
@@ -348,24 +344,23 @@ void EntVstProcessor::initNoiseParamMappings()
                 noise->setBrightness(static_cast<float>(v));
         };
         paramMap[ParameterId::Noise2GainId] = [noise](ParamValue v) {
-                noise->setGain(static_cast<float>(v));
+                noise->setGain(DspNoiseProxyVst::gainFromNormalized(v));
         };
         paramMap[ParameterId::Noise2StereoId] = [noise](ParamValue v) {
-                noise->setStereo(static_cast<float>(v));
+                noise->setStereo(v);
+        };
+        paramMap[ParameterId::Noise2FilterEnableId] = [noise](ParamValue v) {
+                noise->enableFilter(v >= 0.5);
         };
         paramMap[ParameterId::Noise2FilterTypeId] = [noise](ParamValue v) {
-                auto n = static_cast<int>(FilterType::HighPass);
-                auto type = static_cast<FilterType>(v * n  + 0.5);
-                noise->setFilterType(type);
+                noise->setFilterType(DspNoiseProxyVst::filterTypeFromNormalized(v));
         };
         paramMap[ParameterId::Noise2CutOffId] = [noise](ParamValue v) {
-                noise->setCutOff(static_cast<float>(v));
+                noise->setCutOff(DspNoiseProxyVst::cutoffFromNormalized(v));
         };
         paramMap[ParameterId::Noise2ResonanceId] = [noise](ParamValue v) {
                 noise->setResonance(static_cast<float>(v));
         };
-
-        ENT_LOG_DEBUG("END");
 }
 
 void EntVstProcessor::initCrackleParamMappings()
@@ -507,5 +502,3 @@ void EntVstProcessor::initGlitchParamMappings()
                 glitch->setRepeatCount(repeats);
         };
 }
-
-

@@ -43,6 +43,7 @@ struct ent_crackle {
         int sample_channel;
         struct qx_randomizer prob_randomizer;
         struct qx_randomizer randomizer;
+        struct qx_randomizer burst_width_randomizer;
         struct qx_randomizer stereo_randomizer;
         struct qx_fader fader;
         struct ent_shelf_filter sh_filter_l;
@@ -62,6 +63,7 @@ struct ent_crackle* ent_crackle_create(int sample_rate)
         qx_randomizer_init(&c->prob_randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
         qx_randomizer_init(&c->randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
         qx_randomizer_init(&c->stereo_randomizer, 0.0f, 1.0f, 1.0f / 65536.0f);
+        qx_randomizer_init(&c->burst_width_randomizer, 0.0f, 1.0f, 1.0f / 65536.0f);
 
         c->sample_rate = sample_rate;
         c->enabled = false;
@@ -241,7 +243,7 @@ void ent_crackle_process(struct ent_crackle *c, float **data, size_t size)
                                 c->burst_amplitude = ampl_sign * amp_random * c->amplitude;
 
                                 // Calculate random burst width.
-                                rand_val = fabs(qx_randomizer_get_float(&c->randomizer));
+                                rand_val = qx_randomizer_get_float(&c->burst_width_randomizer);
                                 float rad_duration = 0.1f + (c->duration - 0.1f) * (1.0 - rand_val * c->randomness);
                                 c->burst_samples = (rad_duration / 1000.0f) * c->sample_rate;
 

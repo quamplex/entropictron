@@ -62,6 +62,8 @@ class NoiseModel: public EntAbstractModel
         double getStereoDefaultValue() const;
         void setStereoRange(double from, double to);
         std::pair<double, double> getStereoRange() const;
+        void enableFilter(bool b = true);
+        bool isFilterEnabled() const;
         void setFilterType(FilterType type);
         FilterType filterType() const;
         void setCutOff(double value);
@@ -101,6 +103,10 @@ class NoiseModel: public EntAbstractModel
                     stereoUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
+        RK_DECL_ACT(filterEnabled,
+                    filterEnabled(bool b),
+                    RK_ARG_TYPE(bool),
+                    RK_ARG_VAL(b));
         RK_DECL_ACT(filterTypeUpdated,
                     filterTypeUpdated(FilterType type),
                     RK_ARG_TYPE(FilterType),

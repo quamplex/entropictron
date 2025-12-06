@@ -44,6 +44,8 @@ class DspWrapperNoise
         double gain() const;
         void setStereo(double value);
         double stereo() const;
+        void enableFilter(bool b = true);
+        bool isFilterEnabled() const;
         void setFilterType(FilterType type);
         FilterType filterType() const;
         void setCutOff(double value);

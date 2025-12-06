@@ -155,11 +155,10 @@ void NoiseWidget::updateView()
 
         auto [stereoFrom, stereoTo] = model->getStereoRange();
         stereoKnob->setRange(stereoFrom, stereoTo);
-        stereoKnob->setRangeType(Knob::RangeType::Logarithmic);
         stereoKnob->setDefaultValue(model->getStereoDefaultValue());
         stereoKnob->setValue(model->stereo());
 
-        setFilterType(model->filterType());
+        onFilterEnabled(model->isFilterEnabled());
 
         auto [cutOffFrom, cutOffTo] = model->getCutOffRange();
         cutOffKnob->setRange(cutOffFrom, cutOffTo);
@@ -220,15 +219,15 @@ void NoiseWidget::bindModel()
         RK_ACT_BIND(lowPassButton,
                     toggled,
                     RK_ACT_ARGS(bool b),
-                    model, setFilterType(FilterType::LowPass));
+                    this, setFilterType(FilterType::LowPass, b));
         RK_ACT_BIND(bandPassButton,
                     toggled,
                     RK_ACT_ARGS(bool b),
-                    model, setFilterType(FilterType::BandPass));
+                    this, setFilterType(FilterType::BandPass, b));
         RK_ACT_BIND(highPassButton,
                     toggled,
                     RK_ACT_ARGS(bool b),
-                    model, setFilterType(FilterType::HighPass));
+                    this, setFilterType(FilterType::HighPass, b));
         RK_ACT_BIND(cutOffKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
@@ -276,10 +275,13 @@ void NoiseWidget::bindModel()
                     stereoKnob,
                     setValue(value));
         RK_ACT_BIND(model,
+                    filterEnabled,
+                    RK_ACT_ARGS(bool b),
+                    this, onFilterEnabled(b));
+        RK_ACT_BIND(model,
                     filterTypeUpdated,
                     RK_ACT_ARGS(FilterType type),
-                    this,
-                    setFilterType(type));
+                    this, onFilterEnabled(true));
         RK_ACT_BIND(model,
                     cutOffUpdated,
                     RK_ACT_ARGS(double value),
@@ -450,10 +452,35 @@ void NoiseWidget::setType(NoiseType type)
         brownNoiseButton->setPressed(type == NoiseType::BrownNoise);
 }
 
-void NoiseWidget::setFilterType(FilterType type)
+void NoiseWidget::onFilterEnabled(bool b)
 {
-        lowPassButton->setPressed(type == FilterType::LowPass);
-        bandPassButton->setPressed(type == FilterType::BandPass);
-        highPassButton->setPressed(type == FilterType::HighPass);
+        auto model = static_cast<NoiseModel*>(getModel());
+        if (!model)
+                return;
+
+        if (b) {
+                auto type = model->filterType();
+                lowPassButton->setPressed(type == FilterType::LowPass);
+                bandPassButton->setPressed(type == FilterType::BandPass);
+                highPassButton->setPressed(type == FilterType::HighPass);
+        } else {
+                lowPassButton->setPressed(false);
+                bandPassButton->setPressed(false);
+                highPassButton->setPressed(false);
+        }
+}
+
+void NoiseWidget::setFilterType(FilterType type, bool b)
+{
+        auto model = static_cast<NoiseModel*>(getModel());
+        if (!model)
+                return;
+
+        if (model->filterType() == type && !b) {
+                model->enableFilter(false);
+        } else {
+                model->setFilterType(type);
+                model->enableFilter(true);
+        }
 }
 
