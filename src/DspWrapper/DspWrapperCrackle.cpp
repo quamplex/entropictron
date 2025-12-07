@@ -101,6 +101,7 @@ void DspWrapperCrackle::setEnvelopeShape(CrackleEnvelopeShape shape)
 {
         ENT_LOG_DEBUG("called: " << (int)shape);
         auto value = static_cast<enum ent_crackle_envelope>(shape);
+        ENT_LOG_DEBUG("called[1]: " << (int)value);
         ent_crackle_set_envelope_shape(crackleDsp, value);
 }
 

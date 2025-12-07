@@ -29,14 +29,14 @@ CrackleModel::CrackleModel(RkObject *parent, DspCrackleProxy *dspCrackleProxy)
         , dspCrackleProxy {dspCrackleProxy}
         , rateDefaultvalue{20.0} // 20 Hz
         , rateRange{0.5, 150.0} // 150 Hz
-        , randomnessDefaultvalue{0.5} // 50%
+        , randomnessDefaultvalue{1.0} // 100%
         , randomnessRange{0.01, 1.0} // 1 - 100%
         , amplitudeDefaultvalue{1.0} // 0dB
         , amplitudeRange{Entropictron::fromDecibel(-50), // -50dB
                          Entropictron::fromDecibel(6)}   // +6dB
         , brightnessDefaultvalue{0.0}
         , brightnessRange{0.0, 1.0}
-        , durationDefaultvalue{1.0} // 0.1ms
+        , durationDefaultvalue{1.0} // 1ms
         , durationRange{0.1, 50.0} // 0.1 - 50 ms
         , stereospreadDefaultvalue{1.0}
         , stereospreadRange{0.0, 1.0}

@@ -38,7 +38,6 @@ struct ent_noise {
         float brightness;
         float gain;
         float stereo;
-        int sample_channel;
         struct qx_randomizer prob_randomizer;
         struct qx_randomizer randomizer;
         struct qx_randomizer stereo_randomizer;
@@ -74,7 +73,6 @@ struct ent_noise* ent_noise_create(int sample_rate)
         noise->brightness = 0.0f;
         noise->gain = 1.0f;
         noise->stereo = 0.0f;
-        noise->sample_channel = 0;
         noise->brown = 0.0f;
         noise->b0 = 0.0f;
         noise->b1 = 0.0f;
@@ -90,7 +88,7 @@ struct ent_noise* ent_noise_create(int sample_rate)
         ent_shelf_filter_init(&noise->sh_filter_l, noise->sample_rate, 4000.0f, noise->gain);
         ent_shelf_filter_init(&noise->sh_filter_r, noise->sample_rate, 4000.0f, noise->gain);
 
-        ent_filter_init(&noise->filter, noise->sample_rate, 18000.0f, 1.0f);
+        ent_filter_init(&noise->filter, noise->sample_rate, 800.0f, 0.5f);
 
         return noise;
 }

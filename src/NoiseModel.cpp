@@ -32,7 +32,7 @@ NoiseModel::NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy)
         , gainDefaultValue {Entropictron::fromDecibel(0)}
         , stereoDefaultValue {1.0}
         , cutOffDefaultValue {800.0}
-        , resonanceDefaultValue {1.0}
+        , resonanceDefaultValue {0.5}
         , densityRange {0.0, 1.0}
         , brightnessRange {0.0, 1.0}
         , gainRange {Entropictron::fromDecibel(-50), // -50dB

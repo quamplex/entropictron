@@ -71,7 +71,7 @@ struct ent_crackle* ent_crackle_create(int sample_rate)
         c->duration = 1.0f; // 0.1-50ms
         c->burst_samples = (c->duration / 1000.0f) * c->sample_rate;
         c->amplitude = 1.0f;
-        c->randomness = 0.5f;
+        c->randomness = 1.0f;
         c->brightness = 0.5f;
         c->envelope_shape = ENT_CRACKLE_ENV_EXPONENTIAL;
         c->stereo_spread = 0.0f;
@@ -81,8 +81,8 @@ struct ent_crackle* ent_crackle_create(int sample_rate)
 
         qx_fader_init(&c->fader, 50, c->sample_rate);
 
-        ent_shelf_filter_init(&c->sh_filter_l, c->sample_rate, 8000.0f, 1.0f);
-        ent_shelf_filter_init(&c->sh_filter_r, c->sample_rate, 8000.0f, 1.0f);
+        ent_shelf_filter_init(&c->sh_filter_l, c->sample_rate, 4000.0f, 1.0f);
+        ent_shelf_filter_init(&c->sh_filter_r, c->sample_rate, 4000.0f, 1.0f);
 
         return c;
 }
@@ -109,6 +109,7 @@ bool ent_crackle_is_enabled(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_rate(struct ent_crackle *c, float rate)
 {
+        ent_log_info("RATE: %f", rate);
         c->rate = qx_clamp_float(rate, 0.5f, 150.0f);
         return ENT_OK;
 }
@@ -120,6 +121,7 @@ float ent_crackle_get_rate(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_duration(struct ent_crackle *c, float duration)
 {
+        ent_log_info("DURATION: %f", duration);
         c->duration = qx_clamp_float(duration, 0.1f, 50.0f);
         return ENT_OK;
 }
@@ -131,6 +133,7 @@ float ent_crackle_get_duration(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_amplitude(struct ent_crackle *c, float amplitude)
 {
+        ent_log_info("AMPLITUDE: %f", amplitude);
         c->amplitude = qx_clamp_float(amplitude, 0.0f, 1.0f);
         return ENT_OK;
 }
@@ -142,6 +145,7 @@ float ent_crackle_get_amplitude(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_randomness(struct ent_crackle *c, float randomness)
 {
+        ent_log_info("RNADOMNESS: %f", randomness);
         c->randomness = qx_clamp_float(randomness, 0.01f, 1.0f);
         return ENT_OK;
 }
@@ -153,15 +157,16 @@ float ent_crackle_get_randomness(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_brightness(struct ent_crackle *c, float brightness)
 {
+        ent_log_info("BRIGHTNESS: %f", brightness);
         c->brightness = 1.0 - qx_clamp_float(brightness, 0.0f, 1.0f);
 
-        float min_cutoff = 1000.0f;
+        float min_cutoff = 4000.0f;
         float max_cutoff = 8000.0f;
         float cutoff = min_cutoff + (max_cutoff - min_cutoff) * c->brightness;
 
         float min_gain = 1.0f;
         float max_gain = 24.0f;
-        float gain = 24.0f;
+        float gain = min_gain + (max_gain - min_gain) *  brightness;
 
         ent_shelf_filter_set_cutoff(&c->sh_filter_l, c->sample_rate, cutoff, gain);
         ent_shelf_filter_set_cutoff(&c->sh_filter_r, c->sample_rate, cutoff, gain);
@@ -177,6 +182,7 @@ float ent_crackle_get_brightness(struct ent_crackle *c)
 enum ent_error ent_crackle_set_envelope_shape(struct ent_crackle *c,
                                               enum ent_crackle_envelope shape)
 {
+        ent_log_info("SHAPE: %d", (int)shape);
         if (shape >= ENT_CRACKLE_ENV_NUM_TYPES)
                 shape = ENT_CRACKLE_ENV_EXPONENTIAL;
         c->envelope_shape = shape;
@@ -189,6 +195,7 @@ enum ent_crackle_envelope ent_crackle_get_envelope_shape(struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_stereo_spread(struct ent_crackle *c, float spread)
 {
+        ent_log_info("STEREO: %f", spread);
         c->stereo_spread = qx_clamp_float(spread, 0.0f, 1.0f);
         return ENT_OK;
 }
@@ -279,10 +286,8 @@ void ent_crackle_process(struct ent_crackle *c, float **data, size_t size)
                 }
         }
 
-        if (c->brightness < 1.0 - 1e-6f) {
-                ent_shelf_filter_process(&c->sh_filter_l, c->buffer[0], size);
-                ent_shelf_filter_process(&c->sh_filter_r, c->buffer[1], size);
-        }
+        ent_shelf_filter_process(&c->sh_filter_l, c->buffer[0], size);
+        ent_shelf_filter_process(&c->sh_filter_r, c->buffer[1], size);
 
         for (size_t i = 0; i < size; i++) {
                 data[0][i] += c->buffer[0][i];

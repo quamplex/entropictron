@@ -30,6 +30,8 @@
 #include "DspWrapperGlitch.h"
 #include "EntVstParameters.h"
 #include "DspNoiseProxyVst.h"
+#include "DspCrackleProxyVst.h"
+#include "DspGlitchProxyVst.h"
 
 #include "base/source/fstreamer.h"
 #include "pluginterfaces/base/ibstream.h"
@@ -374,66 +376,65 @@ void EntVstProcessor::initCrackleParamMappings()
 
         paramMap[ParameterId::Crackle1RateId] = [crackle](ParamValue v) {
                 // 0.5 - 150Hz
-                crackle->setRate(0.5 + (100.0 - 0.5) * v);
+                crackle->setRate(DspCrackleProxyVst::rateFromNormalized(v));
         };
 
         paramMap[ParameterId::Crackle1DurationId] = [crackle](ParamValue v) {
-                crackle->setDuration((50.0 - 0.1) * v + 0.1);
+                crackle->setDuration(DspCrackleProxyVst::durationFromNormalized(v));
         };
 
         paramMap[ParameterId::Crackle1AmplitudeId] = [crackle](ParamValue v) {
-                crackle->setAmplitude(static_cast<float>(v));
+                crackle->setAmplitude(v);
         };
 
         paramMap[ParameterId::Crackle1RandomnessId] = [crackle](ParamValue v) {
-                crackle->setRandomness(static_cast<float>(v));
+                crackle->setRandomness(v);
         };
 
         paramMap[ParameterId::Crackle1BrightnessId] = [crackle](ParamValue v) {
-                crackle->setBrightness(static_cast<float>(v));
+                crackle->setBrightness(v);
         };
 
         paramMap[ParameterId::Crackle1EnvelopeShapeId] = [crackle](ParamValue v) {
-                crackle->setEnvelopeShape(static_cast<CrackleEnvelopeShape>(v));
+                crackle->setEnvelopeShape(DspCrackleProxyVst::envelopeShapeFromNormalized(v));
         };
 
         paramMap[ParameterId::Crackle1StereoSpreadId] = [crackle](ParamValue v) {
-                crackle->setStereoSpread(static_cast<float>(v));
+                crackle->setStereoSpread(v);
         };
 
+        // Crackle 1
         crackle = entropictronDsp->getCrackle(CrackleId::Crackle2);
-
-        // Crackle 2
         paramMap[ParameterId::Crackle2EnabledId] = [crackle](ParamValue v) {
                 crackle->enable(v > 0.5);
         };
 
         paramMap[ParameterId::Crackle2RateId] = [crackle](ParamValue v) {
-                crackle->setRate(0.5 + (150.0 - 0.5) * v);
+                crackle->setRate(DspCrackleProxyVst::rateFromNormalized(v));
         };
 
         paramMap[ParameterId::Crackle2DurationId] = [crackle](ParamValue v) {
-                crackle->setDuration((50.0 - 0.1) * v + 0.1);
+                crackle->setDuration(DspCrackleProxyVst::durationFromNormalized(v));
         };
 
         paramMap[ParameterId::Crackle2AmplitudeId] = [crackle](ParamValue v) {
-                crackle->setAmplitude(static_cast<float>(v));
+                crackle->setAmplitude(v);
         };
 
         paramMap[ParameterId::Crackle2RandomnessId] = [crackle](ParamValue v) {
-                crackle->setRandomness(static_cast<float>(v));
+                crackle->setRandomness(v);
         };
 
         paramMap[ParameterId::Crackle2BrightnessId] = [crackle](ParamValue v) {
-                crackle->setBrightness(static_cast<float>(v));
+                crackle->setBrightness(v);
         };
 
         paramMap[ParameterId::Crackle2EnvelopeShapeId] = [crackle](ParamValue v) {
-                crackle->setEnvelopeShape(static_cast<CrackleEnvelopeShape>(v));
+                crackle->setEnvelopeShape(DspCrackleProxyVst::envelopeShapeFromNormalized(v));
         };
 
         paramMap[ParameterId::Crackle2StereoSpreadId] = [crackle](ParamValue v) {
-                crackle->setStereoSpread(static_cast<float>(v));
+                crackle->setStereoSpread(v);
         };
 }
 

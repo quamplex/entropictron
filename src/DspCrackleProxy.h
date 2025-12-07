@@ -62,8 +62,8 @@ class DspCrackleProxy : public RkObject {
                     durationUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
-        RK_DECL_ACT(amplitueUpdated,
-                    amplitueUpdated(double value),
+        RK_DECL_ACT(amplitudeUpdated,
+                    amplitudeUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
         RK_DECL_ACT(randomnessUpdated,
@@ -73,6 +73,10 @@ class DspCrackleProxy : public RkObject {
         RK_DECL_ACT(brightnessUpdated,
                     brightnessUpdated(double value),
                     RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(envelopeShapeUpdated,
+                    envelopeShapeUpdated(CrackleEnvelopeShape value),
+                    RK_ARG_TYPE(CrackleEnvelopeShape),
                     RK_ARG_VAL(value));
         RK_DECL_ACT(stereospreadUpdated,
                     stereospreadUpdated(double value),

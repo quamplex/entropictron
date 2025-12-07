@@ -49,6 +49,19 @@ DspCrackleProxyVst::DspCrackleProxyVst(RkObject* parent,
                         ParameterId::Crackle1EnvelopeShapeId,
                         ParameterId::Crackle1StereoSpreadId
                 };
+
+                vstController->setParamNormalized(ParameterId::Crackle1EnabledId, 0.0);
+                vstController->setParamNormalized(ParameterId::Crackle1RateId,
+                                                  rateToNormalized(20.0));
+                vstController->setParamNormalized(ParameterId::Crackle1DurationId,
+                                                  durationToNormalized(1.0));
+                vstController->setParamNormalized(ParameterId::Crackle1AmplitudeId, 1.0);
+                vstController->setParamNormalized(ParameterId::Crackle1RandomnessId, 1.0);
+                vstController->setParamNormalized(ParameterId::Crackle1BrightnessId, 0.0);
+                vstController->setParamNormalized(ParameterId::Crackle1EnvelopeShapeId,
+                                                  envelopeShapeToNormalized(CrackleEnvelopeShape::Exponential));
+                vstController->setParamNormalized(ParameterId::Crackle1StereoSpreadId, 0.0);
+
         } else {
                 params = {
                         ParameterId::Crackle2RateId,
@@ -59,6 +72,18 @@ DspCrackleProxyVst::DspCrackleProxyVst(RkObject* parent,
                         ParameterId::Crackle2EnvelopeShapeId,
                         ParameterId::Crackle2StereoSpreadId
                 };
+
+                vstController->setParamNormalized(ParameterId::Crackle2EnabledId, 0.0);
+                vstController->setParamNormalized(ParameterId::Crackle2RateId,
+                                                  rateToNormalized(20.0));
+                vstController->setParamNormalized(ParameterId::Crackle2DurationId,
+                                                  durationToNormalized(1.0));
+                vstController->setParamNormalized(ParameterId::Crackle2AmplitudeId, 1.0);
+                vstController->setParamNormalized(ParameterId::Crackle2RandomnessId, 1.0);
+                vstController->setParamNormalized(ParameterId::Crackle2BrightnessId, 0.0);
+                vstController->setParamNormalized(ParameterId::Crackle2EnvelopeShapeId,
+                                                  envelopeShapeToNormalized(CrackleEnvelopeShape::Exponential));
+                vstController->setParamNormalized(ParameterId::Crackle2StereoSpreadId, 0.0);
         }
 
         for (const auto& paramId : params)
@@ -109,8 +134,7 @@ bool DspCrackleProxyVst::setRate(double value)
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1RateId : ParameterId::Crackle2RateId;
         vstController->getComponentHandler()->beginEdit(id);
-        value = (value - 0.5) / (150 - 0.5);
-        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->performEdit(id, rateToNormalized(value));
         vstController->getComponentHandler()->endEdit(id);
         return true;
 }
@@ -119,7 +143,7 @@ double DspCrackleProxyVst::rate() const
 {
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1RateId : ParameterId::Crackle2RateId;
-        return 0.5 + (150 - 0.5) * vstController->getParamNormalized(id);
+        return rateFromNormalized(vstController->getParamNormalized(id));
 }
 
 bool DspCrackleProxyVst::setDuration(double value)
@@ -127,8 +151,7 @@ bool DspCrackleProxyVst::setDuration(double value)
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1DurationId : ParameterId::Crackle2DurationId;
         vstController->getComponentHandler()->beginEdit(id);
-        value = (value - 0.1) / (50 - 0.1);
-        vstController->getComponentHandler()->performEdit(id, value);
+        vstController->getComponentHandler()->performEdit(id, durationToNormalized(value));
         vstController->getComponentHandler()->endEdit(id);
         return true;
 }
@@ -137,7 +160,7 @@ double DspCrackleProxyVst::duration() const
 {
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1DurationId : ParameterId::Crackle2DurationId;
-        return (50 - 0.1) * vstController->getParamNormalized(id) + 0.1;
+        return durationFromNormalized(vstController->getParamNormalized(id));
 }
 
 bool DspCrackleProxyVst::setAmplitude(double value)
@@ -195,8 +218,8 @@ bool DspCrackleProxyVst::setEnvelopeShape(CrackleEnvelopeShape shape)
 {
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1EnvelopeShapeId : ParameterId::Crackle2EnvelopeShapeId;
-        double value = static_cast<double>(shape);
         vstController->getComponentHandler()->beginEdit(id);
+        auto value = envelopeShapeToNormalized(shape);
         vstController->getComponentHandler()->performEdit(id, value);
         vstController->getComponentHandler()->endEdit(id);
         return true;
@@ -207,7 +230,7 @@ CrackleEnvelopeShape DspCrackleProxyVst::envelopeShape() const
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1EnvelopeShapeId : ParameterId::Crackle2EnvelopeShapeId;
         double value = vstController->getParamNormalized(id);
-        return static_cast<CrackleEnvelopeShape>(value);
+        return envelopeShapeFromNormalized(value);
 }
 
 bool DspCrackleProxyVst::setStereospread(double value)
@@ -236,17 +259,71 @@ void DspCrackleProxyVst::onParameterChanged(ParameterId paramId, ParamValue valu
                 break;
         case ParameterId::Crackle1RateId:
         case ParameterId::Crackle2RateId:
-                action rateUpdated(0.5 + (150 - 0.5) * value);
+                action rateUpdated(rateFromNormalized(value));
+                break;
+        case ParameterId::Crackle1DurationId:
+        case ParameterId::Crackle2DurationId:
+                action durationUpdated(durationFromNormalized(value));
+                break;
+        case ParameterId::Crackle1AmplitudeId:
+        case ParameterId::Crackle2AmplitudeId:
+                action amplitudeUpdated(value);
                 break;
         case ParameterId::Crackle1RandomnessId:
         case ParameterId::Crackle2RandomnessId:
                 action rateUpdated(value);
                 break;
-        case ParameterId::Crackle1DurationId:
-        case ParameterId::Crackle2DurationId:
-                action durationUpdated((50 - 0.1) * value + 0.1);
+        case ParameterId::Crackle1BrightnessId:
+        case ParameterId::Crackle2BrightnessId:
+                action rateUpdated(value);
+                break;
+        case ParameterId::Crackle1EnvelopeShapeId:
+        case ParameterId::Crackle2EnvelopeShapeId:
+                action envelopeShapeUpdated(envelopeShapeFromNormalized(value));
+                break;
+        case ParameterId::Crackle1StereoSpreadId:
+        case ParameterId::Crackle2StereoSpreadId:
+                action stereospreadUpdated(value);
                 break;
         default:
                 break;
         }
 }
+
+double DspCrackleProxyVst::rateToNormalized(double value)
+{
+        //[0.5Hz - 150Hz] -> [0, 1]
+        return (value - 0.5) / (150 - 0.5);
+}
+
+double DspCrackleProxyVst::rateFromNormalized(double value)
+{
+        // [0, 1] -> [0.5Hz - 150Hz]
+        return 0.5 + (150.0 - 0.5) * value;
+}
+
+double DspCrackleProxyVst::durationToNormalized(double value)
+{
+        // 0.1 - 50 ms -> [0, 1]
+        return (value - 0.1) / (50.0 - 0.1);
+}
+
+double DspCrackleProxyVst::durationFromNormalized(double value)
+{
+        // [0, 1] -> 0.1 - 50 ms
+        return 0.1 + (50.0 - 0.1) * value;
+}
+
+double DspCrackleProxyVst::envelopeShapeToNormalized(CrackleEnvelopeShape shape)
+{
+        auto n = static_cast<double>(CrackleEnvelopeShapeMax);
+        return static_cast<double>(shape) / n;
+}
+
+CrackleEnvelopeShape DspCrackleProxyVst::envelopeShapeFromNormalized(double value)
+{
+        auto n = static_cast<double>(CrackleEnvelopeShapeMax);
+        return static_cast<CrackleEnvelopeShape>(std::round(value * n));
+}
+
+

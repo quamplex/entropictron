@@ -52,6 +52,21 @@ DspNoiseProxyVst::DspNoiseProxyVst(RkObject* parent,
                            ParameterId::Noise1FilterTypeId,
                            ParameterId::Noise1CutOffId,
                            ParameterId::Noise1ResonanceId};
+
+                vstController->setParamNormalized (ParameterId::Noise1EnabledId, 0.0);
+                vstController->setParamNormalized (ParameterId::Noise1TypeId,
+                                                   noiseTypeToNormalized(NoiseType::WhiteNoise));
+                vstController->setParamNormalized (ParameterId::Noise1DensityId, 1.0);
+                vstController->setParamNormalized (ParameterId::Noise1BrightnessId, 0.0);
+                vstController->setParamNormalized (ParameterId::Noise1GainId,
+                                                   gainToNormalized(Entropictron::fromDecibel(0)));
+                vstController->setParamNormalized (ParameterId::Noise1StereoId, 0.0);
+                vstController->setParamNormalized (ParameterId::Noise1FilterEnableId, 0.0);
+                vstController->setParamNormalized (ParameterId::Noise1FilterTypeId,
+                                                   filterTypeToNormalized(FilterType::LowPass));
+                vstController->setParamNormalized (ParameterId::Noise1CutOffId,
+                                                   cutoffToNormalized(800));
+                vstController->setParamNormalized (ParameterId::Noise1ResonanceId, 1.0);
         } else {
                 params = { ParameterId::Noise2EnabledId,
                            ParameterId::Noise2TypeId,
@@ -63,48 +78,25 @@ DspNoiseProxyVst::DspNoiseProxyVst(RkObject* parent,
                            ParameterId::Noise2FilterTypeId,
                            ParameterId::Noise2CutOffId,
                            ParameterId::Noise2ResonanceId};
+
+                vstController->setParamNormalized (ParameterId::Noise2EnabledId, 0.0);
+                vstController->setParamNormalized (ParameterId::Noise2TypeId,
+                                                   noiseTypeToNormalized(NoiseType::WhiteNoise));
+                vstController->setParamNormalized (ParameterId::Noise2DensityId, 1.0);
+                vstController->setParamNormalized (ParameterId::Noise2BrightnessId, 0.0);
+                vstController->setParamNormalized (ParameterId::Noise2GainId,
+                                                   gainToNormalized(Entropictron::fromDecibel(0)));
+                vstController->setParamNormalized (ParameterId::Noise2StereoId, 0.0);
+                vstController->setParamNormalized (ParameterId::Noise2FilterEnableId, 0.0);
+                vstController->setParamNormalized (ParameterId::Noise2FilterTypeId,
+                                                   filterTypeToNormalized(FilterType::LowPass));
+                vstController->setParamNormalized (ParameterId::Noise2CutOffId,
+                                                   cutoffToNormalized(800));
+                vstController->setParamNormalized (ParameterId::Noise2ResonanceId, 1.0);
         }
 
         for (const auto& paramId : params)
                 vstController->setParamterCallback(paramId, paramCallback);
-
-        vstController->setParamNormalized (ParameterId::Noise1EnabledId, 0.0);
-        vstController->setParamNormalized (ParameterId::Noise2EnabledId, 0.0);
-
-        vstController->setParamNormalized (ParameterId::Noise1TypeId,
-                                           noiseTypeToNormalized(NoiseType::WhiteNoise));
-        vstController->setParamNormalized (ParameterId::Noise2TypeId,
-                                           noiseTypeToNormalized(NoiseType::WhiteNoise));
-
-        vstController->setParamNormalized (ParameterId::Noise1DensityId, 1.0);
-        vstController->setParamNormalized (ParameterId::Noise2DensityId, 1.0);
-
-        vstController->setParamNormalized (ParameterId::Noise1BrightnessId, 0.0);
-        vstController->setParamNormalized (ParameterId::Noise2BrightnessId, 0.0);
-
-        vstController->setParamNormalized (ParameterId::Noise1GainId,
-                                           gainToNormalized(Entropictron::fromDecibel(0)));
-        vstController->setParamNormalized (ParameterId::Noise2GainId,
-                                           gainToNormalized(Entropictron::fromDecibel(0)));
-
-        vstController->setParamNormalized (ParameterId::Noise1StereoId, 0.0);
-        vstController->setParamNormalized (ParameterId::Noise2StereoId, 0.0);
-
-        vstController->setParamNormalized (ParameterId::Noise1FilterEnableId, 0.0);
-        vstController->setParamNormalized (ParameterId::Noise2FilterEnableId, 0.0);
-
-        vstController->setParamNormalized (ParameterId::Noise1FilterTypeId,
-                                           filterTypeToNormalized(FilterType::LowPass));
-        vstController->setParamNormalized (ParameterId::Noise2FilterTypeId,
-                                           filterTypeToNormalized(FilterType::LowPass));
-
-        vstController->setParamNormalized (ParameterId::Noise1CutOffId,
-                                           cutoffToNormalized(18000));
-        vstController->setParamNormalized (ParameterId::Noise2CutOffId,
-                                           cutoffToNormalized(18000));
-
-        vstController->setParamNormalized (ParameterId::Noise1ResonanceId, 1.0);
-        vstController->setParamNormalized (ParameterId::Noise2ResonanceId, 1.0);
 }
 
 DspNoiseProxyVst::~DspNoiseProxyVst()
@@ -402,8 +394,3 @@ double DspNoiseProxyVst::cutoffToNormalized(double value)
         constexpr double toVal   = 18000.0;
         return (value - fromVal) / (toVal - fromVal);
 }
-
-
-
-
-

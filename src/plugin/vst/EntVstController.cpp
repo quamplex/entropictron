@@ -26,6 +26,8 @@
 #include "VstIds.h"
 #include "EntVstParameters.h"
 #include "DspNoiseProxyVst.h"
+#include "DspCrackleProxyVst.h"
+#include "DspGlitchProxyVst.h"
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
 
@@ -95,13 +97,11 @@ void EntVstController::addNoiseParameters()
                                 ParameterId::Noise1FilterTypeId);
         parameters.addParameter(STR16("Noise 1 CutOff"),
                                 STR16("Hz"),
-                                0,
-                                // 20 - 18000 Hz, default 800Hz
-                                (800.0 - 20.0) / (18000.0 - 20.0),
+                                0, DspNoiseProxyVst::cutoffToNormalized(800),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise1CutOffId);
         parameters.addParameter(STR16("Noise 1 Resonance"),
-                                STR16("Q"), 0, 1.0,
+                                STR16("Q"), 0, 0.5,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise1ResonanceId);
 
@@ -141,11 +141,11 @@ void EntVstController::addNoiseParameters()
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2FilterTypeId);
         parameters.addParameter(STR16("Noise 2 CutOff"),
-                                STR16("Hz"), 0, 1.0,
+                                STR16("Hz"), 0, DspNoiseProxyVst::cutoffToNormalized(800),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2CutOffId);
         parameters.addParameter(STR16("Noise 2 Resonance"),
-                                STR16("Q"), 0, 1.0,
+                                STR16("Q"), 0, 0.5,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2ResonanceId);
 }
@@ -159,17 +159,16 @@ void EntVstController::addCrackleParameters()
                                 ParameterId::Crackle1EnabledId);
 
         // Rate (bursts per second)
-        auto rateDefalutNormalized = (20 - 0.5) / (150 - 0.5);
         parameters.addParameter(STR16("Crackle1 Rate"),
                                 nullptr,
-                                0, rateDefalutNormalized, // 0–150 Hz, default 20Hz
+                                0, DspCrackleProxyVst::rateToNormalized(20.0), // default 20Hz
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1RateId);
 
         // Duration (ms)
         parameters.addParameter(STR16("Crackle1 Duration"),
                                 nullptr, 0,
-                                (1.0 - 0.1) / (50.0 - 0.1), // 0.1–50 ms, default 1.0ms
+                                DspCrackleProxyVst::durationToNormalized(1.0),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1DurationId);
 
@@ -181,7 +180,7 @@ void EntVstController::addCrackleParameters()
 
         // Randomness
         parameters.addParameter(STR16("Crackle1 Randomness"),
-                                nullptr, 0, 0.5, // 1–100%, default 50%
+                                nullptr, 0, 1.0, // 1–100%, default 50%
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1RandomnessId);
 
@@ -193,7 +192,8 @@ void EntVstController::addCrackleParameters()
 
         // Envelope Shape
         parameters.addParameter(STR16("Crackle1 Envelope Shape"),
-                                nullptr, 3, 0.0, // 0–1, default 0.0
+                                nullptr, 3,
+                                DspCrackleProxyVst::envelopeShapeToNormalized(CrackleEnvelopeShape::Exponential),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle1EnvelopeShapeId);
 
@@ -209,16 +209,15 @@ void EntVstController::addCrackleParameters()
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2EnabledId);
 
-        // Rate (bursts per second)
         parameters.addParameter(STR16("Crackle2 Rate"),
-                                nullptr, 0, rateDefalutNormalized, // 0–100 Hz, default 20
+                                nullptr, 0, DspCrackleProxyVst::rateToNormalized(20),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2RateId);
 
         // Duration (ms)
         parameters.addParameter(STR16("Crackle2 Duration"),
                                 nullptr, 0,
-                                (1.0 - 0.1) / (50.0 - 0.1), // 1–50 ms, default 20
+                                DspCrackleProxyVst::durationToNormalized(1.0),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2DurationId);
 
@@ -230,19 +229,20 @@ void EntVstController::addCrackleParameters()
 
         // Randomness
         parameters.addParameter(STR16("Crackle2 Randomness"),
-                                nullptr, 0, 0.5, // 1–100%, default 50%
+                                nullptr, 0, 1.0, // 1–100%, default 50%
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2RandomnessId);
 
         // Brightness
         parameters.addParameter(STR16("Crackle2 Brightness"),
-                                nullptr, 0, 0.5, // 0–1, default 0.5
+                                nullptr, 0, 0.0, // 0–1, default 0.0
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2BrightnessId);
 
         // Envelope Shape
         parameters.addParameter(STR16("Crackle2 Envelope Shape"),
-                                nullptr, 3, 0.0, // 0–1, default 0.0
+                                nullptr, 3,
+                                DspCrackleProxyVst::envelopeShapeToNormalized(CrackleEnvelopeShape::Exponential),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Crackle2EnvelopeShapeId);
 

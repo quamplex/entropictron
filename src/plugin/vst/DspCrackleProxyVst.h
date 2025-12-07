@@ -55,6 +55,13 @@ class DspCrackleProxyVst: public DspCrackleProxy {
         bool setStereospread(double value) override;
         double stereospread() const override;
 
+        static double rateToNormalized(double value);
+        static double rateFromNormalized(double value);
+        static double durationToNormalized(double value);
+        static double durationFromNormalized(double value);
+        static double envelopeShapeToNormalized(CrackleEnvelopeShape shape);
+        static CrackleEnvelopeShape envelopeShapeFromNormalized(double value);
+
 protected:
         void onParameterChanged(ParameterId paramId, ParamValue value);
 

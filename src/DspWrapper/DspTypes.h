@@ -57,8 +57,10 @@ enum class FilterType: int {
 enum class CrackleEnvelopeShape : int {
         Exponential = ENT_CRACKLE_ENV_EXPONENTIAL,
         Linear      = ENT_CRACKLE_ENV_LINEAR,
-        Triangle    = ENT_CRACKLE_ENV_TRIANGLE
+        Triangle    = ENT_CRACKLE_ENV_TRIANGLE,
 };
+
+constexpr auto CrackleEnvelopeShapeMax = CrackleEnvelopeShape::Triangle;
 
 enum class PlayMode : int {
     PlaybackMode = ENT_PLAY_MODE_PLAYBACK,
