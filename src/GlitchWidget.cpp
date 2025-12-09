@@ -105,6 +105,7 @@ void GlitchWidget::updateView()
 
         auto [repeatsFrom, repeatsTo] = model->getRepeatsRange();
         repeatsKnob->setRange(repeatsFrom, repeatsTo);
+        repeatsKnob->setSteps(10);
         repeatsKnob->setDefaultValue(model->getRepeatsDefaultValue());
         repeatsKnob->setValue(model->repeats());
 

@@ -23,6 +23,7 @@
 
 #include "ent_glitch.h"
 #include "ent_log.h"
+#include "qx_math.h"
 #include "qx_randomizer.h"
 
 #include <stdlib.h>
@@ -55,12 +56,12 @@ struct ent_glitch* ent_glitch_create(int sample_rate)
         if (!g) return NULL;
 
         g->sample_rate = sample_rate;
-        g->enabled = true;
-        g->probability = 0.1f;
-        g->jump_min_samples = sample_rate / 20;
-        g->jump_max_samples = sample_rate / 3;
-        g->glitch_length_samples = sample_rate / 24; // 40 ms
-        g->glitch_repeat_count = 2;
+        g->enabled = false;
+        g->probability = 0.25f;
+        g->jump_min_samples = 0; // 0ms;
+        g->jump_max_samples = sample_rate * (200.0f / 1000.0f); // 200ms
+        g->glitch_length_samples = sample_rate *  (50.0f / 1000.0f); // 40 ms
+        g->glitch_repeat_count = 3;
 
         g->buffer_size = sample_rate;
         g->buffer[0] = calloc(g->buffer_size * 2, sizeof(float)); // stereo
@@ -99,7 +100,8 @@ bool ent_glitch_is_enabled(struct ent_glitch *g)
 
 enum ent_error ent_glitch_set_probability(struct ent_glitch *g, float probability)
 {
-        g->probability = probability;
+        ent_log_info("PROBABILITY: %f", probability);
+        g->probability = qx_clamp_float(probability, 0.1f, 1.0f);
         return ENT_OK;
 }
 
@@ -110,6 +112,8 @@ float ent_glitch_get_probability(struct ent_glitch *g)
 
 enum ent_error ent_glitch_set_jump_min(struct ent_glitch *g, float jump_min_ms)
 {
+        ent_log_info("JUMP MIN: %f", jump_min_ms);
+        jump_min_ms = qx_clamp_float(jump_min_ms, 0.0f, 2000.0f);
         g->jump_min_samples = (int)(jump_min_ms * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
@@ -121,6 +125,8 @@ float ent_glitch_get_jump_min(struct ent_glitch *g)
 
 enum ent_error ent_glitch_set_jump_max(struct ent_glitch *g, float jump_max_ms)
 {
+        ent_log_info("JUMP MAX: %f", jump_max_ms);
+        jump_max_ms = qx_clamp_float(jump_max_ms, 0.0f, 2000.0f);
         g->jump_max_samples = (int)(jump_max_ms * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
@@ -132,6 +138,8 @@ float ent_glitch_get_jump_max(struct ent_glitch *g)
 
 enum ent_error ent_glitch_set_length(struct ent_glitch *g, float length_ms)
 {
+        ent_log_info("JUMP MIN: %f", length_ms);
+        length_ms = qx_clamp_float(length_ms, 0.0f, 2000.0f);
         g->glitch_length_samples = (int)(length_ms * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
@@ -143,7 +151,8 @@ float ent_glitch_get_length(struct ent_glitch *g)
 
 enum ent_error ent_glitch_set_repeat_count(struct ent_glitch *g, int repeats)
 {
-        g->glitch_repeat_count = repeats > 0 ? repeats : 1;
+        ent_log_info("REPEATS: %d", repeats);
+        g->glitch_repeat_count = QX_CLAMP(repeats, 1, 10);
         ent_log_error("glitch_repeat_count: %f", g->glitch_repeat_count);
         return ENT_OK;
 }

@@ -24,9 +24,20 @@
 #include "GlitchModel.h"
 #include "DspGlitchProxy.h"
 
-GlitchModel::GlitchModel(RkObject *parent, DspGlitchProxy *dspGlitchProxy)
-        : EntAbstractModel(parent)
-        , dspGlitchProxy {dspGlitchProxy}
+GlitchModel::GlitchModel(RkObject *parent,
+                         DspGlitchProxy* dspGlitchProxy)
+        : EntAbstractModel(parent),
+          dspGlitchProxy{dspGlitchProxy},
+          repeatsDefaultValue{3},
+          repeatsRange{1, 10},
+          probabilityDefaultValue{0.25},
+          probabilityRange{0.1, 1.0},
+          lengthDefaultValue{50}, // 50ms
+          lengthRange{10, 2000}, // [10ms - 2000ms]
+          minJumpDefaultValue{0}, // 0ms
+          minJumpRange{0.0, 2000}, // [0ms - 2000ms]
+          maxJumpDefaultValue{200}, // 200 ms
+          maxJumpRange{0.0, 2000} // [0ms - 2000ms]
 {
         RK_ACT_BIND(dspGlitchProxy,
                     enabled,
@@ -50,33 +61,33 @@ bool GlitchModel::isEnabled() const
         return dspGlitchProxy->isEnabled();
 }
 
-void GlitchModel::setRepeats(double value)
+void GlitchModel::setRepeats(int value)
 {
         if (dspGlitchProxy->setRepeats(value))
                 action repeatsUpdated(value);
 }
 
-double GlitchModel::repeats() const
+int GlitchModel::repeats() const
 {
         return dspGlitchProxy->repeats();
 }
 
-void GlitchModel::setRepeatsDefaultValue(double value)
+void GlitchModel::setRepeatsDefaultValue(int value)
 {
-        repeatsDefaultvalue = value;
+        repeatsDefaultValue = value;
 }
 
-double GlitchModel::getRepeatsDefaultValue() const
+int GlitchModel::getRepeatsDefaultValue() const
 {
-        return repeatsDefaultvalue;
+        return repeatsDefaultValue;
 }
 
-void GlitchModel::setRepeatsRange(double from, double to)
+void GlitchModel::setRepeatsRange(int from, int to)
 {
         repeatsRange = {from, to};
 }
 
-std::pair<double, double> GlitchModel::getRepeatsRange() const
+std::pair<int, int> GlitchModel::getRepeatsRange() const
 {
         return repeatsRange;
 }
@@ -94,12 +105,12 @@ double GlitchModel::probability() const
 
 void GlitchModel::setProbabilityDefaultValue(double value)
 {
-        probabilityDefaultvalue = value;
+        probabilityDefaultValue = value;
 }
 
 double GlitchModel::getProbabilityDefaultValue() const
 {
-        return probabilityDefaultvalue;
+        return probabilityDefaultValue;
 }
 
 void GlitchModel::setProbabilityRange(double from, double to)
@@ -125,12 +136,12 @@ double GlitchModel::length() const
 
 void GlitchModel::setLengthDefaultValue(double value)
 {
-        lengthDefaultvalue = value;
+        lengthDefaultValue = value;
 }
 
 double GlitchModel::getLengthDefaultValue() const
 {
-        return lengthDefaultvalue;
+        return lengthDefaultValue;
 }
 
 void GlitchModel::setLengthRange(double from, double to)
@@ -156,12 +167,12 @@ double GlitchModel::maxJump() const
 
 void GlitchModel::setMaxJumpDefaultValue(double value)
 {
-        maxJumpDefaultvalue = value;
+        maxJumpDefaultValue = value;
 }
 
 double GlitchModel::getMaxJumpDefaultValue() const
 {
-        return maxJumpDefaultvalue;
+        return maxJumpDefaultValue;
 }
 
 void GlitchModel::setMaxJumpRange(double from, double to)
@@ -187,12 +198,12 @@ double GlitchModel::minJump() const
 
 void GlitchModel::setMinJumpDefaultValue(double value)
 {
-        minJumpDefaultvalue = value;
+        minJumpDefaultValue = value;
 }
 
 double GlitchModel::getMinJumpDefaultValue() const
 {
-        return minJumpDefaultvalue;
+        return minJumpDefaultValue;
 }
 
 void GlitchModel::setMinJumpRange(double from, double to)

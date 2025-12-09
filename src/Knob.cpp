@@ -29,15 +29,17 @@
 Knob::Knob(EntWidget* parent, const RkImage &label)
         : EntWidget(parent)
         , labelImage{label}
+        , maxSteps{0}
         , rangeFrom{0}
-        , rangeTo {0}
+        , rangeTo{0}
         , rangeType{RangeType::Linear}
-        , minimumDegree {45}
-        , maximumDegree {360 - 45}
+        , minimumDegree{45}
+        , maximumDegree{360 - 45}
         , rangeDegree{maximumDegree - minimumDegree}
-        , knobValueDegree {minimumDegree}
-        , isSelected {false}
-        , defaultValue {0}
+        , knobValueDegree{minimumDegree}
+        , isSelected{false}
+        , defaultValue{0}
+        , knobValue{defaultValue}
 {
 }
 
@@ -58,6 +60,27 @@ void Knob::setMarkerImage(const RkImage &img)
         markerImage = img;
 }
 
+void Knob::setSteps(int steps)
+{
+        maxSteps = steps;
+}
+
+int Knob::getSteps() const
+{
+        return maxSteps;
+}
+
+double Knob::stepValue() const
+{
+        auto steps = getSteps();
+        if (steps == 0)
+                return 0.0;
+        else if (steps == 1)
+                return rangeTo - rangeFrom;
+        else
+                return (rangeTo - rangeFrom) / (steps - 1);
+}
+
 void Knob::setRange(double from, double to)
 {
         rangeFrom = std::min(from, to);
@@ -76,28 +99,19 @@ Knob::RangeType Knob::getRangeType() const
 
 void Knob::setValue(double val)
 {
-        knobValueDegree = valueToDegree(val);
+        knobValue = snapToNearestStep(val);
+        knobValueDegree = valueToDegree(knobValue);
         update();
 }
 
 double Knob::getValue(void) const
 {
-        double k = (knobValueDegree - minimumDegree) / rangeDegree;
-        double val;
-        if (getRangeType() == RangeType::Logarithmic) {
-                double logVal = log10(rangeFrom) + k * (log10(rangeTo) - log10(rangeFrom));
-                val = pow(10, logVal);
-        } else {
-                val = rangeFrom + k * (rangeTo - rangeFrom);
-        }
-
-	return val;
+        return knobValue;
 }
 
 void Knob::setDefaultValue(double val)
 {
-        defaultValue = val;
-        setValue(defaultValue);
+        defaultValue = snapToNearestStep(val);
 }
 
 void Knob::paintEvent(RkPaintEvent *event)
@@ -122,7 +136,7 @@ void Knob::paintEvent(RkPaintEvent *event)
         if (!markerImage.isNull()) {
                 auto translateOffset = RkPoint(width() / 2, yOffset);
                 painter.translate(translateOffset);
-                auto degree = (2 * M_PI / 360) * knobValueDegree;
+                auto degree = (2 * M_PI / 360) * valueToDegree(knobValue);
                 painter.rotate(degree);
                 painter.drawImage(markerImage,
                                   -markerImage.width() / 2,
@@ -137,7 +151,13 @@ void Knob::mouseButtonPressEvent(RkMouseEvent *event)
         setFocus(true);
         if (event->button() == RkMouseEvent::ButtonType::WheelUp
             || event->button() == RkMouseEvent::ButtonType::WheelDown) {
-                rotateKnob(event->button() == RkMouseEvent::ButtonType::WheelUp ? 2 : -2);
+                double degreeStep = 2;
+                if (getSteps() == 1 )
+                        degreeStep = rangeDegree;
+                if (getSteps() > 1 )
+                        degreeStep = rangeDegree / (getSteps() - 1);
+                rotateKnob(event->button() == RkMouseEvent::ButtonType::WheelUp
+                           ? degreeStep : -degreeStep);
                 return;
         }
 
@@ -167,7 +187,6 @@ void Knob::mouseMoveEvent(RkMouseEvent *event)
                 rotateKnob(-dy);
                 lastPositionPoint.setX(event->x());
                 lastPositionPoint.setY(event->y());
-                update();
         }
 }
 
@@ -181,20 +200,15 @@ void Knob::rotateKnob(double degree)
 {
         knobValueDegree += degree;
         knobValueDegree = std::clamp(knobValueDegree, minimumDegree, maximumDegree);
+        auto snapVal = snapToNearestStep(degreeToValue(knobValueDegree));
+        if (std::abs(snapVal - knobValue) < stepValue())
+                return;
 
-        double k = (knobValueDegree - minimumDegree) / rangeDegree;
-        if (getRangeType() == RangeType::Logarithmic) {
-                if (rangeFrom <= 0.0) {
-                        constexpr double curve = 4.0;
-                        valueUpdated(std::pow(k, curve) * (rangeTo - rangeFrom) + rangeFrom);
-                } else {
-                        double logVal = std::log10(rangeFrom) + k * (std::log10(rangeTo) - std::log10(rangeFrom));
-                        valueUpdated(std::pow(10.0, logVal));
-                }
-        } else {
-                valueUpdated(rangeFrom + k * (rangeTo - rangeFrom));
-        }
+        knobValue = snapVal;
+        knobValueDegree = valueToDegree(knobValue);
 
+        ENT_LOG_INFO("VALUE: " << knobValue);
+        valueUpdated(knobValue);
         update();
 }
 
@@ -227,4 +241,33 @@ double Knob::valueToDegree(double value) const
         return minimumDegree + k * rangeDegree;
 }
 
+double Knob::degreeToValue(double degree) const
+{
+        double k = (degree - minimumDegree) / rangeDegree;
+        double value = 0.0;
+        if (getRangeType() == RangeType::Logarithmic) {
+                if (rangeFrom <= 0.0) {
+                        constexpr double curve = 4.0;
+                        value = std::pow(k, curve) * (rangeTo - rangeFrom) + rangeFrom;
+                } else {
+                        auto logRange = std::log10(rangeTo) - std::log10(rangeFrom);
+                        double logVal = std::log10(rangeFrom) + k * (logRange);
+                        value = std::pow(10.0, logVal);
+                }
+        } else {
+                value = rangeFrom + k * (rangeTo - rangeFrom);
+        }
 
+	return value;
+}
+
+
+double Knob::snapToNearestStep(double val) const
+{
+        if (getSteps() <= 0)
+                return val;
+
+        auto stepVal = stepValue();
+        const int n = std::round((val - rangeFrom) / stepVal);
+        return rangeFrom + n * stepVal;
+}

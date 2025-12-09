@@ -448,28 +448,23 @@ void EntVstProcessor::initGlitchParamMappings()
         };
 
         paramMap[ParameterId::Glitch1ProbabilityId] = [glitch](ParamValue v) {
-                float prob = static_cast<float>(v) * 100.0f;
-                glitch->setProbability(prob);
+                glitch->setProbability(DspGlitchProxyVst::probabilityFromNormalized(v));
         };
 
         paramMap[ParameterId::Glitch1MinJumpId] = [glitch](ParamValue v) {
-                float minMs = static_cast<float>(v) * 2000.0f;
-                glitch->setJumpMin(minMs);
+                glitch->setJumpMin(DspGlitchProxyVst::minJumpFromNormalized(v));
         };
 
         paramMap[ParameterId::Glitch1MaxJumpId] = [glitch](ParamValue v) {
-                float maxMs = static_cast<float>(v) * 5000.0f;
-                glitch->setJumpMax(maxMs);
+                glitch->setJumpMax(DspGlitchProxyVst::maxJumpFromNormalized(v));
         };
 
         paramMap[ParameterId::Glitch1LengthId] = [glitch](ParamValue v) {
-                float lenMs = static_cast<float>(v) * 2000.0f;
-                glitch->setLength(lenMs);
+                glitch->setLength(DspGlitchProxyVst::lengthFromNormalized(v));
         };
 
         paramMap[ParameterId::Glitch1RepeatsId] = [glitch](ParamValue v) {
-                int repeats = 1 + static_cast<int>(v * 9.0f);
-                glitch->setRepeatCount(repeats);
+                glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
         };
 
         // Glitch 2
@@ -478,28 +473,23 @@ void EntVstProcessor::initGlitchParamMappings()
                 glitch->enable(v > 0.5);
         };
 
-        paramMap[ParameterId::Glitch2ProbabilityId] = [glitch](ParamValue v) {
-                float prob = static_cast<float>(v) * 100.0f;
-                glitch->setProbability(prob);
+                paramMap[ParameterId::Glitch1ProbabilityId] = [glitch](ParamValue v) {
+                glitch->setProbability(DspGlitchProxyVst::probabilityFromNormalized(v));
         };
 
         paramMap[ParameterId::Glitch2MinJumpId] = [glitch](ParamValue v) {
-                float minMs = static_cast<float>(v) * 2000.0f;
-                glitch->setJumpMin(minMs);
+                glitch->setJumpMin(DspGlitchProxyVst::minJumpFromNormalized(v));
         };
 
         paramMap[ParameterId::Glitch2MaxJumpId] = [glitch](ParamValue v) {
-                float maxMs = static_cast<float>(v) * 5000.0f;
-                glitch->setJumpMax(maxMs);
+                glitch->setJumpMax(DspGlitchProxyVst::maxJumpFromNormalized(v));
         };
 
         paramMap[ParameterId::Glitch2LengthId] = [glitch](ParamValue v) {
-                float lenMs = static_cast<float>(v) * 2000.0f;
-                glitch->setLength(lenMs);
+                glitch->setLength(DspGlitchProxyVst::lengthFromNormalized(v));
         };
 
         paramMap[ParameterId::Glitch2RepeatsId] = [glitch](ParamValue v) {
-                int repeats = 1 + static_cast<int>(v * 9.0f);
-                glitch->setRepeatCount(repeats);
+                glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
         };
 }

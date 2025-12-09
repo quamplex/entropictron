@@ -120,7 +120,7 @@ namespace Entropictron
                                [](unsigned char c) { return std::tolower(c); });
                 return result;
         }
-} // namespace Geonkick
+}
 
 namespace GeonkickTypes
 {

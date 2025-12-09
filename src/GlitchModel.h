@@ -36,12 +36,12 @@ class GlitchModel: public EntAbstractModel
         GlitchId getId() const;
         void enable(bool b = true);
         bool isEnabled() const;
-        void setRepeats(double value);
-        double repeats() const;
-        void setRepeatsDefaultValue(double value);
-        double getRepeatsDefaultValue() const;
-        void setRepeatsRange(double from, double to);
-        std::pair<double, double> getRepeatsRange() const;
+        void setRepeats(int value);
+        int repeats() const;
+        void setRepeatsDefaultValue(int value);
+        int getRepeatsDefaultValue() const;
+        void setRepeatsRange(int from, int to);
+        std::pair<int, int> getRepeatsRange() const;
         void setProbability(double value);
         double probability() const;
         void setProbabilityDefaultValue(double value);
@@ -71,8 +71,8 @@ class GlitchModel: public EntAbstractModel
                     RK_ARG_TYPE(bool),
                     RK_ARG_VAL(b));
         RK_DECL_ACT(repeatsUpdated,
-                    repeatsUpdated(double value),
-                    RK_ARG_TYPE(double),
+                    repeatsUpdated(int value),
+                    RK_ARG_TYPE(int),
                     RK_ARG_VAL(value));
         RK_DECL_ACT(probabilityUpdated,
                     probabilityUpdated(double value),
@@ -93,17 +93,16 @@ class GlitchModel: public EntAbstractModel
 
  private:
         DspGlitchProxy *dspGlitchProxy;
-        double repeatsDefaultvalue;
-        std::pair<double, double> repeatsRange;
-        double probabilityDefaultvalue;
+        int repeatsDefaultValue;
+        std::pair<int, int> repeatsRange;
+        double probabilityDefaultValue;
         std::pair<double, double> probabilityRange;
-        double lengthDefaultvalue;
+        double lengthDefaultValue;
         std::pair<double, double> lengthRange;
-        double maxJumpDefaultvalue;
-        std::pair<double, double> maxJumpRange;
-        double minJumpDefaultvalue;
+        double minJumpDefaultValue;
         std::pair<double, double> minJumpRange;
-
+        double maxJumpDefaultValue;
+        std::pair<double, double> maxJumpRange;
 };
 
 #endif // ENT_GLITCH_MODEL_H

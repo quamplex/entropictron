@@ -35,8 +35,8 @@ class DspGlitchProxy : public RkObject {
         GlitchId getGlitchId() const;
         virtual bool enable(bool b = true) = 0;
         virtual bool isEnabled() const = 0;
-        virtual bool setRepeats(double value) = 0;
-        virtual double repeats() const = 0;
+        virtual bool setRepeats(int value) = 0;
+        virtual int repeats() const = 0;
         virtual bool setProbability(double value) = 0;
         virtual double probability() const = 0;
         virtual bool setLength(double value) = 0;
@@ -51,8 +51,8 @@ class DspGlitchProxy : public RkObject {
                     RK_ARG_TYPE(bool b),
                     RK_ARG_VAL(b));
         RK_DECL_ACT(repeatsUpdated,
-                    repeatsUpdated(double value),
-                    RK_ARG_TYPE(double),
+                    repeatsUpdated(int value),
+                    RK_ARG_TYPE(int),
                     RK_ARG_VAL(value));
         RK_DECL_ACT(probabilityUpdated,
                     probabilityUpdated(double value),

@@ -161,12 +161,12 @@ ent_process(struct entropictron *ent, float** data, size_t size)
                         ent_crackle_process(crackle, out, size);
         }
 
-        /*n = QX_ARRAY_SIZE(ent->glitch);
+        n = QX_ARRAY_SIZE(ent->glitch);
         for (size_t i = 0; i < n; i++) {
                 struct ent_glitch *glitch = ent->glitch[i];
                 if (ent_glitch_is_enabled(glitch))
                         ent_glitch_process(glitch, in, out, size);
-                        }*/
+        }
 
         return ENT_OK;
 }

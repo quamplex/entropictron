@@ -40,8 +40,8 @@ class DspGlitchProxyVst: public DspGlitchProxy {
         ~DspGlitchProxyVst();
         bool enable(bool b = true) override;
         bool isEnabled() const override;
-        bool setRepeats(double value) override;
-        double repeats() const override;
+        bool setRepeats(int value) override;
+        int repeats() const override;
         bool setProbability(double value) override;
         double probability() const override;
         bool setLength(double value) override;
@@ -50,6 +50,17 @@ class DspGlitchProxyVst: public DspGlitchProxy {
         double maxJump() const override;
         bool setMinJump(double value) override;
         double minJump() const override;
+
+        static double repeatsToNormalized(int value);
+        static int repeatsFromNormalized(double normalized);
+        static double probabilityToNormalized(double value);
+        static double probabilityFromNormalized(double normalized);
+        static double lengthToNormalized(double value);
+        static double lengthFromNormalized(double normalized);
+        static double minJumpToNormalized(double value);
+        static double minJumpFromNormalized(double normalized);
+        static double maxJumpToNormalized(double value);
+        static double maxJumpFromNormalized(double normalized);
 
 protected:
         void onParameterChanged(ParameterId paramId, ParamValue value);

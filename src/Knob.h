@@ -47,6 +47,9 @@ public:
         void setValue(double val);
         double getValue(void) const;
         void setDefaultValue(double val);
+        void setSteps(int steps);
+        int getSteps() const;
+
         RK_DECL_ACT(valueUpdated,
                     valueUpdated(double value),
                     RK_ARG_TYPE(double),
@@ -60,11 +63,15 @@ protected:
    void mouseDoubleClickEvent(RkMouseEvent *event) override;
    void rotateKnob(double degree);
    double valueToDegree(double val) const;
+   double degreeToValue(double degree) const;
+   double snapToNearestStep(double val) const;
+   double stepValue() const;
 
 private:
         RkImage labelImage;
         RkImage knobImage;
         RkImage markerImage;
+        int maxSteps;
         double rangeFrom;
         double rangeTo;
         RangeType rangeType;
@@ -74,7 +81,9 @@ private:
         double knobValueDegree;
         bool isSelected;
         double defaultValue;
+        double knobValue;
         RkPoint lastPositionPoint;
 };
 
 #endif // ENT_KNOB_H
+
