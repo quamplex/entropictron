@@ -28,16 +28,16 @@ GlitchModel::GlitchModel(RkObject *parent,
                          DspGlitchProxy* dspGlitchProxy)
         : EntAbstractModel(parent),
           dspGlitchProxy{dspGlitchProxy},
-          repeatsDefaultValue{3},
-          repeatsRange{1, 10},
-          probabilityDefaultValue{0.25},
-          probabilityRange{0.1, 1.0},
-          lengthDefaultValue{50}, // 50ms
-          lengthRange{10, 2000}, // [10ms - 2000ms]
-          minJumpDefaultValue{0}, // 0ms
-          minJumpRange{0.0, 2000}, // [0ms - 2000ms]
-          maxJumpDefaultValue{200}, // 200 ms
-          maxJumpRange{0.0, 2000} // [0ms - 2000ms]
+          repeatsDefaultValue{ENT_GLITCH_DEFAULT_REPEATS},
+          repeatsRange{ENT_GLITCH_MIN_REPEATS, ENT_GLITCH_MAX_REPEATS},
+          probabilityDefaultValue{ENT_GLITCH_DEFAULT_PROB},
+          probabilityRange{ENT_GLITCH_MIN_PROB, ENT_GLITCH_MAX_PROB},
+          lengthDefaultValue{ENT_GLITCH_DEFAULT_LENGH}, // 50ms
+          lengthRange{ENT_GLITCH_MIN_LENGH, ENT_GLITCH_MAX_LENGH}, // [10ms - 2000ms]
+          minJumpDefaultValue{ENT_GLITCH_DEFAULT_MIN_JUMP}, // 0ms
+          minJumpRange{ENT_GLITCH_MIN_MIN_JUMP, ENT_GLITCH_MAX_MIN_JUMP}, // [0ms - 2000ms]
+          maxJumpDefaultValue{ENT_GLITCH_DEFAULT_MAX_JUMP}, // 200 ms
+          maxJumpRange{ENT_GLITCH_MIN_MAX_JUMP, ENT_GLITCH_MAX_MAX_JUMP} // [0ms - 2000ms]
 {
         RK_ACT_BIND(dspGlitchProxy,
                     enabled,

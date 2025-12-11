@@ -26,6 +26,7 @@
 
 #include "ent_noise.h"
 #include "ent_crackle.h"
+#include "ent_glitch.h"
 
 enum class NoiseId: int {
         Noise1,

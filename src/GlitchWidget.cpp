@@ -105,7 +105,7 @@ void GlitchWidget::updateView()
 
         auto [repeatsFrom, repeatsTo] = model->getRepeatsRange();
         repeatsKnob->setRange(repeatsFrom, repeatsTo);
-        repeatsKnob->setSteps(10);
+        repeatsKnob->setSteps(ENT_GLITCH_MAX_REPEATS);
         repeatsKnob->setDefaultValue(model->getRepeatsDefaultValue());
         repeatsKnob->setValue(model->repeats());
 
@@ -120,17 +120,17 @@ void GlitchWidget::updateView()
         lengthKnob->setDefaultValue(model->getLengthDefaultValue());
         lengthKnob->setValue(model->length());
 
-        auto [maxJumpFrom, maxJumpTo] = model->getMaxJumpRange();
-        maxJumpKnob->setRange(maxJumpFrom, maxJumpTo);
-        maxJumpKnob->setRangeType(Knob::RangeType::Logarithmic);
-        maxJumpKnob->setDefaultValue(model->getMaxJumpDefaultValue());
-        maxJumpKnob->setValue(model->maxJump());
-
         auto [minJumpFrom, minJumpTo] = model->getMinJumpRange();
         minJumpKnob->setRange(minJumpFrom, minJumpTo);
         minJumpKnob->setRangeType(Knob::RangeType::Logarithmic);
         minJumpKnob->setDefaultValue(model->getMinJumpDefaultValue());
         minJumpKnob->setValue(model->minJump());
+
+        auto [maxJumpFrom, maxJumpTo] = model->getMaxJumpRange();
+        maxJumpKnob->setRange(maxJumpFrom, maxJumpTo);
+        maxJumpKnob->setRangeType(Knob::RangeType::Logarithmic);
+        maxJumpKnob->setDefaultValue(model->getMaxJumpDefaultValue());
+        maxJumpKnob->setValue(model->maxJump());
 }
 
 void GlitchWidget::bindModel()
@@ -250,13 +250,13 @@ void GlitchWidget::createGlitchControls(RkContainer *container)
         container->addContainer(horizontalContainer);
         horizontalContainer->addSpace(82);
 
-        maxJumpKnob = new Knob(this, RK_RC_IMAGE(glitch_maxjump_knob_label));
-        maxJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
-        maxJumpKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
-        horizontalContainer->addWidget(maxJumpKnob);
-
         minJumpKnob = new Knob(this, RK_RC_IMAGE(glitch_minjump_knob_label));
         minJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
         minJumpKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         horizontalContainer->addWidget(minJumpKnob);
+
+        maxJumpKnob = new Knob(this, RK_RC_IMAGE(glitch_maxjump_knob_label));
+        maxJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        maxJumpKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        horizontalContainer->addWidget(maxJumpKnob);
 }

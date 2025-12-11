@@ -473,7 +473,7 @@ void EntVstProcessor::initGlitchParamMappings()
                 glitch->enable(v > 0.5);
         };
 
-                paramMap[ParameterId::Glitch1ProbabilityId] = [glitch](ParamValue v) {
+        paramMap[ParameterId::Glitch1ProbabilityId] = [glitch](ParamValue v) {
                 glitch->setProbability(DspGlitchProxyVst::probabilityFromNormalized(v));
         };
 

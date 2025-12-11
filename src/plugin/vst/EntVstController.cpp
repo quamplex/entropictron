@@ -264,35 +264,35 @@ void EntVstController::addGlitchParameters()
         // Glitch1 Repeats
         parameters.addParameter(STR16("Glitch1 Repeats"),
                                 nullptr, 10,
-                                DspGlitchProxyVst::repeatsToNormalized(3),
+                                DspGlitchProxyVst::repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch1RepeatsId);
 
         // Glitch1 Probability
         parameters.addParameter(STR16("Glitch1 Probability"),
                                 STR16("%"), 0,
-                                DspGlitchProxyVst::probabilityToNormalized(0.25),
+                                DspGlitchProxyVst::probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch1ProbabilityId);
 
         // Glitch1 Length (ms)
         parameters.addParameter(STR16("Glitch1 Length"),
                                 STR16("ms"), 0,
-                                DspGlitchProxyVst::lengthToNormalized(50),
+                                DspGlitchProxyVst::lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch1LengthId);
 
         // Glitch1 Min Jump Time (ms)
         parameters.addParameter(STR16("Min Jump Time"),
                                 STR16("ms"), 0,
-                                DspGlitchProxyVst::minJumpToNormalized(0),
+                                DspGlitchProxyVst::minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch1MinJumpId);
 
         // Glitch1 Max Jump Time (ms)
         parameters.addParameter(STR16("Max Jum Time"),
                                 STR16("ms"), 0,
-                                DspGlitchProxyVst::maxJumpToNormalized(200),
+                                DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch1MaxJumpId);
 
@@ -305,35 +305,35 @@ void EntVstController::addGlitchParameters()
         // Glitch2 Repeats
         parameters.addParameter(STR16("Glitch2 Repeats"),
                                 nullptr, 10,
-                                DspGlitchProxyVst::repeatsToNormalized(3),
+                                DspGlitchProxyVst::repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch2RepeatsId);
 
         // Glitch2 Probability
         parameters.addParameter(STR16("Glitch2 Probability"),
                                 STR16("%"), 0,
-                                DspGlitchProxyVst::probabilityToNormalized(0.25),
+                                DspGlitchProxyVst::probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch2ProbabilityId);
 
         // Glitch2 Length (ms)
         parameters.addParameter(STR16("Glitch2 Length"),
                                 STR16("ms"), 0,
-                                DspGlitchProxyVst::lengthToNormalized(50),
+                                DspGlitchProxyVst::lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch2LengthId);
 
         // Glitch2 Min Jump Time (ms)
         parameters.addParameter(STR16("Min Jump Time"),
                                 STR16("ms"), 0,
-                                DspGlitchProxyVst::minJumpToNormalized(0),
+                                DspGlitchProxyVst::minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch2MinJumpId);
 
         // Glitch2 Max Jump Time (ms)
         parameters.addParameter(STR16("Max Jum Time"),
                                 STR16("ms"), 0,
-                                DspGlitchProxyVst::maxJumpToNormalized(200),
+                                DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch2MaxJumpId);
 }

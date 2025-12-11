@@ -51,15 +51,15 @@ DspGlitchProxyVst::DspGlitchProxyVst(RkObject* parent,
 
                 vstController->setParamNormalized (ParameterId::Glitch1EnabledId, 0);
                 vstController->setParamNormalized (ParameterId::Glitch1RepeatsId,
-                                                   repeatsToNormalized(3));
+                                                   repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
                 vstController->setParamNormalized (ParameterId::Glitch1ProbabilityId,
-                                                   probabilityToNormalized(0.25));
+                                                   probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
                 vstController->setParamNormalized (ParameterId::Glitch1LengthId,
-                                                   lengthToNormalized(50));
-                vstController->setParamNormalized (ParameterId::Glitch1MaxJumpId,
-                                                   maxJumpToNormalized(200));
+                                                   lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
                 vstController->setParamNormalized (ParameterId::Glitch1MinJumpId,
-                                                   minJumpToNormalized(0));
+                                                   minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
+                vstController->setParamNormalized (ParameterId::Glitch1MaxJumpId,
+                                                   maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
         } else {
                 params = {
                         ParameterId::Glitch2EnabledId,
@@ -72,15 +72,15 @@ DspGlitchProxyVst::DspGlitchProxyVst(RkObject* parent,
 
                 vstController->setParamNormalized (ParameterId::Glitch2EnabledId, 0);
                 vstController->setParamNormalized (ParameterId::Glitch2RepeatsId,
-                                                   repeatsToNormalized(3));
+                                                   repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
                 vstController->setParamNormalized (ParameterId::Glitch2ProbabilityId,
-                                                   probabilityToNormalized(0.25));
+                                                   probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
                 vstController->setParamNormalized (ParameterId::Glitch2LengthId,
-                                                   lengthToNormalized(50));
-                vstController->setParamNormalized (ParameterId::Glitch2MaxJumpId,
-                                                   maxJumpToNormalized(200));
+                                                   lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
                 vstController->setParamNormalized (ParameterId::Glitch2MinJumpId,
-                                                   minJumpToNormalized(0));
+                                                   minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
+                vstController->setParamNormalized (ParameterId::Glitch2MaxJumpId,
+                                                   maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
         }
 
         for (const auto& paramId : params)
@@ -213,7 +213,7 @@ void DspGlitchProxyVst::onParameterChanged(ParameterId paramId, ParamValue value
         switch (paramId) {
         case ParameterId::Glitch1EnabledId:
         case ParameterId::Glitch2EnabledId:
-                action enable(value > 0.5);
+                action enabled(value > 0.5);
                 break;
         case ParameterId::Glitch1RepeatsId:
         case ParameterId::Glitch2RepeatsId:
@@ -252,50 +252,70 @@ static double fromNormalized(double normalized, double min, double max)
 
 double DspGlitchProxyVst::repeatsToNormalized(int value)
 {
-        return toNormalized(static_cast<double>(value), 1.0, 10.0);
+        return toNormalized(static_cast<double>(value),
+                            ENT_GLITCH_MIN_REPEATS,
+                            ENT_GLITCH_MAX_REPEATS);
 }
 
 int DspGlitchProxyVst::repeatsFromNormalized(double normalized)
 {
-        return static_cast<int>(std::round(fromNormalized(normalized, 1.0, 10.0)));
+        return static_cast<int>(std::round(fromNormalized(normalized,
+                                                          ENT_GLITCH_MIN_REPEATS,
+                                                          ENT_GLITCH_MAX_REPEATS)));
 }
 
 double DspGlitchProxyVst::probabilityToNormalized(double value)
 {
-        return toNormalized(value, 0.1, 1.0);
+        return toNormalized(value,
+                            ENT_GLITCH_MIN_PROB,
+                            ENT_GLITCH_MAX_PROB);
 }
 
 double DspGlitchProxyVst::probabilityFromNormalized(double normalized)
 {
-        return fromNormalized(normalized, 0.1, 1.0);
+        return fromNormalized(normalized,
+                              ENT_GLITCH_MIN_PROB,
+                              ENT_GLITCH_MAX_PROB);
 }
 
 double DspGlitchProxyVst::lengthToNormalized(double value)
 {
-        return toNormalized(value, 10.0, 2000.0);
+        return toNormalized(value,
+                            ENT_GLITCH_MIN_LENGH,
+                            ENT_GLITCH_MAX_LENGH);
 }
 
 double DspGlitchProxyVst::lengthFromNormalized(double normalized)
 {
-        return fromNormalized(normalized, 10.0, 2000.0);
+        return fromNormalized(normalized,
+                              ENT_GLITCH_MIN_LENGH,
+                              ENT_GLITCH_MAX_LENGH);
 }
 
 double DspGlitchProxyVst::minJumpToNormalized(double value)
 {
-        return toNormalized(value, 0.0, 2000.0);
+        return toNormalized(value,
+                            ENT_GLITCH_MIN_MIN_JUMP,
+                            ENT_GLITCH_MAX_MIN_JUMP);
 }
 
 double DspGlitchProxyVst::minJumpFromNormalized(double normalized)
 {
-        return fromNormalized(normalized, 0.0, 2000.0);
+        return fromNormalized(normalized,
+                              ENT_GLITCH_MIN_MIN_JUMP,
+                              ENT_GLITCH_MAX_MIN_JUMP);
 }
 
 double DspGlitchProxyVst::maxJumpToNormalized(double value)
 {
-        return toNormalized(value, 0.0, 2000.0);
+        return toNormalized(value,
+                            ENT_GLITCH_MIN_MAX_JUMP,
+                            ENT_GLITCH_MAX_MAX_JUMP);
 }
 
 double DspGlitchProxyVst::maxJumpFromNormalized(double normalized)
 {
-        return fromNormalized(normalized, 0.0, 2000.0);
+        return fromNormalized(normalized,
+                              ENT_GLITCH_MIN_MAX_JUMP,
+                              ENT_GLITCH_MAX_MAX_JUMP);
 }

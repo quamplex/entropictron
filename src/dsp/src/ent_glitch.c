@@ -53,19 +53,21 @@ struct ent_glitch {
 struct ent_glitch* ent_glitch_create(int sample_rate)
 {
         struct ent_glitch* g = calloc(1, sizeof(struct ent_glitch));
-        if (!g) return NULL;
+        if (!g)
+                return NULL;
 
         g->sample_rate = sample_rate;
         g->enabled = false;
-        g->probability = 0.25f;
-        g->jump_min_samples = 0; // 0ms;
-        g->jump_max_samples = sample_rate * (200.0f / 1000.0f); // 200ms
-        g->glitch_length_samples = sample_rate *  (50.0f / 1000.0f); // 40 ms
-        g->glitch_repeat_count = 3;
+        g->probability = ENT_GLITCH_DEFAULT_PROB;
+        g->jump_min_samples = sample_rate * ENT_GLITCH_DEFAULT_MIN_JUMP / 1000;
+        g->jump_max_samples = sample_rate * ENT_GLITCH_DEFAULT_MAX_JUMP / 1000;
+        g->glitch_length_samples = sample_rate *  (ENT_GLITCH_DEFAULT_LENGH / 1000.0f);
+        g->glitch_repeat_count = ENT_GLITCH_DEFAULT_REPEATS;
 
-        g->buffer_size = sample_rate;
-        g->buffer[0] = calloc(g->buffer_size * 2, sizeof(float)); // stereo
-        g->buffer[1] = calloc(g->buffer_size * 2, sizeof(float)); // stereo
+        g->buffer_size = sample_rate * (ENT_GLITCH_MAX_MAX_JUMP + ENT_GLITCH_MAX_LENGH)
+                                     * ENT_GLITCH_MAX_REPEATS / 1000.0f;
+        g->buffer[0] = calloc(g->buffer_size, sizeof(float)); // stereo
+        g->buffer[1] = calloc(g->buffer_size, sizeof(float)); // stereo
         g->write_pos = 0;
         g->glitch_pos = -1;
         g->glitch_count = 0;
@@ -89,6 +91,7 @@ void ent_glitch_free(struct ent_glitch **g)
 
 enum ent_error ent_glitch_enable(struct ent_glitch *g, bool b)
 {
+        ent_log_info("ENABLE: %f", b);
         g->enabled = b;
         return ENT_OK;
 }
@@ -101,7 +104,9 @@ bool ent_glitch_is_enabled(struct ent_glitch *g)
 enum ent_error ent_glitch_set_probability(struct ent_glitch *g, float probability)
 {
         ent_log_info("PROBABILITY: %f", probability);
-        g->probability = qx_clamp_float(probability, 0.1f, 1.0f);
+        g->probability = qx_clamp_float(probability,
+                                        ENT_GLITCH_MIN_PROB,
+                                        ENT_GLITCH_MAX_PROB);
         return ENT_OK;
 }
 
@@ -113,7 +118,9 @@ float ent_glitch_get_probability(struct ent_glitch *g)
 enum ent_error ent_glitch_set_jump_min(struct ent_glitch *g, float jump_min_ms)
 {
         ent_log_info("JUMP MIN: %f", jump_min_ms);
-        jump_min_ms = qx_clamp_float(jump_min_ms, 0.0f, 2000.0f);
+        jump_min_ms = qx_clamp_float(jump_min_ms,
+                                     ENT_GLITCH_MIN_MIN_JUMP,
+                                     ENT_GLITCH_MAX_MIN_JUMP);
         g->jump_min_samples = (int)(jump_min_ms * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
@@ -126,7 +133,9 @@ float ent_glitch_get_jump_min(struct ent_glitch *g)
 enum ent_error ent_glitch_set_jump_max(struct ent_glitch *g, float jump_max_ms)
 {
         ent_log_info("JUMP MAX: %f", jump_max_ms);
-        jump_max_ms = qx_clamp_float(jump_max_ms, 0.0f, 2000.0f);
+        jump_max_ms = qx_clamp_float(jump_max_ms,
+                                     ENT_GLITCH_MIN_MAX_JUMP,
+                                     ENT_GLITCH_MAX_MAX_JUMP);
         g->jump_max_samples = (int)(jump_max_ms * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
@@ -139,7 +148,9 @@ float ent_glitch_get_jump_max(struct ent_glitch *g)
 enum ent_error ent_glitch_set_length(struct ent_glitch *g, float length_ms)
 {
         ent_log_info("JUMP MIN: %f", length_ms);
-        length_ms = qx_clamp_float(length_ms, 0.0f, 2000.0f);
+        length_ms = qx_clamp_float(length_ms,
+                                   ENT_GLITCH_MIN_LENGH,
+                                   ENT_GLITCH_MAX_LENGH);
         g->glitch_length_samples = (int)(length_ms * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
@@ -152,7 +163,9 @@ float ent_glitch_get_length(struct ent_glitch *g)
 enum ent_error ent_glitch_set_repeat_count(struct ent_glitch *g, int repeats)
 {
         ent_log_info("REPEATS: %d", repeats);
-        g->glitch_repeat_count = QX_CLAMP(repeats, 1, 10);
+        g->glitch_repeat_count = QX_CLAMP(repeats,
+                                          ENT_GLITCH_MIN_REPEATS,
+                                          ENT_GLITCH_MAX_REPEATS);
         ent_log_error("glitch_repeat_count: %f", g->glitch_repeat_count);
         return ENT_OK;
 }
@@ -168,21 +181,21 @@ void ent_glitch_process(struct ent_glitch *g,
                           size_t size)
 {
         for (size_t i = 0; i < size; i++) {
-                out[0][i] = in[0][i];
-                out[1][i] = in[1][i];
                 g->buffer[0][g->write_pos] = in[0][i];
                 g->buffer[1][g->write_pos] = in[1][i];
+                out[0][i] = 0;
+                out[1][i] = 0;
                 if (g->glitch_count > 0 && g->glitch_pos >= 0) {
                         int playback_index = (g->glitch_pos + g->glitch_play_pos) % g->buffer_size;
-                        out[0][i] = g->buffer[0][playback_index];
-                        out[1][i] = g->buffer[1][playback_index];
+                        out[0][i] += g->buffer[0][playback_index];
+                        out[1][i] += g->buffer[1][playback_index];
                         g->glitch_play_pos++;
                         g->glitch_count--;
                 } else if (qx_randomizer_get_float(&g->prob_randomizer) < g->probability) {
-                        int jump_range = g->jump_max_samples - g->jump_min_samples;
+                        int jump_range = abs(g->jump_max_samples - g->jump_min_samples);
                         float jump_prob = qx_randomizer_get_float(&g->randomizer);
                         int jump = g->jump_min_samples + jump_prob * jump_range;
-                        g->glitch_pos = (g->write_pos - jump) % g->buffer_size;
+                        g->glitch_pos = (g->write_pos + g->buffer_size - (jump % g->buffer_size)) % g->buffer_size;
                         g->glitch_count = g->glitch_length_samples * g->glitch_repeat_count;
                         g->glitch_play_pos = 0;
                 }
