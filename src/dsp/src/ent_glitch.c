@@ -183,10 +183,11 @@ void ent_glitch_process(struct ent_glitch *g,
         for (size_t i = 0; i < size; i++) {
                 g->buffer[0][g->write_pos] = in[0][i];
                 g->buffer[1][g->write_pos] = in[1][i];
-                out[0][i] = 0;
-                out[1][i] = 0;
+                out[0][i] = in[0][i];
+                out[1][i] = in[1][i];
                 if (g->glitch_count > 0 && g->glitch_pos >= 0) {
-                        int playback_index = (g->glitch_pos + g->glitch_play_pos) % g->buffer_size;
+                        int play_offset = g->glitch_play_pos % g->glitch_length_samples;
+                        int playback_index = (g->glitch_pos + play_offset) % g->buffer_size;
                         out[0][i] += g->buffer[0][playback_index];
                         out[1][i] += g->buffer[1][playback_index];
                         g->glitch_play_pos++;
