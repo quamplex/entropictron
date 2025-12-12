@@ -35,17 +35,17 @@ extern "C" {
 #define ENT_GLITCH_MIN_REPEATS  1
 #define ENT_GLITCH_MAX_REPEATS  6
 
-#define ENT_GLITCH_MIN_PROB     0.1f
+#define ENT_GLITCH_MIN_PROB     0.05f
 #define ENT_GLITCH_MAX_PROB     1.0f
 
-#define ENT_GLITCH_MIN_LENGH    20.0f   // ms
-#define ENT_GLITCH_MAX_LENGH    150.0f  // ms
+#define ENT_GLITCH_MIN_LENGH    5.0f   // ms
+#define ENT_GLITCH_MAX_LENGH    250.0f  // ms
 
 #define ENT_GLITCH_MIN_MIN_JUMP 0.0f    // ms
-#define ENT_GLITCH_MAX_MIN_JUMP 50.0f   // ms
+#define ENT_GLITCH_MAX_MIN_JUMP 100.0f   // ms
 
-#define ENT_GLITCH_MIN_MAX_JUMP 50.0f   // ms
-#define ENT_GLITCH_MAX_MAX_JUMP 500.0f  // ms
+#define ENT_GLITCH_MIN_MAX_JUMP ENT_GLITCH_MAX_MIN_JUMP
+#define ENT_GLITCH_MAX_MAX_JUMP 1000.0f  // ms
 
 #define ENT_GLITCH_DEFAULT_REPEATS  3
 #define ENT_GLITCH_DEFAULT_PROB     0.25f

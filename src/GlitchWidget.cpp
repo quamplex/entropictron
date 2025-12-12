@@ -117,6 +117,7 @@ void GlitchWidget::updateView()
 
         auto [lengthFrom, lengthTo] = model->getLengthRange();
         lengthKnob->setRange(lengthFrom, lengthTo);
+        lengthKnob->setRangeType(Knob::RangeType::Logarithmic);
         lengthKnob->setDefaultValue(model->getLengthDefaultValue());
         lengthKnob->setValue(model->length());
 

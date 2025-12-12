@@ -66,8 +66,8 @@ struct ent_glitch* ent_glitch_create(int sample_rate)
 
         g->buffer_size = sample_rate * (ENT_GLITCH_MAX_MAX_JUMP + ENT_GLITCH_MAX_LENGH)
                                      * ENT_GLITCH_MAX_REPEATS / 1000.0f;
-        g->buffer[0] = calloc(g->buffer_size, sizeof(float)); // stereo
-        g->buffer[1] = calloc(g->buffer_size, sizeof(float)); // stereo
+        g->buffer[0] = calloc(g->buffer_size, sizeof(float));
+        g->buffer[1] = calloc(g->buffer_size, sizeof(float));
         g->write_pos = 0;
         g->glitch_pos = -1;
         g->glitch_count = 0;
