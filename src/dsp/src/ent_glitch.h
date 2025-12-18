@@ -54,6 +54,7 @@ extern "C" {
 #define ENT_GLITCH_DEFAULT_MAX_JUMP 50.0f  // ms
 
 struct ent_glitch;
+struct ent_state_glitch;
 
 struct ent_glitch* ent_glitch_create(int sample_rate);
 
@@ -87,6 +88,9 @@ void ent_glitch_process(struct ent_glitch *g,
                         float **in,
                         float **out,
                         size_t size);
+
+void ent_glitch_get_state(struct ent_glitch *g, struct ent_state_glitch *state);
+
 #ifdef __cplusplus
 }
 #endif

@@ -34,6 +34,10 @@ extern "C" {
 
 #define ENT_DEFAULT_SAMPLE_RATE 48000
 
+#define ENT_MAX_KEY_VELOCITY 127
+#define ENT_DEFALUT_MIDI_KEY 69 // A4 - 440Hz
+
+
 enum ent_error {
   	ENT_OK                    = 0,
 	ENT_ERROR                 = 1,

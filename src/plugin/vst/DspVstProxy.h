@@ -26,6 +26,7 @@
 
 #include "DspProxy.h"
 #include "EntVstParameters.h"
+#include "EntVstController.h"
 
 using namespace EntVst;
 using namespace Steinberg::Vst;
@@ -44,10 +45,11 @@ class DspProxyVst: public DspProxy {
         DspCrackleProxy* getCrackle(CrackleId id) const override;
         DspGlitchProxy* getGlitch(GlitchId id) const override;
 
+        static double playModeToNormalized(PlayMode mode);
+        static PlayMode playModeFromNormalized(double value);
+
 protected:
         void onParameterChanged(ParameterId paramId, ParamValue value);
-        double playModeToNormalized(PlayMode mode) const;
-        PlayMode playModeFromNormalized(double value) const;
 
  private:
         EntVstController *vstController;

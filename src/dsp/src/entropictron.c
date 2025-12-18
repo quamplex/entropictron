@@ -31,6 +31,8 @@
 
 struct entropictron {
 	unsigned int sample_rate;
+        enum ent_play_mode play_mode;
+        bool is_playing;
         struct ent_noise* noise[2];
         struct ent_crackle *crackle[2];
         struct ent_glitch *glitch[2];
@@ -47,6 +49,8 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
 		return ENT_ERROR_MEM_ALLOC;
 
 	(*ent)->sample_rate = sample_rate;
+        (*ent)->is_playing = false;
+        (*ent)->play_mode = ENT_PLAY_MODE_PLAYBACK;
 
         // Create noise
         size_t num_noises = QX_ARRAY_SIZE((*ent)->noise);
@@ -133,17 +137,25 @@ ent_get_sample_rate(struct entropictron *ent, unsigned int *sample_rate)
 
 enum ent_error ent_set_play_mode(struct entropictron *ent, enum ent_play_mode mode)
 {
+        ent->play_mode = mode;
+        if (ent->play_mode == ENT_PLAY_MODE_ON)
+                ent->is_playing = true;
+        else
+                ent->is_playing = false;
         return ENT_OK;
 }
 
 enum ent_play_mode ent_get_play_mode(struct entropictron *ent)
 {
-        return ENT_PLAY_MODE_PLAYBACK;
+        return ent->play_mode;
 }
 
 enum ent_error
 ent_process(struct entropictron *ent, float** data, size_t size)
 {
+        if (!ent->is_playing)
+                return ENT_OK;
+
         float *in[2] = {data[0], data[1]};
         float *out[2] = {data[2], data[3]};
 
@@ -169,6 +181,28 @@ ent_process(struct entropictron *ent, float** data, size_t size)
         }
 
         return ENT_OK;
+}
+
+void ent_get_state(struct entropictron *ent, struct ent_state *state)
+{
+        state->play_mode = ent->play_mode;
+
+        size_t n = QX_ARRAY_SIZE(ent->noise);
+        for (size_t i = 0; i < n; i++) {
+                ent_noise_get_state(ent->noise[i], &state->noises[i]);
+
+        n = QX_ARRAY_SIZE(ent->crackle);
+        for (size_t i = 0; i < n; i++)
+                ent_crackle_get_state(ent->crackle[i], &state->crackles[i]);
+
+        n = QX_ARRAY_SIZE(ent->glitch);
+        for (size_t i = 0; i < n; i++) {
+                ent_glitch_get_state(ent->glitch[i], &state->glitches[i]);
+}
+
+void ent_press_key(struct entropictron *ent, bool on, int pitch, int velocity)
+{
+        ent->is_playing = on;
 }
 
 struct ent_noise*

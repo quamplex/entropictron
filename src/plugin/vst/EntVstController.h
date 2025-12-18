@@ -40,6 +40,7 @@ using namespace EntVst;
 class EntVstController : public Vst::EditControllerEx1 {
  public:
         using ParameterCallback = std::function<void(ParameterId paramId, ParamValue value)>;
+        using StateCallback = std::function<tresult(IBStream *state)>;
         EntVstController() = default;
         static FUnknown* createInstance(void*);
         tresult PLUGIN_API initialize(FUnknown* context) SMTG_OVERRIDE;
@@ -47,6 +48,7 @@ class EntVstController : public Vst::EditControllerEx1 {
         void setParamterCallback(ParameterId id, const ParameterCallback &callback);
         void removeParamterCallback(ParameterId id);
         tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
+        void restartComponent();
 
 protected:
         void addNoiseParameters();

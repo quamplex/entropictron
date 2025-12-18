@@ -61,6 +61,8 @@ enum ent_play_mode ent_get_play_mode(struct entropictron *ent);
 
 enum ent_error ent_process(struct entropictron *ent, float** data, size_t size);
 
+void ent_press_key(struct entropictron *ent, bool on, int pitch, int velocity);
+
 struct ent_noise* ent_get_noise(struct entropictron *ent, int id);
 
 struct ent_crackle* ent_get_crackle(struct entropictron *ent, int id);

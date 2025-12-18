@@ -22,10 +22,11 @@
  */
 
 #include "DspVstProxy.h"
-#include "EntVstController.h"
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
+
+#include "pluginterfaces/base/ibstream.h"
 
 DspProxyVst::DspProxyVst(EntVstController *controller)
         : vstController{controller}
@@ -53,11 +54,15 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
         };
 
         vstController->setParamterCallback(ParameterId::PlayModeId, paramCallback);
+        vstController->setParamterCallback(ParameterId::StateChangedId, paramCallback);
+        vstController->setParamNormalized (ParameterId::PlayModeId,
+                                           playModeToNormalized(PlayMode::PlaybackMode));
 }
 
 bool DspProxyVst::setPlayMode(PlayMode mode)
 {
         vstController->getComponentHandler()->beginEdit(ParameterId::PlayModeId);
+        ENT_LOG_INFO("PLAYMODE: " << (int)mode);
         vstController->getComponentHandler()->performEdit(ParameterId::PlayModeId,
                                                           playModeToNormalized(mode));
         vstController->getComponentHandler()->endEdit(ParameterId::PlayModeId);
@@ -109,6 +114,9 @@ DspGlitchProxy* DspProxyVst::getGlitch(GlitchId id) const
 void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
 {
         switch (paramId) {
+        case ParameterId::StateChangedId:
+                vstController->restartComponent();
+                break;
         case ParameterId::PlayModeId:
                 action playModeUpdated(playModeFromNormalized(value));
                 break;
@@ -117,15 +125,14 @@ void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
         }
 }
 
-double DspProxyVst::playModeToNormalized(PlayMode mode) const
+double DspProxyVst::playModeToNormalized(PlayMode mode)
 {
         auto numPlayModes = static_cast<double>(PlayMode::OnMode);
         return static_cast<double>(mode) / numPlayModes;
 }
 
-PlayMode DspProxyVst::playModeFromNormalized(double value) const
+PlayMode DspProxyVst::playModeFromNormalized(double value)
 {
-        ENT_LOG_INFO("PLAY_MODE: " << value);
         auto numPlayModes = static_cast<double>(PlayMode::OnMode);
         return static_cast<PlayMode>(std::round(value * numPlayModes));
 }

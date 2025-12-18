@@ -29,6 +29,7 @@
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
 #include "EntVstParameters.h"
+#include "DspVstProxy.h"
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
@@ -66,6 +67,8 @@ bool ModuleExit (void)
 
 EntVstProcessor::EntVstProcessor()
         :  entropictronDsp {std::make_unique<DspWrapper>()}
+        , dspSateUpdated {false}
+        , dspStateFlag{DspStateFlag::isFree}
 {
         ENT_LOG_DEBUG("called");
         initParamMappings();
@@ -98,6 +101,10 @@ EntVstProcessor::initialize(FUnknown* context)
                       SpeakerArr::kStereo);
         addAudioOutput(reinterpret_cast<const TChar*>(u"Stereo Out"),
                        SpeakerArr::kStereo);
+        addEventInput(reinterpret_cast<const TChar*>(u"MIDI Input"), 1);
+
+        dspStateFlag.store(DspStateFlag::isFree, std::memory_order_relaxed);
+
         return kResultTrue;
 }
 
@@ -134,6 +141,12 @@ tresult PLUGIN_API
 EntVstProcessor::setActive(TBool state)
 {
         return AudioEffect::setActive(state);
+}
+
+tresult PLUGIN_API EntVstProcessor::setProcessing (TBool state)
+{
+        ENT_LOG_INFO("PROCESSING STATE:" << state);
+        return AudioEffect::setProcessing (state);
 }
 
 tresult PLUGIN_API
@@ -222,7 +235,6 @@ EntVstProcessor::process(ProcessData& data)
          };
 
          size_t currentFrame = 0;
-
          for (int i = 0; i < eventCount; ++i) {
                  size_t eventFrame = static_cast<size_t>(eventQueue[i].sampleOffset);
                  if (eventFrame > static_cast<size_t>(data.numSamples))
@@ -241,14 +253,19 @@ EntVstProcessor::process(ProcessData& data)
                  // Apply event at exact sample
                  switch (eventQueue[i].type) {
                  case QueuedEvent::Type::NoteOn:
-                         entropictronDsp->pressKey(eventQueue[i].note.pitch, eventQueue[i].note.velocity, true);
+                         ENT_LOG_INFO("QueuedEvent::Type::NoteOn");
+                         if (entropictronDsp->playMode() == PlayMode::HoldMode)
+                                 entropictronDsp->pressKey(true);
                          break;
                  case QueuedEvent::Type::NoteOff:
-                         entropictronDsp->pressKey(eventQueue[i].note.pitch, eventQueue[i].note.velocity, false);
+                         ENT_LOG_INFO("QueuedEvent::Type::NoteOff");
+                         if (entropictronDsp->playMode() == PlayMode::HoldMode)
+                                 entropictronDsp->pressKey(false);
                          break;
                  case QueuedEvent::Type::Automation:
                          updateParameters(static_cast<ParameterId>(eventQueue[i].automation.pid),
                                           eventQueue[i].automation.value);
+                         dspSateUpdated = true;
                          break;
                  }
          }
@@ -259,19 +276,26 @@ EntVstProcessor::process(ProcessData& data)
                  entropictronDsp->process(buffer, remaining);
          }
 
+         if (dspSateUpdated)
+                 storeDspSate();
+
          return kResultOk;
  }
 
-tresult PLUGIN_API
-EntVstProcessor::setState(IBStream* state)
+void EntVstProcessor::storeDspSate()
 {
-        return kResultOk;
-}
+        auto expected = DspFlag::isFree;
+        bool ok = dspStateFlag.compare_exchange_strong(expected,
+                                                       DspFlag::isStoring,
+                                                       std::memory_order_acquire,
+                                                       std::memory_order_relaxed);
 
-tresult PLUGIN_API
-EntVstProcessor::getState(IBStream* state)
-{
-        return kResultOk;
+        if (!ok)
+                return;
+
+        entropictronDsp->getState(&dspActiveState);
+        dspStateFlag.store(DspFlag::isFree, std::memory_order_release);
+        dspStateUpdated = false;
 }
 
 void EntVstProcessor::updateParameters(ParameterId id, ParamValue value)
@@ -284,7 +308,8 @@ void EntVstProcessor::updateParameters(ParameterId id, ParamValue value)
 void EntVstProcessor::initParamMappings()
 {
         paramMap[ParameterId::PlayModeId] = [this](ParamValue v) {
-                entropictronDsp->setPlayMode(static_cast<PlayMode>(v));
+                ENT_LOG_INFO("PLAY MODE: " << v);
+                entropictronDsp->setPlayMode(DspProxyVst::playModeFromNormalized(v));
         };
 
         initNoiseParamMappings();
@@ -493,3 +518,41 @@ void EntVstProcessor::initGlitchParamMappings()
                 glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
         };
 }
+
+tresult EntVstProcessor::setState (IBStream *state)
+{
+}
+
+tresult EntVstProcessor::getState (IBStream *state)
+{
+        if (state == nullptr)
+                return kResultInvalidArgument;
+
+        DspFlagState expected = DspStateFlag::isFree;
+        bool ok = dspStateFlag.compare_exchange_strong(expected,
+                                                       DspStateFlag::isSaving,
+                                                       std::memory_order_acquire,
+                                                       std::memory_order_relaxed);
+
+        if (ok) {
+                dspStateSave = dspActiveState;
+                dspStateFlag.store(DspStateFlag::isFree, std::memory_order_release);
+        }
+
+        EntState entState (dspStateSave);
+
+        int32 nBytes = 0;
+        auto data = entState.toJson();
+        if (state->write(data.data(), data.size(), &nBytes) == kResultFalse) {
+                ENT_LOG_ERROR("error on saving the state");
+                return kResultFalse;
+        }
+
+        if (static_cast<decltype(nBytes)>(data.size()) != nBytes) {
+                ENT_LOG_ERROR("error on saving the state");
+                return kResultFalse;
+        }
+
+        return kResultOk;
+}
+

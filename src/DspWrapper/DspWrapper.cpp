@@ -26,6 +26,7 @@
 #include "DspWrapperNoise.h"
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
+#include "EntState.h"
 
 DspWrapper::DspWrapper()
 {
@@ -79,6 +80,15 @@ int DspWrapper::getSampleRate() const
         return sampleRate;
 }
 
+void DspWrapper::setState(std::unique_ptr<EntState> state)
+{
+}
+
+void DspWrapper::getState(struct ent_state *state) const
+{
+        ent_get_state(entropictronDsp.get(), state);
+}
+
 void DspWrapper::setPlayMode(PlayMode mode)
 {
         ent_set_play_mode(entropictronDsp.get(),
@@ -94,6 +104,12 @@ void DspWrapper::process(float** data, size_t size)
 {
         ent_process(entropictronDsp.get(), data, size);
 }
+
+void DspWrapper::pressKey(bool on, int pitch, int velocity)
+{
+        ent_press_key(entropictronDsp.get(), on, pitch, velocity);
+}
+
 
 DspWrapperNoise* DspWrapper::getNoise(NoiseId id) const
 {

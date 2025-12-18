@@ -22,9 +22,51 @@
  */
 
 #include "DspProxy.h"
+#include "DspNoiseProxy.h"
+#include "EntState.h"
 
 DspProxy::DspProxy(RkObject *parent)
         : RkObject(parent)
 {
+}
+
+void DspProxy::setState(std::unique_ptr<EntState> state) const
+{
+        // Noise state
+        for (int i = 0; i < static_cast<int>(NoiseId::Noise2); i++) {
+                auto noise = getNoise(static_cast<NoiseId>(i));
+                auto noiseState = state->getNoise(static_cast<NoiseId>(i));
+                noise->enable(noiseState.enabled);
+                noise->setType(static_cast<NoiseType>(noiseState.type));
+                noise->setDensity(noiseState.density);
+                noise->setBrightness(noiseState.brightness);
+                noise->setGain(noiseState.gain);
+                noise->setStereo(noiseState.stereo);
+                noise->setFilterType(static_cast<FilterType>(noiseState.filter_type));
+                noise->setCutOff(noiseState.cutoff);
+                noise->setResonance(noiseState.resonance);
+        }
+}
+
+std::unique_ptr<EntState> DspProxy::getState() const
+{
+        auto state = std::make_unique<EntState>();
+
+        // Noise state
+        for (int i = 0; i < static_cast<int>(NoiseId::Noise2); i++) {
+                auto& noiseState = state->getNoise(static_cast<NoiseId>(i));
+                auto noise = getNoise(static_cast<NoiseId>(i));
+                noiseState.enabled = noise->isEnabled();
+                noiseState.type = static_cast<int>(noise->noiseType());
+                noiseState.density = noise->density();
+                noiseState.brightness = noise->brightness();
+                noiseState.gain = noise->gain();
+                noiseState.stereo = noise->stereo();
+                noiseState.filter_type = static_cast<int>(noise->filterType());
+                noiseState.cutoff = noise->cutOff();
+                noiseState.resonance = noise->resonance();
+        }
+
+        return state;
 }
 

@@ -27,6 +27,7 @@
 #include "qx_fader.h"
 #include "qx_randomizer.h"
 #include "ent_shelf_filter.h"
+#include "ent_state.h"
 
 #include <stdlib.h>
 
@@ -293,4 +294,16 @@ void ent_crackle_process(struct ent_crackle *c, float **data, size_t size)
                 data[0][i] += c->buffer[0][i];
                 data[1][i] += c->buffer[1][i];
         }
+}
+
+void ent_crackle_get_state(struct ent_crackle *c, struct ent_state_crackle *state)
+{
+        state->enabled = c->enabled;
+        state->rate = c->rate;
+        state->duration = c->duration;
+        state->amplitude = c->amplitude;
+        state->randomness = c->randomness;
+        state->brightness = c->brightness;
+        state->envelope_shape = c->envelope_shape;
+        state->stereo_spread = c->stereo_spread;
 }

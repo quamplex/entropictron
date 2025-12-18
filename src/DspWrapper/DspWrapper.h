@@ -28,6 +28,8 @@
 #include "DspTypes.h"
 
 struct entropictron;
+struct ent_state;
+class EntState;
 class DspWrapperNoise;
 class DspWrapperCrackle;
 class DspWrapperGlitch;
@@ -38,8 +40,12 @@ public:
         explicit DspWrapper();
         void setSampleRate(unsigned int srate);
         int getSampleRate() const;
+        void setState(std::unique_ptr<EntState> state);
+        void getState(struct ent_state *state) const;
         void process(float** data, size_t size);
-        void pressKey(int pitch, int velocity, bool on = true);
+        void pressKey(bool on = true,
+                      int pitch = Entropictron::defaultMidiKey,
+                      int velocity = Entropictron::maxKeyVelocity);
         void setPlayMode(PlayMode mode);
         PlayMode playMode() const;
         DspWrapperNoise* getNoise(NoiseId id) const;

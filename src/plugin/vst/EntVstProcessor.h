@@ -26,6 +26,7 @@
 
 #include "globals.h"
 #include "EntVstParameters.h"
+#include "ent_state.h"
 
 #include "public.sdk/source/vst/vstaudioeffect.h"
 
@@ -61,20 +62,33 @@ class EntVstProcessor : public AudioEffect {
         tresult PLUGIN_API setupProcessing(ProcessSetup& setup) SMTG_OVERRIDE;
         tresult PLUGIN_API setActive(TBool state) SMTG_OVERRIDE;
         tresult PLUGIN_API process(ProcessData& data) SMTG_OVERRIDE;
-        tresult PLUGIN_API setState(IBStream* state) SMTG_OVERRIDE;
-        tresult PLUGIN_API getState(IBStream* state) SMTG_OVERRIDE;
 
  protected:
+        tresult PLUGIN_API setProcessing (TBool state) SMTG_OVERRIDE;
         using UpdateParamFunc = std::function<void(const ParamValue&)>;
         void initParamMappings();
         void initNoiseParamMappings();
         void initCrackleParamMappings();
         void initGlitchParamMappings();
         void updateParameters(ParameterId pid, ParamValue value);
+        void storeDspSate();
+        tresult setState (IBStream *state) SMTG_OVERRIDE;
+        tresult getState (IBStream *state) SMTG_OVERRIDE
 
  private:
         std::unordered_map<ParameterId, UpdateParamFunc> paramMap;
         std::unique_ptr<DspWrapper> entropictronDsp;
+        bool dspSateUpdated;
+
+        enum DspStateFlag: int {
+                isFree,
+                isStoring,
+                isSaving
+        };
+
+        std::atomic<DspStateFlag> dspActiveSateFlag;
+        struct ent_state dspActiveSate;
+        struct ent_state dspStateSave;
 };
 
 #endif // ENT_VST_PROCESSOR_H

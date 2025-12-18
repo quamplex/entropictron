@@ -122,11 +122,13 @@ namespace Entropictron
         }
 }
 
-namespace GeonkickTypes
+namespace Entropictron
 {
 using MidiKey = unsigned char;
 constexpr MidiKey entropictronAnyKey = ENT_ANY_KEY;
 constexpr int entropictronAnyMidiChannel = ENT_ANY_MIDI_CHANNEL;
+constexpr MidiKey maxKeyVelocity = ENT_MAX_KEY_VELOCITY;
+constexpr MidiKey defaultMidiKey = ENT_DEFALUT_MIDI_KEY;
 
 enum class Formats : int {
           Gkick  = 0,

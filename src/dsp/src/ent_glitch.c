@@ -25,6 +25,7 @@
 #include "ent_log.h"
 #include "qx_math.h"
 #include "qx_randomizer.h"
+#include "ent_state.h"
 
 #include <stdlib.h>
 
@@ -203,4 +204,14 @@ void ent_glitch_process(struct ent_glitch *g,
 
                 g->write_pos = (g->write_pos + 1) % g->buffer_size;
         }
+}
+
+void ent_glitch_get_state(struct ent_glitch *g, struct ent_state_glitch *state)
+{
+        state->enabled = g->enabled;
+        state->probability = g->probability;
+        state->jump_min_samples = g->jump_min_samples;
+        state->jump_max_samples = g->jump_max_samples;
+        state->glitch_length_samples = g->glitch_length_samples;
+        state->glitch_repeat_count = g->glitch_repeat_count;
 }

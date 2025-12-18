@@ -81,6 +81,7 @@ class EntState
         std::string getLicense() const;
         void setPlayMode(int mode);
         int getPlayMode() const;
+        EntState::Noise& getNoise(NoiseId id);
         std::string toJson(bool asPreset = false) const;
         bool fromJson(const std::string& jsonStr);
         bool saveToFile(const std::filesystem::path& filepath) const;

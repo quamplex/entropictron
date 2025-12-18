@@ -25,6 +25,7 @@
 #include "ent_log.h"
 #include "ent_shelf_filter.h"
 #include "ent_filter.h"
+#include "ent_state.h"
 
 #include "qx_math.h"
 #include "qx_randomizer.h"
@@ -202,12 +203,6 @@ float ent_noise_get_stereo(struct ent_noise *noise)
         return noise->stereo;
 }
 
-enum ent_error ent_noise_set_filter_type(struct ent_noise *noise, enum ent_filter_type type)
-{
-        ent_filter_set_type(&noise->filter, type);
-        return ENT_OK;
-}
-
 enum ent_error
 ent_noise_filter_enable(struct ent_noise *noise, bool enable)
 {
@@ -217,6 +212,12 @@ ent_noise_filter_enable(struct ent_noise *noise, bool enable)
 bool ent_noise_filter_is_enabled(struct ent_noise *noise)
 {
         return noise->filter_enabled;
+}
+
+enum ent_error ent_noise_set_filter_type(struct ent_noise *noise, enum ent_filter_type type)
+{
+        ent_filter_set_type(&noise->filter, type);
+        return ENT_OK;
 }
 
 enum ent_filter_type ent_noise_get_filter_type(struct ent_noise *noise)
@@ -343,3 +344,16 @@ void ent_noise_process(struct ent_noise *noise,
         }
 }
 
+void ent_noise_get_state(struct ent_noise *noise, struct ent_state_noise *state)
+{
+        state->enabled = noise->enabled;
+        state->type = noise->type;
+        state->density = noise->density;
+        state->birghtness = noise->birghtness;
+        state->gain = noise->gain;
+        state->stereo = noise->stereo;
+        state->filter_enabled = noise->filter_enabled;
+        state->filter_type = ent_filter_get_type(&noise->filter);
+        state->cutoff = ent_filter_get_cutoff(&noise->filter);
+        state->resonance = ent_filter_get_resonance(&noise->filter);
+}

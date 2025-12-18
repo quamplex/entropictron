@@ -38,6 +38,7 @@ enum ent_noise_type {
 };
 
 struct ent_noise;
+struct ent_state_noise;
 
 struct ent_noise* ent_noise_create(int sample_rate);
 
@@ -91,6 +92,8 @@ float ent_noise_get_resonance(struct ent_noise *noise);
 void ent_noise_process(struct ent_noise *noise,
                        float **data,
                        size_t size);
+
+void ent_noise_get_state(struct ent_noise *noise, struct ent_state_noise *state);
 
 #ifdef __cplusplus
 }

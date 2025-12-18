@@ -38,6 +38,7 @@ enum ent_crackle_envelope {
 };
 
 struct ent_crackle;
+struct ent_state_crackle;
 
 struct ent_crackle* ent_crackle_create(int sample_rate);
 
@@ -77,6 +78,8 @@ enum ent_error ent_crackle_set_stereo_spread(struct ent_crackle *c, float spread
 float ent_crackle_get_stereo_spread(struct ent_crackle *c);
 
 void ent_crackle_process(struct ent_crackle *c, float **data, size_t size);
+
+void ent_crackle_get_state(struct ent_crackle *c, struct ent_state_crackle *state);
 
 #ifdef __cplusplus
 }

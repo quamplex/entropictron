@@ -78,6 +78,11 @@ int EntState::getPlayMode() const
         return playMode;
 }
 
+EntState::Noise& EntState::getNoise(NoiseId id)
+{
+        return noise[static_cast<size_t>(id)];
+}
+
 std::string EntState::toJson(bool asPreset) const
 {
         Document doc;

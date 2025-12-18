@@ -25,11 +25,16 @@
 #include "EntVstPluginView.h"
 #include "VstIds.h"
 #include "EntVstParameters.h"
+#include "DspVstProxy.h"
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
+#include "EntState.h"
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
+
+#include <type_traits>
+#include <atomic>
 
 using namespace Steinberg;
 using namespace EntVst;
@@ -56,8 +61,8 @@ EntVstController::initialize(FUnknown* context)
 void EntVstController::addNoiseParameters()
 {
         parameters.addParameter(STR16("Play Mode"),
-                                nullptr, 3, 0.0,
-                                ParameterInfo::kIsHidden,
+                                nullptr, 3, DspProxyVst::playModeToNormalized(PlayMode::PlaybackMode),
+                                ParameterInfo::kCanAutomate,
                                 ParameterId::PlayModeId);
 
         // Noise 1
@@ -368,4 +373,10 @@ tresult EntVstController::setParamNormalized (ParamID tag, ParamValue value)
         if (res != parametersCallbacks.end())
                 res->second(parameterId, value);
         return result;
+}
+
+void EntVstController::restartComponent()
+{
+        if (componentHandler)
+                componentHandler->restartComponent (kParamValuesChanged);
 }
