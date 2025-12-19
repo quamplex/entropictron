@@ -32,7 +32,7 @@
 #include <stdlib.h>
 
 struct ent_crackle {
-        int sample_rate;
+        // Parameters
         bool enabled;
         float rate;
         float duration;
@@ -41,6 +41,8 @@ struct ent_crackle {
         float brightness;
         enum ent_crackle_envelope envelope_shape;
         float stereo_spread;
+
+        int sample_rate;
         int sample_channel;
         struct qx_randomizer prob_randomizer;
         struct qx_randomizer randomizer;
@@ -296,14 +298,26 @@ void ent_crackle_process(struct ent_crackle *c, float **data, size_t size)
         }
 }
 
-void ent_crackle_get_state(struct ent_crackle *c, struct ent_state_crackle *state)
+void ent_crackle_set_state(struct ent_crackle *c, const struct ent_state_crackle *state)
 {
-        state->enabled = c->enabled;
-        state->rate = c->rate;
-        state->duration = c->duration;
-        state->amplitude = c->amplitude;
-        state->randomness = c->randomness;
-        state->brightness = c->brightness;
-        state->envelope_shape = c->envelope_shape;
-        state->stereo_spread = c->stereo_spread;
+        ENT_SET_STATE(c, state, enabled,        ent_crackle_set_enabled);
+        ENT_SET_STATE(c, state, rate,           ent_crackle_set_rate);
+        ENT_SET_STATE(c, state, duration,       ent_crackle_set_duration);
+        ENT_SET_STATE(c, state, amplitude,      ent_crackle_set_amplitude);
+        ENT_SET_STATE(c, state, randomness,     ent_crackle_set_randomness);
+        ENT_SET_STATE(c, state, brightness,     ent_crackle_set_brightness);
+        ENT_SET_STATE(c, state, envelope_shape, ent_crackle_set_envelope_shape);
+        ENT_SET_STATE(c, state, stereo_spread,  ent_crackle_set_stereo_spread);
+}
+
+void ent_crackle_get_state(const struct ent_crackle *c, struct ent_state_crackle *state)
+{
+        ENT_GET_STATE(c, state, enabled,        ent_crackle_get_enabled);
+        ENT_GET_STATE(c, state, rate,           ent_crackle_get_rate);
+        ENT_GET_STATE(c, state, duration,       ent_crackle_get_duration);
+        ENT_GET_STATE(c, state, amplitude,      ent_crackle_get_amplitude);
+        ENT_GET_STATE(c, state, randomness,     ent_crackle_get_randomness);
+        ENT_GET_STATE(c, state, brightness,     ent_crackle_get_brightness);
+        ENT_GET_STATE(c, state, envelope_shape, ent_crackle_get_envelope_shape);
+        ENT_GET_STATE(c, state, stereo_spread,  ent_crackle_get_stereo_spread);
 }

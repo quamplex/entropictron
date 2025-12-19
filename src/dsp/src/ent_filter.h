@@ -53,17 +53,17 @@ void ent_filter_init(struct ent_filter* filter,
 void ent_filter_set_type(struct ent_filter* filter,
                          enum ent_filter_type type);
 
-enum ent_filter_type ent_filter_get_type(struct ent_filter* filter);
+enum ent_filter_type ent_filter_get_type(const struct ent_filter* filter);
 
 void ent_filter_set_cutoff(struct ent_filter* filter,
                            float cut_off);
 
-float ent_filter_get_cutoff(struct ent_filter* filter);
+float ent_filter_get_cutoff(const struct ent_filter* filter);
 
 void ent_filter_set_resonance(struct ent_filter* filter,
                            float cut_off);
 
-float ent_filter_get_resonance(struct ent_filter* filter);
+float ent_filter_get_resonance(const struct ent_filter* filter);
 
 void ent_filter_process(struct ent_filter* filter,
                         float **data,

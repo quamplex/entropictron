@@ -33,6 +33,7 @@ class EntState;
 class DspWrapperNoise;
 class DspWrapperCrackle;
 class DspWrapperGlitch;
+struct ent_state;
 
 class DspWrapper
 {
@@ -40,7 +41,7 @@ public:
         explicit DspWrapper();
         void setSampleRate(unsigned int srate);
         int getSampleRate() const;
-        void setState(std::unique_ptr<EntState> state);
+        void setState(const struct ent_state *state);
         void getState(struct ent_state *state) const;
         void process(float** data, size_t size);
         void pressKey(bool on = true,

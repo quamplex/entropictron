@@ -24,12 +24,12 @@
 #ifndef ENT_LOG_H
 #define ENT_LOG_H
 
+#include <stdarg.h>
+#include <stdio.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <stdarg.h>
-#include <stdio.h>
 
 void
 ent_log_msg(const char *message, ...);

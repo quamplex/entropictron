@@ -344,16 +344,30 @@ void ent_noise_process(struct ent_noise *noise,
         }
 }
 
-void ent_noise_get_state(struct ent_noise *noise, struct ent_state_noise *state)
+void ent_noise_set_state(struct ent_noise *noise, const struct ent_state_noise *state)
 {
-        state->enabled = noise->enabled;
-        state->type = noise->type;
-        state->density = noise->density;
-        state->birghtness = noise->birghtness;
-        state->gain = noise->gain;
-        state->stereo = noise->stereo;
-        state->filter_enabled = noise->filter_enabled;
-        state->filter_type = ent_filter_get_type(&noise->filter);
-        state->cutoff = ent_filter_get_cutoff(&noise->filter);
-        state->resonance = ent_filter_get_resonance(&noise->filter);
+        ENT_SET_STATE(noise, state, enabled,        ent_noise_enable);
+        ENT_SET_STATE(noise, state, type,           ent_noise_set_type);
+        ENT_SET_STATE(noise, state, density,        ent_noise_set_density);
+        ENT_SET_STATE(noise, state, brightness,     ent_noise_set_brightness);
+        ENT_SET_STATE(noise, state, gain,           ent_noise_set_gain);
+        ENT_SET_STATE(noise, state, stereo,         ent_noise_set_stereo);
+        ENT_SET_STATE(noise, state, filter_enabled, ent_noise_set_filter_enabled);
+        ENT_SET_STATE(noise, state, filter_type,    ent_filter_set_type);
+        ENT_SET_STATE(noise, state, cutoff,         ent_filter_set_cutoff);
+        ENT_SET_STATE(noise, state, resonance,      ent_filter_set_resonance);
+}
+
+void ent_noise_get_state(const struct ent_noise *noise, struct ent_state_noise *state)
+{
+        ENT_GET_STATE(noise, state, enabled,        ent_noise_is_enabled);
+        ENT_GET_STATE(noise, state, type,           ent_noise_get_type);
+        ENT_GET_STATE(noise, state, density,        ent_noise_get_density);
+        ENT_GET_STATE(noise, state, brightness,     ent_noise_get_brightness);
+        ENT_GET_STATE(noise, state, gain,           ent_noise_get_gain);
+        ENT_GET_STATE(noise, state, stereo,         ent_noise_get_stereo);
+        ENT_GET_STATE(noise, state, filter_enabled, ent_noise_get_filter_enabled);
+        ENT_GET_STATE(noise, state, filter_type,    ent_filter_get_type);
+        ENT_GET_STATE(noise, state, cutoff,         ent_filter_get_cutoff);
+        ENT_GET_STATE(noise, state, resonance,      ent_filter_get_resonance);
 }

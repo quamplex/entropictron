@@ -79,16 +79,8 @@ class EntVstProcessor : public AudioEffect {
         std::unordered_map<ParameterId, UpdateParamFunc> paramMap;
         std::unique_ptr<DspWrapper> entropictronDsp;
         bool dspSateUpdated;
-
-        enum DspStateFlag: int {
-                isFree,
-                isStoring,
-                isSaving
-        };
-
-        std::atomic<DspStateFlag> dspActiveSateFlag;
-        struct ent_state dspActiveSate;
-        struct ent_state dspStateSave;
+        std::atomic<bool> isPendingState;
+        struct ent_state dspState;
 };
 
 #endif // ENT_VST_PROCESSOR_H

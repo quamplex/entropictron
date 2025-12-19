@@ -26,7 +26,7 @@
 #include "DspWrapperNoise.h"
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
-#include "EntState.h"
+#include "ent_state.h"
 
 DspWrapper::DspWrapper()
 {
@@ -80,8 +80,9 @@ int DspWrapper::getSampleRate() const
         return sampleRate;
 }
 
-void DspWrapper::setState(std::unique_ptr<EntState> state)
+void DspWrapper::setState(struct ent_state *state)
 {
+        ent_set_state(entropictronDsp.get(), state);
 }
 
 void DspWrapper::getState(struct ent_state *state) const

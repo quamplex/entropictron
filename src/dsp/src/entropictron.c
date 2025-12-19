@@ -26,6 +26,7 @@
 #include "ent_crackle.h"
 #include "ent_glitch.h"
 #include "ent_log.h"
+#include "ent_state.h"
 
 #include "qx_math.h"
 
@@ -183,12 +184,32 @@ ent_process(struct entropictron *ent, float** data, size_t size)
         return ENT_OK;
 }
 
-void ent_get_state(struct entropictron *ent, struct ent_state *state)
+void ent_set_state(struct entropictron *ent, struct ent_state *state)
 {
-        state->play_mode = ent->play_mode;
+        state->play_mode = atomic_load_explicit(&state->play_mode,
+                                                memory_order_acquire);
 
         size_t n = QX_ARRAY_SIZE(ent->noise);
-        for (size_t i = 0; i < n; i++) {
+        for (size_t i = 0; i < n; i++)
+                ent_noise_set_state(ent->noise[i], &state->noises[i]);
+
+        n = QX_ARRAY_SIZE(ent->crackle);
+        for (size_t i = 0; i < n; i++)
+                ent_crackle_set_state(ent->crackle[i], &state->crackles[i]);
+
+        n = QX_ARRAY_SIZE(ent->glitch);
+        for (size_t i = 0; i < n; i++)
+                ent_glitch_set_state(ent->glitch[i], &state->glitches[i]);
+}
+
+void ent_get_state(struct entropictron *ent, struct ent_state *state)
+{
+        atomic_store_explicit(&state->play_mode,
+                              ent->play_mode,
+                              memory_order_relaxed);
+
+        size_t n = QX_ARRAY_SIZE(ent->noise);
+        for (size_t i = 0; i < n; i++)
                 ent_noise_get_state(ent->noise[i], &state->noises[i]);
 
         n = QX_ARRAY_SIZE(ent->crackle);
@@ -196,7 +217,7 @@ void ent_get_state(struct entropictron *ent, struct ent_state *state)
                 ent_crackle_get_state(ent->crackle[i], &state->crackles[i]);
 
         n = QX_ARRAY_SIZE(ent->glitch);
-        for (size_t i = 0; i < n; i++) {
+        for (size_t i = 0; i < n; i++)
                 ent_glitch_get_state(ent->glitch[i], &state->glitches[i]);
 }
 

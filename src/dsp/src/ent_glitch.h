@@ -24,13 +24,13 @@
 #ifndef ENT_GLITCH_H
 #define ENT_GLITCH_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include "ent_defs.h"
 #include <stdbool.h>
 #include <stddef.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define ENT_GLITCH_MIN_REPEATS  1
 #define ENT_GLITCH_MAX_REPEATS  6
@@ -89,7 +89,9 @@ void ent_glitch_process(struct ent_glitch *g,
                         float **out,
                         size_t size);
 
-void ent_glitch_get_state(struct ent_glitch *g, struct ent_state_glitch *state);
+void ent_glitch_set_state(struct ent_glitch *g, const struct ent_state_glitch *state);
+
+void ent_glitch_get_state(const struct ent_glitch *g, struct ent_state_glitch *state);
 
 #ifdef __cplusplus
 }

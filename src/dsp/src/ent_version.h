@@ -24,13 +24,13 @@
 #ifndef ENT_VERSION_H
 #define ENT_VERSION_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdlib.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define ENT_VERSION ENT_VERSION_HEX
 #define ENT_VERSION_MAJOR ((ENT_VERSION_HEX >> 16) & 0xFF)

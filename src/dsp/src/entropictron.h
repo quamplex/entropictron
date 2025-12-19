@@ -24,11 +24,11 @@
 #ifndef ENT_H
 #define ENT_H
 
+#include <stddef.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <stddef.h>
 
 #ifdef __FAST_MATH__
 #error -ffast-math disables nan detection needed by entropictron

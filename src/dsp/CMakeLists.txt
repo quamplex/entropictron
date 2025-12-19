@@ -11,6 +11,7 @@ set(ENT_DSP_HEADERS
     ${ENT_DSP_DIR}/src/ent_noise.h
     ${ENT_DSP_DIR}/src/ent_crackle.h
     ${ENT_DSP_DIR}/src/ent_glitch.h
+    ${ENT_DSP_DIR}/src/ent_state.h
     ${ENT_DSP_DIR}/src/entropictron.h
     ${ENT_DSP_DIR}/src/ent_log.h)
 

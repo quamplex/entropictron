@@ -29,6 +29,8 @@
 
 #include <rapidjson/document.h>
 
+struct ent_state;
+
 class EntState
 {
  public:
@@ -40,6 +42,7 @@ class EntState
                 double brightness = 0.0;
                 double gain = 0.0;
                 double stereo = 0.0;
+                bool filter_enabled = false;
                 int filter_type = 0;
                 double cutoff = 0.0;
                 double resonance = 0.0;
@@ -51,10 +54,10 @@ class EntState
                 double rate = 0.0;
                 double randomness = 0.0;
                 double amplitude = 0.0;
-                int env_type = 0;
+                int envelope_shape = 0;
                 double brightness = 0.0;
                 double duration = 0.0;
-                double stereo = 0.0;
+                double stereo_spread = 0.0;
         };
 
         struct Glitch {
@@ -71,6 +74,11 @@ class EntState
         Crackle crackle[2];
         Glitch glitch[2];
 
+        EntState();
+        EntState(const std::string &jsonData);
+        EntState(const struct ent_state *state);
+        void setState(const struct ent_state* state);
+        void getState(struct ent_state* state) const;
         void setName(const std::string_view &name);
         std::string getName() const;
         void setAuthor(const std::string_view &author);

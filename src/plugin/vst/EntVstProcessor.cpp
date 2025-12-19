@@ -67,10 +67,11 @@ bool ModuleExit (void)
 
 EntVstProcessor::EntVstProcessor()
         :  entropictronDsp {std::make_unique<DspWrapper>()}
-        , dspSateUpdated {false}
-        , dspStateFlag{DspStateFlag::isFree}
+        , dspSateUpdated{false}
+        , isPendingState{false}
 {
         ENT_LOG_DEBUG("called");
+        entropictronDsp->getState(&dspState);
         initParamMappings();
 }
 
@@ -89,12 +90,8 @@ EntVstProcessor::initialize(FUnknown* context)
 {
         ENT_LOG_DEBUG("called");
         auto res = AudioEffect::initialize(context);
-        if (res != kResultTrue) {
-                ENT_LOG_ERROR("called1");
+        if (res != kResultTrue)
                 return res;
-        }
-
-        ENT_LOG_DEBUG("called1");
 
         setControllerClass(EntVstControllerUID);
         addAudioInput(reinterpret_cast<const TChar*>(u"Stereo In"),
@@ -103,7 +100,8 @@ EntVstProcessor::initialize(FUnknown* context)
                        SpeakerArr::kStereo);
         addEventInput(reinterpret_cast<const TChar*>(u"MIDI Input"), 1);
 
-        dspStateFlag.store(DspStateFlag::isFree, std::memory_order_relaxed);
+        entropictronDsp->getState(&dspState);
+        isPendingState.store(false, std::memory_order_release);
 
         return kResultTrue;
 }
@@ -154,6 +152,14 @@ EntVstProcessor::process(ProcessData& data)
  {
          if (!entropictronDsp || data.numSamples < 1)
                  return kResultOk;
+
+         bool expected = true;
+         auto ok = isPendingState.compare_exchange_strong(expected,
+                                                          false,
+                                                          std::memory_order_acquire,
+                                                          std::memory_order_relaxed);
+         if (ok)
+                 entropictronDsp->setSate(&dspSate);
 
          // --- Collect MIDI events ---
          auto midiEvents = data.inputEvents;
@@ -276,27 +282,13 @@ EntVstProcessor::process(ProcessData& data)
                  entropictronDsp->process(buffer, remaining);
          }
 
-         if (dspSateUpdated)
-                 storeDspSate();
+         if (dspSateUpdated) {
+                 entropictronDsp->getState(&dspState);
+                 dspSateUpdated = false;
+         }
 
          return kResultOk;
  }
-
-void EntVstProcessor::storeDspSate()
-{
-        auto expected = DspFlag::isFree;
-        bool ok = dspStateFlag.compare_exchange_strong(expected,
-                                                       DspFlag::isStoring,
-                                                       std::memory_order_acquire,
-                                                       std::memory_order_relaxed);
-
-        if (!ok)
-                return;
-
-        entropictronDsp->getState(&dspActiveState);
-        dspStateFlag.store(DspFlag::isFree, std::memory_order_release);
-        dspStateUpdated = false;
-}
 
 void EntVstProcessor::updateParameters(ParameterId id, ParamValue value)
  {
@@ -521,6 +513,45 @@ void EntVstProcessor::initGlitchParamMappings()
 
 tresult EntVstProcessor::setState (IBStream *state)
 {
+        if (state == nullptr)
+                return kResultInvalidArgument;
+
+        if (state->seek(0, IBStream::kIBSeekEnd, 0) == kResultFalse) {
+                ENT_LOG_ERROR("can't seek in stream");
+                return kResultFalse;
+        }
+
+        int64 endStream = 0;
+        if (state->tell(&endStream) == kResultFalse) {
+                ENT_LOG_ERROR("can't get current position in stream");
+                return kResultFalse;
+        } else if (endStream < 1) {
+                ENT_LOG_ERROR("stream is empty");
+                return kResultFalse;
+        }
+
+        if (state->seek(0, IBStream::kIBSeekSet, 0) == kResultFalse) {
+                ENT_LOG_ERROR("can't seek in stream");
+                return kResultFalse;
+        }
+
+        std::string data(endStream, '\0');
+        int32 nBytes = 0;
+        if (state->read(data.data(), data.size(), &nBytes) == kResultFalse) {
+                ENT_LOG_ERROR("error on reading the state");
+                return kResultFalse;
+        }
+
+        if (static_cast<decltype(nBytes)>(data.size()) != nBytes) {
+                ENT_LOG_ERROR("error on reading the state");
+                return kResultFalse;
+        }
+
+        EntState state{data};
+        state.getState(&dspState);
+        isPendingState.store(true, std::memory_order_release);
+
+        return kResultOk;
 }
 
 tresult EntVstProcessor::getState (IBStream *state)
@@ -528,18 +559,7 @@ tresult EntVstProcessor::getState (IBStream *state)
         if (state == nullptr)
                 return kResultInvalidArgument;
 
-        DspFlagState expected = DspStateFlag::isFree;
-        bool ok = dspStateFlag.compare_exchange_strong(expected,
-                                                       DspStateFlag::isSaving,
-                                                       std::memory_order_acquire,
-                                                       std::memory_order_relaxed);
-
-        if (ok) {
-                dspStateSave = dspActiveState;
-                dspStateFlag.store(DspStateFlag::isFree, std::memory_order_release);
-        }
-
-        EntState entState (dspStateSave);
+        EntState entState (&dspState);
 
         int32 nBytes = 0;
         auto data = entState.toJson();

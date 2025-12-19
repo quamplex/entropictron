@@ -22,11 +22,175 @@
  */
 
 #include "EntState.h"
+#include "ent_state.h"
 
 #include <rapidjson/writer.h>
 #include <rapidjson/stringbuffer.h>
+#include <stdatomic.h>
 
 using namespace rapidjson;
+
+EntState::EntState()
+{
+}
+
+EntState::EntState(const std::string &jsonData)
+{
+        fromJson(jsonData);
+}
+
+EntState::EntState(const struct ent_state *state)
+{
+        setState(state);
+}
+
+void EntState::getState(struct ent_state* state) const
+{
+        atomic_store_explicit(&state->play_mode,
+                              static_cast<enum ent_play_mode>(getPlayMode()),
+                              memory_order_release);
+
+        for (size_t i = 0; i < 2; i++) {
+                // Noise
+                atomic_store_explicit(&state->noises[i].enabled,
+                                      noise[i].enabled,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->noises[i].type,
+                                      static_cast<enum ent_noise_type>(noise[i].type),
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->noises[i].density,
+                                      noise[i].density,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->noises[i].brightness,
+                                      noise[i].brightness,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->noises[i].gain,
+                                      noise[i].gain,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->noises[i].stereo,
+                                      noise[i].stereo,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->noises[i].filter_enabled,
+                                      noise[i].filter_enabled,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->noises[i].filter_type,
+                                      static_cast<enum ent_filter_type>(noise[i].filter_type),
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->noises[i].cutoff,
+                                      noise[i].cutoff,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->noises[i].resonance,
+                                      noise[i].seronance,
+                                      memory_order_relaxed);
+
+                // Crackle
+                atomic_store_explicit(&state->crackles[i].enabled,
+                                      crackle[i].enabled,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->crackles[i].rate,
+                                      crackle[i].rate,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->crackles[i].duration,
+                                      crackle[i].duration,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->crackles[i].amplitude,
+                                      crackle[i].amplitude,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->crackles[i].randomness,
+                                      crackle[i].randomness,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->crackles[i].brightness,
+                                      crackle[i].brightness,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->crackles[i].envelope_shape,
+                                      crackle[i].envelope_shape,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->crackles[i].stereo_spread,
+                                      crackle[i].stereo_spread,
+                                      memory_order_relaxed);
+
+                // Glitch
+                atomic_store_explicit(&state->glitches[i].enabled,
+                                      glitch[i].enabled,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->glitches[i].probability,
+                                      glitch[i].probability,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->glitches[i].min_jump,
+                                      glitch[i].min_jump,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->glitches[i].max_jump,
+                                      glitch[i].max_jump,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->glitches[i].length,
+                                      glitch[i].length,
+                                      memory_order_relaxed);
+                atomic_store_explicit(&state->glitches[i].repeats,
+                                      glitch[i].repeats,
+                                      memory_order_relaxed);
+        }
+}
+
+void EntState::setState(const struct ent_state* state)
+{
+        setPlayMode(atomic_load_explicit(&state->play_mode, memory_order_acquire));
+
+        for (size_t i = 0; i < 2; i++) {
+                //  Noise
+                noise[i].enabled = atomic_load_explicit(&state->noises[i].enabled,
+                                                        memory_order_relaxed);
+                noise[i].type = atomic_load_explicit(&state->noises[i].type,
+                                                     memory_order_relaxed);
+                noise[i].density = atomic_load_explicit(&state->noises[i].density,
+                                                        memory_order_relaxed);
+                noise[i].brightness = atomic_load_explicit(&state->noises[i].brightness,
+                                                           memory_order_relaxed);
+                noise[i].gain = atomic_load_explicit(&state->noises[i].gain,
+                                                     memory_order_relaxed);
+                noise[i].stereo = atomic_load_explicit(&state->noises[i].stereo,
+                                                       memory_order_relaxed);
+                noise[i].filter_enabled = atomic_load_explicit(&state->noises[i].filter_enabled,
+                                                               memory_order_relaxed);
+                noise[i].filter_type = atomic_load_explicit(&state->noises[i].filter_type,
+                                                            memory_order_relaxed);
+                noise[i].cutoff = atomic_load_explicit(&state->noises[i].cutoff,
+                                                       memory_order_relaxed);
+                noise[i].resonance = atomic_load_explicit(&state->noises[i].resonance,
+                                                          memory_order_relaxed);
+
+                // Crackle
+                crackle[i].enabled = atomic_load_explicit(&state->crackles[i].enabled,
+                                                          memory_order_relaxed);
+                crackle[i].rate = atomic_load_explicit(&state->crackles[i].rate,
+                                                       memory_order_relaxed);
+                crackle[i].duration = atomic_load_explicit(&state->crackles[i].duration,
+                                                           memory_order_relaxed);
+                crackle[i].amplitude = atomic_load_explicit(&state->crackles[i].amplitude,
+                                                            memory_order_relaxed);
+                crackle[i].randomness = atomic_load_explicit(&state->crackles[i].randomness,
+                                                             memory_order_relaxed);
+                crackle[i].brightness = atomic_load_explicit(&state->crackles[i].brightness,
+                                                             memory_order_relaxed);
+                crackle[i].envelope_shape = atomic_load_explicit(&state->crackles[i].envelope_shape,
+                                                                 memory_order_relaxed);
+                crackle[i].stereo_spread = atomic_load_explicit(&state->crackles[i].stereo_spread,
+                                                                memory_order_relaxed);
+
+                // Glitch
+                glitch[i].enabled = atomic_load_explicit(&state->glitches[i].enabled,
+                                                         memory_order_relaxed);
+                glitch[i].probability = atomic_load_explicit(&state->glitches[i].probability,
+                                                             memory_order_relaxed);
+                glitch[i].min_jump = atomic_load_explicit(&state->glitches[i].min_jump,
+                                                          memory_order_relaxed);
+                glitch[i].max_jump = atomic_load_explicit(&state->glitches[i].max_jump,
+                                                          memory_order_relaxed);
+                glitch[i].length = atomic_load_explicit(&state->glitches[i].length,
+                                                        memory_order_relaxed);
+                glitch[i].repeats = atomic_load_explicit(&state->glitches[i].repeats,
+                                                         memory_order_relaxed);
+        }
+}
 
 void EntState::setName(const std::string_view &name)
 {

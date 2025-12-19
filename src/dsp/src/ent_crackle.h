@@ -24,11 +24,11 @@
 #ifndef ENT_CRACKLE_H
 #define ENT_CRACKLE_H
 
+#include "ent_defs.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "ent_defs.h"
 
 enum ent_crackle_envelope {
     ENT_CRACKLE_ENV_EXPONENTIAL = 0,
@@ -79,7 +79,9 @@ float ent_crackle_get_stereo_spread(struct ent_crackle *c);
 
 void ent_crackle_process(struct ent_crackle *c, float **data, size_t size);
 
-void ent_crackle_get_state(struct ent_crackle *c, struct ent_state_crackle *state);
+void ent_crackle_set_state(struct ent_crackle *c, const struct ent_state_crackle *state);
+
+void ent_crackle_get_state(const struct ent_crackle *c, struct ent_state_crackle *state);
 
 #ifdef __cplusplus
 }

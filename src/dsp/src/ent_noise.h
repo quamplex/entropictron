@@ -24,12 +24,12 @@
 #ifndef ENT_NOISE_H
 #define ENT_NOISE_H
 
+#include "ent_defs.h"
+#include "ent_filter.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include "ent_defs.h"
-#include "ent_filter.h"
 
 enum ent_noise_type {
         ENT_NOISE_TYPE_WHITE,
@@ -93,7 +93,9 @@ void ent_noise_process(struct ent_noise *noise,
                        float **data,
                        size_t size);
 
-void ent_noise_get_state(struct ent_noise *noise, struct ent_state_noise *state);
+void ent_noise_set_state(struct ent_noise *noise, const struct ent_state_noise *state);
+
+void ent_noise_get_state(const struct ent_noise *noise, struct ent_state_noise *state);
 
 #ifdef __cplusplus
 }

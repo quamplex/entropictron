@@ -108,7 +108,7 @@ void ent_filter_set_type(struct ent_filter* filter,
         filter->type = type;
 }
 
-enum ent_filter_type ent_filter_get_type(struct ent_filter* filter)
+enum ent_filter_type ent_filter_get_type(const struct ent_filter* filter)
 {
         return filter->type;
 }
@@ -120,7 +120,7 @@ void ent_filter_set_cutoff(struct ent_filter* filter,
         ent_filter_update_coeffs(filter);
 }
 
-float ent_filter_get_cutoff(struct ent_filter* filter)
+float ent_filter_get_cutoff(const struct ent_filter* filter)
 {
         return filter->cutoff;
 }
@@ -132,7 +132,7 @@ void ent_filter_set_resonance(struct ent_filter* filter,
         ent_filter_update_coeffs(filter);
 }
 
-float ent_filter_get_resonance(struct ent_filter* filter)
+float ent_filter_get_resonance(const struct ent_filter* filter)
 {
         return filter->resonance;
 }

@@ -30,23 +30,24 @@
 #include <stdlib.h>
 
 struct ent_glitch {
-        int sample_rate;
+        // Parameters
         bool enabled;
-
         float probability;
+        int min_jump;
+        int max_jump;
+        int length;
+        int repeats;
+
+        int sample_rate;
+        int glitch_length_samples;
         int jump_min_samples;
         int jump_max_samples;
-        int glitch_length_samples;
-        int glitch_repeat_count;
-
         float *buffer[2];
         size_t buffer_size;
         size_t write_pos;
-
         int glitch_pos;
         int glitch_count;
         int glitch_play_pos;
-
         struct qx_randomizer prob_randomizer;
         struct qx_randomizer randomizer;
 };
@@ -63,7 +64,7 @@ struct ent_glitch* ent_glitch_create(int sample_rate)
         g->jump_min_samples = sample_rate * ENT_GLITCH_DEFAULT_MIN_JUMP / 1000;
         g->jump_max_samples = sample_rate * ENT_GLITCH_DEFAULT_MAX_JUMP / 1000;
         g->glitch_length_samples = sample_rate *  (ENT_GLITCH_DEFAULT_LENGH / 1000.0f);
-        g->glitch_repeat_count = ENT_GLITCH_DEFAULT_REPEATS;
+        g->repeats = ENT_GLITCH_DEFAULT_REPEATS;
 
         g->buffer_size = sample_rate * (ENT_GLITCH_MAX_MAX_JUMP + ENT_GLITCH_MAX_LENGH)
                                      * ENT_GLITCH_MAX_REPEATS / 1000.0f;
@@ -119,61 +120,61 @@ float ent_glitch_get_probability(struct ent_glitch *g)
 enum ent_error ent_glitch_set_jump_min(struct ent_glitch *g, float jump_min_ms)
 {
         ent_log_info("JUMP MIN: %f", jump_min_ms);
-        jump_min_ms = qx_clamp_float(jump_min_ms,
+        g->min_jump = qx_clamp_float(jump_min_ms,
                                      ENT_GLITCH_MIN_MIN_JUMP,
                                      ENT_GLITCH_MAX_MIN_JUMP);
-        g->jump_min_samples = (int)(jump_min_ms * g->sample_rate / 1000.0f);
+        g->jump_min_samples = (int)(g->min_jump * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
 
 float ent_glitch_get_jump_min(struct ent_glitch *g)
 {
-        return (float)g->jump_min_samples * 1000.0f / g->sample_rate;
+        return g->min_jump;
 }
 
 enum ent_error ent_glitch_set_jump_max(struct ent_glitch *g, float jump_max_ms)
 {
         ent_log_info("JUMP MAX: %f", jump_max_ms);
-        jump_max_ms = qx_clamp_float(jump_max_ms,
+        g->max_jump = qx_clamp_float(jump_max_ms,
                                      ENT_GLITCH_MIN_MAX_JUMP,
                                      ENT_GLITCH_MAX_MAX_JUMP);
-        g->jump_max_samples = (int)(jump_max_ms * g->sample_rate / 1000.0f);
+        g->jump_max_samples = (int)(g->max_jump * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
 
 float ent_glitch_get_jump_max(struct ent_glitch *g)
 {
-        return (float)g->jump_max_samples * 1000.0f / g->sample_rate;
+        return g->max_jump;
 }
 
 enum ent_error ent_glitch_set_length(struct ent_glitch *g, float length_ms)
 {
         ent_log_info("JUMP MIN: %f", length_ms);
-        length_ms = qx_clamp_float(length_ms,
+        g->length = qx_clamp_float(length_ms,
                                    ENT_GLITCH_MIN_LENGH,
                                    ENT_GLITCH_MAX_LENGH);
-        g->glitch_length_samples = (int)(length_ms * g->sample_rate / 1000.0f);
+        g->glitch_length_samples = (int)(g->length * g->sample_rate / 1000.0f);
         return ENT_OK;
 }
 
 float ent_glitch_get_length(struct ent_glitch *g)
 {
-        return (float)g->glitch_length_samples * 1000.0f / g->sample_rate;
+        return g->length;
 }
 
 enum ent_error ent_glitch_set_repeat_count(struct ent_glitch *g, int repeats)
 {
         ent_log_info("REPEATS: %d", repeats);
-        g->glitch_repeat_count = QX_CLAMP(repeats,
-                                          ENT_GLITCH_MIN_REPEATS,
-                                          ENT_GLITCH_MAX_REPEATS);
-        ent_log_error("glitch_repeat_count: %f", g->glitch_repeat_count);
+        g->repeats = QX_CLAMP(repeats,
+                              ENT_GLITCH_MIN_REPEATS,
+                              ENT_GLITCH_MAX_REPEATS);
+        ent_log_error("repeats: %f", g->repeats);
         return ENT_OK;
 }
 
 int ent_glitch_get_repeat_count(struct ent_glitch *g)
 {
-        return g->glitch_repeat_count;
+        return g->repeats;
 }
 
 void ent_glitch_process(struct ent_glitch *g,
@@ -198,7 +199,7 @@ void ent_glitch_process(struct ent_glitch *g,
                         float jump_prob = qx_randomizer_get_float(&g->randomizer);
                         int jump = g->jump_min_samples + jump_prob * jump_range;
                         g->glitch_pos = (g->write_pos + g->buffer_size - (jump % g->buffer_size)) % g->buffer_size;
-                        g->glitch_count = g->glitch_length_samples * g->glitch_repeat_count;
+                        g->glitch_count = g->glitch_length_samples * g->repeats;
                         g->glitch_play_pos = 0;
                 }
 
@@ -206,12 +207,22 @@ void ent_glitch_process(struct ent_glitch *g,
         }
 }
 
-void ent_glitch_get_state(struct ent_glitch *g, struct ent_state_glitch *state)
+void ent_glitch_set_state(struct ent_glitch *g, const struct ent_state_glitch *state)
 {
-        state->enabled = g->enabled;
-        state->probability = g->probability;
-        state->jump_min_samples = g->jump_min_samples;
-        state->jump_max_samples = g->jump_max_samples;
-        state->glitch_length_samples = g->glitch_length_samples;
-        state->glitch_repeat_count = g->glitch_repeat_count;
+        ENT_SET_STATE(g, state, enabled,     ent_glitch_enable);
+        ENT_SET_STATE(g, state, probability, ent_glitch_set_probability);
+        ENT_SET_STATE(g, state, min_jump,    ent_glitch_set_jump_min);
+        ENT_SET_STATE(g, state, max_jump,    ent_glitch_set_jump_max);
+        ENT_SET_STATE(g, state, length,      ent_glitch_set_length);
+        ENT_SET_STATE(g, state, repeats,     ent_glitch_set_repeat_count);
+}
+
+void ent_glitch_get_state(const struct ent_glitch *g, struct ent_state_glitch *state)
+{
+        ENT_GET_STATE(g, state, enabled,     ent_glitch_is_enabled);
+        ENT_GET_STATE(g, state, probability, ent_glitch_get_probability);
+        ENT_GET_STATE(g, state, min_jump,    ent_glitch_get_jump_min);
+        ENT_GET_STATE(g, state, max_jump,    ent_glitch_get_jump_max);
+        ENT_GET_STATE(g, state, length,      ent_glitch_get_length);
+        ENT_GET_STATE(g, state, repeats,     ent_glitch_get_repeat_count);
 }
