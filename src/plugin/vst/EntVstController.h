@@ -51,15 +51,14 @@ class EntVstController : public Vst::EditControllerEx1 {
         void removeParamterCallback(ParameterId id);
         tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
         void setStateCallback(StateCallback callback);
-        void clearStateCallbacks();
+        void clearStateCallback();
         void restartComponent();
 
 protected:
         tresult PLUGIN_API setComponentState(IBStream* state) SMTG_OVERRIDE;
-        void setNoiseState(const EntentState& state)
-        void setCrackleState(const EntentState& state)
-        void setGlitchState(const EntentState& state)
-
+        void setNoiseState(const EntState& state);
+        void setCrackleState(const EntState& state);
+        void setGlitchState(const EntState& state);
         void addNoiseParameters();
         void addCrackleParameters();
         void addGlitchParameters();

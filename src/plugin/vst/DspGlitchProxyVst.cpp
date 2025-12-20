@@ -35,10 +35,6 @@ DspGlitchProxyVst::DspGlitchProxyVst(RkObject* parent,
         : DspGlitchProxy(parent, id)
         , vstController{controller}
 {
-        vstController->addStateCallback([this](const EntState &state){
-                setState(state);
-        });
-
         auto paramCallback = [this](ParameterId paramId, ParamValue value){
                 onParameterChanged(paramId, value);
         };
@@ -53,18 +49,6 @@ DspGlitchProxyVst::DspGlitchProxyVst(RkObject* parent,
                         ParameterId::Glitch1MaxJumpId,
                         ParameterId::Glitch1MinJumpId
                 };
-
-                vstController->setParamNormalized (ParameterId::Glitch1EnabledId, 0);
-                vstController->setParamNormalized (ParameterId::Glitch1RepeatsId,
-                                                   repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
-                vstController->setParamNormalized (ParameterId::Glitch1ProbabilityId,
-                                                   probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
-                vstController->setParamNormalized (ParameterId::Glitch1LengthId,
-                                                   lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
-                vstController->setParamNormalized (ParameterId::Glitch1MinJumpId,
-                                                   minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
-                vstController->setParamNormalized (ParameterId::Glitch1MaxJumpId,
-                                                   maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
         } else {
                 params = {
                         ParameterId::Glitch2EnabledId,

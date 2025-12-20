@@ -60,8 +60,6 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
 
         vstController->setParamterCallback(ParameterId::PlayModeId, paramCallback);
         vstController->setParamterCallback(ParameterId::StateChangedId, paramCallback);
-        vstController->setParamNormalized (ParameterId::PlayModeId,
-                                           playModeToNormalized(PlayMode::PlaybackMode));
 }
 
 DspProxyVst::~DspProxyVst()

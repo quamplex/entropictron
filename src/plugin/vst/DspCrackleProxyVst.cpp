@@ -35,10 +35,6 @@ DspCrackleProxyVst::DspCrackleProxyVst(RkObject* parent,
         : DspCrackleProxy(parent, id)
         , vstController{controller}
 {
-        vstController->addStateCallback([this](const EntState &state){
-                setState(state);
-        });
-
         auto paramCallback = [this](ParameterId paramId, ParamValue value){
                 onParameterChanged(paramId, value);
         };
@@ -54,19 +50,6 @@ DspCrackleProxyVst::DspCrackleProxyVst(RkObject* parent,
                         ParameterId::Crackle1EnvelopeShapeId,
                         ParameterId::Crackle1StereoSpreadId
                 };
-
-                vstController->setParamNormalized(ParameterId::Crackle1EnabledId, 0.0);
-                vstController->setParamNormalized(ParameterId::Crackle1RateId,
-                                                  rateToNormalized(20.0));
-                vstController->setParamNormalized(ParameterId::Crackle1DurationId,
-                                                  durationToNormalized(1.0));
-                vstController->setParamNormalized(ParameterId::Crackle1AmplitudeId, 1.0);
-                vstController->setParamNormalized(ParameterId::Crackle1RandomnessId, 1.0);
-                vstController->setParamNormalized(ParameterId::Crackle1BrightnessId, 0.0);
-                vstController->setParamNormalized(ParameterId::Crackle1EnvelopeShapeId,
-                                                  envelopeShapeToNormalized(CrackleEnvelopeShape::Exponential));
-                vstController->setParamNormalized(ParameterId::Crackle1StereoSpreadId, 0.0);
-
         } else {
                 params = {
                         ParameterId::Crackle2RateId,
@@ -77,18 +60,6 @@ DspCrackleProxyVst::DspCrackleProxyVst(RkObject* parent,
                         ParameterId::Crackle2EnvelopeShapeId,
                         ParameterId::Crackle2StereoSpreadId
                 };
-
-                vstController->setParamNormalized(ParameterId::Crackle2EnabledId, 0.0);
-                vstController->setParamNormalized(ParameterId::Crackle2RateId,
-                                                  rateToNormalized(20.0));
-                vstController->setParamNormalized(ParameterId::Crackle2DurationId,
-                                                  durationToNormalized(1.0));
-                vstController->setParamNormalized(ParameterId::Crackle2AmplitudeId, 1.0);
-                vstController->setParamNormalized(ParameterId::Crackle2RandomnessId, 1.0);
-                vstController->setParamNormalized(ParameterId::Crackle2BrightnessId, 0.0);
-                vstController->setParamNormalized(ParameterId::Crackle2EnvelopeShapeId,
-                                                  envelopeShapeToNormalized(CrackleEnvelopeShape::Exponential));
-                vstController->setParamNormalized(ParameterId::Crackle2StereoSpreadId, 0.0);
         }
 
         for (const auto& paramId : params)

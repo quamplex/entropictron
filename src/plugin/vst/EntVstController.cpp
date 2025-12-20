@@ -56,6 +56,93 @@ EntVstController::initialize(FUnknown* context)
         addCrackleParameters();
         addGlitchParameters();
 
+        setParamNormalized (ParameterId::PlayModeId,
+                            DspProxyVst::playModeToNormalized(PlayMode::PlaybackMode));
+
+        // Noise 1
+        setParamNormalized (ParameterId::Noise1EnabledId, 0.0);
+        setParamNormalized (ParameterId::Noise1TypeId,
+                            DspNoiseProxyVst::noiseTypeToNormalized(NoiseType::WhiteNoise));
+        setParamNormalized (ParameterId::Noise1DensityId, 1.0);
+        setParamNormalized (ParameterId::Noise1BrightnessId, 0.0);
+        setParamNormalized (ParameterId::Noise1GainId,
+                            DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(0)));
+        setParamNormalized (ParameterId::Noise1StereoId, 0.0);
+        setParamNormalized (ParameterId::Noise1FilterEnableId, 0.0);
+        setParamNormalized (ParameterId::Noise1FilterTypeId,
+                            DspNoiseProxyVst::filterTypeToNormalized(FilterType::LowPass));
+        setParamNormalized (ParameterId::Noise1CutOffId,
+                            DspNoiseProxyVst::cutoffToNormalized(800));
+        setParamNormalized (ParameterId::Noise1ResonanceId, 1.0);
+
+        // Noise 2
+        setParamNormalized (ParameterId::Noise2EnabledId, 0.0);
+        setParamNormalized (ParameterId::Noise2TypeId,
+                            DspNoiseProxyVst::noiseTypeToNormalized(NoiseType::WhiteNoise));
+        setParamNormalized (ParameterId::Noise2DensityId, 2.0);
+        setParamNormalized (ParameterId::Noise2BrightnessId, 0.0);
+        setParamNormalized (ParameterId::Noise2GainId,
+                            DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(0)));
+        setParamNormalized (ParameterId::Noise2StereoId, 0.0);
+        setParamNormalized (ParameterId::Noise2FilterEnableId, 0.0);
+        setParamNormalized (ParameterId::Noise2FilterTypeId,
+                            DspNoiseProxyVst::filterTypeToNormalized(FilterType::LowPass));
+        setParamNormalized (ParameterId::Noise2CutOffId,
+                            DspNoiseProxyVst::cutoffToNormalized(800));
+        setParamNormalized (ParameterId::Noise2ResonanceId, 2.0);
+
+        // Crackle 1
+        setParamNormalized(ParameterId::Crackle1EnabledId, 0.0);
+        setParamNormalized(ParameterId::Crackle1RateId,
+                           DspCrackleProxyVst::rateToNormalized(20.0));
+        setParamNormalized(ParameterId::Crackle1DurationId,
+                           DspCrackleProxyVst::durationToNormalized(1.0));
+        setParamNormalized(ParameterId::Crackle1AmplitudeId, 1.0);
+        setParamNormalized(ParameterId::Crackle1RandomnessId, 1.0);
+        setParamNormalized(ParameterId::Crackle1BrightnessId, 0.0);
+        setParamNormalized(ParameterId::Crackle1EnvelopeShapeId,
+                           DspCrackleProxyVst::envelopeShapeToNormalized(CrackleEnvelopeShape::Exponential));
+        setParamNormalized(ParameterId::Crackle1StereoSpreadId, 0.0);
+
+        // Crackle 2
+        setParamNormalized(ParameterId::Crackle2EnabledId, 0.0);
+        setParamNormalized(ParameterId::Crackle2RateId,
+                           DspCrackleProxyVst::rateToNormalized(20.0));
+        setParamNormalized(ParameterId::Crackle2DurationId,
+                           DspCrackleProxyVst::durationToNormalized(2.0));
+        setParamNormalized(ParameterId::Crackle2AmplitudeId, 2.0);
+        setParamNormalized(ParameterId::Crackle2RandomnessId, 2.0);
+        setParamNormalized(ParameterId::Crackle2BrightnessId, 0.0);
+        setParamNormalized(ParameterId::Crackle2EnvelopeShapeId,
+                           DspCrackleProxyVst::envelopeShapeToNormalized(CrackleEnvelopeShape::Exponential));
+        setParamNormalized(ParameterId::Crackle2StereoSpreadId, 0.0);
+
+        // Glitch1
+        setParamNormalized (ParameterId::Glitch1EnabledId, 0);
+        setParamNormalized (ParameterId::Glitch1RepeatsId,
+                            DspGlitchProxyVst::repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
+        setParamNormalized (ParameterId::Glitch1ProbabilityId,
+                            DspGlitchProxyVst::probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
+        setParamNormalized (ParameterId::Glitch1LengthId,
+                            DspGlitchProxyVst::lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
+        setParamNormalized (ParameterId::Glitch1MinJumpId,
+                            DspGlitchProxyVst::minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
+        setParamNormalized (ParameterId::Glitch1MaxJumpId,
+                            DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
+
+        // Glitch2
+        setParamNormalized (ParameterId::Glitch2EnabledId, 0);
+        setParamNormalized (ParameterId::Glitch2RepeatsId,
+                            DspGlitchProxyVst::repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
+        setParamNormalized (ParameterId::Glitch2ProbabilityId,
+                            DspGlitchProxyVst::probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
+        setParamNormalized (ParameterId::Glitch2LengthId,
+                            DspGlitchProxyVst::lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
+        setParamNormalized (ParameterId::Glitch2MinJumpId,
+                            DspGlitchProxyVst::minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
+        setParamNormalized (ParameterId::Glitch2MaxJumpId,
+                            DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
+
         return result;
 }
 
@@ -101,124 +188,124 @@ tresult PLUGIN_API EntVstController::setComponentState(IBStream* state)
 
         EntState entState{data};
 
-        auto playMode = static_cast<PlayMode>(state.getPlayMode();
-        vstController->setParamNormalized (ParameterId::PlayModeId,
-                                           DspProxyVst::playModeToNormalized(playMode)));
+        auto playMode = static_cast<PlayMode>(entState.getPlayMode());
+        setParamNormalized (ParameterId::PlayModeId,
+                            DspProxyVst::playModeToNormalized(playMode));
 
         setNoiseState(entState);
         setCrackleState(entState);
         setGlitchState(entState);
 
-        if (setStateCallback)
-                setStateCallback();
+        if (stateCallback)
+                stateCallback();
 
         return kResultOk;
 }
 
-void EntVstController::setNoiseState(const EntentState& state)
+void EntVstController::setNoiseState(const EntState& state)
 {
         {
                 const auto& noise = state.noise[static_cast<size_t>(NoiseId::Noise1)];
-                vstController->setParamNormalized (ParameterId::Noise1EnabledId, noise.enabled);
-                vstController->setParamNormalized (ParameterId::Noise1TypeId,
-                                                   DspNoiseProxyVst::noiseTypeToNormalized(static_cast<NoiseType>(noise.type)));
-                vstController->setParamNormalized (ParameterId::Noise1DensityId, noise.density);
-                vstController->setParamNormalized (ParameterId::Noise1BrightnessId, noise.brightness);
-                vstController->setParamNormalized (ParameterId::Noise1GainId,
-                                                   DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(noise.gain)));
-                vstController->setParamNormalized (ParameterId::Noise1StereoId, noise.stereo);
-                vstController->setParamNormalized (ParameterId::Noise1FilterEnableId, noise.filter_enabled);
-                vstController->setParamNormalized (ParameterId::Noise1FilterTypeId,
-                                                   DspNoiseProxyVst::filterTypeToNormalized(static_cast<FilterType>(noise.filter_type)));
-                vstController->setParamNormalized (ParameterId::Noise1CutOffId,
-                                                   DspNoiseProxyVst::cutoffToNormalized(noise.cutoff));
-                vstController->setParamNormalized (ParameterId::Noise1ResonanceId, noise.resonance);
+                setParamNormalized (ParameterId::Noise1EnabledId, noise.enabled);
+                setParamNormalized (ParameterId::Noise1TypeId,
+                                    DspNoiseProxyVst::noiseTypeToNormalized(static_cast<NoiseType>(noise.type)));
+                setParamNormalized (ParameterId::Noise1DensityId, noise.density);
+                setParamNormalized (ParameterId::Noise1BrightnessId, noise.brightness);
+                setParamNormalized (ParameterId::Noise1GainId,
+                                    DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(noise.gain)));
+                setParamNormalized (ParameterId::Noise1StereoId, noise.stereo);
+                setParamNormalized (ParameterId::Noise1FilterEnableId, noise.filter_enabled);
+                setParamNormalized (ParameterId::Noise1FilterTypeId,
+                                    DspNoiseProxyVst::filterTypeToNormalized(static_cast<FilterType>(noise.filter_type)));
+                setParamNormalized (ParameterId::Noise1CutOffId,
+                                    DspNoiseProxyVst::cutoffToNormalized(noise.cutoff));
+                setParamNormalized (ParameterId::Noise1ResonanceId, noise.resonance);
         }
 
         {
                 const auto& noise = state.noise[static_cast<size_t>(NoiseId::Noise2)];
-                vstController->setParamNormalized (ParameterId::Noise2EnabledId, noise.enabled);
-                vstController->setParamNormalized (ParameterId::Noise2TypeId,
-                                                   DspNoiseProxyVst::noiseTypeToNormalized(static_cast<NoiseType>(noise.type)));
-                vstController->setParamNormalized (ParameterId::Noise2DensityId, noise.density);
-                vstController->setParamNormalized (ParameterId::Noise2BrightnessId, noise.brightness);
-                vstController->setParamNormalized (ParameterId::Noise2GainId,
-                                                   DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(noise.gain)));
-                vstController->setParamNormalized (ParameterId::Noise2StereoId, noise.stereo);
-                vstController->setParamNormalized (ParameterId::Noise2FilterEnableId, noise.filter_enabled);
-                vstController->setParamNormalized (ParameterId::Noise2FilterTypeId,
-                                                   DspNoiseProxyVst::filterTypeToNormalized(static_cast<FilterType>(noise.filter_type)));
-                vstController->setParamNormalized (ParameterId::Noise2CutOffId,
-                                                   DspNoiseProxyVst::cutoffToNormalized(noise.cutoff));
-                vstController->setParamNormalized (ParameterId::Noise2ResonanceId, noise.resonance);
+                setParamNormalized (ParameterId::Noise2EnabledId, noise.enabled);
+                setParamNormalized (ParameterId::Noise2TypeId,
+                                    DspNoiseProxyVst::noiseTypeToNormalized(static_cast<NoiseType>(noise.type)));
+                setParamNormalized (ParameterId::Noise2DensityId, noise.density);
+                setParamNormalized (ParameterId::Noise2BrightnessId, noise.brightness);
+                setParamNormalized (ParameterId::Noise2GainId,
+                                    DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(noise.gain)));
+                setParamNormalized (ParameterId::Noise2StereoId, noise.stereo);
+                setParamNormalized (ParameterId::Noise2FilterEnableId, noise.filter_enabled);
+                setParamNormalized (ParameterId::Noise2FilterTypeId,
+                                    DspNoiseProxyVst::filterTypeToNormalized(static_cast<FilterType>(noise.filter_type)));
+                setParamNormalized (ParameterId::Noise2CutOffId,
+                                    DspNoiseProxyVst::cutoffToNormalized(noise.cutoff));
+                setParamNormalized (ParameterId::Noise2ResonanceId, noise.resonance);
         }
 }
 
-void EntVstController::setCrackleState(const EntentState& state)
+void EntVstController::setCrackleState(const EntState& state)
 {
         {
                 const auto& crackle = state.crackle[static_cast<size_t>(CrackleId::Crackle1)];
-                vstController->setParamNormalized(ParameterId::Crackle1EnabledId,
-                                                  crackle.enabled);
-                vstController->setParamNormalized(ParameterId::Crackle1RateId,
-                                                  DspCrackleProxyVst::rateToNormalized(crackle.rate));
-                vstController->setParamNormalized(ParameterId::Crackle1DurationId,
-                                                  DspCrackleProxyVst::durationToNormalized(crackle.duration));
-                vstController->setParamNormalized(ParameterId::Crackle1AmplitudeId, crackle.amplitude);
-                vstController->setParamNormalized(ParameterId::Crackle1RandomnessId, crackle.randomness);
-                vstController->setParamNormalized(ParameterId::Crackle1BrightnessId, crackle.brightness);
+                setParamNormalized(ParameterId::Crackle1EnabledId,
+                                   crackle.enabled);
+                setParamNormalized(ParameterId::Crackle1RateId,
+                                   DspCrackleProxyVst::rateToNormalized(crackle.rate));
+                setParamNormalized(ParameterId::Crackle1DurationId,
+                                   DspCrackleProxyVst::durationToNormalized(crackle.duration));
+                setParamNormalized(ParameterId::Crackle1AmplitudeId, crackle.amplitude);
+                setParamNormalized(ParameterId::Crackle1RandomnessId, crackle.randomness);
+                setParamNormalized(ParameterId::Crackle1BrightnessId, crackle.brightness);
                 auto envShape = DspCrackleProxyVst::envelopeShapeToNormalized(static_cast<CrackleEnvelopeShape>(crackle.envelope_shape));
-                vstController->setParamNormalized(ParameterId::Crackle1EnvelopeShapeId, envShape);
-                vstController->setParamNormalized(ParameterId::Crackle1StereoSpreadId, crackle.stereo_spread);
+                setParamNormalized(ParameterId::Crackle1EnvelopeShapeId, envShape);
+                setParamNormalized(ParameterId::Crackle1StereoSpreadId, crackle.stereo_spread);
         }
 
         {
                 const auto& crackle = state.crackle[static_cast<size_t>(CrackleId::Crackle2)];
-                vstController->setParamNormalized(ParameterId::Crackle2EnabledId,
-                                                  crackle.enabled);
-                vstController->setParamNormalized(ParameterId::Crackle2RateId,
-                                                  DspCrackleProxyVst::rateToNormalized(crackle.rate));
-                vstController->setParamNormalized(ParameterId::Crackle2DurationId,
-                                                  DspCrackleProxyVst::durationToNormalized(crackle.duration));
-                vstController->setParamNormalized(ParameterId::Crackle2AmplitudeId, crackle.amplitude);
-                vstController->setParamNormalized(ParameterId::Crackle2RandomnessId, crackle.randomness);
-                vstController->setParamNormalized(ParameterId::Crackle2BrightnessId, crackle.brightness);
+                setParamNormalized(ParameterId::Crackle2EnabledId,
+                                   crackle.enabled);
+                setParamNormalized(ParameterId::Crackle2RateId,
+                                   DspCrackleProxyVst::rateToNormalized(crackle.rate));
+                setParamNormalized(ParameterId::Crackle2DurationId,
+                                   DspCrackleProxyVst::durationToNormalized(crackle.duration));
+                setParamNormalized(ParameterId::Crackle2AmplitudeId, crackle.amplitude);
+                setParamNormalized(ParameterId::Crackle2RandomnessId, crackle.randomness);
+                setParamNormalized(ParameterId::Crackle2BrightnessId, crackle.brightness);
                 auto envShape = DspCrackleProxyVst::envelopeShapeToNormalized(static_cast<CrackleEnvelopeShape>(crackle.envelope_shape));
-                vstController->setParamNormalized(ParameterId::Crackle2EnvelopeShapeId, envShape);
-                vstController->setParamNormalized(ParameterId::Crackle2StereoSpreadId, crackle.stereo_spread);
+                setParamNormalized(ParameterId::Crackle2EnvelopeShapeId, envShape);
+                setParamNormalized(ParameterId::Crackle2StereoSpreadId, crackle.stereo_spread);
         }
 }
 
-void EntVstController::setGlitchState(const EntState &entState)
+void EntVstController::setGlitchState(const EntState &state)
 {
         {
-                const auto& glitch = state.glitch[static_cast<size_t>(Glitch::Glitch1)];
-                vstController->setParamNormalized (ParameterId::Glitch1EnabledId, glitch.enabled);
-                vstController->setParamNormalized (ParameterId::Glitch1RepeatsId,
-                                                   DspGlitchProxyVst::repeatsToNormalized(glitch.repeats));
-                vstController->setParamNormalized (ParameterId::Glitch1ProbabilityId,
-                                                   DspGlitchProxyVst::probabilityToNormalized(glitch.probability));
-                vstController->setParamNormalized (ParameterId::Glitch1LengthId,
-                                                   DspGlitchProxyVst::lengthToNormalized(glitch.length));
-                vstController->setParamNormalized (ParameterId::Glitch1MinJumpId,
-                                                   DspGlitchProxyVst::minJumpToNormalized(glitch.min_jump));
-                vstController->setParamNormalized (ParameterId::Glitch1MaxJumpId,
-                                                   DspGlitchProxyVst::maxJumpToNormalized(glitch.max_jump));
+                const auto& glitch = state.glitch[static_cast<size_t>(GlitchId::Glitch1)];
+                setParamNormalized (ParameterId::Glitch1EnabledId, glitch.enabled);
+                setParamNormalized (ParameterId::Glitch1RepeatsId,
+                                    DspGlitchProxyVst::repeatsToNormalized(glitch.repeats));
+                setParamNormalized (ParameterId::Glitch1ProbabilityId,
+                                    DspGlitchProxyVst::probabilityToNormalized(glitch.probability));
+                setParamNormalized (ParameterId::Glitch1LengthId,
+                                    DspGlitchProxyVst::lengthToNormalized(glitch.length));
+                setParamNormalized (ParameterId::Glitch1MinJumpId,
+                                    DspGlitchProxyVst::minJumpToNormalized(glitch.min_jump));
+                setParamNormalized (ParameterId::Glitch1MaxJumpId,
+                                    DspGlitchProxyVst::maxJumpToNormalized(glitch.max_jump));
         }
 
         {
-                const auto& glitch = state.glitch[static_cast<size_t>(Glitch::Glitch2)];
-                vstController->setParamNormalized (ParameterId::Glitch2EnabledId, glitch.enabled);
-                vstController->setParamNormalized (ParameterId::Glitch2RepeatsId,
-                                                   DspGlitchProxyVst::repeatsToNormalized(glitch.repeats));
-                vstController->setParamNormalized (ParameterId::Glitch2ProbabilityId,
-                                                   DspGlitchProxyVst::probabilityToNormalized(glitch.probability));
-                vstController->setParamNormalized (ParameterId::Glitch2LengthId,
-                                                   DspGlitchProxyVst::lengthToNormalized(glitch.length));
-                vstController->setParamNormalized (ParameterId::Glitch2MinJumpId,
-                                                   DspGlitchProxyVst::minJumpToNormalized(glitch.min_jump));
-                vstController->setParamNormalized (ParameterId::Glitch2MaxJumpId,
-                                                   DspGlitchProxyVst::maxJumpToNormalized(glitch.max_jump));
+                const auto& glitch = state.glitch[static_cast<size_t>(GlitchId::Glitch2)];
+                setParamNormalized (ParameterId::Glitch2EnabledId, glitch.enabled);
+                setParamNormalized (ParameterId::Glitch2RepeatsId,
+                                    DspGlitchProxyVst::repeatsToNormalized(glitch.repeats));
+                setParamNormalized (ParameterId::Glitch2ProbabilityId,
+                                    DspGlitchProxyVst::probabilityToNormalized(glitch.probability));
+                setParamNormalized (ParameterId::Glitch2LengthId,
+                                    DspGlitchProxyVst::lengthToNormalized(glitch.length));
+                setParamNormalized (ParameterId::Glitch2MinJumpId,
+                                    DspGlitchProxyVst::minJumpToNormalized(glitch.min_jump));
+                setParamNormalized (ParameterId::Glitch2MaxJumpId,
+                                    DspGlitchProxyVst::maxJumpToNormalized(glitch.max_jump));
         }
 }
 
@@ -533,7 +620,7 @@ void EntVstController::removeParamterCallback(ParameterId id)
 
 void EntVstController::setStateCallback(StateCallback callback)
 {
-        stateCallback = stateCallback;
+        stateCallback = callback;
 }
 
 void EntVstController::clearStateCallback()
