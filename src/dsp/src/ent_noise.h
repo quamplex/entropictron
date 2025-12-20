@@ -46,48 +46,48 @@ void ent_noise_free(struct ent_noise **noise);
 
 enum ent_error ent_noise_enable(struct ent_noise *noise, bool b);
 
-bool ent_noise_is_enabled(struct ent_noise *noise);
+bool ent_noise_is_enabled(const struct ent_noise *noise);
 
 enum ent_error ent_noise_set_type(struct ent_noise *noise,
                                   enum ent_noise_type type);
 
-enum ent_noise_type ent_noise_get_type(struct ent_noise *noise);
+enum ent_noise_type ent_noise_get_type(const struct ent_noise *noise);
 
 enum ent_error ent_noise_set_density(struct ent_noise *noise, float density);
 
-float ent_noise_get_density(struct ent_noise *noise);
+float ent_noise_get_density(const struct ent_noise *noise);
 
 enum ent_error ent_noise_set_brightness(struct ent_noise *noise, float brightness);
 
-float ent_noise_get_brightness(struct ent_noise *noise);
+float ent_noise_get_brightness(const struct ent_noise *noise);
 
 enum ent_error ent_noise_set_gain(struct ent_noise *noise, float gain);
 
-float ent_noise_get_gain(struct ent_noise *noise);
+float ent_noise_get_gain(const struct ent_noise *noise);
 
 enum ent_error ent_noise_set_stereo(struct ent_noise *noise, float stereo);
 
-float ent_noise_get_stereo(struct ent_noise *noise);
+float ent_noise_get_stereo(const struct ent_noise *noise);
 
 enum ent_error
 ent_noise_filter_enable(struct ent_noise *noise, bool enable);
 
-bool ent_noise_filter_is_enabled(struct ent_noise *noise);
+bool ent_noise_filter_is_enabled(const struct ent_noise *noise);
 
 enum ent_error
 ent_noise_set_filter_type(struct ent_noise *noise,
                           enum ent_filter_type type);
 
 enum ent_filter_type
-ent_noise_get_filter_type(struct ent_noise *noise);
+ent_noise_get_filter_type(const struct ent_noise *noise);
 
 enum ent_error ent_noise_set_cutoff(struct ent_noise *noise, float cutoff);
 
-float ent_noise_get_cutoff(struct ent_noise *noise);
+float ent_noise_get_cutoff(const struct ent_noise *noise);
 
 enum ent_error ent_noise_set_resonance(struct ent_noise *noise, float resonance);
 
-float ent_noise_get_resonance(struct ent_noise *noise);
+float ent_noise_get_resonance(const struct ent_noise *noise);
 
 void ent_noise_process(struct ent_noise *noise,
                        float **data,

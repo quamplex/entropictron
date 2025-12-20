@@ -80,7 +80,7 @@ int DspWrapper::getSampleRate() const
         return sampleRate;
 }
 
-void DspWrapper::setState(struct ent_state *state)
+void DspWrapper::setState(const struct ent_state *state)
 {
         ent_set_state(entropictronDsp.get(), state);
 }

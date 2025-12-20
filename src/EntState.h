@@ -75,8 +75,8 @@ class EntState
         Glitch glitch[2];
 
         EntState();
-        EntState(const std::string &jsonData);
-        EntState(const struct ent_state *state);
+        explicit EntState(const std::string &jsonData);
+        explicit EntState(const struct ent_state *state);
         void setState(const struct ent_state* state);
         void getState(struct ent_state* state) const;
         void setName(const std::string_view &name);

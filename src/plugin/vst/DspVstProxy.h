@@ -39,6 +39,7 @@ class DspGlitchProxyVst;
 class DspProxyVst: public DspProxy {
  public:
         explicit DspProxyVst(EntVstController *controller);
+        ~DspProxyVst();
         bool setPlayMode(PlayMode mode) override;
         PlayMode playMode() const override;
         DspNoiseProxy* getNoise(NoiseId id) const override;

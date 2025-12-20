@@ -46,6 +46,7 @@ struct ent_noise;
 struct ent_crackle;
 struct ent_glitch;
 struct entropictron;
+struct ent_state;
 
 enum ent_error ent_create(struct entropictron **ent, unsigned int sample_rate);
 
@@ -53,11 +54,11 @@ void ent_free(struct entropictron **ent);
 
 enum ent_error ent_set_sample_rate(struct entropictron *ent, unsigned int rate);
 
-enum ent_error ent_get_sample_rate(struct entropictron *ent, unsigned int *sample_rate);
+enum ent_error ent_get_sample_rate(const struct entropictron *ent, unsigned int *sample_rate);
 
 enum ent_error ent_set_play_mode(struct entropictron *ent, enum ent_play_mode mode);
 
-enum ent_play_mode ent_get_play_mode(struct entropictron *ent);
+enum ent_play_mode ent_get_play_mode(const struct entropictron *ent);
 
 enum ent_error ent_process(struct entropictron *ent, float** data, size_t size);
 
@@ -68,6 +69,10 @@ struct ent_noise* ent_get_noise(struct entropictron *ent, int id);
 struct ent_crackle* ent_get_crackle(struct entropictron *ent, int id);
 
 struct ent_glitch* ent_get_glitch(struct entropictron *ent, int id);
+
+void ent_set_state(struct entropictron *ent, const struct ent_state *state);
+
+void ent_get_state(const struct entropictron *ent, struct ent_state *state);
 
 #ifdef __cplusplus
 }

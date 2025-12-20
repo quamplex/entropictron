@@ -25,6 +25,7 @@
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
+#include "EntState.h"
 
 #include "pluginterfaces/base/ibstream.h"
 
@@ -49,6 +50,10 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
                                                  controller,
                                                  GlitchId::Glitch2)}
 {
+        vstController->setStateCallback([this]() {
+                action stateChanged();
+        });
+
         auto paramCallback = [this](ParameterId paramId, ParamValue value){
                 onParameterChanged(paramId, value);
         };
@@ -57,6 +62,13 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
         vstController->setParamterCallback(ParameterId::StateChangedId, paramCallback);
         vstController->setParamNormalized (ParameterId::PlayModeId,
                                            playModeToNormalized(PlayMode::PlaybackMode));
+}
+
+DspProxyVst::~DspProxyVst()
+{
+        vstController->removeParamterCallback(ParameterId::StateChangedId);
+        vstController->removeParamterCallback(ParameterId::PlayModeId);
+        vstController->clearStateCallback();
 }
 
 bool DspProxyVst::setPlayMode(PlayMode mode)
@@ -115,7 +127,8 @@ void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
 {
         switch (paramId) {
         case ParameterId::StateChangedId:
-                vstController->restartComponent();
+                ENT_LOG_INFO("STATE CHANGED: restartComponent");
+                action stateChanged();
                 break;
         case ParameterId::PlayModeId:
                 action playModeUpdated(playModeFromNormalized(value));

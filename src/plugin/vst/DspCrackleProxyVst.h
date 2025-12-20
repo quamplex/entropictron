@@ -31,6 +31,7 @@ using namespace EntVst;
 using namespace Steinberg::Vst;
 
 class EntVstController;
+class EntState;
 
 class DspCrackleProxyVst: public DspCrackleProxy {
  public:

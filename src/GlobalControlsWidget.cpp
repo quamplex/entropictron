@@ -127,6 +127,11 @@ void GlobalControlsWidget::createPlayModeControls(RkContainer *container)
                     RK_ACT_ARGS(PlayMode mode),
                     this,
                     setPlayMode(mode));
+        RK_ACT_BIND(entModel,
+                    modelUpdated,
+                    RK_ACT_ARGS(),
+                    this,
+                    setPlayMode(entModel->playMode()));
 
         setPlayMode(entModel->playMode());
 }

@@ -45,6 +45,10 @@ class DspProxy : public RkObject {
         void setState(std::unique_ptr<EntState> state) const;
         std::unique_ptr<EntState> getState() const;
 
+        RK_DECL_ACT(stateChanged,
+                    stateChanged(),
+                    RK_ARG_TYPE(),
+                    RK_ARG_VAL());
         RK_DECL_ACT(playModeUpdated,
                     playModeUpdated(PlayMode mode),
                     RK_ARG_TYPE(PlayMode),

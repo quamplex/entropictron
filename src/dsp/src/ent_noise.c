@@ -109,7 +109,7 @@ enum ent_error ent_noise_enable(struct ent_noise *noise, bool b)
         return ENT_OK;
 }
 
-bool ent_noise_is_enabled(struct ent_noise *noise)
+bool ent_noise_is_enabled(const struct ent_noise *noise)
 {
         return noise->enabled;
 }
@@ -137,7 +137,7 @@ enum ent_error ent_noise_set_type(struct ent_noise *noise,
         return ENT_OK;
 }
 
-enum ent_noise_type ent_noise_get_type(struct ent_noise *noise)
+enum ent_noise_type ent_noise_get_type(const struct ent_noise *noise)
 {
         return noise->type;
 }
@@ -149,7 +149,7 @@ enum ent_error ent_noise_set_density(struct ent_noise *noise, float density)
         return ENT_OK;
 }
 
-float ent_noise_get_density(struct ent_noise *noise)
+float ent_noise_get_density(const struct ent_noise *noise)
 {
         return noise->density;
 }
@@ -174,7 +174,7 @@ enum ent_error ent_noise_set_brightness(struct ent_noise *noise, float brightnes
     return ENT_OK;
 }
 
-float ent_noise_get_brightness(struct ent_noise *noise)
+float ent_noise_get_brightness(const struct ent_noise *noise)
 {
         return noise->brightness;
 }
@@ -186,7 +186,7 @@ enum ent_error ent_noise_set_gain(struct ent_noise *noise, float gain)
         return ENT_OK;
 }
 
-float ent_noise_get_gain(struct ent_noise *noise)
+float ent_noise_get_gain(const struct ent_noise *noise)
 {
         return noise->gain;
 }
@@ -198,7 +198,7 @@ enum ent_error ent_noise_set_stereo(struct ent_noise *noise, float stereo)
         return ENT_OK;
 }
 
-float ent_noise_get_stereo(struct ent_noise *noise)
+float ent_noise_get_stereo(const struct ent_noise *noise)
 {
         return noise->stereo;
 }
@@ -209,7 +209,7 @@ ent_noise_filter_enable(struct ent_noise *noise, bool enable)
         noise->filter_enabled = enable;
 }
 
-bool ent_noise_filter_is_enabled(struct ent_noise *noise)
+bool ent_noise_filter_is_enabled(const struct ent_noise *noise)
 {
         return noise->filter_enabled;
 }
@@ -220,7 +220,7 @@ enum ent_error ent_noise_set_filter_type(struct ent_noise *noise, enum ent_filte
         return ENT_OK;
 }
 
-enum ent_filter_type ent_noise_get_filter_type(struct ent_noise *noise)
+enum ent_filter_type ent_noise_get_filter_type(const struct ent_noise *noise)
 {
         return ent_filter_get_type(&noise->filter);
 }
@@ -233,7 +233,7 @@ enum ent_error ent_noise_set_cutoff(struct ent_noise *noise, float cutoff)
         return ENT_OK;
 }
 
-float ent_noise_get_cutoff(struct ent_noise *noise)
+float ent_noise_get_cutoff(const struct ent_noise *noise)
 {
         return ent_filter_get_cutoff(&noise->filter);
 }
@@ -246,7 +246,7 @@ enum ent_error ent_noise_set_resonance(struct ent_noise *noise, float resonance)
         return ENT_OK;
 }
 
-float ent_noise_get_resonance(struct ent_noise *noise)
+float ent_noise_get_resonance(const struct ent_noise *noise)
 {
         return ent_filter_get_resonance(&noise->filter);
 }
@@ -352,10 +352,10 @@ void ent_noise_set_state(struct ent_noise *noise, const struct ent_state_noise *
         ENT_SET_STATE(noise, state, brightness,     ent_noise_set_brightness);
         ENT_SET_STATE(noise, state, gain,           ent_noise_set_gain);
         ENT_SET_STATE(noise, state, stereo,         ent_noise_set_stereo);
-        ENT_SET_STATE(noise, state, filter_enabled, ent_noise_set_filter_enabled);
-        ENT_SET_STATE(noise, state, filter_type,    ent_filter_set_type);
-        ENT_SET_STATE(noise, state, cutoff,         ent_filter_set_cutoff);
-        ENT_SET_STATE(noise, state, resonance,      ent_filter_set_resonance);
+        ENT_SET_STATE(noise, state, filter_enabled, ent_noise_filter_enable);
+        ENT_SET_STATE(noise, state, filter_type,    ent_noise_set_filter_type);
+        ENT_SET_STATE(noise, state, cutoff,         ent_noise_set_cutoff);
+        ENT_SET_STATE(noise, state, resonance,      ent_noise_set_resonance);
 }
 
 void ent_noise_get_state(const struct ent_noise *noise, struct ent_state_noise *state)
@@ -366,8 +366,8 @@ void ent_noise_get_state(const struct ent_noise *noise, struct ent_state_noise *
         ENT_GET_STATE(noise, state, brightness,     ent_noise_get_brightness);
         ENT_GET_STATE(noise, state, gain,           ent_noise_get_gain);
         ENT_GET_STATE(noise, state, stereo,         ent_noise_get_stereo);
-        ENT_GET_STATE(noise, state, filter_enabled, ent_noise_get_filter_enabled);
-        ENT_GET_STATE(noise, state, filter_type,    ent_filter_get_type);
-        ENT_GET_STATE(noise, state, cutoff,         ent_filter_get_cutoff);
-        ENT_GET_STATE(noise, state, resonance,      ent_filter_get_resonance);
+        ENT_GET_STATE(noise, state, filter_enabled, ent_noise_filter_is_enabled);
+        ENT_GET_STATE(noise, state, filter_type,    ent_noise_get_filter_type);
+        ENT_GET_STATE(noise, state, cutoff,         ent_noise_get_cutoff);
+        ENT_GET_STATE(noise, state, resonance,      ent_noise_get_resonance);
 }

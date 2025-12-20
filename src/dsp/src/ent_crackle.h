@@ -46,36 +46,36 @@ void ent_crackle_free(struct ent_crackle **c);
 
 enum ent_error ent_crackle_enable(struct ent_crackle *c, bool b);
 
-bool ent_crackle_is_enabled(struct ent_crackle *c);
+bool ent_crackle_is_enabled(const struct ent_crackle *c);
 
 enum ent_error ent_crackle_set_rate(struct ent_crackle *c, float rate);
 
-float ent_crackle_get_rate(struct ent_crackle *c);
+float ent_crackle_get_rate(const struct ent_crackle *c);
 
 enum ent_error ent_crackle_set_duration(struct ent_crackle *c, float duration);
 
-float ent_crackle_get_duration(struct ent_crackle *c);
+float ent_crackle_get_duration(const struct ent_crackle *c);
 
 enum ent_error ent_crackle_set_amplitude(struct ent_crackle *c, float amplitude);
 
-float ent_crackle_get_amplitude(struct ent_crackle *c);
+float ent_crackle_get_amplitude(const struct ent_crackle *c);
 
 enum ent_error ent_crackle_set_randomness(struct ent_crackle *c, float randomness);
 
-float ent_crackle_get_randomness(struct ent_crackle *c);
+float ent_crackle_get_randomness(const struct ent_crackle *c);
 
 enum ent_error ent_crackle_set_brightness(struct ent_crackle *c, float brightness);
 
-float ent_crackle_get_brightness(struct ent_crackle *c);
+float ent_crackle_get_brightness(const struct ent_crackle *c);
 
 enum ent_error ent_crackle_set_envelope_shape(struct ent_crackle *c,
                                               enum ent_crackle_envelope shape);
 
-enum ent_crackle_envelope ent_crackle_get_envelope_shape(struct ent_crackle *c);
+enum ent_crackle_envelope ent_crackle_get_envelope_shape(const struct ent_crackle *c);
 
 enum ent_error ent_crackle_set_stereo_spread(struct ent_crackle *c, float spread);
 
-float ent_crackle_get_stereo_spread(struct ent_crackle *c);
+float ent_crackle_get_stereo_spread(const struct ent_crackle *c);
 
 void ent_crackle_process(struct ent_crackle *c, float **data, size_t size);
 

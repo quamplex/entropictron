@@ -21,9 +21,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
+#include "globals.h"
 #include "DspNoiseProxyVst.h"
 #include "EntVstController.h"
-#include "globals.h"
+#include "EntState.h"
 
 #include <cmath>
 
@@ -36,6 +37,10 @@ DspNoiseProxyVst::DspNoiseProxyVst(RkObject* parent,
         : DspNoiseProxy(parent, id)
         , vstController{controller}
 {
+        vstController->addStateCallback([this](const EntState &state){
+                setState(state);
+        });
+
         auto paramCallback = [this](ParameterId paramId, ParamValue value){
                 onParameterChanged(paramId, value);
         };

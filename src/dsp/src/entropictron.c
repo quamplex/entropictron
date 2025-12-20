@@ -125,7 +125,7 @@ ent_set_sample_rate(struct entropictron *ent, unsigned int rate)
 }
 
 enum ent_error
-ent_get_sample_rate(struct entropictron *ent, unsigned int *sample_rate)
+ent_get_sample_rate(const struct entropictron *ent, unsigned int *sample_rate)
 {
         if (ent == NULL || sample_rate == NULL) {
                 ent_log_error("wrong arguments");
@@ -146,7 +146,7 @@ enum ent_error ent_set_play_mode(struct entropictron *ent, enum ent_play_mode mo
         return ENT_OK;
 }
 
-enum ent_play_mode ent_get_play_mode(struct entropictron *ent)
+enum ent_play_mode ent_get_play_mode(const struct entropictron *ent)
 {
         return ent->play_mode;
 }
@@ -184,10 +184,9 @@ ent_process(struct entropictron *ent, float** data, size_t size)
         return ENT_OK;
 }
 
-void ent_set_state(struct entropictron *ent, struct ent_state *state)
+void ent_set_state(struct entropictron *ent, const struct ent_state *state)
 {
-        state->play_mode = atomic_load_explicit(&state->play_mode,
-                                                memory_order_acquire);
+        ENT_SET_STATE(ent, state, play_mode, ent_set_play_mode);
 
         size_t n = QX_ARRAY_SIZE(ent->noise);
         for (size_t i = 0; i < n; i++)
@@ -202,11 +201,9 @@ void ent_set_state(struct entropictron *ent, struct ent_state *state)
                 ent_glitch_set_state(ent->glitch[i], &state->glitches[i]);
 }
 
-void ent_get_state(struct entropictron *ent, struct ent_state *state)
+void ent_get_state(const struct entropictron *ent, struct ent_state *state)
 {
-        atomic_store_explicit(&state->play_mode,
-                              ent->play_mode,
-                              memory_order_relaxed);
+        ENT_GET_STATE(ent, state, play_mode, ent_get_play_mode);
 
         size_t n = QX_ARRAY_SIZE(ent->noise);
         for (size_t i = 0; i < n; i++)

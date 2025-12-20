@@ -47,6 +47,10 @@ class EntropictronModel: public RkObject
         GlitchModel* getGlitch1() const;
         GlitchModel* getGlitch2() const;
 
+        RK_DECL_ACT(modelUpdated,
+                    modelUpdated(),
+                    RK_ARG_TYPE(),
+                    RK_ARG_VAL());
         RK_DECL_ACT(playModeUpdated,
                     playModeUpdated(PlayMode mode),
                     RK_ARG_TYPE(PlayMode),

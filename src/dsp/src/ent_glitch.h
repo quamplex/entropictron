@@ -62,27 +62,27 @@ void ent_glitch_free(struct ent_glitch **g);
 
 enum ent_error ent_glitch_enable(struct ent_glitch *g, bool b);
 
-bool ent_glitch_is_enabled(struct ent_glitch *g);
+bool ent_glitch_is_enabled(const struct ent_glitch *g);
 
 enum ent_error ent_glitch_set_probability(struct ent_glitch *g, float probability);
 
-float ent_glitch_get_probability(struct ent_glitch *g);
+float ent_glitch_get_probability(const struct ent_glitch *g);
 
 enum ent_error ent_glitch_set_jump_min(struct ent_glitch *g, float jump_min_ms);
 
-float ent_glitch_get_jump_min(struct ent_glitch *g);
+float ent_glitch_get_jump_min(const struct ent_glitch *g);
 
 enum ent_error ent_glitch_set_jump_max(struct ent_glitch *g, float jump_max_ms);
 
-float ent_glitch_get_jump_max(struct ent_glitch *g);
+float ent_glitch_get_jump_max(const struct ent_glitch *g);
 
 enum ent_error ent_glitch_set_length(struct ent_glitch *g, float length_ms);
 
-float ent_glitch_get_length(struct ent_glitch *g);
+float ent_glitch_get_length(const struct ent_glitch *g);
 
 enum ent_error ent_glitch_set_repeat_count(struct ent_glitch *g, int repeats);
 
-int ent_glitch_get_repeat_count(struct ent_glitch *g);
+int ent_glitch_get_repeat_count(const struct ent_glitch *g);
 
 void ent_glitch_process(struct ent_glitch *g,
                         float **in,

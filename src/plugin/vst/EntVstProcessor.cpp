@@ -33,6 +33,7 @@
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
+#include "EntState.h"
 
 #include "base/source/fstreamer.h"
 #include "pluginterfaces/base/ibstream.h"
@@ -67,7 +68,7 @@ bool ModuleExit (void)
 
 EntVstProcessor::EntVstProcessor()
         :  entropictronDsp {std::make_unique<DspWrapper>()}
-        , dspSateUpdated{false}
+        , dspStateUpdated{false}
         , isPendingState{false}
 {
         ENT_LOG_DEBUG("called");
@@ -159,7 +160,7 @@ EntVstProcessor::process(ProcessData& data)
                                                           std::memory_order_acquire,
                                                           std::memory_order_relaxed);
          if (ok)
-                 entropictronDsp->setSate(&dspSate);
+                 entropictronDsp->setState(&dspState);
 
          // --- Collect MIDI events ---
          auto midiEvents = data.inputEvents;
@@ -271,7 +272,7 @@ EntVstProcessor::process(ProcessData& data)
                  case QueuedEvent::Type::Automation:
                          updateParameters(static_cast<ParameterId>(eventQueue[i].automation.pid),
                                           eventQueue[i].automation.value);
-                         dspSateUpdated = true;
+                         dspStateUpdated = true;
                          break;
                  }
          }
@@ -282,9 +283,9 @@ EntVstProcessor::process(ProcessData& data)
                  entropictronDsp->process(buffer, remaining);
          }
 
-         if (dspSateUpdated) {
+         if (dspStateUpdated) {
                  entropictronDsp->getState(&dspState);
-                 dspSateUpdated = false;
+                 dspStateUpdated = false;
          }
 
          return kResultOk;
@@ -514,7 +515,7 @@ void EntVstProcessor::initGlitchParamMappings()
 tresult EntVstProcessor::setState (IBStream *state)
 {
         if (state == nullptr)
-                return kResultInvalidArgument;
+                return kInvalidArgument;
 
         if (state->seek(0, IBStream::kIBSeekEnd, 0) == kResultFalse) {
                 ENT_LOG_ERROR("can't seek in stream");
@@ -547,8 +548,9 @@ tresult EntVstProcessor::setState (IBStream *state)
                 return kResultFalse;
         }
 
-        EntState state{data};
-        state.getState(&dspState);
+        EntState entState{data};
+        entState.getState(&dspState);
+
         isPendingState.store(true, std::memory_order_release);
 
         return kResultOk;
@@ -557,10 +559,9 @@ tresult EntVstProcessor::setState (IBStream *state)
 tresult EntVstProcessor::getState (IBStream *state)
 {
         if (state == nullptr)
-                return kResultInvalidArgument;
+                return kInvalidArgument;
 
-        EntState entState (&dspState);
-
+        EntState entState{&dspState};
         int32 nBytes = 0;
         auto data = entState.toJson();
         if (state->write(data.data(), data.size(), &nBytes) == kResultFalse) {

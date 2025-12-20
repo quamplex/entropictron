@@ -41,6 +41,35 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
         dspProxy->setParent(this);
 
         RK_ACT_BIND(dspProxy,
+                    stateChanged,
+                    RK_ACT_ARGS(),
+                    this, modelUpdated());
+        RK_ACT_BIND(dspProxy,
+                    stateChanged,
+                    RK_ACT_ARGS(),
+                    noise1Model, modelUpdated());
+        RK_ACT_BIND(dspProxy,
+                    stateChanged,
+                    RK_ACT_ARGS(),
+                    noise2Model, modelUpdated());
+        RK_ACT_BIND(dspProxy,
+                    stateChanged,
+                    RK_ACT_ARGS(),
+                    crackle1Model, modelUpdated());
+        RK_ACT_BIND(dspProxy,
+                    stateChanged,
+                    RK_ACT_ARGS(),
+                    crackle2Model, modelUpdated());
+        RK_ACT_BIND(dspProxy,
+                    stateChanged,
+                    RK_ACT_ARGS(),
+                    glitch1Model, modelUpdated());
+        RK_ACT_BIND(dspProxy,
+                    stateChanged,
+                    RK_ACT_ARGS(),
+                    glitch2Model, modelUpdated());
+
+        RK_ACT_BIND(dspProxy,
                     playModeUpdated,
                     RK_ACT_ARGS(PlayMode mode),
                     this, playModeUpdated(mode));
@@ -68,11 +97,11 @@ bool EntropictronModel::loadPreset(const EntState *preset)
                 crackle[i]->setRate(preset->crackle[i].rate);
                 crackle[i]->setRandomness(preset->crackle[i].randomness);
                 crackle[i]->setAmplitude(preset->crackle[i].amplitude);
-                auto type = static_cast<CrackleEnvelopeShape>(preset->crackle[i].env_type);
+                auto type = static_cast<CrackleEnvelopeShape>(preset->crackle[i].envelope_shape);
                 crackle[i]->setEnvelopeShape(type);
                 crackle[i]->setBrightness(preset->crackle[i].brightness);
                 crackle[i]->setDuration(preset->crackle[i].duration);
-                crackle[i]->setStereospread(preset->crackle[i].stereo);
+                crackle[i]->setStereospread(preset->crackle[i].stereo_spread);
         }
 
         std::vector<GlitchModel*> glitch = {glitch1Model, glitch2Model};

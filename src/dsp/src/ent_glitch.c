@@ -98,7 +98,7 @@ enum ent_error ent_glitch_enable(struct ent_glitch *g, bool b)
         return ENT_OK;
 }
 
-bool ent_glitch_is_enabled(struct ent_glitch *g)
+bool ent_glitch_is_enabled(const struct ent_glitch *g)
 {
         return g->enabled;
 }
@@ -112,7 +112,7 @@ enum ent_error ent_glitch_set_probability(struct ent_glitch *g, float probabilit
         return ENT_OK;
 }
 
-float ent_glitch_get_probability(struct ent_glitch *g)
+float ent_glitch_get_probability(const struct ent_glitch *g)
 {
         return g->probability;
 }
@@ -127,7 +127,7 @@ enum ent_error ent_glitch_set_jump_min(struct ent_glitch *g, float jump_min_ms)
         return ENT_OK;
 }
 
-float ent_glitch_get_jump_min(struct ent_glitch *g)
+float ent_glitch_get_jump_min(const struct ent_glitch *g)
 {
         return g->min_jump;
 }
@@ -142,7 +142,7 @@ enum ent_error ent_glitch_set_jump_max(struct ent_glitch *g, float jump_max_ms)
         return ENT_OK;
 }
 
-float ent_glitch_get_jump_max(struct ent_glitch *g)
+float ent_glitch_get_jump_max(const struct ent_glitch *g)
 {
         return g->max_jump;
 }
@@ -157,7 +157,7 @@ enum ent_error ent_glitch_set_length(struct ent_glitch *g, float length_ms)
         return ENT_OK;
 }
 
-float ent_glitch_get_length(struct ent_glitch *g)
+float ent_glitch_get_length(const struct ent_glitch *g)
 {
         return g->length;
 }
@@ -172,7 +172,7 @@ enum ent_error ent_glitch_set_repeat_count(struct ent_glitch *g, int repeats)
         return ENT_OK;
 }
 
-int ent_glitch_get_repeat_count(struct ent_glitch *g)
+int ent_glitch_get_repeat_count(const struct ent_glitch *g)
 {
         return g->repeats;
 }

@@ -73,12 +73,12 @@ class EntVstProcessor : public AudioEffect {
         void updateParameters(ParameterId pid, ParamValue value);
         void storeDspSate();
         tresult setState (IBStream *state) SMTG_OVERRIDE;
-        tresult getState (IBStream *state) SMTG_OVERRIDE
+        tresult getState (IBStream *state) SMTG_OVERRIDE;
 
  private:
         std::unordered_map<ParameterId, UpdateParamFunc> paramMap;
         std::unique_ptr<DspWrapper> entropictronDsp;
-        bool dspSateUpdated;
+        bool dspStateUpdated;
         std::atomic<bool> isPendingState;
         struct ent_state dspState;
 };

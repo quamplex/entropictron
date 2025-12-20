@@ -80,7 +80,7 @@ void EntState::getState(struct ent_state* state) const
                                       noise[i].cutoff,
                                       memory_order_relaxed);
                 atomic_store_explicit(&state->noises[i].resonance,
-                                      noise[i].seronance,
+                                      noise[i].resonance,
                                       memory_order_relaxed);
 
                 // Crackle
@@ -103,7 +103,7 @@ void EntState::getState(struct ent_state* state) const
                                       crackle[i].brightness,
                                       memory_order_relaxed);
                 atomic_store_explicit(&state->crackles[i].envelope_shape,
-                                      crackle[i].envelope_shape,
+                                      static_cast<ent_crackle_envelope>(crackle[i].envelope_shape),
                                       memory_order_relaxed);
                 atomic_store_explicit(&state->crackles[i].stereo_spread,
                                       crackle[i].stereo_spread,
@@ -391,10 +391,10 @@ void EntState::writeCrackle(Value& modulesArray,
                 m.AddMember("rate", crackle[i].rate, a);
                 m.AddMember("randomness", crackle[i].randomness, a);
                 m.AddMember("amplitude", crackle[i].amplitude, a);
-                m.AddMember("env_type", crackle[i].env_type, a);
+                m.AddMember("env_type", crackle[i].envelope_shape, a);
                 m.AddMember("brightness", crackle[i].brightness, a);
                 m.AddMember("duration", crackle[i].duration, a);
-                m.AddMember("stereo", crackle[i].stereo, a);
+                m.AddMember("stereo", crackle[i].stereo_spread, a);
                 modulesArray.PushBack(m, a);
         }
 }
@@ -437,14 +437,14 @@ void EntState::readCrackle(const Value& m, size_t id)
         if (id >= std::size(crackle))
                 return;
 
-        crackle[id].enabled     = m["enabled"].GetBool();
-        crackle[id].rate        = m["rate"].GetDouble();
-        crackle[id].randomness  = m["randomness"].GetDouble();
-        crackle[id].amplitude   = m["amplitude"].GetDouble();
-        crackle[id].env_type    = std::clamp(m["env_type"].GetInt(), 0, 2);
-        crackle[id].brightness  = m["brightness"].GetDouble();
-        crackle[id].duration    = m["duration"].GetDouble();
-        crackle[id].stereo      = m["stereo"].GetDouble();
+        crackle[id].enabled        = m["enabled"].GetBool();
+        crackle[id].rate           = m["rate"].GetDouble();
+        crackle[id].randomness     = m["randomness"].GetDouble();
+        crackle[id].amplitude      = m["amplitude"].GetDouble();
+        crackle[id].envelope_shape = std::clamp(m["env_type"].GetInt(), 0, 2);
+        crackle[id].brightness     = m["brightness"].GetDouble();
+        crackle[id].duration       = m["duration"].GetDouble();
+        crackle[id].stereo_spread  = m["stereo"].GetDouble();
 }
 
 void EntState::readGlitch(const Value& m, size_t id)
