@@ -10,6 +10,8 @@ video production, game audio, and other multimedia projects.
 Entropictron will be released under the GNU GPLv3 license as
 a VST3 plugin (later LV2 and CLAP support is planned).
 
+![Screenshot](artwork/screenshot.png)
+
 For version 1.0, the following features are planned:
 
 - Noise generator with control over density, brightness, gain,
