@@ -1,25 +1,60 @@
 # Entropictron
 
-Entropictron is a free software context synthesizer and audio effect,
- still under development with no release yet.
-Its aim is to produce a variety of sound textures that can
-serve as background or contextual elements in music tracks.
-It may be useful for ambient music, sound effects, film and
-video production, game audio, and other multimedia projects.
+**Entropictron** is a [free software](https://www.gnu.org/philosophy/free-sw.en.html)
+context synthesizer and audio effect.
 
-Entropictron will be released under the GNU GPLv3 license as
-a VST3 plugin (later LV2 and CLAP support is planned).
+**Website:** [https://quamplex.com/entropictron](https://quamplex.com/entropictron)
+
+Entropictron can produce a variety of sound textures that can
+serve as background or contextual elements in music tracks.
+Useful for ambient music, sound effects, film and
+video production, game audio, and other.
+
+**License:** GNU General Public License, Version 3
+
+**Version:** 1.0.0 (not released yet)
 
 ![Screenshot](artwork/screenshot.png)
 
-For version 1.0, the following features are planned:
+## Features
 
-- Noise generator with control over density, brightness, gain,
-  filter type (low-pass, band-pass, high-pass), and stereo spread
-- Crackle generator producing bursts with configurable rate,
-  duration, number of bursts, burst shape, randomness, brightness, and stereo spread
-- Glitcher (memory glitch effect) with parameters for probability
-  , minimum and maximum jump size, segment length, and repeats
-- Mixing of all modules, with automation support for all parameters
-- Playback, Hold, and On modes, with Hold triggerable via MIDI
-- Sidechain control for modulation of parameters
+Entropictron combines and mixes several sound generators and effects,
+allowing to layer Noise, Crackle, and Glitch in a single patch.
+
+### Noise (×2)
+A noise generator producing various noise types with an integrated
+filter to shape the frequency spectrum.
+
+**Parameters:**
+- Type (white, pink, brownian)
+- Density
+- Brightness
+- Gain
+- Stereo
+- Filter type (low-pass, band-pass, high-pass)
+- Filter cutoff
+- Filter resonance
+
+### Crackle (×2)
+Generates short, irregular bursts with different shapes.
+
+**Parameters:**
+- Rate
+- Randomness
+- Amplitude
+- Burst shape (exponential, linear, triangle)
+- Brightness
+- Duration
+- Stereo spread
+
+### Glitch (×2)
+Simulates memory-based glitches with adjustable length, randomness,
+and jump parameters, creating stutters and digital artifacts.
+
+**Parameters:**
+- Repeats
+- Probability
+- Length
+- Minimum jump
+- Maximum jump
+
