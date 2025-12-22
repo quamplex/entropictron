@@ -22,8 +22,10 @@
  */
 
 #include "PresetList.h"
+#include "DesktopPaths.h"
 
 PresetList::PresetList()
+        : presetFolder {DesktopPaths().getFactoryPresetsPath()}
 {
         loadFromDefaultPath();
 }

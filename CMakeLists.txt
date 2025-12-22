@@ -23,7 +23,7 @@ endif()
 set(REDKITE_INSTALL OFF CACHE BOOL "Disable Redkite install" FORCE)
 option(ENTROPICTRON_LIMITED_VERSION "Enable entropictron limited version" OFF)
 option(ENT_PLUGIN "Enable build for plugin" ON)
-option(ENT_PRESETS "Enable presets" OFF)
+option(ENT_PRESETS "Enable presets" ON)
 
 if (ENT_PLUGIN)
   option(ENT_PLUGIN_LV2 "Enable build LV2 plugin" OFF)
@@ -136,6 +136,7 @@ set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/ModuleWidgetTab.h
   ${ENT_COMMON_DIR}/GlobalControlsWidget.h
   ${ENT_COMMON_DIR}/EntState.h
+  ${ENT_COMMON_DIR}/DesktopPaths.h
   ${ENT_COMMON_DIR}/PresetList.h
   ${ENT_COMMON_DIR}/PresetWidget.h
   ${ENT_COMMON_DIR}/MainWindow.h
@@ -160,6 +161,7 @@ set(ENT_COMMON_SOURCES
   ${ENT_COMMON_DIR}/ModuleWidgetTab.cpp
   ${ENT_COMMON_DIR}/GlobalControlsWidget.cpp
   ${ENT_COMMON_DIR}/EntState.cpp
+  ${ENT_COMMON_DIR}/DesktopPaths.cpp
   ${ENT_COMMON_DIR}/PresetList.cpp
   ${ENT_COMMON_DIR}/PresetWidget.cpp
   ${ENT_COMMON_DIR}/MainWindow.cpp
@@ -274,6 +276,10 @@ if (ENT_PLUGIN)
    add_subdirectory(${ENT_COMMON_DIR}/plugin)
 endif (ENT_PLUGIN)
 
+if (ENT_PRESETS)
+   add_subdirectory(presets)
+ endif (ENT_PRESETS)
+
 message(STATUS "------------ Summary ---------")
 
 if (ENTROPICTRON_LIMITED_VERSION)
@@ -320,5 +326,3 @@ else(ENABLE_LOGGING)
   message(STATUS "Debug enabled: no" )
 endif(ENABLE_LOGGING)
 message(STATUS "------------------------------")
-
-

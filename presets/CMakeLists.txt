@@ -1,31 +1,31 @@
-set(ENT_PRESETS Entropictron.tar.xz )
-
 string(TOLOWER "${PROJECT_NAME}" PROJECT_NAME_LOWER)
 
-set(ENT_PRESETS_OUTPUT "")
+set(ENT_FACTORY_PRESETS
+    "${CMAKE_CURRENT_SOURCE_DIR}/EntropictronPresets.tar.xz"
+)
 
-foreach(compressedFolder ${ENT_PRESETS})
-   message(STATUS "Uncompress file: ${compressedFolder}")
+set(outputDir "${CMAKE_BINARY_DIR}/presets")
+set(stampFile "${outputDir}/.entropictron_presets_extracted")
+set(factoryFile "${outputDir}/factory.txt")
 
-   get_filename_component(presetsFolder "${compressedFolder}" NAME_WE)
+message(STATUS "Uncompress file: ${ENT_FACTORY_PRESETS}")
 
-   set(outputDir "${CMAKE_BINARY_DIR}/presets/${presetsFolder}")
+add_custom_command(
+    OUTPUT "${stampFile}"
+    COMMAND ${CMAKE_COMMAND} -E make_directory "${outputDir}"
+    COMMAND ${CMAKE_COMMAND} -E chdir "${outputDir}"
+            ${CMAKE_COMMAND} -E tar xvf "${ENT_FACTORY_PRESETS}"
+    COMMAND ${CMAKE_COMMAND} -E touch "${factoryFile}"
+    COMMAND ${CMAKE_COMMAND} -E touch "${stampFile}"
+    COMMENT "Extracting ${ENT_FACTORY_PRESETS}"
+    VERBATIM
+)
 
-    add_custom_command(
-        OUTPUT "${outputDir}"
-        COMMAND ${CMAKE_COMMAND} -E make_directory "${outputDir}"
-        COMMAND ${CMAKE_COMMAND} -E tar xvf
-        "${ENT_PRESETS_DIR}/${compressedFolder}"
-        --directory="${outputDir}"
-        COMMENT "Extracting ${compressedFolder}"
-        VERBATIM
-   )
+add_custom_target(entropictron_presets ALL
+    DEPENDS "${stampFile}"
+)
 
-   list(APPEND ENT_PRESETS_OUTPUT "${outputDir}")
-endforeach()
-
-add_custom_target(gkick_presets ALL
-    DEPENDS ${ENT_PRESETS_OUTPUT})
-
-install(DIRECTORY ${ENT_PRESETS_OUTPUT}
-        DESTINATION ${CMAKE_INSTALL_FULL_DATADIR}/${PROJECT_NAME_LOWER}/presets)
+install(
+    DIRECTORY "${outputDir}/"
+    DESTINATION "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME_LOWER}/presets"
+)

@@ -6,7 +6,7 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 option(RK_ENABLE_EXAMPLES "Build examples" OFF)
 option(RK_BUILD_TOOLS "Build tools" ON)
-option(REDKITE_INSTALL "Enable installation of Redkite" ON)
+option(REDKITE_INSTALL "Enable installation of Redkite" OFF)
 
 if (CMAKE_SYSTEM_NAME MATCHES Windows)
   message(STATUS "Build Redkite for Windows")
@@ -240,7 +240,7 @@ add_library(redkite STATIC
   ${RK_SOURCES}
   ${RK_SOURCES_PLATFORM})
 
-if (REDKITE_ENABLE_INSTALL)
+if (REDKITE_INSTALL)
 if (CMAKE_SYSTEM_NAME MATCHES Windows)
   install(TARGETS redkite DESTINATION ${CMAKE_INSTALL_PREFIX})
   install(FILES ${RK_HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
@@ -248,7 +248,7 @@ else()
   install(TARGETS redkite DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
   install(FILES ${RK_HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/redkite)
 endif()
-endif(REDKITE_ENABLE_INSTALL)
+endif(REDKITE_INSTALL)
 
 if(RK_BUILD_TOOLS)
 	add_subdirectory(tools)

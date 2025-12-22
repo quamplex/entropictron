@@ -42,7 +42,7 @@ public:
 
 private:
         std::vector<std::unique_ptr<EntState>> presetList;
-        std::filesystem::path presetFolder = "/usr/local/share/entropictron/presets";
+        std::filesystem::path presetFolder;
 };
 
 #endif // ENT_PRESET_LIST_H
