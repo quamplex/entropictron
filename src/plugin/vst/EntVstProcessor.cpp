@@ -154,6 +154,11 @@ EntVstProcessor::process(ProcessData& data)
          if (!entropictronDsp || data.numSamples < 1)
                  return kResultOk;
 
+         memset(data.outputs[0].channelBuffers32[0], 0,
+                data.numSamples * sizeof(float));
+         memset(data.outputs[0].channelBuffers32[1], 0,
+                data.numSamples * sizeof(float));
+
          bool expected = true;
          auto ok = isPendingState.compare_exchange_strong(expected,
                                                           false,
