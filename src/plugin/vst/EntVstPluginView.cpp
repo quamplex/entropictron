@@ -23,7 +23,9 @@
 
 #include "EntVstPluginView.h"
 #include "MainWindow.h"
+#ifdef ENTROPICTRON_OS_GNU
 #include "EntVstLoopTimer.h"
+#endif // ENTROPICTRON_OS_GNU
 #include "DspVstProxy.h"
 #include "EntVstController.h"
 
@@ -79,7 +81,9 @@ EntVstPluginView::attached(void* parent, FIDString type)
         dspProxy->setName("DspProxyVst");
         mainWindow = new MainWindow(*guiApp.get(), info, dspProxy);
         mainWindow->show();
+#ifdef ENTROPICTRON_OS_GNU
         loopTimer->registerTimer(guiApp.get());
+#endif // ENTROPICTRON_OS_GNU
 
         return EditorView::attached(parent, type);
 }
@@ -87,7 +91,9 @@ EntVstPluginView::attached(void* parent, FIDString type)
 tresult PLUGIN_API
 EntVstPluginView::removed()
 {
+#ifdef ENTROPICTRON_OS_GNU
         loopTimer->unregisterTimer();
+#endif // ENTROPICTRON_OS_GNU
         if (guiApp)
                 guiApp = nullptr;
         dspProxy.reset();

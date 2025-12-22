@@ -31,9 +31,7 @@ set(ENT_VST_HEADERS
   ${ENT_VST_DIR}/EntVstParameters.h
   ${ENT_VST_DIR}/EntVstProcessor.h
   ${ENT_VST_DIR}/EntVstController.h
-  ${ENT_VST_DIR}/EntVstPluginView.h
-  ${ENT_VST_DIR}/EntVstLoopTimer.h
-  )
+  ${ENT_VST_DIR}/EntVstPluginView.h)
 
 
 set(ENT_VST_SOURCES
@@ -46,9 +44,12 @@ set(ENT_VST_SOURCES
   ${ENT_VST_DIR}/DspVstProxy.cpp
   ${ENT_VST_DIR}/EntVstProcessor.cpp
   ${ENT_VST_DIR}/EntVstController.cpp
-  ${ENT_VST_DIR}/EntVstPluginView.cpp
-  ${ENT_VST_DIR}/EntVstLoopTimer.cpp
-  )
+  ${ENT_VST_DIR}/EntVstPluginView.cpp)
+
+if (NOT CMAKE_SYSTEM_NAME MATCHES Windows)
+    list(APPEND ENT_VST_HEADERS ${ENT_VST_DIR}/EntVstLoopTimer.h)
+    list(APPEND ENT_VST_SOURCES ${ENT_VST_DIR}/EntVstLoopTimer.cpp)
+endif()
 
 set(target entropictron_vst)
 

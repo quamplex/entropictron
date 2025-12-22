@@ -34,7 +34,9 @@
 
 class MainWindow;
 class RkMain;
+#ifdef ENTROPICTRON_OS_GNU
 class EntVstLoopTimer;
+#endif // ENTROPICTRON_OS_GNU
 class DspProxyVst;
 
 using namespace Steinberg;
