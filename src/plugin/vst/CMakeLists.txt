@@ -66,7 +66,7 @@ endif ()
 
 target_link_libraries(${target} PRIVATE base sdk sdk_common pluginterfaces)
 target_link_libraries(${target} PRIVATE entropictron_common dsp_wrapper redkite)
-#target_link_options(${target} PRIVATE -Wl,--no-undefined)
+target_link_options(${target} PRIVATE -Wl,--no-undefined)
 
 if (CMAKE_SYSTEM_NAME MATCHES Windows)
 target_link_libraries(${target} PRIVATE
@@ -101,6 +101,7 @@ target_link_libraries(${target} PRIVATE
       "-static-libgcc"
       )
 else()
+      target_link_libraries(${target} PRIVATE X11)
       target_link_libraries(${target} PRIVATE "-lstdc++ -lstdc++fs -lsndfile -lcairo -lm -lpthread")
 endif()
 
