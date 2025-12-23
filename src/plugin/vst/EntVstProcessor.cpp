@@ -104,6 +104,8 @@ EntVstProcessor::initialize(FUnknown* context)
         entropictronDsp->getState(&dspState);
         isPendingState.store(false, std::memory_order_release);
 
+        processContextRequirements.flags = ProcessContext::kPlaying;
+
         return kResultTrue;
 }
 
@@ -158,6 +160,11 @@ EntVstProcessor::process(ProcessData& data)
                 data.numSamples * sizeof(float));
          memset(data.outputs[0].channelBuffers32[1], 0,
                 data.numSamples * sizeof(float));
+
+         const auto* ctx = data.processContext;
+         if (entropictronDsp->playMode() == PlayMode::PlaybackMode && ctx)
+                 entropictronDsp->pressKey(ctx->state & ProcessContext::kPlaying);
+
 
          bool expected = true;
          auto ok = isPendingState.compare_exchange_strong(expected,
