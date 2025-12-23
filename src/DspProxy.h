@@ -42,8 +42,6 @@ class DspProxy : public RkObject {
         virtual DspNoiseProxy* getNoise(NoiseId id) const = 0;
         virtual DspCrackleProxy* getCrackle(CrackleId id) const = 0;
         virtual DspGlitchProxy* getGlitch(GlitchId id) const = 0;
-        void setState(std::unique_ptr<EntState> state) const;
-        std::unique_ptr<EntState> getState() const;
 
         RK_DECL_ACT(stateChanged,
                     stateChanged(),

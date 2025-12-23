@@ -26,11 +26,6 @@
 
 #include "ent_log.h"
 
-#ifndef M_PI
-#define M_PI 3.14159265358979323846  // π – the magical circle constant
-#endif
-
-// Initialize high-shelf filter with linear gain
 void ent_shelf_filter_init(struct ent_shelf_filter* filter,
                            float sample_rate,
                            float cut_off,
@@ -41,7 +36,7 @@ void ent_shelf_filter_init(struct ent_shelf_filter* filter,
         float w0 = 2.0f * M_PI * cut_off / sample_rate;
         float cosw0 = cosf(w0);
         float sinw0 = sinf(w0);
-        float alpha = sinw0 / 2.0f * sqrtf((A + 1/A) * 1.0f + 2.0f); // shelf factor = 1
+        float alpha = sinw0 / 2.0f * sqrtf((A + 1/A) * 1.0f + 2.0f);
 
         float b0 =    A * ((A+1) + (A-1)*cosw0 + 2*sqrtf(A)*alpha);
         float b1 = -2*A * ((A-1) + (A+1)*cosw0);
@@ -57,16 +52,14 @@ void ent_shelf_filter_init(struct ent_shelf_filter* filter,
         filter->a1 = a1 / a0;
         filter->a2 = a2 / a0;
 
-        // Clear Direct Form II Transposed state
         filter->z1 = 0.0f;
         filter->z2 = 0.0f;
 }
 
-// Dynamically update cutoff and gain without resetting state
 void ent_shelf_filter_set_cutoff(struct ent_shelf_filter* filter,
                                  float sample_rate,
                                  float cut_off,
-                                 float gain) // linear gain
+                                 float gain)
 {
         filter->gain = gain;
         float A = powf(10.0f, gain / 40.0f);
@@ -90,7 +83,6 @@ void ent_shelf_filter_set_cutoff(struct ent_shelf_filter* filter,
         filter->a2 = a2 / a0;
 }
 
-// Process buffer with Direct Form II Transposed
 void ent_shelf_filter_process(struct ent_shelf_filter* filter,
                               float *data,
                               size_t size)

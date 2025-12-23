@@ -184,8 +184,6 @@ tresult PLUGIN_API EntVstController::setComponentState(IBStream* state)
                 return kResultFalse;
         }
 
-        ENT_LOG_INFO("DATA: " << data);
-
         EntState entState{data};
 
         auto playMode = static_cast<PlayMode>(entState.getPlayMode());

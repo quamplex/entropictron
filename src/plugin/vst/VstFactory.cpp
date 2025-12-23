@@ -1,5 +1,5 @@
 /**
- * File name: VstIds.h
+ * File name: VstFactory.cpp
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor
@@ -36,9 +36,9 @@
 #define entFileDescription	entPluginName" Entropictron"
 #endif
 #define entCompanyName	"Quamplex"
-#define entCompanyWeb		"http://quamplex.com/entropictron"
+#define entCompanyWeb	"http://quamplex.com/entropictron"
 #define entCompanyEmail	"iuriehn@gmail.com"
-#define entLegalCopyright	"Copyright (C) 2020 Iurie Nistor. Licensed under the GNU General Public License, Version 3"
+#define entLegalCopyright "Copyright (C) 2020 Iurie Nistor. Licensed under the GNU General Public License, Version 3"
 
 BEGIN_FACTORY_DEF(entCompanyName, entCompanyWeb, entCompanyEmail)
 

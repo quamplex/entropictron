@@ -89,7 +89,6 @@ DspCrackleProxyVst::~DspCrackleProxyVst()
 
 bool DspCrackleProxyVst::enable(bool b)
 {
-        ENT_LOG_DEBUG("called: ID : " << (int)getCrackleId());
         auto paramId = (getCrackleId() == CrackleId::Crackle1) ? ParameterId::Crackle1EnabledId : ParameterId::Crackle2EnabledId;
         vstController->getComponentHandler()->beginEdit(paramId);
         vstController->getComponentHandler()->performEdit(paramId, b ? 1.0 : 0.0);
@@ -106,7 +105,6 @@ bool DspCrackleProxyVst::isEnabled() const
 
 bool DspCrackleProxyVst::setRate(double value)
 {
-        ENT_LOG_INFO("value: " << value);
         auto id = (getCrackleId() == CrackleId::Crackle1) ?
                 ParameterId::Crackle1RateId : ParameterId::Crackle2RateId;
         vstController->getComponentHandler()->beginEdit(id);
@@ -301,5 +299,3 @@ CrackleEnvelopeShape DspCrackleProxyVst::envelopeShapeFromNormalized(double valu
         auto n = static_cast<double>(CrackleEnvelopeShapeMax);
         return static_cast<CrackleEnvelopeShape>(std::round(value * n));
 }
-
-

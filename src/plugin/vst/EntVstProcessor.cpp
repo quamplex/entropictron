@@ -71,7 +71,6 @@ EntVstProcessor::EntVstProcessor()
         , dspStateUpdated{false}
         , isPendingState{false}
 {
-        ENT_LOG_DEBUG("called");
         entropictronDsp->getState(&dspState);
         initParamMappings();
 }
@@ -82,14 +81,12 @@ EntVstProcessor::~EntVstProcessor()
 
 FUnknown* EntVstProcessor::createInstance(void*)
 {
-        ENT_LOG_DEBUG("called");
         return static_cast<IAudioProcessor*>(new EntVstProcessor());
 }
 
 tresult PLUGIN_API
 EntVstProcessor::initialize(FUnknown* context)
 {
-        ENT_LOG_DEBUG("called");
         auto res = AudioEffect::initialize(context);
         if (res != kResultTrue)
                 return res;
@@ -111,7 +108,6 @@ EntVstProcessor::initialize(FUnknown* context)
 
 tresult PLUGIN_API EntVstProcessor::terminate()
 {
-        ENT_LOG_DEBUG("called");
         entropictronDsp.reset();
         return AudioEffect::terminate();
 }
@@ -122,7 +118,6 @@ EntVstProcessor::setBusArrangements(SpeakerArrangement* inputs,
                                     SpeakerArrangement* outputs,
                                     int32 numOuts)
 {
-        ENT_LOG_DEBUG("numIns : " << numIns << ", numOuts: " << numOuts);
         return AudioEffect::setBusArrangements(inputs,
                                                numIns,
                                                outputs,
@@ -132,7 +127,6 @@ EntVstProcessor::setBusArrangements(SpeakerArrangement* inputs,
 tresult PLUGIN_API
 EntVstProcessor::setupProcessing(ProcessSetup& setup)
 {
-        ENT_LOG_DEBUG("called");
         if (entropictronDsp)
                 entropictronDsp->setSampleRate(setup.sampleRate);
         return AudioEffect::setupProcessing(setup);
@@ -146,7 +140,6 @@ EntVstProcessor::setActive(TBool state)
 
 tresult PLUGIN_API EntVstProcessor::setProcessing (TBool state)
 {
-        ENT_LOG_INFO("PROCESSING STATE:" << state);
         return AudioEffect::setProcessing (state);
 }
 
@@ -174,11 +167,11 @@ EntVstProcessor::process(ProcessData& data)
          if (ok)
                  entropictronDsp->setState(&dspState);
 
-         // --- Collect MIDI events ---
+         // Collect MIDI events
          auto midiEvents = data.inputEvents;
          int32 nMidiEvents = midiEvents ? midiEvents->getEventCount() : 0;
 
-         // --- Collect automation events ---
+         // Collect automation events
          auto inputParams = data.inputParameterChanges;
          std::array<QueuedEvent, MAX_EVENTS> eventQueue;
          int eventCount = 0;
@@ -272,12 +265,10 @@ EntVstProcessor::process(ProcessData& data)
                  // Apply event at exact sample
                  switch (eventQueue[i].type) {
                  case QueuedEvent::Type::NoteOn:
-                         ENT_LOG_INFO("QueuedEvent::Type::NoteOn");
                          if (entropictronDsp->playMode() == PlayMode::HoldMode)
                                  entropictronDsp->pressKey(true);
                          break;
                  case QueuedEvent::Type::NoteOff:
-                         ENT_LOG_INFO("QueuedEvent::Type::NoteOff");
                          if (entropictronDsp->playMode() == PlayMode::HoldMode)
                                  entropictronDsp->pressKey(false);
                          break;
@@ -305,7 +296,6 @@ EntVstProcessor::process(ProcessData& data)
 
 void EntVstProcessor::updateParameters(ParameterId id, ParamValue value)
  {
-         ENT_LOG_DEBUG("called");
         if (auto it = paramMap.find(id); it != paramMap.end())
                 it->second(value);
 }
@@ -313,7 +303,6 @@ void EntVstProcessor::updateParameters(ParameterId id, ParamValue value)
 void EntVstProcessor::initParamMappings()
 {
         paramMap[ParameterId::PlayModeId] = [this](ParamValue v) {
-                ENT_LOG_INFO("PLAY MODE: " << v);
                 entropictronDsp->setPlayMode(DspProxyVst::playModeFromNormalized(v));
         };
 
@@ -324,15 +313,11 @@ void EntVstProcessor::initParamMappings()
 
 void EntVstProcessor::initNoiseParamMappings()
 {
-        ENT_LOG_DEBUG("called");
         // Noise 1
         auto noise = entropictronDsp->getNoise(NoiseId::Noise1);
-        ENT_LOG_DEBUG("called-0.1");
         paramMap[ParameterId::Noise1EnabledId] = [noise](ParamValue v) {
-                ENT_LOG_DEBUG("called-0.2");
                 noise->enable(v >= 0.5);
         };
-        ENT_LOG_DEBUG("called-0.3");
         paramMap[ParameterId::Noise1TypeId] = [noise](ParamValue v) {
                 noise->setType(DspNoiseProxyVst::noiseTypeFromNormalized(v));
         };
@@ -397,38 +382,30 @@ void EntVstProcessor::initNoiseParamMappings()
 
 void EntVstProcessor::initCrackleParamMappings()
 {
-        ENT_LOG_DEBUG("called");
         // Crackle 1
         auto crackle = entropictronDsp->getCrackle(CrackleId::Crackle1);
         paramMap[ParameterId::Crackle1EnabledId] = [crackle](ParamValue v) {
                 crackle->enable(v > 0.5);
         };
-
         paramMap[ParameterId::Crackle1RateId] = [crackle](ParamValue v) {
                 // 0.5 - 150Hz
                 crackle->setRate(DspCrackleProxyVst::rateFromNormalized(v));
         };
-
         paramMap[ParameterId::Crackle1DurationId] = [crackle](ParamValue v) {
                 crackle->setDuration(DspCrackleProxyVst::durationFromNormalized(v));
         };
-
         paramMap[ParameterId::Crackle1AmplitudeId] = [crackle](ParamValue v) {
                 crackle->setAmplitude(v);
         };
-
         paramMap[ParameterId::Crackle1RandomnessId] = [crackle](ParamValue v) {
                 crackle->setRandomness(v);
         };
-
         paramMap[ParameterId::Crackle1BrightnessId] = [crackle](ParamValue v) {
                 crackle->setBrightness(v);
         };
-
         paramMap[ParameterId::Crackle1EnvelopeShapeId] = [crackle](ParamValue v) {
                 crackle->setEnvelopeShape(DspCrackleProxyVst::envelopeShapeFromNormalized(v));
         };
-
         paramMap[ParameterId::Crackle1StereoSpreadId] = [crackle](ParamValue v) {
                 crackle->setStereoSpread(v);
         };
@@ -438,31 +415,24 @@ void EntVstProcessor::initCrackleParamMappings()
         paramMap[ParameterId::Crackle2EnabledId] = [crackle](ParamValue v) {
                 crackle->enable(v > 0.5);
         };
-
         paramMap[ParameterId::Crackle2RateId] = [crackle](ParamValue v) {
                 crackle->setRate(DspCrackleProxyVst::rateFromNormalized(v));
         };
-
         paramMap[ParameterId::Crackle2DurationId] = [crackle](ParamValue v) {
                 crackle->setDuration(DspCrackleProxyVst::durationFromNormalized(v));
         };
-
         paramMap[ParameterId::Crackle2AmplitudeId] = [crackle](ParamValue v) {
                 crackle->setAmplitude(v);
         };
-
         paramMap[ParameterId::Crackle2RandomnessId] = [crackle](ParamValue v) {
                 crackle->setRandomness(v);
         };
-
         paramMap[ParameterId::Crackle2BrightnessId] = [crackle](ParamValue v) {
                 crackle->setBrightness(v);
         };
-
         paramMap[ParameterId::Crackle2EnvelopeShapeId] = [crackle](ParamValue v) {
                 crackle->setEnvelopeShape(DspCrackleProxyVst::envelopeShapeFromNormalized(v));
         };
-
         paramMap[ParameterId::Crackle2StereoSpreadId] = [crackle](ParamValue v) {
                 crackle->setStereoSpread(v);
         };
@@ -470,29 +440,23 @@ void EntVstProcessor::initCrackleParamMappings()
 
 void EntVstProcessor::initGlitchParamMappings()
 {
-        ENT_LOG_DEBUG("called");
         // Glitch 1
         auto glitch = entropictronDsp->getGlitch(GlitchId::Glitch1);
         paramMap[ParameterId::Glitch1EnabledId] = [glitch](ParamValue v) {
                 glitch->enable(v > 0.5);
         };
-
         paramMap[ParameterId::Glitch1ProbabilityId] = [glitch](ParamValue v) {
                 glitch->setProbability(DspGlitchProxyVst::probabilityFromNormalized(v));
         };
-
         paramMap[ParameterId::Glitch1MinJumpId] = [glitch](ParamValue v) {
                 glitch->setJumpMin(DspGlitchProxyVst::minJumpFromNormalized(v));
         };
-
         paramMap[ParameterId::Glitch1MaxJumpId] = [glitch](ParamValue v) {
                 glitch->setJumpMax(DspGlitchProxyVst::maxJumpFromNormalized(v));
         };
-
         paramMap[ParameterId::Glitch1LengthId] = [glitch](ParamValue v) {
                 glitch->setLength(DspGlitchProxyVst::lengthFromNormalized(v));
         };
-
         paramMap[ParameterId::Glitch1RepeatsId] = [glitch](ParamValue v) {
                 glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
         };
@@ -502,23 +466,18 @@ void EntVstProcessor::initGlitchParamMappings()
         paramMap[ParameterId::Glitch2EnabledId] = [glitch](ParamValue v) {
                 glitch->enable(v > 0.5);
         };
-
         paramMap[ParameterId::Glitch1ProbabilityId] = [glitch](ParamValue v) {
                 glitch->setProbability(DspGlitchProxyVst::probabilityFromNormalized(v));
         };
-
         paramMap[ParameterId::Glitch2MinJumpId] = [glitch](ParamValue v) {
                 glitch->setJumpMin(DspGlitchProxyVst::minJumpFromNormalized(v));
         };
-
         paramMap[ParameterId::Glitch2MaxJumpId] = [glitch](ParamValue v) {
                 glitch->setJumpMax(DspGlitchProxyVst::maxJumpFromNormalized(v));
         };
-
         paramMap[ParameterId::Glitch2LengthId] = [glitch](ParamValue v) {
                 glitch->setLength(DspGlitchProxyVst::lengthFromNormalized(v));
         };
-
         paramMap[ParameterId::Glitch2RepeatsId] = [glitch](ParamValue v) {
                 glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
         };
@@ -588,4 +547,3 @@ tresult EntVstProcessor::getState (IBStream *state)
 
         return kResultOk;
 }
-

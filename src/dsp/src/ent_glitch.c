@@ -93,7 +93,6 @@ void ent_glitch_free(struct ent_glitch **g)
 
 enum ent_error ent_glitch_enable(struct ent_glitch *g, bool b)
 {
-        ent_log_info("ENABLE: %f", b);
         g->enabled = b;
         return ENT_OK;
 }
@@ -105,7 +104,6 @@ bool ent_glitch_is_enabled(const struct ent_glitch *g)
 
 enum ent_error ent_glitch_set_probability(struct ent_glitch *g, float probability)
 {
-        ent_log_info("PROBABILITY: %f", probability);
         g->probability = qx_clamp_float(probability,
                                         ENT_GLITCH_MIN_PROB,
                                         ENT_GLITCH_MAX_PROB);
@@ -119,7 +117,6 @@ float ent_glitch_get_probability(const struct ent_glitch *g)
 
 enum ent_error ent_glitch_set_jump_min(struct ent_glitch *g, float jump_min_ms)
 {
-        ent_log_info("JUMP MIN: %f", jump_min_ms);
         g->min_jump = qx_clamp_float(jump_min_ms,
                                      ENT_GLITCH_MIN_MIN_JUMP,
                                      ENT_GLITCH_MAX_MIN_JUMP);
@@ -134,7 +131,6 @@ float ent_glitch_get_jump_min(const struct ent_glitch *g)
 
 enum ent_error ent_glitch_set_jump_max(struct ent_glitch *g, float jump_max_ms)
 {
-        ent_log_info("JUMP MAX: %f", jump_max_ms);
         g->max_jump = qx_clamp_float(jump_max_ms,
                                      ENT_GLITCH_MIN_MAX_JUMP,
                                      ENT_GLITCH_MAX_MAX_JUMP);
@@ -149,7 +145,6 @@ float ent_glitch_get_jump_max(const struct ent_glitch *g)
 
 enum ent_error ent_glitch_set_length(struct ent_glitch *g, float length_ms)
 {
-        ent_log_info("JUMP MIN: %f", length_ms);
         g->length = qx_clamp_float(length_ms,
                                    ENT_GLITCH_MIN_LENGH,
                                    ENT_GLITCH_MAX_LENGH);
@@ -164,11 +159,9 @@ float ent_glitch_get_length(const struct ent_glitch *g)
 
 enum ent_error ent_glitch_set_repeat_count(struct ent_glitch *g, int repeats)
 {
-        ent_log_info("REPEATS: %d", repeats);
         g->repeats = QX_CLAMP(repeats,
                               ENT_GLITCH_MIN_REPEATS,
                               ENT_GLITCH_MAX_REPEATS);
-        ent_log_error("repeats: %f", g->repeats);
         return ENT_OK;
 }
 

@@ -294,7 +294,7 @@ bool EntState::fromJson(const std::string& jsonStr)
     if (doc.Parse(jsonStr.c_str()).HasParseError())
         return false;
 
-    // --- Preset metadata ---
+    // Preset metadata
     if (doc.HasMember("preset_name") && doc["preset_name"].IsString())
             setName(doc["preset_name"].GetString());
 
@@ -307,7 +307,7 @@ bool EntState::fromJson(const std::string& jsonStr)
     if (doc.HasMember("license") && doc["license"].IsString())
             setLicense(doc["license"].GetString());
 
-    // --- Global section ---
+    // Global section
     if (!doc.HasMember("global") || !doc["global"].IsObject())
         return false;
 
@@ -316,7 +316,7 @@ bool EntState::fromJson(const std::string& jsonStr)
     if (global.HasMember("playmode") && global["playmode"].IsInt())
             setPlayMode(global["playmode"].GetInt());
 
-    // --- Modules ---
+    // Modules
     if (!doc.HasMember("modules") || !doc["modules"].IsArray())
         return false;
 

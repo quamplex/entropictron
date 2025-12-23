@@ -29,13 +29,10 @@
 #include "qx_math.h"
 
 struct ent_shelf_filter {
-    // Biquad coefficients
-    float b0, b1, b2;
-    float a1, a2;
-
-    // Filter state
-    float z1, z2;
-    float gain;
+        float b0, b1, b2;
+        float a1, a2;
+        float z1, z2;
+        float gain;
 };
 
 
@@ -54,5 +51,3 @@ void ent_shelf_filter_process(struct ent_shelf_filter* filter,
                               size_t size);
 
 #endif // ENT_SHELF_FILTER_H
-
-

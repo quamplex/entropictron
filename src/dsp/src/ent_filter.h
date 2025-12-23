@@ -70,5 +70,3 @@ void ent_filter_process(struct ent_filter* filter,
                         size_t size);
 
 #endif // ENT_FILTER_H
-
-

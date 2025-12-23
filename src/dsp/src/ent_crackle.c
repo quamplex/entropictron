@@ -70,8 +70,8 @@ struct ent_crackle* ent_crackle_create(int sample_rate)
 
         c->sample_rate = sample_rate;
         c->enabled = false;
-        c->rate = 20.0f; // 0.5 - 150Hz, default 20Hz
-        c->duration = 1.0f; // 0.1-50ms
+        c->rate = 20.0f;
+        c->duration = 1.0f;
         c->burst_samples = (c->duration / 1000.0f) * c->sample_rate;
         c->amplitude = 1.0f;
         c->randomness = 1.0f;
@@ -112,7 +112,6 @@ bool ent_crackle_is_enabled(const struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_rate(struct ent_crackle *c, float rate)
 {
-        ent_log_info("RATE: %f", rate);
         c->rate = qx_clamp_float(rate, 0.5f, 150.0f);
         return ENT_OK;
 }
@@ -124,7 +123,6 @@ float ent_crackle_get_rate(const struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_duration(struct ent_crackle *c, float duration)
 {
-        ent_log_info("DURATION: %f", duration);
         c->duration = qx_clamp_float(duration, 0.1f, 50.0f);
         return ENT_OK;
 }
@@ -136,7 +134,6 @@ float ent_crackle_get_duration(const struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_amplitude(struct ent_crackle *c, float amplitude)
 {
-        ent_log_info("AMPLITUDE: %f", amplitude);
         c->amplitude = qx_clamp_float(amplitude, 0.0f, 1.0f);
         return ENT_OK;
 }
@@ -148,7 +145,6 @@ float ent_crackle_get_amplitude(const struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_randomness(struct ent_crackle *c, float randomness)
 {
-        ent_log_info("RNADOMNESS: %f", randomness);
         c->randomness = qx_clamp_float(randomness, 0.01f, 1.0f);
         return ENT_OK;
 }
@@ -160,7 +156,6 @@ float ent_crackle_get_randomness(const struct ent_crackle *c)
 
 enum ent_error ent_crackle_set_brightness(struct ent_crackle *c, float brightness)
 {
-        ent_log_info("BRIGHTNESS: %f", brightness);
         c->brightness = 1.0 - qx_clamp_float(brightness, 0.0f, 1.0f);
 
         float min_cutoff = 4000.0f;
@@ -185,7 +180,6 @@ float ent_crackle_get_brightness(const struct ent_crackle *c)
 enum ent_error ent_crackle_set_envelope_shape(struct ent_crackle *c,
                                               enum ent_crackle_envelope shape)
 {
-        ent_log_info("SHAPE: %d", (int)shape);
         if (shape >= ENT_CRACKLE_ENV_NUM_TYPES)
                 shape = ENT_CRACKLE_ENV_EXPONENTIAL;
         c->envelope_shape = shape;
@@ -198,7 +192,6 @@ enum ent_crackle_envelope ent_crackle_get_envelope_shape(const struct ent_crackl
 
 enum ent_error ent_crackle_set_stereo_spread(struct ent_crackle *c, float spread)
 {
-        ent_log_info("STEREO: %f", spread);
         c->stereo_spread = qx_clamp_float(spread, 0.0f, 1.0f);
         return ENT_OK;
 }

@@ -35,7 +35,7 @@ bool PresetList::loadFromDefaultPath()
         presetList.clear();
 
         if (!std::filesystem::exists(presetFolder)) {
-                std::cerr << "Preset folder does not exist: " << presetFolder << "\n";
+                ENT_LOG_ERROR("Preset folder does not exist: " << presetFolder);
                 return false;
         }
 

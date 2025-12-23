@@ -317,4 +317,3 @@ std::pair<double, double> NoiseModel::getResonanceRange() const
 {
         return resonanceRange;
 }
-

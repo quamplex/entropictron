@@ -77,7 +77,6 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
 
 bool EntropictronModel::loadPreset(const EntState *preset)
 {
-        ENT_LOG_INFO("load preset: " << preset->getName());
         std::vector<NoiseModel*> noise = {noise1Model, noise2Model};
         for (size_t i = 0; i < noise.size(); i++) {
                 noise[i]->enable(preset->noise[i].enabled);
@@ -158,5 +157,3 @@ GlitchModel* EntropictronModel::getGlitch2() const
 {
         return  glitch2Model;
 }
-
-

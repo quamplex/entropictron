@@ -32,12 +32,12 @@ GlitchModel::GlitchModel(RkObject *parent,
           repeatsRange{ENT_GLITCH_MIN_REPEATS, ENT_GLITCH_MAX_REPEATS},
           probabilityDefaultValue{ENT_GLITCH_DEFAULT_PROB},
           probabilityRange{ENT_GLITCH_MIN_PROB, ENT_GLITCH_MAX_PROB},
-          lengthDefaultValue{ENT_GLITCH_DEFAULT_LENGH}, // 50ms
-          lengthRange{ENT_GLITCH_MIN_LENGH, ENT_GLITCH_MAX_LENGH}, // [10ms - 2000ms]
-          minJumpDefaultValue{ENT_GLITCH_DEFAULT_MIN_JUMP}, // 0ms
-          minJumpRange{ENT_GLITCH_MIN_MIN_JUMP, ENT_GLITCH_MAX_MIN_JUMP}, // [0ms - 2000ms]
-          maxJumpDefaultValue{ENT_GLITCH_DEFAULT_MAX_JUMP}, // 200 ms
-          maxJumpRange{ENT_GLITCH_MIN_MAX_JUMP, ENT_GLITCH_MAX_MAX_JUMP} // [0ms - 2000ms]
+          lengthDefaultValue{ENT_GLITCH_DEFAULT_LENGH},
+          lengthRange{ENT_GLITCH_MIN_LENGH, ENT_GLITCH_MAX_LENGH},
+          minJumpDefaultValue{ENT_GLITCH_DEFAULT_MIN_JUMP},
+          minJumpRange{ENT_GLITCH_MIN_MIN_JUMP, ENT_GLITCH_MAX_MIN_JUMP},
+          maxJumpDefaultValue{ENT_GLITCH_DEFAULT_MAX_JUMP},
+          maxJumpRange{ENT_GLITCH_MIN_MAX_JUMP, ENT_GLITCH_MAX_MAX_JUMP}
 {
         RK_ACT_BIND(dspGlitchProxy,
                     enabled,

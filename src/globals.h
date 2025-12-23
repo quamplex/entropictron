@@ -1,12 +1,12 @@
 /**
  * File name: globals.h
- * Project: Geonkick (A kick synthesizer)
+ * Project: Entropictron (A texture synthesizer)
  *
- * Copyright (C) 2017 Iurie Nistor
+ * Copyright (C) 2025 Iurie Nistor
  *
- * This file is part of Geonkick.
+ * This file is part of Entropictron.
  *
- * GeonKick is free software; you can redistribute it and/or modify
+ * Entropictron is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
@@ -48,13 +48,9 @@
 
 namespace fs = std::filesystem;
 
-#ifndef M_PI
-    #define M_PI 3.14159265358979323846
-#endif
-
 #include <RkObject.h>
 
-//#ifdef GKICK_LOG_DEBUG_LEVEL
+#ifdef GKICK_LOG_DEBUG_LEVEL
 #define ENT_LOG_INFO(msg) std::cerr << "[" << ENT_NAME << "] "    \
         << " [" << std::this_thread::get_id() << "] "             \
         << __PRETTY_FUNCTION__ << "[INFO] "                       \
@@ -68,13 +64,13 @@ namespace fs = std::filesystem;
         << " [" << std::this_thread::get_id() << "] "             \
         << __PRETTY_FUNCTION__ << "[DEBUG] "                      \
         << msg << std::endl;
-/*#else
-#define ENT_LOG_INFO(msg) std::cerr << "[" << ENTROPICTRON_NAME << "] " \
+#else
+#define ENT_LOG_INFO(msg) std::cerr << "[" << ENT_NAME << "] " \
                                << "[INFO] " << msg << std::endl;
-#define ENT_LOG_ERROR(msg) std::cerr << "[" << ENTROPICTRON_NAME << "] " \
+#define ENT_LOG_ERROR(msg) std::cerr << "[" << ENT_NAME << "] " \
                                << "[ERROR] " << msg << std::endl;
-                               #define ENT_LOG_DEBUG(msg)*/
-//#endif //  // GKICK_LIB_LOG_LEVEL_DEBUG
+#define ENT_LOG_DEBUG(msg)
+#endif // GKICK_LIB_LOG_LEVEL_DEBUG
 
 namespace Entropictron
 {
@@ -82,8 +78,6 @@ namespace Entropictron
         constexpr int defaultSampleRate = ENT_DEFAULT_SAMPLE_RATE;
         constexpr char applicationName[] = "Entropictron";
         constexpr char applicationVersionStr[] = ENT_VERSION_STRING;
-        constexpr std::string_view defaultExportFormat = "flac24";
-        constexpr int defaultBitDepth = 16;
         constexpr double toDecibel(double val)
         {
                 if (val < 1e-5)
@@ -120,25 +114,12 @@ namespace Entropictron
                                [](unsigned char c) { return std::tolower(c); });
                 return result;
         }
-}
 
-namespace Entropictron
-{
-using MidiKey = unsigned char;
-constexpr MidiKey entropictronAnyKey = ENT_ANY_KEY;
-constexpr int entropictronAnyMidiChannel = ENT_ANY_MIDI_CHANNEL;
-constexpr MidiKey maxKeyVelocity = ENT_MAX_KEY_VELOCITY;
-constexpr MidiKey defaultMidiKey = ENT_DEFALUT_MIDI_KEY;
-
-enum class Formats : int {
-          Gkick  = 0,
-          Gkit   = 1,
-          Flac   = 2,
-          Wav    = 4,
-          Ogg    = 7,
-          Sfz    = 8
-};
-
-} // namespace GeonkickTypes
+        using MidiKey = unsigned char;
+        constexpr MidiKey entropictronAnyKey = ENT_ANY_KEY;
+        constexpr int entropictronAnyMidiChannel = ENT_ANY_MIDI_CHANNEL;
+        constexpr MidiKey maxKeyVelocity = ENT_MAX_KEY_VELOCITY;
+        constexpr MidiKey defaultMidiKey = ENT_DEFALUT_MIDI_KEY;
+} // namespace Entropictron
 
 #endif // ENTROPICTRON_GLOBALS_H

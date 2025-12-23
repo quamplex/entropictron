@@ -144,7 +144,6 @@ enum ent_noise_type ent_noise_get_type(const struct ent_noise *noise)
 
 enum ent_error ent_noise_set_density(struct ent_noise *noise, float density)
 {
-        ent_log_info("DENSITY: %f", density);
         noise->density = qx_clamp_float(density, 0.0f, 1.0f);
         return ENT_OK;
 }
@@ -156,7 +155,6 @@ float ent_noise_get_density(const struct ent_noise *noise)
 
 enum ent_error ent_noise_set_brightness(struct ent_noise *noise, float brightness)
 {
-    ent_log_info("BRIGHTNESS: %f", brightness);
     noise->brightness = qx_clamp_float(brightness, 0.01f, 1.0f);
 
     float min_cutoff = 4000.0f;
@@ -181,7 +179,6 @@ float ent_noise_get_brightness(const struct ent_noise *noise)
 
 enum ent_error ent_noise_set_gain(struct ent_noise *noise, float gain)
 {
-        ent_log_info("GAIN: %f db", gain);
         noise->gain = gain;
         return ENT_OK;
 }
@@ -193,7 +190,6 @@ float ent_noise_get_gain(const struct ent_noise *noise)
 
 enum ent_error ent_noise_set_stereo(struct ent_noise *noise, float stereo)
 {
-        ent_log_info("STEREO: %f", stereo);
         noise->stereo = qx_clamp_float(stereo, 0.0f, 1.0f);
         return ENT_OK;
 }
@@ -227,7 +223,6 @@ enum ent_filter_type ent_noise_get_filter_type(const struct ent_noise *noise)
 
 enum ent_error ent_noise_set_cutoff(struct ent_noise *noise, float cutoff)
 {
-        ent_log_info("CUTOFF: %f Hz", cutoff);
         cutoff = qx_clamp_float(cutoff, 20.0f, 18000.0f);
         ent_filter_set_cutoff(&noise->filter, cutoff);
         return ENT_OK;
@@ -240,7 +235,6 @@ float ent_noise_get_cutoff(const struct ent_noise *noise)
 
 enum ent_error ent_noise_set_resonance(struct ent_noise *noise, float resonance)
 {
-        ent_log_info("RESOANCE: %f Hz", resonance);
         resonance = qx_clamp_float(resonance, 0.0f, 1.0f);
         ent_filter_set_resonance(&noise->filter, resonance);
         return ENT_OK;

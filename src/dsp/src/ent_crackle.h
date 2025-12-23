@@ -86,6 +86,4 @@ void ent_crackle_get_state(const struct ent_crackle *c, struct ent_state_crackle
 #ifdef __cplusplus
 }
 #endif
-
 #endif // ENT_CRACKLE_H
-

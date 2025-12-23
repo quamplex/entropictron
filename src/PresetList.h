@@ -46,4 +46,3 @@ private:
 };
 
 #endif // ENT_PRESET_LIST_H
-

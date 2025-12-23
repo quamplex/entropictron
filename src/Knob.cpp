@@ -206,8 +206,6 @@ void Knob::rotateKnob(double degree)
 
         knobValue = snapVal;
         knobValueDegree = valueToDegree(knobValue);
-
-        ENT_LOG_INFO("VALUE: " << knobValue);
         valueUpdated(knobValue);
         update();
 }

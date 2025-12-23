@@ -35,25 +35,18 @@ static inline float q_max_from_cutoff(float Qmin,
         if (C <= 0.0f)
                 return Qmax;
         if (C >= fs * 0.5f)
-                return Qmin;          /* Nyquist → min Q */
+                return Qmin;
 
         float k = 5.0f;
-
-        /* ---------- normalise cutoff (0 … 1) ----------------------- */
-        float c = C / (fs * 0.5f);    /* c ∈ (0,1) */
-
-        /* ---------- pre‑compute exponentials ------------------------ */
-        float exp_k = expf(-k);                 // constant for given k
-        float denom = 1.0f - exp_k;             // >0 because k>0
-        float num   = expf(-k * c) - exp_k;     // varies with c
-
-        /* ---------- scaled‑exponential mapping --------------------- */
+        float c = C / (fs * 0.5f);
+        float exp_k = expf(-k);
+        float denom = 1.0f - exp_k;
+        float num   = expf(-k * c) - exp_k;
         float Q = Qmin + (Qmax - Qmin) * (num / denom);
 
         return qx_clamp_float(Q, Qmin, Qmax);
 }
 
-/** Update internal filter coefficients */
 static void ent_filter_update_coeffs(struct ent_filter* filter)
 {
         filter->isnan_val = false;
@@ -68,18 +61,7 @@ static void ent_filter_update_coeffs(struct ent_filter* filter)
         float fc = qx_clamp_float(filter->cutoff, 20.0f, 0.49f * filter->sample_rate);
         filter->g = tanf((float)M_PI * fc / filter->sample_rate);
         filter->k = 1.0f / Q;
-
         filter->denom = 1.0f + filter->g * (filter->g + filter->k);
-
-        ent_log_info("----------------");
-        ent_log_info("cutoff: %f", filter->cutoff);
-        ent_log_info("resonance: %f", filter->resonance);
-        ent_log_info("fc: %f", fc);
-        ent_log_info("Qmax: = %f", Qmax);
-        ent_log_info("Q: = %f", Q);
-        ent_log_info("g: = %f", filter->g);
-        ent_log_info("k: = %f", filter->k);
-        ent_log_info("denom: %f", filter->denom);
 }
 
 void ent_filter_init(struct ent_filter* filter,
@@ -104,7 +86,6 @@ void ent_filter_init(struct ent_filter* filter,
 void ent_filter_set_type(struct ent_filter* filter,
                          enum ent_filter_type type)
 {
-        ent_log_info("TYPE: %f", (int)type);
         filter->type = type;
 }
 
@@ -147,9 +128,6 @@ void ent_filter_process(struct ent_filter* filter,
 
         float *L = data[0];
         float *R = data[1];
-
-        //if (filter->isnan_val)
-        //        return;
 
         for (size_t i = 0; i < size; i++) {
                 /* Left channel */

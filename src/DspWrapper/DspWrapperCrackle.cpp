@@ -33,7 +33,6 @@ DspWrapperCrackle::DspWrapperCrackle(struct ent_crackle* dsp)
 
 void DspWrapperCrackle::enable(bool b)
 {
-    ENT_LOG_DEBUG("called: " << b);
     ent_crackle_enable(crackleDsp, b);
 }
 
@@ -44,7 +43,6 @@ bool DspWrapperCrackle::isEnabled() const
 
 void DspWrapperCrackle::setRate(double value)
 {
-    ENT_LOG_DEBUG("called: " << value);
     ent_crackle_set_rate(crackleDsp, value);
 }
 
@@ -55,7 +53,6 @@ double DspWrapperCrackle::rate() const
 
 void DspWrapperCrackle::setDuration(double value)
 {
-    ENT_LOG_DEBUG("called: " << value);
     ent_crackle_set_duration(crackleDsp, value);
 }
 
@@ -66,7 +63,6 @@ double DspWrapperCrackle::duration() const
 
 void DspWrapperCrackle::setAmplitude(double value)
 {
-    ENT_LOG_DEBUG("called: " << value);
     ent_crackle_set_amplitude(crackleDsp, value);
 }
 
@@ -77,7 +73,6 @@ double DspWrapperCrackle::amplitude() const
 
 void DspWrapperCrackle::setRandomness(double value)
 {
-    ENT_LOG_DEBUG("called: " << value);
     ent_crackle_set_randomness(crackleDsp, value);
 }
 
@@ -88,7 +83,6 @@ double DspWrapperCrackle::randomness() const
 
 void DspWrapperCrackle::setBrightness(double value)
 {
-    ENT_LOG_DEBUG("called: " << value);
     ent_crackle_set_brightness(crackleDsp, value);
 }
 
@@ -99,9 +93,7 @@ double DspWrapperCrackle::brightness() const
 
 void DspWrapperCrackle::setEnvelopeShape(CrackleEnvelopeShape shape)
 {
-        ENT_LOG_DEBUG("called: " << (int)shape);
         auto value = static_cast<enum ent_crackle_envelope>(shape);
-        ENT_LOG_DEBUG("called[1]: " << (int)value);
         ent_crackle_set_envelope_shape(crackleDsp, value);
 }
 
@@ -112,7 +104,6 @@ CrackleEnvelopeShape DspWrapperCrackle::envelopeShape() const
 
 void DspWrapperCrackle::setStereoSpread(double value)
 {
-    ENT_LOG_DEBUG("called: " << value);
     ent_crackle_set_stereo_spread(crackleDsp, value);
 }
 
