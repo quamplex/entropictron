@@ -6,7 +6,7 @@ set(ENT_FACTORY_PRESETS
 
 set(outputDir "${CMAKE_BINARY_DIR}/presets")
 set(stampFile "${outputDir}/.entropictron_presets_extracted")
-set(factoryFile "${outputDir}/factory.txt")
+set(factoryFile "${outputDir}/EntropictronPresets/factory.txt")
 
 message(STATUS "Uncompress file: ${ENT_FACTORY_PRESETS}")
 
@@ -26,6 +26,6 @@ add_custom_target(entropictron_presets ALL
 )
 
 install(
-    DIRECTORY "${outputDir}/"
+    DIRECTORY "${outputDir}/EntropictronPresets/"
     DESTINATION "${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME_LOWER}/presets"
 )
