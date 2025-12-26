@@ -43,10 +43,9 @@ enum ParameterId : Steinberg::Vst::ParamID
     Noise1BrightnessId   = 10104,
     Noise1GainId         = 10105,
     Noise1StereoId       = 10106,
-    Noise1FilterEnableId = 10107,
-    Noise1FilterTypeId   = 10108,
-    Noise1CutOffId       = 10109,
-    Noise1ResonanceId    = 10110,
+    Noise1FilterTypeId   = 10107,
+    Noise1CutOffId       = 10108,
+    Noise1ResonanceId    = 10109,
 
     // Noise 2
     Noise2EnabledId      = 10201,
@@ -55,10 +54,9 @@ enum ParameterId : Steinberg::Vst::ParamID
     Noise2BrightnessId   = 10204,
     Noise2GainId         = 10205,
     Noise2StereoId       = 10206,
-    Noise2FilterEnableId = 10207,
-    Noise2FilterTypeId   = 10208,
-    Noise2CutOffId       = 10209,
-    Noise2ResonanceId    = 10210,
+    Noise2FilterTypeId   = 10207,
+    Noise2CutOffId       = 10208,
+    Noise2ResonanceId    = 10209,
 
     // Crackle 1
     Crackle1EnabledId       = 20101,

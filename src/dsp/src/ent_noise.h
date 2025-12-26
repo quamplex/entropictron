@@ -70,11 +70,6 @@ enum ent_error ent_noise_set_stereo(struct ent_noise *noise, float stereo);
 float ent_noise_get_stereo(const struct ent_noise *noise);
 
 enum ent_error
-ent_noise_filter_enable(struct ent_noise *noise, bool enable);
-
-bool ent_noise_filter_is_enabled(const struct ent_noise *noise);
-
-enum ent_error
 ent_noise_set_filter_type(struct ent_noise *noise,
                           enum ent_filter_type type);
 

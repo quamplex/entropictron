@@ -55,7 +55,6 @@ struct ent_noise {
         struct ent_shelf_filter sh_filter_r;
 
         // Low, band, high pass filter
-        bool filter_enabled;
         struct ent_filter filter;
 
         float buffer[2][4096];
@@ -68,8 +67,8 @@ struct ent_noise* ent_noise_create(int sample_rate)
                 return NULL;
 
         noise->sample_rate = sample_rate;
-        noise->enabled = false;
         noise->type = ENT_NOISE_TYPE_WHITE;
+        noise->enabled = false;
         noise->density = 1.0f;
         noise->brightness = 0.0f;
         noise->gain = 1.0f;
@@ -78,7 +77,6 @@ struct ent_noise* ent_noise_create(int sample_rate)
         noise->b0 = 0.0f;
         noise->b1 = 0.0f;
         noise->b2 = 0.0f;
-        noise->filter_enabled = false;
 
         qx_randomizer_init(&noise->prob_randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
         qx_randomizer_init(&noise->randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
@@ -199,17 +197,6 @@ float ent_noise_get_stereo(const struct ent_noise *noise)
         return noise->stereo;
 }
 
-enum ent_error
-ent_noise_filter_enable(struct ent_noise *noise, bool enable)
-{
-        noise->filter_enabled = enable;
-}
-
-bool ent_noise_filter_is_enabled(const struct ent_noise *noise)
-{
-        return noise->filter_enabled;
-}
-
 enum ent_error ent_noise_set_filter_type(struct ent_noise *noise, enum ent_filter_type type)
 {
         ent_filter_set_type(&noise->filter, type);
@@ -327,10 +314,8 @@ void ent_noise_process(struct ent_noise *noise,
                 }
         }
 
-        if (noise->filter_enabled) {
-                float *buffer[2] = { noise->buffer[0], noise->buffer[1] };
-                ent_filter_process(&noise->filter, buffer, size);
-        }
+        float *buffer[2] = { noise->buffer[0], noise->buffer[1] };
+        ent_filter_process(&noise->filter, buffer, size);
 
         for (size_t i = 0; i < size; i++) {
                 data[0][i] += noise->buffer[0][i] * noise->gain;
@@ -346,7 +331,6 @@ void ent_noise_set_state(struct ent_noise *noise, const struct ent_state_noise *
         ENT_SET_STATE(noise, state, brightness,     ent_noise_set_brightness);
         ENT_SET_STATE(noise, state, gain,           ent_noise_set_gain);
         ENT_SET_STATE(noise, state, stereo,         ent_noise_set_stereo);
-        ENT_SET_STATE(noise, state, filter_enabled, ent_noise_filter_enable);
         ENT_SET_STATE(noise, state, filter_type,    ent_noise_set_filter_type);
         ENT_SET_STATE(noise, state, cutoff,         ent_noise_set_cutoff);
         ENT_SET_STATE(noise, state, resonance,      ent_noise_set_resonance);
@@ -360,7 +344,6 @@ void ent_noise_get_state(const struct ent_noise *noise, struct ent_state_noise *
         ENT_GET_STATE(noise, state, brightness,     ent_noise_get_brightness);
         ENT_GET_STATE(noise, state, gain,           ent_noise_get_gain);
         ENT_GET_STATE(noise, state, stereo,         ent_noise_get_stereo);
-        ENT_GET_STATE(noise, state, filter_enabled, ent_noise_filter_is_enabled);
         ENT_GET_STATE(noise, state, filter_type,    ent_noise_get_filter_type);
         ENT_GET_STATE(noise, state, cutoff,         ent_noise_get_cutoff);
         ENT_GET_STATE(noise, state, resonance,      ent_noise_get_resonance);

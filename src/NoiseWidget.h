@@ -47,7 +47,7 @@ protected:
         void createNoiseControls(RkContainer *container);
         void setType(NoiseType type);
         void setFilterType(FilterType type, bool b);
-        void onFilterEnabled(bool b);
+        void updateFilterButtons(FilterType type);
 
 private:
         RkButton *enableNoiseButton;

@@ -27,6 +27,7 @@
 #include "ent_defs.h"
 
 enum ent_filter_type {
+        ENT_FILTER_TYPE_ALLPASS,
         ENT_FILTER_TYPE_LOWPASS,
         ENT_FILTER_TYPE_BANDPASS,
         ENT_FILTER_TYPE_HIGHPASS

@@ -50,6 +50,7 @@ enum class NoiseType: int {
 };
 
 enum class FilterType: int {
+        AllPass  = ENT_FILTER_TYPE_ALLPASS,
         LowPass  = ENT_FILTER_TYPE_LOWPASS,
         BandPass = ENT_FILTER_TYPE_BANDPASS,
         HighPass = ENT_FILTER_TYPE_HIGHPASS

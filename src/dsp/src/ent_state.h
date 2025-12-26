@@ -48,7 +48,6 @@ struct ent_state_noise {
         _Atomic(float) brightness;
         _Atomic(float) gain;
         _Atomic(float) stereo;
-        _Atomic(bool) filter_enabled;
         _Atomic(enum ent_filter_type) filter_type;
         _Atomic(float) cutoff;
         _Atomic(float) resonance;

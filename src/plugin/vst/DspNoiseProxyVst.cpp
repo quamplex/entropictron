@@ -49,7 +49,6 @@ DspNoiseProxyVst::DspNoiseProxyVst(RkObject* parent,
                            ParameterId::Noise1GainId,
                            ParameterId::Noise1BrightnessId,
                            ParameterId::Noise1StereoId,
-                           ParameterId::Noise1FilterEnableId,
                            ParameterId::Noise1FilterTypeId,
                            ParameterId::Noise1CutOffId,
                            ParameterId::Noise1ResonanceId};
@@ -60,7 +59,6 @@ DspNoiseProxyVst::DspNoiseProxyVst(RkObject* parent,
                            ParameterId::Noise2GainId,
                            ParameterId::Noise2BrightnessId,
                            ParameterId::Noise2StereoId,
-                           ParameterId::Noise2FilterEnableId,
                            ParameterId::Noise2FilterTypeId,
                            ParameterId::Noise2CutOffId,
                            ParameterId::Noise2ResonanceId};
@@ -79,7 +77,6 @@ DspNoiseProxyVst::~DspNoiseProxyVst()
                 vstController->removeParamterCallback(ParameterId::Noise1BrightnessId);
                 vstController->removeParamterCallback(ParameterId::Noise1GainId);
                 vstController->removeParamterCallback(ParameterId::Noise1StereoId);
-                vstController->removeParamterCallback(ParameterId::Noise1FilterEnableId);
                 vstController->removeParamterCallback(ParameterId::Noise1FilterTypeId);
                 vstController->removeParamterCallback(ParameterId::Noise1CutOffId);
                 vstController->removeParamterCallback(ParameterId::Noise1ResonanceId);
@@ -90,7 +87,6 @@ DspNoiseProxyVst::~DspNoiseProxyVst()
                 vstController->removeParamterCallback(ParameterId::Noise2BrightnessId);
                 vstController->removeParamterCallback(ParameterId::Noise2GainId);
                 vstController->removeParamterCallback(ParameterId::Noise2StereoId);
-                vstController->removeParamterCallback(ParameterId::Noise2FilterEnableId);
                 vstController->removeParamterCallback(ParameterId::Noise2FilterTypeId);
                 vstController->removeParamterCallback(ParameterId::Noise2CutOffId);
                 vstController->removeParamterCallback(ParameterId::Noise2ResonanceId);
@@ -199,23 +195,6 @@ double DspNoiseProxyVst::stereo() const
     return vstController->getParamNormalized(id);
 }
 
-bool DspNoiseProxyVst::enableFilter(bool b)
-{
-        auto id = (getNoiseId() == NoiseId::Noise1) ?
-                ParameterId::Noise1FilterEnableId : ParameterId::Noise2FilterEnableId;
-        vstController->getComponentHandler()->beginEdit(id);
-        vstController->getComponentHandler()->performEdit(id, b ? 1.0 : 0.0);
-        vstController->getComponentHandler()->endEdit(id);
-        return true;
-}
-
-bool DspNoiseProxyVst::isFilterEnabled() const
-{
-        auto id = (getNoiseId() == NoiseId::Noise1) ?
-                ParameterId::Noise1FilterEnableId : ParameterId::Noise2FilterEnableId;
-        return vstController->getParamNormalized(id) > 0.5;
-}
-
 bool DspNoiseProxyVst::setFilterType(FilterType type)
 {
         auto id = (getNoiseId() == NoiseId::Noise1) ?
@@ -292,10 +271,6 @@ void DspNoiseProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
         case ParameterId::Noise1StereoId:
         case ParameterId::Noise2StereoId:
                 action stereoUpdated(value);
-                break;
-        case ParameterId::Noise1FilterEnableId:
-        case ParameterId::Noise2FilterEnableId:
-                action filterEnabled(value >= 0.5);
                 break;
         case ParameterId::Noise1FilterTypeId:
         case ParameterId::Noise2FilterTypeId:

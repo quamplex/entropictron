@@ -70,9 +70,6 @@ void EntState::getState(struct ent_state* state) const
                 atomic_store_explicit(&state->noises[i].stereo,
                                       noise[i].stereo,
                                       memory_order_relaxed);
-                atomic_store_explicit(&state->noises[i].filter_enabled,
-                                      noise[i].filter_enabled,
-                                      memory_order_relaxed);
                 atomic_store_explicit(&state->noises[i].filter_type,
                                       static_cast<enum ent_filter_type>(noise[i].filter_type),
                                       memory_order_relaxed);
@@ -149,8 +146,6 @@ void EntState::setState(const struct ent_state* state)
                                                      memory_order_relaxed);
                 noise[i].stereo = atomic_load_explicit(&state->noises[i].stereo,
                                                        memory_order_relaxed);
-                noise[i].filter_enabled = atomic_load_explicit(&state->noises[i].filter_enabled,
-                                                               memory_order_relaxed);
                 noise[i].filter_type = atomic_load_explicit(&state->noises[i].filter_type,
                                                             memory_order_relaxed);
                 noise[i].cutoff = atomic_load_explicit(&state->noises[i].cutoff,
@@ -373,7 +368,6 @@ void EntState::writeNoise(Value& modulesArray,
                 m.AddMember("brightness", noise[i].brightness, a);
                 m.AddMember("gain", noise[i].gain, a);
                 m.AddMember("stereo", noise[i].stereo, a);
-                m.AddMember("filter_enabled", noise[i].filter_enabled, a);
                 m.AddMember("filter_type", noise[i].filter_type, a);
                 m.AddMember("cutoff", noise[i].cutoff, a);
                 m.AddMember("resonance", noise[i].resonance, a);
@@ -434,8 +428,6 @@ void EntState::readNoise(const Value& m, size_t id)
                 noise[id].gain = m["gain"].GetDouble();
         if (m.HasMember("stereo") && m["stereo"].IsNumber())
                 noise[id].stereo = m["stereo"].GetDouble();
-        if (m.HasMember("filter_enabled") && m["filter_enabled"].IsBool())
-                noise[id].filter_enabled = m["filter_enabled"].GetBool();
         if (m.HasMember("filter_type") && m["filter_type"].IsInt())
                 noise[id].filter_type =
                         std::clamp(m["filter_type"].GetInt(), 0, 2);

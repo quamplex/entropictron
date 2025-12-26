@@ -68,9 +68,8 @@ EntVstController::initialize(FUnknown* context)
         setParamNormalized (ParameterId::Noise1GainId,
                             DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(0)));
         setParamNormalized (ParameterId::Noise1StereoId, 0.0);
-        setParamNormalized (ParameterId::Noise1FilterEnableId, 0.0);
         setParamNormalized (ParameterId::Noise1FilterTypeId,
-                            DspNoiseProxyVst::filterTypeToNormalized(FilterType::LowPass));
+                            DspNoiseProxyVst::filterTypeToNormalized(FilterType::AllPass));
         setParamNormalized (ParameterId::Noise1CutOffId,
                             DspNoiseProxyVst::cutoffToNormalized(800));
         setParamNormalized (ParameterId::Noise1ResonanceId, 1.0);
@@ -84,9 +83,8 @@ EntVstController::initialize(FUnknown* context)
         setParamNormalized (ParameterId::Noise2GainId,
                             DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(0)));
         setParamNormalized (ParameterId::Noise2StereoId, 0.0);
-        setParamNormalized (ParameterId::Noise2FilterEnableId, 0.0);
         setParamNormalized (ParameterId::Noise2FilterTypeId,
-                            DspNoiseProxyVst::filterTypeToNormalized(FilterType::LowPass));
+                            DspNoiseProxyVst::filterTypeToNormalized(FilterType::AllPass));
         setParamNormalized (ParameterId::Noise2CutOffId,
                             DspNoiseProxyVst::cutoffToNormalized(800));
         setParamNormalized (ParameterId::Noise2ResonanceId, 2.0);
@@ -212,7 +210,6 @@ void EntVstController::setNoiseState(const EntState& state)
                 setParamNormalized (ParameterId::Noise1GainId,
                                     DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(noise.gain)));
                 setParamNormalized (ParameterId::Noise1StereoId, noise.stereo);
-                setParamNormalized (ParameterId::Noise1FilterEnableId, noise.filter_enabled);
                 setParamNormalized (ParameterId::Noise1FilterTypeId,
                                     DspNoiseProxyVst::filterTypeToNormalized(static_cast<FilterType>(noise.filter_type)));
                 setParamNormalized (ParameterId::Noise1CutOffId,
@@ -230,7 +227,6 @@ void EntVstController::setNoiseState(const EntState& state)
                 setParamNormalized (ParameterId::Noise2GainId,
                                     DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(noise.gain)));
                 setParamNormalized (ParameterId::Noise2StereoId, noise.stereo);
-                setParamNormalized (ParameterId::Noise2FilterEnableId, noise.filter_enabled);
                 setParamNormalized (ParameterId::Noise2FilterTypeId,
                                     DspNoiseProxyVst::filterTypeToNormalized(static_cast<FilterType>(noise.filter_type)));
                 setParamNormalized (ParameterId::Noise2CutOffId,
@@ -346,12 +342,8 @@ void EntVstController::addNoiseParameters()
                                 STR16("%"), 0, 1.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise1StereoId);
-        parameters.addParameter(STR16("Noise 1 Enable Filter"),
-                                nullptr, 2, 0.0,
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::Noise1FilterEnableId);
         parameters.addParameter(STR16("Noise 1 Filter Type"),
-                                nullptr, 3, 0.0,
+                                nullptr, 4, 0.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise1FilterTypeId);
         parameters.addParameter(STR16("Noise 1 CutOff"),
@@ -391,12 +383,8 @@ void EntVstController::addNoiseParameters()
                                 STR16("%"), 0, 1.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2StereoId);
-        parameters.addParameter(STR16("Noise 2 Enable Filter"),
-                                nullptr, 2, 0.0,
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::Noise2FilterEnableId);
         parameters.addParameter(STR16("Noise 2 Filter Type"),
-                                nullptr, 3, 0.0,
+                                nullptr, 4, 0.0,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Noise2FilterTypeId);
         parameters.addParameter(STR16("Noise 2 CutOff"),

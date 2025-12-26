@@ -333,9 +333,6 @@ void EntVstProcessor::initNoiseParamMappings()
         paramMap[ParameterId::Noise1StereoId] = [noise](ParamValue v) {
                 noise->setStereo(v);
         };
-        paramMap[ParameterId::Noise1FilterEnableId] = [noise](ParamValue v) {
-                noise->enableFilter(v >= 0.5);
-        };
         paramMap[ParameterId::Noise1FilterTypeId] = [noise](ParamValue v) {
                 noise->setFilterType(DspNoiseProxyVst::filterTypeFromNormalized(v));
         };
@@ -365,9 +362,6 @@ void EntVstProcessor::initNoiseParamMappings()
         };
         paramMap[ParameterId::Noise2StereoId] = [noise](ParamValue v) {
                 noise->setStereo(v);
-        };
-        paramMap[ParameterId::Noise2FilterEnableId] = [noise](ParamValue v) {
-                noise->enableFilter(v >= 0.5);
         };
         paramMap[ParameterId::Noise2FilterTypeId] = [noise](ParamValue v) {
                 noise->setFilterType(DspNoiseProxyVst::filterTypeFromNormalized(v));

@@ -91,16 +91,6 @@ double DspWrapperNoise::stereo() const
         return ent_noise_get_stereo(noiseDsp);
 }
 
-void DspWrapperNoise::enableFilter(bool b)
-{
-        ent_noise_filter_enable(noiseDsp, b);
-}
-
-bool DspWrapperNoise::isFilterEnabled() const
-{
-        return ent_noise_filter_is_enabled(noiseDsp);
-}
-
 void DspWrapperNoise::setFilterType(FilterType type)
 {
         ent_noise_set_filter_type(noiseDsp, static_cast<enum ent_filter_type>(type));

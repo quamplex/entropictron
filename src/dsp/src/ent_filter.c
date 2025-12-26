@@ -74,7 +74,7 @@ void ent_filter_init(struct ent_filter* filter,
         filter->sample_rate = sample_rate;
         filter->cutoff = cut_off;
         filter->resonance = resonance;
-        filter->type = ENT_FILTER_TYPE_LOWPASS;
+        filter->type = ENT_FILTER_TYPE_ALLPASS;
         filter->isnan_val = false;
 
         filter->ic1eq[0] = filter->ic1eq[1] = 0.0f;
@@ -122,6 +122,9 @@ void ent_filter_process(struct ent_filter* filter,
                         float **data,
                         size_t size)
 {
+        if (filter->type == ENT_FILTER_TYPE_ALLPASS)
+                return;
+
         const float g = filter->g;
         const float k = filter->k;
         const float denom = filter->denom;

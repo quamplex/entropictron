@@ -66,10 +66,6 @@ NoiseModel::NoiseModel(RkObject *parent, DspNoiseProxy *dspNoiseProxy)
                     RK_ACT_ARGS(double value),
                     this, stereoUpdated(value));
         RK_ACT_BIND(dspNoiseProxy,
-                    filterEnabled,
-                    RK_ACT_ARGS(bool b),
-                    this, filterEnabled(b));
-        RK_ACT_BIND(dspNoiseProxy,
                     filterTypeUpdated,
                     RK_ACT_ARGS(FilterType type),
                     this, filterTypeUpdated(type));
@@ -232,17 +228,6 @@ void NoiseModel::setStereoRange(double from, double to)
 std::pair<double, double> NoiseModel::getStereoRange() const
 {
         return stereoRange;
-}
-
-void NoiseModel::enableFilter(bool b)
-{
-        if (dspNoiseProxy->enableFilter(b))
-                action filterEnabled(b);
-}
-
-bool NoiseModel::isFilterEnabled() const
-{
-        return dspNoiseProxy->isFilterEnabled();
 }
 
 void NoiseModel::setFilterType(FilterType type)

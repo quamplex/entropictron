@@ -51,8 +51,6 @@ class DspNoiseProxyVst: public DspNoiseProxy {
         double gain() const override;
         bool setStereo(double value) override;
         double stereo() const override;
-        bool enableFilter(bool b) override;
-        bool isFilterEnabled() const override;
         bool setFilterType(FilterType type) override;
         FilterType filterType() const override;
         bool setCutOff(double value) override;

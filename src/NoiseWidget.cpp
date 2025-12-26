@@ -135,6 +135,7 @@ void NoiseWidget::updateView()
 
         enableNoiseButton->setPressed(model->isEnabled());
         setType(model->noiseType());
+        updateFilterButtons(model->filterType());
 
         auto [densityFrom, densityTo] = model->getDensityRange();
         densityKnob->setRange(densityFrom, densityTo);
@@ -157,8 +158,6 @@ void NoiseWidget::updateView()
         stereoKnob->setRange(stereoFrom, stereoTo);
         stereoKnob->setDefaultValue(model->getStereoDefaultValue());
         stereoKnob->setValue(model->stereo());
-
-        onFilterEnabled(model->isFilterEnabled());
 
         auto [cutOffFrom, cutOffTo] = model->getCutOffRange();
         cutOffKnob->setRange(cutOffFrom, cutOffTo);
@@ -275,13 +274,9 @@ void NoiseWidget::bindModel()
                     stereoKnob,
                     setValue(value));
         RK_ACT_BIND(model,
-                    filterEnabled,
-                    RK_ACT_ARGS(bool b),
-                    this, onFilterEnabled(b));
-        RK_ACT_BIND(model,
                     filterTypeUpdated,
                     RK_ACT_ARGS(FilterType type),
-                    this, onFilterEnabled(true));
+                    this, updateFilterButtons(type));
         RK_ACT_BIND(model,
                     cutOffUpdated,
                     RK_ACT_ARGS(double value),
@@ -452,35 +447,22 @@ void NoiseWidget::setType(NoiseType type)
         brownNoiseButton->setPressed(type == NoiseType::BrownNoise);
 }
 
-void NoiseWidget::onFilterEnabled(bool b)
-{
-        auto model = static_cast<NoiseModel*>(getModel());
-        if (!model)
-                return;
-
-        if (b) {
-                auto type = model->filterType();
-                lowPassButton->setPressed(type == FilterType::LowPass);
-                bandPassButton->setPressed(type == FilterType::BandPass);
-                highPassButton->setPressed(type == FilterType::HighPass);
-        } else {
-                lowPassButton->setPressed(false);
-                bandPassButton->setPressed(false);
-                highPassButton->setPressed(false);
-        }
-}
-
 void NoiseWidget::setFilterType(FilterType type, bool b)
 {
         auto model = static_cast<NoiseModel*>(getModel());
         if (!model)
                 return;
 
-        if (model->filterType() == type && !b) {
-                model->enableFilter(false);
-        } else {
+        if (b)
                 model->setFilterType(type);
-                model->enableFilter(true);
-        }
+        else
+                model->setFilterType(FilterType::AllPass);
+}
+
+void NoiseWidget::updateFilterButtons(FilterType type)
+{
+        lowPassButton->setPressed(type == FilterType::LowPass);
+        bandPassButton->setPressed(type == FilterType::BandPass);
+        highPassButton->setPressed(type == FilterType::HighPass);
 }
 

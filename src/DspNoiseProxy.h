@@ -46,8 +46,6 @@ class DspNoiseProxy : public RkObject {
         virtual double gain() const = 0;
         virtual bool setStereo(double value) = 0;
         virtual double stereo() const = 0;
-        virtual bool enableFilter(bool b) = 0;
-        virtual bool isFilterEnabled() const = 0;
         virtual bool setFilterType(FilterType type) = 0;
         virtual FilterType filterType() const = 0;
         virtual bool setCutOff(double value) = 0;

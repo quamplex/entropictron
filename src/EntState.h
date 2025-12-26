@@ -36,13 +36,12 @@ class EntState
  public:
         struct Noise {
                 int id = 1;
-                bool enabled = true;
+                bool enabled = false;
                 int type = 0;
                 double density = 0.0;
                 double brightness = 0.0;
                 double gain = 0.0;
                 double stereo = 0.0;
-                bool filter_enabled = false;
                 int filter_type = 0;
                 double cutoff = 0.0;
                 double resonance = 0.0;
@@ -62,7 +61,7 @@ class EntState
 
         struct Glitch {
                 int id = 3;
-                bool enabled = true;
+                bool enabled = false;
                 int repeats = 0;
                 double probability = 0.0;
                 double length = 0.0;
