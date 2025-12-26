@@ -86,7 +86,6 @@ target_link_libraries(${target} PRIVATE
       "libbrotlicommon.a"
       "libgraphite2.a"
       "librpcrt4.a"
-      "libopus.a"
       "libshlwapi.a"
       "libz.a"
       "libwinpthread.a"
