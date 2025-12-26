@@ -42,9 +42,9 @@ class DesktopPaths {
  protected:
         std::filesystem::path findFactoryPresetsPath(const std::filesystem::path &presetsPath) const;
 	void loadPaths();
-#ifdef GEONKICK_OS_WINDOWS
+#ifdef ENTROPICTRON_OS_WINDOWS
         void loadDrivesList();
-#endif // GEONKICK_OS_WINDOWS
+#endif // ENTROPICTRON_OS_WINDOWS
 
  private:
 	std::filesystem::path homePath;

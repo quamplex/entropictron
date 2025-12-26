@@ -23,9 +23,9 @@
 
 #include "DesktopPaths.h"
 
-#ifdef ENT_OS_WINDOWS
+#ifdef ENTROPICTRON_OS_WINDOWS
 #include <windows.h>
-#endif // ENT_OS_WINDS
+#endif // ENTROPICTRON_OS_WINDOWS
 
 DesktopPaths::DesktopPaths()
 {
@@ -67,7 +67,7 @@ std::filesystem::path DesktopPaths::getUserPresetsPath() const
 	return userPresetsPath;
 }
 
-#ifdef ENT_OS_WINDOWS
+#ifdef ENTROPICTRON_OS_WINDOWS
 void DesktopPaths::loadPaths()
 {
 	const char* userProfilePath = std::getenv("USERPROFILE");
