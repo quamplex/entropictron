@@ -86,14 +86,7 @@ target_link_libraries(${target} PRIVATE
       "libbrotlicommon.a"
       "libgraphite2.a"
       "librpcrt4.a"
-      "libsndfile.a"
-      "libvorbis.a"
-      "libvorbisenc.a"
-      "libogg.a"
-      "libFLAC.a"
-      "libmp3lame.a"
       "libopus.a"
-      "libmpg123.a"
       "libshlwapi.a"
       "libz.a"
       "libwinpthread.a"
@@ -103,7 +96,7 @@ target_link_libraries(${target} PRIVATE
       )
 else()
       target_link_libraries(${target} PRIVATE X11)
-      target_link_libraries(${target} PRIVATE "-lstdc++ -lstdc++fs -lsndfile -lcairo -lm -lpthread")
+      target_link_libraries(${target} PRIVATE "-lstdc++ -lstdc++fs -lcairo -lm -lpthread")
 endif()
 
 add_dependencies(${target} entropictron_common)

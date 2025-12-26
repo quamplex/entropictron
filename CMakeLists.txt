@@ -189,11 +189,6 @@ if (CMAKE_SYSTEM_NAME MATCHES Windows)
    include_directories(${RapidJSON_INCLUDE_DIR})
 endif()
 
-pkg_check_modules(SNDFILE sndfile)
-if (NOT SNDFILE_FOUND)
-    message(FATAL_ERROR "can't find sndfile library")
-endif(NOT SNDFILE_FOUND)
-
 if (CMAKE_SYSTEM_NAME MATCHES Windows)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DRK_OS_WIN")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DRK_OS_WIN")

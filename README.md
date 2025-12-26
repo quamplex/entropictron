@@ -58,3 +58,39 @@ and jump parameters, creating stutters and digital artifacts.
 - Minimum jump
 - Maximum jump
 
+## Requirements
+
+In order Entropictron to run and operate correctly there is a need
+
+ * GNU/Linux or Windows operating system.
+ * A host that supports VST3 plugin format.
+
+## Build & Install
+
+##### Install dependencies
+
+In order to build Entropictron there is a need to install
+the following development packages:
+
+* RapidJSON
+* Cairo
+
+On Debian, Ubuntu, Ubuntu Studio install:
+
+    apt-get install build-essential cmake rapidjson-dev libcairo2-dev
+
+##### Build & install Entropictron
+
+Clone the Entropictron code repository, compile and install.
+
+        copy the source code of the latest release
+        mkdir entropictron/build
+        cd entropictron/build
+        cmake -DVST3_SDK_PATH=<full system path to VST3 SDK folder> ../
+        make
+        make install
+
+##### Building on Windows
+
+To build on Windows, there is a need to install MSYS2/UCRT64 and follow
+the same steps as mentioned above.
