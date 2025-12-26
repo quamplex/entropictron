@@ -136,7 +136,7 @@ void Knob::paintEvent(RkPaintEvent *event)
         if (!markerImage.isNull()) {
                 auto translateOffset = RkPoint(width() / 2, yOffset);
                 painter.translate(translateOffset);
-                auto degree = (2 * M_PI / 360) * valueToDegree(knobValue);
+                auto degree = (2 * std::numbers::pi / 360) * valueToDegree(knobValue);
                 painter.rotate(degree);
                 painter.drawImage(markerImage,
                                   -markerImage.width() / 2,

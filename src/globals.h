@@ -45,6 +45,7 @@
 #include <math.h>
 #include <optional>
 #include <ranges>
+#include <numbers>
 
 namespace fs = std::filesystem;
 
