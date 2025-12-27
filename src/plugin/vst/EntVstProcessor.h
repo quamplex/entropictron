@@ -26,7 +26,6 @@
 
 #include "globals.h"
 #include "EntVstParameters.h"
-#include "ent_state.h"
 
 #include "public.sdk/source/vst/vstaudioeffect.h"
 
@@ -47,6 +46,7 @@ using namespace Steinberg::Vst;
 using namespace EntVst;
 
 class DspWrapper;
+struct ent_state;
 
 class EntVstProcessor : public AudioEffect {
  public:
@@ -80,7 +80,7 @@ class EntVstProcessor : public AudioEffect {
         std::unique_ptr<DspWrapper> entropictronDsp;
         bool dspStateUpdated;
         std::atomic<bool> isPendingState;
-        struct ent_state dspState;
+        struct ent_state* dspState;
 };
 
 #endif // ENT_VST_PROCESSOR_H

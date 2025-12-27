@@ -25,7 +25,7 @@
 #include "ent_log.h"
 #include "qx_math.h"
 #include "qx_randomizer.h"
-#include "ent_state.h"
+#include "ent_state_internal.h"
 
 #include <stdlib.h>
 

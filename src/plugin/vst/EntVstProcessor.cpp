@@ -34,6 +34,7 @@
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
 #include "EntState.h"
+#include "ent_state.h"
 
 #include "base/source/fstreamer.h"
 #include "pluginterfaces/base/ibstream.h"
@@ -70,13 +71,15 @@ EntVstProcessor::EntVstProcessor()
         :  entropictronDsp {std::make_unique<DspWrapper>()}
         , dspStateUpdated{false}
         , isPendingState{false}
+        , dspState{ent_state_create()}
 {
-        entropictronDsp->getState(&dspState);
+        entropictronDsp->getState(dspState);
         initParamMappings();
 }
 
 EntVstProcessor::~EntVstProcessor()
 {
+        ent_state_free(dspState);
 }
 
 FUnknown* EntVstProcessor::createInstance(void*)
@@ -98,7 +101,7 @@ EntVstProcessor::initialize(FUnknown* context)
                        SpeakerArr::kStereo);
         addEventInput(reinterpret_cast<const TChar*>(u"MIDI Input"), 1);
 
-        entropictronDsp->getState(&dspState);
+        entropictronDsp->getState(dspState);
         isPendingState.store(false, std::memory_order_release);
 
         processContextRequirements.flags = ProcessContext::kPlaying;
@@ -165,7 +168,7 @@ EntVstProcessor::process(ProcessData& data)
                                                           std::memory_order_acquire,
                                                           std::memory_order_relaxed);
          if (ok)
-                 entropictronDsp->setState(&dspState);
+                 entropictronDsp->setState(dspState);
 
          // Collect MIDI events
          auto midiEvents = data.inputEvents;
@@ -287,7 +290,7 @@ EntVstProcessor::process(ProcessData& data)
          }
 
          if (dspStateUpdated) {
-                 entropictronDsp->getState(&dspState);
+                 entropictronDsp->getState(dspState);
                  dspStateUpdated = false;
          }
 
@@ -514,7 +517,7 @@ tresult EntVstProcessor::setState (IBStream *state)
         }
 
         EntState entState{data};
-        entState.getState(&dspState);
+        entState.getState(dspState);
 
         isPendingState.store(true, std::memory_order_release);
 
@@ -526,7 +529,7 @@ tresult EntVstProcessor::getState (IBStream *state)
         if (state == nullptr)
                 return kInvalidArgument;
 
-        EntState entState{&dspState};
+        EntState entState{dspState};
         int32 nBytes = 0;
         auto data = entState.toJson();
         if (state->write(data.data(), data.size(), &nBytes) == kResultFalse) {

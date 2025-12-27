@@ -26,7 +26,7 @@
 #include "ent_crackle.h"
 #include "ent_glitch.h"
 #include "ent_log.h"
-#include "ent_state.h"
+#include "ent_state_internal.h"
 
 #include "qx_math.h"
 

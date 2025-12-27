@@ -29,56 +29,112 @@
 #include "ent_crackle.h"
 #include "ent_glitch.h"
 
-#include <stdatomic.h>
-
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-#define ENT_SET_STATE(obj, state, field, setter)                        \
-        setter(obj, atomic_load_explicit(&state->field, memory_order_relaxed))
+struct ent_state_noise;
+struct ent_state_crackle;
+struct ent_state_glitch;
+struct ent_state;
 
-#define ENT_GET_STATE(obj, state, field, getter)                        \
-        atomic_store_explicit(&state->field, getter(obj), memory_order_relaxed)
+struct ent_state* ent_state_create();
 
-struct ent_state_noise {
-        _Atomic(bool) enabled;
-        _Atomic(enum ent_noise_type) type;
-        _Atomic(float) density;
-        _Atomic(float) brightness;
-        _Atomic(float) gain;
-        _Atomic(float) stereo;
-        _Atomic(enum ent_filter_type) filter_type;
-        _Atomic(float) cutoff;
-        _Atomic(float) resonance;
-};
+void ent_state_free(struct ent_state* state);
 
-struct ent_state_crackle {
-        _Atomic(bool) enabled;
-        _Atomic(float) rate;
-        _Atomic(float) duration;
-        _Atomic(float) amplitude;
-        _Atomic(float) randomness;
-        _Atomic(float) brightness;
-        _Atomic(enum ent_crackle_envelope) envelope_shape;
-        _Atomic(float) stereo_spread;
-};
+struct ent_state_noise*
+ent_state_get_noise(struct ent_state *state, size_t index);
 
-struct ent_state_glitch {
-        _Atomic(bool) enabled;
-        _Atomic(float) probability;
-        _Atomic(int) min_jump;
-        _Atomic(int) max_jump;
-        _Atomic(int) length;
-        _Atomic(int) repeats;
-};
+struct ent_state_crackle*
+ent_state_get_crackle(struct ent_state *state, size_t index);
 
-struct ent_state {
-        _Atomic(enum ent_play_mode) play_mode;
-        struct ent_state_noise noises[2];
-        struct ent_state_crackle crackles[2];
-        struct ent_state_glitch glitches[2];
-};
+struct ent_state_glitch*
+ent_state_get_glitch(struct ent_state *state, size_t index);
+
+const struct ent_state_noise*
+ent_state_get_noise_const(const struct ent_state *state, size_t index);
+
+const struct ent_state_crackle*
+ent_state_get_crackle_const(const struct ent_state *state, size_t index);
+
+const struct ent_state_glitch*
+ent_state_get_glitch_const(const struct ent_state *state, size_t index);
+
+/* PLAY MODE */
+void ent_state_set_play_mode(struct ent_state *state, int play_mode);
+int  ent_state_get_play_mode(const struct ent_state *state);
+
+/* NOISE */
+void ent_state_noise_set_enabled(struct ent_state_noise *n, bool enabled);
+bool ent_state_noise_get_enabled(const struct ent_state_noise *n);
+
+void ent_state_noise_set_type(struct ent_state_noise *n, int type);
+int  ent_state_noise_get_type(const struct ent_state_noise *n);
+
+void ent_state_noise_set_density(struct ent_state_noise *n, float density);
+float ent_state_noise_get_density(const struct ent_state_noise *n);
+
+void ent_state_noise_set_brightness(struct ent_state_noise *n, float brightness);
+float ent_state_noise_get_brightness(const struct ent_state_noise *n);
+
+void ent_state_noise_set_gain(struct ent_state_noise *n, float gain);
+float ent_state_noise_get_gain(const struct ent_state_noise *n);
+
+void ent_state_noise_set_stereo(struct ent_state_noise *n, float stereo);
+float ent_state_noise_get_stereo(const struct ent_state_noise *n);
+
+void ent_state_noise_set_filter_type(struct ent_state_noise *n, int filter_type);
+int  ent_state_noise_get_filter_type(const struct ent_state_noise *n);
+
+void ent_state_noise_set_cutoff(struct ent_state_noise *n, float cutoff);
+float ent_state_noise_get_cutoff(const struct ent_state_noise *n);
+
+void ent_state_noise_set_resonance(struct ent_state_noise *n, float resonance);
+float ent_state_noise_get_resonance(const struct ent_state_noise *n);
+
+/* CRACKLE */
+void ent_state_crackle_set_enabled(struct ent_state_crackle *c, bool enabled);
+bool ent_state_crackle_get_enabled(const struct ent_state_crackle *c);
+
+void ent_state_crackle_set_rate(struct ent_state_crackle *c, float rate);
+float ent_state_crackle_get_rate(const struct ent_state_crackle *c);
+
+void ent_state_crackle_set_duration(struct ent_state_crackle *c, float duration);
+float ent_state_crackle_get_duration(const struct ent_state_crackle *c);
+
+void ent_state_crackle_set_amplitude(struct ent_state_crackle *c, float amplitude);
+float ent_state_crackle_get_amplitude(const struct ent_state_crackle *c);
+
+void ent_state_crackle_set_randomness(struct ent_state_crackle *c, float randomness);
+float ent_state_crackle_get_randomness(const struct ent_state_crackle *c);
+
+void ent_state_crackle_set_brightness(struct ent_state_crackle *c, float brightness);
+float ent_state_crackle_get_brightness(const struct ent_state_crackle *c);
+
+void ent_state_crackle_set_envelope_shape(struct ent_state_crackle *c, int shape);
+int  ent_state_crackle_get_envelope_shape(const struct ent_state_crackle *c);
+
+void ent_state_crackle_set_stereo_spread(struct ent_state_crackle *c, float spread);
+float ent_state_crackle_get_stereo_spread(const struct ent_state_crackle *c);
+
+/* GLITCH */
+void ent_state_glitch_set_enabled(struct ent_state_glitch *g, bool enabled);
+bool ent_state_glitch_get_enabled(const struct ent_state_glitch *g);
+
+void ent_state_glitch_set_probability(struct ent_state_glitch *g, float probability);
+float ent_state_glitch_get_probability(const struct ent_state_glitch *g);
+
+void ent_state_glitch_set_min_jump(struct ent_state_glitch *g, float min_jump);
+float ent_state_glitch_get_min_jump(const struct ent_state_glitch *g);
+
+void ent_state_glitch_set_max_jump(struct ent_state_glitch *g, float max_jump);
+float ent_state_glitch_get_max_jump(const struct ent_state_glitch *g);
+
+void ent_state_glitch_set_length(struct ent_state_glitch *g, float length);
+float ent_state_glitch_get_length(const struct ent_state_glitch *g);
+
+void ent_state_glitch_set_repeats(struct ent_state_glitch *g, int repeats);
+int  ent_state_glitch_get_repeats(const struct ent_state_glitch *g);
 
 #ifdef __cplusplus
 }

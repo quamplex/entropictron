@@ -27,7 +27,7 @@
 #include "qx_fader.h"
 #include "qx_randomizer.h"
 #include "ent_shelf_filter.h"
-#include "ent_state.h"
+#include "ent_state_internal.h"
 
 #include <stdlib.h>
 
