@@ -26,7 +26,6 @@
 
 #include <rapidjson/writer.h>
 #include <rapidjson/stringbuffer.h>
-#include <stdatomic.h>
 
 using namespace rapidjson;
 
