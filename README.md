@@ -94,3 +94,7 @@ Clone the Entropictron code repository, compile and install.
 
 To build on Windows, there is a need to install MSYS2/UCRT64 and follow
 the same steps as mentioned above.
+
+## Documentation
+
+ [doc/Entropictron_User_Guide.md](doc/Entropictron_User_Guide.md)
