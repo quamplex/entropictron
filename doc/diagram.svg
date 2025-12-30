@@ -19,7 +19,11 @@
        id="marker5114"
        refX="0"
        refY="0"
-       orient="auto">
+       orient="auto"
+       viewBox="0 0 6.9304588 5.1962256"
+       markerWidth="6.9304581"
+       markerHeight="5.1962252"
+       preserveAspectRatio="xMidYMid">
       <path
          transform="scale(-0.6)"
          d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
@@ -88,15 +92,15 @@
     </marker>
     <marker
        orient="auto"
-       refY="0.0"
-       refX="0.0"
+       refY="0"
+       refX="0"
        id="marker1933"
-       style="overflow:visible;">
+       style="overflow:visible">
       <path
          id="path1931"
-         style="fill-rule:evenodd;stroke-width:0.625;stroke-linejoin:round;stroke:#000000;stroke-opacity:1;fill:#000000;fill-opacity:1"
-         d="M 8.7185878,4.0337352 L -2.2072895,0.016013256 L 8.7185884,-4.0017078 C 6.9730900,-1.6296469 6.9831476,1.6157441 8.7185878,4.0337352 z "
-         transform="scale(0.6) rotate(180) translate(0,0)" />
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6)" />
     </marker>
     <marker
        orient="auto"
@@ -938,6 +942,114 @@
          d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
          transform="scale(-0.6)" />
     </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1979-5"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path1977-9" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1979-92-6"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path1977-0-2" />
+    </marker>
+    <marker
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="marker1933-1"
+       style="overflow:visible">
+      <path
+         id="path1931-78"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         transform="scale(-0.6)" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker5114-5"
+       refX="0"
+       refY="0"
+       orient="auto"
+       viewBox="0 0 6.9304588 5.1962256"
+       markerWidth="6.9304585"
+       markerHeight="5.1962256"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path5112-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1979-5-6"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path1977-9-7" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker1979-92-6-5"
+       refX="0"
+       refY="0"
+       orient="auto">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path1977-0-2-6" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker5114-1"
+       refX="0"
+       refY="0"
+       orient="auto"
+       viewBox="0 0 6.9304588 5.1962256"
+       markerWidth="6.9304581"
+       markerHeight="5.1962252"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path5112-74" />
+    </marker>
+    <marker
+       style="overflow:visible"
+       id="marker5114-14"
+       refX="0"
+       refY="0"
+       orient="auto"
+       viewBox="0 0 6.9304588 5.1962256"
+       markerWidth="6.9304581"
+       markerHeight="5.1962252"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(-0.6)"
+         d="M 8.7185878,4.0337352 -2.2072895,0.01601326 8.7185884,-4.0017078 c -1.7454984,2.3720609 -1.7354408,5.6174519 -6e-7,8.035443 z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.625;stroke-linejoin:round;stroke-opacity:1"
+         id="path5112-6" />
+    </marker>
   </defs>
   <metadata
      id="metadata5">
@@ -950,6 +1062,13 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
+  <rect
+     style="opacity:1;fill:#ffffff;stroke:#000000;stroke-width:0.1;stroke-linecap:square;stroke-linejoin:round;fill-opacity:1"
+     id="rect1686"
+     width="135.0049"
+     height="134.28291"
+     x="42.209522"
+     y="15.038497" />
   <g
      id="layer1">
     <g
@@ -958,423 +1077,948 @@
     <g
        id="g8183"
        transform="matrix(0.91219337,0,0,0.91219337,7.2469494,5.9244311)">
-      <rect
-         y="16.832409"
-         x="15.719181"
-         height="4.206502"
-         width="52.441952"
-         id="rect1687-1"
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.21925177;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
-      <rect
-         y="2.1148844"
-         x="13.622787"
-         height="25.206596"
-         width="60.332073"
-         id="rect1687-1-4"
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.575672;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
-      <text
-         id="text1563-23-6-2-2-1"
-         y="18.421227"
-         x="44.477421"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="18.421227"
-           x="44.477421"
-           id="tspan1561-7-2-7-8-2">Resonance</tspan></text>
-      <text
-         id="text1563-23-6-2-2-1-4"
-         y="19.388607"
-         x="32.51181"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="19.388607"
-           x="32.51181"
-           id="tspan1561-7-2-7-8-2-3">Enable / Disable</tspan></text>
-      <text
-         id="text1563-23-6-2-2-3"
-         y="18.421227"
-         x="39.717098"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="18.421227"
-           x="39.717098"
-           id="tspan1561-7-2-7-8-6">Cutoff</tspan></text>
-      <text
-         id="text1563-23-6-2-2-9"
-         y="18.276251"
-         x="33.558041"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="18.276251"
-           x="33.558041"
-           id="tspan1561-7-2-7-8-7">Filter Type</tspan></text>
-      <text
-         id="text1563-23-6-2-2"
-         y="18.421227"
-         x="22.489634"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="18.421227"
-           x="22.489634"
-           id="tspan1561-7-2-7-8">Stereo</tspan></text>
-      <path
-         id="path1909-9"
-         d="m 72.831263,13.626027 c 3.909366,0 3.909366,0 3.909366,0"
-         style="fill:none;stroke:#000000;stroke-width:0.110014;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:" />
-      <path
-         id="path1909-94-3-5-2-8-20"
-         d="m 76.018421,43.742755 c 0,-29.698969 0,-29.698969 0,-29.698969"
-         style="fill:none;stroke:#000000;stroke-width:0.184916;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <rect
-         y="12.27488"
-         x="64.321922"
-         height="2.8430057"
-         width="8.333909"
-         id="rect1687-7-0"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
-      <rect
-         y="5.03618"
-         x="28.068613"
-         height="2.8430057"
-         width="8.333909"
-         id="rect1687-7-0-1"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
-      <text
-         id="text1563-23-6-2-9-8"
-         y="6.7625613"
-         x="28.883009"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="6.7625613"
-           x="28.883009"
-           id="tspan1561-7-2-7-3-7">Stochastic Stereo </tspan></text>
-      <text
-         id="text1563-23-6-2"
-         y="18.318134"
-         x="62.837719"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="18.318134"
-           x="62.837719"
-           id="tspan1561-7-2-7">Gain</tspan></text>
-      <text
-         id="text1563-23-6-2-9"
-         y="14.002721"
-         x="67.373703"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="14.002721"
-           x="67.373703"
-           id="tspan1561-7-2-7-3">Gain</tspan></text>
-      <text
-         id="text1563-23-6-9"
-         y="18.257622"
-         x="27.315561"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="18.257622"
-           x="27.315561"
-           id="tspan1561-7-2-1">Brightness</tspan></text>
-      <text
-         id="text1563-23-6"
-         y="18.276251"
-         x="17.232018"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="18.276251"
-           x="17.232018"
-           id="tspan1561-7-2">Density</tspan></text>
-      <rect
-         y="5.0991344"
-         x="39.417294"
-         height="2.8430057"
-         width="8.333909"
-         id="rect1687-7"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
-      <rect
-         y="5.0442023"
-         x="16.802704"
-         height="2.8430057"
-         width="8.333909"
-         id="rect1687"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
-      <text
-         id="text1563-23"
-         y="6.7649708"
-         x="17.732811"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="6.7649708"
-           x="17.732811"
-           id="tspan1561-7">Noise Generator</tspan></text>
-      <text
-         id="text1563-23-5"
-         y="6.6936784"
-         x="41.154167"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="6.6936784"
-           x="41.154167"
-           id="tspan1561-7-3">Shelf Filter</tspan></text>
-      <rect
-         y="4.3132324"
-         x="52.290932"
-         height="4.626852"
-         width="12.654161"
-         id="rect1697"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
-      <text
-         id="text1563-23-3-1"
-         y="6.9341488"
-         x="54.546452"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.18604px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0370636"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0370636"
-           y="6.9341488"
-           x="54.546452"
-           id="tspan1561-7-6-2">LP, BP, HP Filter</tspan></text>
-      <path
-         id="path1907"
-         d="m 25.209134,6.4149899 c 2.519582,0 2.519582,0 2.519582,0"
-         style="fill:none;stroke:#000000;stroke-width:0.106928;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1979)" />
-      <path
-         id="path1907-2"
-         d="m 36.565137,6.3739343 c 2.519582,0 2.519582,0 2.519582,0"
-         style="fill:none;stroke:#000000;stroke-width:0.106928;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1979-92)" />
-      <path
-         id="path1907-6"
-         d="m 68.421341,9.4544127 c 0,2.5195803 0,2.5195803 0,2.5195803"
-         style="fill:none;stroke:#000000;stroke-width:0.106928;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1979-60)" />
-      <path
-         id="path1909"
-         d="m 47.942087,6.5582979 c 3.909366,0 3.909366,0 3.909366,0"
-         style="fill:none;stroke:#000000;stroke-width:0.110014;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1933)" />
-      <text
-         id="text3544"
-         y="24.726562"
-         x="17.104111"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.35868px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0737085"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0737085"
-           y="24.726562"
-           x="17.104111"
-           id="tspan3542">Noise 1&amp;2</tspan></text>
       <text
          id="text8193"
          y="73.503822"
          x="91.976044"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:9.49706px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.296783"
          xml:space="preserve" />
+      <g
+         id="g58653">
+        <rect
+           y="67.347336"
+           x="45.516487"
+           height="2.8430057"
+           width="8.333909"
+           id="rect1687-7-0-3-5-9"
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:0.5945, 0.29725;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal" />
+        <text
+           id="text1563-23-6-2-9-88-5-0"
+           y="68.966408"
+           x="47.563877"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+           xml:space="preserve"><tspan
+             style="stroke-width:0.0253099"
+             y="68.966408"
+             x="47.563877"
+             id="tspan1561-7-2-7-3-8-2-2">Play Mode</tspan></text>
+      </g>
+      <g
+         id="g58667">
+        <g
+           id="g58661">
+          <rect
+             y="106.74476"
+             x="45.516487"
+             height="2.8430057"
+             width="8.333909"
+             id="rect1687-7-0-3-5-9-8"
+             style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:0.89175, 0.89175;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal" />
+        </g>
+        <text
+           id="text1563-23-6-2-9-88-5-0-3"
+           y="108.38777"
+           x="47.404728"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099;stroke-dasharray:0.0759297, 0.0759297;stroke-dashoffset:0"
+           xml:space="preserve"><tspan
+             style="stroke-width:0.0253099;stroke-dasharray:0.0759297, 0.0759297;stroke-dashoffset:0"
+             y="108.38777"
+             x="47.404728"
+             id="tspan1561-7-2-7-3-8-2-2-8">Audio Input</tspan></text>
+      </g>
+      <g
+         id="g58658">
+        <rect
+           y="83.448296"
+           x="45.516487"
+           height="2.8430057"
+           width="8.333909"
+           id="rect1687-7-0-3-5-9-8-0"
+           style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:0.89175, 0.89175;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal" />
+        <text
+           id="text1563-23-6-2-9-88-5-0-3-4"
+           y="85.089745"
+           x="47.686176"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099;stroke-dasharray:0.0759297, 0.0759297;stroke-dashoffset:0"
+           xml:space="preserve"><tspan
+             style="stroke-width:0.0253099;stroke-dasharray:0.0759297, 0.0759297;stroke-dashoffset:0"
+             y="85.089745"
+             x="47.686176"
+             id="tspan1561-7-2-7-3-8-2-2-8-0">MIDI Input</tspan></text>
+      </g>
+      <text
+         id="text1563-23-6-2-2-18-6"
+         y="53.809048"
+         x="32.791729"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="53.809048"
+           x="32.791729"
+           id="tspan1561-7-2-7-8-9-2" /></text>
+      <path
+         id="path1909-94-3-5-2-8-20"
+         d="m 138.66974,72.047841 c 0,-29.984025 0,-29.984025 0,-29.984025"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         y="45.292065"
+         x="78.370491"
+         height="4.206502"
+         width="52.441952"
+         id="rect1687-1"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.219252;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:0.219252, 0.219252;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal" />
+      <rect
+         y="30.574543"
+         x="76.274101"
+         height="25.206596"
+         width="60.332073"
+         id="rect1687-1-4"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.575672;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+      <text
+         id="text1563-23-6-2-2-1"
+         y="46.717278"
+         x="112.34969"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="46.717278"
+           x="112.34969"
+           id="tspan1561-7-2-7-8-2">Resonance</tspan></text>
+      <text
+         id="text1563-23-6-2-2-1-4"
+         y="47.914391"
+         x="101.90148"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="47.914391"
+           x="101.90148"
+           id="tspan1561-7-2-7-8-2-3">Enable</tspan></text>
+      <text
+         id="text1563-23-6-2-2-3"
+         y="46.727806"
+         x="107.58936"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="46.727806"
+           x="107.58936"
+           id="tspan1561-7-2-7-8-6">Cutoff</tspan></text>
+      <text
+         id="text1563-23-6-2-2-9"
+         y="46.717278"
+         x="101.43031"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="46.717278"
+           x="101.43031"
+           id="tspan1561-7-2-7-8-7">Filter Type</tspan></text>
+      <text
+         id="text1563-23-6-2-2"
+         y="46.727806"
+         x="90.36187"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="46.727806"
+           x="90.36187"
+           id="tspan1561-7-2-7-8">Stereo</tspan></text>
+      <path
+         id="path1909-9"
+         d="m 135.17954,42.156043 c 3.53448,0 3.53448,0 3.53448,0"
+         style="fill:none;stroke:#000000;stroke-width:0.104606;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         y="40.734539"
+         x="126.97322"
+         height="2.8430057"
+         width="8.333909"
+         id="rect1687-7-0"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+      <rect
+         y="33.664814"
+         x="90.719925"
+         height="2.8430057"
+         width="8.333909"
+         id="rect1687-7-0-1"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+      <text
+         id="text1563-23-6-2-9-8"
+         y="35.385582"
+         x="91.534317"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="35.385582"
+           x="91.534317"
+           id="tspan1561-7-2-7-3-7">Stochastic Stereo </tspan></text>
+      <text
+         id="text1563-23-6-2"
+         y="46.727806"
+         x="125.48903"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="46.727806"
+           x="125.48903"
+           id="tspan1561-7-2-7">Gain</tspan></text>
+      <text
+         id="text1563-23-6-2-9"
+         y="42.455307"
+         x="130.02501"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="42.455307"
+           x="130.02501"
+           id="tspan1561-7-2-7-3">Gain</tspan></text>
+      <text
+         id="text1563-23-6-9"
+         y="46.717278"
+         x="95.187805"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="46.717278"
+           x="95.187805"
+           id="tspan1561-7-2-1">Brightness</tspan></text>
+      <text
+         id="text1563-23-6-9-8"
+         y="82.205704"
+         x="101.88592"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="82.205704"
+           x="101.88592"
+           id="tspan1561-7-2-1-4">Rate</tspan></text>
+      <text
+         id="text1563-23-6"
+         y="46.717278"
+         x="85.104256"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="46.717278"
+           x="85.104256"
+           id="tspan1561-7-2">Density</tspan></text>
+      <rect
+         y="33.664814"
+         x="102.06861"
+         height="2.8430057"
+         width="8.333909"
+         id="rect1687-7"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+      <rect
+         y="33.664814"
+         x="79.45401"
+         height="2.8430057"
+         width="8.333909"
+         id="rect1687"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+      <text
+         id="text1563-23"
+         y="35.385582"
+         x="80.384117"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="35.385582"
+           x="80.384117"
+           id="tspan1561-7">Noise Generator</tspan></text>
+      <text
+         id="text1563-23-5"
+         y="35.385582"
+         x="103.80549"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="35.385582"
+           x="103.80549"
+           id="tspan1561-7-3">Shelf Filter</tspan></text>
+      <rect
+         y="32.772888"
+         x="114.7232"
+         height="4.626852"
+         width="12.654161"
+         id="rect1697"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+      <text
+         id="text1563-23-3-1"
+         y="35.484825"
+         x="117.19777"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.18604px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0370636"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0370636"
+           y="35.484825"
+           x="117.19777"
+           id="tspan1561-7-6-2">LP, BP, HP Filter</tspan></text>
+      <path
+         id="path1907"
+         d="m 87.860449,35.08737 c 2.519582,0 2.519582,0 2.519582,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1979)" />
+      <path
+         id="path1907-2"
+         d="m 99.216452,35.08737 c 2.519578,0 2.519578,0 2.519578,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1979-92)" />
+      <path
+         id="path1909"
+         d="m 110.5934,35.08737 c 3.90937,0 3.90937,0 3.90937,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1933)" />
+      <text
+         id="text3544"
+         y="53.186218"
+         x="79.755417"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.35868px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0737085"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0737085"
+           y="53.186218"
+           x="79.755417"
+           id="tspan3542">Noise 1&amp;2</tspan></text>
       <path
          id="path1909-94"
-         d="m 18.471229,17.022131 c 0,-8.9920118 0,-8.9920118 0,-8.9920118"
-         style="fill:none;stroke:#000000;stroke-width:0.166848;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 81.122544,45.265601 c 0,-8.775823 0,-8.775823 0,-8.775823"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-0-2"
-         d="m 23.804381,17.249302 c 0,-6.00461 0,-6.00461 0,-6.00461"
-         style="fill:none;stroke:#000000;stroke-width:0.136344;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 86.455696,45.324417 c 0,-5.598198 0,-5.598198 0,-5.598198"
+         style="fill:none;stroke:#000000;stroke-width:0.109412;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-3-06"
-         d="m 23.783708,11.221135 c 7.802584,0 7.802584,0 7.802584,0"
-         style="fill:none;stroke:#000000;stroke-width:0.155422;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 86.447058,39.777937 c -4.10623,0 -4.10623,0 -4.10623,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-3-06-5"
+         d="m 82.388304,36.484835 c 0,3.346684 0,3.346684 0,3.346684"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-6-1"
-         d="m 31.89027,11.296134 c 0,-3.3051187 0,-3.3051187 0,-3.3051187"
-         style="fill:none;stroke:#000000;stroke-width:0.101155;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 94.536062,41.428835 c 0,-4.943995 0,-4.943995 0,-4.943995"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-0"
-         d="m 28.952152,17.400454 c 0,-4.505085 0,-4.505085 0,-4.505085"
-         style="fill:none;stroke:#000000;stroke-width:0.118098;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 91.603467,45.305627 c 0,-3.903045 0,-3.903045 0,-3.903045"
+         style="fill:none;stroke:#000000;stroke-width:0.108964;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-3"
-         d="m 28.847724,12.778084 c 14.547548,0 14.547548,0 14.547548,0"
-         style="fill:none;stroke:#000000;stroke-width:0.212221;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 91.548161,41.456946 c 3.041103,0 3.041103,0 3.041103,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109509;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-6"
-         d="m 43.323544,12.75344 c 0,-4.8182868 0,-4.8182868 0,-4.8182868"
-         style="fill:none;stroke:#000000;stroke-width:0.122135;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 105.97486,41.663824 c 0,-5.269012 0,-5.269012 0,-5.269012"
+         style="fill:none;stroke:#000000;stroke-width:0.11076;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-0-5"
-         d="m 35.206779,17.283417 c 0,-2.840031 0,-2.840031 0,-2.840031"
-         style="fill:none;stroke:#000000;stroke-width:0.0937679;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 97.869486,45.297498 c 0,-3.615938 0,-3.615938 0,-3.615938"
+         style="fill:none;stroke:#000000;stroke-width:0.105804;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-0-5-5"
-         d="m 40.952831,17.423273 c 0,-2.182277 0,-2.182277 0,-2.182277"
-         style="fill:none;stroke:#000000;stroke-width:0.0821954;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 103.62217,45.183331 c 0,-1.629033 0,-1.629033 0,-1.629033"
+         style="fill:none;stroke:#000000;stroke-width:0.109186;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-0-5-6"
-         d="m 46.264815,17.464295 c 0,-1.737016 0,-1.737016 0,-1.737016"
-         style="fill:none;stroke:#000000;stroke-width:0.0733322;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 108.98003,45.27306 c 0,-1.086121 0,-1.086121 0,-1.086121"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-0-5-6-5"
-         d="m 63.951024,17.580444 c 0,-1.14214 0,-1.14214 0,-1.14214"
-         style="fill:none;stroke:#000000;stroke-width:0.0594658;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 126.62034,45.38579 c 0,-0.746279 0,-0.746279 0,-0.746279"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-3-5"
-         d="m 35.186106,14.325198 c 18.339767,0 18.339767,0 18.339767,0"
-         style="fill:none;stroke:#000000;stroke-width:0.145312;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 97.813264,41.628078 c 8.217466,0 8.217466,0 8.217466,0"
+         style="fill:none;stroke:#000000;stroke-width:0.10978;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-3-5-7"
-         d="m 40.935444,15.146863 c 14.415422,0 14.415422,0 14.415422,0"
-         style="fill:none;stroke:#000000;stroke-width:0.128831;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 103.58712,43.607041 c 12.63208,-0.001 12.63208,-0.001 12.63208,-0.001"
+         style="fill:none;stroke:#000000;stroke-width:0.102548;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-6-4"
-         d="m 53.50925,14.152442 c 0,-5.0189871 0,-5.0189871 0,-5.0189871"
-         style="fill:none;stroke:#000000;stroke-width:0.124653;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 116.16056,43.61062 c 0,-6.280024 0,-6.280024 0,-6.280024"
+         style="fill:none;stroke:#000000;stroke-width:0.116864;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-6-4-7"
-         d="m 68.386094,6.6264813 c -3.37256,0 -3.37256,0 -3.37256,0"
-         style="fill:none;stroke:#000000;stroke-width:0.102182;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 131.1047,35.086317 c -3.59991,0 -3.59991,0 -3.59991,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-6-4-6"
-         d="m 68.390704,9.6843325 c 0,-3.0817538 0,-3.0817538 0,-3.0817538"
-         style="fill:none;stroke:#000000;stroke-width:0.0976773;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 131.04202,35.040724 c 0,5.373532 0,5.373532 0,5.373532"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5114)" />
       <path
          id="path1909-94-3-5-4"
-         d="m 55.342352,15.303343 c 0,-6.1386173 0,-6.1386173 0,-6.1386173"
-         style="fill:none;stroke:#000000;stroke-width:0.0840698;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 117.99367,44.295418 c 0,-6.86357 0,-6.86357 0,-6.86357"
+         style="fill:none;stroke:#000000;stroke-width:0.109818;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-3-5-5"
-         d="m 46.243497,15.776252 c 10.911916,0 10.911916,0 10.911916,0"
-         style="fill:none;stroke:#000000;stroke-width:0.112087;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 108.95037,44.24139 c 9.0995,0 9.0995,0 9.0995,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109605;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-3-5-5-4"
-         d="m 64.011625,16.217364 c 4.606245,0 4.606245,0 4.606245,0"
-         style="fill:none;stroke:#000000;stroke-width:0.0728246;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 126.56422,44.677024 c 4.63948,0 4.63948,0 4.63948,0"
+         style="fill:none;stroke:#000000;stroke-width:0.110029;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-3-5-5-7"
-         d="m 68.533145,16.342965 c 0,-1.266188 0,-1.266188 0,-1.266188"
-         style="fill:none;stroke:#000000;stroke-width:0.0381816;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 131.18446,44.733307 c 0,-1.19687 0,-1.19687 0,-1.19687"
+         style="fill:none;stroke:#000000;stroke-width:0.110576;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          id="path1909-94-3-5-2"
-         d="m 57.25971,15.875335 c 0,-6.6819906 0,-6.6819906 0,-6.6819906"
-         style="fill:none;stroke:#000000;stroke-width:0.0877117;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         d="m 119.91102,44.766653 c 0,-7.361022 0,-7.361022 0,-7.361022"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text1563-23-6-2-2-1-0"
+         y="46.70599"
+         x="79.883636"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="46.70599"
+           x="79.883636"
+           id="tspan1561-7-2-7-8-2-8">Enable</tspan></text>
+      <path
+         id="path1909-94-3-5-5-06"
+         d="m 114.72974,44.72488 c 5.23696,0 5.23696,0 5.23696,0"
+         style="fill:none;stroke:#000000;stroke-width:0.110055;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-3-5-5-46"
+         d="m 114.78406,45.253807 c 0,-0.584823 0,-0.584823 0,-0.584823"
+         style="fill:none;stroke:#000000;stroke-width:0.110821;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <rect
-         y="32.059814"
-         x="13.712985"
+         y="81.018501"
+         x="77.6371"
+         height="4.2309108"
+         width="41.176479"
+         id="rect1687-1-1"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.194843;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:0.194843, 0.194843;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal" />
+      <rect
+         y="66.313179"
+         x="75.552917"
          height="25.206596"
          width="60.332073"
-         id="rect1687-1-4-9"
+         id="rect1687-1-4-8"
          style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.575672;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
-      <path
-         id="path1909-9-3"
-         d="m 72.92146,43.570955 c 10.651432,0 10.651432,0 10.651432,0"
-         style="fill:none;stroke:#000000;stroke-width:0.181593;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:" />
       <text
-         id="text3544-9"
-         y="54.671494"
-         x="17.194307"
+         id="text1563-23-6-2-2-9-8"
+         y="82.205704"
+         x="105.34995"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="82.205704"
+           x="105.34995"
+           id="tspan1561-7-2-7-8-7-3">Durations</tspan></text>
+      <text
+         id="text1563-23-6-2-2-18"
+         y="82.216232"
+         x="95.080666"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="82.216232"
+           x="95.080666"
+           id="tspan1561-7-2-7-8-9">Burst Shape</tspan></text>
+      <path
+         id="path1909-9-64"
+         d="m 132.92624,77.894679 c 5.76401,0 5.76401,0 5.76401,0"
+         style="fill:none;stroke:#000000;stroke-width:0.133585;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-9-64-9"
+         d="m 132.56459,116.27447 c 6.17132,0 6.17132,0 6.17132,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0-0"
+         d="m 138.68288,72.033282 c 0,6.050211 0,6.050211 0,6.050211"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0-0-4"
+         d="m 138.68522,77.829092 c 0,38.411638 0,38.411638 0,38.411638"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <rect
+         y="69.40345"
+         x="89.998734"
+         height="2.8430057"
+         width="8.333909"
+         id="rect1687-7-0-1-3"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+      <text
+         id="text1563-23-6-2-9-8-3"
+         y="71.124222"
+         x="90.813133"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="71.124222"
+           x="90.813133"
+           id="tspan1561-7-2-7-3-7-8">Stochastic Stereo </tspan></text>
+      <text
+         id="text1563-23-6-97"
+         y="82.205704"
+         x="83.203468"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="82.205704"
+           x="83.203468"
+           id="tspan1561-7-2-76">Density</tspan></text>
+      <text
+         id="text1563-23-6-97-5"
+         y="82.205704"
+         x="78.029442"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="82.205704"
+           x="78.029442"
+           id="tspan1561-7-2-76-6">Enable</tspan></text>
+      <rect
+         y="69.25515"
+         x="101.26443"
+         height="2.8430057"
+         width="8.333909"
+         id="rect1687-7-4"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+      <rect
+         y="69.40345"
+         x="78.732826"
+         height="2.8430057"
+         width="8.333909"
+         id="rect1687-3"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+      <text
+         id="text1563-23-0"
+         y="71.124222"
+         x="79.662933"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="71.124222"
+           x="79.662933"
+           id="tspan1561-7-30">Burst Generator</tspan></text>
+      <text
+         id="text1563-23-5-9"
+         y="70.975922"
+         x="103.0013"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="70.975922"
+           x="103.0013"
+           id="tspan1561-7-3-2">Shelf Filter</tspan></text>
+      <path
+         id="path1907-5"
+         d="m 87.139262,70.826008 c 2.519582,0 2.519582,0 2.519582,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1979-5)" />
+      <path
+         id="path1907-2-9"
+         d="m 98.495265,70.826008 c 2.519585,0 2.519585,0 2.519585,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker1979-92-6)" />
+      <text
+         id="text3544-6"
+         y="88.924858"
+         x="79.034233"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.35868px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0737085"
          xml:space="preserve"><tspan
            style="stroke-width:0.0737085"
-           y="54.671494"
-           x="17.194307"
-           id="tspan3542-2">Crackle 1&amp;2</tspan></text>
+           y="88.924858"
+           x="79.034233"
+           id="tspan3542-9">Crackle 1&amp;2</tspan></text>
       <path
-         id="path1909-94-3-5-2-8-2"
-         d="m 76.034343,74.65397 c 0,-31.506565 0,-31.506565 0,-31.506565"
-         style="fill:none;stroke:#000000;stroke-width:0.190461;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <rect
-         y="63.175858"
-         x="13.001059"
-         height="25.206596"
-         width="60.332073"
-         id="rect1687-1-4-6"
-         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.575672;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+         id="path1909-94-2"
+         d="m 79.241149,81.004237 c 0,-8.775822 0,-8.775822 0,-8.775822"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
-         id="path1909-9-39"
-         d="m 72.209534,74.686999 c 3.909366,0 3.909366,0 3.909366,0"
-         style="fill:none;stroke:#000000;stroke-width:0.110014;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:" />
-      <text
-         id="text3544-0"
-         y="85.787537"
-         x="16.482382"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.35868px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0737085"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0737085"
-           y="85.787537"
-           x="16.482382"
-           id="tspan3542-27">Glitch 1&amp;2</tspan></text>
+         id="path1909-94-2-4"
+         d="m 76.823231,83.790034 c 0,-12.843463 0,-12.843463 0,-12.843463"
+         style="fill:none;stroke:#000000;stroke-width:0.132621;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-2-4-4"
+         d="m 78.797732,70.973151 c -2.027998,0 -2.027998,0 -2.027998,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-6-1-7"
+         d="m 86.514862,74.573639 c 0,-2.311544 0,-2.311544 0,-2.311544"
+         style="fill:none;stroke:#000000;stroke-width:0.122108;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7"
+         d="m 90.88228,81.044263 c 0,-2.901188 0,-2.901188 0,-2.901188"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-1"
+         d="m 90.932541,78.162765 c -8.398119,0 -8.398119,0 -8.398119,0"
+         style="fill:none;stroke:#000000;stroke-width:0.117917;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-1-1"
+         d="m 82.552502,72.360278 c 0,5.860773 0,5.860773 0,5.860773"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-2"
+         d="m 84.522228,79.506079 c -3.652861,0 -3.652861,0 -3.652861,0"
+         style="fill:none;stroke:#000000;stroke-width:0.132391;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-4"
+         d="m 80.901461,79.562353 c 0,-7.282348 0,-7.282348 0,-7.282348"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-6-8"
+         d="m 93.944976,73.597637 c 0,-1.231817 0,-1.231817 0,-1.231817"
+         style="fill:none;stroke:#000000;stroke-width:0.108094;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-1"
+         d="m 97.148299,81.036134 c 0,-4.249105 0,-4.249105 0,-4.249105"
+         style="fill:none;stroke:#000000;stroke-width:0.144572;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-1-3"
+         d="m 84.46901,81.113423 c 0,-1.602263 0,-1.602263 0,-1.602263"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0"
+         d="m 104.02524,74.515836 c -17.582096,0 -17.582096,0 -17.582096,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0-3"
+         d="m 132.94928,70.821811 c -23.28966,0 -23.28966,0 -23.28966,0"
+         style="fill:none;stroke:#000000;stroke-width:0.175112;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0-8"
+         d="m 132.95152,70.87177 c 0,7.10099 0,7.10099 0,7.10099"
+         style="fill:none;stroke:#000000;stroke-width:0.0966926;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0-9"
+         d="m 102.84556,75.447605 c -17.12664,0 -17.12664,0 -17.12664,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2"
+         d="m 102.79221,81.005171 c 0,-5.604403 0,-5.604403 0,-5.604403"
+         style="fill:none;stroke:#000000;stroke-width:0.0981804;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-9"
+         d="m 104.01884,79.899327 c 0,-5.435894 0,-5.435894 0,-5.435894"
+         style="fill:none;stroke:#000000;stroke-width:0.096693;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-8"
+         d="m 111.16188,81.135563 c 0,-4.419231 0,-4.419231 0,-4.419231"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-8-0"
+         d="m 116.24429,80.981611 c 0,-7.352107 0,-7.352107 0,-7.352107"
+         style="fill:none;stroke:#000000;stroke-width:0.107539;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-8-6"
+         d="m 111.2054,76.713515 c -5.71392,0 -5.71392,0 -5.71392,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-8-4"
+         d="m 105.4819,76.764656 c 0,-3.287546 0,-3.287546 0,-3.287546"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-6"
+         d="m 93.890936,73.544408 c 11.632524,0 11.632524,0 11.632524,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <rect
-         y="42.077095"
-         x="85.325569"
+         y="76.314796"
+         x="173.53407"
          height="2.8430057"
          width="8.333909"
          id="rect1687-7-0-3-5"
          style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
       <text
          id="text1563-23-6-2-9-88-5"
-         y="43.714485"
-         x="88.184669"
+         y="77.952187"
+         x="175.10301"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
          xml:space="preserve"><tspan
            style="stroke-width:0.0253099"
-           y="43.714485"
-           x="88.184669"
-           id="tspan1561-7-2-7-3-8-2">Oudio Output</tspan></text>
+           y="77.952187"
+           x="175.10301"
+           id="tspan1561-7-2-7-3-8-2">Audio Output</tspan></text>
+      <path
+         id="path1909-9-6"
+         d="m 138.60469,77.881192 c 35.11367,0 35.11367,0 35.11367,0"
+         style="fill:none;stroke:#000000;stroke-width:0.10962588;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text1563-23-6-97-2"
+         y="82.205704"
+         x="89.082581"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="82.205704"
+           x="89.082581"
+           id="tspan1561-7-2-76-5">Amplitude</tspan></text>
+      <text
+         id="text1563-23-6-2-2-9-8-2"
+         y="82.205704"
+         x="114.21716"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="82.205704"
+           x="114.21716"
+           id="tspan1561-7-2-7-8-7-3-9">Brightness</tspan></text>
+      <text
+         id="text1563-23-6-2-2-9-8-9"
+         y="82.216232"
+         x="109.96014"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="82.216232"
+           x="109.96014"
+           id="tspan1561-7-2-7-8-7-3-0">Stereo</tspan></text>
+      <path
+         id="path1909-94-0-7-1-4"
+         d="m 97.219877,76.735326 c -13.020997,0 -13.020997,0 -13.020997,0"
+         style="fill:none;stroke:#000000;stroke-width:0.140231;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-1-03"
+         d="m 84.212026,72.126225 c 0,4.661638 0,4.661638 0,4.661638"
+         style="fill:none;stroke:#000000;stroke-width:0.119083;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0-1"
+         d="m 85.752809,75.525669 c 0,-3.227739 0,-3.227739 0,-3.227739"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-69"
+         d="m 106.65666,79.865626 c -2.68883,0 -2.68883,0 -2.68883,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109763;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-3"
+         d="m 106.60168,81.046897 c 0,-1.237487 0,-1.237487 0,-1.237487"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-8-04"
+         d="m 116.29614,73.67377 c -8.93485,0 -8.93485,0 -8.93485,0"
+         style="fill:none;stroke:#000000;stroke-width:0.10953;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-8-62"
+         d="m 107.39123,73.736718 c 0,-1.765744 0,-1.765744 0,-1.765744"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <rect
-         y="46.186775"
-         x="-1.3580637"
+         y="118.10166"
+         x="77.301727"
+         height="4.2309108"
+         width="41.176479"
+         id="rect1687-1-1-9"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.194843;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:0.194843, 0.194843;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal" />
+      <rect
+         y="103.39634"
+         x="75.217545"
+         height="25.206596"
+         width="60.332073"
+         id="rect1687-1-4-8-8"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.575672;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+      <text
+         id="text1563-23-6-2-2-18-8"
+         y="119.32524"
+         x="94.745293"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="119.32524"
+           x="94.745293"
+           id="tspan1561-7-2-7-8-9-29">Min Jump</tspan></text>
+      <text
+         id="text1563-23-6-2-2-18-8-9"
+         y="119.31384"
+         x="100.23467"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="119.31384"
+           x="100.23467"
+           id="tspan1561-7-2-7-8-9-29-3">Max Jump</tspan></text>
+      <text
+         id="text1563-23-6-97-27"
+         y="119.42166"
+         x="82.35704"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="119.42166"
+           x="82.35704"
+           id="tspan1561-7-2-76-61">Probability</tspan></text>
+      <text
+         id="text1563-23-6-97-5-3"
+         y="119.4856"
+         x="77.694069"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="119.4856"
+           x="77.694069"
+           id="tspan1561-7-2-76-6-2">Enable</tspan></text>
+      <rect
+         y="106.48661"
+         x="78.397453"
          height="2.8430057"
          width="8.333909"
-         id="rect1687-7-0-3-5-9"
+         id="rect1687-3-5"
          style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
       <text
-         id="text1563-23-6-2-9-88-5-0"
-         y="47.828224"
-         x="0.51740164"
+         id="text1563-23-0-9"
+         y="108.20738"
+         x="79.907661"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
          xml:space="preserve"><tspan
            style="stroke-width:0.0253099"
-           y="47.828224"
-           x="0.51740164"
-           id="tspan1561-7-2-7-3-8-2-2">Play Mode</tspan></text>
+           y="108.20738"
+           x="79.907661"
+           id="tspan1561-7-30-9">Glitch Effect</tspan></text>
+      <text
+         id="text3544-6-0"
+         y="126.00802"
+         x="78.69886"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.35868px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0737085"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0737085"
+           y="126.00802"
+           x="78.69886"
+           id="tspan3542-9-7">Glitch 1&amp;2</tspan></text>
+      <path
+         id="path1909-94-2-5"
+         d="m 78.905774,118.08741 c 0,-8.77582 0,-8.77582 0,-8.77582"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-6-1-7-8"
+         d="m 86.179487,111.65681 c 0,-2.31154 0,-2.31154 0,-2.31154"
+         style="fill:none;stroke:#000000;stroke-width:0.122108;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-7"
+         d="m 90.546905,118.12744 c 0,-2.90119 0,-2.90119 0,-2.90119"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-1-0"
+         d="m 90.597166,115.24594 c -8.398119,0 -8.398119,0 -8.398119,0"
+         style="fill:none;stroke:#000000;stroke-width:0.117917;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-1-1-4"
+         d="m 82.217127,109.44345 c 0,5.86078 0,5.86078 0,5.86078"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-2-8"
+         d="m 84.186853,116.58925 c -3.652861,0 -3.652861,0 -3.652861,0"
+         style="fill:none;stroke:#000000;stroke-width:0.132391;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-4-0"
+         d="m 80.566086,116.64553 c 0,-7.28235 0,-7.28235 0,-7.28235"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-1-2"
+         d="m 96.812924,118.11931 c 0,-4.24911 0,-4.24911 0,-4.24911"
+         style="fill:none;stroke:#000000;stroke-width:0.144572;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-1-3-9"
+         d="m 84.133635,118.1966 c 0,-1.60227 0,-1.60227 0,-1.60227"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0-6"
+         d="m 103.68987,111.59901 c -17.582101,0 -17.582101,0 -17.582101,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0-3-1"
+         d="m 132.61391,107.90499 c -45.710885,0 -45.710885,0 -45.710885,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0-8-0"
+         d="m 132.60719,107.84071 c 0,8.48938 0,8.48938 0,8.48938"
+         style="fill:none;stroke:#000000;stroke-width:0.119865;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0-9-4"
+         d="m 102.51018,112.53078 c -17.126635,0 -17.126635,0 -17.126635,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-2"
+         d="m 102.45684,118.08835 c 0,-5.60441 0,-5.60441 0,-5.60441"
+         style="fill:none;stroke:#000000;stroke-width:0.0981804;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-9-2"
+         d="m 103.68347,116.9825 c 0,-5.43589 0,-5.43589 0,-5.43589"
+         style="fill:none;stroke:#000000;stroke-width:0.096693;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text1563-23-6-97-2-9"
+         y="119.28886"
+         x="88.747208"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="119.28886"
+           x="88.747208"
+           id="tspan1561-7-2-76-5-0">Length</tspan></text>
+      <text
+         id="text1563-23-6-2-2-9-8-9-3"
+         y="119.29939"
+         x="104.98392"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="119.29939"
+           x="104.98392"
+           id="tspan1561-7-2-7-8-7-3-0-8">Repeats</tspan></text>
+      <path
+         id="path1909-94-0-7-1-4-0"
+         d="m 96.884502,113.8185 c -13.020997,0 -13.020997,0 -13.020997,0"
+         style="fill:none;stroke:#000000;stroke-width:0.140231;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-1-03-4"
+         d="m 83.876651,109.2094 c 0,4.66164 0,4.66164 0,4.66164"
+         style="fill:none;stroke:#000000;stroke-width:0.119083;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-0-1-0"
+         d="m 85.417434,112.60884 c 0,-3.22774 0,-3.22774 0,-3.22774"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-69-9"
+         d="m 106.32129,116.9488 c -2.68884,0 -2.68884,0 -2.68884,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109763;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-5-5-2-3-1"
+         d="m 106.26631,118.13007 c 0,-1.23749 0,-1.23749 0,-1.23749"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text1563-23-6-97-5-2"
+         y="83.961769"
+         x="78.024513"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         xml:space="preserve"><tspan
+           style="stroke-width:0.0253099"
+           y="83.961769"
+           x="78.024513"
+           id="tspan1561-7-2-76-6-5">Randomness</tspan></text>
+      <path
+         id="path1909-94-2-4-9"
+         d="m 77.739369,83.732645 c -0.922924,0 -0.922924,0 -0.922924,0"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path1909-94-0-7-1-0-5"
+         d="m 53.905117,108.07119 c 24.164522,0 24.164522,0 24.164522,0"
+         style="fill:none;stroke:#000000;stroke-width:0.127723;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5114)" />
+      <path
+         id="path1909-94-0-7-1-0-0"
+         d="m 65.631983,99.737126 c 0,8.333654 0,8.333654 0,8.333654"
+         style="fill:none;stroke:#000000;stroke-width:0.109626;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <rect
-         y="63.153824"
-         x="-1.5773175"
-         height="2.8430057"
-         width="8.333909"
-         id="rect1687-7-0-3-5-9-8"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+         y="23.43524"
+         x="64.537827"
+         height="112.307"
+         width="102.31345"
+         id="rect1687-1-4-8-8-3"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:2.37208;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+      <path
+         id="path1909-94-2-4-5"
+         d="m 54.288542,68.942856 c 8.95466,0 8.95466,0 8.95466,0"
+         style="fill:none;stroke:#000000;stroke-width:0.110738;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5114)" />
+      <path
+         id="path1909-94-2-4-5-3"
+         d="m 54.340673,85.045121 c 8.95466,0 8.95466,0 8.95466,0"
+         style="fill:none;stroke:#000000;stroke-width:0.110738;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5114-1)" />
       <text
-         id="text1563-23-6-2-9-88-5-0-3"
-         y="64.795273"
-         x="0.2981557"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
+         id="text3544-6-0-4"
+         y="17.89093"
+         x="95.477455"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.97022px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.155319"
          xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="64.795273"
-           x="0.2981557"
-           id="tspan1561-7-2-7-3-8-2-2-8">Audio Input</tspan></text>
-      <rect
-         y="55.87822"
-         x="-1.3889533"
-         height="2.8430057"
-         width="8.333909"
-         id="rect1687-7-0-3-5-9-8-0"
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.29725;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
-      <text
-         id="text1563-23-6-2-9-88-5-0-3-4"
-         y="57.519669"
-         x="0.48651972"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:0.809921px;line-height:1.25;font-family:'URW Gothic L';-inkscape-font-specification:'URW Gothic L';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.0253099"
-         xml:space="preserve"><tspan
-           style="stroke-width:0.0253099"
-           y="57.519669"
-           x="0.48651972"
-           id="tspan1561-7-2-7-3-8-2-2-8-0">MIDI Input</tspan></text>
+           style="stroke-width:0.155319"
+           y="17.89093"
+           x="95.477455"
+           id="tspan3542-9-7-2">Entropictron</tspan></text>
     </g>
   </g>
 </svg>
