@@ -42,7 +42,7 @@ PresetWidget::PresetWidget(EntWidget* parent, EntropictronModel *model)
         , selectedIndex{-1}
         , hoverIndex{-1}
 {
-        setFixedSize(240, 288);
+        setFixedSize(240, 248);
         setBackgroundColor(22, 22, 22);
         setTextColor({180, 180, 180});
         updateListView();

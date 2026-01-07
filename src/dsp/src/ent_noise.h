@@ -31,6 +31,9 @@
 extern "C" {
 #endif
 
+#define ENT_NOISE_MIN_GAIN  (-50.0f) // dB
+#define ENT_NOISE_MAX_GAIN  (6.0f)   // dB
+
 enum ent_noise_type {
         ENT_NOISE_TYPE_WHITE,
         ENT_NOISE_TYPE_PINK,
@@ -87,6 +90,10 @@ float ent_noise_get_resonance(const struct ent_noise *noise);
 void ent_noise_process(struct ent_noise *noise,
                        float **data,
                        size_t size);
+
+void ent_noise_set_entropy(struct ent_noise *noise, float entropy);
+
+float ent_noise_get_entropy(const struct ent_noise *noise);
 
 void ent_noise_set_state(struct ent_noise *noise, const struct ent_state_noise *state);
 

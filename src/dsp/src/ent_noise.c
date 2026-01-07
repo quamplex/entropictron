@@ -30,6 +30,7 @@
 #include "qx_math.h"
 #include "qx_randomizer.h"
 #include "qx_fader.h"
+#include "qx_smoother.h"
 
 struct ent_noise {
         int sample_rate;
@@ -43,6 +44,10 @@ struct ent_noise {
         struct qx_randomizer randomizer;
         struct qx_randomizer stereo_randomizer;
         struct qx_fader fader;
+        struct qx_smoother entropy;
+
+        float max_gain;
+        float min_gain;
 
         // Pink noise filter states
         float b0, b1, b2;
@@ -77,6 +82,11 @@ struct ent_noise* ent_noise_create(int sample_rate)
         noise->b0 = 0.0f;
         noise->b1 = 0.0f;
         noise->b2 = 0.0f;
+
+        qx_smoother_init(&noise->entropy, 0.0f, 50);
+
+        noise->min_gain = qx_db_to_val(ENT_NOISE_MIN_GAIN);
+        noise->max_gain = qx_db_to_val(ENT_NOISE_MAX_GAIN);
 
         qx_randomizer_init(&noise->prob_randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
         qx_randomizer_init(&noise->randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
@@ -177,7 +187,7 @@ float ent_noise_get_brightness(const struct ent_noise *noise)
 
 enum ent_error ent_noise_set_gain(struct ent_noise *noise, float gain)
 {
-        noise->gain = gain;
+        noise->gain = qx_clamp_float(gain, noise->min_gain, noise->max_gain);
         return ENT_OK;
 }
 
@@ -232,6 +242,17 @@ float ent_noise_get_resonance(const struct ent_noise *noise)
         return ent_filter_get_resonance(&noise->filter);
 }
 
+void ent_noise_set_entropy(struct ent_noise *noise, float entropy)
+{
+
+        qx_smoother_set_target(&noise->entropy, entropy);
+}
+
+float ent_noise_get_entropy(const struct ent_noise *noise)
+{
+        return qx_smoother_get(&noise->entropy);
+}
+
 inline static float ent_pink_noise(float white)
 {
         static float b0, b1, b2;
@@ -268,6 +289,10 @@ void ent_noise_process(struct ent_noise *noise,
                        float **data,
                        size_t size)
 {
+        float entropy = qx_smoother_next(&noise->entropy);
+        float cutoff = ent_noise_get_cutoff(noise) * (1.0f + 0.05f * entropy);
+        ent_noise_set_cutoff(noise, cutoff);
+
         float threshold = 2.0f * noise->density - 1.0f;
         for (size_t i = 0; i < size; i++) {
                 float val = 0.0f;
@@ -317,9 +342,14 @@ void ent_noise_process(struct ent_noise *noise,
         float *buffer[2] = { noise->buffer[0], noise->buffer[1] };
         ent_filter_process(&noise->filter, buffer, size);
 
+        float gain = noise->gain * (1.0f + 0.5f * entropy);
+        gain = qx_clamp_float(gain,
+                              noise->min_gain,
+                              noise->max_gain);
+
         for (size_t i = 0; i < size; i++) {
-                data[0][i] += noise->buffer[0][i] * noise->gain;
-                data[1][i] += noise->buffer[1][i] * noise->gain;
+                data[0][i] += noise->buffer[0][i] * gain;
+                data[1][i] += noise->buffer[1][i] * gain;
         }
 }
 

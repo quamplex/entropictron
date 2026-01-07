@@ -6,6 +6,7 @@ set(ENT_DSP_HEADERS
     ${QUAMPLEX_DSP_TOOLS_PATH}/qx_math.h
     ${QUAMPLEX_DSP_TOOLS_PATH}/qx_fader.h
     ${QUAMPLEX_DSP_TOOLS_PATH}/qx_randomizer.h
+    ${QUAMPLEX_DSP_TOOLS_PATH}/qx_smoother.h
     ${ENT_DSP_DIR}/src/ent_shelf_filter.h
     ${ENT_DSP_DIR}/src/ent_filter.h
     ${ENT_DSP_DIR}/src/ent_noise.h

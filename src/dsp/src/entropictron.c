@@ -29,14 +29,18 @@
 #include "ent_state_internal.h"
 
 #include "qx_math.h"
+#include "qx_randomizer.h"
 
 struct entropictron {
 	unsigned int sample_rate;
         enum ent_play_mode play_mode;
         bool is_playing;
+        float entropy_rate;
         struct ent_noise* noise[2];
         struct ent_crackle *crackle[2];
         struct ent_glitch *glitch[2];
+        struct qx_randomizer prob_randomizer;
+        struct qx_randomizer entropy_randomizer;
 };
 
 enum ent_error
@@ -52,6 +56,14 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
 	(*ent)->sample_rate = sample_rate;
         (*ent)->is_playing = false;
         (*ent)->play_mode = ENT_PLAY_MODE_PLAYBACK;
+        (*ent)->entropy_rate = 0.1f;
+
+        qx_randomizer_init(&(*ent)->prob_randomizer,
+                           0.0f, 1.0f,
+                           1.0f / 65536.0f);
+        qx_randomizer_init(&(*ent)->entropy_randomizer,
+                           -1.0f, 1.0f,
+                           1.0f / 65536.0f);
 
         // Create noise
         size_t num_noises = QX_ARRAY_SIZE((*ent)->noise);
@@ -151,6 +163,26 @@ enum ent_play_mode ent_get_play_mode(const struct entropictron *ent)
         return ent->play_mode;
 }
 
+static void update_entropy(struct entropictron *ent)
+{
+        float change_prob = qx_randomizer_get_float(&ent->prob_randomizer);
+        if (change_prob > ent->entropy_rate)
+                return;
+
+        float entropy = qx_randomizer_get_float(&ent->entropy_randomizer);
+        size_t n = QX_ARRAY_SIZE(ent->noise);
+        for (size_t i = 0; i < n; i++)
+                ent_noise_set_entropy(ent->noise[i], entropy);
+
+        /*n = QX_ARRAY_SIZE(ent->crackle);
+        for (size_t i = 0; i < n; i++)
+                ent_crackle_set_entropy(ent->crackle[i], entropy);
+
+        n = QX_ARRAY_SIZE(ent->glitch);
+        for (size_t i = 0; i < n; i++)
+        ent_glitch_set_entropy(ent->glitch[i], entropy);*/
+}
+
 enum ent_error
 ent_process(struct entropictron *ent, float** data, size_t size)
 {
@@ -159,6 +191,8 @@ ent_process(struct entropictron *ent, float** data, size_t size)
 
         float *in[2] = {data[0], data[1]};
         float *out[2] = {data[2], data[3]};
+
+        update_entropy(ent);
 
         size_t n = QX_ARRAY_SIZE(ent->noise);
         for (size_t i = 0; i < n; i++) {

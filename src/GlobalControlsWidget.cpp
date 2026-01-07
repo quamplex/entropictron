@@ -53,9 +53,9 @@ GlobalControlsWidget::GlobalControlsWidget(EntWidget* parent, EntropictronModel*
 
         auto mainContainer = new RkContainer(this, Rk::Orientation::Vertical);
         mainContainer->addSpace(5);
-        createPlayModeControls(mainContainer);
-        mainContainer->addSpace(5);
         mainContainer->addWidget(new PresetWidget(this, entModel));
+        mainContainer->addSpace(5);
+        createPlayModeControls(mainContainer);
 }
 
 void GlobalControlsWidget::createPlayModeControls(RkContainer *container)

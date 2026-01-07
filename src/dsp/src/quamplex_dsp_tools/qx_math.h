@@ -1,5 +1,5 @@
 /**
- * @file qm_math.h
+ * @file qx_math.h
  * @brief Math utilities for Quamplex DSP Tools.
  *
  * This header provides basic mathematical functions used in audio DSP,
@@ -27,8 +27,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#ifndef QM_MATH_H
-#define QM_MATH_H
+#ifndef QX_MATH_H
+#define QX_MATH_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -103,9 +103,19 @@ static inline double qx_clamp_double(double value, double min, double max)
     return QX_CLAMP(value, min, max);
 }
 
+static inline float qx_db_to_val(float db)
+{
+    return powf(10.0f, db * 0.05f);
+}
+
+static inline float qx_val_to_db(float val)
+{
+    return (val > 0.0f) ? (20.0f * log10f(val)) : -INFINITY;
+}
+
 #ifdef __cplusplus
 }
 #endif
 
-#endif // QM_MATH_H
+#endif // QX_MATH_H
 
