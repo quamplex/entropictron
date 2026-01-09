@@ -244,7 +244,6 @@ float ent_noise_get_resonance(const struct ent_noise *noise)
 
 void ent_noise_set_entropy(struct ent_noise *noise, float entropy)
 {
-
         qx_smoother_set_target(&noise->entropy, entropy);
 }
 
@@ -289,7 +288,9 @@ void ent_noise_process(struct ent_noise *noise,
                        float **data,
                        size_t size)
 {
-        float entropy = qx_smoother_next(&noise->entropy);
+        //        float entropy = qx_smoother_next(&noise->entropy);
+        float entropy = noise->entropy.target;
+        //        ent_log_info("entropy: %f", entropy);
         float cutoff = ent_noise_get_cutoff(noise) * (1.0f + 0.05f * entropy);
         ent_noise_set_cutoff(noise, cutoff);
 

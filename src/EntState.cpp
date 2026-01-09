@@ -45,8 +45,8 @@ EntState::EntState(const struct ent_state *state)
 
 void EntState::getState(struct ent_state* state) const
 {
-        // Play mode
         ent_state_set_play_mode(state, getPlayMode());
+        ent_state_set_entropy_rate(state, getEntropyRate());
 
         for (size_t i = 0; i < 2; i++) {
                 // Noise
@@ -60,7 +60,7 @@ void EntState::getState(struct ent_state* state) const
                 ent_state_noise_set_filter_type(ns, noise[i].filter_type);
                 ent_state_noise_set_cutoff(ns, noise[i].cutoff);
                 ent_state_noise_set_resonance(ns, noise[i].resonance);
- 
+
                 // Crackle
                 auto cs = ent_state_get_crackle(state, i);
                 ent_state_crackle_set_enabled(cs, crackle[i].enabled);
@@ -85,8 +85,8 @@ void EntState::getState(struct ent_state* state) const
 
 void EntState::setState(const struct ent_state* state)
 {
-        // Play mode
         setPlayMode(ent_state_get_play_mode(state));
+        setEntropyRate(ent_state_get_entropy_rate(state));
 
         for (size_t i = 0; i < 2; i++) {
                 // Noise
@@ -173,6 +173,16 @@ int EntState::getPlayMode() const
         return playMode;
 }
 
+void EntState::setEntropyRate(double value)
+{
+        entropyRate = value;
+}
+
+double EntState::getEntropyRate() const
+{
+        return entropyRate;
+}
+
 EntState::Noise& EntState::getNoise(NoiseId id)
 {
         return noise[static_cast<size_t>(id)];
@@ -202,6 +212,7 @@ std::string EntState::toJson(bool asPreset) const
         Value global(kObjectType);
         if (!asPreset)
                 global.AddMember("playmode", getPlayMode(), a);
+        global.AddMember("entropy_rate", getEntropyRate(), a);
         doc.AddMember("global", global, a);
 
         Value modules(kArrayType);
@@ -246,6 +257,9 @@ bool EntState::fromJson(const std::string& jsonStr)
 
     if (global.HasMember("playmode") && global["playmode"].IsInt())
             setPlayMode(global["playmode"].GetInt());
+
+    if (global.HasMember("entropy_rate") && global["entropy_rate"].IsDouble())
+            setEntropyRate(global["entropy_rate"].GetDouble());
 
     // Modules
     if (!doc.HasMember("modules") || !doc["modules"].IsArray())

@@ -309,6 +309,11 @@ void EntVstProcessor::initParamMappings()
                 entropictronDsp->setPlayMode(DspProxyVst::playModeFromNormalized(v));
         };
 
+        paramMap[ParameterId::EntropyRateId] = [this](ParamValue v) {
+                ENT_LOG_INFO("set rate: " << v);
+                entropictronDsp->setEntropyRate(v);
+        };
+
         initNoiseParamMappings();
         initCrackleParamMappings();
         initGlitchParamMappings();

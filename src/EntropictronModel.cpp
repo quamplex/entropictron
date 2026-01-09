@@ -73,6 +73,10 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
                     playModeUpdated,
                     RK_ACT_ARGS(PlayMode mode),
                     this, playModeUpdated(mode));
+        RK_ACT_BIND(dspProxy,
+                    entropyRateUpdated,
+                    RK_ACT_ARGS(double val),
+                    this, entropyRateUpdated(val));
 }
 
 bool EntropictronModel::loadPreset(const EntState *preset)
@@ -126,6 +130,17 @@ void EntropictronModel::setPlayMode(PlayMode mode)
 PlayMode EntropictronModel::playMode() const
 {
         return dspProxy->playMode();
+}
+
+void EntropictronModel::setEntropyRate(double rate)
+{
+        if (dspProxy->setEntropyRate(rate))
+                action entropyRateUpdated(rate);
+}
+
+double EntropictronModel::entropyRate() const
+{
+        return dspProxy->getEntropyRate();
 }
 
 NoiseModel* EntropictronModel::getNoise1() const

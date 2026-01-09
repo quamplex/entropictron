@@ -49,6 +49,8 @@ public:
                       int velocity = Entropictron::maxKeyVelocity);
         void setPlayMode(PlayMode mode);
         PlayMode playMode() const;
+        void setEntropyRate(double rate);
+        double getEntropyRate() const;
         DspWrapperNoise* getNoise(NoiseId id) const;
         DspWrapperCrackle* getCrackle(CrackleId id) const;
         DspWrapperGlitch* getGlitch(GlitchId id) const;

@@ -60,9 +60,11 @@ ent_state_get_crackle_const(const struct ent_state *state, size_t index);
 const struct ent_state_glitch*
 ent_state_get_glitch_const(const struct ent_state *state, size_t index);
 
-/* PLAY MODE */
 void ent_state_set_play_mode(struct ent_state *state, int play_mode);
-int  ent_state_get_play_mode(const struct ent_state *state);
+int ent_state_get_play_mode(const struct ent_state *state);
+
+void ent_state_set_entropy_rate(struct ent_state *state, float rate);
+float ent_state_get_entropy_rate(const struct ent_state *state);
 
 /* NOISE */
 void ent_state_noise_set_enabled(struct ent_state_noise *n, bool enabled);

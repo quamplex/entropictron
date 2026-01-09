@@ -69,17 +69,30 @@ ent_state_get_glitch_const(const struct ent_state *state, size_t index)
         return &state->glitches[index];
 }
 
-/* PLAY MODE */
 void ent_state_set_play_mode(struct ent_state *state, int play_mode)
 {
     atomic_store_explicit(&state->play_mode,
                           (enum ent_play_mode)play_mode,
-                          memory_order_release);
+                          memory_order_relaxed);
 }
 
 int ent_state_get_play_mode(const struct ent_state *state)
 {
-    return (int)atomic_load_explicit(&state->play_mode, memory_order_acquire);
+        return atomic_load_explicit(&state->play_mode,
+                                    memory_order_relaxed);
+}
+
+void ent_state_set_entropy_rate(struct ent_state *state, float rate)
+{
+        atomic_store_explicit(&state->entropy_rate,
+                              rate,
+                              memory_order_relaxed);
+}
+
+float ent_state_get_entropy_rate(const struct ent_state *state)
+{
+        return atomic_load_explicit(&state->entropy_rate,
+                                    memory_order_relaxed);
 }
 
 /* NOISE */
@@ -100,7 +113,7 @@ void ent_state_noise_set_type(struct ent_state_noise *n, int type)
 
 int ent_state_noise_get_type(const struct ent_state_noise *n)
 {
-    return (int)atomic_load_explicit(&n->type, memory_order_relaxed);
+    return atomic_load_explicit(&n->type, memory_order_relaxed);
 }
 
 void ent_state_noise_set_density(struct ent_state_noise *n, float density)
@@ -241,7 +254,7 @@ void ent_state_crackle_set_envelope_shape(struct ent_state_crackle *c, int shape
 
 int ent_state_crackle_get_envelope_shape(const struct ent_state_crackle *c)
 {
-    return (int)atomic_load_explicit(&c->envelope_shape, memory_order_relaxed);
+    return atomic_load_explicit(&c->envelope_shape, memory_order_relaxed);
 }
 
 void ent_state_crackle_set_stereo_spread(struct ent_state_crackle *c, float spread)
@@ -312,5 +325,5 @@ void ent_state_glitch_set_repeats(struct ent_state_glitch *g, int repeats)
 
 int ent_state_glitch_get_repeats(const struct ent_state_glitch *g)
 {
-    return (int)atomic_load_explicit(&g->repeats, memory_order_relaxed);
+    return atomic_load_explicit(&g->repeats, memory_order_relaxed);
 }

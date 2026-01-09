@@ -40,6 +40,8 @@ class EntropictronModel: public RkObject
         bool loadPreset(const EntState *preset);
         void setPlayMode(PlayMode mode);
         PlayMode playMode() const;
+        void setEntropyRate(double rate);
+        double entropyRate() const;
         NoiseModel* getNoise1() const;
         NoiseModel* getNoise2() const;
         CrackleModel* getCrackle1() const;
@@ -55,6 +57,10 @@ class EntropictronModel: public RkObject
                     playModeUpdated(PlayMode mode),
                     RK_ARG_TYPE(PlayMode),
                     RK_ARG_VAL(mode));
+        RK_DECL_ACT(entropyRateUpdated,
+                    entropyRateUpdated(double val),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(val));
 
  private:
         DspProxy *dspProxy;

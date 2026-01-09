@@ -88,6 +88,8 @@ class EntState
         std::string getLicense() const;
         void setPlayMode(int mode);
         int getPlayMode() const;
+        void setEntropyRate(double value);
+        double getEntropyRate() const;
         EntState::Noise& getNoise(NoiseId id);
         std::string toJson(bool asPreset = false) const;
         bool fromJson(const std::string& jsonStr);
@@ -111,6 +113,7 @@ class EntState
         std::string presetAuthorURL;
         std::string presetLicense;
         int playMode = 0;
+        double entropyRate = 0.0;
 };
 
 #endif // ENT_STATE_H

@@ -52,12 +52,28 @@ EntVstController::initialize(FUnknown* context)
         if (result != kResultOk)
                 return result;
 
+        parameters.addParameter(STR16("State Changed"),
+                                nullptr,
+                                1, 0, Vst::ParameterInfo::kIsReadOnly | Vst::ParameterInfo::kIsHidden,
+                                ParameterId::StateChangedId);
+
+        parameters.addParameter(STR16("Play Mode"),
+                                nullptr, 3, DspProxyVst::playModeToNormalized(PlayMode::PlaybackMode),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::PlayModeId);
+
+        parameters.addParameter(STR16("Entropy Rate"),
+                                nullptr, 0, ENT_DEFAULT_ENTROPY_RATE,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::EntropyRateId);
+
         addNoiseParameters();
         addCrackleParameters();
         addGlitchParameters();
 
         setParamNormalized (ParameterId::PlayModeId,
                             DspProxyVst::playModeToNormalized(PlayMode::PlaybackMode));
+        setParamNormalized (ParameterId::EntropyRateId, ENT_DEFAULT_ENTROPY_RATE);
 
         // Noise 1
         setParamNormalized (ParameterId::Noise1EnabledId, 0.0);
@@ -187,6 +203,8 @@ tresult PLUGIN_API EntVstController::setComponentState(IBStream* state)
         auto playMode = static_cast<PlayMode>(entState.getPlayMode());
         setParamNormalized (ParameterId::PlayModeId,
                             DspProxyVst::playModeToNormalized(playMode));
+        setParamNormalized (ParameterId::EntropyRateId,
+                            entState.getEntropyRate());
 
         setNoiseState(entState);
         setCrackleState(entState);
@@ -305,16 +323,6 @@ void EntVstController::setGlitchState(const EntState &state)
 
 void EntVstController::addNoiseParameters()
 {
-        parameters.addParameter(STR16("State Changed"),
-                                nullptr,
-                                1, 0, Vst::ParameterInfo::kIsReadOnly | Vst::ParameterInfo::kIsHidden,
-                                ParameterId::StateChangedId);
-
-        parameters.addParameter(STR16("Play Mode"),
-                                nullptr, 3, DspProxyVst::playModeToNormalized(PlayMode::PlaybackMode),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::PlayModeId);
-
         // Noise 1
         parameters.addParameter(STR16("Noise 1 Enabled"),
                                 nullptr, 2, 0.0,

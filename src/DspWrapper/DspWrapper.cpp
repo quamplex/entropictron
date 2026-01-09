@@ -100,6 +100,16 @@ PlayMode DspWrapper::playMode() const
         return static_cast<PlayMode>(ent_get_play_mode(entropictronDsp.get()));
 }
 
+void DspWrapper::setEntropyRate(double rate)
+{
+        ent_set_entropy_rate(entropictronDsp.get(), rate);
+}
+
+double DspWrapper::getEntropyRate() const
+{
+        return ent_get_entropy_rate(entropictronDsp.get());
+}
+
 void DspWrapper::process(float** data, size_t size)
 {
         ent_process(entropictronDsp.get(), data, size);

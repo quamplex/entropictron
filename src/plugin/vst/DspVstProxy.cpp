@@ -59,20 +59,22 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
         };
 
         vstController->setParamterCallback(ParameterId::PlayModeId, paramCallback);
+        vstController->setParamterCallback(ParameterId::EntropyRateId, paramCallback);
         vstController->setParamterCallback(ParameterId::StateChangedId, paramCallback);
 }
 
 DspProxyVst::~DspProxyVst()
 {
         vstController->removeParamterCallback(ParameterId::StateChangedId);
+        vstController->removeParamterCallback(ParameterId::EntropyRateId);
         vstController->removeParamterCallback(ParameterId::PlayModeId);
         vstController->clearStateCallback();
 }
 
 bool DspProxyVst::setPlayMode(PlayMode mode)
 {
+        ENT_LOG_INFO("mode: " << (int)mode);
         vstController->getComponentHandler()->beginEdit(ParameterId::PlayModeId);
-        ENT_LOG_INFO("PLAYMODE: " << (int)mode);
         vstController->getComponentHandler()->performEdit(ParameterId::PlayModeId,
                                                           playModeToNormalized(mode));
         vstController->getComponentHandler()->endEdit(ParameterId::PlayModeId);
@@ -83,6 +85,21 @@ PlayMode DspProxyVst::playMode() const
 {
         auto id = ParameterId::PlayModeId;
         return playModeFromNormalized(vstController->getParamNormalized(id));
+}
+
+bool DspProxyVst::setEntropyRate(double rate)
+{
+        ENT_LOG_INFO("rate: " << rate);
+        vstController->getComponentHandler()->beginEdit(ParameterId::EntropyRateId);
+        vstController->getComponentHandler()->performEdit(ParameterId::EntropyRateId,
+                                                          rate);
+        vstController->getComponentHandler()->endEdit(ParameterId::EntropyRateId);
+        return true;
+}
+
+double DspProxyVst::getEntropyRate() const
+{
+        return vstController->getParamNormalized(ParameterId::EntropyRateId);
 }
 
 DspNoiseProxy* DspProxyVst::getNoise(NoiseId id) const
@@ -125,11 +142,13 @@ void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
 {
         switch (paramId) {
         case ParameterId::StateChangedId:
-                ENT_LOG_INFO("STATE CHANGED: restartComponent");
                 action stateChanged();
                 break;
         case ParameterId::PlayModeId:
                 action playModeUpdated(playModeFromNormalized(value));
+                break;
+        case ParameterId::EntropyRateId:
+                action entropyRateUpdated(value);
                 break;
         default:
                 break;
