@@ -66,6 +66,9 @@ int ent_state_get_play_mode(const struct ent_state *state);
 void ent_state_set_entropy_rate(struct ent_state *state, float rate);
 float ent_state_get_entropy_rate(const struct ent_state *state);
 
+void ent_state_set_entropy_depth(struct ent_state *state, float depth);
+float ent_state_get_entropy_depth(const struct ent_state *state);
+
 /* NOISE */
 void ent_state_noise_set_enabled(struct ent_state_noise *n, bool enabled);
 bool ent_state_noise_get_enabled(const struct ent_state_noise *n);

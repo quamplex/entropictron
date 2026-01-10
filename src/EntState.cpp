@@ -47,6 +47,7 @@ void EntState::getState(struct ent_state* state) const
 {
         ent_state_set_play_mode(state, getPlayMode());
         ent_state_set_entropy_rate(state, getEntropyRate());
+        ent_state_set_entropy_depth(state, getEntropyDepth());
 
         for (size_t i = 0; i < 2; i++) {
                 // Noise
@@ -87,6 +88,7 @@ void EntState::setState(const struct ent_state* state)
 {
         setPlayMode(ent_state_get_play_mode(state));
         setEntropyRate(ent_state_get_entropy_rate(state));
+        setEntropyDepth(ent_state_get_entropy_depth(state));
 
         for (size_t i = 0; i < 2; i++) {
                 // Noise
@@ -183,6 +185,16 @@ double EntState::getEntropyRate() const
         return entropyRate;
 }
 
+void EntState::setEntropyDepth(double value)
+{
+        entropyDepth = value;
+}
+
+double EntState::getEntropyDepth() const
+{
+        return entropyDepth;
+}
+
 EntState::Noise& EntState::getNoise(NoiseId id)
 {
         return noise[static_cast<size_t>(id)];
@@ -213,6 +225,7 @@ std::string EntState::toJson(bool asPreset) const
         if (!asPreset)
                 global.AddMember("playmode", getPlayMode(), a);
         global.AddMember("entropy_rate", getEntropyRate(), a);
+        global.AddMember("entropy_depth", getEntropyDepth(), a);
         doc.AddMember("global", global, a);
 
         Value modules(kArrayType);
@@ -260,6 +273,8 @@ bool EntState::fromJson(const std::string& jsonStr)
 
     if (global.HasMember("entropy_rate") && global["entropy_rate"].IsDouble())
             setEntropyRate(global["entropy_rate"].GetDouble());
+    if (global.HasMember("entropy_depth") && global["entropy_depth"].IsDouble())
+            setEntropyDepth(global["entropy_depth"].GetDouble());
 
     // Modules
     if (!doc.HasMember("modules") || !doc["modules"].IsArray())

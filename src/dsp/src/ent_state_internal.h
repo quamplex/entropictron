@@ -63,6 +63,7 @@ struct ent_state_glitch {
 struct ent_state {
         _Atomic(enum ent_play_mode) play_mode;
         _Atomic(float) entropy_rate;
+        _Atomic(float) entropy_depth;
         struct ent_state_noise noises[2];
         struct ent_state_crackle crackles[2];
         struct ent_state_glitch glitches[2];

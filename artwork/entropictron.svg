@@ -29916,4 +29916,38 @@
     <title
        id="title7203-29-5">button-rect</title>
   </rect>
+  <rect
+     style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+     id="rect4499-56-0-3"
+     width="6.186358"
+     height="1.0093144"
+     x="116.07688"
+     y="127.0495" />
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="117.42416"
+     y="127.7825"
+     id="text20130-57-5-90-3-56"><tspan
+       id="tspan20128-4-0-2-6-2"
+       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+       x="117.42416"
+       y="127.7825">Entropy</tspan></text>
+  <rect
+     style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+     id="rect4499-56-0-3-9"
+     width="6.186358"
+     height="1.0093144"
+     x="115.98402"
+     y="129.39885" />
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="117.73866"
+     y="130.15012"
+     id="text20130-57-5-90-3-56-1"><tspan
+       id="tspan20128-4-0-2-6-2-2"
+       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+       x="117.73866"
+       y="130.15012">Depth</tspan></text>
 </svg>

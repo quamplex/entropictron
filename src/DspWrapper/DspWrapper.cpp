@@ -110,6 +110,16 @@ double DspWrapper::getEntropyRate() const
         return ent_get_entropy_rate(entropictronDsp.get());
 }
 
+void DspWrapper::setEntropyDepth(double depth)
+{
+        ent_set_entropy_depth(entropictronDsp.get(), depth);
+}
+
+double DspWrapper::getEntropyDepth() const
+{
+        return ent_get_entropy_depth(entropictronDsp.get());
+}
+
 void DspWrapper::process(float** data, size_t size)
 {
         ent_process(entropictronDsp.get(), data, size);

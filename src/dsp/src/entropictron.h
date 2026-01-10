@@ -49,8 +49,13 @@ struct entropictron;
 struct ent_state;
 
 #define ENT_DEFAULT_ENTROPY_RATE 0.0f
-#define ENT_ENTROPY_RATE_MIN 0.01f
-#define ENT_ENTROPY_RATE_MAX 1.0f
+#define ENT_ENTROPY_RATE_MIN 0.0f
+#define ENT_ENTROPY_RATE_MAX 0.4f
+
+#define ENT_DEFAULT_ENTROPY_DEPTH 0.5f
+#define ENT_ENTROPY_DEPTH_MIN 0.01f
+#define ENT_ENTROPY_DEPTH_MAX 1.0f
+
 
 enum ent_error ent_create(struct entropictron **ent, unsigned int sample_rate);
 
@@ -67,6 +72,10 @@ enum ent_play_mode ent_get_play_mode(const struct entropictron *ent);
 void ent_set_entropy_rate(struct entropictron *ent, float rate);
 
 float ent_get_entropy_rate(const struct entropictron *ent);
+
+void ent_set_entropy_depth(struct entropictron *ent, float depth);
+
+float ent_get_entropy_depth(const struct entropictron *ent);
 
 enum ent_error ent_process(struct entropictron *ent, float** data, size_t size);
 

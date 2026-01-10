@@ -41,6 +41,8 @@ class DspProxy : public RkObject {
         virtual PlayMode playMode() const = 0;
         virtual bool setEntropyRate(double value) = 0;
         virtual double getEntropyRate() const = 0;
+        virtual bool setEntropyDepth(double value) = 0;
+        virtual double getEntropyDepth() const = 0;
         virtual DspNoiseProxy* getNoise(NoiseId id) const = 0;
         virtual DspCrackleProxy* getCrackle(CrackleId id) const = 0;
         virtual DspGlitchProxy* getGlitch(GlitchId id) const = 0;
@@ -55,6 +57,10 @@ class DspProxy : public RkObject {
                     RK_ARG_VAL(mode));
         RK_DECL_ACT(entropyRateUpdated,
                     entropyRateUpdated(double val),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(val));
+        RK_DECL_ACT(entropyDepthUpdated,
+                    entropyDepthUpdated(double val),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(val));
 };

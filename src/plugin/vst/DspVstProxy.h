@@ -44,6 +44,8 @@ class DspProxyVst: public DspProxy {
         PlayMode playMode() const override;
         bool setEntropyRate(double rate) override;
         double getEntropyRate() const override;
+        bool setEntropyDepth(double depth) override;
+        double getEntropyDepth() const override;
         DspNoiseProxy* getNoise(NoiseId id) const override;
         DspCrackleProxy* getCrackle(CrackleId id) const override;
         DspGlitchProxy* getGlitch(GlitchId id) const override;

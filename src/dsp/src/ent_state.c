@@ -95,6 +95,19 @@ float ent_state_get_entropy_rate(const struct ent_state *state)
                                     memory_order_relaxed);
 }
 
+void ent_state_set_entropy_depth(struct ent_state *state, float depth)
+{
+        atomic_store_explicit(&state->entropy_depth,
+                              depth,
+                              memory_order_relaxed);
+}
+
+float ent_state_get_entropy_depth(const struct ent_state *state)
+{
+        return atomic_load_explicit(&state->entropy_depth,
+                                    memory_order_relaxed);
+}
+
 /* NOISE */
 void ent_state_noise_set_enabled(struct ent_state_noise *n, bool enabled)
 {

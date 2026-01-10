@@ -66,6 +66,10 @@ EntVstController::initialize(FUnknown* context)
                                 nullptr, 0, ENT_DEFAULT_ENTROPY_RATE,
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::EntropyRateId);
+        parameters.addParameter(STR16("Entropy Depth"),
+                                nullptr, 0, ENT_DEFAULT_ENTROPY_DEPTH,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::EntropyDepthId);
 
         addNoiseParameters();
         addCrackleParameters();
@@ -74,6 +78,7 @@ EntVstController::initialize(FUnknown* context)
         setParamNormalized (ParameterId::PlayModeId,
                             DspProxyVst::playModeToNormalized(PlayMode::PlaybackMode));
         setParamNormalized (ParameterId::EntropyRateId, ENT_DEFAULT_ENTROPY_RATE);
+        setParamNormalized (ParameterId::EntropyDepthId, ENT_DEFAULT_ENTROPY_DEPTH);
 
         // Noise 1
         setParamNormalized (ParameterId::Noise1EnabledId, 0.0);
@@ -205,6 +210,8 @@ tresult PLUGIN_API EntVstController::setComponentState(IBStream* state)
                             DspProxyVst::playModeToNormalized(playMode));
         setParamNormalized (ParameterId::EntropyRateId,
                             entState.getEntropyRate());
+        setParamNormalized (ParameterId::EntropyDepthId,
+                            entState.getEntropyDepth());
 
         setNoiseState(entState);
         setCrackleState(entState);

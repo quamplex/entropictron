@@ -60,6 +60,7 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
 
         vstController->setParamterCallback(ParameterId::PlayModeId, paramCallback);
         vstController->setParamterCallback(ParameterId::EntropyRateId, paramCallback);
+        vstController->setParamterCallback(ParameterId::EntropyDepthId, paramCallback);
         vstController->setParamterCallback(ParameterId::StateChangedId, paramCallback);
 }
 
@@ -67,13 +68,13 @@ DspProxyVst::~DspProxyVst()
 {
         vstController->removeParamterCallback(ParameterId::StateChangedId);
         vstController->removeParamterCallback(ParameterId::EntropyRateId);
+        vstController->removeParamterCallback(ParameterId::EntropyDepthId);
         vstController->removeParamterCallback(ParameterId::PlayModeId);
         vstController->clearStateCallback();
 }
 
 bool DspProxyVst::setPlayMode(PlayMode mode)
 {
-        ENT_LOG_INFO("mode: " << (int)mode);
         vstController->getComponentHandler()->beginEdit(ParameterId::PlayModeId);
         vstController->getComponentHandler()->performEdit(ParameterId::PlayModeId,
                                                           playModeToNormalized(mode));
@@ -89,7 +90,6 @@ PlayMode DspProxyVst::playMode() const
 
 bool DspProxyVst::setEntropyRate(double rate)
 {
-        ENT_LOG_INFO("rate: " << rate);
         vstController->getComponentHandler()->beginEdit(ParameterId::EntropyRateId);
         vstController->getComponentHandler()->performEdit(ParameterId::EntropyRateId,
                                                           rate);
@@ -100,6 +100,20 @@ bool DspProxyVst::setEntropyRate(double rate)
 double DspProxyVst::getEntropyRate() const
 {
         return vstController->getParamNormalized(ParameterId::EntropyRateId);
+}
+
+bool DspProxyVst::setEntropyDepth(double depth)
+{
+        vstController->getComponentHandler()->beginEdit(ParameterId::EntropyDepthId);
+        vstController->getComponentHandler()->performEdit(ParameterId::EntropyDepthId,
+                                                          depth);
+        vstController->getComponentHandler()->endEdit(ParameterId::EntropyDepthId);
+        return true;
+}
+
+double DspProxyVst::getEntropyDepth() const
+{
+        return vstController->getParamNormalized(ParameterId::EntropyDepthId);
 }
 
 DspNoiseProxy* DspProxyVst::getNoise(NoiseId id) const
@@ -149,6 +163,9 @@ void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
                 break;
         case ParameterId::EntropyRateId:
                 action entropyRateUpdated(value);
+                break;
+        case ParameterId::EntropyDepthId:
+                action entropyDepthUpdated(value);
                 break;
         default:
                 break;

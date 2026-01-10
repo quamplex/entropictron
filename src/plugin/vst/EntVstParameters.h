@@ -33,6 +33,7 @@ enum ParameterId : Steinberg::Vst::ParamID
     StateChangedId       = 1000,
     PlayModeId           = 1001,
     EntropyRateId        = 1002,
+    EntropyDepthId       = 1003,
 
     // Noise 1
     Noise1EnabledId      = 10101,

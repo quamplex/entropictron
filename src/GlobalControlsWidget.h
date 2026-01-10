@@ -30,6 +30,7 @@
 class EntropictronModel;
 class RkContainer;
 class RkButton;
+class Knob;
 
 class GlobalControlsWidget : public EntWidget
 {
@@ -39,6 +40,7 @@ public:
 
 protected:
         void createPlayModeControls(RkContainer *container);
+        void createEntropyControls(RkContainer *container);
         void setPlayMode(PlayMode mode);
 
 private:
@@ -46,6 +48,8 @@ private:
         RkButton *playbackModeButton;
         RkButton *holdModeButton;
         RkButton *onModeButton;
+        Knob *entropyRateKnob;
+        Knob *entropyDepthKnob;
 };
 
 #endif // ENT_GLOBAL_CONTROLS_WIDGET_H

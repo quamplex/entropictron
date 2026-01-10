@@ -24,6 +24,7 @@
 #include "GlobalControlsWidget.h"
 #include "EntropictronModel.h"
 #include "PresetWidget.h"
+#include "Knob.h"
 
 #include "RkContainer.h"
 #include "RkButton.h"
@@ -41,21 +42,34 @@ RK_DECLARE_IMAGE_RC(play_mode_on_hover);
 RK_DECLARE_IMAGE_RC(play_mode_on_on);
 RK_DECLARE_IMAGE_RC(play_mode_on_hover_on);
 
+RK_DECLARE_IMAGE_RC(knob_medium_size_bk);
+RK_DECLARE_IMAGE_RC(knob_medium_size_marker);
+RK_DECLARE_IMAGE_RC(entropy_rate_knob_label);
+RK_DECLARE_IMAGE_RC(entropy_depth_knob_label);
+
 GlobalControlsWidget::GlobalControlsWidget(EntWidget* parent, EntropictronModel* model)
         : EntWidget(parent)
         , entModel{model}
         , playbackModeButton{nullptr}
         , holdModeButton{nullptr}
         , onModeButton{nullptr}
+        , entropyRateKnob{nullptr}
+        , entropyDepthKnob{nullptr}
+
 {
         setBackgroundColor(37, 43, 53);
         setFixedSize(250, 331);
 
         auto mainContainer = new RkContainer(this, Rk::Orientation::Vertical);
+
+        mainContainer->addSpace(3);
+        createPlayModeControls(mainContainer);
+
         mainContainer->addSpace(5);
         mainContainer->addWidget(new PresetWidget(this, entModel));
-        mainContainer->addSpace(5);
-        createPlayModeControls(mainContainer);
+
+        mainContainer->addSpace(10);
+        createEntropyControls(mainContainer);
 }
 
 void GlobalControlsWidget::createPlayModeControls(RkContainer *container)
@@ -134,6 +148,51 @@ void GlobalControlsWidget::createPlayModeControls(RkContainer *container)
                     setPlayMode(entModel->playMode()));
 
         setPlayMode(entModel->playMode());
+}
+
+void GlobalControlsWidget::createEntropyControls(RkContainer *container)
+{
+        auto contolsContainer = new RkContainer(this);
+        contolsContainer->setSize(width(), 83);
+        container->addContainer(contolsContainer);
+        contolsContainer->addSpace(54);
+
+        entropyRateKnob = new Knob(this, RK_RC_IMAGE(entropy_rate_knob_label));
+        entropyRateKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        entropyRateKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
+        entropyRateKnob->setRange(ENT_ENTROPY_RATE_MIN, ENT_ENTROPY_RATE_MAX);
+        entropyRateKnob->setDefaultValue(ENT_DEFAULT_ENTROPY_RATE);
+        entropyRateKnob->setValue(entModel->entropyRate());
+        contolsContainer->addWidget(entropyRateKnob);
+        RK_ACT_BIND(entropyRateKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    entModel,
+                    setEntropyRate(value));
+
+        entropyDepthKnob = new Knob(this, RK_RC_IMAGE(entropy_depth_knob_label));
+        entropyDepthKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        entropyDepthKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
+        entropyDepthKnob->setRange(ENT_ENTROPY_DEPTH_MIN, ENT_ENTROPY_DEPTH_MAX);
+        entropyDepthKnob->setDefaultValue(ENT_DEFAULT_ENTROPY_DEPTH);
+        entropyDepthKnob->setValue(entModel->entropyDepth());
+        contolsContainer->addWidget(entropyDepthKnob);
+        RK_ACT_BIND(entropyDepthKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    entModel,
+                    setEntropyDepth(value));
+
+        RK_ACT_BIND(entModel,
+                    entropyRateUpdated,
+                    RK_ACT_ARGS(double value),
+                    entropyRateKnob,
+                    setValue(value));
+        RK_ACT_BIND(entModel,
+                    entropyDepthUpdated,
+                    RK_ACT_ARGS(double value),
+                    entropyDepthKnob,
+                    setValue(value));
 }
 
 void GlobalControlsWidget::setPlayMode(PlayMode mode)

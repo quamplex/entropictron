@@ -310,8 +310,11 @@ void EntVstProcessor::initParamMappings()
         };
 
         paramMap[ParameterId::EntropyRateId] = [this](ParamValue v) {
-                ENT_LOG_INFO("set rate: " << v);
                 entropictronDsp->setEntropyRate(v);
+        };
+
+        paramMap[ParameterId::EntropyDepthId] = [this](ParamValue v) {
+                entropictronDsp->setEntropyDepth(v);
         };
 
         initNoiseParamMappings();

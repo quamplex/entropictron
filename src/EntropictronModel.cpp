@@ -77,6 +77,10 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
                     entropyRateUpdated,
                     RK_ACT_ARGS(double val),
                     this, entropyRateUpdated(val));
+        RK_ACT_BIND(dspProxy,
+                    entropyDepthUpdated,
+                    RK_ACT_ARGS(double val),
+                    this, entropyDepthUpdated(val));
 }
 
 bool EntropictronModel::loadPreset(const EntState *preset)
@@ -141,6 +145,17 @@ void EntropictronModel::setEntropyRate(double rate)
 double EntropictronModel::entropyRate() const
 {
         return dspProxy->getEntropyRate();
+}
+
+void EntropictronModel::setEntropyDepth(double depth)
+{
+        if (dspProxy->setEntropyDepth(depth))
+                action entropyDepthUpdated(depth);
+}
+
+double EntropictronModel::entropyDepth() const
+{
+        return dspProxy->getEntropyDepth();
 }
 
 NoiseModel* EntropictronModel::getNoise1() const

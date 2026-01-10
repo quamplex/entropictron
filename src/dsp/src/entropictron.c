@@ -32,10 +32,15 @@
 #include "qx_randomizer.h"
 
 struct entropictron {
-	unsigned int sample_rate;
+        // Parameters
         enum ent_play_mode play_mode;
-        bool is_playing;
         float entropy_rate;
+        float entropy_depth;
+
+	unsigned int sample_rate;
+        bool is_playing;
+        float entropy;
+        float entropy_abs;
         struct ent_noise* noise[2];
         struct ent_crackle *crackle[2];
         struct ent_glitch *glitch[2];
@@ -57,6 +62,8 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
         (*ent)->is_playing = false;
         (*ent)->play_mode = ENT_PLAY_MODE_PLAYBACK;
         (*ent)->entropy_rate = ENT_DEFAULT_ENTROPY_RATE;
+        (*ent)->entropy_depth = ENT_DEFAULT_ENTROPY_DEPTH;
+        (*ent)->entropy = 0.0f;
 
         qx_randomizer_init(&(*ent)->prob_randomizer,
                            0.0f, 1.0f,
@@ -165,7 +172,6 @@ enum ent_play_mode ent_get_play_mode(const struct entropictron *ent)
 
 void ent_set_entropy_rate(struct entropictron *ent, float rate)
 {
-        ent_log_info("entropy_rate: %f", rate);
         ent->entropy_rate = qx_clamp_float(rate,
                                            ENT_ENTROPY_RATE_MIN,
                                            ENT_ENTROPY_RATE_MAX);
@@ -176,25 +182,39 @@ float ent_get_entropy_rate(const struct entropictron *ent)
         return ent->entropy_rate;
 }
 
+void ent_set_entropy_depth(struct entropictron *ent, float depth)
+{
+        ent->entropy_depth = qx_clamp_float(depth,
+                                           ENT_ENTROPY_DEPTH_MIN,
+                                           ENT_ENTROPY_DEPTH_MAX);
+}
+
+float ent_get_entropy_depth(const struct entropictron *ent)
+{
+        return ent->entropy_depth;
+}
+
 static void update_entropy(struct entropictron *ent)
 {
-        float change_prob = qx_randomizer_get_float(&ent->prob_randomizer);
-        if (change_prob >= ENT_ENTROPY_RATE_MIN
-            && change_prob <= ent->entropy_rate && ) {
-                float entropy = qx_randomizer_get_float(&ent->entropy_randomizer);
-                size_t n = QX_ARRAY_SIZE(ent->noise);
-                //        ent_log_info("update entropy: %f", entropy);
-                for (size_t i = 0; i < n; i++)
-                        ent_noise_set_entropy(ent->noise[i], entropy);
-
-                /*n = QX_ARRAY_SIZE(ent->crackle);
-                  for (size_t i = 0; i < n; i++)
-                  ent_crackle_set_entropy(ent->crackle[i], entropy);
-
-                  n = QX_ARRAY_SIZE(ent->glitch);
-                  for (size_t i = 0; i < n; i++)
-                  ent_glitch_set_entropy(ent->glitch[i], entropy);*/
+        float prob = qx_randomizer_get_float(&ent->prob_randomizer);
+        if (prob >= ENT_ENTROPY_RATE_MIN && prob <= ent->entropy_rate) {
+                ent->entropy = qx_randomizer_get_float(&ent->entropy_randomizer);
+                ent->entropy_abs = fabs(ent->entropy);
         }
+
+        const float gravity = 0.001f;
+        ent->entropy_abs -= gravity;
+        if (ent->entropy_abs <= 0.0f)
+                ent->entropy_abs = 0.0f;
+
+        ent->entropy = qx_clamp_float(ent->entropy,
+                                      -ent->entropy_abs,
+                                      ent->entropy_abs);
+
+        size_t n = QX_ARRAY_SIZE(ent->noise);
+        float entropy = ent->entropy * ent->entropy_depth;
+        for (size_t i = 0; i < n; i++)
+                ent_noise_set_entropy(ent->noise[i], entropy);
 }
 
 enum ent_error
@@ -236,6 +256,7 @@ void ent_set_state(struct entropictron *ent, const struct ent_state *state)
 {
         ENT_SET_STATE(ent, state, play_mode, ent_set_play_mode);
         ENT_SET_STATE(ent, state, entropy_rate, ent_set_entropy_rate);
+        ENT_SET_STATE(ent, state, entropy_depth, ent_set_entropy_depth);
 
         size_t n = QX_ARRAY_SIZE(ent->noise);
         for (size_t i = 0; i < n; i++)
@@ -254,6 +275,7 @@ void ent_get_state(const struct entropictron *ent, struct ent_state *state)
 {
         ENT_GET_STATE(ent, state, play_mode, ent_get_play_mode);
         ENT_GET_STATE(ent, state, entropy_rate, ent_get_entropy_rate);
+        ENT_GET_STATE(ent, state, entropy_depth, ent_get_entropy_depth);
 
         size_t n = QX_ARRAY_SIZE(ent->noise);
         for (size_t i = 0; i < n; i++)

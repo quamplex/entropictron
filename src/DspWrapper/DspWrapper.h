@@ -51,6 +51,8 @@ public:
         PlayMode playMode() const;
         void setEntropyRate(double rate);
         double getEntropyRate() const;
+        void setEntropyDepth(double depth);
+        double getEntropyDepth() const;
         DspWrapperNoise* getNoise(NoiseId id) const;
         DspWrapperCrackle* getCrackle(CrackleId id) const;
         DspWrapperGlitch* getGlitch(GlitchId id) const;
