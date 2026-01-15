@@ -1,5 +1,5 @@
 /**
- * File name: ent_noise.
+ * File name: ent_noise.h
  * Project: Entropictron (A texture synthesizer)
  *
  * Copyright (C) 2025 Iurie Nistor

@@ -25,6 +25,7 @@
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
+#include "DspPitchProxyVst.h"
 #include "EntState.h"
 
 #include "pluginterfaces/base/ibstream.h"
@@ -49,6 +50,7 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
         , dspGlitch2Proxy {new DspGlitchProxyVst(this,
                                                  controller,
                                                  GlitchId::Glitch2)}
+        , dspPitchProxy {new DspPitchProxyVst(this, controller)}
 {
         vstController->setStateCallback([this]() {
                 action stateChanged();
@@ -116,6 +118,11 @@ double DspProxyVst::getEntropyDepth() const
         return vstController->getParamNormalized(ParameterId::EntropyDepthId);
 }
 
+double DspProxyVst::getEntropy() const
+{
+        return entropyFromNormalized(vstController->getParamNormalized(ParameterId::EntropyMeterId));
+}
+
 DspNoiseProxy* DspProxyVst::getNoise(NoiseId id) const
 {
         switch(id) {
@@ -152,6 +159,11 @@ DspGlitchProxy* DspProxyVst::getGlitch(GlitchId id) const
         }
 }
 
+DspPitchProxy* DspProxyVst::getPitch() const
+{
+        return dspPitchProxy;
+}
+
 void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
 {
         switch (paramId) {
@@ -172,6 +184,16 @@ void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
         }
 }
 
+static double toNormalized(double value, double min, double max)
+{
+        return (value - min) / (max - min);
+}
+
+static double fromNormalized(double normalized, double min, double max)
+{
+        return min + normalized * (max - min);
+}
+
 double DspProxyVst::playModeToNormalized(PlayMode mode)
 {
         auto numPlayModes = static_cast<double>(PlayMode::OnMode);
@@ -183,3 +205,14 @@ PlayMode DspProxyVst::playModeFromNormalized(double value)
         auto numPlayModes = static_cast<double>(PlayMode::OnMode);
         return static_cast<PlayMode>(std::round(value * numPlayModes));
 }
+
+double DspProxyVst::entropyToNormalized(double val)
+{
+        return toNormalized(val, -1.0, 1.0);
+}
+
+double DspProxyVst::entropyFromNormalized(double val)
+{
+        return fromNormalized(val, -1.0, 1.0);
+}
+

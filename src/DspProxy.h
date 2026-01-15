@@ -31,6 +31,7 @@
 class DspNoiseProxy;
 class DspCrackleProxy;
 class DspGlitchProxy;
+class DspPitchProxy;
 class EntState;
 
 class DspProxy : public RkObject {
@@ -43,9 +44,11 @@ class DspProxy : public RkObject {
         virtual double getEntropyRate() const = 0;
         virtual bool setEntropyDepth(double value) = 0;
         virtual double getEntropyDepth() const = 0;
+        virtual double getEntropy() const = 0;
         virtual DspNoiseProxy* getNoise(NoiseId id) const = 0;
         virtual DspCrackleProxy* getCrackle(CrackleId id) const = 0;
         virtual DspGlitchProxy* getGlitch(GlitchId id) const = 0;
+        virtual DspPitchProxy* getPitch() const = 0;
 
         RK_DECL_ACT(stateChanged,
                     stateChanged(),

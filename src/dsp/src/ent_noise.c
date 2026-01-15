@@ -96,7 +96,8 @@ struct ent_noise* ent_noise_create(int sample_rate)
         qx_randomizer_init(&noise->randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
         qx_randomizer_init(&noise->stereo_randomizer, 0.0f, 1.0f, 1.0f / 65536.0f);
 
-        qx_fader_init(&noise->fader, 50.0f, noise->sample_rate);
+        // Add a fade of 10 ms.
+        qx_fader_init(&noise->fader, 10.0f, noise->sample_rate);
 
         ent_shelf_filter_init(&noise->sh_filter_l, noise->sample_rate, 4000.0f, noise->gain);
         ent_shelf_filter_init(&noise->sh_filter_r, noise->sample_rate, 4000.0f, noise->gain);

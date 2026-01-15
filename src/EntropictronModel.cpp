@@ -158,6 +158,11 @@ double EntropictronModel::entropyDepth() const
         return dspProxy->getEntropyDepth();
 }
 
+double EntropictronModel::entropy() const
+{
+        return dspProxy->getEntropy();
+}
+
 NoiseModel* EntropictronModel::getNoise1() const
 {
         return  noise1Model;

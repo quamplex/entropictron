@@ -23,12 +23,15 @@
 
 #include "DspWrapper.h"
 #include "entropictron.h"
+#include "DspFrameTimer.h"
 #include "DspWrapperNoise.h"
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
+#include "DspWrapperPitch.h"
 #include "ent_state.h"
 
 DspWrapper::DspWrapper()
+        : frameTimer{std::make_unique<DspFrameTimer>()}
 {
         // Create DSP
         struct entropictron* dsp = nullptr;
@@ -64,11 +67,20 @@ DspWrapper::DspWrapper()
         glitch = ent_get_glitch(entropictronDsp.get(),
                                 static_cast<int>(GlitchId::Glitch2));
         dspGlitch2 = std::make_unique<DspWrapperGlitch>(glitch);
+
+        // Pitch
+        auto pitch = ent_get_pitch(entropictronDsp.get());
+        dspPitch = std::make_unique<DspWrapperPitch>(pitch);
+
+        // Set 50ms timeout.
+        frameTimer->setTimeout(getSampleRate() * 0.05);
 }
 
 void DspWrapper::setSampleRate(unsigned int srate)
 {
         ent_set_sample_rate(entropictronDsp.get(), srate);
+        // Set 50ms timeout.
+        frameTimer->setTimeout(srate * 0.05);
 }
 
 int DspWrapper::getSampleRate() const
@@ -120,6 +132,16 @@ double DspWrapper::getEntropyDepth() const
         return ent_get_entropy_depth(entropictronDsp.get());
 }
 
+double DspWrapper::getEntropy() const
+{
+        return ent_get_entropy(entropictronDsp.get());
+}
+
+void DspWrapper::updateEntropy()
+{
+        ent_update_entropy(entropictronDsp.get());
+}
+
 void DspWrapper::process(float** data, size_t size)
 {
         ent_process(entropictronDsp.get(), data, size);
@@ -153,6 +175,16 @@ DspWrapperGlitch* DspWrapper::getGlitch(GlitchId id) const
                 return dspGlitch1.get();
         else
                 return dspGlitch2.get();
+}
+
+DspWrapperPitch* DspWrapper::getPitch() const
+{
+        return dspPitch.get();
+}
+
+DspFrameTimer* DspWrapper::getFrameTimer() const
+{
+        return frameTimer.get();
 }
 
 

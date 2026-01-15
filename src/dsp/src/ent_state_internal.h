@@ -60,6 +60,14 @@ struct ent_state_glitch {
         _Atomic(int) repeats;
 };
 
+struct ent_state_pitch {
+        _Atomic(bool) enabled;
+        _Atomic(float) pitch;
+        _Atomic(float) fine;
+        _Atomic(float) depth;
+        _Atomic(float) drift;
+};
+
 struct ent_state {
         _Atomic(enum ent_play_mode) play_mode;
         _Atomic(float) entropy_rate;
@@ -67,6 +75,7 @@ struct ent_state {
         struct ent_state_noise noises[2];
         struct ent_state_crackle crackles[2];
         struct ent_state_glitch glitches[2];
+        struct ent_state_glitch pitch;
 };
 
 #define ENT_SET_STATE(obj, state, field, setter)                        \

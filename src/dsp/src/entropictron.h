@@ -45,12 +45,13 @@ extern "C" {
 struct ent_noise;
 struct ent_crackle;
 struct ent_glitch;
+struct ent_pitch;
 struct entropictron;
 struct ent_state;
 
 #define ENT_DEFAULT_ENTROPY_RATE 0.0f
 #define ENT_ENTROPY_RATE_MIN 0.0f
-#define ENT_ENTROPY_RATE_MAX 0.4f
+#define ENT_ENTROPY_RATE_MAX 1.0f
 
 #define ENT_DEFAULT_ENTROPY_DEPTH 0.5f
 #define ENT_ENTROPY_DEPTH_MIN 0.01f
@@ -77,6 +78,10 @@ void ent_set_entropy_depth(struct entropictron *ent, float depth);
 
 float ent_get_entropy_depth(const struct entropictron *ent);
 
+float ent_get_entropy(struct entropictron *ent);
+
+void ent_update_entropy(struct entropictron *ent);
+
 enum ent_error ent_process(struct entropictron *ent, float** data, size_t size);
 
 void ent_press_key(struct entropictron *ent, bool on, int pitch, int velocity);
@@ -86,6 +91,8 @@ struct ent_noise* ent_get_noise(struct entropictron *ent, int id);
 struct ent_crackle* ent_get_crackle(struct entropictron *ent, int id);
 
 struct ent_glitch* ent_get_glitch(struct entropictron *ent, int id);
+
+struct ent_pitch* ent_get_pitch(struct entropictron *ent);
 
 void ent_set_state(struct entropictron *ent, const struct ent_state *state);
 

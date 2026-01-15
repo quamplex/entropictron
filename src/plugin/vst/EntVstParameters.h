@@ -34,6 +34,7 @@ enum ParameterId : Steinberg::Vst::ParamID
     PlayModeId           = 1001,
     EntropyRateId        = 1002,
     EntropyDepthId       = 1003,
+    EntropyMeterId       = 1004,
 
     // Noise 1
     Noise1EnabledId      = 10101,
@@ -93,6 +94,13 @@ enum ParameterId : Steinberg::Vst::ParamID
     Glitch2MaxJumpId        = 30204,
     Glitch2LengthId         = 30205,
     Glitch2RepeatsId        = 30206,
+
+    // Pitch
+    PitchEnabledId          = 40201,
+    PitchPitchId            = 40202,
+    PitchFineId             = 40203,
+    PitchDepthId            = 40204,
+    PitchDriftId            = 40205,
 };
 
 } // namesapce EntVst

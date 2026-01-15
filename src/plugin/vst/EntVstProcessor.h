@@ -48,6 +48,17 @@ using namespace EntVst;
 class DspWrapper;
 struct ent_state;
 
+constexpr int QUEUE_MAX_EVENTS = 512;
+
+struct QueuedEvent {
+    int32 sampleOffset;
+        enum class Type { NoteOn, NoteOff, Automation, DspTimer } type;
+    union {
+        struct { int32 pitch; float velocity; bool on; } note;
+        struct { Steinberg::Vst::ParamID pid; Steinberg::Vst::ParamValue value; } automation;
+    };
+};
+
 class EntVstProcessor : public AudioEffect {
  public:
         EntVstProcessor();
@@ -70,6 +81,7 @@ class EntVstProcessor : public AudioEffect {
         void initNoiseParamMappings();
         void initCrackleParamMappings();
         void initGlitchParamMappings();
+        void initPitchParamMappings();
         void updateParameters(ParameterId pid, ParamValue value);
         void storeDspSate();
         tresult setState (IBStream *state) SMTG_OVERRIDE;
@@ -81,6 +93,8 @@ class EntVstProcessor : public AudioEffect {
         bool dspStateUpdated;
         std::atomic<bool> isPendingState;
         struct ent_state* dspState;
+        size_t eventCount;
+        std::array<QueuedEvent, QUEUE_MAX_EVENTS> eventQueue;
 };
 
 #endif // ENT_VST_PROCESSOR_H

@@ -340,3 +340,54 @@ int ent_state_glitch_get_repeats(const struct ent_state_glitch *g)
 {
     return atomic_load_explicit(&g->repeats, memory_order_relaxed);
 }
+
+/* PITCH */
+void ent_state_pitch_set_enabled(struct ent_state_pitch *g, bool enabled)
+{
+    atomic_store_explicit(&g->enabled, enabled, memory_order_relaxed);
+}
+
+bool ent_state_pitch_get_enabled(const struct ent_state_pitch *g)
+{
+    return atomic_load_explicit(&g->enabled, memory_order_relaxed);
+}
+
+void ent_state_pitch_set_pitch(struct ent_state_pitch *g, float val)
+{
+    atomic_store_explicit(&g->pitch, val, memory_order_relaxed);
+}
+
+float ent_state_pitch_get_pitch(const struct ent_state_pitch *g)
+{
+    return atomic_load_explicit(&g->pitch, memory_order_relaxed);
+}
+
+void ent_state_pitch_set_fine(struct ent_state_pitch *g, float val)
+{
+    atomic_store_explicit(&g->fine, val, memory_order_relaxed);
+}
+
+float ent_state_pitch_get_fine(const struct ent_state_pitch *g)
+{
+    return atomic_load_explicit(&g->fine, memory_order_relaxed);
+}
+
+void ent_state_pitch_set_depth(struct ent_state_pitch *g, float val)
+{
+    atomic_store_explicit(&g->depth, val, memory_order_relaxed);
+}
+
+float ent_state_pitch_get_depth(const struct ent_state_pitch *g)
+{
+    return atomic_load_explicit(&g->depth, memory_order_relaxed);
+}
+
+void ent_state_pitch_set_drift(struct ent_state_pitch *g, float drift)
+{
+    atomic_store_explicit(&g->drift, drift, memory_order_relaxed);
+}
+
+float ent_state_pitch_get_drift(const struct ent_state_pitch *g)
+{
+    return atomic_load_explicit(&g->drift, memory_order_relaxed);
+}

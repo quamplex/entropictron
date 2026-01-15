@@ -113,6 +113,21 @@ static inline float qx_val_to_db(float val)
     return (val > 0.0f) ? (20.0f * log10f(val)) : -INFINITY;
 }
 
+static inline float qx_ring_interp_linear(const float *buf,
+                                          float index,
+                                          int size)
+{
+    int i1 = (int)index;
+    int i2 = i1 + 1;
+
+    if (i1 >= size)
+            i1 -= size;
+
+    float k = index - (float)i1;
+
+    return buf[i1] + k * (buf[i2] - buf[i1]);
+}
+
 #ifdef __cplusplus
 }
 #endif

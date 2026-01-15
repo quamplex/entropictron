@@ -59,9 +59,11 @@ protected:
         void setNoiseState(const EntState& state);
         void setCrackleState(const EntState& state);
         void setGlitchState(const EntState& state);
+        void setPitchState(const EntState& state);
         void addNoiseParameters();
         void addCrackleParameters();
         void addGlitchParameters();
+        void addPitchParameters();
 
 private:
         std::unordered_map<ParameterId, ParameterCallback> parametersCallbacks;

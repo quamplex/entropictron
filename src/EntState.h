@@ -69,9 +69,19 @@ class EntState
                 double max_jump = 0.0;
         };
 
+        struct Pitch {
+                int id = 4;
+                bool enabled = false;
+                double pitch = 0;
+                double fine = 0.0;
+                double depth = 0.0;
+                double drift = 0.0;
+        };
+
         Noise noise[2];
         Crackle crackle[2];
         Glitch glitch[2];
+        Pitch pitch;
 
         EntState();
         explicit EntState(const std::string &jsonData);

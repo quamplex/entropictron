@@ -35,6 +35,7 @@ class EntVstController;
 class DspNoiseProxyVst;
 class DspCrackleProxyVst;
 class DspGlitchProxyVst;
+class DspPitchProxyVst;
 
 class DspProxyVst: public DspProxy {
  public:
@@ -46,12 +47,16 @@ class DspProxyVst: public DspProxy {
         double getEntropyRate() const override;
         bool setEntropyDepth(double depth) override;
         double getEntropyDepth() const override;
+        double getEntropy() const override;
         DspNoiseProxy* getNoise(NoiseId id) const override;
         DspCrackleProxy* getCrackle(CrackleId id) const override;
         DspGlitchProxy* getGlitch(GlitchId id) const override;
+        DspPitchProxy* getPitch() const override;
 
         static double playModeToNormalized(PlayMode mode);
         static PlayMode playModeFromNormalized(double value);
+        static double entropyToNormalized(double val);
+        static double entropyFromNormalized(double val);
 
 protected:
         void onParameterChanged(ParameterId paramId, ParamValue value);
@@ -64,6 +69,7 @@ protected:
         DspCrackleProxyVst *dspCrackle2Proxy;
         DspGlitchProxyVst *dspGlitch1Proxy;
         DspGlitchProxyVst *dspGlitch2Proxy;
+        DspPitchProxyVst *dspPitchProxy;
 };
 
 #endif // DSP_PROXY_VST_H

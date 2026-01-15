@@ -112,6 +112,7 @@ set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/DspNoiseProxy.h
   ${ENT_COMMON_DIR}/DspCrackleProxy.h
   ${ENT_COMMON_DIR}/DspGlitchProxy.h
+  ${ENT_COMMON_DIR}/DspPitchProxy.h
   ${ENT_COMMON_DIR}/EntAbstractModel.h
   ${ENT_COMMON_DIR}/EntropictronModel.h
   ${ENT_COMMON_DIR}/NoiseModel.h
@@ -124,6 +125,7 @@ set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/NoiseWidget.h
   ${ENT_COMMON_DIR}/CrackleWidget.h
   ${ENT_COMMON_DIR}/GlitchWidget.h
+  ${ENT_COMMON_DIR}/EntropyMeter.h
   ${ENT_COMMON_DIR}/ModuleWidgetTab.h
   ${ENT_COMMON_DIR}/GlobalControlsWidget.h
   ${ENT_COMMON_DIR}/EntState.h
@@ -138,6 +140,7 @@ set(ENT_COMMON_SOURCES
   ${ENT_COMMON_DIR}/DspNoiseProxy.cpp
   ${ENT_COMMON_DIR}/DspCrackleProxy.cpp
   ${ENT_COMMON_DIR}/DspGlitchProxy.cpp
+  ${ENT_COMMON_DIR}/DspPitchProxy.cpp
   ${ENT_COMMON_DIR}/EntAbstractModel.cpp
   ${ENT_COMMON_DIR}/EntropictronModel.cpp
   ${ENT_COMMON_DIR}/NoiseModel.cpp
@@ -149,6 +152,7 @@ set(ENT_COMMON_SOURCES
   ${ENT_COMMON_DIR}/NoiseWidget.cpp
   ${ENT_COMMON_DIR}/CrackleWidget.cpp
   ${ENT_COMMON_DIR}/GlitchWidget.cpp
+  ${ENT_COMMON_DIR}/EntropyMeter.cpp
   ${ENT_COMMON_DIR}/ModuleWidgetTab.cpp
   ${ENT_COMMON_DIR}/GlobalControlsWidget.cpp
   ${ENT_COMMON_DIR}/EntState.cpp

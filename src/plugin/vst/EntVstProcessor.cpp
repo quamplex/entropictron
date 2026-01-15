@@ -25,14 +25,17 @@
 #include "EntVstPluginView.h"
 #include "VstIds.h"
 #include "DspWrapper.h"
+#include "DspFrameTimer.h"
 #include "DspWrapperNoise.h"
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
+#include "DspWrapperPitch.h"
 #include "EntVstParameters.h"
 #include "DspVstProxy.h"
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
+#include "DspPitchProxyVst.h"
 #include "EntState.h"
 #include "ent_state.h"
 
@@ -43,17 +46,6 @@
 
 using namespace EntVst;
 using namespace Steinberg::Vst;
-
-static constexpr int MAX_EVENTS = 512;
-
-struct QueuedEvent {
-    int32 sampleOffset;
-    enum class Type { NoteOn, NoteOff, Automation } type;
-    union {
-        struct { int32 pitch; float velocity; bool on; } note;
-        struct { Steinberg::Vst::ParamID pid; Steinberg::Vst::ParamValue value; } automation;
-    };
-};
 
 #ifndef ENTROPICTRON_OS_WINDOWS
 bool ModuleEntry (void*)
@@ -72,7 +64,16 @@ EntVstProcessor::EntVstProcessor()
         , dspStateUpdated{false}
         , isPendingState{false}
         , dspState{ent_state_create()}
+        , eventCount{0}
 {
+        entropictronDsp->getFrameTimer()->setOnTimeoutCallback([this](size_t i) {
+                QueuedEvent qe;
+                qe.type = QueuedEvent::Type::DspTimer;
+                qe.sampleOffset = i;
+                if (eventCount < eventQueue.max_size())
+                        eventQueue[eventCount++] = qe;
+        });
+
         entropictronDsp->getState(dspState);
         initParamMappings();
 }
@@ -152,10 +153,23 @@ EntVstProcessor::process(ProcessData& data)
          if (!entropictronDsp || data.numSamples < 1)
                  return kResultOk;
 
+         eventCount = 0;
          memset(data.outputs[0].channelBuffers32[0], 0,
                 data.numSamples * sizeof(float));
          memset(data.outputs[0].channelBuffers32[1], 0,
                 data.numSamples * sizeof(float));
+
+         if (data.outputParameterChanges) {
+                 int32 index = 0;
+                 auto queue = data.outputParameterChanges->addParameterData(ParameterId::EntropyMeterId, index);
+                 if (queue) {
+                         int32 queueIndex = 0;
+                         auto val = DspProxyVst::entropyToNormalized(entropictronDsp->getEntropy());
+                         queue->addPoint(data.numSamples - 1, val, queueIndex);
+                 }
+         }
+
+         entropictronDsp->getFrameTimer()->process(data.numSamples);
 
          const auto* ctx = data.processContext;
          if (entropictronDsp->playMode() == PlayMode::PlaybackMode && ctx)
@@ -176,11 +190,9 @@ EntVstProcessor::process(ProcessData& data)
 
          // Collect automation events
          auto inputParams = data.inputParameterChanges;
-         std::array<QueuedEvent, MAX_EVENTS> eventQueue;
-         int eventCount = 0;
 
          // Insert MIDI events into queue
-         for (int32 i = 0; i < nMidiEvents && eventCount < MAX_EVENTS; ++i) {
+         for (int32 i = 0; i < nMidiEvents && eventCount < eventQueue.max_size(); ++i) {
                  Event event{};
                  if (midiEvents->getEvent(i, event) == kResultOk) {
                          QueuedEvent qe;
@@ -212,7 +224,7 @@ EntVstProcessor::process(ProcessData& data)
          // Insert automation parameter changes into queue
          if (inputParams) {
                  int32 paramCount = inputParams->getParameterCount();
-                 for (int32 i = 0; i < paramCount && eventCount < MAX_EVENTS; ++i) {
+                 for (int32 i = 0; i < paramCount && eventCount < eventQueue.max_size(); ++i) {
                          auto queue = inputParams->getParameterData(i);
                          if (!queue)
                                  continue;
@@ -221,7 +233,7 @@ EntVstProcessor::process(ProcessData& data)
                          int32 pointCount = queue->getPointCount();
 
                          // Push all points as automation events
-                         for (int32 p = 0; p < pointCount && eventCount < MAX_EVENTS; ++p) {
+                         for (int32 p = 0; p < pointCount && eventCount < eventQueue.max_size(); ++p) {
                                  int32 sampleOffset = 0;
                                  ParamValue value = 0;
                                  if (queue->getPoint(p, sampleOffset, value) == kResultOk) {
@@ -250,7 +262,7 @@ EntVstProcessor::process(ProcessData& data)
          };
 
          size_t currentFrame = 0;
-         for (int i = 0; i < eventCount; ++i) {
+         for (size_t i = 0; i < eventCount; ++i) {
                  size_t eventFrame = static_cast<size_t>(eventQueue[i].sampleOffset);
                  if (eventFrame > static_cast<size_t>(data.numSamples))
                          eventFrame = data.numSamples;
@@ -267,6 +279,9 @@ EntVstProcessor::process(ProcessData& data)
 
                  // Apply event at exact sample
                  switch (eventQueue[i].type) {
+                 case QueuedEvent::Type::DspTimer:
+                         entropictronDsp->updateEntropy();
+                         break;
                  case QueuedEvent::Type::NoteOn:
                          if (entropictronDsp->playMode() == PlayMode::HoldMode)
                                  entropictronDsp->pressKey(true);
@@ -320,6 +335,7 @@ void EntVstProcessor::initParamMappings()
         initNoiseParamMappings();
         initCrackleParamMappings();
         initGlitchParamMappings();
+        initPitchParamMappings();
 }
 
 void EntVstProcessor::initNoiseParamMappings()
@@ -485,6 +501,26 @@ void EntVstProcessor::initGlitchParamMappings()
         };
         paramMap[ParameterId::Glitch2RepeatsId] = [glitch](ParamValue v) {
                 glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
+        };
+}
+
+void EntVstProcessor::initPitchParamMappings()
+{
+        auto pitch = entropictronDsp->getPitch();
+        paramMap[ParameterId::PitchEnabledId] = [pitch](ParamValue v) {
+                pitch->enable(v > 0.5);
+        };
+        paramMap[ParameterId::PitchPitchId] = [pitch](ParamValue v) {
+                pitch->setPitch(DspPitchProxyVst::pitchFromNormalized(v));
+        };
+        paramMap[ParameterId::PitchFineId] = [pitch](ParamValue v) {
+                pitch->setFine(DspPitchProxyVst::fineFromNormalized(v));
+        };
+        paramMap[ParameterId::PitchDepthId] = [pitch](ParamValue v) {
+                pitch->setDepth(DspPitchProxyVst::depthFromNormalized(v));
+        };
+        paramMap[ParameterId::PitchDriftId] = [pitch](ParamValue v) {
+                pitch->setDrift(DspPitchProxyVst::driftFromNormalized(v));
         };
 }
 

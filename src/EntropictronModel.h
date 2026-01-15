@@ -44,6 +44,7 @@ class EntropictronModel: public RkObject
         double entropyRate() const;
         void setEntropyDepth(double depth);
         double entropyDepth() const;
+        double entropy() const;
         NoiseModel* getNoise1() const;
         NoiseModel* getNoise2() const;
         CrackleModel* getCrackle1() const;

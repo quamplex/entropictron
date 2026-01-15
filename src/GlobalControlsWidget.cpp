@@ -24,6 +24,7 @@
 #include "GlobalControlsWidget.h"
 #include "EntropictronModel.h"
 #include "PresetWidget.h"
+#include "EntropyMeter.h"
 #include "Knob.h"
 
 #include "RkContainer.h"
@@ -155,7 +156,7 @@ void GlobalControlsWidget::createEntropyControls(RkContainer *container)
         auto contolsContainer = new RkContainer(this);
         contolsContainer->setSize(width(), 83);
         container->addContainer(contolsContainer);
-        contolsContainer->addSpace(54);
+        contolsContainer->addSpace(5);
 
         entropyRateKnob = new Knob(this, RK_RC_IMAGE(entropy_rate_knob_label));
         entropyRateKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
@@ -193,6 +194,9 @@ void GlobalControlsWidget::createEntropyControls(RkContainer *container)
                     RK_ACT_ARGS(double value),
                     entropyDepthKnob,
                     setValue(value));
+
+        contolsContainer->addSpace(5);
+        contolsContainer->addWidget(new EntropyMeter(this, entModel));
 }
 
 void GlobalControlsWidget::setPlayMode(PlayMode mode)

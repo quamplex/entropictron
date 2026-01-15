@@ -36,6 +36,7 @@ extern "C" {
 struct ent_state_noise;
 struct ent_state_crackle;
 struct ent_state_glitch;
+struct ent_state_pitch;
 struct ent_state;
 
 struct ent_state* ent_state_create();
@@ -140,6 +141,22 @@ float ent_state_glitch_get_length(const struct ent_state_glitch *g);
 
 void ent_state_glitch_set_repeats(struct ent_state_glitch *g, int repeats);
 int  ent_state_glitch_get_repeats(const struct ent_state_glitch *g);
+
+/* PITCH */
+void ent_state_pitch_set_enabled(struct ent_state_pitch *g, bool enabled);
+bool ent_state_pitch_get_enabled(const struct ent_state_pitch *g);
+
+void ent_state_pitch_set_pitch(struct ent_state_pitch *g, float val);
+float ent_state_pitch_get_pitch(const struct ent_state_pitch *g);
+
+void ent_state_pitch_set_fine(struct ent_state_pitch *g, float val);
+float ent_state_pitch_get_fine(const struct ent_state_pitch *g);
+
+void ent_state_pitch_set_depth(struct ent_state_pitch *g, float val);
+float ent_state_pitch_get_depth(const struct ent_state_pitch *g);
+
+void ent_state_pitch_set_drift(struct ent_state_pitch *g, float val);
+float ent_state_pitch_get_drift(const struct ent_state_pitch *g);
 
 #ifdef __cplusplus
 }
