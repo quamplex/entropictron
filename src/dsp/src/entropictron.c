@@ -41,7 +41,6 @@ struct entropictron {
 	unsigned int sample_rate;
         bool is_playing;
         struct qx_smoother entropy;
-        //float entropy;
         float entropy_abs;
         struct ent_noise* noise[2];
         struct ent_crackle *crackle[2];
@@ -66,7 +65,6 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
         (*ent)->entropy_rate = ENT_DEFAULT_ENTROPY_RATE;
         (*ent)->entropy_depth = ENT_DEFAULT_ENTROPY_DEPTH;
         qx_smoother_init(&(*ent)->entropy, 0.0f, 2.0f);
-        //        (*ent)->entropy = 0.0f;
 
         qx_randomizer_init(&(*ent)->prob_randomizer,
                            0.0f, 1.0f,

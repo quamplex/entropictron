@@ -53,7 +53,7 @@ struct ent_state;
 #define ENT_ENTROPY_RATE_MAX 1.0f
 
 #define ENT_DEFAULT_ENTROPY_DEPTH 0.5f
-#define ENT_ENTROPY_DEPTH_MIN 0.01f
+#define ENT_ENTROPY_DEPTH_MIN 0.0f
 #define ENT_ENTROPY_DEPTH_MAX 1.0f
 
 

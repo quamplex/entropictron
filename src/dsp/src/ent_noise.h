@@ -47,28 +47,36 @@ struct ent_noise* ent_noise_create(int sample_rate);
 
 void ent_noise_free(struct ent_noise **noise);
 
-enum ent_error ent_noise_enable(struct ent_noise *noise, bool b);
+enum ent_error
+ent_noise_enable(struct ent_noise *noise, bool b);
 
 bool ent_noise_is_enabled(const struct ent_noise *noise);
 
-enum ent_error ent_noise_set_type(struct ent_noise *noise,
-                                  enum ent_noise_type type);
+enum ent_error
+ent_noise_set_type(struct ent_noise *noise,
+                   enum ent_noise_type type);
 
-enum ent_noise_type ent_noise_get_type(const struct ent_noise *noise);
+enum ent_noise_type
+ent_noise_get_type(const struct ent_noise *noise);
 
-enum ent_error ent_noise_set_density(struct ent_noise *noise, float density);
+enum ent_error
+ent_noise_set_density(struct ent_noise *noise, float density);
 
 float ent_noise_get_density(const struct ent_noise *noise);
 
-enum ent_error ent_noise_set_brightness(struct ent_noise *noise, float brightness);
+enum ent_error
+ent_noise_set_brightness(struct ent_noise *noise,
+                         float brightness);
 
 float ent_noise_get_brightness(const struct ent_noise *noise);
 
-enum ent_error ent_noise_set_gain(struct ent_noise *noise, float gain);
+enum ent_error
+ent_noise_set_gain(struct ent_noise *noise, float gain);
 
 float ent_noise_get_gain(const struct ent_noise *noise);
 
-enum ent_error ent_noise_set_stereo(struct ent_noise *noise, float stereo);
+enum ent_error
+ent_noise_set_stereo(struct ent_noise *noise, float stereo);
 
 float ent_noise_get_stereo(const struct ent_noise *noise);
 
@@ -95,9 +103,11 @@ void ent_noise_set_entropy(struct ent_noise *noise, float entropy);
 
 float ent_noise_get_entropy(const struct ent_noise *noise);
 
-void ent_noise_set_state(struct ent_noise *noise, const struct ent_state_noise *state);
+void ent_noise_set_state(struct ent_noise *noise,
+                         const struct ent_state_noise *state);
 
-void ent_noise_get_state(const struct ent_noise *noise, struct ent_state_noise *state);
+void ent_noise_get_state(const struct ent_noise *noise,
+                         struct ent_state_noise *state);
 
 #ifdef __cplusplus
 }

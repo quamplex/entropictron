@@ -92,15 +92,27 @@ struct ent_noise* ent_noise_create(int sample_rate)
         noise->min_gain = qx_db_to_val(ENT_NOISE_MIN_GAIN);
         noise->max_gain = qx_db_to_val(ENT_NOISE_MAX_GAIN);
 
-        qx_randomizer_init(&noise->prob_randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
-        qx_randomizer_init(&noise->randomizer, -1.0f, 1.0f, 1.0f / 65536.0f);
-        qx_randomizer_init(&noise->stereo_randomizer, 0.0f, 1.0f, 1.0f / 65536.0f);
+        qx_randomizer_init(&noise->prob_randomizer,
+                           -1.0f, 1.0f,
+                           1.0f / 65536.0f);
+        qx_randomizer_init(&noise->randomizer,
+                           -1.0f, 1.0f,
+                           1.0f / 65536.0f);
+        qx_randomizer_init(&noise->stereo_randomizer,
+                           0.0f, 1.0f,
+                           1.0f / 65536.0f);
 
         // Add a fade of 10 ms.
         qx_fader_init(&noise->fader, 10.0f, noise->sample_rate);
 
-        ent_shelf_filter_init(&noise->sh_filter_l, noise->sample_rate, 4000.0f, noise->gain);
-        ent_shelf_filter_init(&noise->sh_filter_r, noise->sample_rate, 4000.0f, noise->gain);
+        ent_shelf_filter_init(&noise->sh_filter_l,
+                              noise->sample_rate,
+                              4000.0f,
+                              noise->gain);
+        ent_shelf_filter_init(&noise->sh_filter_r,
+                              noise->sample_rate,
+                              4000.0f,
+                              noise->gain);
 
         noise->filter_cut_off = 800.0f;
         noise->resonance = 0.5f;
@@ -175,17 +187,23 @@ enum ent_error ent_noise_set_brightness(struct ent_noise *noise, float brightnes
 {
     noise->brightness = qx_clamp_float(brightness, 0.01f, 1.0f);
 
-    float min_cutoff = 4000.0f;
-    float max_cutoff = 8000.0f;
-    float cutoff = min_cutoff + (max_cutoff - min_cutoff) * noise->brightness;
+    const float min_cutoff = 4000.0f;
+    const float max_cutoff = 8000.0f;
+    const float cutoff = min_cutoff + (max_cutoff - min_cutoff) * noise->brightness;
 
-    float min_gain = 0.0f;
-    float max_gain = 6.0f;
-    float gain = min_gain + (max_gain - min_gain) *  brightness;
+    const float min_gain = 0.0f;
+    const float max_gain = 6.0f;
+    const float gain = min_gain + (max_gain - min_gain) *  brightness;
 
     // Update high-shelf filter for both channels
-    ent_shelf_filter_set_cutoff(&noise->sh_filter_l, noise->sample_rate, cutoff, gain);
-    ent_shelf_filter_set_cutoff(&noise->sh_filter_r, noise->sample_rate, cutoff, gain);
+    ent_shelf_filter_set_cutoff(&noise->sh_filter_l,
+                                noise->sample_rate,
+                                cutoff,
+                                gain);
+    ent_shelf_filter_set_cutoff(&noise->sh_filter_r,
+                                noise->sample_rate,
+                                cutoff,
+                                gain);
 
     return ENT_OK;
 }
@@ -260,19 +278,6 @@ float ent_noise_get_entropy(const struct ent_noise *noise)
         return qx_smoother_get(&noise->entropy);
 }
 
-inline static float ent_pink_noise(float white)
-{
-        static float b0, b1, b2;
-
-        b0 = 0.99765f * b0 + 0.0990460f * white;
-        b1 = 0.96300f * b1 + 0.2965164f * white;
-        b2 = 0.57000f * b2 + 1.0526913f * white;
-
-        float pink = b0 + b1 + b2 + 0.1848f * white;
-
-        return pink * 0.05f;
-}
-
 static inline float pink_from_white(struct ent_noise *noise, float white)
 {
     // Paul Kellet 3-pole filter
@@ -280,7 +285,7 @@ static inline float pink_from_white(struct ent_noise *noise, float white)
     noise->b1 = 0.96300f * noise->b1 + 0.2965164f * white;
     noise->b2 = 0.57000f * noise->b2 + 1.0526913f * white;
 
-    float pink = noise->b0 + noise->b1 + noise->b2 + 0.1848f * white;
+    const float pink = noise->b0 + noise->b1 + noise->b2 + 0.1848f * white;
 
     return pink * 0.05f;
 }
@@ -298,19 +303,24 @@ void ent_noise_process(struct ent_noise *noise,
 {
         float entropy = qx_smoother_next(&noise->entropy);
 
-        float cutoff = ent_noise_get_cutoff(noise) * (1.0f + 0.05 * entropy);
+        // Modulate filter cutoff
+        float cutoff = ent_noise_get_cutoff(noise) * (1.0f + 0.05f * entropy);
         cutoff = qx_clamp_float(cutoff, 20.0f, 18000.0f);
-        float resonance = ent_noise_get_resonance(noise) * (1.0f + 0.1 * entropy);
+
+        // Modulate filter resonance
+        float resonance = ent_noise_get_resonance(noise) * (1.0f + 0.1f * entropy);
         resonance = qx_clamp_float(resonance, 0.0f, 1.0f);
         ent_filter_set_cutoff(&noise->filter, cutoff);
         ent_filter_set_resonance(&noise->filter, resonance);
 
+        // Modulate noise density
         float density = noise->density * (1.0f + 0.5f * entropy);
         density = qx_clamp_float(density, 0.0f, 1.0f);
-        float threshold = 2.0f * density - 1.0f;
+
+        const float threshold = 2.0f * density - 1.0f;
         for (size_t i = 0; i < size; i++) {
                 float val = 0.0f;
-                float prob = qx_randomizer_get_float(&noise->prob_randomizer);
+                const float prob = qx_randomizer_get_float(&noise->prob_randomizer);
                 if (prob <= threshold)
                         val = qx_randomizer_get_float(&noise->randomizer);
 
@@ -328,8 +338,8 @@ void ent_noise_process(struct ent_noise *noise,
                 val = qx_fader_fade(&noise->fader, val);
 
                 // Calculate random stereo channel
-                float rand_val = qx_randomizer_get_float(&noise->stereo_randomizer);
-                float width = noise->stereo / 2.0f;
+                const float rand_val = qx_randomizer_get_float(&noise->stereo_randomizer);
+                const float width = noise->stereo / 2.0f;
                 if (rand_val < width) {
                         noise->buffer[0][i] = val;
                         noise->buffer[1][i] = 0.0f;
@@ -346,7 +356,7 @@ void ent_noise_process(struct ent_noise *noise,
                 ent_shelf_filter_process(&noise->sh_filter_l, noise->buffer[0], size);
                 ent_shelf_filter_process(&noise->sh_filter_r, noise->buffer[1], size);
 
-                float k = 1.0f / powf(10.0f, noise->sh_filter_r.gain / 20.0f);
+                const float k = 1.0f / powf(10.0f, noise->sh_filter_r.gain / 20.0f);
                 for (size_t i = 0; i < size; i++) {
                         noise->buffer[0][i] *= k;
                         noise->buffer[1][i] *= k;
@@ -367,28 +377,30 @@ void ent_noise_process(struct ent_noise *noise,
         }
 }
 
-void ent_noise_set_state(struct ent_noise *noise, const struct ent_state_noise *state)
+void ent_noise_set_state(struct ent_noise *noise,
+                         const struct ent_state_noise *state)
 {
-        ENT_SET_STATE(noise, state, enabled,        ent_noise_enable);
-        ENT_SET_STATE(noise, state, type,           ent_noise_set_type);
-        ENT_SET_STATE(noise, state, density,        ent_noise_set_density);
-        ENT_SET_STATE(noise, state, brightness,     ent_noise_set_brightness);
-        ENT_SET_STATE(noise, state, gain,           ent_noise_set_gain);
-        ENT_SET_STATE(noise, state, stereo,         ent_noise_set_stereo);
-        ENT_SET_STATE(noise, state, filter_type,    ent_noise_set_filter_type);
-        ENT_SET_STATE(noise, state, cutoff,         ent_noise_set_cutoff);
-        ENT_SET_STATE(noise, state, resonance,      ent_noise_set_resonance);
+        ENT_SET_STATE(noise, state, enabled,     ent_noise_enable);
+        ENT_SET_STATE(noise, state, type,        ent_noise_set_type);
+        ENT_SET_STATE(noise, state, density,     ent_noise_set_density);
+        ENT_SET_STATE(noise, state, brightness,  ent_noise_set_brightness);
+        ENT_SET_STATE(noise, state, gain,        ent_noise_set_gain);
+        ENT_SET_STATE(noise, state, stereo,      ent_noise_set_stereo);
+        ENT_SET_STATE(noise, state, filter_type, ent_noise_set_filter_type);
+        ENT_SET_STATE(noise, state, cutoff,      ent_noise_set_cutoff);
+        ENT_SET_STATE(noise, state, resonance,   ent_noise_set_resonance);
 }
 
-void ent_noise_get_state(const struct ent_noise *noise, struct ent_state_noise *state)
+void ent_noise_get_state(const struct ent_noise *noise,
+                         struct ent_state_noise *state)
 {
-        ENT_GET_STATE(noise, state, enabled,        ent_noise_is_enabled);
-        ENT_GET_STATE(noise, state, type,           ent_noise_get_type);
-        ENT_GET_STATE(noise, state, density,        ent_noise_get_density);
-        ENT_GET_STATE(noise, state, brightness,     ent_noise_get_brightness);
-        ENT_GET_STATE(noise, state, gain,           ent_noise_get_gain);
-        ENT_GET_STATE(noise, state, stereo,         ent_noise_get_stereo);
-        ENT_GET_STATE(noise, state, filter_type,    ent_noise_get_filter_type);
-        ENT_GET_STATE(noise, state, cutoff,         ent_noise_get_cutoff);
-        ENT_GET_STATE(noise, state, resonance,      ent_noise_get_resonance);
+        ENT_GET_STATE(noise, state, enabled,     ent_noise_is_enabled);
+        ENT_GET_STATE(noise, state, type,        ent_noise_get_type);
+        ENT_GET_STATE(noise, state, density,     ent_noise_get_density);
+        ENT_GET_STATE(noise, state, brightness,  ent_noise_get_brightness);
+        ENT_GET_STATE(noise, state, gain,        ent_noise_get_gain);
+        ENT_GET_STATE(noise, state, stereo,      ent_noise_get_stereo);
+        ENT_GET_STATE(noise, state, filter_type, ent_noise_get_filter_type);
+        ENT_GET_STATE(noise, state, cutoff,      ent_noise_get_cutoff);
+        ENT_GET_STATE(noise, state, resonance,   ent_noise_get_resonance);
 }
