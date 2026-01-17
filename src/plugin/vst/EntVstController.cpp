@@ -29,7 +29,6 @@
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
-#include "DspPitchProxyVst.h"
 #include "EntState.h"
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
@@ -80,7 +79,6 @@ EntVstController::initialize(FUnknown* context)
         addNoiseParameters();
         addCrackleParameters();
         addGlitchParameters();
-        addPitchParameters();
 
         setParamNormalized (ParameterId::PlayModeId,
                             DspProxyVst::playModeToNormalized(PlayMode::PlaybackMode));
@@ -169,17 +167,6 @@ EntVstController::initialize(FUnknown* context)
                             DspGlitchProxyVst::minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
         setParamNormalized (ParameterId::Glitch2MaxJumpId,
                             DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
-
-        // Pitch
-        setParamNormalized (ParameterId::PitchEnabledId, 0);
-        setParamNormalized (ParameterId::PitchPitchId,
-                            DspPitchProxyVst::pitchToNormalized(ENT_PITCH_DEFAULT_PITCH));
-        setParamNormalized (ParameterId::PitchFineId,
-                            DspPitchProxyVst::fineToNormalized(ENT_PITCH_DEFAULT_FINE));
-        setParamNormalized (ParameterId::PitchDepthId,
-                            DspPitchProxyVst::depthToNormalized(ENT_PITCH_DEFAULT_DEPTH));
-        setParamNormalized (ParameterId::PitchDriftId,
-                            DspPitchProxyVst::driftToNormalized(ENT_PITCH_DEFAULT_DRIFT));
 
         return result;
 }
@@ -346,20 +333,6 @@ void EntVstController::setGlitchState(const EntState &state)
                 setParamNormalized (ParameterId::Glitch2MaxJumpId,
                                     DspGlitchProxyVst::maxJumpToNormalized(glitch.max_jump));
         }
-}
-
-void EntVstController::setPitchState(const EntState &state)
-{
-        const auto& pitch = state.pitch;
-        setParamNormalized (ParameterId::PitchEnabledId, pitch.enabled);
-        setParamNormalized (ParameterId::PitchPitchId,
-                            DspPitchProxyVst::pitchToNormalized(pitch.pitch));
-        setParamNormalized (ParameterId::PitchFineId,
-                            DspPitchProxyVst::fineToNormalized(pitch.fine));
-        setParamNormalized (ParameterId::PitchDepthId,
-                            DspPitchProxyVst::depthToNormalized(pitch.depth));
-        setParamNormalized (ParameterId::PitchDriftId,
-                            DspPitchProxyVst::driftToNormalized(pitch.drift));
 }
 
 void EntVstController::addNoiseParameters()
@@ -632,38 +605,6 @@ void EntVstController::addGlitchParameters()
                                 DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch2MaxJumpId);
-}
-
-void EntVstController::addPitchParameters()
-{
-        parameters.addParameter(STR16("Pitch Enabled"),
-                                nullptr, 2, 0.0,
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::PitchEnabledId);
-
-        parameters.addParameter(STR16("Pitch Pitch"),
-                                nullptr, 7,
-                                DspPitchProxyVst::pitchToNormalized(ENT_PITCH_DEFAULT_PITCH),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::PitchPitchId);
-
-        parameters.addParameter(STR16("Pitch Fine"),
-                                nullptr, 0,
-                                DspPitchProxyVst::fineToNormalized(ENT_PITCH_DEFAULT_FINE),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::PitchFineId);
-
-        parameters.addParameter(STR16("Pitch Depth"),
-                                nullptr, 0,
-                                DspPitchProxyVst::depthToNormalized(ENT_PITCH_DEFAULT_DEPTH),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::PitchDepthId);
-
-        parameters.addParameter(STR16("Pitch Drift"),
-                                nullptr, 0,
-                                DspPitchProxyVst::driftToNormalized(ENT_PITCH_DEFAULT_DRIFT),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::PitchDriftId);
 }
 
 IPlugView* PLUGIN_API

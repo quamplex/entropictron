@@ -25,7 +25,6 @@
 #include "ent_noise.h"
 #include "ent_crackle.h"
 #include "ent_glitch.h"
-#include "ent_pitch.h"
 #include "ent_log.h"
 #include "ent_state_internal.h"
 
@@ -47,7 +46,6 @@ struct entropictron {
         struct ent_noise* noise[2];
         struct ent_crackle *crackle[2];
         struct ent_glitch *glitch[2];
-        struct ent_pitch *pitch;
         struct qx_randomizer prob_randomizer;
         struct qx_randomizer entropy_randomizer;
 };
@@ -110,14 +108,6 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
                 }
         }
 
-        // Create pitch module
-        (*ent)->pitch = ent_pitch_create(sample_rate);
-        if ((*ent)->pitch == NULL) {
-                ent_log_error("can't create pitch module");
-                ent_free(ent);
-                return ENT_ERROR;
-        }
-
 	return ENT_OK;
 }
 
@@ -138,9 +128,6 @@ void ent_free(struct entropictron **ent)
                 size_t num_glitchs = QX_ARRAY_SIZE((*ent)->glitch);
                 for (size_t i = 0; i < num_glitchs; i++)
                         ent_glitch_free(&(*ent)->glitch[i]);
-
-                // Free pitch module
-                ent_pitch_free(&(*ent)->pitch);
 
                 free(*ent);
                 *ent = NULL;
@@ -213,40 +200,30 @@ float ent_get_entropy_depth(const struct entropictron *ent)
 float ent_get_entropy(struct entropictron *ent)
 {
         return qx_smoother_get(&ent->entropy);
-        //        return ent->entropy;
 }
 
 void ent_update_entropy(struct entropictron *ent)
 {
         float step = 0.0f;
         float prob = qx_randomizer_get_float(&ent->prob_randomizer);
-        if (prob >= ENT_ENTROPY_RATE_MIN && prob <= ent->entropy_rate) {
+        if (prob >= ENT_ENTROPY_RATE_MIN && prob <= ent->entropy_rate)
                 step = qx_randomizer_get_float(&ent->entropy_randomizer);
-        }
 
         float target = qx_smoother_next(&ent->entropy) + step;
+
+        // Do reflection if needed.
         if (target > 1.0f)
-                target = 1.0f - step;
-        else if(target < -1.0f)
-                target = -1.0f - step;
-        target = qx_clamp_float(target, -1.0, 1.0);
+                target = 2.0f - target;
+        else if (target < -1.0f)
+                target = -2.0f - target;
+
+        target = qx_clamp_float(target, -1.0f, 1.0f);
         qx_smoother_set_target(&ent->entropy, target);
 
-        ent_log_info("step: %f, ent: %f", step, ent->entropy);
-        //const float gravity = 0.001f;
-        //ent->entropy_abs -= gravity;
-        //if (ent->entropy_abs <= 0.0f)
-        //        ent->entropy_abs = 0.0f;
-
-        //ent->entropy = qx_clamp_float(ent->entropy,
-        //                                      -ent->entropy_abs,
-                                              //                              ent->entropy_abs);
         float entropy = qx_smoother_next(&ent->entropy) * ent->entropy_depth;
         size_t n = QX_ARRAY_SIZE(ent->noise);
         for (size_t i = 0; i < n; i++)
                 ent_noise_set_entropy(ent->noise[i], entropy);
-
-        ent_pitch_set_entropy(ent->pitch, entropy);
 }
 
 enum ent_error
@@ -278,9 +255,6 @@ ent_process(struct entropictron *ent, float** data, size_t size)
                 if (ent_glitch_is_enabled(glitch))
                         ent_glitch_process(glitch, in, out, size);
         }
-
-        if (ent_pitch_is_enabled(ent->pitch))
-                ent_pitch_process(ent->pitch, in, out, size);
 
         return ENT_OK;
 }
@@ -353,9 +327,4 @@ ent_get_glitch(struct entropictron *ent, int id)
                 return NULL;
 
         return ent->glitch[id];
-}
-
-struct ent_pitch* ent_get_pitch(struct entropictron *ent)
-{
-        return ent->pitch;
 }

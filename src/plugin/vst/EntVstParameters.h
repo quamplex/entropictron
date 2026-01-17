@@ -94,13 +94,6 @@ enum ParameterId : Steinberg::Vst::ParamID
     Glitch2MaxJumpId        = 30204,
     Glitch2LengthId         = 30205,
     Glitch2RepeatsId        = 30206,
-
-    // Pitch
-    PitchEnabledId          = 40201,
-    PitchPitchId            = 40202,
-    PitchFineId             = 40203,
-    PitchDepthId            = 40204,
-    PitchDriftId            = 40205,
 };
 
 } // namesapce EntVst

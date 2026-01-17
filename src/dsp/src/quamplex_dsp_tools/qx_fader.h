@@ -1,3 +1,33 @@
+/**
+ * @file qx_fader.h
+ * @brief Math utilities for Quamplex DSP Tools.
+ *
+ * This header provides basic mathematical functions used in audio DSP,
+ * such as clamping values to a given range, normalization, decibel conversion,
+ * interpolation, and wrapping.
+ *
+ * Project: Quamplex DSP Tools (A small C library of tools for audio DSP processing)
+ * Website: https://quamplex.com
+ *
+ * Copyright (C) 2025 Iurie Nistor
+ *
+ * This file is part of Quamplex DSP Tools.
+ *
+ * Quamplex DSP Tools is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+
 #ifndef QX_FADER_H
 #define QX_FADER_H
 
@@ -33,7 +63,7 @@ typedef struct qx_fader {
  * Sets the initial fade value to 0 and computes per-sample
  * step based on fade time and sample rate.
  */
-static inline void qx_fader_init(qx_fader* fader, float fadeTime, float sample_rate)
+static inline void qx_fader_init(struct qx_fader* fader, float fadeTime, float sample_rate)
 {
         fader->fade = 0.0f;
         fader->enabled = false;
@@ -53,7 +83,7 @@ static inline void qx_fader_init(qx_fader* fader, float fadeTime, float sample_r
  * Sets the target state. The fade value will ramp towards
  * 1.0 if enabled or 0.0 if disabled during processing.
  */
-static inline void qx_fader_enable(qx_fader* fader, bool enabled)
+static inline void qx_fader_enable(struct qx_fader* fader, bool enabled)
 {
         fader->enabled = enabled;
         fader->fade = enabled ? 0.0f : 1.0f;
@@ -69,7 +99,7 @@ static inline void qx_fader_enable(qx_fader* fader, bool enabled)
  * Updates the internal fade value and multiplies the input
  * sample by it. Should be called for every audio sample.
  */
-static inline float qx_fader_fade(qx_fader* fader, float val)
+static inline float qx_fader_fade(struct qx_fader* fader, float val)
 {
         fader->fade += fader->enabled ? fader->step : -fader->step;
         fader->fade = qx_clamp_float(fader->fade, 0.0f, 1.0f);

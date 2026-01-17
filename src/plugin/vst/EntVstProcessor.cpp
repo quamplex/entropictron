@@ -29,13 +29,11 @@
 #include "DspWrapperNoise.h"
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
-#include "DspWrapperPitch.h"
 #include "EntVstParameters.h"
 #include "DspVstProxy.h"
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
-#include "DspPitchProxyVst.h"
 #include "EntState.h"
 #include "ent_state.h"
 
@@ -335,7 +333,6 @@ void EntVstProcessor::initParamMappings()
         initNoiseParamMappings();
         initCrackleParamMappings();
         initGlitchParamMappings();
-        initPitchParamMappings();
 }
 
 void EntVstProcessor::initNoiseParamMappings()
@@ -501,26 +498,6 @@ void EntVstProcessor::initGlitchParamMappings()
         };
         paramMap[ParameterId::Glitch2RepeatsId] = [glitch](ParamValue v) {
                 glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
-        };
-}
-
-void EntVstProcessor::initPitchParamMappings()
-{
-        auto pitch = entropictronDsp->getPitch();
-        paramMap[ParameterId::PitchEnabledId] = [pitch](ParamValue v) {
-                pitch->enable(v > 0.5);
-        };
-        paramMap[ParameterId::PitchPitchId] = [pitch](ParamValue v) {
-                pitch->setPitch(DspPitchProxyVst::pitchFromNormalized(v));
-        };
-        paramMap[ParameterId::PitchFineId] = [pitch](ParamValue v) {
-                pitch->setFine(DspPitchProxyVst::fineFromNormalized(v));
-        };
-        paramMap[ParameterId::PitchDepthId] = [pitch](ParamValue v) {
-                pitch->setDepth(DspPitchProxyVst::depthFromNormalized(v));
-        };
-        paramMap[ParameterId::PitchDriftId] = [pitch](ParamValue v) {
-                pitch->setDrift(DspPitchProxyVst::driftFromNormalized(v));
         };
 }
 

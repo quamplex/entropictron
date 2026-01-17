@@ -25,7 +25,6 @@
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
-#include "DspPitchProxyVst.h"
 #include "EntState.h"
 
 #include "pluginterfaces/base/ibstream.h"
@@ -50,7 +49,6 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
         , dspGlitch2Proxy {new DspGlitchProxyVst(this,
                                                  controller,
                                                  GlitchId::Glitch2)}
-        , dspPitchProxy {new DspPitchProxyVst(this, controller)}
 {
         vstController->setStateCallback([this]() {
                 action stateChanged();
@@ -157,11 +155,6 @@ DspGlitchProxy* DspProxyVst::getGlitch(GlitchId id) const
         default:
                 return nullptr;
         }
-}
-
-DspPitchProxy* DspProxyVst::getPitch() const
-{
-        return dspPitchProxy;
 }
 
 void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)

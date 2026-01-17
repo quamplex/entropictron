@@ -112,7 +112,6 @@ set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/DspNoiseProxy.h
   ${ENT_COMMON_DIR}/DspCrackleProxy.h
   ${ENT_COMMON_DIR}/DspGlitchProxy.h
-  ${ENT_COMMON_DIR}/DspPitchProxy.h
   ${ENT_COMMON_DIR}/EntAbstractModel.h
   ${ENT_COMMON_DIR}/EntropictronModel.h
   ${ENT_COMMON_DIR}/NoiseModel.h
@@ -140,7 +139,6 @@ set(ENT_COMMON_SOURCES
   ${ENT_COMMON_DIR}/DspNoiseProxy.cpp
   ${ENT_COMMON_DIR}/DspCrackleProxy.cpp
   ${ENT_COMMON_DIR}/DspGlitchProxy.cpp
-  ${ENT_COMMON_DIR}/DspPitchProxy.cpp
   ${ENT_COMMON_DIR}/EntAbstractModel.cpp
   ${ENT_COMMON_DIR}/EntropictronModel.cpp
   ${ENT_COMMON_DIR}/NoiseModel.cpp
