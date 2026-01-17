@@ -12,7 +12,7 @@ video production, game audio, and other.
 
 **License:** GNU General Public License, Version 3
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 
 ![Screenshot](artwork/screenshot.png)
 
