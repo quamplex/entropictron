@@ -6,6 +6,8 @@
 [Crackle](#crackle)
 [Glitch](#glitch)
 [Factory Presets](#factroy-presets)
+[Play Mode](#play-mode)
+[Global Entropy](#global-entropy)
 [Audio Plugin](#audio-plugin)
 [Build & Install](#build--install)
 
@@ -15,7 +17,7 @@
 
 **License:** This work (including all images it uses) is released under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/deed.en).
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 
 **Website:** [https://quamplex.com/entropictron](https://quamplex.com/entropictron)
 
@@ -92,6 +94,30 @@ It has the following parameters:
 Factory presets are JSON-format files with the extension `*.entp`.
 They are installed in the corresponding user directory depending on the platform.
 The plugin UI loads these files and displays the list of available presets.
+
+### Play Mode
+
+The UI provides three buttons to select the play mode:
+
+- **Playback** – The audio plugin processes or generates audio only when the host is playing.
+- **Hold** – The audio plugin processes or generates audio only while a MIDI key is held.
+- **On** – The audio plugin always processes or generates audio.
+
+By default, the plugin is loaded in **Playback** mode. The selected mode is saved in the plugin state.
+
+### Global Entropy
+
+Global Entropy is a global random LFO (walker) that generates a value that changes over time.
+This entropy value modulates the **density**, **gain**, and **filter cutoff and resonance** of the Noise module.
+
+The entropy is controlled by two parameters:
+
+- **Entropy** – sets the rate at which the entropy value changes.
+- **Depth** – sets the amount (depth) of the entropy modulation.
+
+The UI contains knobs to control these two parameters.
+
+There is also an entropy value graph that shows the current entropy value in real time.
 
 ### Audio Plugin
 
