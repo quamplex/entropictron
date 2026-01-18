@@ -58,6 +58,26 @@ and jump parameters, creating stutters and digital artifacts.
 - Minimum jump
 - Maximum jump
 
+### Play Mode
+
+- **Playback** – Active only during host playback
+- **Hold** – Active while a MIDI key is held
+- **On** – Always active
+
+### Global Entropy Modulation
+
+Entropy modulation affects the **Noise** module parameters:
+
+- Density
+- Gain
+- Filter cutoff
+- Resonance
+
+**Global controls:**
+
+- Entropy modulation rate
+- Entropy modulation depth
+
 ## Requirements
 
 In order Entropictron to run and operate correctly there is a need
