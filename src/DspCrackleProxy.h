@@ -29,8 +29,7 @@
 
 class DspCrackleProxy : public RkObject {
  public:
-        explicit DspCrackleProxy(CrackleId id = CrackleId::Crackle1);
-        explicit DspCrackleProxy(RkObject* parent, CrackleId id = CrackleId::Crackle1);
+        explicit DspCrackleProxy(RkObject* parent = nullptr, CrackleId id = CrackleId::Crackle1);
         void setCrackleId(CrackleId id);
         CrackleId getCrackleId() const;
         virtual bool enable(bool b = true) = 0;

@@ -29,8 +29,7 @@
 
 class DspGlitchProxy : public RkObject {
  public:
-        explicit DspGlitchProxy(GlitchId id = GlitchId::Glitch1);
-        explicit DspGlitchProxy(RkObject* parent, GlitchId id = GlitchId::Glitch1);
+        explicit DspGlitchProxy(RkObject* parent = nullptr, GlitchId id = GlitchId::Glitch1);
         void setGlitchId(GlitchId id);
         GlitchId getGlitchId() const;
         virtual bool enable(bool b = true) = 0;

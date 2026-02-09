@@ -29,8 +29,7 @@
 
 class DspNoiseProxy : public RkObject {
  public:
-        explicit DspNoiseProxy(NoiseId id = NoiseId::Noise1);
-        explicit DspNoiseProxy(RkObject* parent, NoiseId id = NoiseId::Noise1);
+        explicit DspNoiseProxy(RkObject* parent = nullptr, NoiseId id = NoiseId::Noise1);
         virtual ~DspNoiseProxy() = default;
         void setNoiseId(NoiseId id);
         NoiseId getNoiseId() const;

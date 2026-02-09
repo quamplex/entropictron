@@ -1,8 +1,8 @@
 /**
- * File name: DspCrackleProxy.cpp
+ * File name: DspRgateProxy.cpp
  * Project: Entropictron (A texture synthesizer)
  *
- * Copyright (C) 2025 Iurie Nistor
+ * Copyright (C) 2026 Iurie Nistor
  *
  * This file is part of Entropictron.
  *
@@ -21,15 +21,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 
-#include "DspCrackleProxy.h"
+#include "DspRgateProxy.h"
 
-DspCrackleProxy::DspCrackleProxy(RkObject* parent, CrackleId id)
+DspRgateProxy::DspRgateProxy(RkObject* parent)
         : RkObject(parent)
-        , crackleId{id}
 {
-}
-
-CrackleId DspCrackleProxy::getCrackleId() const
-{
-        return crackleId;
 }

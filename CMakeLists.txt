@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.7)
 
-project(entropictron VERSION 1.1.0)
+project(entropictron VERSION 1.2.0)
 
 math(EXPR ENT_VERSION_HEX "0x${PROJECT_VERSION_MAJOR} * 0x10000 + 0x${PROJECT_VERSION_MINOR} * 0x100 + 0x${PROJECT_VERSION_PATCH}")
 set(ENT_VERSION_STR "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}")
@@ -121,6 +121,7 @@ set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/DspNoiseProxy.h
   ${ENT_COMMON_DIR}/DspCrackleProxy.h
   ${ENT_COMMON_DIR}/DspGlitchProxy.h
+  ${ENT_COMMON_DIR}/DspRgateProxy.h
   ${ENT_COMMON_DIR}/EntAbstractModel.h
   ${ENT_COMMON_DIR}/EntropictronModel.h
   ${ENT_COMMON_DIR}/NoiseModel.h
@@ -148,6 +149,7 @@ set(ENT_COMMON_SOURCES
   ${ENT_COMMON_DIR}/DspNoiseProxy.cpp
   ${ENT_COMMON_DIR}/DspCrackleProxy.cpp
   ${ENT_COMMON_DIR}/DspGlitchProxy.cpp
+  ${ENT_COMMON_DIR}/DspRgateProxy.cpp
   ${ENT_COMMON_DIR}/EntAbstractModel.cpp
   ${ENT_COMMON_DIR}/EntropictronModel.cpp
   ${ENT_COMMON_DIR}/NoiseModel.cpp

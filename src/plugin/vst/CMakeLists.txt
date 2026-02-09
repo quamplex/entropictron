@@ -28,6 +28,7 @@ set(ENT_VST_HEADERS
   ${ENT_VST_DIR}/DspNoiseProxyVst.h
   ${ENT_VST_DIR}/DspCrackleProxyVst.h
   ${ENT_VST_DIR}/DspGlitchProxyVst.h
+  ${ENT_VST_DIR}/DspRgateProxyVst.h
   ${ENT_VST_DIR}/EntVstParameters.h
   ${ENT_VST_DIR}/EntVstProcessor.h
   ${ENT_VST_DIR}/EntVstController.h
@@ -41,6 +42,7 @@ set(ENT_VST_SOURCES
   ${ENT_VST_DIR}/DspNoiseProxyVst.cpp
   ${ENT_VST_DIR}/DspCrackleProxyVst.cpp
   ${ENT_VST_DIR}/DspGlitchProxyVst.cpp
+  ${ENT_VST_DIR}/DspRgateProxyVst.cpp
   ${ENT_VST_DIR}/DspVstProxy.cpp
   ${ENT_VST_DIR}/EntVstProcessor.cpp
   ${ENT_VST_DIR}/EntVstController.cpp

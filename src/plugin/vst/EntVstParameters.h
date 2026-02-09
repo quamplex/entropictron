@@ -94,6 +94,16 @@ enum ParameterId : Steinberg::Vst::ParamID
     Glitch2MaxJumpId        = 30204,
     Glitch2LengthId         = 30205,
     Glitch2RepeatsId        = 30206,
+
+    // Rgate
+    RgateMinIntervalId      = 30301,
+    RgateMaxIntervalId      = 30302,
+    RgateMinDurationId      = 30303,
+    RgateMaxDurationId      = 30304,
+    RgateMinGainId          = 30305,
+    RgateMaxGainId          = 30306,
+    RgateRandomnessId       = 30307,
+    RgateInvertedId         = 30308,
 };
 
 } // namesapce EntVst
