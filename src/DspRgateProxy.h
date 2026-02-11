@@ -32,22 +32,24 @@ class DspRgateProxy : public RkObject {
         explicit DspRgateProxy(RkObject* parent = nullptr);
         virtual bool enable(bool b = true) = 0;
         virtual bool isEnabled() const = 0;
-        virtual void setMinInterval(double value) = 0;
+        virtual bool setMinInterval(double value) = 0;
         virtual double getMinInterval() const = 0;
-        virtual void setMaxInterval(double value) = 0;
+        virtual bool setMaxInterval(double value) = 0;
         virtual double getMaxInterval() const = 0;
-        virtual void setMinDuration(double value) = 0;
+        virtual bool setMinDuration(double value) = 0;
         virtual double getMinDuration() const = 0;
-        virtual void setMaxDuration(double value) = 0;
+        virtual bool setMaxDuration(double value) = 0;
         virtual double getMaxDuration() const = 0;
-        virtual void setMinGain(double value) = 0;
+        virtual bool setMinGain(double value) = 0;
         virtual double getMinGain() const = 0;
-        virtual void setMaxGain(double value) = 0;
+        virtual bool setMaxGain(double value) = 0;
         virtual double getMaxGain() const = 0;
-        virtual double setProbability(double value) = 0;
-        virtual double getProbability() const = 0;
-        virtual double setInverted(bool b = true) = 0;
-        virtual double isInverted() const = 0;
+        virtual bool setRandomness(double value) = 0;
+        virtual double getRandomness() const = 0;
+        virtual bool setInverted(bool b = true) = 0;
+        virtual bool getInverted() const = 0;
+        virtual bool setDrywet(double value) = 0;
+        virtual double getDrywet() const = 0;
 
         RK_DECL_ACT(enabled,
                     enabled(bool b),
@@ -57,20 +59,8 @@ class DspRgateProxy : public RkObject {
                     minIntervalUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
-        RK_DECL_ACT(minIntervalUpdated,
-                    minIntervalUpdated(double value),
-                    RK_ARG_TYPE(double),
-                    RK_ARG_VAL(value));
         RK_DECL_ACT(maxIntervalUpdated,
                     maxIntervalUpdated(double value),
-                    RK_ARG_TYPE(double),
-                    RK_ARG_VAL(value));
-        RK_DECL_ACT(maxIntervalUpdated,
-                    maxIntervalUpdated(double value),
-                    RK_ARG_TYPE(double),
-                    RK_ARG_VAL(value));
-        RK_DECL_ACT(minDurationUpdated,
-                    minDurationUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
         RK_DECL_ACT(minDurationUpdated,
@@ -81,20 +71,8 @@ class DspRgateProxy : public RkObject {
                     maxDurationUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
-        RK_DECL_ACT(maxDurationUpdated,
-                    maxDurationUpdated(double value),
-                    RK_ARG_TYPE(double),
-                    RK_ARG_VAL(value));
         RK_DECL_ACT(minGainUpdated,
                     minGainUpdated(double value),
-                    RK_ARG_TYPE(double),
-                    RK_ARG_VAL(value));
-        RK_DECL_ACT(minGainUpdated,
-                    minGainUpdated(double value),
-                    RK_ARG_TYPE(double),
-                    RK_ARG_VAL(value));
-        RK_DECL_ACT(maxGainUpdated,
-                    maxGainUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
         RK_DECL_ACT(maxGainUpdated,
@@ -109,6 +87,10 @@ class DspRgateProxy : public RkObject {
                     invertedUpdated(bool b),
                     RK_ARG_TYPE(bool),
                     RK_ARG_VAL(b));
+        RK_DECL_ACT(drywetUpdated,
+                    drywetUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
 };
 
 #endif // DSP_RGATE_PROXY_H

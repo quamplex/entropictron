@@ -54,10 +54,23 @@ struct ent_state_crackle {
 struct ent_state_glitch {
         _Atomic(bool) enabled;
         _Atomic(float) probability;
-        _Atomic(int) min_jump;
-        _Atomic(int) max_jump;
-        _Atomic(int) length;
+        _Atomic(float) min_jump;
+        _Atomic(float) max_jump;
+        _Atomic(float) length;
         _Atomic(int) repeats;
+};
+
+struct ent_state_rgate {
+        _Atomic(bool) enabled;
+        _Atomic(float) min_interval;
+        _Atomic(float) max_interval;
+        _Atomic(float) min_duration;
+        _Atomic(float) max_duration;
+        _Atomic(float) min_gain;
+        _Atomic(float) max_gain;
+        _Atomic(float) randomness;
+        _Atomic(bool) inverted;
+        _Atomic(float) drywet;
 };
 
 struct ent_state {
@@ -67,6 +80,7 @@ struct ent_state {
         struct ent_state_noise noises[2];
         struct ent_state_crackle crackles[2];
         struct ent_state_glitch glitches[2];
+        struct ent_state_rgate rgate;
 };
 
 #define ENT_SET_STATE(obj, state, field, setter)                        \

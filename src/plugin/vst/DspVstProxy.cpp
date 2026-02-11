@@ -25,9 +25,12 @@
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
+#include "DspRgateProxyVst.h"
 #include "EntState.h"
 
 #include "pluginterfaces/base/ibstream.h"
+
+using namespace EntVst;
 
 DspProxyVst::DspProxyVst(EntVstController *controller)
         : vstController{controller}
@@ -49,6 +52,7 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
         , dspGlitch2Proxy {new DspGlitchProxyVst(this,
                                                  controller,
                                                  GlitchId::Glitch2)}
+        , dspRgateProxy {new DspRgateProxyVst(this, controller)}
 {
         vstController->setStateCallback([this]() {
                 action stateChanged();
@@ -157,6 +161,11 @@ DspGlitchProxy* DspProxyVst::getGlitch(GlitchId id) const
         }
 }
 
+DspRgateProxy* DspProxyVst::getRgate() const
+{
+        return dspRgateProxy;
+}
+
 void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
 {
         switch (paramId) {
@@ -175,16 +184,6 @@ void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
         default:
                 break;
         }
-}
-
-static double toNormalized(double value, double min, double max)
-{
-        return (value - min) / (max - min);
-}
-
-static double fromNormalized(double normalized, double min, double max)
-{
-        return min + normalized * (max - min);
 }
 
 double DspProxyVst::playModeToNormalized(PlayMode mode)
@@ -208,4 +207,3 @@ double DspProxyVst::entropyFromNormalized(double val)
 {
         return fromNormalized(val, -1.0, 1.0);
 }
-

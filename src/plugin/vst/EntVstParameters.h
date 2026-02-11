@@ -96,15 +96,27 @@ enum ParameterId : Steinberg::Vst::ParamID
     Glitch2RepeatsId        = 30206,
 
     // Rgate
-    RgateMinIntervalId      = 30301,
-    RgateMaxIntervalId      = 30302,
-    RgateMinDurationId      = 30303,
-    RgateMaxDurationId      = 30304,
-    RgateMinGainId          = 30305,
-    RgateMaxGainId          = 30306,
-    RgateRandomnessId       = 30307,
-    RgateInvertedId         = 30308,
+    RgateEnabledId          = 30301,
+    RgateMinIntervalId      = 30302,
+    RgateMaxIntervalId      = 30303,
+    RgateMinDurationId      = 30304,
+    RgateMaxDurationId      = 30305,
+    RgateMinGainId          = 30306,
+    RgateMaxGainId          = 30307,
+    RgateRandomnessId       = 30308,
+    RgateInvertedId         = 30309,
+    RgateDrywetId           = 30310,
 };
+
+inline double toNormalized(double value, double min, double max)
+{
+        return (value - min) / (max - min);
+}
+
+inline double fromNormalized(double normalized, double min, double max)
+{
+        return min + normalized * (max - min);
+}
 
 } // namesapce EntVst
 

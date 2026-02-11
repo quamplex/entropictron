@@ -28,6 +28,7 @@
 #include "ent_noise.h"
 #include "ent_crackle.h"
 #include "ent_glitch.h"
+#include "ent_rgate.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,6 +52,9 @@ ent_state_get_crackle(struct ent_state *state, size_t index);
 struct ent_state_glitch*
 ent_state_get_glitch(struct ent_state *state, size_t index);
 
+struct ent_state_rgate*
+ent_state_get_rgate(struct ent_state *state);
+
 const struct ent_state_noise*
 ent_state_get_noise_const(const struct ent_state *state, size_t index);
 
@@ -59,6 +63,9 @@ ent_state_get_crackle_const(const struct ent_state *state, size_t index);
 
 const struct ent_state_glitch*
 ent_state_get_glitch_const(const struct ent_state *state, size_t index);
+
+const struct ent_state_rgate*
+ent_state_get_rgate_const(const struct ent_state *state);
 
 void ent_state_set_play_mode(struct ent_state *state, int play_mode);
 int ent_state_get_play_mode(const struct ent_state *state);
@@ -140,6 +147,34 @@ float ent_state_glitch_get_length(const struct ent_state_glitch *g);
 
 void ent_state_glitch_set_repeats(struct ent_state_glitch *g, int repeats);
 int  ent_state_glitch_get_repeats(const struct ent_state_glitch *g);
+
+/* RGATE */
+void ent_state_rgate_set_enabled(struct ent_state_rgate *g, bool val);
+bool ent_state_rgate_get_enabled(const struct ent_state_rgate *g);
+
+void ent_state_rgate_set_min_interval(struct ent_state_rgate *g, float val);
+float ent_state_rgate_get_min_interval(const struct ent_state_rgate *g);
+void ent_state_rgate_set_max_interval(struct ent_state_rgate *g, float val);
+float ent_state_rgate_get_max_interval(const struct ent_state_rgate *g);
+
+void ent_state_rgate_set_min_duration(struct ent_state_rgate *g, float val);
+float ent_state_rgate_get_min_duration(const struct ent_state_rgate *g);
+void ent_state_rgate_set_max_duration(struct ent_state_rgate *g, float val);
+float ent_state_rgate_get_max_duration(const struct ent_state_rgate *g);
+
+void ent_state_rgate_set_min_gain(struct ent_state_rgate *g, float val);
+float ent_state_rgate_get_min_gain(const struct ent_state_rgate *g);
+void ent_state_rgate_set_max_gain(struct ent_state_rgate *g, float val);
+float ent_state_rgate_get_max_gain(const struct ent_state_rgate *g);
+
+void ent_state_rgate_set_randomness(struct ent_state_rgate *g, float val);
+float ent_state_rgate_get_randomness(const struct ent_state_rgate *g);
+
+void ent_state_rgate_set_inverted(struct ent_state_rgate *g, bool val);
+bool ent_state_rgate_get_inverted(const struct ent_state_rgate *g);
+
+void ent_state_rgate_set_drywet(struct ent_state_rgate *g, float val);
+float ent_state_rgate_get_drywet(const struct ent_state_rgate *g);
 
 #ifdef __cplusplus
 }

@@ -229,16 +229,6 @@ void DspGlitchProxyVst::onParameterChanged(ParameterId paramId, ParamValue value
         }
 }
 
-static double toNormalized(double value, double min, double max)
-{
-        return (value - min) / (max - min);
-}
-
-static double fromNormalized(double normalized, double min, double max)
-{
-        return min + normalized * (max - min);
-}
-
 double DspGlitchProxyVst::repeatsToNormalized(int value)
 {
         return toNormalized(static_cast<double>(value),

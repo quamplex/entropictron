@@ -27,6 +27,7 @@
 #include "DspWrapperNoise.h"
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
+#include "DspWrapperRgate.h"
 #include "ent_state.h"
 
 DspWrapper::DspWrapper()
@@ -66,6 +67,10 @@ DspWrapper::DspWrapper()
         glitch = ent_get_glitch(entropictronDsp.get(),
                                 static_cast<int>(GlitchId::Glitch2));
         dspGlitch2 = std::make_unique<DspWrapperGlitch>(glitch);
+
+        // Rgate
+        auto rgate = ent_get_rgate(entropictronDsp.get());
+        dspRgate = std::make_unique<DspWrapperRgate>(rgate);
 
         // Set 50ms timeout.
         frameTimer->setTimeout(getSampleRate() * 0.05);
@@ -169,6 +174,11 @@ DspWrapperGlitch* DspWrapper::getGlitch(GlitchId id) const
                 return dspGlitch1.get();
         else
                 return dspGlitch2.get();
+}
+
+DspWrapperRgate* DspWrapper::getRgate() const
+{
+        return dspRgate.get();
 }
 
 DspFrameTimer* DspWrapper::getFrameTimer() const

@@ -22,7 +22,6 @@
  */
 
 #include "DspProxy.h"
-#include "DspNoiseProxy.h"
 #include "EntState.h"
 
 DspProxy::DspProxy(RkObject *parent)

@@ -29,11 +29,13 @@
 #include "DspWrapperNoise.h"
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
+#include "DspWrapperRgate.h"
 #include "EntVstParameters.h"
 #include "DspVstProxy.h"
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
+#include "DspRgateProxyVst.h"
 #include "EntState.h"
 #include "ent_state.h"
 
@@ -333,6 +335,7 @@ void EntVstProcessor::initParamMappings()
         initNoiseParamMappings();
         initCrackleParamMappings();
         initGlitchParamMappings();
+        initRgateParamMappings();
 }
 
 void EntVstProcessor::initNoiseParamMappings()
@@ -498,6 +501,41 @@ void EntVstProcessor::initGlitchParamMappings()
         };
         paramMap[ParameterId::Glitch2RepeatsId] = [glitch](ParamValue v) {
                 glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
+        };
+}
+
+void EntVstProcessor::initRgateParamMappings()
+{
+        auto rgate = entropictronDsp->getRgate();
+        paramMap[ParameterId::RgateEnabledId] = [rgate](ParamValue v) {
+                rgate->enable(DspRgateProxyVst::enabledFromNormalized(v));
+        };
+        paramMap[ParameterId::RgateMinIntervalId] = [rgate](ParamValue v) {
+                rgate->setMinInterval(DspRgateProxyVst::minIntervalFromNormalized(v));
+        };
+        paramMap[ParameterId::RgateMaxIntervalId] = [rgate](ParamValue v) {
+                rgate->setMaxInterval(DspRgateProxyVst::maxIntervalFromNormalized(v));
+        };
+        paramMap[ParameterId::RgateMinDurationId] = [rgate](ParamValue v) {
+                rgate->setMinDuration(DspRgateProxyVst::minDurationFromNormalized(v));
+        };
+        paramMap[ParameterId::RgateMaxDurationId] = [rgate](ParamValue v) {
+                rgate->setMaxDuration(DspRgateProxyVst::maxDurationFromNormalized(v));
+        };
+        paramMap[ParameterId::RgateMinGainId] = [rgate](ParamValue v) {
+                rgate->setMinGain(DspRgateProxyVst::minGainFromNormalized(v));
+        };
+        paramMap[ParameterId::RgateMaxGainId] = [rgate](ParamValue v) {
+                rgate->setMaxGain(DspRgateProxyVst::maxGainFromNormalized(v));
+        };
+        paramMap[ParameterId::RgateRandomnessId] = [rgate](ParamValue v) {
+                rgate->setRandomness(DspRgateProxyVst::randomnessFromNormalized(v));
+        };
+        paramMap[ParameterId::RgateInvertedId] = [rgate](ParamValue v) {
+                rgate->setInverted(DspRgateProxyVst::invertedFromNormalized(v));
+        };
+        paramMap[ParameterId::RgateDrywetId] = [rgate](ParamValue v) {
+                rgate->setDrywet(DspRgateProxyVst::drywetFromNormalized(v));
         };
 }
 

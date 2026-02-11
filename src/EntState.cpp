@@ -82,6 +82,18 @@ void EntState::getState(struct ent_state* state) const
                 ent_state_glitch_set_length(gs, glitch[i].length);
                 ent_state_glitch_set_repeats(gs, glitch[i].repeats);
         }
+
+        auto rg = ent_state_get_rgate(state);
+        ent_state_rgate_set_enabled(rg, rgate.enabled);
+        ent_state_rgate_set_min_interval(rg, rgate.min_interval);
+        ent_state_rgate_set_max_interval(rg, rgate.max_interval);
+        ent_state_rgate_set_min_duration(rg, rgate.min_duration);
+        ent_state_rgate_set_max_duration(rg, rgate.max_duration);
+        ent_state_rgate_set_min_gain(rg, rgate.min_gain);
+        ent_state_rgate_set_max_gain(rg, rgate.max_gain);
+        ent_state_rgate_set_randomness(rg, rgate.randomness);
+        ent_state_rgate_set_inverted(rg, rgate.inverted);
+        ent_state_rgate_set_drywet(rg, rgate.drywet);
 }
 
 void EntState::setState(const struct ent_state* state)
@@ -123,6 +135,18 @@ void EntState::setState(const struct ent_state* state)
                 glitch[i].length = ent_state_glitch_get_length(gs);
                 glitch[i].repeats = ent_state_glitch_get_repeats(gs);
         }
+
+        const auto* rg = ent_state_get_rgate_const(state);
+        rgate.enabled = ent_state_rgate_get_enabled(rg);
+        rgate.min_interval = ent_state_rgate_get_min_interval(rg);
+        rgate.max_interval = ent_state_rgate_get_max_interval(rg);
+        rgate.min_duration = ent_state_rgate_get_min_duration(rg);
+        rgate.max_duration = ent_state_rgate_get_max_duration(rg);
+        rgate.min_gain = ent_state_rgate_get_min_gain(rg);
+        rgate.max_gain = ent_state_rgate_get_max_gain(rg);
+        rgate.randomness = ent_state_rgate_get_inverted(rg);
+        rgate.inverted = ent_state_rgate_get_inverted(rg);
+        rgate.drywet = ent_state_rgate_get_inverted(rg);
 }
 
 void EntState::setName(const std::string_view &name)
@@ -233,6 +257,7 @@ std::string EntState::toJson(bool asPreset) const
         writeNoise(modules, a);
         writeCrackle(modules, a);
         writeGlitch(modules, a);
+        writeRgate(modules, a);
 
         doc.AddMember("modules", modules, a);
 
@@ -294,6 +319,8 @@ bool EntState::fromJson(const std::string& jsonStr)
                 readCrackle(m, m["id"].GetInt());
         else if (moduleName == "glitch")
                 readGlitch(m, m["id"].GetInt());
+        else if (moduleName == "rgate")
+                readRgate(m);
     }
 
     return true;
@@ -376,6 +403,24 @@ void EntState::writeGlitch(Value& modulesArray,
         }
 }
 
+void EntState::writeRgate(Value& modulesArray,
+                          Document::AllocatorType& a) const
+{
+                Value m(kObjectType);
+                m.AddMember("name", "rgate", a);
+                m.AddMember("enabled", rgate.enabled, a);
+                m.AddMember("min_interval", rgate.min_interval, a);
+                m.AddMember("max_interval", rgate.max_interval, a);
+                m.AddMember("min_duration", rgate.min_duration, a);
+                m.AddMember("max_duration", rgate.max_duration, a);
+                m.AddMember("min_gain", rgate.min_gain, a);
+                m.AddMember("max_gain", rgate.max_gain, a);
+                m.AddMember("randomness", rgate.randomness, a);
+                m.AddMember("inverted", rgate.inverted, a);
+                m.AddMember("drywet", rgate.drywet, a);
+                modulesArray.PushBack(m, a);
+}
+
 void EntState::readNoise(const Value& m, size_t id)
 {
         if (id >= std::size(noise))
@@ -444,3 +489,28 @@ void EntState::readGlitch(const Value& m, size_t id)
         if (m.HasMember("max_jump") && m["max_jump"].IsNumber())
                 glitch[id].max_jump = m["max_jump"].GetDouble();
 }
+
+void EntState::readRgate(const Value& m)
+{
+        if (m.HasMember("enabled") && m["enabled"].IsBool())
+                rgate.enabled = m["enabled"].GetBool();
+        if (m.HasMember("min_interval") && m["min_interval"].IsDouble())
+                rgate.min_interval = m["min_interval"].GetDouble();
+        if (m.HasMember("max_interval") && m["max_interval"].IsDouble())
+                rgate.max_interval = m["max_interval"].GetDouble();
+        if (m.HasMember("min_duration") && m["min_duration"].IsDouble())
+                rgate.min_duration = m["min_duration"].GetDouble();
+        if (m.HasMember("max_duration") && m["max_duration"].IsDouble())
+                rgate.max_duration = m["max_duration"].GetDouble();
+        if (m.HasMember("min_gain") && m["min_gain"].IsDouble())
+                rgate.min_gain = m["min_gain"].GetDouble();
+        if (m.HasMember("max_gain") && m["max_gain"].IsDouble())
+                rgate.max_gain = m["max_gain"].GetDouble();
+        if (m.HasMember("randomness") && m["randomness"].IsDouble())
+                rgate.randomness = m["randomness"].GetDouble();
+        if (m.HasMember("inverted") && m["inverted"].IsBool())
+                rgate.inverted = m["inverted"].GetBool();
+        if (m.HasMember("drywet") && m["drywet"].IsDouble())
+                rgate.drywet = m["drywet"].GetDouble();
+}
+

@@ -29,6 +29,7 @@
 #include "DspNoiseProxyVst.h"
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
+#include "DspRgateProxyVst.h"
 #include "EntState.h"
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
@@ -79,42 +80,43 @@ EntVstController::initialize(FUnknown* context)
         addNoiseParameters();
         addCrackleParameters();
         addGlitchParameters();
+        addRgateParameters();
 
-        setParamNormalized (ParameterId::PlayModeId,
+        setParamNormalized(ParameterId::PlayModeId,
                             DspProxyVst::playModeToNormalized(PlayMode::PlaybackMode));
-        setParamNormalized (ParameterId::EntropyRateId, ENT_DEFAULT_ENTROPY_RATE);
-        setParamNormalized (ParameterId::EntropyDepthId, ENT_DEFAULT_ENTROPY_DEPTH);
-        setParamNormalized (ParameterId::EntropyMeterId, DspProxyVst::entropyToNormalized(0.0));
+        setParamNormalized(ParameterId::EntropyRateId, ENT_DEFAULT_ENTROPY_RATE);
+        setParamNormalized(ParameterId::EntropyDepthId, ENT_DEFAULT_ENTROPY_DEPTH);
+        setParamNormalized(ParameterId::EntropyMeterId, DspProxyVst::entropyToNormalized(0.0));
 
         // Noise 1
-        setParamNormalized (ParameterId::Noise1EnabledId, 0.0);
-        setParamNormalized (ParameterId::Noise1TypeId,
+        setParamNormalized(ParameterId::Noise1EnabledId, 0.0);
+        setParamNormalized(ParameterId::Noise1TypeId,
                             DspNoiseProxyVst::noiseTypeToNormalized(NoiseType::WhiteNoise));
-        setParamNormalized (ParameterId::Noise1DensityId, 1.0);
-        setParamNormalized (ParameterId::Noise1BrightnessId, 0.0);
-        setParamNormalized (ParameterId::Noise1GainId,
+        setParamNormalized(ParameterId::Noise1DensityId, 1.0);
+        setParamNormalized(ParameterId::Noise1BrightnessId, 0.0);
+        setParamNormalized(ParameterId::Noise1GainId,
                             DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(0)));
-        setParamNormalized (ParameterId::Noise1StereoId, 0.0);
-        setParamNormalized (ParameterId::Noise1FilterTypeId,
+        setParamNormalized(ParameterId::Noise1StereoId, 0.0);
+        setParamNormalized(ParameterId::Noise1FilterTypeId,
                             DspNoiseProxyVst::filterTypeToNormalized(FilterType::AllPass));
-        setParamNormalized (ParameterId::Noise1CutOffId,
+        setParamNormalized(ParameterId::Noise1CutOffId,
                             DspNoiseProxyVst::cutoffToNormalized(800));
-        setParamNormalized (ParameterId::Noise1ResonanceId, 1.0);
+        setParamNormalized(ParameterId::Noise1ResonanceId, 1.0);
 
         // Noise 2
-        setParamNormalized (ParameterId::Noise2EnabledId, 0.0);
-        setParamNormalized (ParameterId::Noise2TypeId,
+        setParamNormalized(ParameterId::Noise2EnabledId, 0.0);
+        setParamNormalized(ParameterId::Noise2TypeId,
                             DspNoiseProxyVst::noiseTypeToNormalized(NoiseType::WhiteNoise));
-        setParamNormalized (ParameterId::Noise2DensityId, 2.0);
-        setParamNormalized (ParameterId::Noise2BrightnessId, 0.0);
-        setParamNormalized (ParameterId::Noise2GainId,
+        setParamNormalized(ParameterId::Noise2DensityId, 2.0);
+        setParamNormalized(ParameterId::Noise2BrightnessId, 0.0);
+        setParamNormalized(ParameterId::Noise2GainId,
                             DspNoiseProxyVst::gainToNormalized(Entropictron::fromDecibel(0)));
-        setParamNormalized (ParameterId::Noise2StereoId, 0.0);
-        setParamNormalized (ParameterId::Noise2FilterTypeId,
+        setParamNormalized(ParameterId::Noise2StereoId, 0.0);
+        setParamNormalized(ParameterId::Noise2FilterTypeId,
                             DspNoiseProxyVst::filterTypeToNormalized(FilterType::AllPass));
-        setParamNormalized (ParameterId::Noise2CutOffId,
+        setParamNormalized(ParameterId::Noise2CutOffId,
                             DspNoiseProxyVst::cutoffToNormalized(800));
-        setParamNormalized (ParameterId::Noise2ResonanceId, 2.0);
+        setParamNormalized(ParameterId::Noise2ResonanceId, 2.0);
 
         // Crackle 1
         setParamNormalized(ParameterId::Crackle1EnabledId, 0.0);
@@ -143,30 +145,52 @@ EntVstController::initialize(FUnknown* context)
         setParamNormalized(ParameterId::Crackle2StereoSpreadId, 0.0);
 
         // Glitch1
-        setParamNormalized (ParameterId::Glitch1EnabledId, 0);
-        setParamNormalized (ParameterId::Glitch1RepeatsId,
+        setParamNormalized(ParameterId::Glitch1EnabledId, 0);
+        setParamNormalized(ParameterId::Glitch1RepeatsId,
                             DspGlitchProxyVst::repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
-        setParamNormalized (ParameterId::Glitch1ProbabilityId,
+        setParamNormalized(ParameterId::Glitch1ProbabilityId,
                             DspGlitchProxyVst::probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
-        setParamNormalized (ParameterId::Glitch1LengthId,
+        setParamNormalized(ParameterId::Glitch1LengthId,
                             DspGlitchProxyVst::lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
-        setParamNormalized (ParameterId::Glitch1MinJumpId,
+        setParamNormalized(ParameterId::Glitch1MinJumpId,
                             DspGlitchProxyVst::minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
-        setParamNormalized (ParameterId::Glitch1MaxJumpId,
+        setParamNormalized(ParameterId::Glitch1MaxJumpId,
                             DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
 
         // Glitch2
-        setParamNormalized (ParameterId::Glitch2EnabledId, 0);
-        setParamNormalized (ParameterId::Glitch2RepeatsId,
+        setParamNormalized(ParameterId::Glitch2EnabledId, 0);
+        setParamNormalized(ParameterId::Glitch2RepeatsId,
                             DspGlitchProxyVst::repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
-        setParamNormalized (ParameterId::Glitch2ProbabilityId,
+        setParamNormalized(ParameterId::Glitch2ProbabilityId,
                             DspGlitchProxyVst::probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
-        setParamNormalized (ParameterId::Glitch2LengthId,
+        setParamNormalized(ParameterId::Glitch2LengthId,
                             DspGlitchProxyVst::lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
-        setParamNormalized (ParameterId::Glitch2MinJumpId,
+        setParamNormalized(ParameterId::Glitch2MinJumpId,
                             DspGlitchProxyVst::minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
-        setParamNormalized (ParameterId::Glitch2MaxJumpId,
+        setParamNormalized(ParameterId::Glitch2MaxJumpId,
                             DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
+
+        // Rgate
+        setParamNormalized(ParameterId::RgateEnabledId,
+                           DspRgateProxyVst::enabledToNormalized(false));
+        setParamNormalized(ParameterId::RgateMinIntervalId,
+                           DspRgateProxyVst::minIntervalToNormalized(ENT_RGATE_DEFAULT_MIN_INTERVAL));
+        setParamNormalized(ParameterId::RgateMaxIntervalId,
+                           DspRgateProxyVst::maxIntervalToNormalized(ENT_RGATE_DEFAULT_MAX_INTERVAL));
+        setParamNormalized(ParameterId::RgateMinDurationId,
+                           DspRgateProxyVst::minDurationToNormalized(ENT_RGATE_DEFAULT_MIN_DURATION));
+        setParamNormalized(ParameterId::RgateMaxDurationId,
+                           DspRgateProxyVst::maxDurationToNormalized(ENT_RGATE_DEFAULT_MAX_DURATION));
+        setParamNormalized(ParameterId::RgateMinGainId,
+                           DspRgateProxyVst::minGainToNormalized(ENT_RGATE_DEFAULT_MIN_GAIN));
+        setParamNormalized(ParameterId::RgateMaxGainId,
+                           DspRgateProxyVst::maxGainToNormalized(ENT_RGATE_DEFAULT_MAX_GAIN));
+        setParamNormalized(ParameterId::RgateRandomnessId,
+                           DspRgateProxyVst::randomnessToNormalized(ENT_RGATE_DEFAULT_RANDOMNESS));
+        setParamNormalized(ParameterId::RgateInvertedId,
+                           DspRgateProxyVst::invertedToNormalized(ENT_RGATE_DEFAULT_INVERTED));
+        setParamNormalized(ParameterId::RgateDrywetId,
+                           DspRgateProxyVst::drywetToNormalized(ENT_RGATE_DEFAULT_DRYWET));
 
         return result;
 }
@@ -333,6 +357,31 @@ void EntVstController::setGlitchState(const EntState &state)
                 setParamNormalized (ParameterId::Glitch2MaxJumpId,
                                     DspGlitchProxyVst::maxJumpToNormalized(glitch.max_jump));
         }
+}
+
+void EntVstController::setRgateState(const EntState &state)
+{
+
+        const auto& rgate = state.rgate;
+        setParamNormalized(ParameterId::RgateEnabledId, rgate.enabled);
+        setParamNormalized(ParameterId::RgateMinIntervalId,
+                           DspRgateProxyVst::minIntervalToNormalized(rgate.min_interval));
+        setParamNormalized(ParameterId::RgateMaxIntervalId,
+                           DspRgateProxyVst::maxIntervalToNormalized(rgate.max_interval));
+        setParamNormalized(ParameterId::RgateMinDurationId,
+                           DspRgateProxyVst::minDurationToNormalized(rgate.min_duration));
+        setParamNormalized(ParameterId::RgateMaxDurationId,
+                           DspRgateProxyVst::maxDurationToNormalized(rgate.max_duration));
+        setParamNormalized(ParameterId::RgateMinGainId,
+                           DspRgateProxyVst::minGainToNormalized(rgate.min_gain));
+        setParamNormalized(ParameterId::RgateMaxGainId,
+                           DspRgateProxyVst::maxGainToNormalized(rgate.max_gain));
+        setParamNormalized(ParameterId::RgateRandomnessId,
+                           DspRgateProxyVst::randomnessToNormalized(rgate.randomness));
+        setParamNormalized(ParameterId::RgateInvertedId,
+                           DspRgateProxyVst::invertedToNormalized(rgate.inverted));
+        setParamNormalized(ParameterId::RgateDrywetId,
+                           DspRgateProxyVst::drywetToNormalized(rgate.drywet));
 }
 
 void EntVstController::addNoiseParameters()
@@ -605,6 +654,69 @@ void EntVstController::addGlitchParameters()
                                 DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::Glitch2MaxJumpId);
+}
+
+void EntVstController::addRgateParameters()
+{
+        parameters.addParameter(STR16("Rgate Enabled"),
+                                nullptr, 2, DspRgateProxyVst::enabledToNormalized(false),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::RgateEnabledId);
+
+        parameters.addParameter(STR16("Rgate Min Interval"),
+                                nullptr, 0,
+                                DspRgateProxyVst::minIntervalToNormalized(ENT_RGATE_DEFAULT_MIN_INTERVAL),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::RgateMinIntervalId);
+
+        parameters.addParameter(STR16("Rgate Max Interval"),
+                                nullptr, 0,
+                                DspRgateProxyVst::maxIntervalToNormalized(ENT_RGATE_DEFAULT_MAX_INTERVAL),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::RgateMaxIntervalId);
+
+        parameters.addParameter(STR16("Rgate Min Duration"),
+                                nullptr, 0,
+                                DspRgateProxyVst::minDurationToNormalized(ENT_RGATE_DEFAULT_MIN_DURATION),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::RgateMinDurationId);
+
+        parameters.addParameter(STR16("Rgate Max Duration"),
+                                nullptr, 0,
+                                DspRgateProxyVst::maxDurationToNormalized(ENT_RGATE_DEFAULT_MAX_DURATION),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::RgateMaxDurationId);
+
+        parameters.addParameter(STR16("Rgate Min Gain"),
+                                nullptr, 0,
+                                DspRgateProxyVst::minGainToNormalized(ENT_RGATE_DEFAULT_MIN_GAIN),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::RgateMinGainId);
+
+        parameters.addParameter(STR16("Rgate Max Gain"),
+                                nullptr, 0,
+                                DspRgateProxyVst::maxGainToNormalized(ENT_RGATE_DEFAULT_MAX_GAIN),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::RgateMaxGainId);
+
+        parameters.addParameter(STR16("Rgate Randomness"),
+                                nullptr, 0,
+                                DspRgateProxyVst::randomnessToNormalized(ENT_RGATE_DEFAULT_RANDOMNESS),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::RgateRandomnessId);
+
+        parameters.addParameter(STR16("Rgate Inverted"),
+                                nullptr, 2,
+                                DspRgateProxyVst::invertedToNormalized(ENT_RGATE_DEFAULT_INVERTED),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::RgateInvertedId);
+
+        parameters.addParameter(STR16("Rgate Drywet"),
+                                nullptr, 0,
+                                DspRgateProxyVst::drywetToNormalized(ENT_RGATE_DEFAULT_DRYWET),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::RgateDrywetId);
+
 }
 
 IPlugView* PLUGIN_API

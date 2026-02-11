@@ -69,9 +69,23 @@ class EntState
                 double max_jump = 0.0;
         };
 
+        struct Rgate {
+                bool enabled = false;
+                double max_interval = 0.0;
+                double min_interval = 0.0;
+                double max_duration = 0.0;
+                double min_duration = 0.0;
+                double max_gain = 0.0;
+                double min_gain = 0.0;
+                double randomness = 0.0;
+                bool inverted = false;
+                double drywet = 0.0;
+        };
+
         Noise noise[2];
         Crackle crackle[2];
         Glitch glitch[2];
+        Rgate rgate;
 
         EntState();
         explicit EntState(const std::string &jsonData);
@@ -105,9 +119,12 @@ class EntState
                           rapidjson::Document::AllocatorType& a) const;
         void writeGlitch(rapidjson::Value& modulesArray,
                          rapidjson::Document::AllocatorType& a) const;
+        void writeRgate(rapidjson::Value& modulesArray,
+                         rapidjson::Document::AllocatorType& a) const;
         void readNoise(const rapidjson::Value& m, size_t id);
         void readCrackle(const rapidjson::Value& m, size_t id);
         void readGlitch(const rapidjson::Value& m, size_t id);
+        void readRgate(const rapidjson::Value& m);
 
  private:
         std::string presetName;

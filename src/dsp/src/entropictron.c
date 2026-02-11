@@ -25,6 +25,7 @@
 #include "ent_noise.h"
 #include "ent_crackle.h"
 #include "ent_glitch.h"
+#include "ent_rgate.h"
 #include "ent_log.h"
 #include "ent_state_internal.h"
 
@@ -45,6 +46,7 @@ struct entropictron {
         struct ent_noise* noise[2];
         struct ent_crackle *crackle[2];
         struct ent_glitch *glitch[2];
+        struct ent_rgate *rgate;
         struct qx_randomizer prob_randomizer;
         struct qx_randomizer entropy_randomizer;
 };
@@ -106,6 +108,14 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
                 }
         }
 
+        // Create rgate
+        (*ent)->rgate = ent_rgate_create(sample_rate);
+        if ((*ent)->rgate == NULL) {
+                ent_log_error("can't create rgate module");
+                ent_free(ent);
+                return ENT_ERROR;
+        }
+
 	return ENT_OK;
 }
 
@@ -126,6 +136,9 @@ void ent_free(struct entropictron **ent)
                 size_t num_glitchs = QX_ARRAY_SIZE((*ent)->glitch);
                 for (size_t i = 0; i < num_glitchs; i++)
                         ent_glitch_free(&(*ent)->glitch[i]);
+
+                // Free rgate
+                ent_rgate_free(&(*ent)->rgate);
 
                 free(*ent);
                 *ent = NULL;
@@ -254,6 +267,9 @@ ent_process(struct entropictron *ent, float** data, size_t size)
                         ent_glitch_process(glitch, in, out, size);
         }
 
+        //        if (ent_rgate_is_enabled(ent->rgate))
+                ent_rgate_process(ent->rgate, in, out, size);
+
         return ENT_OK;
 }
 
@@ -274,6 +290,8 @@ void ent_set_state(struct entropictron *ent, const struct ent_state *state)
         n = QX_ARRAY_SIZE(ent->glitch);
         for (size_t i = 0; i < n; i++)
                 ent_glitch_set_state(ent->glitch[i], &state->glitches[i]);
+
+        ent_rgate_set_state(ent->rgate, &state->rgate);
 }
 
 void ent_get_state(const struct entropictron *ent, struct ent_state *state)
@@ -293,6 +311,8 @@ void ent_get_state(const struct entropictron *ent, struct ent_state *state)
         n = QX_ARRAY_SIZE(ent->glitch);
         for (size_t i = 0; i < n; i++)
                 ent_glitch_get_state(ent->glitch[i], &state->glitches[i]);
+
+        ent_rgate_get_state(ent->rgate, &state->rgate);
 }
 
 void ent_press_key(struct entropictron *ent, bool on, int pitch, int velocity)
@@ -326,3 +346,10 @@ ent_get_glitch(struct entropictron *ent, int id)
 
         return ent->glitch[id];
 }
+
+struct ent_rgate*
+ent_get_rgate(struct entropictron *ent)
+{
+        return ent->rgate;
+}
+

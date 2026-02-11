@@ -47,17 +47,21 @@ extern "C" {
 #define ENT_RGATE_DEFAULT_MAX_DURATION   50.0f
 
 #define ENT_RGATE_MIN_MIN_GAIN            0.0f
-#define ENT_RGATE_MAX_MIN_GAIN            0.1f
-#define ENT_RGATE_MIN_MAX_GAIN            0.1f
 #define ENT_RGATE_MAX_MIN_GAIN            1.0f
+#define ENT_RGATE_MIN_MAX_GAIN            0.0f
+#define ENT_RGATE_MAX_MAX_GAIN            1.0f
 #define ENT_RGATE_DEFAULT_MIN_GAIN        0.0f
 #define ENT_RGATE_DEFAULT_MAX_GAIN        1.0f
 
-#define ENT_RGATE_MIN_GAIN_RANDOMNESS     0.0f
-#define ENT_RGATE_MAX_GAIN_RANDOMNESS     1.0f
-#define ENT_RGATE_DEFAULT_GAIN_RANDOMNESS 0.2f
+#define ENT_RGATE_MIN_RANDOMNESS          0.0f
+#define ENT_RGATE_MAX_RANDOMNESS          1.0f
+#define ENT_RGATE_DEFAULT_RANDOMNESS      0.5f
 
 #define ENT_RGATE_DEFAULT_INVERTED        false
+
+#define ENT_RGATE_MIN_DRYWET              0.0f
+#define ENT_RGATE_MAX_DRYWET              1.0f
+#define ENT_RGATE_DEFAULT_DRYWET          0.5f
 
 struct ent_rgate;
 struct ent_state_rgate;
@@ -65,62 +69,67 @@ struct ent_state_rgate;
 struct ent_rgate*
 ent_rgate_create(int sample_rate);
 
-void ent_rgate_free(struct ent_rgate **b);
+void ent_rgate_free(struct ent_rgate **g);
 
 enum ent_error
-ent_rgate_enable(struct ent_rgate *b, bool enable);
+ent_rgate_enable(struct ent_rgate *g, bool enable);
 
-bool ent_rgate_is_enabled(const struct ent_rgate *b);
-
-enum ent_error
-ent_rgate_set_min_interval(struct ent_rgate *b, float val);
-
-float ent_rgate_get_min_interval(const struct ent_rgate *b);
+bool ent_rgate_is_enabled(const struct ent_rgate *g);
 
 enum ent_error
-ent_rgate_set_max_interval(struct ent_rgate *b, float val);
+ent_rgate_set_min_interval(struct ent_rgate *g, float val);
 
-float ent_rgate_get_max_interval(const struct ent_rgate *b);
-
-enum ent_error
-ent_rgate_set_min_duration(struct ent_rgate *b, float val);
-
-float ent_rgate_get_min_duration(const struct ent_rgate *b);
+float ent_rgate_get_min_interval(const struct ent_rgate *g);
 
 enum ent_error
-ent_rgate_set_max_duration(struct ent_rgate *b, float val);
+ent_rgate_set_max_interval(struct ent_rgate *g, float val);
 
-float ent_rgate_get_max_duration(const struct ent_rgate *b);
-
-enum ent_error
-ent_rgate_set_min_gain(struct ent_rgate *b, float val);
-
-float ent_rgate_get_min_gain(const struct ent_rgate *b);
+float ent_rgate_get_max_interval(const struct ent_rgate *g);
 
 enum ent_error
-ent_rgate_set_max_gain(struct ent_rgate *b, float val);
+ent_rgate_set_min_duration(struct ent_rgate *g, float val);
 
-float ent_rgate_get_max_gain(const struct ent_rgate *b);
-
-enum ent_error
-ent_rgate_set_probability(struct ent_rgate *b, float val);
-
-float ent_rgate_get_probability(const struct ent_rgate *b);
+float ent_rgate_get_min_duration(const struct ent_rgate *g);
 
 enum ent_error
-ent_rgate_set_inverted(struct ent_rgate *b, bool b);
+ent_rgate_set_max_duration(struct ent_rgate *g, float val);
 
-bool ent_rgate_is_inverted(const struct ent_rgate *b);
+float ent_rgate_get_max_duration(const struct ent_rgate *g);
 
-void ent_rgate_process(struct ent_rgate *b,
-                         float **data,
-                         size_t size);
+enum ent_error
+ent_rgate_set_min_gain(struct ent_rgate *g, float val);
 
-void ent_rgate_set_state(struct ent_rgate *b,
-                           const struct ent_state_rgate *state);
+float ent_rgate_get_min_gain(const struct ent_rgate *g);
 
-void ent_rgate_get_state(const struct ent_rgate *b,
-                           struct ent_state_rgate *state);
+enum ent_error
+ent_rgate_set_max_gain(struct ent_rgate *g, float val);
+
+float ent_rgate_get_max_gain(const struct ent_rgate *g);
+
+enum ent_error
+ent_rgate_set_randomness(struct ent_rgate *g, float val);
+
+float ent_rgate_get_randomness(const struct ent_rgate *g);
+
+enum ent_error
+ent_rgate_set_inverted(struct ent_rgate *g, bool b);
+
+bool ent_rgate_get_inverted(const struct ent_rgate *g);
+
+enum ent_error ent_rgate_set_drywet(struct ent_rgate *g, float val);
+
+float ent_rgate_get_drywet(const struct ent_rgate *g);
+
+void ent_rgate_process(struct ent_rgate *g,
+                        float **in,
+                        float **out,
+                        size_t size);
+
+void ent_rgate_set_state(struct ent_rgate *g,
+                         const struct ent_state_rgate *state);
+
+void ent_rgate_get_state(const struct ent_rgate *g,
+                         struct ent_state_rgate *state);
 
 #ifdef __cplusplus
 }

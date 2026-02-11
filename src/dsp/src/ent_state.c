@@ -51,6 +51,12 @@ ent_state_get_glitch(struct ent_state *state, size_t index)
         return &state->glitches[index];
 }
 
+struct ent_state_rgate*
+ent_state_get_rgate(struct ent_state *state)
+{
+        return &state->rgate;
+}
+
 const struct ent_state_noise*
 ent_state_get_noise_const(const struct ent_state *state, size_t index)
 {
@@ -67,6 +73,12 @@ const struct ent_state_glitch*
 ent_state_get_glitch_const(const struct ent_state *state, size_t index)
 {
         return &state->glitches[index];
+}
+
+const struct ent_state_rgate*
+ent_state_get_rgate_const(const struct ent_state *state)
+{
+        return &state->rgate;
 }
 
 void ent_state_set_play_mode(struct ent_state *state, int play_mode)
@@ -340,3 +352,106 @@ int ent_state_glitch_get_repeats(const struct ent_state_glitch *g)
 {
     return atomic_load_explicit(&g->repeats, memory_order_relaxed);
 }
+
+/* RGATE */
+void ent_state_rgate_set_enabled(struct ent_state_rgate *g, bool val)
+{
+    atomic_store_explicit(&g->enabled, val, memory_order_relaxed);
+}
+
+bool ent_state_rgate_get_enabled(const struct ent_state_rgate *g)
+{
+    return atomic_load_explicit(&g->enabled, memory_order_relaxed);
+}
+
+void ent_state_rgate_set_min_interval(struct ent_state_rgate *g, float val)
+{
+    atomic_store_explicit(&g->min_interval, val, memory_order_relaxed);
+}
+
+float ent_state_rgate_get_min_interval(const struct ent_state_rgate *g)
+{
+        return atomic_load_explicit(&g->min_interval, memory_order_relaxed);
+}
+
+void ent_state_rgate_set_max_interval(struct ent_state_rgate *g, float val)
+{
+    atomic_store_explicit(&g->max_interval, val, memory_order_relaxed);
+}
+
+float ent_state_rgate_get_max_interval(const struct ent_state_rgate *g)
+{
+        return atomic_load_explicit(&g->max_interval, memory_order_relaxed);
+}
+
+void ent_state_rgate_set_min_duration(struct ent_state_rgate *g, float val)
+{
+    atomic_store_explicit(&g->min_duration, val, memory_order_relaxed);
+}
+
+float ent_state_rgate_get_min_duration(const struct ent_state_rgate *g)
+{
+        return atomic_load_explicit(&g->min_duration, memory_order_relaxed);
+}
+
+void ent_state_rgate_set_max_duration(struct ent_state_rgate *g, float val)
+{
+    atomic_store_explicit(&g->max_duration, val, memory_order_relaxed);
+}
+
+float ent_state_rgate_get_max_duration(const struct ent_state_rgate *g)
+{
+        return atomic_load_explicit(&g->max_duration, memory_order_relaxed);
+}
+
+void ent_state_rgate_set_min_gain(struct ent_state_rgate *g, float val)
+{
+    atomic_store_explicit(&g->min_gain, val, memory_order_relaxed);
+}
+
+float ent_state_rgate_get_min_gain(const struct ent_state_rgate *g)
+{
+        return atomic_load_explicit(&g->min_gain, memory_order_relaxed);
+}
+
+void ent_state_rgate_set_max_gain(struct ent_state_rgate *g, float val)
+{
+    atomic_store_explicit(&g->max_gain, val, memory_order_relaxed);
+}
+
+float ent_state_rgate_get_max_gain(const struct ent_state_rgate *g)
+{
+        return atomic_load_explicit(&g->max_gain, memory_order_relaxed);
+}
+
+void ent_state_rgate_set_randomness(struct ent_state_rgate *g, float val)
+{
+    atomic_store_explicit(&g->randomness, val, memory_order_relaxed);
+}
+
+float ent_state_rgate_get_randomness(const struct ent_state_rgate *g)
+{
+        return atomic_load_explicit(&g->randomness, memory_order_relaxed);
+}
+
+void ent_state_rgate_set_inverted(struct ent_state_rgate *g, bool val)
+{
+    atomic_store_explicit(&g->inverted, val, memory_order_relaxed);
+}
+
+bool ent_state_rgate_get_inverted(const struct ent_state_rgate *g)
+{
+        return atomic_load_explicit(&g->inverted, memory_order_relaxed);
+}
+
+void ent_state_rgate_set_drywet(struct ent_state_rgate *g, float val)
+{
+    atomic_store_explicit(&g->drywet, val, memory_order_relaxed);
+}
+
+float ent_state_rgate_get_drywet(const struct ent_state_rgate *g)
+{
+        return atomic_load_explicit(&g->drywet, memory_order_relaxed);
+}
+
+

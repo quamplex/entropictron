@@ -33,90 +33,100 @@ DspWrapperRgate::DspWrapperRgate(struct ent_rgate* dsp)
 
 void DspWrapperRgate::enable(bool b)
 {
-        ent_rgate_enable(glitchDsp, b);
+        ent_rgate_enable(rgateDsp, b);
 }
 
 bool DspWrapperRgate::isEnabled() const
 {
-        return ent_rgate_is_enabled(glitchDsp);
+        return ent_rgate_is_enabled(rgateDsp);
 }
 
 void DspWrapperRgate::setMinInterval(double value)
 {
-        ent_rgate_set_min_interval(glitchDsp, value);
+        ent_rgate_set_min_interval(rgateDsp, value);
 }
 
 double DspWrapperRgate::getMinInterval() const
 {
-        return ent_rgate_get_min_interval(glitchDsp);
+        return ent_rgate_get_min_interval(rgateDsp);
 }
 
 void DspWrapperRgate::setMaxInterval(double value)
 {
-        ent_rgate_set_max_interval(glitchDsp, value);
+        ent_rgate_set_max_interval(rgateDsp, value);
 }
 
 double DspWrapperRgate::getMaxInterval() const
 {
-        return ent_rgate_get_max_interval(glitchDsp);
+        return ent_rgate_get_max_interval(rgateDsp);
 }
 
 void DspWrapperRgate::setMinDuration(double value)
 {
-        ent_rgate_set_min_duration(glitchDsp, value);
+        ent_rgate_set_min_duration(rgateDsp, value);
 }
 
 double DspWrapperRgate::getMinDuration() const
 {
-        return ent_rgate_get_min_duration(glitchDsp);
+        return ent_rgate_get_min_duration(rgateDsp);
 }
 
 void DspWrapperRgate::setMaxDuration(double value)
 {
-        ent_rgate_set_max_duration(glitchDsp, value);
+        ent_rgate_set_max_duration(rgateDsp, value);
 }
 
 double DspWrapperRgate::getMaxDuration() const
 {
-        return ent_rgate_get_max_duration(glitchDsp);
+        return ent_rgate_get_max_duration(rgateDsp);
 }
 
 void DspWrapperRgate::setMinGain(double value)
 {
-        ent_rgate_set_min_gain(glitchDsp, value);
+        ent_rgate_set_min_gain(rgateDsp, value);
 }
 
 double DspWrapperRgate::getMinGain() const
 {
-        return ent_rgate_get_min_gain(glitchDsp);
+        return ent_rgate_get_min_gain(rgateDsp);
 }
 
 void DspWrapperRgate::setMaxGain(double value)
 {
-        ent_rgate_set_max_gain(glitchDsp, value);
+        ent_rgate_set_max_gain(rgateDsp, value);
 }
 
 double DspWrapperRgate::getMaxGain() const
 {
-        return ent_rgate_get_max_gain(glitchDsp);
+        return ent_rgate_get_max_gain(rgateDsp);
 }
 
-void DspWrapperRgate::setProbability(double value);
+void DspWrapperRgate::setRandomness(double value)
 {
-        ent_rgate_set_probability(glitchDsp, value);
+        ent_rgate_set_randomness(rgateDsp, value);
 }
 
-double DspWrapperRgate::getProbability() const
+double DspWrapperRgate::getRandomness() const
 {
-        return  ent_rgate_get_probability(glitchDsp);
+        return  ent_rgate_get_randomness(rgateDsp);
 }
 
-double DspWrapperRgate::setInverted(bool b)
+void DspWrapperRgate::setInverted(bool b)
 {
-        return ent_rgate_set_inverted(glitchDsp, b);
+        ent_rgate_set_inverted(rgateDsp, b);
 }
 
 double DspWrapperRgate::isInverted() const
 {
-        return ent_rgate_is_inverted(glitchDsp);
+        return ent_rgate_get_inverted(rgateDsp);
+}
+
+void DspWrapperRgate::setDrywet(double value)
+{
+        ent_rgate_set_drywet(rgateDsp, value);
+}
+
+double DspWrapperRgate::getDrywet() const
+{
+        return  ent_rgate_get_drywet(rgateDsp);
 }

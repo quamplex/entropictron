@@ -45,6 +45,7 @@ extern "C" {
 struct ent_noise;
 struct ent_crackle;
 struct ent_glitch;
+struct ent_rgate;
 struct entropictron;
 struct ent_state;
 
@@ -90,6 +91,8 @@ struct ent_noise* ent_get_noise(struct entropictron *ent, int id);
 struct ent_crackle* ent_get_crackle(struct entropictron *ent, int id);
 
 struct ent_glitch* ent_get_glitch(struct entropictron *ent, int id);
+
+struct ent_rgate* ent_get_rgate(struct entropictron *ent);
 
 void ent_set_state(struct entropictron *ent, const struct ent_state *state);
 

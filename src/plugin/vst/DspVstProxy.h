@@ -36,6 +36,7 @@ class DspNoiseProxyVst;
 class DspCrackleProxyVst;
 class DspGlitchProxyVst;
 class DspPitchProxyVst;
+class DspRgateProxyVst;
 
 class DspProxyVst: public DspProxy {
  public:
@@ -51,6 +52,7 @@ class DspProxyVst: public DspProxy {
         DspNoiseProxy* getNoise(NoiseId id) const override;
         DspCrackleProxy* getCrackle(CrackleId id) const override;
         DspGlitchProxy* getGlitch(GlitchId id) const override;
+        DspRgateProxy* getRgate() const override;
 
         static double playModeToNormalized(PlayMode mode);
         static PlayMode playModeFromNormalized(double value);
@@ -68,6 +70,7 @@ protected:
         DspCrackleProxyVst *dspCrackle2Proxy;
         DspGlitchProxyVst *dspGlitch1Proxy;
         DspGlitchProxyVst *dspGlitch2Proxy;
+        DspRgateProxyVst *dspRgateProxy;
 };
 
 #endif // DSP_PROXY_VST_H
