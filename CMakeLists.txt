@@ -127,6 +127,7 @@ set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/NoiseModel.h
   ${ENT_COMMON_DIR}/CrackleModel.h
   ${ENT_COMMON_DIR}/GlitchModel.h
+  ${ENT_COMMON_DIR}/RgateModel.h
   ${ENT_COMMON_DIR}/EntWidget.h
   ${ENT_COMMON_DIR}/EntAbstractView.h
   ${ENT_COMMON_DIR}/EntWidget.h
@@ -134,6 +135,7 @@ set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/NoiseWidget.h
   ${ENT_COMMON_DIR}/CrackleWidget.h
   ${ENT_COMMON_DIR}/GlitchWidget.h
+  ${ENT_COMMON_DIR}/RgateWidget.h
   ${ENT_COMMON_DIR}/EntropyMeter.h
   ${ENT_COMMON_DIR}/ModuleWidgetTab.h
   ${ENT_COMMON_DIR}/GlobalControlsWidget.h
@@ -155,12 +157,14 @@ set(ENT_COMMON_SOURCES
   ${ENT_COMMON_DIR}/NoiseModel.cpp
   ${ENT_COMMON_DIR}/CrackleModel.cpp
   ${ENT_COMMON_DIR}/GlitchModel.cpp
+  ${ENT_COMMON_DIR}/RgateModel.cpp
   ${ENT_COMMON_DIR}/EntWidget.cpp
   ${ENT_COMMON_DIR}/EntAbstractView.cpp
   ${ENT_COMMON_DIR}/Knob.cpp
   ${ENT_COMMON_DIR}/NoiseWidget.cpp
   ${ENT_COMMON_DIR}/CrackleWidget.cpp
   ${ENT_COMMON_DIR}/GlitchWidget.cpp
+  ${ENT_COMMON_DIR}/RgateWidget.cpp
   ${ENT_COMMON_DIR}/EntropyMeter.cpp
   ${ENT_COMMON_DIR}/ModuleWidgetTab.cpp
   ${ENT_COMMON_DIR}/GlobalControlsWidget.cpp
