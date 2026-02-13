@@ -173,9 +173,6 @@ float ent_state_rgate_get_randomness(const struct ent_state_rgate *g);
 void ent_state_rgate_set_inverted(struct ent_state_rgate *g, bool val);
 bool ent_state_rgate_get_inverted(const struct ent_state_rgate *g);
 
-void ent_state_rgate_set_drywet(struct ent_state_rgate *g, float val);
-float ent_state_rgate_get_drywet(const struct ent_state_rgate *g);
-
 #ifdef __cplusplus
 }
 #endif

@@ -39,7 +39,6 @@ struct ent_rgate {
         float max_gain;
         float randomness;
         bool inverted;
-        float drywet;
 
         int sample_rate;
 
@@ -55,8 +54,6 @@ struct ent_rgate {
         float interval_range;
         float duration_range;
         float gain_range;
-        float dry;
-        float wet;
 };
 
 struct ent_rgate* ent_rgate_create(int sample_rate)
@@ -78,14 +75,11 @@ struct ent_rgate* ent_rgate_create(int sample_rate)
         g->max_gain = ENT_RGATE_DEFAULT_MAX_GAIN;
         g->randomness = ENT_RGATE_DEFAULT_RANDOMNESS;
         g->inverted = ENT_RGATE_DEFAULT_INVERTED;
-        g->drywet = ENT_RGATE_DEFAULT_DRYWET;
 
         // Ranges
         g->interval_range = fabs(g->max_interval - g->min_interval);
         g->duration_range = fabs(g->max_duration - g->min_duration);
         g->gain_range = fabs(g->max_gain - g->min_gain);
-        g->wet = g->drywet;
-        g->dry = ENT_RGATE_MAX_DRYWET - g->drywet;
 
         qx_randomizer_init(&g->randomizer, 0.0f, 1.0f, 1.0f / 65536.0f);
         qx_randomizer_init(&g->randomizer_interval, 0.0f, 1.0f, 1.0f / 65536.0f);
@@ -229,21 +223,6 @@ bool ent_rgate_get_inverted(const struct ent_rgate *g)
         return g->inverted;
 }
 
-enum ent_error ent_rgate_set_drywet(struct ent_rgate *g, float val)
-{
-        g->drywet = qx_clamp_float(val,
-                                   ENT_RGATE_MIN_DRYWET,
-                                   ENT_RGATE_MAX_DRYWET);
-        g->wet = g->drywet;
-        g->dry = ENT_RGATE_MAX_DRYWET - g->drywet;
-        return ENT_OK;
-}
-
-float ent_rgate_get_drywet(const struct ent_rgate *g)
-{
-        return g->drywet;
-}
-
 void ent_rgate_process(struct ent_rgate *g,
                        float **in,
                        float **out,
@@ -279,11 +258,8 @@ void ent_rgate_process(struct ent_rgate *g,
                 float gain = qx_smoother_next(&g->current_gain);
                 gain = g->inverted ? 1.0f - gain : gain;
 
-                float wet_l = in_l * gain;
-                float wet_r = in_r * gain;
-
-                out[0][i] += in_l * g->dry + wet_l * g->wet;
-                out[1][i] += in_r * g->dry + wet_r * g->wet;
+                out[0][i] += in_l * gain:
+                out[1][i] += in_r * gain;
         }
 }
 
@@ -298,7 +274,6 @@ void ent_rgate_set_state(struct ent_rgate *g, const struct ent_state_rgate *stat
         ENT_SET_STATE(g, state, max_gain, ent_rgate_set_max_gain);
         ENT_SET_STATE(g, state, randomness, ent_rgate_set_randomness);
         ENT_SET_STATE(g, state, inverted, ent_rgate_set_inverted);
-        ENT_SET_STATE(g, state, drywet, ent_rgate_set_drywet);
  }
 
 void ent_rgate_get_state(const struct ent_rgate *g, struct ent_state_rgate *state)
@@ -312,5 +287,4 @@ void ent_rgate_get_state(const struct ent_rgate *g, struct ent_state_rgate *stat
         ENT_GET_STATE(g, state, max_gain, ent_rgate_get_max_gain);
         ENT_GET_STATE(g, state, randomness, ent_rgate_get_randomness);
         ENT_GET_STATE(g, state, inverted, ent_rgate_get_inverted);
-        ENT_GET_STATE(g, state, drywet, ent_rgate_get_drywet);
 }

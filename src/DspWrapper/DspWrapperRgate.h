@@ -50,8 +50,6 @@ public:
     double getRandomness() const;
     void setInverted(bool b = true);
     double isInverted() const;
-    void setDrywet(double value);
-    double getDrywet() const;
 
 private:
     struct ent_rgate* rgateDsp;

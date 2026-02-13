@@ -70,7 +70,6 @@ struct ent_state_rgate {
         _Atomic(float) max_gain;
         _Atomic(float) randomness;
         _Atomic(bool) inverted;
-        _Atomic(float) drywet;
 };
 
 struct ent_state {

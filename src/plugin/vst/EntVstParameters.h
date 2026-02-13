@@ -105,7 +105,6 @@ enum ParameterId : Steinberg::Vst::ParamID
     RgateMaxGainId          = 30307,
     RgateRandomnessId       = 30308,
     RgateInvertedId         = 30309,
-    RgateDrywetId           = 30310,
 };
 
 inline double toNormalized(double value, double min, double max)

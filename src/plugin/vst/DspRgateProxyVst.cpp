@@ -47,7 +47,6 @@ DspRgateProxyVst::DspRgateProxyVst(RkObject* parent,
                 ParameterId::RgateMaxGainId,
                 ParameterId::RgateRandomnessId,
                 ParameterId::RgateInvertedId,
-                ParameterId::RgateDrywetId,
         };
 
         vstController->setParamNormalized(ParameterId::RgateEnabledId,
@@ -82,7 +81,6 @@ DspRgateProxyVst::~DspRgateProxyVst()
         vstController->removeParamterCallback(ParameterId::RgateMaxGainId);
         vstController->removeParamterCallback(ParameterId::RgateRandomnessId);
         vstController->removeParamterCallback(ParameterId::RgateInvertedId);
-        vstController->removeParamterCallback(ParameterId::RgateDrywetId);
 }
 
 bool DspRgateProxyVst::enable(bool b)
@@ -212,22 +210,6 @@ double DspRgateProxyVst::getRandomness() const
         return randomnessFromNormalized(val);
 }
 
-bool DspRgateProxyVst::setDrywet(double value)
-{
-        auto handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::RgateDrywetId);
-        handler->performEdit(ParameterId::RgateDrywetId,
-                             drywetToNormalized(value));
-        handler->endEdit(ParameterId::RgateDrywetId);
-        return true;
-}
-
-double DspRgateProxyVst::getDrywet() const
-{
-        auto val = vstController->getParamNormalized(ParameterId::RgateDrywetId);
-        return drywetFromNormalized(val);
-}
-
 bool DspRgateProxyVst::setInverted(bool b)
 {
         auto handler = vstController->getComponentHandler();
@@ -273,9 +255,6 @@ void DspRgateProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
                 break;
         case ParameterId::RgateInvertedId:
                 action invertedUpdated(invertedFromNormalized(value));
-                break;
-        case ParameterId::RgateDrywetId:
-                action drywetUpdated(drywetFromNormalized(value));
                 break;
         default:
                 break;
@@ -400,16 +379,3 @@ bool DspRgateProxyVst::invertedFromNormalized(double value)
         return value > 0.5;
 }
 
-double DspRgateProxyVst::drywetToNormalized(double value)
-{
-        return toNormalized(value,
-                            ENT_RGATE_MIN_DRYWET,
-                            ENT_RGATE_MAX_DRYWET);
-}
-
-double DspRgateProxyVst::drywetFromNormalized(double value)
-{
-        return fromNormalized(value,
-                              ENT_RGATE_MIN_DRYWET,
-                              ENT_RGATE_MAX_DRYWET);
-}

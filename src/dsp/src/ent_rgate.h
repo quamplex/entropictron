@@ -59,10 +59,6 @@ extern "C" {
 
 #define ENT_RGATE_DEFAULT_INVERTED        false
 
-#define ENT_RGATE_MIN_DRYWET              0.0f
-#define ENT_RGATE_MAX_DRYWET              1.0f
-#define ENT_RGATE_DEFAULT_DRYWET          0.5f
-
 struct ent_rgate;
 struct ent_state_rgate;
 
@@ -115,10 +111,6 @@ enum ent_error
 ent_rgate_set_inverted(struct ent_rgate *g, bool b);
 
 bool ent_rgate_get_inverted(const struct ent_rgate *g);
-
-enum ent_error ent_rgate_set_drywet(struct ent_rgate *g, float val);
-
-float ent_rgate_get_drywet(const struct ent_rgate *g);
 
 void ent_rgate_process(struct ent_rgate *g,
                         float **in,

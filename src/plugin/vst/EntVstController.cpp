@@ -189,8 +189,6 @@ EntVstController::initialize(FUnknown* context)
                            DspRgateProxyVst::randomnessToNormalized(ENT_RGATE_DEFAULT_RANDOMNESS));
         setParamNormalized(ParameterId::RgateInvertedId,
                            DspRgateProxyVst::invertedToNormalized(ENT_RGATE_DEFAULT_INVERTED));
-        setParamNormalized(ParameterId::RgateDrywetId,
-                           DspRgateProxyVst::drywetToNormalized(ENT_RGATE_DEFAULT_DRYWET));
 
         return result;
 }
@@ -380,8 +378,6 @@ void EntVstController::setRgateState(const EntState &state)
                            DspRgateProxyVst::randomnessToNormalized(rgate.randomness));
         setParamNormalized(ParameterId::RgateInvertedId,
                            DspRgateProxyVst::invertedToNormalized(rgate.inverted));
-        setParamNormalized(ParameterId::RgateDrywetId,
-                           DspRgateProxyVst::drywetToNormalized(rgate.drywet));
 }
 
 void EntVstController::addNoiseParameters()
@@ -710,12 +706,6 @@ void EntVstController::addRgateParameters()
                                 DspRgateProxyVst::invertedToNormalized(ENT_RGATE_DEFAULT_INVERTED),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::RgateInvertedId);
-
-        parameters.addParameter(STR16("Rgate Drywet"),
-                                nullptr, 0,
-                                DspRgateProxyVst::drywetToNormalized(ENT_RGATE_DEFAULT_DRYWET),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::RgateDrywetId);
 
 }
 

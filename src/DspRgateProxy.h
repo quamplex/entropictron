@@ -48,8 +48,6 @@ class DspRgateProxy : public RkObject {
         virtual double getRandomness() const = 0;
         virtual bool setInverted(bool b = true) = 0;
         virtual bool getInverted() const = 0;
-        virtual bool setDrywet(double value) = 0;
-        virtual double getDrywet() const = 0;
 
         RK_DECL_ACT(enabled,
                     enabled(bool b),
@@ -87,10 +85,6 @@ class DspRgateProxy : public RkObject {
                     invertedUpdated(bool b),
                     RK_ARG_TYPE(bool),
                     RK_ARG_VAL(b));
-        RK_DECL_ACT(drywetUpdated,
-                    drywetUpdated(double value),
-                    RK_ARG_TYPE(double),
-                    RK_ARG_VAL(value));
 };
 
 #endif // DSP_RGATE_PROXY_H

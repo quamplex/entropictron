@@ -444,14 +444,3 @@ bool ent_state_rgate_get_inverted(const struct ent_state_rgate *g)
         return atomic_load_explicit(&g->inverted, memory_order_relaxed);
 }
 
-void ent_state_rgate_set_drywet(struct ent_state_rgate *g, float val)
-{
-    atomic_store_explicit(&g->drywet, val, memory_order_relaxed);
-}
-
-float ent_state_rgate_get_drywet(const struct ent_state_rgate *g)
-{
-        return atomic_load_explicit(&g->drywet, memory_order_relaxed);
-}
-
-

@@ -56,8 +56,6 @@ class DspRgateProxyVst: public DspRgateProxy {
         double getRandomness() const override;
         bool setInverted(bool b = true) override;
         bool getInverted() const override;
-        bool setDrywet(double value) override;
-        double getDrywet() const override;
 
         static double enabledToNormalized(bool b);
         static bool enabledFromNormalized(double value);
@@ -77,8 +75,6 @@ class DspRgateProxyVst: public DspRgateProxy {
         static double randomnessFromNormalized(double value);
         static double invertedToNormalized(bool b);
         static bool invertedFromNormalized(double value);
-        static double drywetToNormalized(double value);
-        static double drywetFromNormalized(double value);
 
 protected:
         void onParameterChanged(ParameterId paramId, ParamValue value);

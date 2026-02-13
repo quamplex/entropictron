@@ -534,9 +534,6 @@ void EntVstProcessor::initRgateParamMappings()
         paramMap[ParameterId::RgateInvertedId] = [rgate](ParamValue v) {
                 rgate->setInverted(DspRgateProxyVst::invertedFromNormalized(v));
         };
-        paramMap[ParameterId::RgateDrywetId] = [rgate](ParamValue v) {
-                rgate->setDrywet(DspRgateProxyVst::drywetFromNormalized(v));
-        };
 }
 
 tresult EntVstProcessor::setState (IBStream *state)

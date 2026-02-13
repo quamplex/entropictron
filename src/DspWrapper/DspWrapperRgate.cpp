@@ -120,13 +120,3 @@ double DspWrapperRgate::isInverted() const
 {
         return ent_rgate_get_inverted(rgateDsp);
 }
-
-void DspWrapperRgate::setDrywet(double value)
-{
-        ent_rgate_set_drywet(rgateDsp, value);
-}
-
-double DspWrapperRgate::getDrywet() const
-{
-        return  ent_rgate_get_drywet(rgateDsp);
-}
