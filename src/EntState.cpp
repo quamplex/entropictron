@@ -93,7 +93,6 @@ void EntState::getState(struct ent_state* state) const
         ent_state_rgate_set_max_gain(rg, rgate.max_gain);
         ent_state_rgate_set_randomness(rg, rgate.randomness);
         ent_state_rgate_set_inverted(rg, rgate.inverted);
-        ent_state_rgate_set_drywet(rg, rgate.drywet);
 }
 
 void EntState::setState(const struct ent_state* state)
@@ -146,7 +145,6 @@ void EntState::setState(const struct ent_state* state)
         rgate.max_gain = ent_state_rgate_get_max_gain(rg);
         rgate.randomness = ent_state_rgate_get_inverted(rg);
         rgate.inverted = ent_state_rgate_get_inverted(rg);
-        rgate.drywet = ent_state_rgate_get_inverted(rg);
 }
 
 void EntState::setName(const std::string_view &name)
@@ -417,7 +415,6 @@ void EntState::writeRgate(Value& modulesArray,
                 m.AddMember("max_gain", rgate.max_gain, a);
                 m.AddMember("randomness", rgate.randomness, a);
                 m.AddMember("inverted", rgate.inverted, a);
-                m.AddMember("drywet", rgate.drywet, a);
                 modulesArray.PushBack(m, a);
 }
 
@@ -510,7 +507,5 @@ void EntState::readRgate(const Value& m)
                 rgate.randomness = m["randomness"].GetDouble();
         if (m.HasMember("inverted") && m["inverted"].IsBool())
                 rgate.inverted = m["inverted"].GetBool();
-        if (m.HasMember("drywet") && m["drywet"].IsDouble())
-                rgate.drywet = m["drywet"].GetDouble();
 }
 

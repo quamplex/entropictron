@@ -228,39 +228,66 @@ void ent_rgate_process(struct ent_rgate *g,
                        float **out,
                        size_t size)
 {
+        float duration      = g->duration;
+        float timer_ms      = g->timer_ms;
+        float ms_per_sample = g->ms_per_sample;
+
+        float randomness    = g->randomness;
+        float min_interval  = g->min_interval;
+        float interval_rng  = g->interval_range;
+        float min_duration  = g->min_duration;
+        float duration_rng  = g->duration_range;
+        float min_gain      = g->min_gain;
+        float gain_rng      = g->gain_range;
+        bool  inverted      = g->inverted;
+
+        struct qx_smoother   *current_gain  = &g->current_gain;
+        struct qx_randomizer *rand_interval = &g->randomizer_interval;
+        struct qx_randomizer *rand_duration = &g->randomizer_duration;
+        struct qx_randomizer *rand_gain     = &g->randomizer_gain;
+        struct qx_randomizer *rand_main     = &g->randomizer;
+
+        float *inL  = in[0];
+        float *inR  = in[1];
+        float *outL = out[0];
+        float *outR = out[1];
+
         for (size_t i = 0; i < size; i++) {
-                float in_l = in[0][i];
-                float in_r = in[1][i];
+                float in_l = inL[i];
+                float in_r = inR[i];
 
-                if (g->duration > 0.0f) {
-                        g->duration -= g->ms_per_sample;
+                if (duration > 0.0f) {
+                        duration -= ms_per_sample;
                 } else {
-                        qx_smoother_set_target(&g->current_gain, 1.0f);
-                        g->timer_ms -= g->ms_per_sample;
+                        qx_smoother_set_target(current_gain, 1.0f);
+                        timer_ms -= ms_per_sample;
 
-                        if (g->timer_ms <= 0.0f) {
-                                float rv = qx_randomizer_get_float(&g->randomizer_interval);
-                                g->timer_ms = g->min_interval + g->interval_range * rv;
+                        if (timer_ms <= 0.0f) {
+                                float rv = qx_randomizer_get_float(rand_interval);
+                                timer_ms = min_interval + interval_rng * rv;
 
-                                rv = qx_randomizer_get_float(&g->randomizer);
-                                if (rv <= g->randomness) {
-                                        rv = qx_randomizer_get_float(&g->randomizer_duration);
-                                        g->duration = g->min_duration + g->duration_range * rv;
+                                rv = qx_randomizer_get_float(rand_main);
+                                if (rv <= randomness) {
+                                        rv = qx_randomizer_get_float(rand_duration);
+                                        duration = min_duration + duration_rng * rv;
 
-                                        rv = qx_randomizer_get_float(&g->randomizer_gain);
-                                        float new_gain = g->min_gain + g->gain_range * rv;
+                                        rv = qx_randomizer_get_float(rand_gain);
+                                        float new_gain = min_gain + gain_rng * rv;
 
-                                        qx_smoother_set_target(&g->current_gain, new_gain);
+                                        qx_smoother_set_target(current_gain, new_gain);
                                 }
                         }
                 }
 
-                float gain = qx_smoother_next(&g->current_gain);
-                gain = g->inverted ? 1.0f - gain : gain;
+                float gain = qx_smoother_next(current_gain);
+                gain = inverted ? 1.0f - gain : gain;
 
-                out[0][i] += in_l * gain:
-                out[1][i] += in_r * gain;
+                outL[i] += in_l * gain;
+                outR[i] += in_r * gain;
         }
+
+        g->duration = duration;
+        g->timer_ms = timer_ms;
 }
 
 void ent_rgate_set_state(struct ent_rgate *g, const struct ent_state_rgate *state)

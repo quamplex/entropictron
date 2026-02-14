@@ -79,7 +79,6 @@ class EntState
                 double min_gain = 0.0;
                 double randomness = 0.0;
                 bool inverted = false;
-                double drywet = 0.0;
         };
 
         Noise noise[2];

@@ -35,8 +35,8 @@ RK_DECLARE_IMAGE_RC(switch_button_off);
 
 RgateWidget::RgateWidget(EntWidget* parent, RgateModel* model)
         : EntAbstractView(parent, model)
-        , enableButton {nullptr}
-        , enableInvertButton {nullptr}
+        , enableButton{nullptr}
+        , invertButton{nullptr}
 {
         setFixedSize(350, 302);
         setBackgroundColor(37, 43, 53);
@@ -90,7 +90,7 @@ void RgateWidget::updateView()
 
         enableButton->setPressed(model->isEnabled());
 
-        auto [repeatsFrom, repeatsTo] = model->getRepeatsRange();
+        /*auto [repeatsFrom, repeatsTo] = model->getRepeatsRange();
         repeatsKnob->setRange(repeatsFrom, repeatsTo);
         repeatsKnob->setSteps(ENT_RGATE_MAX_REPEATS);
         repeatsKnob->setDefaultValue(model->getRepeatsDefaultValue());
@@ -118,7 +118,7 @@ void RgateWidget::updateView()
         maxJumpKnob->setRange(maxJumpFrom, maxJumpTo);
         maxJumpKnob->setRangeType(Knob::RangeType::Logarithmic);
         maxJumpKnob->setDefaultValue(model->getMaxJumpDefaultValue());
-        maxJumpKnob->setValue(model->maxJump());
+        maxJumpKnob->setValue(model->maxJump());*/
 }
 
 void RgateWidget::bindModel()

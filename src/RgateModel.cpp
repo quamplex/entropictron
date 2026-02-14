@@ -30,19 +30,19 @@ RgateModel::RgateModel(RkObject *parent,
           dspRgateProxy{dspRgateProxy},
           minIntervalDefaultValue{ENT_RGATE_DEFAULT_MIN_INTERVAL},
           minIntervalRange{ENT_RGATE_MIN_MIN_INTERVAL, ENT_RGATE_MAX_MIN_INTERVAL},
-          maxIntervalDefaultValue{ENT_RGATE_DEFAULT_MAX_NTERVAL},
+          maxIntervalDefaultValue{ENT_RGATE_DEFAULT_MAX_INTERVAL},
           maxIntervalRange{ENT_RGATE_MIN_MAX_INTERVAL, ENT_RGATE_MAX_MAX_INTERVAL},
           minDurationDefaultValue{ENT_RGATE_DEFAULT_MIN_DURATION},
           minDurationRange{ENT_RGATE_MIN_MIN_DURATION, ENT_RGATE_MAX_MIN_DURATION},
-          maxDurationDefaultValue{ENT_RGATE_DEFAULT_MAX_DURAITON},
+          maxDurationDefaultValue{ENT_RGATE_DEFAULT_MAX_DURATION},
           maxDurationRange{ENT_RGATE_MIN_MAX_DURATION, ENT_RGATE_MAX_MAX_DURATION},
-          maxGainDefaultValue{ENT_RGATE_DEFAULT_MAX_GAIN},
-          maxGainRange{ENT_RGATE_MIN_MAX_GAIN, ENT_RGATE_MIN_MAX_GAIN},
+          minGainDefaultValue{ENT_RGATE_DEFAULT_MIN_GAIN},
+          minGainRange{ENT_RGATE_MIN_MIN_GAIN, ENT_RGATE_MAX_MIN_GAIN},
           maxGainDefaultValue{ENT_RGATE_DEFAULT_MAX_GAIN},
           maxGainRange{ENT_RGATE_MIN_MAX_GAIN, ENT_RGATE_MAX_MAX_GAIN},
           randomnessDefaultValue{ENT_RGATE_DEFAULT_RANDOMNESS},
-          randomnessRange{ENT_RGATE_MIN_RANDOMNESS, ENT_RGATE_MAX_RANDOMNESS}
-          randomnessDefaultValue{ENT_RGATE_DEFAULT_INVERTED},
+          randomnessRange{ENT_RGATE_MIN_RANDOMNESS, ENT_RGATE_MAX_RANDOMNESS},
+          invertedDefaultValue{ENT_RGATE_DEFAULT_INVERTED}
 {
         RK_ACT_BIND(dspRgateProxy,
                     enabled,
@@ -101,36 +101,66 @@ bool RgateModel::isEnabled() const
         return dspRgateProxy->isEnabled();
 }
 
-void RgateModel::setMinDoubleerval(double value)
+void RgateModel::setMinInterval(double value)
 {
-        if (dspRgateProxy->setMinDoubleerval(value))
-                action minDoubleervalUpdated(value);
+        if (dspRgateProxy->setMinInterval(value))
+                action minIntervalUpdated(value);
 }
 
-double RgateModel::minDoubleerval() const
+double RgateModel::minInterval() const
 {
-        return dspRgateProxy->minDoubleerval();
+        return dspRgateProxy->getMinInterval();
 }
 
-void RgateModel::setMinDoubleervalDefaultValue(double value)
+void RgateModel::setMinIntervalDefaultValue(double value)
 {
-        minDoubleervalDefaultValue = value;
+        minIntervalDefaultValue = value;
 }
 
-void RgateModel::setMaxDoubleerval(double value)
+double RgateModel::getMinIntervalDefaultValue() const
 {
-        if (dspRgateProxy->setMaxDoubleerval(value))
-                action maxDoubleervalUpdated(value);
+        return minIntervalDefaultValue;
 }
 
-double RgateModel::maxDoubleerval() const
+void RgateModel::setMinIntervalRange(double from, double to)
 {
-        return dspRgateProxy->maxDoubleerval();
+        minIntervalRange = {from, to};
 }
 
-void RgateModel::setMaxDoubleervalDefaultValue(double value)
+std::pair<double, double> RgateModel::getMinIntervalRange() const
 {
-        maxDoubleervalDefaultValue = value;
+        return minIntervalRange;
+}
+
+void RgateModel::setMaxInterval(double value)
+{
+        if (dspRgateProxy->setMaxInterval(value))
+                action maxIntervalUpdated(value);
+}
+
+double RgateModel::maxInterval() const
+{
+        return dspRgateProxy->getMaxInterval();
+}
+
+void RgateModel::setMaxIntervalDefaultValue(double value)
+{
+        maxIntervalDefaultValue = value;
+}
+
+double RgateModel::getMaxIntervalDefaultValue() const
+{
+        return maxIntervalDefaultValue;
+}
+
+void RgateModel::setMaxIntervalRange(double from, double to)
+{
+        maxIntervalRange = {from, to};
+}
+
+std::pair<double, double> RgateModel::getMaxIntervalRange() const
+{
+        return maxIntervalRange;
 }
 
 void RgateModel::setMinDuration(double value)
@@ -141,12 +171,27 @@ void RgateModel::setMinDuration(double value)
 
 double RgateModel::minDuration() const
 {
-        return dspRgateProxy->minDuration();
+        return dspRgateProxy->getMaxDuration();
 }
 
 void RgateModel::setMinDurationDefaultValue(double value)
 {
         minDurationDefaultValue = value;
+}
+
+double RgateModel::getMinDurationDefaultValue() const
+{
+        return minDurationDefaultValue;
+}
+
+void RgateModel::setMinDurationRange(double from, double to)
+{
+        minDurationRange = {from, to};
+}
+
+std::pair<double, double> RgateModel::getMinDurationRange() const
+{
+        return minDurationRange;
 }
 
 void RgateModel::setMaxDuration(double value)
@@ -157,12 +202,27 @@ void RgateModel::setMaxDuration(double value)
 
 double RgateModel::maxDuration() const
 {
-        return dspRgateProxy->maxDuration();
+        return dspRgateProxy->getMaxDuration();
 }
 
 void RgateModel::setMaxDurationDefaultValue(double value)
 {
         maxDurationDefaultValue = value;
+}
+
+double RgateModel::getMaxDurationDefaultValue() const
+{
+        return maxDurationDefaultValue;
+}
+
+void RgateModel::setMaxDurationRange(double from, double to)
+{
+        maxDurationRange = {from, to};
+}
+
+std::pair<double, double> RgateModel::getMaxDurationRange() const
+{
+        return maxDurationRange;
 }
 
 void RgateModel::setMinGain(double value)
@@ -173,12 +233,27 @@ void RgateModel::setMinGain(double value)
 
 double RgateModel::minGain() const
 {
-        return dspRgateProxy->minGain();
+        return dspRgateProxy->getMinGain();
 }
 
 void RgateModel::setMinGainDefaultValue(double value)
 {
         minGainDefaultValue = value;
+}
+
+double RgateModel::getMinGainDefaultValue() const
+{
+        return minGainDefaultValue;
+}
+
+void RgateModel::setMinGainRange(double from, double to)
+{
+        minGainRange = {from, to};
+}
+
+std::pair<double, double> RgateModel::getMinGainRange() const
+{
+        return minGainRange;
 }
 
 void RgateModel::setMaxGain(double value)
@@ -189,12 +264,27 @@ void RgateModel::setMaxGain(double value)
 
 double RgateModel::maxGain() const
 {
-        return dspRgateProxy->maxGain();
+        return dspRgateProxy->getMaxGain();
 }
 
 void RgateModel::setMaxGainDefaultValue(double value)
 {
         maxGainDefaultValue = value;
+}
+
+double RgateModel::getMaxGainDefaultValue() const
+{
+        return maxGainDefaultValue;
+}
+
+void RgateModel::setMaxGainRange(double from, double to)
+{
+        maxGainRange = {from, to};
+}
+
+std::pair<double, double> RgateModel::getMaxGainRange() const
+{
+        return maxGainRange;
 }
 
 void RgateModel::setRandomness(double value)
@@ -205,7 +295,7 @@ void RgateModel::setRandomness(double value)
 
 double RgateModel::randomness() const
 {
-        return dspRgateProxy->randomness();
+        return dspRgateProxy->getRandomness();
 }
 
 void RgateModel::setRandomnessDefaultValue(double value)
@@ -213,7 +303,28 @@ void RgateModel::setRandomnessDefaultValue(double value)
         randomnessDefaultValue = value;
 }
 
-double RgateModel::randomness() const
+double RgateModel::getRandomnessDefaultValue() const
 {
-        return dspRgateProxy->randomness();
+        return randomnessDefaultValue;
+}
+
+void RgateModel::setRandomnessRange(double from, double to)
+{
+        randomnessRange = {from, to};
+}
+
+std::pair<double, double> RgateModel::getRandomnessRange() const
+{
+        return randomnessRange;
+}
+
+void RgateModel::setInverted(bool value)
+{
+        if (dspRgateProxy->setInverted(value))
+                action invertedUpdated(value);
+}
+
+bool RgateModel::isInverted() const
+{
+        return dspRgateProxy->getInverted();
 }
