@@ -98,7 +98,6 @@ void RkCairoGraphicsBackend::drawImage(const RkImage &image, int x, int y)
 void RkCairoGraphicsBackend::drawEllipse(const RkPoint& p, int width, int height)
 {
         if (width == height) {
-                cairo_move_to(context(), p.x() + width / 2, p.y());
                 cairo_arc(context(), p.x(), p.y(), width / 2, 0, 2 * std::numbers::pi);
                 cairo_stroke(context());
         } else {

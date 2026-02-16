@@ -2,7 +2,7 @@
  * File name: RkWindowX.cpp
  * Project: Redkite (A small GUI toolkit)
  *
- * Copyright (C) 2019 Iurie Nistor 
+ * Copyright (C) 2019 Iurie Nistor
  *
  * This file is part of Redkite.
  *
@@ -32,6 +32,7 @@ RkWindowX::RkWindowX(const RkNativeWindowInfo *parent)
         : parentWindowInfo{parent ? *parent : RkNativeWindowInfo() }
          , xDisplay{parent ? parent->display : nullptr}
          , screenNumber{parent ? parent->screenNumber : 0}
+         , windowAttr{}
          , xWindow{0}
          , winBorderWidth{0}
          , winBorderColor{255, 255, 255}
@@ -47,6 +48,7 @@ RkWindowX::RkWindowX(const RkNativeWindowInfo &parent)
         : parentWindowInfo{parent}
         , xDisplay{parent.display}
         , screenNumber{parent.screenNumber}
+        , windowAttr{}
         , xWindow{0}
         , winBorderWidth{0}
         , winBorderColor{255, 255, 255}
@@ -61,11 +63,24 @@ RkWindowX::RkWindowX(const RkNativeWindowInfo &parent)
 RkWindowX::~RkWindowX()
 {
         RK_LOG_DEBUG("called");
-        if (xDisplay) {
-                freeCanvasInfo();
+        cleanup();
+}
+
+void RkWindowX::cleanup()
+{
+        if (!xDisplay)
+                return;
+
+        freeCanvasInfo();
+
+        if (xWindow) {
                 XDestroyWindow(xDisplay, xWindow);
-                if (!hasParent())
-                        XCloseDisplay(xDisplay);
+                xWindow = 0;
+        }
+
+        if (windowAttr.colormap) {
+                XFreeColormap(xDisplay, windowAttr.colormap);
+                windowAttr.colormap = 0;
         }
 }
 
@@ -84,6 +99,7 @@ bool RkWindowX::openDisplay()
 bool RkWindowX::init()
 {
         RK_LOG_DEBUG("called");
+
         if (!hasParent()) {
                 if (!openDisplay()) {
                         RK_LOG_ERROR("can't open display");
@@ -99,26 +115,27 @@ bool RkWindowX::init()
                 return false;
         }
 
-        XSetWindowAttributes attr;
         unsigned long mask = CWColormap | CWBorderPixel | CWBackPixel | CWEventMask;
-        attr.background_pixmap = None;
-        attr.colormap = XCreateColormap(xDisplay, parent, visualInfo.visual, AllocNone);
-        attr.border_pixel = winBorderColor.argb();
-        attr.background_pixel = winBackgroundColor.argb();
+        windowAttr.background_pixmap = None;
+        windowAttr.colormap = XCreateColormap(xDisplay, parent, visualInfo.visual, AllocNone);
+        windowAttr.border_pixel = winBorderColor.argb();
+        windowAttr.background_pixel = winBackgroundColor.argb();
 
-        attr.event_mask = ExposureMask
+        windowAttr.event_mask = ExposureMask
                           | KeyPressMask | KeyReleaseMask | KeymapStateMask | FocusChangeMask
                           | ButtonPressMask | ButtonReleaseMask
                           | EnterWindowMask | LeaveWindowMask | StructureNotifyMask
                           | PropertyChangeMask
                           | PointerMotionMask;
-        attr.override_redirect = False;
+        windowAttr.override_redirect = False;
 
         auto pos = position();
         auto winSize = size();
+
         RK_LOG_DEBUG("create window: d: " << xDisplay << ", p: " << parent);
         RK_LOG_DEBUG("size[" << winSize.width() * scaleFactor
                      <<", " << winSize.height() * scaleFactor << "]");
+
         xWindow = XCreateWindow(xDisplay, parent,
                                 pos.x() * scaleFactor, pos.y() * scaleFactor,
                                 winSize.width() * scaleFactor, winSize.height() * scaleFactor,
@@ -127,35 +144,45 @@ bool RkWindowX::init()
                                 InputOutput,
                                 visualInfo.visual,
                                 mask,
-                                &attr);
+                                &windowAttr);
         if (!xWindow) {
                 RK_LOG_ERROR("can't create window");
+
+                cleanup();
                 return false;
         }
 
-        deleteWindowAtom = XInternAtom(display(), "WM_DELETE_WINDOW", True);
+        deleteWindowAtom = XInternAtom(display(), "WM_DELETE_WINDOW", False);
         XSetWMProtocols(xDisplay, xWindow, &deleteWindowAtom, 1);
-        createCanvasInfo();
+
         windowInfo = std::make_unique<RkNativeWindowInfo>();
         windowInfo->display      = xDisplay;
         windowInfo->screenNumber = screenNumber;
         windowInfo->window       = xWindow;
         windowInfo->scaleFactor  = scaleFactor;
+
         RK_LOG_DEBUG("window created");
         return true;
 }
 
 void RkWindowX::show(bool b)
 {
-        RK_LOG_DEBUG("called, b = " << b);
-        if (isWindowCreated()) {
-                if (b) {
-                        RK_LOG_DEBUG("XMapRaised");
-                        XMapRaised(display(), xWindow);
-                } else {
-                        RK_LOG_DEBUG("XUnmapWindow");
-                        XUnmapWindow(display(), xWindow);
-                }
+        if (!isWindowCreated())
+                return;
+
+        if (b) {
+                RK_LOG_DEBUG("XMapRaised");
+                XMapRaised(display(), xWindow);
+                XSync(display(), False);
+
+                if (!canvasInfo)
+                        createCanvasInfo();
+        } else {
+                RK_LOG_DEBUG("XUnmapWindow");
+                XUnmapWindow(display(), xWindow);
+                XFlush(display());
+
+                freeCanvasInfo();
         }
 }
 
@@ -289,13 +316,17 @@ void RkWindowX::update()
 #ifdef RK_GRAPHICS_CAIRO_BACKEND
 void RkWindowX::createCanvasInfo()
 {
+        if (canvasInfo)
+                return;
+
         RK_LOG_DEBUG("called");
         canvasInfo = std::make_unique<RkCanvasInfo>();
         canvasInfo->cairo_surface = cairo_xlib_surface_create(display(), xWindow,
                                                               visualInfo.visual,
                                                               size().width() * scaleFactor, size().height() * scaleFactor);
-	if (!canvasInfo->cairo_surface) {
-                RK_LOG_ERROR("error on creating Cairo Win32 surface");
+	if (cairo_surface_status(canvasInfo->cairo_surface)
+            != CAIRO_STATUS_SUCCESS) {
+                RK_LOG_ERROR("Failed to create Cairo surface");
                 return;
         }
         cairo_surface_set_device_scale(canvasInfo->cairo_surface, scaleFactor, scaleFactor);
@@ -303,6 +334,9 @@ void RkWindowX::createCanvasInfo()
 
 void RkWindowX::resizeCanvas()
 {
+        if (!canvasInfo)
+                return;
+
         cairo_xlib_surface_set_size(canvasInfo->cairo_surface,
                                     size().width() * scaleFactor,
                                     size().height() * scaleFactor);
@@ -311,7 +345,7 @@ void RkWindowX::resizeCanvas()
 
 RkCanvasInfo* RkWindowX::getCanvasInfo() const
 {
-        return canvasInfo ? canvasInfo.get() : nullptr;
+        return canvasInfo.get();
 }
 
 void RkWindowX::freeCanvasInfo()
@@ -320,6 +354,7 @@ void RkWindowX::freeCanvasInfo()
                 if (canvasInfo->cairo_context)
                         cairo_destroy(canvasInfo->cairo_context);
                 cairo_surface_destroy(canvasInfo->cairo_surface);
+                canvasInfo.reset();
         }
 }
 
