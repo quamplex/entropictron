@@ -71,6 +71,7 @@ class RkWindowX {
         bool isWindowCreated() const;
         bool hasParent() const;
         void createCanvasInfo();
+        void cleanup();
 
  private:
         RK_DISABLE_COPY(RkWindowX);
@@ -78,6 +79,7 @@ class RkWindowX {
         RkNativeWindowInfo parentWindowInfo;
         Display *xDisplay;
         int screenNumber;
+        XSetWindowAttributes windowAttr;
         Window xWindow;
         Atom deleteWindowAtom;
         mutable RkPoint windowPosition;
