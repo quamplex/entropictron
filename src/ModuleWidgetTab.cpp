@@ -26,6 +26,7 @@
 #include "NoiseWidget.h"
 #include "CrackleWidget.h"
 #include "GlitchWidget.h"
+#include "RgateWidget.h"
 
 #include "RkButton.h"
 #include "RkContainer.h"
@@ -42,17 +43,22 @@ RK_DECLARE_IMAGE_RC(tab_glitch_button);
 RK_DECLARE_IMAGE_RC(tab_glitch_button_hover);
 RK_DECLARE_IMAGE_RC(tab_glitch_button_on);
 RK_DECLARE_IMAGE_RC(tab_glitch_button_hover_on);
+RK_DECLARE_IMAGE_RC(tab_rgate_button);
+RK_DECLARE_IMAGE_RC(tab_rgate_button_hover);
+RK_DECLARE_IMAGE_RC(tab_rgate_button_on);
+RK_DECLARE_IMAGE_RC(tab_rgate_button_hover_on);
 
 ModuleWidgetTab::ModuleWidgetTab(EntWidget* parent,
                                  EntropictronModel *model,
                                  size_t id)
         : EntWidget(parent)
         , tabId{id}
-        , entropictronModel{model}
-        , moduleWidget {nullptr}
-        , noiseTabButton {nullptr}
-        , crackleTabButton {nullptr}
-        , glitchTabButton {nullptr}
+        , entModel{model}
+        , moduleWidget{nullptr}
+        , noiseTabButton{nullptr}
+        , crackleTabButton{nullptr}
+        , glitchTabButton{nullptr}
+        , rgateTabButton{nullptr}
 {
         setFixedSize(350, 331);
         createTabButtons();
@@ -125,6 +131,28 @@ void ModuleWidgetTab::createTabButtons()
                     RK_ACT_ARGS(bool b),
                     this,
                     showGlitch());
+
+        if (tabId == 1) {
+                // Rgate
+                rgateTabButton = new RkButton(tabButtonWidget);
+                rgateTabButton->setBackgroundColor(tabButtonWidget->background());
+                rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button),
+                                         RkButton::State::Unpressed);
+                rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button_on),
+                                         RkButton::State::Pressed);
+                rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button_hover),
+                                         RkButton::State::UnpressedHover);
+                rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button_hover_on),
+                                         RkButton::State::PressedHover);
+                rgateTabButton->setCheckable(true);
+                rgateTabButton->show();
+                tabButtonContianer->addWidget(rgateTabButton);
+                RK_ACT_BIND(rgateTabButton,
+                            toggled,
+                            RK_ACT_ARGS(bool b),
+                            this,
+                            showRgate());
+        }
 }
 
 void ModuleWidgetTab::showNoise()
@@ -132,11 +160,13 @@ void ModuleWidgetTab::showNoise()
         noiseTabButton->setPressed(true);
         crackleTabButton->setPressed(false);
         glitchTabButton->setPressed(false);
+        if (rgateTabButton)
+                rgateTabButton->setPressed(false);
 
         delete moduleWidget;
         moduleWidget = new NoiseWidget(this,
-                                       tabId == 0 ? entropictronModel->getNoise1()
-                                       : entropictronModel->getNoise2());
+                                       tabId == 0 ? entModel->getNoise1()
+                                       : entModel->getNoise2());
         moduleWidget->setPosition(0, 29);
 }
 
@@ -145,11 +175,13 @@ void ModuleWidgetTab::showCrackle()
         noiseTabButton->setPressed(false);
         crackleTabButton->setPressed(true);
         glitchTabButton->setPressed(false);
+        if (rgateTabButton)
+                rgateTabButton->setPressed(false);
 
         delete moduleWidget;
         moduleWidget = new CrackleWidget(this,
-                                         tabId == 0 ? entropictronModel->getCrackle1()
-                                         : entropictronModel->getCrackle2());
+                                         tabId == 0 ? entModel->getCrackle1()
+                                         : entModel->getCrackle2());
         moduleWidget->setPosition(0, 29);
 }
 
@@ -158,10 +190,27 @@ void ModuleWidgetTab::showGlitch()
         noiseTabButton->setPressed(false);
         crackleTabButton->setPressed(false);
         glitchTabButton->setPressed(true);
+        if (rgateTabButton)
+                rgateTabButton->setPressed(false);
 
         delete moduleWidget;
         moduleWidget = new GlitchWidget(this,
-                                        tabId == 0 ? entropictronModel->getGlitch1()
-                                        : entropictronModel->getGlitch2());
+                                        tabId == 0 ? entModel->getGlitch1()
+                                        : entModel->getGlitch2());
         moduleWidget->setPosition(0, 29);
 }
+
+void ModuleWidgetTab::showRgate()
+{
+        if (rgateTabButton) {
+                noiseTabButton->setPressed(false);
+                crackleTabButton->setPressed(false);
+                glitchTabButton->setPressed(false);
+                rgateTabButton->setPressed(true);
+
+                delete moduleWidget;
+                moduleWidget = new RgateWidget(this, entModel->getRgate());
+                moduleWidget->setPosition(0, 29);
+        }
+}
+

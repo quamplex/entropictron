@@ -26,6 +26,7 @@
 #include "NoiseModel.h"
 #include "CrackleModel.h"
 #include "GlitchModel.h"
+#include "RgateModel.h"
 #include "EntState.h"
 
 EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
@@ -37,6 +38,7 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
         , crackle2Model{new CrackleModel(this, dspProxy->getCrackle(CrackleId::Crackle2))}
         , glitch1Model{new GlitchModel(this, dspProxy->getGlitch(GlitchId::Glitch1))}
         , glitch2Model{new GlitchModel(this, dspProxy->getGlitch(GlitchId::Glitch2))}
+        , rgateModel{new RgateModel(this, dspProxy->getRgate())}
 {
         dspProxy->setParent(this);
 
@@ -68,6 +70,10 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
                     stateChanged,
                     RK_ACT_ARGS(),
                     glitch2Model, modelUpdated());
+        RK_ACT_BIND(dspProxy,
+                    stateChanged,
+                    RK_ACT_ARGS(),
+                    rgateModel, modelUpdated());
 
         RK_ACT_BIND(dspProxy,
                     playModeUpdated,
@@ -120,6 +126,16 @@ bool EntropictronModel::loadPreset(const EntState *preset)
                 glitch[i]->setMinJump(preset->glitch[i].min_jump);
                 glitch[i]->setMaxJump(preset->glitch[i].max_jump);
         }
+
+        rgateModel->enable(preset->rgate.enabled);
+        rgateModel->setMinInterval(preset->rgate.min_interval);
+        rgateModel->setMaxInterval(preset->rgate.max_interval);
+        rgateModel->setMinDuration(preset->rgate.min_duration);
+        rgateModel->setMaxDuration(preset->rgate.max_duration);
+        rgateModel->setMinGain(preset->rgate.min_gain);
+        rgateModel->setMaxGain(preset->rgate.max_gain);
+        rgateModel->setRandomness(preset->rgate.randomness);
+        rgateModel->setInverted(preset->rgate.inverted);
 
         return true;
 }
@@ -192,3 +208,9 @@ GlitchModel* EntropictronModel::getGlitch2() const
 {
         return  glitch2Model;
 }
+
+RgateModel* EntropictronModel::getRgate() const
+{
+        return  rgateModel;
+}
+

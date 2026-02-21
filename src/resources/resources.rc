@@ -41,6 +41,10 @@ tab_glitch_button.png
 tab_glitch_button_hover.png
 tab_glitch_button_on.png
 tab_glitch_button_hover_on.png
+tab_rgate_button.png
+tab_rgate_button_hover.png
+tab_rgate_button_on.png
+tab_rgate_button_hover_on.png
 
 # ---- NOISE -----
 
@@ -106,5 +110,9 @@ glitch_probability_knob_label.png
 glitch_length_knob_label.png
 glitch_maxjump_knob_label.png
 glitch_minjump_knob_label.png
+
+# ---- GRGATE -----
+
+rgate_label.png
 
 )

@@ -39,17 +39,19 @@ public:
         void showNoise();
         void showCrackle();
         void showGlitch();
+        void showRgate();
 
 protected:
         void createTabButtons();
 
 private:
         size_t tabId;
-        EntropictronModel *entropictronModel;
+        EntropictronModel *entModel;
         EntWidget *moduleWidget;
         RkButton *noiseTabButton;
         RkButton *crackleTabButton;
         RkButton *glitchTabButton;
+        RkButton *rgateTabButton;
 };
 
 #endif // ENT_MODULES_WIDGET_TAB_H
