@@ -230,16 +230,16 @@ void ent_rgate_process(struct ent_rgate *g,
 {
         float duration      = g->duration;
         float timer_ms      = g->timer_ms;
-        float ms_per_sample = g->ms_per_sample;
 
-        float randomness    = g->randomness;
-        float min_interval  = g->min_interval;
-        float interval_rng  = g->interval_range;
-        float min_duration  = g->min_duration;
-        float duration_rng  = g->duration_range;
-        float min_gain      = g->min_gain;
-        float gain_rng      = g->gain_range;
-        bool  inverted      = g->inverted;
+        const float ms_per_sample = g->ms_per_sample;
+        const float randomness    = g->randomness;
+        const float min_interval  = g->min_interval;
+        const float interval_rng  = g->interval_range;
+        const float min_duration  = g->min_duration;
+        const float duration_rng  = g->duration_range;
+        const float min_gain      = g->min_gain;
+        const float gain_rng      = g->gain_range;
+        const bool  inverted      = g->inverted;
 
         struct qx_smoother   *current_gain  = &g->current_gain;
         struct qx_randomizer *rand_interval = &g->randomizer_interval;
@@ -247,8 +247,8 @@ void ent_rgate_process(struct ent_rgate *g,
         struct qx_randomizer *rand_gain     = &g->randomizer_gain;
         struct qx_randomizer *rand_main     = &g->randomizer;
 
-        float *inL  = in[0];
-        float *inR  = in[1];
+        const float *inL  = in[0];
+        const float *inR  = in[1];
         float *outL = out[0];
         float *outR = out[1];
 
