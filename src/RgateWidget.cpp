@@ -32,10 +32,21 @@
 RK_DECLARE_IMAGE_RC(rgate_label);
 RK_DECLARE_IMAGE_RC(switch_button_on);
 RK_DECLARE_IMAGE_RC(switch_button_off);
+RK_DECLARE_IMAGE_RC(knob_big_size_bk);
+RK_DECLARE_IMAGE_RC(knob_big_size_marker);
+RK_DECLARE_IMAGE_RC(rgate_min_interval_label);
+RK_DECLARE_IMAGE_RC(rgate_max_interval_label);
 
 RgateWidget::RgateWidget(EntWidget* parent, RgateModel* model)
         : EntAbstractView(parent, model)
         , enableButton{nullptr}
+        , minIntervalKnob{nullptr}
+        , maxIntervalKnob{nullptr}
+        , minDurationKnob{nullptr}
+        , maxDurationKnob{nullptr}
+        , minGainKnob{nullptr}
+        , maxGainKnob{nullptr}
+        , randomnessKnob{nullptr}
         , invertButton{nullptr}
 {
         setFixedSize(350, 302);
@@ -90,35 +101,33 @@ void RgateWidget::updateView()
 
         enableButton->setPressed(model->isEnabled());
 
-        /*auto [repeatsFrom, repeatsTo] = model->getRepeatsRange();
-        repeatsKnob->setRange(repeatsFrom, repeatsTo);
-        repeatsKnob->setSteps(ENT_RGATE_MAX_REPEATS);
-        repeatsKnob->setDefaultValue(model->getRepeatsDefaultValue());
-        repeatsKnob->setValue(model->repeats());
+        minIntervalKnob->setRange(model->getMinIntervalRange());
+        minIntervalKnob->setDefaultValue(model->getMinIntervalDefaultValue());
+        minIntervalKnob->setValue(model->minInterval());
 
-        auto [probabilityFrom, probabilityTo] = model->getProbabilityRange();
-        probabilityKnob->setRange(probabilityFrom, probabilityTo);
-        probabilityKnob->setRangeType(Knob::RangeType::Logarithmic);
-        probabilityKnob->setDefaultValue(model->getProbabilityDefaultValue());
-        probabilityKnob->setValue(model->probability());
+        maxIntervalKnob->setRange(model->getMaxIntervalRange());
+        maxIntervalKnob->setDefaultValue(model->getMaxIntervalDefaultValue());
+        maxIntervalKnob->setValue(model->maxInterval());
 
-        auto [lengthFrom, lengthTo] = model->getLengthRange();
-        lengthKnob->setRange(lengthFrom, lengthTo);
-        lengthKnob->setRangeType(Knob::RangeType::Logarithmic);
-        lengthKnob->setDefaultValue(model->getLengthDefaultValue());
-        lengthKnob->setValue(model->length());
+        /*minDurationKnob->setRange(model->getMinDurationRange());
+        minDurationKnob->setDefaultValue(model->getMinDurationDefaultValue());
+        minDurationKnob->setValue(model->minDuration());
 
-        auto [minJumpFrom, minJumpTo] = model->getMinJumpRange();
-        minJumpKnob->setRange(minJumpFrom, minJumpTo);
-        minJumpKnob->setRangeType(Knob::RangeType::Logarithmic);
-        minJumpKnob->setDefaultValue(model->getMinJumpDefaultValue());
-        minJumpKnob->setValue(model->minJump());
+        maxDurationKnob->setRange(model->getMaxDurationRange());
+        maxDurationKnob->setDefaultValue(model->getMaxDurationDefaultValue());
+        maxDurationKnob->setValue(model->maxDuration());
 
-        auto [maxJumpFrom, maxJumpTo] = model->getMaxJumpRange();
-        maxJumpKnob->setRange(maxJumpFrom, maxJumpTo);
-        maxJumpKnob->setRangeType(Knob::RangeType::Logarithmic);
-        maxJumpKnob->setDefaultValue(model->getMaxJumpDefaultValue());
-        maxJumpKnob->setValue(model->maxJump());*/
+        minGainKnob->setRange(model->getMinGainRange());
+        minGainKnob->setDefaultValue(model->getMinGainDefaultValue());
+        minGainKnob->setValue(model->minGain());
+
+        maxGainKnob->setRange(model->getMaxGainRange());
+        maxGainKnob->setDefaultValue(model->getMaxGainDefaultValue());
+        maxGainKnob->setValue(model->maxGain());
+
+        randomnessKnob->setRange(model->getRandomnessRange());
+        randomnessKnob->setDefaultValue(model->getRandomnessDefaultValue());
+        randomnessKnob->setValue(model->randomness());*/
 }
 
 void RgateWidget::bindModel()
@@ -204,42 +213,50 @@ void RgateWidget::unbindModel()
 
 void RgateWidget::createRgateControls(RkContainer *container)
 {
-        // Repeats, Probability, Length
+        auto vContainer = new RkContainer(this);
+        vContainer->setSize({width(), container->height()});
+        container->addSpace(20);
+        container->addContainer(horizontalContainer);
+        horizontalContainer->addSpace(57);
+
         auto horizontalContainer = new RkContainer(this);
         horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
         horizontalContainer->addSpace(57);
 
-        /*repeatsKnob = new Knob(this, RK_RC_IMAGE(rgate_repeats_knob_label));
-        repeatsKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
-        repeatsKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
-        horizontalContainer->addWidget(repeatsKnob);
+        minIntervalKnob = new Knob(this, RK_RC_IMAGE(rgate_min_interval_label));
+        minIntervalKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        minIntervalKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        horizontalContainer->addWidget(minIntervalKnob);
 
-        probabilityKnob = new Knob(this, RK_RC_IMAGE(rgate_probability_knob_label));
-        probabilityKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
-        probabilityKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
-        horizontalContainer->addWidget(probabilityKnob);
+        maxIntervalKnob = new Knob(this, RK_RC_IMAGE(rgate_max_interval_label));
+        maxIntervalKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        maxIntervalKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        horizontalContainer->addWidget(maxIntervalKnob);
 
-        lengthKnob = new Knob(this, RK_RC_IMAGE(rgate_length_knob_label));
-        lengthKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
-        lengthKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
-        horizontalContainer->addWidget(lengthKnob);
+        /*minDurationKnob = new Knob(this, RK_RC_IMAGE(rgate_min_duration_label));
+        minDurationKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        minDurationKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        horizontalContainer->addWidget(minDurationKnob);
 
-        // Max Jump, Min Jump
-        horizontalContainer = new RkContainer(this);
-        horizontalContainer->setSize({width(), 103});
-        container->addSpace(20);
-        container->addContainer(horizontalContainer);
-        horizontalContainer->addSpace(82);
+        maxDurationKnob = new Knob(this, RK_RC_IMAGE(rgate_max_duration_label));
+        maxDurationKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        maxDurationKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        horizontalContainer->addWidget(maxDurationKnob);
 
-        minJumpKnob = new Knob(this, RK_RC_IMAGE(rgate_minjump_knob_label));
-        minJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
-        minJumpKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
-        horizontalContainer->addWidget(minJumpKnob);
+        minGainKnob = new Knob(this, RK_RC_IMAGE(rgate_min_gain_label));
+        minGainKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        minGainKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        horizontalContainer->addWidget(minGainKnob);
 
-        maxJumpKnob = new Knob(this, RK_RC_IMAGE(rgate_maxjump_knob_label));
-        maxJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
-        maxJumpKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
-        horizontalContainer->addWidget(maxJumpKnob);*/
+        maxGainKnob = new Knob(this, RK_RC_IMAGE(rgate_max_gain_label));
+        maxGainKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        maxGainKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        horizontalContainer->addWidget(maxGainKnob);
+
+        randomnessKnob = new Knob(this, RK_RC_IMAGE(rgate_randomness_label));
+        randomnessKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
+        randomnessKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        horizontalContainer->addWidget(randomnessKnob);*/
 }

@@ -41,6 +41,7 @@ public:
         void setLabelImage(const RkImage &img);
         void setKnobImage(const RkImage &img);
         void setMarkerImage(const RkImage &img);
+        void setRange(const std::pair<double, double> &range);
         void setRange(double from, double to);
         void setRangeType(RangeType type);
         RangeType getRangeType() const;

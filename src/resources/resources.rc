@@ -114,5 +114,7 @@ glitch_minjump_knob_label.png
 # ---- GRGATE -----
 
 rgate_label.png
+rgate_min_interval_label.png
+rgate_max_interval_label.png
 
 )

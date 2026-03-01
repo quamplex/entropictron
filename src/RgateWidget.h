@@ -48,6 +48,13 @@ protected:
 
 private:
         RkButton *enableButton;
+        Knob* minIntervalKnob;
+        Knob* maxIntervalKnob;
+        Knob* minDurationKnob;
+        Knob* maxDurationKnob;
+        Knob* minGainKnob;
+        Knob* maxGainKnob;
+        Knob* randomnessKnob;
         RkButton *invertButton;
 };
 

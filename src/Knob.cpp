@@ -81,6 +81,11 @@ double Knob::stepValue() const
                 return (rangeTo - rangeFrom) / (steps - 1);
 }
 
+void Knob::setRange(const std::pair<double, double> &range)
+{
+        setRange(range.first, range.second);
+}
+
 void Knob::setRange(double from, double to)
 {
         rangeFrom = std::min(from, to);
