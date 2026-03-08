@@ -116,5 +116,13 @@ glitch_minjump_knob_label.png
 rgate_label.png
 rgate_min_interval_label.png
 rgate_max_interval_label.png
-
+rgate_min_duration_label.png
+rgate_max_duration_label.png
+rgate_min_gain_label.png
+rgate_max_gain_label.png
+rgate_randomness_label.png
+rgate_invert_button.png
+rgate_invert_button_hover.png
+rgate_invert_button_hover_on.png
+rgate_invert_button_on.png
 )

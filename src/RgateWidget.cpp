@@ -34,8 +34,19 @@ RK_DECLARE_IMAGE_RC(switch_button_on);
 RK_DECLARE_IMAGE_RC(switch_button_off);
 RK_DECLARE_IMAGE_RC(knob_big_size_bk);
 RK_DECLARE_IMAGE_RC(knob_big_size_marker);
+RK_DECLARE_IMAGE_RC(knob_medium_size_bk);
+RK_DECLARE_IMAGE_RC(knob_medium_size_marker);
 RK_DECLARE_IMAGE_RC(rgate_min_interval_label);
 RK_DECLARE_IMAGE_RC(rgate_max_interval_label);
+RK_DECLARE_IMAGE_RC(rgate_min_duration_label);
+RK_DECLARE_IMAGE_RC(rgate_max_duration_label);
+RK_DECLARE_IMAGE_RC(rgate_min_gain_label);
+RK_DECLARE_IMAGE_RC(rgate_max_gain_label);
+RK_DECLARE_IMAGE_RC(rgate_randomness_label);
+RK_DECLARE_IMAGE_RC(rgate_invert_button);
+RK_DECLARE_IMAGE_RC(rgate_invert_button_hover);
+RK_DECLARE_IMAGE_RC(rgate_invert_button_hover_on);
+RK_DECLARE_IMAGE_RC(rgate_invert_button_on);
 
 RgateWidget::RgateWidget(EntWidget* parent, RgateModel* model)
         : EntAbstractView(parent, model)
@@ -109,7 +120,7 @@ void RgateWidget::updateView()
         maxIntervalKnob->setDefaultValue(model->getMaxIntervalDefaultValue());
         maxIntervalKnob->setValue(model->maxInterval());
 
-        /*minDurationKnob->setRange(model->getMinDurationRange());
+        minDurationKnob->setRange(model->getMinDurationRange());
         minDurationKnob->setDefaultValue(model->getMinDurationDefaultValue());
         minDurationKnob->setValue(model->minDuration());
 
@@ -127,7 +138,9 @@ void RgateWidget::updateView()
 
         randomnessKnob->setRange(model->getRandomnessRange());
         randomnessKnob->setDefaultValue(model->getRandomnessDefaultValue());
-        randomnessKnob->setValue(model->randomness());*/
+        randomnessKnob->setValue(model->randomness());
+
+        invertButton->setPressed(model->isInverted());
 }
 
 void RgateWidget::bindModel()
@@ -136,36 +149,73 @@ void RgateWidget::bindModel()
         if (!model)
                 return;
 
-        RK_ACT_BIND(enableButton,
-                    toggled,
-                    RK_ACT_ARGS(bool b),
-                    model,
-                    enable(b));
-        /*RK_ACT_BIND(repeatsKnob,
+        RK_ACT_BIND(enableButton, toggled, RK_ACT_ARGS(bool b), model, enable(b));
+        RK_ACT_BIND(minIntervalKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
                     model,
-                    setRepeats(value));
-        RK_ACT_BIND(probabilityKnob,
+                    setMinInterval(value));
+        RK_ACT_BIND(minIntervalKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
                     model,
-                    setProbability(value));
-        RK_ACT_BIND(lengthKnob,
+                    setMinInterval(value));
+        RK_ACT_BIND(maxIntervalKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
                     model,
-                    setLength(value));
-        RK_ACT_BIND(maxJumpKnob,
+                    setMaxInterval(value));
+        RK_ACT_BIND(maxIntervalKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
                     model,
-                    setMaxJump(value));
-        RK_ACT_BIND(minJumpKnob,
+                    setMaxInterval(value));
+        RK_ACT_BIND(minDurationKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
                     model,
-                    setMinJump(value));
+                    setMinDuration(value));
+        RK_ACT_BIND(minDurationKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setMinDuration(value));
+        RK_ACT_BIND(maxDurationKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setMaxDuration(value));
+        RK_ACT_BIND(maxDurationKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setMaxDuration(value));
+        RK_ACT_BIND(minGainKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setMinGain(value));
+        RK_ACT_BIND(minGainKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setMinGain(value));
+        RK_ACT_BIND(maxGainKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setMaxGain(value));
+        RK_ACT_BIND(maxGainKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setMaxGain(value));
+        RK_ACT_BIND(randomnessKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setRandomness(value));
+        RK_ACT_BIND(invertButton, toggled, RK_ACT_ARGS(bool b), model, setInverted(b));
 
         RK_ACT_BIND(model,
                     modelUpdated,
@@ -178,30 +228,45 @@ void RgateWidget::bindModel()
                     enableButton,
                     setPressed(b));
         RK_ACT_BIND(model,
-                    repeatsUpdated,
+                    minIntervalUpdated,
                     RK_ACT_ARGS(double value),
-                    repeatsKnob,
+                    minIntervalKnob,
                     setValue(value));
         RK_ACT_BIND(model,
-                    probabilityUpdated,
+                    maxIntervalUpdated,
                     RK_ACT_ARGS(double value),
-                    probabilityKnob,
+                    maxIntervalKnob,
                     setValue(value));
         RK_ACT_BIND(model,
-                    lengthUpdated,
+                    minDurationUpdated,
                     RK_ACT_ARGS(double value),
-                    lengthKnob,
+                    minDurationKnob,
                     setValue(value));
         RK_ACT_BIND(model,
-                    maxJumpUpdated,
+                    maxDurationUpdated,
                     RK_ACT_ARGS(double value),
-                    maxJumpKnob,
+                    maxDurationKnob,
                     setValue(value));
         RK_ACT_BIND(model,
-                    minJumpUpdated,
+                    minGainUpdated,
                     RK_ACT_ARGS(double value),
-                    minJumpKnob,
-                    setValue(value));*/
+                    minGainKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    maxGainUpdated,
+                    RK_ACT_ARGS(double value),
+                    maxGainKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    randomnessUpdated,
+                    RK_ACT_ARGS(double value),
+                    randomnessKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    invertedUpdated,
+                    RK_ACT_ARGS(bool b),
+                    invertButton,
+                    setPressed(b));
 }
 
 void RgateWidget::unbindModel()
@@ -209,22 +274,24 @@ void RgateWidget::unbindModel()
         auto model = getModel();
         unbindObject(model);
         enableButton->unbindObject(model);
+        minIntervalKnob->unbindObject(model);
+        maxIntervalKnob->unbindObject(model);
+        minDurationKnob->unbindObject(model);
+        maxDurationKnob->unbindObject(model);
+        minGainKnob->unbindObject(model);
+        maxGainKnob->unbindObject(model);
+        randomnessKnob->unbindObject(model);
+        invertButton->unbindObject(model);
 }
 
 void RgateWidget::createRgateControls(RkContainer *container)
 {
-        auto vContainer = new RkContainer(this);
-        vContainer->setSize({width(), container->height()});
-        container->addSpace(20);
-        container->addContainer(horizontalContainer);
-        horizontalContainer->addSpace(57);
-
         auto horizontalContainer = new RkContainer(this);
         horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
-        horizontalContainer->addSpace(57);
 
+        horizontalContainer->addSpace(41);
         minIntervalKnob = new Knob(this, RK_RC_IMAGE(rgate_min_interval_label));
         minIntervalKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
         minIntervalKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
@@ -235,28 +302,56 @@ void RgateWidget::createRgateControls(RkContainer *container)
         maxIntervalKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         horizontalContainer->addWidget(maxIntervalKnob);
 
-        /*minDurationKnob = new Knob(this, RK_RC_IMAGE(rgate_min_duration_label));
-        minDurationKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
-        minDurationKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        horizontalContainer->addSpace(5);
+        randomnessKnob = new Knob(this, RK_RC_IMAGE(rgate_randomness_label));
+        randomnessKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        randomnessKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
+        horizontalContainer->addWidget(randomnessKnob);
+
+        horizontalContainer = new RkContainer(this);
+        horizontalContainer->setSize({width(), 103});
+        container->addSpace(10);
+        container->addContainer(horizontalContainer);
+
+        horizontalContainer->addSpace(28);
+
+        minDurationKnob = new Knob(this, RK_RC_IMAGE(rgate_min_duration_label));
+        minDurationKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        minDurationKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         horizontalContainer->addWidget(minDurationKnob);
 
+        horizontalContainer->addSpace(5);
         maxDurationKnob = new Knob(this, RK_RC_IMAGE(rgate_max_duration_label));
-        maxDurationKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
-        maxDurationKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        maxDurationKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        maxDurationKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         horizontalContainer->addWidget(maxDurationKnob);
 
-        minGainKnob = new Knob(this, RK_RC_IMAGE(rgate_min_gain_label));
-        minGainKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
-        minGainKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
-        horizontalContainer->addWidget(minGainKnob);
-
+        horizontalContainer->addSpace(5);
         maxGainKnob = new Knob(this, RK_RC_IMAGE(rgate_max_gain_label));
-        maxGainKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
-        maxGainKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
+        maxGainKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        maxGainKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         horizontalContainer->addWidget(maxGainKnob);
 
-        randomnessKnob = new Knob(this, RK_RC_IMAGE(rgate_randomness_label));
-        randomnessKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
-        randomnessKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
-        horizontalContainer->addWidget(randomnessKnob);*/
+        minGainKnob = new Knob(this, RK_RC_IMAGE(rgate_min_gain_label));
+        minGainKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        minGainKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
+        horizontalContainer->addWidget(minGainKnob);
+
+        horizontalContainer = new RkContainer(this);
+        horizontalContainer->setSize({width(), 30});
+        container->addSpace(5);
+        container->addContainer(horizontalContainer);
+
+        invertButton = new RkButton(this);
+        invertButton->setImage(RK_RC_IMAGE(rgate_invert_button),
+                               RkButton::State::Unpressed);
+        invertButton->setImage(RK_RC_IMAGE(rgate_invert_button_on),
+                               RkButton::State::Pressed);
+        invertButton->setImage(RK_RC_IMAGE(rgate_invert_button_hover),
+                               RkButton::State::UnpressedHover);
+        invertButton->setImage(RK_RC_IMAGE(rgate_invert_button_hover_on),
+                               RkButton::State::PressedHover);
+        invertButton->setCheckable(true);
+        invertButton->show();
+        horizontalContainer->addWidget(invertButton);
 }
