@@ -47,6 +47,7 @@ RK_DECLARE_IMAGE_RC(rgate_invert_button);
 RK_DECLARE_IMAGE_RC(rgate_invert_button_hover);
 RK_DECLARE_IMAGE_RC(rgate_invert_button_hover_on);
 RK_DECLARE_IMAGE_RC(rgate_invert_button_on);
+RK_DECLARE_IMAGE_RC(rgate_invert_label);
 
 RgateWidget::RgateWidget(EntWidget* parent, RgateModel* model)
         : EntAbstractView(parent, model)
@@ -338,8 +339,7 @@ void RgateWidget::createRgateControls(RkContainer *container)
         horizontalContainer->addWidget(minGainKnob);
 
         horizontalContainer = new RkContainer(this);
-        horizontalContainer->setSize({width(), 30});
-        container->addSpace(5);
+        horizontalContainer->setSize({width(), 26});
         container->addContainer(horizontalContainer);
 
         invertButton = new RkButton(this);
@@ -353,5 +353,12 @@ void RgateWidget::createRgateControls(RkContainer *container)
                                RkButton::State::PressedHover);
         invertButton->setCheckable(true);
         invertButton->show();
+        horizontalContainer->addSpace(31);
         horizontalContainer->addWidget(invertButton);
+
+        auto invertLabel = new RkLabel(this, RK_RC_IMAGE(rgate_invert_label));
+        invertLabel->setBackgroundColor(background());
+        invertLabel->show();
+        horizontalContainer->addWidget(invertLabel);
+
 }
