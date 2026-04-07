@@ -73,14 +73,6 @@ RgateModel::RgateModel(RkObject *parent,
                     RK_ACT_ARGS(double value),
                     this, maxGainUpdated(value));
         RK_ACT_BIND(dspRgateProxy,
-                    minGainUpdated,
-                    RK_ACT_ARGS(double value),
-                    this, minGainUpdated(value));
-        RK_ACT_BIND(dspRgateProxy,
-                    maxGainUpdated,
-                    RK_ACT_ARGS(double value),
-                    this, maxGainUpdated(value));
-        RK_ACT_BIND(dspRgateProxy,
                     randomnessUpdated,
                     RK_ACT_ARGS(double value),
                     this, randomnessUpdated(value));

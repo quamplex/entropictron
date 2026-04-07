@@ -156,16 +156,6 @@ void RgateWidget::bindModel()
                     RK_ACT_ARGS(double value),
                     model,
                     setMinInterval(value));
-        RK_ACT_BIND(minIntervalKnob,
-                    valueUpdated,
-                    RK_ACT_ARGS(double value),
-                    model,
-                    setMinInterval(value));
-        RK_ACT_BIND(maxIntervalKnob,
-                    valueUpdated,
-                    RK_ACT_ARGS(double value),
-                    model,
-                    setMaxInterval(value));
         RK_ACT_BIND(maxIntervalKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
@@ -176,16 +166,6 @@ void RgateWidget::bindModel()
                     RK_ACT_ARGS(double value),
                     model,
                     setMinDuration(value));
-        RK_ACT_BIND(minDurationKnob,
-                    valueUpdated,
-                    RK_ACT_ARGS(double value),
-                    model,
-                    setMinDuration(value));
-        RK_ACT_BIND(maxDurationKnob,
-                    valueUpdated,
-                    RK_ACT_ARGS(double value),
-                    model,
-                    setMaxDuration(value));
         RK_ACT_BIND(maxDurationKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
@@ -196,16 +176,6 @@ void RgateWidget::bindModel()
                     RK_ACT_ARGS(double value),
                     model,
                     setMinGain(value));
-        RK_ACT_BIND(minGainKnob,
-                    valueUpdated,
-                    RK_ACT_ARGS(double value),
-                    model,
-                    setMinGain(value));
-        RK_ACT_BIND(maxGainKnob,
-                    valueUpdated,
-                    RK_ACT_ARGS(double value),
-                    model,
-                    setMaxGain(value));
         RK_ACT_BIND(maxGainKnob,
                     valueUpdated,
                     RK_ACT_ARGS(double value),
@@ -328,15 +298,16 @@ void RgateWidget::createRgateControls(RkContainer *container)
         horizontalContainer->addWidget(maxDurationKnob);
 
         horizontalContainer->addSpace(5);
-        maxGainKnob = new Knob(this, RK_RC_IMAGE(rgate_max_gain_label));
-        maxGainKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
-        maxGainKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
-        horizontalContainer->addWidget(maxGainKnob);
 
         minGainKnob = new Knob(this, RK_RC_IMAGE(rgate_min_gain_label));
         minGainKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
         minGainKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         horizontalContainer->addWidget(minGainKnob);
+
+        maxGainKnob = new Knob(this, RK_RC_IMAGE(rgate_max_gain_label));
+        maxGainKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        maxGainKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
+        horizontalContainer->addWidget(maxGainKnob);
 
         horizontalContainer = new RkContainer(this);
         horizontalContainer->setSize({width(), 26});
@@ -360,5 +331,4 @@ void RgateWidget::createRgateControls(RkContainer *container)
         invertLabel->setBackgroundColor(background());
         invertLabel->show();
         horizontalContainer->addWidget(invertLabel);
-
 }

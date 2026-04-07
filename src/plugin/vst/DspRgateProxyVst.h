@@ -59,17 +59,17 @@ class DspRgateProxyVst: public DspRgateProxy {
 
         static double enabledToNormalized(bool b);
         static bool enabledFromNormalized(double value);
-        static double minIntervalToNormalized(int value);
+        static double minIntervalToNormalized(double value);
         static double minIntervalFromNormalized(double value);
-        static double maxIntervalToNormalized(int value);
+        static double maxIntervalToNormalized(double value);
         static double maxIntervalFromNormalized(double value);
-        static double minDurationToNormalized(int value);
+        static double minDurationToNormalized(double value);
         static double minDurationFromNormalized(double value);
-        static double maxDurationToNormalized(int value);
+        static double maxDurationToNormalized(double value);
         static double maxDurationFromNormalized(double value);
-        static double minGainToNormalized(int value);
+        static double minGainToNormalized(double value);
         static double minGainFromNormalized(double value);
-        static double maxGainToNormalized(int value);
+        static double maxGainToNormalized(double value);
         static double maxGainFromNormalized(double value);
         static double randomnessToNormalized(double value);
         static double randomnessFromNormalized(double value);

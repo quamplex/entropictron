@@ -104,7 +104,6 @@ void ent_rgate_free(struct ent_rgate **g)
 enum ent_error ent_rgate_enable(struct ent_rgate *g, bool enable)
 {
         g->enabled = enable;
-        //        qx_fader_enable(&g->fader, enable);
         return ENT_OK;
 }
 
@@ -175,7 +174,6 @@ enum ent_error ent_rgate_set_min_gain(struct ent_rgate *g, float val)
                                      ENT_RGATE_MIN_MIN_GAIN,
                                      ENT_RGATE_MAX_MIN_GAIN);
         g->gain_range = fabs(g->max_gain - g->min_gain);
-        ent_log_info("min_gain: [v]%f, %f, r: %f", val, g->max_gain, g->gain_range);
         return ENT_OK;
 }
 
@@ -190,7 +188,6 @@ enum ent_error ent_rgate_set_max_gain(struct ent_rgate *g, float val)
                                      ENT_RGATE_MIN_MAX_GAIN,
                                      ENT_RGATE_MAX_MAX_GAIN);
         g->gain_range = fabs(g->max_gain - g->min_gain);
-        ent_log_info("max_gain: [v]%f, %f, r: %f", val, g->max_gain, g->gain_range);
         return ENT_OK;
 }
 

@@ -164,6 +164,9 @@ double DspRgateProxyVst::getMaxDuration() const
 
 bool DspRgateProxyVst::setMinGain(double value)
 {
+        if (value > getMaxGain())
+                setMaxGain(value);
+
         auto handler = vstController->getComponentHandler();
         handler->beginEdit(ParameterId::RgateMinGainId);
         handler->performEdit(ParameterId::RgateMinGainId,
@@ -180,10 +183,12 @@ double DspRgateProxyVst::getMinGain() const
 
 bool DspRgateProxyVst::setMaxGain(double value)
 {
+        if (value < getMinGain())
+                setMinGain(value);
+
         auto handler = vstController->getComponentHandler();
         handler->beginEdit(ParameterId::RgateMaxGainId);
-        handler->performEdit(ParameterId::RgateMaxGainId,
-                             maxGainToNormalized(value));
+        handler->performEdit(ParameterId::RgateMaxGainId, maxGainToNormalized(value));
         handler->endEdit(ParameterId::RgateMaxGainId);
         return true;
 }
@@ -271,7 +276,7 @@ bool DspRgateProxyVst::enabledFromNormalized(double value)
         return value > 0.5;
 }
 
-double DspRgateProxyVst::minIntervalToNormalized(int value)
+double DspRgateProxyVst::minIntervalToNormalized(double value)
 {
         return toNormalized(value,
                             ENT_RGATE_MIN_MIN_INTERVAL,
@@ -285,7 +290,7 @@ double DspRgateProxyVst::minIntervalFromNormalized(double value)
                               ENT_RGATE_MAX_MIN_INTERVAL);
 }
 
-double DspRgateProxyVst::maxIntervalToNormalized(int value)
+double DspRgateProxyVst::maxIntervalToNormalized(double value)
 {
         return toNormalized(value,
                             ENT_RGATE_MIN_MAX_INTERVAL,
@@ -299,7 +304,7 @@ double DspRgateProxyVst::maxIntervalFromNormalized(double value)
                               ENT_RGATE_MAX_MAX_INTERVAL);
 }
 
-double DspRgateProxyVst::minDurationToNormalized(int value)
+double DspRgateProxyVst::minDurationToNormalized(double value)
 {
         return toNormalized(value,
                             ENT_RGATE_MIN_MIN_DURATION,
@@ -313,7 +318,7 @@ double DspRgateProxyVst::minDurationFromNormalized(double value)
                               ENT_RGATE_MAX_MIN_DURATION);
 }
 
-double DspRgateProxyVst::maxDurationToNormalized(int value)
+double DspRgateProxyVst::maxDurationToNormalized(double value)
 {
         return toNormalized(value,
                             ENT_RGATE_MIN_MAX_DURATION,
@@ -327,7 +332,7 @@ double DspRgateProxyVst::maxDurationFromNormalized(double value)
                               ENT_RGATE_MAX_MAX_DURATION);
 }
 
-double DspRgateProxyVst::minGainToNormalized(int value)
+double DspRgateProxyVst::minGainToNormalized(double value)
 {
         return toNormalized(value,
                             ENT_RGATE_MIN_MIN_GAIN,
@@ -337,11 +342,11 @@ double DspRgateProxyVst::minGainToNormalized(int value)
 double DspRgateProxyVst::minGainFromNormalized(double value)
 {
         return fromNormalized(value,
-                              ENT_RGATE_MIN_MAX_GAIN,
-                              ENT_RGATE_MAX_MAX_GAIN);
+                              ENT_RGATE_MIN_MIN_GAIN,
+                              ENT_RGATE_MAX_MIN_GAIN);
 }
 
-double DspRgateProxyVst::maxGainToNormalized(int value)
+double DspRgateProxyVst::maxGainToNormalized(double value)
 {
         return toNormalized(value,
                             ENT_RGATE_MIN_MAX_GAIN,
@@ -378,4 +383,3 @@ bool DspRgateProxyVst::invertedFromNormalized(double value)
 {
         return value > 0.5;
 }
-

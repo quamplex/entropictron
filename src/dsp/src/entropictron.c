@@ -267,7 +267,7 @@ ent_process(struct entropictron *ent, float** data, size_t size)
                         ent_glitch_process(glitch, in, out, size);
         }
 
-        //        if (ent_rgate_is_enabled(ent->rgate))
+        if (ent_rgate_is_enabled(ent->rgate))
                 ent_rgate_process(ent->rgate, in, out, size);
 
         return ENT_OK;
