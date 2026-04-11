@@ -38,6 +38,10 @@ GlitchModel::GlitchModel(RkObject *parent,
           minJumpRange{ENT_GLITCH_MIN_MIN_JUMP, ENT_GLITCH_MAX_MIN_JUMP},
           maxJumpDefaultValue{ENT_GLITCH_DEFAULT_MAX_JUMP},
           maxJumpRange{ENT_GLITCH_MIN_MAX_JUMP, ENT_GLITCH_MAX_MAX_JUMP}
+          dryDefaultValue{ENT_GLITCH_DEFAULT_DRY},
+          dryRange{ENT_GLITCH_MIN_DRY, ENT_GLITCH_MAX_DRY},
+          wetDefaultValue{ENT_GLITCH_DEFAULT_WET},
+          wetRange{ENT_GLITCH_MIN_WET, ENT_GLITCH_MAX_WET},
 {
         RK_ACT_BIND(dspGlitchProxy,
                     enabled,
@@ -214,4 +218,66 @@ void GlitchModel::setMinJumpRange(double from, double to)
 std::pair<double, double> GlitchModel::getMinJumpRange() const
 {
         return minJumpRange;
+}
+
+void GlitchModel::setDry(double value)
+{
+        if (dspGlitchProxy->setDry(value))
+                action dryUpdated(value);
+}
+
+double GlitchModel::dry() const
+{
+        return dspGlitchProxy->dry();
+}
+
+void GlitchModel::setDryDefaultValue(double value)
+{
+        dryDefaultValue = value;
+}
+
+double GlitchModel::getDryDefaultValue() const
+{
+        return dryDefaultValue;
+}
+
+void GlitchModel::setDryRange(double from, double to)
+{
+        dryRange = {from, to};
+}
+
+std::pair<double, double> GlitchModel::getDryRange() const
+{
+        return dryRange;
+}
+
+void GlitchModel::setWet(double value)
+{
+        if (dspGlitchProxy->setWet(value))
+                action wetUpdated(value);
+}
+
+double GlitchModel::wet() const
+{
+        return dspGlitchProxy->wet();
+}
+
+void GlitchModel::setWetDefaultValue(double value)
+{
+        wetDefaultValue = value;
+}
+
+double GlitchModel::getWetDefaultValue() const
+{
+        return wetDefaultValue;
+}
+
+void GlitchModel::setWetRange(double from, double to)
+{
+        wetRange = {from, to};
+}
+
+std::pair<double, double> GlitchModel::getWetRange() const
+{
+        return wetRange;
 }

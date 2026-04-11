@@ -53,6 +53,14 @@ extern "C" {
 #define ENT_GLITCH_DEFAULT_MIN_JUMP 0.0f   // ms
 #define ENT_GLITCH_DEFAULT_MAX_JUMP 50.0f  // ms
 
+#define ENT_GLITCH_MIN_DRY 0.0f
+#define ENT_GLITCH_MAX_DRY 1.0f
+#define ENT_GLITCH_DEFAULT_DRY 1.0f
+
+#define ENT_GLITCH_MIN_WET 0.0f
+#define ENT_GLITCH_MAX_WET 1.0f
+#define ENT_GLITCH_DEFAULT_WET 0.5f
+
 struct ent_glitch;
 struct ent_state_glitch;
 
@@ -83,6 +91,14 @@ float ent_glitch_get_length(const struct ent_glitch *g);
 enum ent_error ent_glitch_set_repeat_count(struct ent_glitch *g, int repeats);
 
 int ent_glitch_get_repeat_count(const struct ent_glitch *g);
+
+enum ent_error ent_glitch_set_dry(struct ent_glitch *g, float dry);
+
+float ent_glitch_get_dry(const struct ent_glitch *g);
+
+enum ent_error ent_glitch_set_wet(struct ent_glitch *g, float wet);
+
+float ent_glitch_get_wet(const struct ent_glitch *g);
 
 void ent_glitch_process(struct ent_glitch *g,
                         float **in,

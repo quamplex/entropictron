@@ -148,6 +148,12 @@ float ent_state_glitch_get_length(const struct ent_state_glitch *g);
 void ent_state_glitch_set_repeats(struct ent_state_glitch *g, int repeats);
 int  ent_state_glitch_get_repeats(const struct ent_state_glitch *g);
 
+void ent_state_glitch_set_dry(struct ent_state_glitch *g, float dry);
+float  ent_state_glitch_get_dry(const struct ent_state_glitch *g);
+
+void ent_state_glitch_set_wet(struct ent_state_glitch *g, float wet);
+float  ent_state_glitch_get_wet(const struct ent_state_glitch *g);
+
 /* RGATE */
 void ent_state_rgate_set_enabled(struct ent_state_rgate *g, bool val);
 bool ent_state_rgate_get_enabled(const struct ent_state_rgate *g);

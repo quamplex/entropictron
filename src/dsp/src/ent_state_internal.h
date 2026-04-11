@@ -58,6 +58,8 @@ struct ent_state_glitch {
         _Atomic(float) max_jump;
         _Atomic(float) length;
         _Atomic(int) repeats;
+        _Atomic(float) dry;
+        _Atomic(float) wet;
 };
 
 struct ent_state_rgate {

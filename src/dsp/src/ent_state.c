@@ -353,6 +353,26 @@ int ent_state_glitch_get_repeats(const struct ent_state_glitch *g)
     return atomic_load_explicit(&g->repeats, memory_order_relaxed);
 }
 
+void ent_state_glitch_set_dry(struct ent_state_glitch *g, float dry)
+{
+    atomic_store_explicit(&g->dry, dry, memory_order_relaxed);
+}
+
+float ent_state_glitch_get_dry(const struct ent_state_glitch *g)
+{
+    return atomic_load_explicit(&g->dry, memory_order_relaxed);
+}
+
+void ent_state_glitch_set_wet(struct ent_state_glitch *g, float wet)
+{
+    atomic_store_explicit(&g->wet, wet, memory_order_relaxed);
+}
+
+float ent_state_glitch_get_wet(const struct ent_state_glitch *g)
+{
+    return atomic_load_explicit(&g->wet, memory_order_relaxed);
+}
+
 /* RGATE */
 void ent_state_rgate_set_enabled(struct ent_state_rgate *g, bool val)
 {
