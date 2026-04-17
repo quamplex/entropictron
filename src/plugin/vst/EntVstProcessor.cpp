@@ -481,6 +481,12 @@ void EntVstProcessor::initGlitchParamMappings()
         paramMap[ParameterId::Glitch1RepeatsId] = [glitch](ParamValue v) {
                 glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
         };
+        paramMap[ParameterId::Glitch1DryId] = [glitch](ParamValue v) {
+                glitch->setRepeatCount(DspGlitchProxyVst::dryFromNormalized(v));
+        };
+        paramMap[ParameterId::Glitch1WetId] = [glitch](ParamValue v) {
+                glitch->setRepeatCount(DspGlitchProxyVst::wetFromNormalized(v));
+        };
 
         // Glitch 2
         glitch = entropictronDsp->getGlitch(GlitchId::Glitch2);
@@ -501,6 +507,12 @@ void EntVstProcessor::initGlitchParamMappings()
         };
         paramMap[ParameterId::Glitch2RepeatsId] = [glitch](ParamValue v) {
                 glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
+        };
+        paramMap[ParameterId::Glitch2DryId] = [glitch](ParamValue v) {
+                glitch->setRepeatCount(DspGlitchProxyVst::dryFromNormalized(v));
+        };
+        paramMap[ParameterId::Glitch2WetId] = [glitch](ParamValue v) {
+                glitch->setRepeatCount(DspGlitchProxyVst::wetFromNormalized(v));
         };
 }
 

@@ -72,12 +72,14 @@ class GlitchModel: public EntAbstractModel
         void setDryDefaultValue(double value);
         double getDryDefaultValue() const;
         void setDryRange(double from, double to);
+        std::pair<double, double> getDryRange() const;
 
         void setWet(double value);
         double wet() const;
         void setWetDefaultValue(double value);
         double getWetDefaultValue() const;
         void setWetRange(double from, double to);
+        std::pair<double, double> getWetRange() const;
 
         RK_DECL_ACT(enabled,
                     enabled(bool b),

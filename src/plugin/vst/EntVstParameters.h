@@ -86,6 +86,8 @@ enum ParameterId : Steinberg::Vst::ParamID
     Glitch1MaxJumpId        = 30104,
     Glitch1LengthId         = 30105,
     Glitch1RepeatsId        = 30106,
+    Glitch1DryId            = 30107,
+    Glitch1WetId            = 30108,
 
     // Glitcher 2
     Glitch2EnabledId        = 30201,
@@ -94,6 +96,8 @@ enum ParameterId : Steinberg::Vst::ParamID
     Glitch2MaxJumpId        = 30204,
     Glitch2LengthId         = 30205,
     Glitch2RepeatsId        = 30206,
+    Glitch2DryId            = 30207,
+    Glitch2WetId            = 30208,
 
     // Rgate
     RgateEnabledId          = 30301,

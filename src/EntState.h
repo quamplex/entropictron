@@ -67,6 +67,8 @@ class EntState
                 double length = 0.0;
                 double min_jump = 0.0;
                 double max_jump = 0.0;
+                double dry = 0.0;
+                double wet = 0.0;
         };
 
         struct Rgate {

@@ -26,22 +26,22 @@
 
 GlitchModel::GlitchModel(RkObject *parent,
                          DspGlitchProxy* dspGlitchProxy)
-        : EntAbstractModel(parent),
-          dspGlitchProxy{dspGlitchProxy},
-          repeatsDefaultValue{ENT_GLITCH_DEFAULT_REPEATS},
-          repeatsRange{ENT_GLITCH_MIN_REPEATS, ENT_GLITCH_MAX_REPEATS},
-          probabilityDefaultValue{ENT_GLITCH_DEFAULT_PROB},
-          probabilityRange{ENT_GLITCH_MIN_PROB, ENT_GLITCH_MAX_PROB},
-          lengthDefaultValue{ENT_GLITCH_DEFAULT_LENGH},
-          lengthRange{ENT_GLITCH_MIN_LENGH, ENT_GLITCH_MAX_LENGH},
-          minJumpDefaultValue{ENT_GLITCH_DEFAULT_MIN_JUMP},
-          minJumpRange{ENT_GLITCH_MIN_MIN_JUMP, ENT_GLITCH_MAX_MIN_JUMP},
-          maxJumpDefaultValue{ENT_GLITCH_DEFAULT_MAX_JUMP},
-          maxJumpRange{ENT_GLITCH_MIN_MAX_JUMP, ENT_GLITCH_MAX_MAX_JUMP}
-          dryDefaultValue{ENT_GLITCH_DEFAULT_DRY},
-          dryRange{ENT_GLITCH_MIN_DRY, ENT_GLITCH_MAX_DRY},
-          wetDefaultValue{ENT_GLITCH_DEFAULT_WET},
-          wetRange{ENT_GLITCH_MIN_WET, ENT_GLITCH_MAX_WET},
+        : EntAbstractModel(parent)
+        , dspGlitchProxy{dspGlitchProxy}
+        , repeatsDefaultValue{ENT_GLITCH_DEFAULT_REPEATS}
+        , repeatsRange{ENT_GLITCH_MIN_REPEATS, ENT_GLITCH_MAX_REPEATS}
+        , probabilityDefaultValue{ENT_GLITCH_DEFAULT_PROB}
+        , probabilityRange{ENT_GLITCH_MIN_PROB, ENT_GLITCH_MAX_PROB}
+        , lengthDefaultValue{ENT_GLITCH_DEFAULT_LENGH}
+        , lengthRange{ENT_GLITCH_MIN_LENGH, ENT_GLITCH_MAX_LENGH}
+        , minJumpDefaultValue{ENT_GLITCH_DEFAULT_MIN_JUMP}
+        , minJumpRange{ENT_GLITCH_MIN_MIN_JUMP, ENT_GLITCH_MAX_MIN_JUMP}
+        , maxJumpDefaultValue{ENT_GLITCH_DEFAULT_MAX_JUMP}
+        , maxJumpRange{ENT_GLITCH_MIN_MAX_JUMP, ENT_GLITCH_MAX_MAX_JUMP}
+        , dryDefaultValue{ENT_GLITCH_DEFAULT_DRY}
+        , dryRange{ENT_GLITCH_MIN_DRY, ENT_GLITCH_MAX_DRY}
+        , wetDefaultValue{ENT_GLITCH_DEFAULT_WET}
+        , wetRange{ENT_GLITCH_MIN_WET, ENT_GLITCH_MAX_WET}
 {
         RK_ACT_BIND(dspGlitchProxy,
                     enabled,

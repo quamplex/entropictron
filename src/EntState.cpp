@@ -81,6 +81,8 @@ void EntState::getState(struct ent_state* state) const
                 ent_state_glitch_set_max_jump(gs, glitch[i].max_jump);
                 ent_state_glitch_set_length(gs, glitch[i].length);
                 ent_state_glitch_set_repeats(gs, glitch[i].repeats);
+                ent_state_glitch_set_dry(gs, glitch[i].dry);
+                ent_state_glitch_set_wet(gs, glitch[i].wet);
         }
 
         auto rg = ent_state_get_rgate(state);
@@ -133,6 +135,8 @@ void EntState::setState(const struct ent_state* state)
                 glitch[i].max_jump = ent_state_glitch_get_max_jump(gs);
                 glitch[i].length = ent_state_glitch_get_length(gs);
                 glitch[i].repeats = ent_state_glitch_get_repeats(gs);
+                glitch[i].dry = ent_state_glitch_get_dry(gs);
+                glitch[i].wet = ent_state_glitch_get_wet(gs);
         }
 
         const auto* rg = ent_state_get_rgate_const(state);
@@ -397,6 +401,8 @@ void EntState::writeGlitch(Value& modulesArray,
                 m.AddMember("length", glitch[i].length, a);
                 m.AddMember("min_jump", glitch[i].min_jump, a);
                 m.AddMember("max_jump", glitch[i].max_jump, a);
+                m.AddMember("dry", glitch[i].dry, a);
+                m.AddMember("wet", glitch[i].wet, a);
                 modulesArray.PushBack(m, a);
         }
 }
@@ -485,6 +491,10 @@ void EntState::readGlitch(const Value& m, size_t id)
                 glitch[id].min_jump = m["min_jump"].GetDouble();
         if (m.HasMember("max_jump") && m["max_jump"].IsNumber())
                 glitch[id].max_jump = m["max_jump"].GetDouble();
+        if (m.HasMember("dry") && m["dry"].IsNumber())
+                glitch[id].dry = m["dry"].GetDouble();
+        if (m.HasMember("wet") && m["wet"].IsNumber())
+                glitch[id].wet = m["wet"].GetDouble();
 }
 
 void EntState::readRgate(const Value& m)

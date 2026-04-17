@@ -53,6 +53,8 @@ private:
         Knob *lengthKnob;
         Knob *maxJumpKnob;
         Knob *minJumpKnob;
+        Knob *dryKnob;
+        Knob *wetKnob;
 };
 
 #endif // ENT_GLITCH_WIDGET_H

@@ -41,6 +41,8 @@ RK_DECLARE_IMAGE_RC(glitch_probability_knob_label);
 RK_DECLARE_IMAGE_RC(glitch_length_knob_label);
 RK_DECLARE_IMAGE_RC(glitch_maxjump_knob_label);
 RK_DECLARE_IMAGE_RC(glitch_minjump_knob_label);
+RK_DECLARE_IMAGE_RC(glitch_dry_knob_label);
+RK_DECLARE_IMAGE_RC(glitch_wet_knob_label);
 
 GlitchWidget::GlitchWidget(EntWidget* parent, GlitchModel* model)
         : EntAbstractView(parent, model)
@@ -50,6 +52,8 @@ GlitchWidget::GlitchWidget(EntWidget* parent, GlitchModel* model)
         , lengthKnob{nullptr}
         , maxJumpKnob{nullptr}
         , minJumpKnob{nullptr}
+        , dryKnob{nullptr}
+        , wetKnob{nullptr}
 {
         setFixedSize(350, 302);
         setBackgroundColor(37, 43, 53);
@@ -132,6 +136,16 @@ void GlitchWidget::updateView()
         maxJumpKnob->setRangeType(Knob::RangeType::Logarithmic);
         maxJumpKnob->setDefaultValue(model->getMaxJumpDefaultValue());
         maxJumpKnob->setValue(model->maxJump());
+
+        auto [dryFrom, dryTo] = model->getDryRange();
+        dryKnob->setRange(dryFrom, dryTo);
+        dryKnob->setDefaultValue(model->getDryDefaultValue());
+        dryKnob->setValue(model->dry());
+
+        auto [wetFrom, wetTo] = model->getWetRange();
+        wetKnob->setRange(wetFrom, wetTo);
+        wetKnob->setDefaultValue(model->getWetDefaultValue());
+        wetKnob->setValue(model->wet());
 }
 
 void GlitchWidget::bindModel()
@@ -170,6 +184,16 @@ void GlitchWidget::bindModel()
                     RK_ACT_ARGS(double value),
                     model,
                     setMinJump(value));
+        RK_ACT_BIND(dryKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setDry(value));
+        RK_ACT_BIND(wetKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setWet(value));
 
         RK_ACT_BIND(model,
                     modelUpdated,
@@ -206,6 +230,16 @@ void GlitchWidget::bindModel()
                     RK_ACT_ARGS(double value),
                     minJumpKnob,
                     setValue(value));
+        RK_ACT_BIND(model,
+                    dryUpdated,
+                    RK_ACT_ARGS(double value),
+                    dryKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    wetUpdated,
+                    RK_ACT_ARGS(double value),
+                    wetKnob,
+                    setValue(value));
 }
 
 void GlitchWidget::unbindModel()
@@ -218,6 +252,8 @@ void GlitchWidget::unbindModel()
         lengthKnob->unbindObject(model);
         maxJumpKnob->unbindObject(model);
         minJumpKnob->unbindObject(model);
+        dryKnob->unbindObject(model);
+        wetKnob->unbindObject(model);
 }
 
 void GlitchWidget::createGlitchControls(RkContainer *container)
@@ -249,7 +285,6 @@ void GlitchWidget::createGlitchControls(RkContainer *container)
         horizontalContainer->setSize({width(), 103});
         container->addSpace(20);
         container->addContainer(horizontalContainer);
-        horizontalContainer->addSpace(82);
 
         minJumpKnob = new Knob(this, RK_RC_IMAGE(glitch_minjump_knob_label));
         minJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
@@ -260,4 +295,14 @@ void GlitchWidget::createGlitchControls(RkContainer *container)
         maxJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
         maxJumpKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         horizontalContainer->addWidget(maxJumpKnob);
+
+        dryKnob = new Knob(this, RK_RC_IMAGE(glitch_dry_knob_label));
+        dryKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        dryKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
+        horizontalContainer->addWidget(dryKnob);
+
+        wetKnob = new Knob(this, RK_RC_IMAGE(glitch_wet_knob_label));
+        wetKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
+        wetKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
+        horizontalContainer->addWidget(wetKnob);
 }

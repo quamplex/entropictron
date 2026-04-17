@@ -303,6 +303,6 @@ void ent_glitch_get_state(const struct ent_glitch *g, struct ent_state_glitch *s
         ENT_GET_STATE(g, state, max_jump,    ent_glitch_get_jump_max);
         ENT_GET_STATE(g, state, length,      ent_glitch_get_length);
         ENT_GET_STATE(g, state, repeats,     ent_glitch_get_repeat_count);
-        ENT_SET_STATE(g, state, dry,         ent_glitch_get_dry);
-        ENT_SET_STATE(g, state, wet,         ent_glitch_get_wet);
+        ENT_GET_STATE(g, state, dry,         ent_glitch_get_dry);
+        ENT_GET_STATE(g, state, wet,         ent_glitch_get_wet);
 }
