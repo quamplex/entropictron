@@ -51,6 +51,10 @@ class DspGlitchProxyVst: public DspGlitchProxy {
         double maxJump() const override;
         bool setMinJump(double value) override;
         double minJump() const override;
+        bool setDry(double value) override;
+        double dry() const override;
+        bool setWet(double value) override;
+        double wet() const override;
 
         static double repeatsToNormalized(int value);
         static int repeatsFromNormalized(double normalized);
@@ -62,7 +66,10 @@ class DspGlitchProxyVst: public DspGlitchProxy {
         static double minJumpFromNormalized(double normalized);
         static double maxJumpToNormalized(double value);
         static double maxJumpFromNormalized(double normalized);
-
+        static double dryToNormalized(double value);
+        static double dryFromNormalized(double normalized);
+        static double wetToNormalized(double value);
+        static double wetFromNormalized(double normalized);
 protected:
         void onParameterChanged(ParameterId paramId, ParamValue value);
 

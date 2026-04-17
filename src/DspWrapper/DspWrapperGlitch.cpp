@@ -90,3 +90,24 @@ int DspWrapperGlitch::repeatCount() const
 {
     return ent_glitch_get_repeat_count(glitchDsp);
 }
+
+void DspWrapperGlitch::setDry(double value)
+{
+    ent_glitch_set_dry(glitchDsp, value);
+}
+
+double DspWrapperGlitch::dry() const
+{
+    return ent_glitch_get_dry(glitchDsp);
+}
+
+void DspWrapperGlitch::setWet(double value)
+{
+    ent_glitch_set_wet(glitchDsp, value);
+}
+
+double DspWrapperGlitch::wet() const
+{
+    return ent_glitch_get_wet(glitchDsp);
+}
+

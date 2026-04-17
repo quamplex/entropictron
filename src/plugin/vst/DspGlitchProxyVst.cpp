@@ -47,8 +47,26 @@ DspGlitchProxyVst::DspGlitchProxyVst(RkObject* parent,
                         ParameterId::Glitch1ProbabilityId,
                         ParameterId::Glitch1LengthId,
                         ParameterId::Glitch1MaxJumpId,
-                        ParameterId::Glitch1MinJumpId
+                        ParameterId::Glitch1MinJumpId,
+                        ParameterId::Glitch1DryId,
+                        ParameterId::Glitch1WetId
                 };
+
+                vstController->setParamNormalized(ParameterId::Glitch1EnabledId, 0);
+                vstController->setParamNormalized(ParameterId::Glitch1RepeatsId,
+                                                  repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
+                vstController->setParamNormalized(ParameterId::Glitch1ProbabilityId,
+                                                  probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
+                vstController->setParamNormalized(ParameterId::Glitch1LengthId,
+                                                  lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
+                vstController->setParamNormalized(ParameterId::Glitch1MinJumpId,
+                                                  minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
+                vstController->setParamNormalized(ParameterId::Glitch1MaxJumpId,
+                                                  maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
+                vstController->setParamNormalized(ParameterId::Glitch1DryId,
+                                                  dryToNormalized(ENT_GLITCH_DEFAULT_DRY));
+                vstController->setParamNormalized(ParameterId::Glitch1WetId,
+                                                  wetToNormalized(ENT_GLITCH_DEFAULT_WET));
         } else {
                 params = {
                         ParameterId::Glitch2EnabledId,
@@ -56,20 +74,26 @@ DspGlitchProxyVst::DspGlitchProxyVst(RkObject* parent,
                         ParameterId::Glitch2ProbabilityId,
                         ParameterId::Glitch2LengthId,
                         ParameterId::Glitch2MaxJumpId,
-                        ParameterId::Glitch2MinJumpId
+                        ParameterId::Glitch2MinJumpId,
+                        ParameterId::Glitch2DryId,
+                        ParameterId::Glitch2WetId
                 };
 
-                vstController->setParamNormalized (ParameterId::Glitch2EnabledId, 0);
-                vstController->setParamNormalized (ParameterId::Glitch2RepeatsId,
-                                                   repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
-                vstController->setParamNormalized (ParameterId::Glitch2ProbabilityId,
-                                                   probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
-                vstController->setParamNormalized (ParameterId::Glitch2LengthId,
-                                                   lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
-                vstController->setParamNormalized (ParameterId::Glitch2MinJumpId,
-                                                   minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
-                vstController->setParamNormalized (ParameterId::Glitch2MaxJumpId,
-                                                   maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
+                vstController->setParamNormalized(ParameterId::Glitch2EnabledId, 0);
+                vstController->setParamNormalized(ParameterId::Glitch2RepeatsId,
+                                                  repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
+                vstController->setParamNormalized(ParameterId::Glitch2ProbabilityId,
+                                                  probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
+                vstController->setParamNormalized(ParameterId::Glitch2LengthId,
+                                                  lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
+                vstController->setParamNormalized(ParameterId::Glitch2MinJumpId,
+                                                  minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
+                vstController->setParamNormalized(ParameterId::Glitch2MaxJumpId,
+                                                  maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
+                vstController->setParamNormalized(ParameterId::Glitch1DryId,
+                                                  dryToNormalized(ENT_GLITCH_DEFAULT_DRY));
+                vstController->setParamNormalized(ParameterId::Glitch1WetId,
+                                                  wetToNormalized(ENT_GLITCH_DEFAULT_WET));
         }
 
         for (const auto& paramId : params)
@@ -85,6 +109,8 @@ DspGlitchProxyVst::~DspGlitchProxyVst()
                 vstController->removeParamterCallback(ParameterId::Glitch1LengthId);
                 vstController->removeParamterCallback(ParameterId::Glitch1MaxJumpId);
                 vstController->removeParamterCallback(ParameterId::Glitch1MinJumpId);
+                vstController->removeParamterCallback(ParameterId::Glitch1DryId);
+                vstController->removeParamterCallback(ParameterId::Glitch1WetId);
         } else {
                 vstController->removeParamterCallback(ParameterId::Glitch2EnabledId);
                 vstController->removeParamterCallback(ParameterId::Glitch2RepeatsId);
@@ -92,6 +118,8 @@ DspGlitchProxyVst::~DspGlitchProxyVst()
                 vstController->removeParamterCallback(ParameterId::Glitch2LengthId);
                 vstController->removeParamterCallback(ParameterId::Glitch2MaxJumpId);
                 vstController->removeParamterCallback(ParameterId::Glitch2MinJumpId);
+                vstController->removeParamterCallback(ParameterId::Glitch2DryId);
+                vstController->removeParamterCallback(ParameterId::Glitch2WetId);
         }
 }
 
@@ -197,6 +225,40 @@ double DspGlitchProxyVst::minJump() const
         return minJumpFromNormalized(vstController->getParamNormalized(id));
 }
 
+bool DspGlitchProxyVst::setDry(double value)
+{
+        auto id = (getGlitchId() == GlitchId::Glitch1) ?
+                  ParameterId::Glitch1DryId : ParameterId::Glitch2DryId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, dryToNormalized(value));
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+double DspGlitchProxyVst::dry() const
+{
+        auto id = (getGlitchId() == GlitchId::Glitch1) ?
+                ParameterId::Glitch1DryId : ParameterId::Glitch2DryId;
+        return dryFromNormalized(vstController->getParamNormalized(id));
+}
+
+bool DspGlitchProxyVst::setWet(double value)
+{
+        auto id = (getGlitchId() == GlitchId::Glitch1) ?
+                  ParameterId::Glitch1WetId : ParameterId::Glitch2WetId;
+        vstController->getComponentHandler()->beginEdit(id);
+        vstController->getComponentHandler()->performEdit(id, wetToNormalized(value));
+        vstController->getComponentHandler()->endEdit(id);
+        return true;
+}
+
+double DspGlitchProxyVst::wet() const
+{
+        auto id = (getGlitchId() == GlitchId::Glitch1) ?
+                ParameterId::Glitch1WetId : ParameterId::Glitch2WetId;
+        return wetFromNormalized(vstController->getParamNormalized(id));
+}
+
 void DspGlitchProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)
 {
         switch (paramId) {
@@ -223,6 +285,14 @@ void DspGlitchProxyVst::onParameterChanged(ParameterId paramId, ParamValue value
         case ParameterId::Glitch1MinJumpId:
         case ParameterId::Glitch2MinJumpId:
                 action minJumpUpdated(value);
+                break;
+        case ParameterId::Glitch1DryId:
+        case ParameterId::Glitch2DryId:
+                action dryUpdated(value);
+                break;
+        case ParameterId::Glitch1WetId:
+        case ParameterId::Glitch2WetId:
+                action wetUpdated(value);
                 break;
         default:
                 break;
@@ -297,4 +367,32 @@ double DspGlitchProxyVst::maxJumpFromNormalized(double normalized)
         return fromNormalized(normalized,
                               ENT_GLITCH_MIN_MAX_JUMP,
                               ENT_GLITCH_MAX_MAX_JUMP);
+}
+
+double DspGlitchProxyVst::dryToNormalized(double value)
+{
+        return toNormalized(value,
+                            ENT_GLITCH_MIN_DRY,
+                            ENT_GLITCH_MAX_DRY);
+}
+
+double DspGlitchProxyVst::dryFromNormalized(double normalized)
+{
+        return fromNormalized(normalized,
+                              ENT_GLITCH_MIN_DRY,
+                              ENT_GLITCH_MAX_DRY);
+}
+
+double DspGlitchProxyVst::wetToNormalized(double value)
+{
+        return toNormalized(value,
+                            ENT_GLITCH_MIN_WET,
+                            ENT_GLITCH_MAX_WET);
+}
+
+double DspGlitchProxyVst::wetFromNormalized(double normalized)
+{
+        return fromNormalized(normalized,
+                              ENT_GLITCH_MIN_WET,
+                              ENT_GLITCH_MAX_WET);
 }

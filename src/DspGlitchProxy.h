@@ -44,6 +44,10 @@ class DspGlitchProxy : public RkObject {
         virtual double maxJump() const = 0;
         virtual bool setMinJump(double value) = 0;
         virtual double minJump() const = 0;
+        virtual bool setDry(double value) = 0;
+        virtual double dry() const = 0;
+        virtual bool setWet(double value) = 0;
+        virtual double wet() const = 0;
 
         RK_DECL_ACT(enabled,
                     enabled(bool b),
@@ -69,6 +73,15 @@ class DspGlitchProxy : public RkObject {
                     minJumpUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
+        RK_DECL_ACT(dryUpdated,
+                    dryUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+        RK_DECL_ACT(wetUpdated,
+                    wetUpdated(double value),
+                    RK_ARG_TYPE(double),
+                    RK_ARG_VAL(value));
+
 
 private:
         GlitchId glitchId;

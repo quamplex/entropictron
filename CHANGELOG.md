@@ -1,3 +1,13 @@
+## [1.2.0]
+
+### Features
+
+- Random gate module
+
+Improvements:
+
+- Glitch: add a small crossfade to avoid artifacts
+
 ## [1.1.0]
 
 ### Features

@@ -44,6 +44,10 @@ public:
     double length() const;
     void setRepeatCount(int value);
     int repeatCount() const;
+    void setDry(double value);
+    double dry() const;
+    void setWet(double value);
+    double wet() const;
 
 private:
     struct ent_glitch* glitchDsp;
