@@ -55,11 +55,11 @@ extern "C" {
 
 #define ENT_GLITCH_MIN_DRY 0.0f
 #define ENT_GLITCH_MAX_DRY 1.0f
-#define ENT_GLITCH_DEFAULT_DRY 1.0f
+#define ENT_GLITCH_DEFAULT_DRY 0.0f
 
 #define ENT_GLITCH_MIN_WET 0.0f
 #define ENT_GLITCH_MAX_WET 1.0f
-#define ENT_GLITCH_DEFAULT_WET 0.5f
+#define ENT_GLITCH_DEFAULT_WET 1.0f
 
 struct ent_glitch;
 struct ent_state_glitch;

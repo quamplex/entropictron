@@ -482,10 +482,10 @@ void EntVstProcessor::initGlitchParamMappings()
                 glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
         };
         paramMap[ParameterId::Glitch1DryId] = [glitch](ParamValue v) {
-                glitch->setRepeatCount(DspGlitchProxyVst::dryFromNormalized(v));
+                glitch->setDry(DspGlitchProxyVst::dryFromNormalized(v));
         };
         paramMap[ParameterId::Glitch1WetId] = [glitch](ParamValue v) {
-                glitch->setRepeatCount(DspGlitchProxyVst::wetFromNormalized(v));
+                glitch->setWet(DspGlitchProxyVst::wetFromNormalized(v));
         };
 
         // Glitch 2
@@ -509,10 +509,10 @@ void EntVstProcessor::initGlitchParamMappings()
                 glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
         };
         paramMap[ParameterId::Glitch2DryId] = [glitch](ParamValue v) {
-                glitch->setRepeatCount(DspGlitchProxyVst::dryFromNormalized(v));
+                glitch->setDry(DspGlitchProxyVst::dryFromNormalized(v));
         };
         paramMap[ParameterId::Glitch2WetId] = [glitch](ParamValue v) {
-                glitch->setRepeatCount(DspGlitchProxyVst::wetFromNormalized(v));
+                glitch->setWet(DspGlitchProxyVst::wetFromNormalized(v));
         };
 }
 

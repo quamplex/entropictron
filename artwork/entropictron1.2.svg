@@ -2386,6 +2386,40 @@
        cx="35.510696"
        cy="41.818672"
        r="0.39293405" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       x="94.635399"
+       y="57.090149"
+       id="text20130-57-5-90-3-70-0-5-0-5"><tspan
+         id="tspan20128-4-0-2-6-93-6-3-9-3"
+         style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+         x="94.635399"
+         y="57.090149">Dry</tspan></text>
+    <rect
+       style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+       id="rect4499-56-0-6-5-3-5"
+       width="6.186358"
+       height="1.0093144"
+       x="92.339584"
+       y="56.357151" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       x="97.480965"
+       y="61.675301"
+       id="text20130-57-5-90-3-70-0-5-0-5-1"><tspan
+         id="tspan20128-4-0-2-6-93-6-3-9-3-2"
+         style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+         x="97.480965"
+         y="61.675301">Wet</tspan></text>
+    <rect
+       style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+       id="rect4499-56-0-6-5-3-5-7"
+       width="6.186358"
+       height="1.0093144"
+       x="95.25"
+       y="60.854164" />
   </g>
   <rect
      style="fill:#272929;stroke-width:0.1;stroke-linecap:square"

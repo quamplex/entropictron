@@ -286,6 +286,7 @@ void GlitchWidget::createGlitchControls(RkContainer *container)
         container->addSpace(20);
         container->addContainer(horizontalContainer);
 
+        horizontalContainer->addSpace(11);
         minJumpKnob = new Knob(this, RK_RC_IMAGE(glitch_minjump_knob_label));
         minJumpKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
         minJumpKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
