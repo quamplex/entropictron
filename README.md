@@ -59,6 +59,18 @@ and jump parameters, creating stutters and digital artifacts.
 - Maximum jump
 - Dry & Wet
 
+### Rgate
+
+Randomly changes the audio level
+
+**Parameters:**
+
+- Min/Max Interval
+- Min/Max Duration
+- Min/Max Gain
+- Randomness
+- Inverted mode
+
 ### Play Mode
 
 - **Playback** – Active only during host playback
