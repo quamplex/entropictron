@@ -17,7 +17,7 @@
 
 **License:** This work (including all images it uses) is released under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/deed.en).
 
-**Version:** 1.1.0
+**Version:** 1.2.0
 
 **Website:** [https://quamplex.com/entropictron](https://quamplex.com/entropictron)
 
@@ -34,14 +34,10 @@ Can run on GNU/Linux and Windows.
 
 The name **Entropictron** derives from the root word *entropy*, which generally refers to something chaotic.
 
-### Block diagram
-
-Entropictron consists of three primary modules: a noise generator, a crackle generator, and a glitch effect.
+Entropictron consists of three primary modules: a noise generator, a crackle generator,
+and a glitch effect, rgate - a kind of random gate.
 Each module can be tuned via its own set of parameters, and the processed
-signals are finally mixed to produce the output sound. Here is the block diagram that
-shows the general overview of the parts of Entropictron.
-
-![Diagram](diagram.png)
+signals are finally mixed to produce the output sound.
 
 ### Noise
 
@@ -88,6 +84,19 @@ It has the following parameters:
 - **Length knob:** Controls the length of each glitch, i.e., how much of the audio is repeated during playback.
 - **Min Jump knob:** Minimum jump back in milliseconds, determining where the glitch starts. Ranges from 0 to 100 ms.
 - **Max Jump knob:** Maximum jump back in milliseconds, determining where the glitch starts. Ranges from 100 ms to 1000 ms.
+
+### Rgate
+
+The Rgate effect randomly changes the audio level over time by applying a random
+gain for a random duration at random intervals.
+
+It has the following parameters:
+
+- **Min/Max Interval knobs:** Control the range between successive gain changes.
+- **Min/Max Duration knobs:** Control the range of time for which each gain change is applied.
+- **Min/Max Gain knobs:** Control the range of gain values that can be applied.
+- **Randomness knob:** Controls the amount of randomness applied to the interval, duration, and gain.
+- **Inverted switch:** Inverts the behavior.
 
 ### Factory Presets
 
