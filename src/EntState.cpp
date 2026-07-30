@@ -433,20 +433,20 @@ void EntState::readNoise(const Value& m, size_t id)
                 noise[id].enabled = m["enabled"].GetBool();
         if (m.HasMember("type") && m["type"].IsInt())
                 noise[id].type = std::clamp(m["type"].GetInt(), 0, 2);
-        if (m.HasMember("density") && m["density"].IsNumber())
+        if (m.HasMember("density") && m["density"].IsDouble())
                 noise[id].density = m["density"].GetDouble();
-        if (m.HasMember("brightness") && m["brightness"].IsNumber())
+        if (m.HasMember("brightness") && m["brightness"].IsDouble())
                 noise[id].brightness = m["brightness"].GetDouble();
-        if (m.HasMember("gain") && m["gain"].IsNumber())
+        if (m.HasMember("gain") && m["gain"].IsDouble())
                 noise[id].gain = m["gain"].GetDouble();
-        if (m.HasMember("stereo") && m["stereo"].IsNumber())
+        if (m.HasMember("stereo") && m["stereo"].IsDouble())
                 noise[id].stereo = m["stereo"].GetDouble();
         if (m.HasMember("filter_type") && m["filter_type"].IsInt())
                 noise[id].filter_type =
                         std::clamp(m["filter_type"].GetInt(), 0, 2);
-        if (m.HasMember("cutoff") && m["cutoff"].IsNumber())
+        if (m.HasMember("cutoff") && m["cutoff"].IsDouble())
                 noise[id].cutoff = m["cutoff"].GetDouble();
-        if (m.HasMember("resonance") && m["resonance"].IsNumber())
+        if (m.HasMember("resonance") && m["resonance"].IsDouble())
                 noise[id].resonance = m["resonance"].GetDouble();
 }
 
@@ -457,20 +457,20 @@ void EntState::readCrackle(const Value& m, size_t id)
 
         if (m.HasMember("enabled") && m["enabled"].IsBool())
                 crackle[id].enabled = m["enabled"].GetBool();
-        if (m.HasMember("rate") && m["rate"].IsNumber())
+        if (m.HasMember("rate") && m["rate"].IsDouble())
                 crackle[id].rate = m["rate"].GetDouble();
-        if (m.HasMember("randomness") && m["randomness"].IsNumber())
+        if (m.HasMember("randomness") && m["randomness"].IsDouble())
                 crackle[id].randomness = m["randomness"].GetDouble();
-        if (m.HasMember("amplitude") && m["amplitude"].IsNumber())
+        if (m.HasMember("amplitude") && m["amplitude"].IsDouble())
                 crackle[id].amplitude = m["amplitude"].GetDouble();
         if (m.HasMember("env_type") && m["env_type"].IsInt())
                 crackle[id].envelope_shape =
                         std::clamp(m["env_type"].GetInt(), 0, 2);
-        if (m.HasMember("brightness") && m["brightness"].IsNumber())
+        if (m.HasMember("brightness") && m["brightness"].IsDouble())
                 crackle[id].brightness = m["brightness"].GetDouble();
-        if (m.HasMember("duration") && m["duration"].IsNumber())
+        if (m.HasMember("duration") && m["duration"].IsDouble())
                 crackle[id].duration = m["duration"].GetDouble();
-        if (m.HasMember("stereo") && m["stereo"].IsNumber())
+        if (m.HasMember("stereo") && m["stereo"].IsDouble())
                 crackle[id].stereo_spread = m["stereo"].GetDouble();
 }
 
@@ -483,17 +483,17 @@ void EntState::readGlitch(const Value& m, size_t id)
                 glitch[id].enabled = m["enabled"].GetBool();
         if (m.HasMember("repeats") && m["repeats"].IsInt())
                 glitch[id].repeats = m["repeats"].GetInt();
-        if (m.HasMember("probability") && m["probability"].IsNumber())
+        if (m.HasMember("probability") && m["probability"].IsDouble())
                 glitch[id].probability = m["probability"].GetDouble();
-        if (m.HasMember("length") && m["length"].IsNumber())
+        if (m.HasMember("length") && m["length"].IsDouble())
                 glitch[id].length = m["length"].GetDouble();
-        if (m.HasMember("min_jump") && m["min_jump"].IsNumber())
+        if (m.HasMember("min_jump") && m["min_jump"].IsDouble())
                 glitch[id].min_jump = m["min_jump"].GetDouble();
-        if (m.HasMember("max_jump") && m["max_jump"].IsNumber())
+        if (m.HasMember("max_jump") && m["max_jump"].IsDouble())
                 glitch[id].max_jump = m["max_jump"].GetDouble();
-        if (m.HasMember("dry") && m["dry"].IsNumber())
+        if (m.HasMember("dry") && m["dry"].IsDouble())
                 glitch[id].dry = m["dry"].GetDouble();
-        if (m.HasMember("wet") && m["wet"].IsNumber())
+        if (m.HasMember("wet") && m["wet"].IsDouble())
                 glitch[id].wet = m["wet"].GetDouble();
 }
 
