@@ -57,6 +57,7 @@ and jump parameters, creating stutters and digital artifacts.
 - Length
 - Minimum jump
 - Maximum jump
+- Dry & Wet
 
 ### Play Mode
 

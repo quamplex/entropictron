@@ -3,6 +3,7 @@
 ### Features
 
 - Random gate module
+- Add dry/wet for glitch module
 
 Improvements:
 
