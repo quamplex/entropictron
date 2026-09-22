@@ -22,6 +22,7 @@
  */
 
 #include "ent_bitcrasher.h"
+#include "ent_log.h"
 #include "ent_state_internal.h"
 #include "qx_math.h"
 
@@ -65,6 +66,7 @@ void ent_bitcrasher_free(struct ent_bitcrasher **b)
 enum ent_error ent_bitcrasher_enable(struct ent_bitcrasher *b, bool enabled)
 {
         b->enabled = enabled;
+        ent_log_info("bitcrasher enabled: %s", enabled ? "true" : "false");
         return ENT_OK;
 }
 
@@ -78,6 +80,7 @@ enum ent_error ent_bitcrasher_set_bits(struct ent_bitcrasher *b, int bits)
         b->bits = QX_CLAMP(bits,
                            ENT_BITCRASHER_MIN_BITS,
                            ENT_BITCRASHER_MAX_BITS);
+        ent_log_info("bitcrasher bits: %d", b->bits);
         return ENT_OK;
 }
 
@@ -91,6 +94,7 @@ enum ent_error ent_bitcrasher_set_rate(struct ent_bitcrasher *b, float rate)
         b->rate = qx_clamp_float(rate,
                                  ENT_BITCRASHER_MIN_RATE,
                                  ENT_BITCRASHER_MAX_RATE);
+        ent_log_info("bitcrasher rate: %f", b->rate);
         return ENT_OK;
 }
 
@@ -104,6 +108,7 @@ enum ent_error ent_bitcrasher_set_chaos(struct ent_bitcrasher *b, float chaos)
         b->chaos = qx_clamp_float(chaos,
                                   ENT_BITCRASHER_MIN_CHAOS,
                                   ENT_BITCRASHER_MAX_CHAOS);
+        ent_log_info("bitcrasher chaos: %f", b->chaos);
         return ENT_OK;
 }
 
@@ -117,6 +122,7 @@ enum ent_error ent_bitcrasher_set_fold(struct ent_bitcrasher *b, float fold)
         b->fold = qx_clamp_float(fold,
                                  ENT_BITCRASHER_MIN_FOLD,
                                  ENT_BITCRASHER_MAX_FOLD);
+        ent_log_info("bitcrasher fold: %f", b->fold);
         return ENT_OK;
 }
 
@@ -130,6 +136,7 @@ enum ent_error ent_bitcrasher_set_mix(struct ent_bitcrasher *b, float mix)
         b->mix = qx_clamp_float(mix,
                                 ENT_BITCRASHER_MIN_MIX,
                                 ENT_BITCRASHER_MAX_MIX);
+        ent_log_info("bitcrasher mix: %f", b->mix);
         return ENT_OK;
 }
 

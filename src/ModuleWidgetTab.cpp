@@ -40,10 +40,10 @@ RK_DECLARE_IMAGE_RC(tab_crackle_button);
 RK_DECLARE_IMAGE_RC(tab_crackle_button_hover);
 RK_DECLARE_IMAGE_RC(tab_crackle_button_on);
 RK_DECLARE_IMAGE_RC(tab_crackle_button_hover_on);
-RK_DECLARE_IMAGE_RC(tab_glitch_button);
-RK_DECLARE_IMAGE_RC(tab_glitch_button_hover);
-RK_DECLARE_IMAGE_RC(tab_glitch_button_on);
-RK_DECLARE_IMAGE_RC(tab_glitch_button_hover_on);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_hover);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_on);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_hover_on);
 RK_DECLARE_IMAGE_RC(tab_rgate_button);
 RK_DECLARE_IMAGE_RC(tab_rgate_button_hover);
 RK_DECLARE_IMAGE_RC(tab_rgate_button_on);
@@ -162,13 +162,13 @@ void ModuleWidgetTab::createTabButtons()
 
         bitcrasherTabButton = new RkButton(tabButtonWidget);
         bitcrasherTabButton->setBackgroundColor(tabButtonWidget->background());
-        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_glitch_button),
+        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_bitcrasher_button),
                                       RkButton::State::Unpressed);
-        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_glitch_button_on),
+        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_bitcrasher_button_on),
                                       RkButton::State::Pressed);
-        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_glitch_button_hover),
+        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_bitcrasher_button_hover),
                                       RkButton::State::UnpressedHover);
-        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_glitch_button_hover_on),
+        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_bitcrasher_button_hover_on),
                                       RkButton::State::PressedHover);
         bitcrasherTabButton->setCheckable(true);
         bitcrasherTabButton->show();

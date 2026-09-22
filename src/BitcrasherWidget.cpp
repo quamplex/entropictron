@@ -7,12 +7,12 @@
 #include "RkLabel.h"
 #include "ent_bitcrasher.h"
 
-RK_DECLARE_IMAGE_RC(glitch_label);
-RK_DECLARE_IMAGE_RC(glitch_repeats_knob_label);
-RK_DECLARE_IMAGE_RC(glitch_probability_knob_label);
-RK_DECLARE_IMAGE_RC(glitch_length_knob_label);
-RK_DECLARE_IMAGE_RC(glitch_maxjump_knob_label);
-RK_DECLARE_IMAGE_RC(glitch_minjump_knob_label);
+RK_DECLARE_IMAGE_RC(bitcrasher_label);
+RK_DECLARE_IMAGE_RC(bitcrasher_bits_knob_label);
+RK_DECLARE_IMAGE_RC(bitcrasher_rate_knob_label);
+RK_DECLARE_IMAGE_RC(bitcrasher_chaos_knob_label);
+RK_DECLARE_IMAGE_RC(bitcrasher_fold_knob_label);
+RK_DECLARE_IMAGE_RC(bitcrasher_mix_knob_label);
 RK_DECLARE_IMAGE_RC(switch_button_on);
 RK_DECLARE_IMAGE_RC(switch_button_off);
 RK_DECLARE_IMAGE_RC(knob_big_size_bk);
@@ -41,7 +41,7 @@ void BitcrasherWidget::createView()
         main->addSpace(8);
         auto header = new RkContainer(this);
         header->setSize({width(), 18});
-        header->addSpace(128);
+        header->addSpace(115);
 
         enableButton = new RkButton(this);
         enableButton->setCheckable();
@@ -55,7 +55,7 @@ void BitcrasherWidget::createView()
 
         auto label = new RkLabel(this);
         label->setBackgroundColor(background());
-        label->setImage(RK_RC_IMAGE(glitch_label));
+        label->setImage(RK_RC_IMAGE(bitcrasher_label));
         label->show();
         header->addWidget(label);
         main->addContainer(header);
@@ -64,9 +64,9 @@ void BitcrasherWidget::createView()
         auto controls = new RkContainer(this);
         controls->setSize({width(), 103});
         controls->addSpace(30);
-        bitsKnob = new Knob(this, RK_RC_IMAGE(glitch_repeats_knob_label));
-        rateKnob = new Knob(this, RK_RC_IMAGE(glitch_probability_knob_label));
-        chaosKnob = new Knob(this, RK_RC_IMAGE(glitch_length_knob_label));
+        bitsKnob = new Knob(this, RK_RC_IMAGE(bitcrasher_bits_knob_label));
+        rateKnob = new Knob(this, RK_RC_IMAGE(bitcrasher_rate_knob_label));
+        chaosKnob = new Knob(this, RK_RC_IMAGE(bitcrasher_chaos_knob_label));
         bitsKnob->setKnobImage(RK_RC_IMAGE(knob_medium_size_bk));
         bitsKnob->setMarkerImage(RK_RC_IMAGE(knob_medium_size_marker));
         rateKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
@@ -82,8 +82,8 @@ void BitcrasherWidget::createView()
         controls = new RkContainer(this);
         controls->setSize({width(), 103});
         controls->addSpace(82);
-        foldKnob = new Knob(this, RK_RC_IMAGE(glitch_maxjump_knob_label));
-        mixKnob = new Knob(this, RK_RC_IMAGE(glitch_minjump_knob_label));
+        foldKnob = new Knob(this, RK_RC_IMAGE(bitcrasher_fold_knob_label));
+        mixKnob = new Knob(this, RK_RC_IMAGE(bitcrasher_mix_knob_label));
         foldKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
         foldKnob->setMarkerImage(RK_RC_IMAGE(knob_big_size_marker));
         mixKnob->setKnobImage(RK_RC_IMAGE(knob_big_size_bk));
