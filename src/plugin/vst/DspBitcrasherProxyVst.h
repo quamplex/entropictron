@@ -25,9 +25,6 @@ public:
         bool setMix(double value) override;
         double mix() const override;
 
-        static double bitsToNormalized(int value);
-        static int bitsFromNormalized(double value);
-
 protected:
         void onParameterChanged(EntVst::ParameterId id,
                                 Steinberg::Vst::ParamValue value);

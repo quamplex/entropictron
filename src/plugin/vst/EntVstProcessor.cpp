@@ -30,7 +30,8 @@
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
 #include "DspWrapperRgate.h"
-#include "DspWrapperBitcrasher.h"
+#include "DspBitcrasherProxyVst.h"
+#include "EntVstController.h"
 #include "EntVstParameters.h"
 #include "DspVstProxy.h"
 #include "DspNoiseProxyVst.h"
@@ -545,7 +546,7 @@ void EntVstProcessor::initBitcrasherParamMappings()
                 bitcrasher->enable(v > 0.5);
         };
         paramMap[ParameterId::BitcrasherBitsId] = [bitcrasher](ParamValue v) {
-                bitcrasher->setBits(DspWrapperBitcrasher::bitsFromNormalized(v));
+                bitcrasher->setBits(EntVstController::bitcrasherBitsFromNormalized(v));
         };
         paramMap[ParameterId::BitcrasherRateId] = [bitcrasher](ParamValue v) {
                 bitcrasher->setRate(v);
@@ -561,7 +562,7 @@ void EntVstProcessor::initBitcrasherParamMappings()
         };
 }
 
-tresult EntVstProcessor::setState (IBStream *state)
+tresult EntVstProcessor::setState(IBStream *state)
 {
         if (state == nullptr)
                 return kInvalidArgument;

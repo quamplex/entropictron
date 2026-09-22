@@ -10,8 +10,6 @@
 #include "DspWrapperBitcrasher.h"
 #include "ent_bitcrasher.h"
 
-#include <cmath>
-
 DspWrapperBitcrasher::DspWrapperBitcrasher(struct ent_bitcrasher *dsp)
         : bitcrasherDsp{dsp}
 {
@@ -75,17 +73,4 @@ void DspWrapperBitcrasher::setMix(double value)
 double DspWrapperBitcrasher::mix() const
 {
         return ent_bitcrasher_get_mix(bitcrasherDsp);
-}
-
-double DspWrapperBitcrasher::bitsToNormalized(int value)
-{
-        return (static_cast<double>(value) - ENT_BITCRASHER_MIN_BITS)
-                / (ENT_BITCRASHER_MAX_BITS - ENT_BITCRASHER_MIN_BITS);
-}
-
-int DspWrapperBitcrasher::bitsFromNormalized(double value)
-{
-        return static_cast<int>(std::lround(
-                ENT_BITCRASHER_MIN_BITS
-                + value * (ENT_BITCRASHER_MAX_BITS - ENT_BITCRASHER_MIN_BITS)));
 }

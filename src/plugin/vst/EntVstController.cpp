@@ -30,7 +30,7 @@
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
 #include "DspRgateProxyVst.h"
-#include "DspWrapperBitcrasher.h"
+#include "DspBitcrasherProxyVst.h"
 #include "EntState.h"
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
@@ -38,6 +38,20 @@
 
 #include <type_traits>
 #include <atomic>
+#include <cmath>
+
+double EntVstController::bitcrasherBitsToNormalized(int value)
+{
+        return (static_cast<double>(value) - ENT_BITCRASHER_MIN_BITS)
+                / (ENT_BITCRASHER_MAX_BITS - ENT_BITCRASHER_MIN_BITS);
+}
+
+int EntVstController::bitcrasherBitsFromNormalized(double value)
+{
+        return static_cast<int>(std::lround(
+                ENT_BITCRASHER_MIN_BITS
+                + value * (ENT_BITCRASHER_MAX_BITS - ENT_BITCRASHER_MIN_BITS)));
+}
 
 using namespace Steinberg;
 using namespace EntVst;
@@ -193,7 +207,7 @@ EntVstController::initialize(FUnknown* context)
                            DspRgateProxyVst::invertedToNormalized(ENT_RGATE_DEFAULT_INVERTED));
         setParamNormalized(ParameterId::BitcrasherEnabledId, 0.0);
         setParamNormalized(ParameterId::BitcrasherBitsId,
-                           DspWrapperBitcrasher::bitsToNormalized(
+                           bitcrasherBitsToNormalized(
                                    ENT_BITCRASHER_DEFAULT_BITS));
         setParamNormalized(ParameterId::BitcrasherRateId,
                            ENT_BITCRASHER_DEFAULT_RATE);
@@ -401,7 +415,7 @@ void EntVstController::setBitcrasherState(const EntState& state)
         const auto& bitcrasher = state.bitcrasher;
         setParamNormalized(ParameterId::BitcrasherEnabledId, bitcrasher.enabled);
         setParamNormalized(ParameterId::BitcrasherBitsId,
-                           DspWrapperBitcrasher::bitsToNormalized(bitcrasher.bits));
+                           bitcrasherBitsToNormalized(bitcrasher.bits));
         setParamNormalized(ParameterId::BitcrasherRateId, bitcrasher.rate);
         setParamNormalized(ParameterId::BitcrasherChaosId, bitcrasher.chaos);
         setParamNormalized(ParameterId::BitcrasherFoldId, bitcrasher.fold);
@@ -746,7 +760,7 @@ void EntVstController::addBitcrasherParameters()
         parameters.addParameter(STR16("Bitcrasher Bits"),
                                 nullptr,
                                 ENT_BITCRASHER_MAX_BITS - ENT_BITCRASHER_MIN_BITS,
-                                DspWrapperBitcrasher::bitsToNormalized(
+                                bitcrasherBitsToNormalized(
                                         ENT_BITCRASHER_DEFAULT_BITS),
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::BitcrasherBitsId);

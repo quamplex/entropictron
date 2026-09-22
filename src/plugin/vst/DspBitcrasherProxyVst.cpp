@@ -2,8 +2,6 @@
 #include "EntVstController.h"
 #include "ent_bitcrasher.h"
 
-#include <cmath>
-
 using namespace EntVst;
 using namespace Steinberg::Vst;
 
@@ -53,14 +51,15 @@ bool DspBitcrasherProxyVst::setBits(int value)
 {
         auto *handler = vstController->getComponentHandler();
         handler->beginEdit(ParameterId::BitcrasherBitsId);
-        handler->performEdit(ParameterId::BitcrasherBitsId, bitsToNormalized(value));
+        handler->performEdit(ParameterId::BitcrasherBitsId,
+                             EntVstController::bitcrasherBitsToNormalized(value));
         handler->endEdit(ParameterId::BitcrasherBitsId);
         return true;
 }
 
 int DspBitcrasherProxyVst::bits() const
 {
-        return bitsFromNormalized(
+        return EntVstController::bitcrasherBitsFromNormalized(
                 vstController->getParamNormalized(ParameterId::BitcrasherBitsId));
 }
 
@@ -124,22 +123,13 @@ void DspBitcrasherProxyVst::onParameterChanged(ParameterId id, ParamValue value)
 {
         switch (id) {
         case ParameterId::BitcrasherEnabledId: action enabled(value > 0.5); break;
-        case ParameterId::BitcrasherBitsId: action bitsUpdated(bitsFromNormalized(value)); break;
+        case ParameterId::BitcrasherBitsId:
+                action bitsUpdated(EntVstController::bitcrasherBitsFromNormalized(value));
+                break;
         case ParameterId::BitcrasherRateId: action rateUpdated(value); break;
         case ParameterId::BitcrasherChaosId: action chaosUpdated(value); break;
         case ParameterId::BitcrasherFoldId: action foldUpdated(value); break;
         case ParameterId::BitcrasherMixId: action mixUpdated(value); break;
         default: break;
         }
-}
-
-double DspBitcrasherProxyVst::bitsToNormalized(int value)
-{
-        return toNormalized(value, ENT_BITCRASHER_MIN_BITS, ENT_BITCRASHER_MAX_BITS);
-}
-
-int DspBitcrasherProxyVst::bitsFromNormalized(double value)
-{
-        return static_cast<int>(std::round(fromNormalized(
-                value, ENT_BITCRASHER_MIN_BITS, ENT_BITCRASHER_MAX_BITS)));
 }

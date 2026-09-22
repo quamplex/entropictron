@@ -28,8 +28,6 @@ public:
         double fold() const;
         void setMix(double value);
         double mix() const;
-        static double bitsToNormalized(int value);
-        static int bitsFromNormalized(double value);
 
 private:
         struct ent_bitcrasher *bitcrasherDsp;

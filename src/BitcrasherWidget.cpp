@@ -5,7 +5,6 @@
 #include "RkButton.h"
 #include "RkContainer.h"
 #include "RkLabel.h"
-#include "ent_bitcrasher.h"
 
 RK_DECLARE_IMAGE_RC(bitcrasher_label);
 RK_DECLARE_IMAGE_RC(bitcrasher_bits_knob_label);
@@ -47,8 +46,10 @@ void BitcrasherWidget::createView()
         enableButton->setCheckable();
         enableButton->setSize(36, 16);
         enableButton->setBackgroundColor(background());
-        enableButton->setImage(RK_RC_IMAGE(switch_button_off), RkButton::State::Unpressed);
-        enableButton->setImage(RK_RC_IMAGE(switch_button_on), RkButton::State::Pressed);
+        enableButton->setImage(RK_RC_IMAGE(switch_button_off),
+                               RkButton::State::Unpressed);
+        enableButton->setImage(RK_RC_IMAGE(switch_button_on),
+                               RkButton::State::Pressed);
         enableButton->show();
         header->addWidget(enableButton);
         header->addSpace(10);
@@ -91,6 +92,7 @@ void BitcrasherWidget::createView()
         controls->addWidget(foldKnob);
         controls->addWidget(mixKnob);
         main->addContainer(controls);
+
         updateView();
 }
 
@@ -99,22 +101,28 @@ void BitcrasherWidget::updateView()
         auto model = static_cast<BitcrasherModel *>(getModel());
         if (!model)
                 return;
+
         enableButton->setPressed(model->isEnabled());
-        bitsKnob->setRange(ENT_BITCRASHER_MIN_BITS, ENT_BITCRASHER_MAX_BITS);
-        bitsKnob->setSteps(ENT_BITCRASHER_MAX_BITS - ENT_BITCRASHER_MIN_BITS);
-        bitsKnob->setDefaultValue(ENT_BITCRASHER_DEFAULT_BITS);
+        auto [bitsFrom, bitsTo] = model->getBitsRange();
+        bitsKnob->setRange(bitsFrom, bitsTo);
+        bitsKnob->setSteps(bitsTo - bitsFrom);
+        bitsKnob->setDefaultValue(model->getBitsDefaultValue());
         bitsKnob->setValue(model->bits());
-        rateKnob->setRange(ENT_BITCRASHER_MIN_RATE, ENT_BITCRASHER_MAX_RATE);
-        rateKnob->setDefaultValue(ENT_BITCRASHER_DEFAULT_RATE);
+        auto [rateFrom, rateTo] = model->getRateRange();
+        rateKnob->setRange(rateFrom, rateTo);
+        rateKnob->setDefaultValue(model->getRateDefaultValue());
         rateKnob->setValue(model->rate());
-        chaosKnob->setRange(ENT_BITCRASHER_MIN_CHAOS, ENT_BITCRASHER_MAX_CHAOS);
-        chaosKnob->setDefaultValue(ENT_BITCRASHER_DEFAULT_CHAOS);
+        auto [chaosFrom, chaosTo] = model->getChaosRange();
+        chaosKnob->setRange(chaosFrom, chaosTo);
+        chaosKnob->setDefaultValue(model->getChaosDefaultValue());
         chaosKnob->setValue(model->chaos());
-        foldKnob->setRange(ENT_BITCRASHER_MIN_FOLD, ENT_BITCRASHER_MAX_FOLD);
-        foldKnob->setDefaultValue(ENT_BITCRASHER_DEFAULT_FOLD);
+        auto [foldFrom, foldTo] = model->getFoldRange();
+        foldKnob->setRange(foldFrom, foldTo);
+        foldKnob->setDefaultValue(model->getFoldDefaultValue());
         foldKnob->setValue(model->fold());
-        mixKnob->setRange(ENT_BITCRASHER_MIN_MIX, ENT_BITCRASHER_MAX_MIX);
-        mixKnob->setDefaultValue(ENT_BITCRASHER_DEFAULT_MIX);
+        auto [mixFrom, mixTo] = model->getMixRange();
+        mixKnob->setRange(mixFrom, mixTo);
+        mixKnob->setDefaultValue(model->getMixDefaultValue());
         mixKnob->setValue(model->mix());
 }
 
@@ -123,19 +131,72 @@ void BitcrasherWidget::bindModel()
         auto model = static_cast<BitcrasherModel *>(getModel());
         if (!model)
                 return;
-        RK_ACT_BIND(enableButton, toggled, RK_ACT_ARGS(bool value), model, enable(value));
-        RK_ACT_BIND(bitsKnob, valueUpdated, RK_ACT_ARGS(double value), model, setBits(value));
-        RK_ACT_BIND(rateKnob, valueUpdated, RK_ACT_ARGS(double value), model, setRate(value));
-        RK_ACT_BIND(chaosKnob, valueUpdated, RK_ACT_ARGS(double value), model, setChaos(value));
-        RK_ACT_BIND(foldKnob, valueUpdated, RK_ACT_ARGS(double value), model, setFold(value));
-        RK_ACT_BIND(mixKnob, valueUpdated, RK_ACT_ARGS(double value), model, setMix(value));
-        RK_ACT_BIND(model, modelUpdated, RK_ACT_ARGS(), this, updateView());
-        RK_ACT_BIND(model, enabled, RK_ACT_ARGS(bool value), enableButton, setPressed(value));
-        RK_ACT_BIND(model, bitsUpdated, RK_ACT_ARGS(int value), bitsKnob, setValue(value));
-        RK_ACT_BIND(model, rateUpdated, RK_ACT_ARGS(double value), rateKnob, setValue(value));
-        RK_ACT_BIND(model, chaosUpdated, RK_ACT_ARGS(double value), chaosKnob, setValue(value));
-        RK_ACT_BIND(model, foldUpdated, RK_ACT_ARGS(double value), foldKnob, setValue(value));
-        RK_ACT_BIND(model, mixUpdated, RK_ACT_ARGS(double value), mixKnob, setValue(value));
+
+        RK_ACT_BIND(enableButton,
+                    toggled,
+                    RK_ACT_ARGS(bool value),
+                    model,
+                    enable(value));
+        RK_ACT_BIND(bitsKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setBits(value));
+        RK_ACT_BIND(rateKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setRate(value));
+        RK_ACT_BIND(chaosKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setChaos(value));
+        RK_ACT_BIND(foldKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setFold(value));
+        RK_ACT_BIND(mixKnob,
+                    valueUpdated,
+                    RK_ACT_ARGS(double value),
+                    model,
+                    setMix(value));
+        RK_ACT_BIND(model,
+                    modelUpdated,
+                    RK_ACT_ARGS(),
+                    this,
+                    updateView());
+        RK_ACT_BIND(model,
+                    enabled,
+                    RK_ACT_ARGS(bool value),
+                    enableButton,
+                    setPressed(value));
+        RK_ACT_BIND(model,
+                    bitsUpdated,
+                    RK_ACT_ARGS(int value),
+                    bitsKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    rateUpdated,
+                    RK_ACT_ARGS(double value),
+                    rateKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    chaosUpdated,
+                    RK_ACT_ARGS(double value),
+                    chaosKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    foldUpdated,
+                    RK_ACT_ARGS(double value),
+                    foldKnob,
+                    setValue(value));
+        RK_ACT_BIND(model,
+                    mixUpdated,
+                    RK_ACT_ARGS(double value),
+                    mixKnob,
+                    setValue(value));
 }
 
 void BitcrasherWidget::unbindModel()
