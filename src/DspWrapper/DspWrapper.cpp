@@ -28,6 +28,7 @@
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
 #include "DspWrapperRgate.h"
+#include "DspWrapperBitcrasher.h"
 #include "ent_state.h"
 
 DspWrapper::DspWrapper()
@@ -71,6 +72,9 @@ DspWrapper::DspWrapper()
         // Rgate
         auto rgate = ent_get_rgate(entropictronDsp.get());
         dspRgate = std::make_unique<DspWrapperRgate>(rgate);
+
+        auto bitcrasher = ent_get_bitcrasher(entropictronDsp.get());
+        dspBitcrasher = std::make_unique<DspWrapperBitcrasher>(bitcrasher);
 
         // Set 50ms timeout.
         frameTimer->setTimeout(getSampleRate() * 0.05);
@@ -181,9 +185,13 @@ DspWrapperRgate* DspWrapper::getRgate() const
         return dspRgate.get();
 }
 
+DspWrapperBitcrasher* DspWrapper::getBitcrasher() const
+{
+        return dspBitcrasher.get();
+}
+
 DspFrameTimer* DspWrapper::getFrameTimer() const
 {
         return frameTimer.get();
 }
-
 

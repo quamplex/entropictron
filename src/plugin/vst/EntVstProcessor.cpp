@@ -30,6 +30,7 @@
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
 #include "DspWrapperRgate.h"
+#include "DspWrapperBitcrasher.h"
 #include "EntVstParameters.h"
 #include "DspVstProxy.h"
 #include "DspNoiseProxyVst.h"
@@ -336,6 +337,7 @@ void EntVstProcessor::initParamMappings()
         initCrackleParamMappings();
         initGlitchParamMappings();
         initRgateParamMappings();
+        initBitcrasherParamMappings();
 }
 
 void EntVstProcessor::initNoiseParamMappings()
@@ -533,6 +535,29 @@ void EntVstProcessor::initRgateParamMappings()
         };
         paramMap[ParameterId::RgateInvertedId] = [rgate](ParamValue v) {
                 rgate->setInverted(DspRgateProxyVst::invertedFromNormalized(v));
+        };
+}
+
+void EntVstProcessor::initBitcrasherParamMappings()
+{
+        auto bitcrasher = entropictronDsp->getBitcrasher();
+        paramMap[ParameterId::BitcrasherEnabledId] = [bitcrasher](ParamValue v) {
+                bitcrasher->enable(v > 0.5);
+        };
+        paramMap[ParameterId::BitcrasherBitsId] = [bitcrasher](ParamValue v) {
+                bitcrasher->setBits(DspWrapperBitcrasher::bitsFromNormalized(v));
+        };
+        paramMap[ParameterId::BitcrasherRateId] = [bitcrasher](ParamValue v) {
+                bitcrasher->setRate(v);
+        };
+        paramMap[ParameterId::BitcrasherChaosId] = [bitcrasher](ParamValue v) {
+                bitcrasher->setChaos(v);
+        };
+        paramMap[ParameterId::BitcrasherFoldId] = [bitcrasher](ParamValue v) {
+                bitcrasher->setFold(v);
+        };
+        paramMap[ParameterId::BitcrasherMixId] = [bitcrasher](ParamValue v) {
+                bitcrasher->setMix(v);
         };
 }
 

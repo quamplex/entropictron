@@ -25,6 +25,7 @@
 #define ENT_DSP_STATE_INTERNAL_H
 
 #include "ent_state.h"
+#include "ent_bitcrasher.h"
 
 #include <stdatomic.h>
 
@@ -74,6 +75,15 @@ struct ent_state_rgate {
         _Atomic(bool) inverted;
 };
 
+struct ent_state_bitcrasher {
+        _Atomic(bool) enabled;
+        _Atomic(int) bits;
+        _Atomic(float) rate;
+        _Atomic(float) chaos;
+        _Atomic(float) fold;
+        _Atomic(float) mix;
+};
+
 struct ent_state {
         _Atomic(enum ent_play_mode) play_mode;
         _Atomic(float) entropy_rate;
@@ -82,6 +92,7 @@ struct ent_state {
         struct ent_state_crackle crackles[2];
         struct ent_state_glitch glitches[2];
         struct ent_state_rgate rgate;
+        struct ent_state_bitcrasher bitcrasher;
 };
 
 #define ENT_SET_STATE(obj, state, field, setter)                        \

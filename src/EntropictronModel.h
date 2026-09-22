@@ -32,6 +32,7 @@ class NoiseModel;
 class CrackleModel;
 class GlitchModel;
 class RgateModel;
+class BitcrasherModel;
 class EntState;
 
 class EntropictronModel: public RkObject
@@ -53,6 +54,7 @@ class EntropictronModel: public RkObject
         GlitchModel* getGlitch1() const;
         GlitchModel* getGlitch2() const;
         RgateModel* getRgate() const;
+        BitcrasherModel* getBitcrasher() const;
 
         RK_DECL_ACT(modelUpdated,
                     modelUpdated(),
@@ -80,6 +82,7 @@ class EntropictronModel: public RkObject
         GlitchModel *glitch1Model;
         GlitchModel *glitch2Model;
         RgateModel *rgateModel;
+        BitcrasherModel *bitcrasherModel;
 };
 
 #endif // ENTROPICTRON_MODEL_H

@@ -93,6 +93,14 @@ void EntState::getState(struct ent_state* state) const
         ent_state_rgate_set_max_gain(rg, rgate.max_gain);
         ent_state_rgate_set_randomness(rg, rgate.randomness);
         ent_state_rgate_set_inverted(rg, rgate.inverted);
+
+        auto bc = ent_state_get_bitcrasher(state);
+        ent_state_bitcrasher_set_enabled(bc, bitcrasher.enabled);
+        ent_state_bitcrasher_set_bits(bc, bitcrasher.bits);
+        ent_state_bitcrasher_set_rate(bc, bitcrasher.rate);
+        ent_state_bitcrasher_set_chaos(bc, bitcrasher.chaos);
+        ent_state_bitcrasher_set_fold(bc, bitcrasher.fold);
+        ent_state_bitcrasher_set_mix(bc, bitcrasher.mix);
 }
 
 void EntState::setState(const struct ent_state* state)
@@ -145,6 +153,14 @@ void EntState::setState(const struct ent_state* state)
         rgate.max_gain = ent_state_rgate_get_max_gain(rg);
         rgate.randomness = ent_state_rgate_get_inverted(rg);
         rgate.inverted = ent_state_rgate_get_inverted(rg);
+
+        const auto* bc = ent_state_get_bitcrasher_const(state);
+        bitcrasher.enabled = ent_state_bitcrasher_get_enabled(bc);
+        bitcrasher.bits = ent_state_bitcrasher_get_bits(bc);
+        bitcrasher.rate = ent_state_bitcrasher_get_rate(bc);
+        bitcrasher.chaos = ent_state_bitcrasher_get_chaos(bc);
+        bitcrasher.fold = ent_state_bitcrasher_get_fold(bc);
+        bitcrasher.mix = ent_state_bitcrasher_get_mix(bc);
 }
 
 void EntState::setName(const std::string_view &name)
@@ -256,6 +272,7 @@ std::string EntState::toJson(bool asPreset) const
         writeCrackle(modules, a);
         writeGlitch(modules, a);
         writeRgate(modules, a);
+        writeBitcrasher(modules, a);
 
         doc.AddMember("modules", modules, a);
 
@@ -319,6 +336,8 @@ bool EntState::fromJson(const std::string& jsonStr)
                 readGlitch(m, m["id"].GetInt());
         else if (moduleName == "rgate")
                 readRgate(m);
+        else if (moduleName == "bitcrasher")
+                readBitcrasher(m);
     }
 
     return true;
@@ -418,6 +437,20 @@ void EntState::writeRgate(Value& modulesArray,
                 modulesArray.PushBack(m, a);
 }
 
+void EntState::writeBitcrasher(Value& modulesArray,
+                               Document::AllocatorType& a) const
+{
+        Value m(kObjectType);
+        m.AddMember("name", "bitcrasher", a);
+        m.AddMember("enabled", bitcrasher.enabled, a);
+        m.AddMember("bits", bitcrasher.bits, a);
+        m.AddMember("rate", bitcrasher.rate, a);
+        m.AddMember("chaos", bitcrasher.chaos, a);
+        m.AddMember("fold", bitcrasher.fold, a);
+        m.AddMember("mix", bitcrasher.mix, a);
+        modulesArray.PushBack(m, a);
+}
+
 void EntState::readNoise(const Value& m, size_t id)
 {
         if (id >= std::size(noise))
@@ -509,3 +542,20 @@ void EntState::readRgate(const Value& m)
                 rgate.inverted = m["inverted"].GetBool();
 }
 
+void EntState::readBitcrasher(const Value& m)
+{
+        if (m.HasMember("enabled") && m["enabled"].IsBool())
+                bitcrasher.enabled = m["enabled"].GetBool();
+        if (m.HasMember("bits") && m["bits"].IsInt())
+                bitcrasher.bits = std::clamp(m["bits"].GetInt(),
+                                             ENT_BITCRASHER_MIN_BITS,
+                                             ENT_BITCRASHER_MAX_BITS);
+        if (m.HasMember("rate") && m["rate"].IsNumber())
+                bitcrasher.rate = m["rate"].GetDouble();
+        if (m.HasMember("chaos") && m["chaos"].IsNumber())
+                bitcrasher.chaos = m["chaos"].GetDouble();
+        if (m.HasMember("fold") && m["fold"].IsNumber())
+                bitcrasher.fold = m["fold"].GetDouble();
+        if (m.HasMember("mix") && m["mix"].IsNumber())
+                bitcrasher.mix = m["mix"].GetDouble();
+}

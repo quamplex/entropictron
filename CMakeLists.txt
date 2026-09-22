@@ -122,12 +122,14 @@ set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/DspCrackleProxy.h
   ${ENT_COMMON_DIR}/DspGlitchProxy.h
   ${ENT_COMMON_DIR}/DspRgateProxy.h
+  ${ENT_COMMON_DIR}/DspBitcrasherProxy.h
   ${ENT_COMMON_DIR}/EntAbstractModel.h
   ${ENT_COMMON_DIR}/EntropictronModel.h
   ${ENT_COMMON_DIR}/NoiseModel.h
   ${ENT_COMMON_DIR}/CrackleModel.h
   ${ENT_COMMON_DIR}/GlitchModel.h
   ${ENT_COMMON_DIR}/RgateModel.h
+  ${ENT_COMMON_DIR}/BitcrasherModel.h
   ${ENT_COMMON_DIR}/EntWidget.h
   ${ENT_COMMON_DIR}/EntAbstractView.h
   ${ENT_COMMON_DIR}/EntWidget.h
@@ -136,6 +138,7 @@ set(ENT_COMMON_HEADERS
   ${ENT_COMMON_DIR}/CrackleWidget.h
   ${ENT_COMMON_DIR}/GlitchWidget.h
   ${ENT_COMMON_DIR}/RgateWidget.h
+  ${ENT_COMMON_DIR}/BitcrasherWidget.h
   ${ENT_COMMON_DIR}/EntropyMeter.h
   ${ENT_COMMON_DIR}/ModuleWidgetTab.h
   ${ENT_COMMON_DIR}/GlobalControlsWidget.h
@@ -152,12 +155,14 @@ set(ENT_COMMON_SOURCES
   ${ENT_COMMON_DIR}/DspCrackleProxy.cpp
   ${ENT_COMMON_DIR}/DspGlitchProxy.cpp
   ${ENT_COMMON_DIR}/DspRgateProxy.cpp
+  ${ENT_COMMON_DIR}/DspBitcrasherProxy.cpp
   ${ENT_COMMON_DIR}/EntAbstractModel.cpp
   ${ENT_COMMON_DIR}/EntropictronModel.cpp
   ${ENT_COMMON_DIR}/NoiseModel.cpp
   ${ENT_COMMON_DIR}/CrackleModel.cpp
   ${ENT_COMMON_DIR}/GlitchModel.cpp
   ${ENT_COMMON_DIR}/RgateModel.cpp
+  ${ENT_COMMON_DIR}/BitcrasherModel.cpp
   ${ENT_COMMON_DIR}/EntWidget.cpp
   ${ENT_COMMON_DIR}/EntAbstractView.cpp
   ${ENT_COMMON_DIR}/Knob.cpp
@@ -165,6 +170,7 @@ set(ENT_COMMON_SOURCES
   ${ENT_COMMON_DIR}/CrackleWidget.cpp
   ${ENT_COMMON_DIR}/GlitchWidget.cpp
   ${ENT_COMMON_DIR}/RgateWidget.cpp
+  ${ENT_COMMON_DIR}/BitcrasherWidget.cpp
   ${ENT_COMMON_DIR}/EntropyMeter.cpp
   ${ENT_COMMON_DIR}/ModuleWidgetTab.cpp
   ${ENT_COMMON_DIR}/GlobalControlsWidget.cpp

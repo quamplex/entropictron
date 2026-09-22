@@ -81,10 +81,20 @@ class EntState
                 bool inverted = false;
         };
 
+        struct Bitcrasher {
+                bool enabled = false;
+                int bits = ENT_BITCRASHER_DEFAULT_BITS;
+                double rate = ENT_BITCRASHER_DEFAULT_RATE;
+                double chaos = ENT_BITCRASHER_DEFAULT_CHAOS;
+                double fold = ENT_BITCRASHER_DEFAULT_FOLD;
+                double mix = ENT_BITCRASHER_DEFAULT_MIX;
+        };
+
         Noise noise[2];
         Crackle crackle[2];
         Glitch glitch[2];
         Rgate rgate;
+        Bitcrasher bitcrasher;
 
         EntState();
         explicit EntState(const std::string &jsonData);
@@ -120,10 +130,13 @@ class EntState
                          rapidjson::Document::AllocatorType& a) const;
         void writeRgate(rapidjson::Value& modulesArray,
                          rapidjson::Document::AllocatorType& a) const;
+        void writeBitcrasher(rapidjson::Value& modulesArray,
+                              rapidjson::Document::AllocatorType& a) const;
         void readNoise(const rapidjson::Value& m, size_t id);
         void readCrackle(const rapidjson::Value& m, size_t id);
         void readGlitch(const rapidjson::Value& m, size_t id);
         void readRgate(const rapidjson::Value& m);
+        void readBitcrasher(const rapidjson::Value& m);
 
  private:
         std::string presetName;

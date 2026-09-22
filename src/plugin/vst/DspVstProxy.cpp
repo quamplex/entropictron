@@ -26,6 +26,7 @@
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
 #include "DspRgateProxyVst.h"
+#include "DspBitcrasherProxyVst.h"
 #include "EntState.h"
 
 #include "pluginterfaces/base/ibstream.h"
@@ -53,6 +54,7 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
                                                  controller,
                                                  GlitchId::Glitch2)}
         , dspRgateProxy {new DspRgateProxyVst(this, controller)}
+        , dspBitcrasherProxy {new DspBitcrasherProxyVst(this, controller)}
 {
         vstController->setStateCallback([this]() {
                 action stateChanged();
@@ -164,6 +166,11 @@ DspGlitchProxy* DspProxyVst::getGlitch(GlitchId id) const
 DspRgateProxy* DspProxyVst::getRgate() const
 {
         return dspRgateProxy;
+}
+
+DspBitcrasherProxy* DspProxyVst::getBitcrasher() const
+{
+        return dspBitcrasherProxy;
 }
 
 void DspProxyVst::onParameterChanged(ParameterId paramId, ParamValue value)

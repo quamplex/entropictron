@@ -27,6 +27,7 @@
 #include "CrackleModel.h"
 #include "GlitchModel.h"
 #include "RgateModel.h"
+#include "BitcrasherModel.h"
 #include "EntState.h"
 
 EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
@@ -39,6 +40,7 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
         , glitch1Model{new GlitchModel(this, dspProxy->getGlitch(GlitchId::Glitch1))}
         , glitch2Model{new GlitchModel(this, dspProxy->getGlitch(GlitchId::Glitch2))}
         , rgateModel{new RgateModel(this, dspProxy->getRgate())}
+        , bitcrasherModel{new BitcrasherModel(this, dspProxy->getBitcrasher())}
 {
         dspProxy->setParent(this);
 
@@ -74,6 +76,10 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
                     stateChanged,
                     RK_ACT_ARGS(),
                     rgateModel, modelUpdated());
+        RK_ACT_BIND(dspProxy,
+                    stateChanged,
+                    RK_ACT_ARGS(),
+                    bitcrasherModel, modelUpdated());
 
         RK_ACT_BIND(dspProxy,
                     playModeUpdated,
@@ -136,6 +142,13 @@ bool EntropictronModel::loadPreset(const EntState *preset)
         rgateModel->setMaxGain(preset->rgate.max_gain);
         rgateModel->setRandomness(preset->rgate.randomness);
         rgateModel->setInverted(preset->rgate.inverted);
+
+        bitcrasherModel->enable(preset->bitcrasher.enabled);
+        bitcrasherModel->setBits(preset->bitcrasher.bits);
+        bitcrasherModel->setRate(preset->bitcrasher.rate);
+        bitcrasherModel->setChaos(preset->bitcrasher.chaos);
+        bitcrasherModel->setFold(preset->bitcrasher.fold);
+        bitcrasherModel->setMix(preset->bitcrasher.mix);
 
         return true;
 }
@@ -214,3 +227,7 @@ RgateModel* EntropictronModel::getRgate() const
         return  rgateModel;
 }
 
+BitcrasherModel* EntropictronModel::getBitcrasher() const
+{
+        return bitcrasherModel;
+}
