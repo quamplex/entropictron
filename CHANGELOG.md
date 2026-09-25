@@ -6,7 +6,7 @@
 
 ### Fixes
 
-- Fix Glitch module
+- Fix Glitch module (add dry/wet knobs)
 
 ## [1.2.0]
 
