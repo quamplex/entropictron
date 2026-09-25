@@ -26,6 +26,7 @@
 #include "ent_crackle.h"
 #include "ent_glitch.h"
 #include "ent_rgate.h"
+#include "ent_bitcrasher.h"
 #include "ent_log.h"
 #include "ent_state_internal.h"
 
@@ -47,6 +48,7 @@ struct entropictron {
         struct ent_crackle *crackle[2];
         struct ent_glitch *glitch[2];
         struct ent_rgate *rgate;
+        struct ent_bitcrasher *bitcrasher;
         struct qx_randomizer prob_randomizer;
         struct qx_randomizer entropy_randomizer;
 };
@@ -116,6 +118,13 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
                 return ENT_ERROR;
         }
 
+        (*ent)->bitcrasher = ent_bitcrasher_create(sample_rate);
+        if ((*ent)->bitcrasher == NULL) {
+                ent_log_error("can't create bitcrasher module");
+                ent_free(ent);
+                return ENT_ERROR;
+        }
+
 	return ENT_OK;
 }
 
@@ -139,6 +148,7 @@ void ent_free(struct entropictron **ent)
 
                 // Free rgate
                 ent_rgate_free(&(*ent)->rgate);
+                ent_bitcrasher_free(&(*ent)->bitcrasher);
 
                 free(*ent);
                 *ent = NULL;
@@ -270,6 +280,13 @@ ent_process(struct entropictron *ent, float** data, size_t size)
         if (ent_rgate_is_enabled(ent->rgate))
                 ent_rgate_process(ent->rgate, in, out, size);
 
+        if (ent_bitcrasher_is_enabled(ent->bitcrasher))
+                ent_bitcrasher_process(ent->bitcrasher,
+                                       in,
+                                       out,
+                                       size,
+                                       ent_get_entropy(ent));
+
         return ENT_OK;
 }
 
@@ -292,6 +309,7 @@ void ent_set_state(struct entropictron *ent, const struct ent_state *state)
                 ent_glitch_set_state(ent->glitch[i], &state->glitches[i]);
 
         ent_rgate_set_state(ent->rgate, &state->rgate);
+        ent_bitcrasher_set_state(ent->bitcrasher, &state->bitcrasher);
 }
 
 void ent_get_state(const struct entropictron *ent, struct ent_state *state)
@@ -313,6 +331,7 @@ void ent_get_state(const struct entropictron *ent, struct ent_state *state)
                 ent_glitch_get_state(ent->glitch[i], &state->glitches[i]);
 
         ent_rgate_get_state(ent->rgate, &state->rgate);
+        ent_bitcrasher_get_state(ent->bitcrasher, &state->bitcrasher);
 }
 
 void ent_press_key(struct entropictron *ent, bool on, int pitch, int velocity)
@@ -353,3 +372,8 @@ ent_get_rgate(struct entropictron *ent)
         return ent->rgate;
 }
 
+struct ent_bitcrasher*
+ent_get_bitcrasher(struct entropictron *ent)
+{
+        return ent->bitcrasher;
+}

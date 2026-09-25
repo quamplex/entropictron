@@ -57,6 +57,12 @@ ent_state_get_rgate(struct ent_state *state)
         return &state->rgate;
 }
 
+struct ent_state_bitcrasher*
+ent_state_get_bitcrasher(struct ent_state *state)
+{
+        return &state->bitcrasher;
+}
+
 const struct ent_state_noise*
 ent_state_get_noise_const(const struct ent_state *state, size_t index)
 {
@@ -79,6 +85,12 @@ const struct ent_state_rgate*
 ent_state_get_rgate_const(const struct ent_state *state)
 {
         return &state->rgate;
+}
+
+const struct ent_state_bitcrasher*
+ent_state_get_bitcrasher_const(const struct ent_state *state)
+{
+        return &state->bitcrasher;
 }
 
 void ent_state_set_play_mode(struct ent_state *state, int play_mode)
@@ -464,3 +476,63 @@ bool ent_state_rgate_get_inverted(const struct ent_state_rgate *g)
         return atomic_load_explicit(&g->inverted, memory_order_relaxed);
 }
 
+/* BITCRASHER */
+void ent_state_bitcrasher_set_enabled(struct ent_state_bitcrasher *b, bool enabled)
+{
+    atomic_store_explicit(&b->enabled, enabled, memory_order_relaxed);
+}
+
+bool ent_state_bitcrasher_get_enabled(const struct ent_state_bitcrasher *b)
+{
+    return atomic_load_explicit(&b->enabled, memory_order_relaxed);
+}
+
+void ent_state_bitcrasher_set_bits(struct ent_state_bitcrasher *b, int bits)
+{
+    atomic_store_explicit(&b->bits, bits, memory_order_relaxed);
+}
+
+int ent_state_bitcrasher_get_bits(const struct ent_state_bitcrasher *b)
+{
+    return atomic_load_explicit(&b->bits, memory_order_relaxed);
+}
+
+void ent_state_bitcrasher_set_rate(struct ent_state_bitcrasher *b, float rate)
+{
+    atomic_store_explicit(&b->rate, rate, memory_order_relaxed);
+}
+
+float ent_state_bitcrasher_get_rate(const struct ent_state_bitcrasher *b)
+{
+    return atomic_load_explicit(&b->rate, memory_order_relaxed);
+}
+
+void ent_state_bitcrasher_set_chaos(struct ent_state_bitcrasher *b, float chaos)
+{
+    atomic_store_explicit(&b->chaos, chaos, memory_order_relaxed);
+}
+
+float ent_state_bitcrasher_get_chaos(const struct ent_state_bitcrasher *b)
+{
+    return atomic_load_explicit(&b->chaos, memory_order_relaxed);
+}
+
+void ent_state_bitcrasher_set_gain(struct ent_state_bitcrasher *b, float gain)
+{
+    atomic_store_explicit(&b->gain, gain, memory_order_relaxed);
+}
+
+float ent_state_bitcrasher_get_gain(const struct ent_state_bitcrasher *b)
+{
+    return atomic_load_explicit(&b->gain, memory_order_relaxed);
+}
+
+void ent_state_bitcrasher_set_mix(struct ent_state_bitcrasher *b, float mix)
+{
+    atomic_store_explicit(&b->mix, mix, memory_order_relaxed);
+}
+
+float ent_state_bitcrasher_get_mix(const struct ent_state_bitcrasher *b)
+{
+    return atomic_load_explicit(&b->mix, memory_order_relaxed);
+}

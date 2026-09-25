@@ -29,6 +29,7 @@
 #include "ent_crackle.h"
 #include "ent_glitch.h"
 #include "ent_rgate.h"
+#include "ent_bitcrasher.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,6 +38,7 @@ extern "C" {
 struct ent_state_noise;
 struct ent_state_crackle;
 struct ent_state_glitch;
+struct ent_state_bitcrasher;
 struct ent_state;
 
 struct ent_state* ent_state_create();
@@ -55,6 +57,9 @@ ent_state_get_glitch(struct ent_state *state, size_t index);
 struct ent_state_rgate*
 ent_state_get_rgate(struct ent_state *state);
 
+struct ent_state_bitcrasher*
+ent_state_get_bitcrasher(struct ent_state *state);
+
 const struct ent_state_noise*
 ent_state_get_noise_const(const struct ent_state *state, size_t index);
 
@@ -66,6 +71,9 @@ ent_state_get_glitch_const(const struct ent_state *state, size_t index);
 
 const struct ent_state_rgate*
 ent_state_get_rgate_const(const struct ent_state *state);
+
+const struct ent_state_bitcrasher*
+ent_state_get_bitcrasher_const(const struct ent_state *state);
 
 void ent_state_set_play_mode(struct ent_state *state, int play_mode);
 int ent_state_get_play_mode(const struct ent_state *state);
@@ -160,16 +168,19 @@ bool ent_state_rgate_get_enabled(const struct ent_state_rgate *g);
 
 void ent_state_rgate_set_min_interval(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_min_interval(const struct ent_state_rgate *g);
+
 void ent_state_rgate_set_max_interval(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_max_interval(const struct ent_state_rgate *g);
 
 void ent_state_rgate_set_min_duration(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_min_duration(const struct ent_state_rgate *g);
+
 void ent_state_rgate_set_max_duration(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_max_duration(const struct ent_state_rgate *g);
 
 void ent_state_rgate_set_min_gain(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_min_gain(const struct ent_state_rgate *g);
+
 void ent_state_rgate_set_max_gain(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_max_gain(const struct ent_state_rgate *g);
 
@@ -178,6 +189,25 @@ float ent_state_rgate_get_randomness(const struct ent_state_rgate *g);
 
 void ent_state_rgate_set_inverted(struct ent_state_rgate *g, bool val);
 bool ent_state_rgate_get_inverted(const struct ent_state_rgate *g);
+
+/* BITCRASHER */
+void ent_state_bitcrasher_set_enabled(struct ent_state_bitcrasher *b, bool enabled);
+bool ent_state_bitcrasher_get_enabled(const struct ent_state_bitcrasher *b);
+
+void ent_state_bitcrasher_set_bits(struct ent_state_bitcrasher *b, int bits);
+int ent_state_bitcrasher_get_bits(const struct ent_state_bitcrasher *b);
+
+void ent_state_bitcrasher_set_rate(struct ent_state_bitcrasher *b, float rate);
+float ent_state_bitcrasher_get_rate(const struct ent_state_bitcrasher *b);
+
+void ent_state_bitcrasher_set_chaos(struct ent_state_bitcrasher *b, float chaos);
+float ent_state_bitcrasher_get_chaos(const struct ent_state_bitcrasher *b);
+
+void ent_state_bitcrasher_set_gain(struct ent_state_bitcrasher *b, float gain);
+float ent_state_bitcrasher_get_gain(const struct ent_state_bitcrasher *b);
+
+void ent_state_bitcrasher_set_mix(struct ent_state_bitcrasher *b, float mix);
+float ent_state_bitcrasher_get_mix(const struct ent_state_bitcrasher *b);
 
 #ifdef __cplusplus
 }

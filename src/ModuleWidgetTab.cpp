@@ -27,6 +27,7 @@
 #include "CrackleWidget.h"
 #include "GlitchWidget.h"
 #include "RgateWidget.h"
+#include "BitcrasherWidget.h"
 
 #include "RkButton.h"
 #include "RkContainer.h"
@@ -39,14 +40,18 @@ RK_DECLARE_IMAGE_RC(tab_crackle_button);
 RK_DECLARE_IMAGE_RC(tab_crackle_button_hover);
 RK_DECLARE_IMAGE_RC(tab_crackle_button_on);
 RK_DECLARE_IMAGE_RC(tab_crackle_button_hover_on);
-RK_DECLARE_IMAGE_RC(tab_glitch_button);
-RK_DECLARE_IMAGE_RC(tab_glitch_button_hover);
-RK_DECLARE_IMAGE_RC(tab_glitch_button_on);
-RK_DECLARE_IMAGE_RC(tab_glitch_button_hover_on);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_hover);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_on);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_hover_on);
 RK_DECLARE_IMAGE_RC(tab_rgate_button);
 RK_DECLARE_IMAGE_RC(tab_rgate_button_hover);
 RK_DECLARE_IMAGE_RC(tab_rgate_button_on);
 RK_DECLARE_IMAGE_RC(tab_rgate_button_hover_on);
+RK_DECLARE_IMAGE_RC(tab_glitch_button);
+RK_DECLARE_IMAGE_RC(tab_glitch_button_hover);
+RK_DECLARE_IMAGE_RC(tab_glitch_button_on);
+RK_DECLARE_IMAGE_RC(tab_glitch_button_hover_on);
 
 ModuleWidgetTab::ModuleWidgetTab(EntWidget* parent,
                                  EntropictronModel *model,
@@ -59,6 +64,7 @@ ModuleWidgetTab::ModuleWidgetTab(EntWidget* parent,
         , crackleTabButton{nullptr}
         , glitchTabButton{nullptr}
         , rgateTabButton{nullptr}
+        , bitcrasherTabButton{nullptr}
 {
         setFixedSize(350, 331);
         createTabButtons();
@@ -153,6 +159,25 @@ void ModuleWidgetTab::createTabButtons()
                             this,
                             showRgate());
         }
+
+        bitcrasherTabButton = new RkButton(tabButtonWidget);
+        bitcrasherTabButton->setBackgroundColor(tabButtonWidget->background());
+        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_bitcrasher_button),
+                                      RkButton::State::Unpressed);
+        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_bitcrasher_button_on),
+                                      RkButton::State::Pressed);
+        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_bitcrasher_button_hover),
+                                      RkButton::State::UnpressedHover);
+        bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_bitcrasher_button_hover_on),
+                                      RkButton::State::PressedHover);
+        bitcrasherTabButton->setCheckable(true);
+        bitcrasherTabButton->show();
+        tabButtonContianer->addWidget(bitcrasherTabButton);
+        RK_ACT_BIND(bitcrasherTabButton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    this,
+                    showBitcrasher());
 }
 
 void ModuleWidgetTab::showNoise()
@@ -162,6 +187,7 @@ void ModuleWidgetTab::showNoise()
         glitchTabButton->setPressed(false);
         if (rgateTabButton)
                 rgateTabButton->setPressed(false);
+        bitcrasherTabButton->setPressed(false);
 
         delete moduleWidget;
         moduleWidget = new NoiseWidget(this,
@@ -177,6 +203,7 @@ void ModuleWidgetTab::showCrackle()
         glitchTabButton->setPressed(false);
         if (rgateTabButton)
                 rgateTabButton->setPressed(false);
+        bitcrasherTabButton->setPressed(false);
 
         delete moduleWidget;
         moduleWidget = new CrackleWidget(this,
@@ -192,6 +219,7 @@ void ModuleWidgetTab::showGlitch()
         glitchTabButton->setPressed(true);
         if (rgateTabButton)
                 rgateTabButton->setPressed(false);
+        bitcrasherTabButton->setPressed(false);
 
         delete moduleWidget;
         moduleWidget = new GlitchWidget(this,
@@ -207,6 +235,7 @@ void ModuleWidgetTab::showRgate()
                 crackleTabButton->setPressed(false);
                 glitchTabButton->setPressed(false);
                 rgateTabButton->setPressed(true);
+                bitcrasherTabButton->setPressed(false);
 
                 delete moduleWidget;
                 moduleWidget = new RgateWidget(this, entModel->getRgate());
@@ -214,3 +243,15 @@ void ModuleWidgetTab::showRgate()
         }
 }
 
+void ModuleWidgetTab::showBitcrasher()
+{
+        noiseTabButton->setPressed(false);
+        crackleTabButton->setPressed(false);
+        glitchTabButton->setPressed(false);
+        if (rgateTabButton)
+                rgateTabButton->setPressed(false);
+        bitcrasherTabButton->setPressed(true);
+        delete moduleWidget;
+        moduleWidget = new BitcrasherWidget(this, entModel->getBitcrasher());
+        moduleWidget->setPosition(0, 29);
+}

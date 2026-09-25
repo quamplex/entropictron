@@ -13,6 +13,7 @@ set(ENT_DSP_HEADERS
     ${ENT_DSP_DIR}/src/ent_crackle.h
     ${ENT_DSP_DIR}/src/ent_rgate.h
     ${ENT_DSP_DIR}/src/ent_glitch.h
+    ${ENT_DSP_DIR}/src/ent_bitcrasher.h
     ${ENT_DSP_DIR}/src/ent_state_internal.h
     ${ENT_DSP_DIR}/src/ent_state.h
     ${ENT_DSP_DIR}/src/entropictron.h
@@ -24,6 +25,7 @@ set(ENT_DSP_SOURCES
     ${ENT_DSP_DIR}/src/ent_noise.c
     ${ENT_DSP_DIR}/src/ent_crackle.c
     ${ENT_DSP_DIR}/src/ent_glitch.c
+    ${ENT_DSP_DIR}/src/ent_bitcrasher.c
     ${ENT_DSP_DIR}/src/ent_rgate.c
     ${ENT_DSP_DIR}/src/entropictron.c
     ${ENT_DSP_DIR}/src/ent_state.c

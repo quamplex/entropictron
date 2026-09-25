@@ -30,6 +30,7 @@
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
 #include "DspRgateProxyVst.h"
+#include "DspBitcrasherProxyVst.h"
 #include "EntState.h"
 
 #include "public.sdk/source/vst/vsteditcontroller.h"
@@ -37,6 +38,7 @@
 
 #include <type_traits>
 #include <atomic>
+#include <cmath>
 
 using namespace Steinberg;
 using namespace EntVst;
@@ -81,6 +83,7 @@ EntVstController::initialize(FUnknown* context)
         addCrackleParameters();
         addGlitchParameters();
         addRgateParameters();
+        addBitcrasherParameters();
 
         setParamNormalized(ParameterId::PlayModeId,
                             DspProxyVst::playModeToNormalized(PlayMode::PlaybackMode));
@@ -197,6 +200,21 @@ EntVstController::initialize(FUnknown* context)
                            DspRgateProxyVst::randomnessToNormalized(ENT_RGATE_DEFAULT_RANDOMNESS));
         setParamNormalized(ParameterId::RgateInvertedId,
                            DspRgateProxyVst::invertedToNormalized(ENT_RGATE_DEFAULT_INVERTED));
+        setParamNormalized(ParameterId::BitcrasherEnabledId, 0.0);
+        setParamNormalized(ParameterId::BitcrasherBitsId,
+                           DspBitcrasherProxyVst::bitcrasherBitsToNormalized(
+                                   ENT_BITCRASHER_DEFAULT_BITS));
+        setParamNormalized(ParameterId::BitcrasherRateId,
+                           DspBitcrasherProxyVst::rateToNormalized(
+                                   ENT_BITCRASHER_DEFAULT_RATE));
+        setParamNormalized(ParameterId::BitcrasherChaosId,
+                           ENT_BITCRASHER_DEFAULT_CHAOS);
+        setParamNormalized(
+                ParameterId::BitcrasherGainId,
+                DspBitcrasherProxyVst::gainToNormalized(
+                        Entropictron::fromDecibel(ENT_BITCRASHER_DEFAULT_GAIN)));
+        setParamNormalized(ParameterId::BitcrasherMixId,
+                           ENT_BITCRASHER_DEFAULT_MIX);
 
         return result;
 }
@@ -253,6 +271,8 @@ tresult PLUGIN_API EntVstController::setComponentState(IBStream* state)
         setNoiseState(entState);
         setCrackleState(entState);
         setGlitchState(entState);
+        setRgateState(entState);
+        setBitcrasherState(entState);
 
         if (stateCallback)
                 stateCallback();
@@ -394,6 +414,22 @@ void EntVstController::setRgateState(const EntState &state)
                            DspRgateProxyVst::randomnessToNormalized(rgate.randomness));
         setParamNormalized(ParameterId::RgateInvertedId,
                            DspRgateProxyVst::invertedToNormalized(rgate.inverted));
+}
+
+void EntVstController::setBitcrasherState(const EntState& state)
+{
+        const auto& bitcrasher = state.bitcrasher;
+        setParamNormalized(ParameterId::BitcrasherEnabledId, bitcrasher.enabled);
+        setParamNormalized(ParameterId::BitcrasherBitsId,
+                           DspBitcrasherProxyVst::bitcrasherBitsToNormalized(bitcrasher.bits));
+        setParamNormalized(
+                ParameterId::BitcrasherRateId,
+                DspBitcrasherProxyVst::rateToNormalized(bitcrasher.rate));
+        setParamNormalized(ParameterId::BitcrasherChaosId, bitcrasher.chaos);
+        setParamNormalized(
+                ParameterId::BitcrasherGainId,
+                DspBitcrasherProxyVst::gainToNormalized(bitcrasher.gain));
+        setParamNormalized(ParameterId::BitcrasherMixId, bitcrasher.mix);
 }
 
 void EntVstController::addNoiseParameters()
@@ -747,6 +783,40 @@ void EntVstController::addRgateParameters()
                                 ParameterInfo::kCanAutomate,
                                 ParameterId::RgateInvertedId);
 
+}
+
+void EntVstController::addBitcrasherParameters()
+{
+        parameters.addParameter(STR16("Bitcrasher Enabled"),
+                                nullptr, 2, 0.0,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::BitcrasherEnabledId);
+        parameters.addParameter(STR16("Bitcrasher Bits"),
+                                nullptr,
+                                ENT_BITCRASHER_MAX_BITS - ENT_BITCRASHER_MIN_BITS,
+                                DspBitcrasherProxyVst::bitcrasherBitsToNormalized(ENT_BITCRASHER_DEFAULT_BITS),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::BitcrasherBitsId);
+        parameters.addParameter(STR16("Bitcrasher Rate"),
+                                STR16("%"), 0,
+                                DspBitcrasherProxyVst::rateToNormalized(
+                                        ENT_BITCRASHER_DEFAULT_RATE),
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::BitcrasherRateId);
+        parameters.addParameter(STR16("Bitcrasher Chaos"),
+                                STR16("%"), 0, ENT_BITCRASHER_DEFAULT_CHAOS,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::BitcrasherChaosId);
+        parameters.addParameter(
+                STR16("Bitcrasher Gain"), STR16("dB"), 0,
+                DspBitcrasherProxyVst::gainToNormalized(
+                        Entropictron::fromDecibel(ENT_BITCRASHER_DEFAULT_GAIN)),
+                ParameterInfo::kCanAutomate,
+                ParameterId::BitcrasherGainId);
+        parameters.addParameter(STR16("Bitcrasher Mix"),
+                                STR16("%"), 0, ENT_BITCRASHER_DEFAULT_MIX,
+                                ParameterInfo::kCanAutomate,
+                                ParameterId::BitcrasherMixId);
 }
 
 IPlugView* PLUGIN_API

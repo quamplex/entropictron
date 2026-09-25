@@ -109,6 +109,14 @@ enum ParameterId : Steinberg::Vst::ParamID
     RgateMaxGainId          = 30307,
     RgateRandomnessId       = 30308,
     RgateInvertedId         = 30309,
+
+    // Bitcrasher
+    BitcrasherEnabledId     = 30401,
+    BitcrasherBitsId        = 30402,
+    BitcrasherRateId        = 30403,
+    BitcrasherChaosId       = 30404,
+    BitcrasherGainId        = 30405,
+    BitcrasherMixId         = 30406,
 };
 
 inline double toNormalized(double value, double min, double max)

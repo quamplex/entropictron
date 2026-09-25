@@ -4,6 +4,7 @@ set(ENT_DSP_WRAPPER_HEADERS
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperNoise.h
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperCrackle.h
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperGlitch.h
+    ${ENT_DSP_WRAPPER_DIR}/DspWrapperBitcrasher.h
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperRgate.h
     ${ENT_DSP_WRAPPER_DIR}/DspWrapper.h)
 
@@ -12,6 +13,7 @@ set(ENT_DSP_WRAPPER_SOURCES
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperNoise.cpp
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperCrackle.cpp
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperGlitch.cpp
+    ${ENT_DSP_WRAPPER_DIR}/DspWrapperBitcrasher.cpp
     ${ENT_DSP_WRAPPER_DIR}/DspWrapperRgate.cpp
     ${ENT_DSP_WRAPPER_DIR}/DspWrapper.cpp)
 

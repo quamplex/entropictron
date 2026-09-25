@@ -82,6 +82,7 @@ class EntVstProcessor : public AudioEffect {
         void initCrackleParamMappings();
         void initGlitchParamMappings();
         void initRgateParamMappings();
+        void initBitcrasherParamMappings();
         void updateParameters(ParameterId pid, ParamValue value);
         void storeDspSate();
         tresult setState (IBStream *state) SMTG_OVERRIDE;

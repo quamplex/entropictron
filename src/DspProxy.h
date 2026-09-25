@@ -32,6 +32,7 @@ class DspNoiseProxy;
 class DspCrackleProxy;
 class DspGlitchProxy;
 class DspRgateProxy;
+class DspBitcrasherProxy;
 class EntState;
 
 class DspProxy : public RkObject {
@@ -49,6 +50,7 @@ class DspProxy : public RkObject {
         virtual DspCrackleProxy* getCrackle(CrackleId id) const = 0;
         virtual DspGlitchProxy* getGlitch(GlitchId id) const = 0;
         virtual DspRgateProxy* getRgate() const = 0;
+        virtual DspBitcrasherProxy* getBitcrasher() const = 0;
 
         RK_DECL_ACT(stateChanged,
                     stateChanged(),

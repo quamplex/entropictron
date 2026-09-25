@@ -60,10 +60,12 @@ protected:
         void setCrackleState(const EntState& state);
         void setGlitchState(const EntState& state);
         void setRgateState(const EntState& state);
+        void setBitcrasherState(const EntState& state);
         void addNoiseParameters();
         void addCrackleParameters();
         void addGlitchParameters();
         void addRgateParameters();
+        void addBitcrasherParameters();
 
 private:
         std::unordered_map<ParameterId, ParameterCallback> parametersCallbacks;

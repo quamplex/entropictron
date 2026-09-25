@@ -28,6 +28,7 @@
 #include "ent_crackle.h"
 #include "ent_glitch.h"
 #include "ent_rgate.h"
+#include "ent_bitcrasher.h"
 
 enum class NoiseId: int {
         Noise1,

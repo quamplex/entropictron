@@ -1,9 +1,9 @@
 ## Table of Contents
 
 [What is Entropictron](#what-is-entropictron)
-[Block Diagram](#block-diagram)
 [Noise](#noise)
 [Crackle](#crackle)
+[Bitcrasher](#bitcrasher)
 [Glitch](#glitch)
 [Factory Presets](#factroy-presets)
 [Play Mode](#play-mode)
@@ -17,7 +17,7 @@
 
 **License:** This work (including all images it uses) is released under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/deed.en).
 
-**Version:** 1.2.0
+**Version:** 1.3.0
 
 **Website:** [https://quamplex.com/entropictron](https://quamplex.com/entropictron)
 
@@ -25,7 +25,7 @@
 ### What is Entropictron
 
 Entropictron is a [free software](https://www.gnu.org/philosophy/free-sw.en.html)
-context synthesizer and audio effect. Entropictron can produce a variety of sound
+context generator and audio effect. Entropictron can produce a variety of sound
 textures that can serve as background or contextual elements in music tracks.
 Useful for ambient music, sound effects, film and video production, game audio,
 and other. Entropictron is released under the GNU General Public License version 3 (and later),
@@ -34,8 +34,10 @@ Can run on GNU/Linux and Windows.
 
 The name **Entropictron** derives from the root word *entropy*, which generally refers to something chaotic.
 
-Entropictron consists of three primary modules: a noise generator, a crackle generator,
-and a glitch effect, rgate - a kind of random gate.
+### Block diagram
+
+Entropictron consists of several primary modules: a noise generator, a crackle generator,
+a bitcrasher effect, glitch effect, and a random gate effect.
 Each module can be tuned via its own set of parameters, and the processed
 signals are finally mixed to produce the output sound.
 
@@ -70,12 +72,28 @@ It has the following parameters:
 - **Stereo knob:** Creates a stochastic stereo effect, where bursts are spread randomly across both channels.
 - **EXP, LIN, TR buttons:** Select the burst shape - exponential decay (EXP), linear decay (LIN), or triangle (TR).
 
+### Bitcrasher
+
+The Bitcrasher introduces digital degradation by periodically sampling and
+quantizing the input signal to a lower bit depth.
+
+It has the following parameters:
+
+- **Bits knob:** Sets the bit depth used for quantization. Ranges from 1 to 10 bits.
+- **Rate knob:** Controls how often the input is sampled and held.
+- **Chaos knob:** Introduces random variations in the bit depth and timing, from 0% to 50%.
+- **Gain knob:** Adjusts the output gain of the bitcrashed signal, from -50 dB to +6 dB.
+- **Mix knob:** Blends the processed signal with the original dry signal, from 0% to 100%.
+
 ### Glitch
 
 The Glitch effect simulates memory glitch effects. It takes the audio input,
 processes it to create glitches, and outputs the result.
 During playback, the audio occasionally jumps back and
 replays parts of the signal (as glitches), mixing them with the current audio.
+
+- **Dry knob:** Controls the level of the original input signal, from 0% to 100%.
+- **Wet knob:** Controls the level of the glitch-processed signal, from 0% to 100%.
 
 It has the following parameters:
 

@@ -34,6 +34,7 @@ class DspWrapperNoise;
 class DspWrapperCrackle;
 class DspWrapperGlitch;
 class DspWrapperRgate;
+class DspWrapperBitcrasher;
 class DspFrameTimer;
 struct ent_state;
 
@@ -61,6 +62,7 @@ public:
         DspWrapperCrackle* getCrackle(CrackleId id) const;
         DspWrapperGlitch* getGlitch(GlitchId id) const;
         DspWrapperRgate* getRgate() const;
+        DspWrapperBitcrasher* getBitcrasher() const;
         DspFrameTimer* getFrameTimer() const;
 
 protected:
@@ -82,6 +84,7 @@ private:
         std::unique_ptr<DspWrapperGlitch> dspGlitch1;
         std::unique_ptr<DspWrapperGlitch> dspGlitch2;
         std::unique_ptr<DspWrapperRgate> dspRgate;
+        std::unique_ptr<DspWrapperBitcrasher> dspBitcrasher;
 };
 
 #endif // ENT_DSP_WRAPER_H

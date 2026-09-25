@@ -69,7 +69,7 @@ struct ent_glitch* ent_glitch_create(int sample_rate)
         g->glitch_length_samples = sample_rate *  (ENT_GLITCH_DEFAULT_LENGH / 1000.0f);
         g->repeats = ENT_GLITCH_DEFAULT_REPEATS;
         g->dry = ENT_GLITCH_DEFAULT_DRY;
-        g->dry = ENT_GLITCH_DEFAULT_WET;
+        g->wet = ENT_GLITCH_DEFAULT_WET;
 
         g->buffer_size = sample_rate * (ENT_GLITCH_MAX_MAX_JUMP + ENT_GLITCH_MAX_LENGH)
                                      * ENT_GLITCH_MAX_REPEATS / 1000.0f;

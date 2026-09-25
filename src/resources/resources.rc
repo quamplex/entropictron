@@ -45,6 +45,10 @@ tab_rgate_button.png
 tab_rgate_button_hover.png
 tab_rgate_button_on.png
 tab_rgate_button_hover_on.png
+tab_bitcrasher_button.png
+tab_bitcrasher_button_hover.png
+tab_bitcrasher_button_on.png
+tab_bitcrasher_button_hover_on.png
 
 # ---- NOISE -----
 
@@ -112,6 +116,15 @@ glitch_maxjump_knob_label.png
 glitch_minjump_knob_label.png
 glitch_dry_knob_label.png
 glitch_wet_knob_label.png
+
+# ---- BITCRASHER -----
+
+bitcrasher_label.png
+bitcrasher_bits_knob_label.png
+bitcrasher_rate_knob_label.png
+bitcrasher_chaos_knob_label.png
+bitcrasher_gain_knob_label.png
+bitcrasher_mix_knob_label.png
 
 # ---- GRGATE -----
 

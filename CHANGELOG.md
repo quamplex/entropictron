@@ -1,3 +1,13 @@
+## [1.3.0]
+
+### Features
+
+- Added Bitcrasher module
+
+### Fixes
+
+- Fix Glitch module
+
 ## [1.2.0]
 
 ### Features
@@ -5,7 +15,7 @@
 - Random gate module
 - Add dry/wet for glitch module
 
-Improvements:
+### Improvements
 
 - Glitch: add a small crossfade to avoid artifacts
 
@@ -14,8 +24,8 @@ Improvements:
 ### Features
 
 - Global entropy
-- Global entropy rate and depth	paremterer & control
-- Noise	gain, density and rate controlled by entropy
+- Global entropy rate and depth parameter control
+- Noise gain, density and rate controlled by entropy
 - Entropy graph showing real-time entropy value
 
 ## [1.0.0]

@@ -29,6 +29,7 @@
 
 class EntropictronModel;
 class RkButton;
+class BitcrasherWidget;
 
 class ModuleWidgetTab : public EntWidget
 {
@@ -40,6 +41,7 @@ public:
         void showCrackle();
         void showGlitch();
         void showRgate();
+        void showBitcrasher();
 
 protected:
         void createTabButtons();
@@ -52,6 +54,7 @@ private:
         RkButton *crackleTabButton;
         RkButton *glitchTabButton;
         RkButton *rgateTabButton;
+        RkButton *bitcrasherTabButton;
 };
 
 #endif // ENT_MODULES_WIDGET_TAB_H

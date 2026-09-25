@@ -90,9 +90,9 @@ DspGlitchProxyVst::DspGlitchProxyVst(RkObject* parent,
                                                   minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
                 vstController->setParamNormalized(ParameterId::Glitch2MaxJumpId,
                                                   maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
-                vstController->setParamNormalized(ParameterId::Glitch1DryId,
+                vstController->setParamNormalized(ParameterId::Glitch2DryId,
                                                   dryToNormalized(ENT_GLITCH_DEFAULT_DRY));
-                vstController->setParamNormalized(ParameterId::Glitch1WetId,
+                vstController->setParamNormalized(ParameterId::Glitch2WetId,
                                                   wetToNormalized(ENT_GLITCH_DEFAULT_WET));
         }
 

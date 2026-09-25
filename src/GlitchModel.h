@@ -66,14 +66,12 @@ class GlitchModel: public EntAbstractModel
         double getMinJumpDefaultValue() const;
         void setMinJumpRange(double from, double to);
         std::pair<double, double> getMinJumpRange() const;
-
         void setDry(double value);
         double dry() const;
         void setDryDefaultValue(double value);
         double getDryDefaultValue() const;
         void setDryRange(double from, double to);
         std::pair<double, double> getDryRange() const;
-
         void setWet(double value);
         double wet() const;
         void setWetDefaultValue(double value);
@@ -113,7 +111,6 @@ class GlitchModel: public EntAbstractModel
                     wetUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
-
  private:
         DspGlitchProxy *dspGlitchProxy;
         int repeatsDefaultValue;
