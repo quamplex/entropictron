@@ -86,7 +86,7 @@ class EntState
                 int bits = ENT_BITCRASHER_DEFAULT_BITS;
                 double rate = ENT_BITCRASHER_DEFAULT_RATE;
                 double chaos = ENT_BITCRASHER_DEFAULT_CHAOS;
-                double fold = ENT_BITCRASHER_DEFAULT_FOLD;
+                double gain = Entropictron::fromDecibel(ENT_BITCRASHER_DEFAULT_GAIN);
                 double mix = ENT_BITCRASHER_DEFAULT_MIX;
         };
 

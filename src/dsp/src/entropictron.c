@@ -281,7 +281,11 @@ ent_process(struct entropictron *ent, float** data, size_t size)
                 ent_rgate_process(ent->rgate, in, out, size);
 
         if (ent_bitcrasher_is_enabled(ent->bitcrasher))
-                ent_bitcrasher_process(ent->bitcrasher, out, size);
+                ent_bitcrasher_process(ent->bitcrasher,
+                                       in,
+                                       out,
+                                       size,
+                                       ent_get_entropy(ent));
 
         return ENT_OK;
 }

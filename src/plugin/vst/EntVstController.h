@@ -49,8 +49,6 @@ class EntVstController : public Vst::EditControllerEx1 {
         IPlugView* PLUGIN_API createView(FIDString name) SMTG_OVERRIDE;
         void setParamterCallback(ParameterId id, const ParameterCallback &callback);
         void removeParamterCallback(ParameterId id);
-        static double bitcrasherBitsToNormalized(int value);
-        static int bitcrasherBitsFromNormalized(double value);
         tresult setParamNormalized (ParamID tag, ParamValue value) SMTG_OVERRIDE;
         void setStateCallback(StateCallback callback);
         void clearStateCallback();

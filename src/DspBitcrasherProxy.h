@@ -20,8 +20,8 @@ public:
         virtual double rate() const = 0;
         virtual bool setChaos(double value) = 0;
         virtual double chaos() const = 0;
-        virtual bool setFold(double value) = 0;
-        virtual double fold() const = 0;
+        virtual bool setGain(double value) = 0;
+        virtual double gain() const = 0;
         virtual bool setMix(double value) = 0;
         virtual double mix() const = 0;
 
@@ -41,8 +41,8 @@ public:
                     chaosUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
-        RK_DECL_ACT(foldUpdated,
-                    foldUpdated(double value),
+        RK_DECL_ACT(gainUpdated,
+                    gainUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
         RK_DECL_ACT(mixUpdated,

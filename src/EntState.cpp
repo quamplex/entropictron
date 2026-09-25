@@ -99,7 +99,7 @@ void EntState::getState(struct ent_state* state) const
         ent_state_bitcrasher_set_bits(bc, bitcrasher.bits);
         ent_state_bitcrasher_set_rate(bc, bitcrasher.rate);
         ent_state_bitcrasher_set_chaos(bc, bitcrasher.chaos);
-        ent_state_bitcrasher_set_fold(bc, bitcrasher.fold);
+        ent_state_bitcrasher_set_gain(bc, bitcrasher.gain);
         ent_state_bitcrasher_set_mix(bc, bitcrasher.mix);
 }
 
@@ -159,7 +159,7 @@ void EntState::setState(const struct ent_state* state)
         bitcrasher.bits = ent_state_bitcrasher_get_bits(bc);
         bitcrasher.rate = ent_state_bitcrasher_get_rate(bc);
         bitcrasher.chaos = ent_state_bitcrasher_get_chaos(bc);
-        bitcrasher.fold = ent_state_bitcrasher_get_fold(bc);
+        bitcrasher.gain = ent_state_bitcrasher_get_gain(bc);
         bitcrasher.mix = ent_state_bitcrasher_get_mix(bc);
 }
 
@@ -446,7 +446,7 @@ void EntState::writeBitcrasher(Value& modulesArray,
         m.AddMember("bits", bitcrasher.bits, a);
         m.AddMember("rate", bitcrasher.rate, a);
         m.AddMember("chaos", bitcrasher.chaos, a);
-        m.AddMember("fold", bitcrasher.fold, a);
+        m.AddMember("gain", bitcrasher.gain, a);
         m.AddMember("mix", bitcrasher.mix, a);
         modulesArray.PushBack(m, a);
 }
@@ -554,8 +554,8 @@ void EntState::readBitcrasher(const Value& m)
                 bitcrasher.rate = m["rate"].GetDouble();
         if (m.HasMember("chaos") && m["chaos"].IsNumber())
                 bitcrasher.chaos = m["chaos"].GetDouble();
-        if (m.HasMember("fold") && m["fold"].IsNumber())
-                bitcrasher.fold = m["fold"].GetDouble();
+        if (m.HasMember("gain") && m["gain"].IsNumber())
+                bitcrasher.gain = m["gain"].GetDouble();
         if (m.HasMember("mix") && m["mix"].IsNumber())
                 bitcrasher.mix = m["mix"].GetDouble();
 }

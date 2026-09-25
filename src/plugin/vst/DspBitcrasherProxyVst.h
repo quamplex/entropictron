@@ -20,10 +20,16 @@ public:
         double rate() const override;
         bool setChaos(double value) override;
         double chaos() const override;
-        bool setFold(double value) override;
-        double fold() const override;
+        bool setGain(double value) override;
+        double gain() const override;
         bool setMix(double value) override;
         double mix() const override;
+        static double bitcrasherBitsToNormalized(int value);
+        static int bitcrasherBitsFromNormalized(double value);
+        static double rateToNormalized(double value);
+        static double rateFromNormalized(double value);
+        static double gainFromNormalized(double value);
+        static double gainToNormalized(double value);
 
 protected:
         void onParameterChanged(EntVst::ParameterId id,

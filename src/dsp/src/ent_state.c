@@ -517,14 +517,14 @@ float ent_state_bitcrasher_get_chaos(const struct ent_state_bitcrasher *b)
     return atomic_load_explicit(&b->chaos, memory_order_relaxed);
 }
 
-void ent_state_bitcrasher_set_fold(struct ent_state_bitcrasher *b, float fold)
+void ent_state_bitcrasher_set_gain(struct ent_state_bitcrasher *b, float gain)
 {
-    atomic_store_explicit(&b->fold, fold, memory_order_relaxed);
+    atomic_store_explicit(&b->gain, gain, memory_order_relaxed);
 }
 
-float ent_state_bitcrasher_get_fold(const struct ent_state_bitcrasher *b)
+float ent_state_bitcrasher_get_gain(const struct ent_state_bitcrasher *b)
 {
-    return atomic_load_explicit(&b->fold, memory_order_relaxed);
+    return atomic_load_explicit(&b->gain, memory_order_relaxed);
 }
 
 void ent_state_bitcrasher_set_mix(struct ent_state_bitcrasher *b, float mix)

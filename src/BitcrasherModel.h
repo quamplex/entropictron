@@ -7,6 +7,7 @@
 #define ENT_BITCRASHER_MODEL_H
 
 #include "EntAbstractModel.h"
+#include "GuiTypes.h"
 
 class DspBitcrasherProxy;
 
@@ -35,12 +36,12 @@ public:
         double getChaosDefaultValue() const;
         void setChaosRange(double from, double to);
         std::pair<double, double> getChaosRange() const;
-        void setFold(double value);
-        double fold() const;
-        void setFoldDefaultValue(double value);
-        double getFoldDefaultValue() const;
-        void setFoldRange(double from, double to);
-        std::pair<double, double> getFoldRange() const;
+        void setGain(double value);
+        double gain() const;
+        void setGainDefaultValue(double value);
+        double getGainDefaultValue() const;
+        void setGainRange(double from, double to);
+        std::pair<double, double> getGainRange() const;
         void setMix(double value);
         double mix() const;
         void setMixDefaultValue(double value);
@@ -64,8 +65,8 @@ public:
                     chaosUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
-        RK_DECL_ACT(foldUpdated,
-                    foldUpdated(double value),
+        RK_DECL_ACT(gainUpdated,
+                    gainUpdated(double value),
                     RK_ARG_TYPE(double),
                     RK_ARG_VAL(value));
         RK_DECL_ACT(mixUpdated,
@@ -81,8 +82,8 @@ private:
         std::pair<double, double> rateRange;
         double chaosDefaultValue;
         std::pair<double, double> chaosRange;
-        double foldDefaultValue;
-        std::pair<double, double> foldRange;
+        double gainDefaultValue;
+        std::pair<double, double> gainRange;
         double mixDefaultValue;
         std::pair<double, double> mixRange;
 };

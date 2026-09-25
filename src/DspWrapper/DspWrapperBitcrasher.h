@@ -24,8 +24,8 @@ public:
         double rate() const;
         void setChaos(double value);
         double chaos() const;
-        void setFold(double value);
-        double fold() const;
+        void setGain(double value);
+        double gain() const;
         void setMix(double value);
         double mix() const;
 

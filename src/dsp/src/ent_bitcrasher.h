@@ -31,20 +31,20 @@ extern "C" {
 #endif
 
 #define ENT_BITCRASHER_MIN_BITS 1
-#define ENT_BITCRASHER_MAX_BITS 16
-#define ENT_BITCRASHER_DEFAULT_BITS 8
+#define ENT_BITCRASHER_MAX_BITS 10
+#define ENT_BITCRASHER_DEFAULT_BITS 6
 
-#define ENT_BITCRASHER_MIN_RATE 0.01f
+#define ENT_BITCRASHER_MIN_RATE 0.02f
 #define ENT_BITCRASHER_MAX_RATE 1.0f
 #define ENT_BITCRASHER_DEFAULT_RATE 1.0f
 
 #define ENT_BITCRASHER_MIN_CHAOS 0.0f
-#define ENT_BITCRASHER_MAX_CHAOS 1.0f
+#define ENT_BITCRASHER_MAX_CHAOS 0.5f
 #define ENT_BITCRASHER_DEFAULT_CHAOS 0.0f
 
-#define ENT_BITCRASHER_MIN_FOLD 0.0f
-#define ENT_BITCRASHER_MAX_FOLD 1.0f
-#define ENT_BITCRASHER_DEFAULT_FOLD 0.0f
+#define ENT_BITCRASHER_MIN_GAIN (-50.0f) // dB
+#define ENT_BITCRASHER_MAX_GAIN (6.0f)   // dB
+#define ENT_BITCRASHER_DEFAULT_GAIN 0.0f // dB
 
 #define ENT_BITCRASHER_MIN_MIX 0.0f
 #define ENT_BITCRASHER_MAX_MIX 1.0f
@@ -73,17 +73,19 @@ enum ent_error ent_bitcrasher_set_chaos(struct ent_bitcrasher *b, float chaos);
 
 float ent_bitcrasher_get_chaos(const struct ent_bitcrasher *b);
 
-enum ent_error ent_bitcrasher_set_fold(struct ent_bitcrasher *b, float fold);
+enum ent_error ent_bitcrasher_set_gain(struct ent_bitcrasher *b, float gain);
 
-float ent_bitcrasher_get_fold(const struct ent_bitcrasher *b);
+float ent_bitcrasher_get_gain(const struct ent_bitcrasher *b);
 
 enum ent_error ent_bitcrasher_set_mix(struct ent_bitcrasher *b, float mix);
 
 float ent_bitcrasher_get_mix(const struct ent_bitcrasher *b);
 
 void ent_bitcrasher_process(struct ent_bitcrasher *b,
-                            float **data,
-                            size_t size);
+                            float **in,
+                            float **out,
+                            size_t size,
+                            float entropy);
 
 void ent_bitcrasher_set_state(struct ent_bitcrasher *b,
                               const struct ent_state_bitcrasher *state);

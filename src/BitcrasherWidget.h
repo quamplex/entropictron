@@ -30,7 +30,7 @@ private:
         Knob *bitsKnob;
         Knob *rateKnob;
         Knob *chaosKnob;
-        Knob *foldKnob;
+        Knob *gainKnob;
         Knob *mixKnob;
 };
 

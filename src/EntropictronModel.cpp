@@ -147,7 +147,7 @@ bool EntropictronModel::loadPreset(const EntState *preset)
         bitcrasherModel->setBits(preset->bitcrasher.bits);
         bitcrasherModel->setRate(preset->bitcrasher.rate);
         bitcrasherModel->setChaos(preset->bitcrasher.chaos);
-        bitcrasherModel->setFold(preset->bitcrasher.fold);
+        bitcrasherModel->setGain(preset->bitcrasher.gain);
         bitcrasherModel->setMix(preset->bitcrasher.mix);
 
         return true;

@@ -168,16 +168,19 @@ bool ent_state_rgate_get_enabled(const struct ent_state_rgate *g);
 
 void ent_state_rgate_set_min_interval(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_min_interval(const struct ent_state_rgate *g);
+
 void ent_state_rgate_set_max_interval(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_max_interval(const struct ent_state_rgate *g);
 
 void ent_state_rgate_set_min_duration(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_min_duration(const struct ent_state_rgate *g);
+
 void ent_state_rgate_set_max_duration(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_max_duration(const struct ent_state_rgate *g);
 
 void ent_state_rgate_set_min_gain(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_min_gain(const struct ent_state_rgate *g);
+
 void ent_state_rgate_set_max_gain(struct ent_state_rgate *g, float val);
 float ent_state_rgate_get_max_gain(const struct ent_state_rgate *g);
 
@@ -190,14 +193,19 @@ bool ent_state_rgate_get_inverted(const struct ent_state_rgate *g);
 /* BITCRASHER */
 void ent_state_bitcrasher_set_enabled(struct ent_state_bitcrasher *b, bool enabled);
 bool ent_state_bitcrasher_get_enabled(const struct ent_state_bitcrasher *b);
+
 void ent_state_bitcrasher_set_bits(struct ent_state_bitcrasher *b, int bits);
 int ent_state_bitcrasher_get_bits(const struct ent_state_bitcrasher *b);
+
 void ent_state_bitcrasher_set_rate(struct ent_state_bitcrasher *b, float rate);
 float ent_state_bitcrasher_get_rate(const struct ent_state_bitcrasher *b);
+
 void ent_state_bitcrasher_set_chaos(struct ent_state_bitcrasher *b, float chaos);
 float ent_state_bitcrasher_get_chaos(const struct ent_state_bitcrasher *b);
-void ent_state_bitcrasher_set_fold(struct ent_state_bitcrasher *b, float fold);
-float ent_state_bitcrasher_get_fold(const struct ent_state_bitcrasher *b);
+
+void ent_state_bitcrasher_set_gain(struct ent_state_bitcrasher *b, float gain);
+float ent_state_bitcrasher_get_gain(const struct ent_state_bitcrasher *b);
+
 void ent_state_bitcrasher_set_mix(struct ent_state_bitcrasher *b, float mix);
 float ent_state_bitcrasher_get_mix(const struct ent_state_bitcrasher *b);
 

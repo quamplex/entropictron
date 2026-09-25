@@ -30,6 +30,7 @@
 #include "DspWrapperCrackle.h"
 #include "DspWrapperGlitch.h"
 #include "DspWrapperRgate.h"
+#include "DspWrapperBitcrasher.h"
 #include "DspBitcrasherProxyVst.h"
 #include "EntVstController.h"
 #include "EntVstParameters.h"
@@ -38,6 +39,7 @@
 #include "DspCrackleProxyVst.h"
 #include "DspGlitchProxyVst.h"
 #include "DspRgateProxyVst.h"
+#include "DspBitcrasherProxyVst.h"
 #include "EntState.h"
 #include "ent_state.h"
 
@@ -546,16 +548,17 @@ void EntVstProcessor::initBitcrasherParamMappings()
                 bitcrasher->enable(v > 0.5);
         };
         paramMap[ParameterId::BitcrasherBitsId] = [bitcrasher](ParamValue v) {
-                bitcrasher->setBits(EntVstController::bitcrasherBitsFromNormalized(v));
+                bitcrasher->setBits(DspBitcrasherProxyVst::bitcrasherBitsFromNormalized(v));
         };
         paramMap[ParameterId::BitcrasherRateId] = [bitcrasher](ParamValue v) {
-                bitcrasher->setRate(v);
+                bitcrasher->setRate(
+                        DspBitcrasherProxyVst::rateFromNormalized(v));
         };
         paramMap[ParameterId::BitcrasherChaosId] = [bitcrasher](ParamValue v) {
                 bitcrasher->setChaos(v);
         };
-        paramMap[ParameterId::BitcrasherFoldId] = [bitcrasher](ParamValue v) {
-                bitcrasher->setFold(v);
+        paramMap[ParameterId::BitcrasherGainId] = [bitcrasher](ParamValue v) {
+                bitcrasher->setGain(DspBitcrasherProxyVst::gainFromNormalized(v));
         };
         paramMap[ParameterId::BitcrasherMixId] = [bitcrasher](ParamValue v) {
                 bitcrasher->setMix(v);

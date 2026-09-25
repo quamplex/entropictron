@@ -55,14 +55,14 @@ double DspWrapperBitcrasher::chaos() const
         return ent_bitcrasher_get_chaos(bitcrasherDsp);
 }
 
-void DspWrapperBitcrasher::setFold(double value)
+void DspWrapperBitcrasher::setGain(double value)
 {
-        ent_bitcrasher_set_fold(bitcrasherDsp, value);
+        ent_bitcrasher_set_gain(bitcrasherDsp, value);
 }
 
-double DspWrapperBitcrasher::fold() const
+double DspWrapperBitcrasher::gain() const
 {
-        return ent_bitcrasher_get_fold(bitcrasherDsp);
+        return ent_bitcrasher_get_gain(bitcrasherDsp);
 }
 
 void DspWrapperBitcrasher::setMix(double value)

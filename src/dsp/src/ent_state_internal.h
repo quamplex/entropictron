@@ -80,7 +80,7 @@ struct ent_state_bitcrasher {
         _Atomic(int) bits;
         _Atomic(float) rate;
         _Atomic(float) chaos;
-        _Atomic(float) fold;
+        _Atomic(float) gain;
         _Atomic(float) mix;
 };
 

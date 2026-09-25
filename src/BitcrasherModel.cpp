@@ -11,8 +11,9 @@ BitcrasherModel::BitcrasherModel(RkObject *parent, DspBitcrasherProxy *proxy)
         , rateRange{ENT_BITCRASHER_MIN_RATE, ENT_BITCRASHER_MAX_RATE}
         , chaosDefaultValue{ENT_BITCRASHER_DEFAULT_CHAOS}
         , chaosRange{ENT_BITCRASHER_MIN_CHAOS, ENT_BITCRASHER_MAX_CHAOS}
-        , foldDefaultValue{ENT_BITCRASHER_DEFAULT_FOLD}
-        , foldRange{ENT_BITCRASHER_MIN_FOLD, ENT_BITCRASHER_MAX_FOLD}
+        , gainDefaultValue{Entropictron::fromDecibel(ENT_BITCRASHER_DEFAULT_GAIN)}
+        , gainRange{Entropictron::fromDecibel(ENT_BITCRASHER_MIN_GAIN),
+                    Entropictron::fromDecibel(ENT_BITCRASHER_MAX_GAIN)}
         , mixDefaultValue{ENT_BITCRASHER_DEFAULT_MIX}
         , mixRange{ENT_BITCRASHER_MIN_MIX, ENT_BITCRASHER_MAX_MIX}
 {
@@ -37,10 +38,10 @@ BitcrasherModel::BitcrasherModel(RkObject *parent, DspBitcrasherProxy *proxy)
                     this,
                     chaosUpdated(value));
         RK_ACT_BIND(proxy,
-                    foldUpdated,
+                    gainUpdated,
                     RK_ACT_ARGS(double value),
                     this,
-                    foldUpdated(value));
+                    gainUpdated(value));
         RK_ACT_BIND(proxy,
                     mixUpdated,
                     RK_ACT_ARGS(double value),
@@ -152,32 +153,35 @@ std::pair<double, double> BitcrasherModel::getChaosRange() const
         return chaosRange;
 }
 
-void BitcrasherModel::setFold(double value)
+void BitcrasherModel::setGain(double value)
 {
-        if (proxy->setFold(value))
-                action foldUpdated(value);
+        if (proxy->setGain(value))
+                action gainUpdated(value);
 }
 
-double BitcrasherModel::fold() const { return proxy->fold(); }
-
-void BitcrasherModel::setFoldDefaultValue(double value)
+double BitcrasherModel::gain() const
 {
-        foldDefaultValue = value;
+        return proxy->gain();
 }
 
-double BitcrasherModel::getFoldDefaultValue() const
+void BitcrasherModel::setGainDefaultValue(double value)
 {
-        return foldDefaultValue;
+        gainDefaultValue = value;
 }
 
-void BitcrasherModel::setFoldRange(double from, double to)
+double BitcrasherModel::getGainDefaultValue() const
 {
-        foldRange = {from, to};
+        return gainDefaultValue;
 }
 
-std::pair<double, double> BitcrasherModel::getFoldRange() const
+void BitcrasherModel::setGainRange(double from, double to)
 {
-        return foldRange;
+        gainRange = {from, to};
+}
+
+std::pair<double, double> BitcrasherModel::getGainRange() const
+{
+        return gainRange;
 }
 
 void BitcrasherModel::setMix(double value)

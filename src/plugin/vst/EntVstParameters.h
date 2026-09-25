@@ -111,7 +111,7 @@ enum ParameterId : Steinberg::Vst::ParamID
     BitcrasherBitsId        = 30402,
     BitcrasherRateId        = 30403,
     BitcrasherChaosId       = 30404,
-    BitcrasherFoldId        = 30405,
+    BitcrasherGainId        = 30405,
     BitcrasherMixId         = 30406,
 };
 
