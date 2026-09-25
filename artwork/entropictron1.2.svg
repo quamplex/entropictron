@@ -2386,6 +2386,101 @@
        cx="35.510696"
        cy="41.818672"
        r="0.39293405" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       x="93.661713"
+       y="69.090942"
+       id="text20130-57-5-90-3-70-0-2-6-6-5"><tspan
+         id="tspan20128-4-0-2-6-93-6-8-2-0-35"
+         style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+         x="93.661713"
+         y="69.090942">Gain</tspan></text>
+    <rect
+       style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+       id="rect4499-56-0-6-9-9-6-6"
+       width="6.186358"
+       height="1.0093144"
+       x="91.54583"
+       y="68.262497" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       x="93.8125"
+       y="65.996025"
+       id="text20130-57-5-90-3-70-0-2-6-6-5-2"><tspan
+         id="tspan20128-4-0-2-6-93-6-8-2-0-35-7"
+         style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+         x="93.8125"
+         y="65.996025">Rate</tspan></text>
+    <rect
+       style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+       id="rect4499-56-0-6-9-9-6-6-0"
+       width="6.186358"
+       height="1.0093144"
+       x="91.787041"
+       y="65.167572" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       x="101.20613"
+       y="66.180534"
+       id="text20130-57-5-90-3-70-0-2-6-6-5-2-0"><tspan
+         id="tspan20128-4-0-2-6-93-6-8-2-0-35-7-6"
+         style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+         x="101.20613"
+         y="66.180534">Bits</tspan></text>
+    <rect
+       style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+       id="rect4499-56-0-6-9-9-6-6-0-2"
+       width="6.186358"
+       height="1.0093144"
+       x="98.954163"
+       y="65.352081" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       x="102.82274"
+       y="61.153454"
+       id="text20130-57-5-90-3-70-0-2-6-6-5-2-0-2"><tspan
+         id="tspan20128-4-0-2-6-93-6-8-2-0-35-7-6-8"
+         style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+         x="102.82274"
+         y="61.153454">Chaos</tspan></text>
+    <rect
+       style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+       id="rect4499-56-0-6-9-9-6-6-0-2-9"
+       width="6.186358"
+       height="1.0093144"
+       x="101.07083"
+       y="60.325001" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:0.913363px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       x="96.024071"
+       y="60.88887"
+       id="text20130-57-5-90-3-70-0-2-6-6-5-2-0-1"><tspan
+         id="tspan20128-4-0-2-6-93-6-8-2-0-35-7-6-2"
+         style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.183162;stroke-opacity:1"
+         x="96.024071"
+         y="60.88887">Mix</tspan></text>
+    <rect
+       style="fill:#ff32ff;fill-opacity:0;stroke-width:0.325968;stroke-linecap:square"
+       id="rect4499-56-0-6-9-9-6-6-0-2-93"
+       width="6.186358"
+       height="1.0093144"
+       x="93.662498"
+       y="60.060417" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:1.30212px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.261121;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+       x="91.712753"
+       y="26.589088"
+       id="text20130-6-9-8-7"><tspan
+         id="tspan20128-0-7-8-8"
+         style="fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.261121;stroke-opacity:1"
+         x="91.712753"
+         y="26.589088">BITCRASHER</tspan></text>
   </g>
   <rect
      style="fill:#272929;stroke-width:0.1;stroke-linecap:square"

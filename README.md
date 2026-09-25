@@ -12,14 +12,14 @@ video production, game audio, and other.
 
 **License:** GNU General Public License, Version 3
 
-**Version:** 1.2.0
+**Version:** 1.3.0
 
 ![Screenshot](artwork/screenshot.png)
 
 ## Features
 
 Entropictron combines and mixes several sound generators and effects,
-allowing to layer Noise, Crackle, and Glitch in a single patch.
+allowing to layer Noise, Crackle, Bitcrasher, and Glitch in a single patch.
 
 ### Noise (×2)
 A noise generator producing various noise types with an integrated
@@ -46,6 +46,16 @@ Generates short, irregular bursts with different shapes.
 - Brightness
 - Duration
 - Stereo spread
+
+### Bitcrasher (×1)
+Applies a sample-rate reduction & bit-depth reduction effect to the input sound.
+
+**Parameters:**
+- Bits
+- Rate
+- Chaos
+- Gain
+- Mix
 
 ### Glitch (×2)
 Simulates memory-based glitches with adjustable length, randomness,

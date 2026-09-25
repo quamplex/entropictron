@@ -1,9 +1,9 @@
 ## Table of Contents
 
 [What is Entropictron](#what-is-entropictron)
-[Block Diagram](#block-diagram)
 [Noise](#noise)
 [Crackle](#crackle)
+[Bitcrasher](#bitcrasher)
 [Glitch](#glitch)
 [Factory Presets](#factroy-presets)
 [Play Mode](#play-mode)
@@ -17,7 +17,7 @@
 
 **License:** This work (including all images it uses) is released under [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/deed.en).
 
-**Version:** 1.1.0
+**Version:** 1.3.0
 
 **Website:** [https://quamplex.com/entropictron](https://quamplex.com/entropictron)
 
@@ -25,7 +25,7 @@
 ### What is Entropictron
 
 Entropictron is a [free software](https://www.gnu.org/philosophy/free-sw.en.html)
-context synthesizer and audio effect. Entropictron can produce a variety of sound
+context generator and audio effect. Entropictron can produce a variety of sound
 textures that can serve as background or contextual elements in music tracks.
 Useful for ambient music, sound effects, film and video production, game audio,
 and other. Entropictron is released under the GNU General Public License version 3 (and later),
@@ -36,12 +36,10 @@ The name **Entropictron** derives from the root word *entropy*, which generally 
 
 ### Block diagram
 
-Entropictron consists of three primary modules: a noise generator, a crackle generator, and a glitch effect.
+Entropictron consists of several primary modules: a noise generator, a crackle generator,
+a bitcrasher effect, glitch effect, and a random gate effect.
 Each module can be tuned via its own set of parameters, and the processed
-signals are finally mixed to produce the output sound. Here is the block diagram that
-shows the general overview of the parts of Entropictron.
-
-![Diagram](diagram.png)
+signals are finally mixed to produce the output sound.
 
 ### Noise
 
@@ -73,6 +71,19 @@ It has the following parameters:
 - **Duration knob:** Controls the duration of each burst. Ranges from 0.1 ms to 50 ms.
 - **Stereo knob:** Creates a stochastic stereo effect, where bursts are spread randomly across both channels.
 - **EXP, LIN, TR buttons:** Select the burst shape - exponential decay (EXP), linear decay (LIN), or triangle (TR).
+
+### Bitcrasher
+
+The Bitcrasher introduces digital degradation by periodically sampling and
+quantizing the input signal to a lower bit depth.
+
+It has the following parameters:
+
+- **Bits knob:** Sets the bit depth used for quantization. Ranges from 1 to 10 bits.
+- **Rate knob:** Controls how often the input is sampled and held.
+- **Chaos knob:** Introduces random variations in the bit depth and timing, from 0% to 50%.
+- **Gain knob:** Adjusts the output gain of the bitcrashed signal, from -50 dB to +6 dB.
+- **Mix knob:** Blends the processed signal with the original dry signal, from 0% to 100%.
 
 ### Glitch
 
