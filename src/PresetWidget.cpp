@@ -76,6 +76,7 @@ void PresetWidget::showScroolbar()
         scroolbar->setPosition(width() - scroolbar->width(), 0);
         scroolbar->setContentSize(presetList->size());
         scroolbar->setPageSize(pageSize);
+        scroolbar->show();
         RK_ACT_BIND(scroolbar,
                     onScrool,
                     RK_ACT_ARGS(int offset),
