@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.7)
+cmake_minimum_required (VERSION 3.31)
 
 project(entropictron VERSION 1.3.0)
 
