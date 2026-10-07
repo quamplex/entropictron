@@ -55,10 +55,11 @@ void RkPainter::drawText(const RkRect &rect,
                 int x;
                 if (alignment == Rk::Alignment::AlignLeft)
                         x = rect.left();
-                else if (alignment == Rk::Alignment::AlignCenter)
-                        x = rect.left() + (rect.width() - o_ptr->getTextWidth(text)) / 2;
-                else
+                else if (alignment == Rk::Alignment::AlignRight)
                         x = rect.right() - o_ptr->getTextWidth(text);
+                else
+                        x = rect.left() + (rect.width() - o_ptr->getTextWidth(text)) / 2;
+
                 int y = rect.top() + f.size() + (rect.height() - f.size()) / 2;
                 drawText(x, y, text);
         }
@@ -178,4 +179,14 @@ int RkPainter::getTextWidth(const std::string &text) const
 void RkPainter::scale(double x, double y)
 {
         return o_ptr->scale(x, y);
+}
+
+void RkPainter::setAntialias(RkPainter::Antialias mode)
+{
+        o_ptr->setAntialias(mode);
+}
+
+RkPainter::Antialias RkPainter::getAntialias() const
+{
+        return o_ptr->getAntialias();
 }

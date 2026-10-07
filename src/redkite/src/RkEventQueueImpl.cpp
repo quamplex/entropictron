@@ -141,12 +141,28 @@ void RkEventQueue::RkEventQueueImpl::removeObjectShortcuts(RkObject *obj)
         }
 }
 
-void RkEventQueue::RkEventQueueImpl::postEvent(RkObject *obj, std::unique_ptr<RkEvent> event)
+void RkEventQueue::RkEventQueueImpl::postEvent(RkObject *obj,
+                                               std::unique_ptr<RkEvent> event)
 {
-        if (obj && event && objectExists(obj)) {
-                std::lock_guard<std::mutex> lock(eventsQueueMutex);
-                eventsQueue.push_back({obj, std::move(event)});
+        if (!obj || !event || !objectExists(obj))
+                return;
+
+        std::lock_guard<std::mutex> lock(eventsQueueMutex);
+        if (event->type() == RkEvent::Type::Paint) {
+                // Coalesce pending Paint events for the same object.
+                // Update the existing event using the latest Paint event data.
+                auto res = pendingPaintEvents.find(obj);
+                if (res != pendingPaintEvents.end()) {
+                        *static_cast<RkPaintEvent*>(res->second)
+                                = *static_cast<RkPaintEvent*>(event.get());
+                        return;
+                }
+
+                // Keep track of the pending Paint event for this object.
+                pendingPaintEvents.insert({obj, event.get()});
         }
+
+        eventsQueue.push_back({obj, std::move(event)});
 }
 
 void RkEventQueue::RkEventQueueImpl::processEvents()
@@ -172,6 +188,7 @@ void RkEventQueue::RkEventQueueImpl::processEvents()
         {
                 std::lock_guard<std::mutex> lock(eventsQueueMutex);
                 queue = std::move(eventsQueue);
+                pendingPaintEvents.clear();
         }
 
         bool repaintSystemWindow = false;

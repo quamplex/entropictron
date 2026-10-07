@@ -24,9 +24,9 @@
 #ifndef RK_GLOBAL_H
 #define RK_GLOBAL_H
 
-#define RK_VERSION 0x020100
+#define RK_VERSION 0x020300
 #define RK_MAJOR   0x02
-#define RK_MINOR   0x01
+#define RK_MINOR   0x03
 #define RK_PATCH   0x00
 
 #include <utility>
@@ -109,11 +109,12 @@ using rk_real = double;
 
 namespace Rk {
         enum class Alignment : int {
-                AlignLeft   = 1,
-                AlignRight  = 2,
-		AlignCenter = 3,
-		AlignTop    = 4,
-		AlignBottom = 5
+                AlignNone,
+                AlignLeft,
+                AlignRight,
+		AlignCenter,
+		AlignTop,
+		AlignBottom
         };
 
         enum class Orientation : int {
