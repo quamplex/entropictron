@@ -1,6 +1,6 @@
 /**
  * File name: DspBitcrasherProxy.h
- * Project: Entropictron (A texture synthesizer)
+ * Project: Entropictron (A context generator and audio effect)
  */
 
 #ifndef DSP_BITCRASHER_PROXY_H

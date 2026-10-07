@@ -1,6 +1,6 @@
 /**
  * File name: DspRgateProxyVst.cpp
- * Project: Entropictron (A texture synthesizer)
+ * Project: Entropictron (A context generator and audio effect)
  *
  * Copyright (C) 2026 Iurie Nistor
  *

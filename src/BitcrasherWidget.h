@@ -1,6 +1,6 @@
 /**
  * File name: BitcrasherWidget.h
- * Project: Entropictron (A texture synthesizer)
+ * Project: Entropictron (A context generator and audio effect)
  */
 
 #ifndef ENT_BITCRASHER_WIDGET_H

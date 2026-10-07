@@ -1,14 +1,12 @@
 # Entropictron
 
 **Entropictron** is a [free software](https://www.gnu.org/philosophy/free-sw.en.html)
-context synthesizer and audio effect.
+context generator and audio effect.
 
 **Website:** [https://quamplex.com/entropictron](https://quamplex.com/entropictron)
 
 Entropictron can produce a variety of sound textures that can
 serve as background or contextual elements in music tracks.
-Useful for ambient music, sound effects, film and
-video production, game audio, and other.
 
 **License:** GNU General Public License, Version 3
 
@@ -137,6 +135,13 @@ Clone the Entropictron code repository, compile and install.
 
 To build on Windows, there is a need to install MSYS2/UCRT64 and follow
 the same steps as mentioned above.
+
+## Road map
+
+Here is kind of plan about what palnned to be devleope for Entropictrond
+
+First stage: Add dustortion and filer module, here adding effect and generator for now will stop
+Second stage: add Event stchastic enerator per mnodule that will influence selected modle parameters.
 
 ## Documentation
 

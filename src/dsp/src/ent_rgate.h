@@ -1,6 +1,6 @@
 /**
  * File name: ent_rgate.h
- * Project: Entropictron (A texture synthesizer)
+ * Project: Entropictron (A context generator and audio effect)
  *
  * Copyright (C) 2026 Iurie Nistor
  *
