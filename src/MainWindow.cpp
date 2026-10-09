@@ -64,8 +64,9 @@ bool MainWindow::createUi(void)
         horizontalContainer->setSize({mainContainer->width(), 331});
         mainContainer->addContainer(horizontalContainer);
 
-        for (int id = 0; id < 2; id++) {
-                auto moduleTabs = new ModuleWidgetTab(this, entropictronModel, id);
+        for (ModuleWidgetTab::ModuleType type : {ModuleWidgetTab::ModuleGenerator,
+                                                 ModuleWidgetTab::ModuleEffect}) {
+                auto moduleTabs = new ModuleWidgetTab(this, entropictronModel, type);
                 horizontalContainer->addSpace(5);
                 horizontalContainer->addWidget(moduleTabs);
         }

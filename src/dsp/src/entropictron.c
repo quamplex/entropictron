@@ -46,7 +46,7 @@ struct entropictron {
         float entropy_abs;
         struct ent_noise* noise[2];
         struct ent_crackle *crackle[2];
-        struct ent_glitch *glitch[2];
+        struct ent_glitch *glitch;
         struct ent_rgate *rgate;
         struct ent_bitcrasher *bitcrasher;
         struct qx_randomizer prob_randomizer;
@@ -100,14 +100,11 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
         }
 
         // Create glitch
-        size_t num_glitchs = QX_ARRAY_SIZE((*ent)->glitch);
-        for (size_t i = 0; i < num_glitchs; i++) {
-                (*ent)->glitch[i] = ent_glitch_create(sample_rate);
-                if ((*ent)->glitch[i] == NULL) {
-                        ent_log_error("can't create glitch module");
-                        ent_free(ent);
-                        return ENT_ERROR;
-                }
+        (*ent)->glitch = ent_glitch_create(sample_rate);
+        if ((*ent)->glitch == NULL) {
+                ent_log_error("can't create glitch module");
+                ent_free(ent);
+                return ENT_ERROR;
         }
 
         // Create rgate
@@ -131,22 +128,15 @@ ent_create(struct entropictron **ent, unsigned int sample_rate)
 void ent_free(struct entropictron **ent)
 {
         if (ent != NULL && *ent != NULL) {
-                // Free noise
                 size_t num_noises = QX_ARRAY_SIZE((*ent)->noise);
                 for (size_t i = 0; i < num_noises; i++)
                         ent_noise_free(&(*ent)->noise[i]);
 
-                // Free crackle
                 size_t num_crackles = QX_ARRAY_SIZE((*ent)->crackle);
                 for (size_t i = 0; i < num_crackles; i++)
                         ent_crackle_free(&(*ent)->crackle[i]);
 
-                // Free glitch
-                size_t num_glitchs = QX_ARRAY_SIZE((*ent)->glitch);
-                for (size_t i = 0; i < num_glitchs; i++)
-                        ent_glitch_free(&(*ent)->glitch[i]);
-
-                // Free rgate
+                ent_glitch_free(&(*ent)->glitch);
                 ent_rgate_free(&(*ent)->rgate);
                 ent_bitcrasher_free(&(*ent)->bitcrasher);
 
@@ -270,22 +260,19 @@ ent_process(struct entropictron *ent, float** data, size_t size)
                         ent_crackle_process(crackle, out, size);
         }
 
-        n = QX_ARRAY_SIZE(ent->glitch);
-        for (size_t i = 0; i < n; i++) {
-                struct ent_glitch *glitch = ent->glitch[i];
-                if (ent_glitch_is_enabled(glitch))
-                        ent_glitch_process(glitch, in, out, size);
-        }
+        if (ent_glitch_is_enabled(ent->glitch))
+                ent_glitch_process(ent->glitch, in, out, size);
 
         if (ent_rgate_is_enabled(ent->rgate))
                 ent_rgate_process(ent->rgate, in, out, size);
 
-        if (ent_bitcrasher_is_enabled(ent->bitcrasher))
+        if (ent_bitcrasher_is_enabled(ent->bitcrasher)) {
                 ent_bitcrasher_process(ent->bitcrasher,
                                        in,
                                        out,
                                        size,
                                        ent_get_entropy(ent));
+        }
 
         return ENT_OK;
 }
@@ -304,10 +291,7 @@ void ent_set_state(struct entropictron *ent, const struct ent_state *state)
         for (size_t i = 0; i < n; i++)
                 ent_crackle_set_state(ent->crackle[i], &state->crackles[i]);
 
-        n = QX_ARRAY_SIZE(ent->glitch);
-        for (size_t i = 0; i < n; i++)
-                ent_glitch_set_state(ent->glitch[i], &state->glitches[i]);
-
+        ent_glitch_set_state(ent->glitch, &state->glitch);
         ent_rgate_set_state(ent->rgate, &state->rgate);
         ent_bitcrasher_set_state(ent->bitcrasher, &state->bitcrasher);
 }
@@ -326,10 +310,7 @@ void ent_get_state(const struct entropictron *ent, struct ent_state *state)
         for (size_t i = 0; i < n; i++)
                 ent_crackle_get_state(ent->crackle[i], &state->crackles[i]);
 
-        n = QX_ARRAY_SIZE(ent->glitch);
-        for (size_t i = 0; i < n; i++)
-                ent_glitch_get_state(ent->glitch[i], &state->glitches[i]);
-
+        ent_glitch_get_state(ent->glitch, &state->glitch);
         ent_rgate_get_state(ent->rgate, &state->rgate);
         ent_bitcrasher_get_state(ent->bitcrasher, &state->bitcrasher);
 }
@@ -358,12 +339,9 @@ ent_get_crackle(struct entropictron *ent, int id)
 }
 
 struct ent_glitch*
-ent_get_glitch(struct entropictron *ent, int id)
+ent_get_glitch(struct entropictron *ent)
 {
-        if (id > 1)
-                return NULL;
-
-        return ent->glitch[id];
+        return ent->glitch;
 }
 
 struct ent_rgate*

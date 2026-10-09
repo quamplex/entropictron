@@ -91,7 +91,7 @@ struct ent_noise* ent_get_noise(struct entropictron *ent, int id);
 
 struct ent_crackle* ent_get_crackle(struct entropictron *ent, int id);
 
-struct ent_glitch* ent_get_glitch(struct entropictron *ent, int id);
+struct ent_glitch* ent_get_glitch(struct entropictron *ent);
 
 struct ent_rgate* ent_get_rgate(struct entropictron *ent);
 struct ent_bitcrasher* ent_get_bitcrasher(struct entropictron *ent);

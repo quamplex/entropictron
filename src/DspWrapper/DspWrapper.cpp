@@ -59,15 +59,9 @@ DspWrapper::DspWrapper()
                                   static_cast<int>(CrackleId::Crackle2));
         dspCrackle2 = std::make_unique<DspWrapperCrackle>(crackle);
 
-        // Glitch 1
-        auto glitch = ent_get_glitch(entropictronDsp.get(),
-                                     static_cast<int>(GlitchId::Glitch1));
-        dspGlitch1 = std::make_unique<DspWrapperGlitch>(glitch);
-
-        // Glitch 2
-        glitch = ent_get_glitch(entropictronDsp.get(),
-                                static_cast<int>(GlitchId::Glitch2));
-        dspGlitch2 = std::make_unique<DspWrapperGlitch>(glitch);
+        // Glitch
+        auto glitch = ent_get_glitch(entropictronDsp.get());
+        dspGlitch = std::make_unique<DspWrapperGlitch>(glitch);
 
         // Rgate
         auto rgate = ent_get_rgate(entropictronDsp.get());
@@ -172,12 +166,9 @@ DspWrapperCrackle* DspWrapper::getCrackle(CrackleId id) const
                 return dspCrackle2.get();
 }
 
-DspWrapperGlitch* DspWrapper::getGlitch(GlitchId id) const
+DspWrapperGlitch* DspWrapper::getGlitch() const
 {
-        if (id == GlitchId::Glitch1)
-                return dspGlitch1.get();
-        else
-                return dspGlitch2.get();
+        return dspGlitch.get();
 }
 
 DspWrapperRgate* DspWrapper::getRgate() const

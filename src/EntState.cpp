@@ -72,18 +72,18 @@ void EntState::getState(struct ent_state* state) const
                 ent_state_crackle_set_brightness(cs, crackle[i].brightness);
                 ent_state_crackle_set_envelope_shape(cs, crackle[i].envelope_shape);
                 ent_state_crackle_set_stereo_spread(cs, crackle[i].stereo_spread);
-
-                // Glitch
-                auto gs = ent_state_get_glitch(state, i);
-                ent_state_glitch_set_enabled(gs, glitch[i].enabled);
-                ent_state_glitch_set_probability(gs, glitch[i].probability);
-                ent_state_glitch_set_min_jump(gs, glitch[i].min_jump);
-                ent_state_glitch_set_max_jump(gs, glitch[i].max_jump);
-                ent_state_glitch_set_length(gs, glitch[i].length);
-                ent_state_glitch_set_repeats(gs, glitch[i].repeats);
-                ent_state_glitch_set_dry(gs, glitch[i].dry);
-                ent_state_glitch_set_wet(gs, glitch[i].wet);
         }
+
+        // Glitch
+        auto gs = ent_state_get_glitch(state);
+        ent_state_glitch_set_enabled(gs, glitch.enabled);
+        ent_state_glitch_set_probability(gs, glitch.probability);
+        ent_state_glitch_set_min_jump(gs, glitch.min_jump);
+        ent_state_glitch_set_max_jump(gs, glitch.max_jump);
+        ent_state_glitch_set_length(gs, glitch.length);
+        ent_state_glitch_set_repeats(gs, glitch.repeats);
+        ent_state_glitch_set_dry(gs, glitch.dry);
+        ent_state_glitch_set_wet(gs, glitch.wet);
 
         auto rg = ent_state_get_rgate(state);
         ent_state_rgate_set_enabled(rg, rgate.enabled);
@@ -134,18 +134,17 @@ void EntState::setState(const struct ent_state* state)
                 crackle[i].brightness = ent_state_crackle_get_brightness(cs);
                 crackle[i].envelope_shape = ent_state_crackle_get_envelope_shape(cs);
                 crackle[i].stereo_spread = ent_state_crackle_get_stereo_spread(cs);
-
-                // Glitch
-                const auto* gs = ent_state_get_glitch_const(state, i);
-                glitch[i].enabled = ent_state_glitch_get_enabled(gs);
-                glitch[i].probability = ent_state_glitch_get_probability(gs);
-                glitch[i].min_jump = ent_state_glitch_get_min_jump(gs);
-                glitch[i].max_jump = ent_state_glitch_get_max_jump(gs);
-                glitch[i].length = ent_state_glitch_get_length(gs);
-                glitch[i].repeats = ent_state_glitch_get_repeats(gs);
-                glitch[i].dry = ent_state_glitch_get_dry(gs);
-                glitch[i].wet = ent_state_glitch_get_wet(gs);
         }
+
+        const auto* gs = ent_state_get_glitch_const(state);
+        glitch.enabled = ent_state_glitch_get_enabled(gs);
+        glitch.probability = ent_state_glitch_get_probability(gs);
+        glitch.min_jump = ent_state_glitch_get_min_jump(gs);
+        glitch.max_jump = ent_state_glitch_get_max_jump(gs);
+        glitch.length = ent_state_glitch_get_length(gs);
+        glitch.repeats = ent_state_glitch_get_repeats(gs);
+        glitch.dry = ent_state_glitch_get_dry(gs);
+        glitch.wet = ent_state_glitch_get_wet(gs);
 
         const auto* rg = ent_state_get_rgate_const(state);
         rgate.enabled = ent_state_rgate_get_enabled(rg);
@@ -325,23 +324,22 @@ bool EntState::fromJson(const std::string& jsonStr)
         return false;
 
     for (const auto& m : doc["modules"].GetArray()) {
-        if (!m.HasMember("id") || !m["id"].IsInt())
             continue;
 
-        if (!m.HasMember("name") || !m["name"].IsString())
-                continue;
+            if (!m.HasMember("name") || !m["name"].IsString())
+                    continue;
 
-        std::string moduleName = m["name"].GetString();
-        if (moduleName == "noise")
-                readNoise(m, m["id"].GetInt());
-        else if (moduleName == "crackle")
-                readCrackle(m, m["id"].GetInt());
-        else if (moduleName == "glitch")
-                readGlitch(m, m["id"].GetInt());
-        else if (moduleName == "rgate")
-                readRgate(m);
-        else if (moduleName == "bitcrasher")
-                readBitcrasher(m);
+            std::string moduleName = m["name"].GetString();
+            if (moduleName == "noise" && m.HasMember("id") && m["id"].IsInt())
+                    readNoise(m, m["id"].GetInt());
+            else if (moduleName == "crackle" && m.HasMember("id") && m["id"].IsInt())
+                    readCrackle(m, m["id"].GetInt());
+            else if (moduleName == "glitch")
+                    readGlitch(m);
+            else if (moduleName == "rgate")
+                    readRgate(m);
+            else if (moduleName == "bitcrasher")
+                    readBitcrasher(m);
     }
 
     return true;
@@ -410,37 +408,34 @@ void EntState::writeCrackle(Value& modulesArray,
 void EntState::writeGlitch(Value& modulesArray,
                            Document::AllocatorType& a) const
 {
-        for (size_t i = 0; i < std::size(noise); i++) {
-                Value m(kObjectType);
-                m.AddMember("id", i, a);
-                m.AddMember("name", "glitch", a);
-                m.AddMember("enabled", glitch[i].enabled, a);
-                m.AddMember("repeats", glitch[i].repeats, a);
-                m.AddMember("probability", glitch[i].probability, a);
-                m.AddMember("length", glitch[i].length, a);
-                m.AddMember("min_jump", glitch[i].min_jump, a);
-                m.AddMember("max_jump", glitch[i].max_jump, a);
-                m.AddMember("dry", glitch[i].dry, a);
-                m.AddMember("wet", glitch[i].wet, a);
-                modulesArray.PushBack(m, a);
-        }
+        Value m(kObjectType);
+        m.AddMember("name", "glitch", a);
+        m.AddMember("enabled", glitch.enabled, a);
+        m.AddMember("repeats", glitch.repeats, a);
+        m.AddMember("probability", glitch.probability, a);
+        m.AddMember("length", glitch.length, a);
+        m.AddMember("min_jump", glitch.min_jump, a);
+        m.AddMember("max_jump", glitch.max_jump, a);
+        m.AddMember("dry", glitch.dry, a);
+        m.AddMember("wet", glitch.wet, a);
+        modulesArray.PushBack(m, a);
 }
 
 void EntState::writeRgate(Value& modulesArray,
                           Document::AllocatorType& a) const
 {
-                Value m(kObjectType);
-                m.AddMember("name", "rgate", a);
-                m.AddMember("enabled", rgate.enabled, a);
-                m.AddMember("min_interval", rgate.min_interval, a);
-                m.AddMember("max_interval", rgate.max_interval, a);
-                m.AddMember("min_duration", rgate.min_duration, a);
-                m.AddMember("max_duration", rgate.max_duration, a);
-                m.AddMember("min_gain", rgate.min_gain, a);
-                m.AddMember("max_gain", rgate.max_gain, a);
-                m.AddMember("randomness", rgate.randomness, a);
-                m.AddMember("inverted", rgate.inverted, a);
-                modulesArray.PushBack(m, a);
+        Value m(kObjectType);
+        m.AddMember("name", "rgate", a);
+        m.AddMember("enabled", rgate.enabled, a);
+        m.AddMember("min_interval", rgate.min_interval, a);
+        m.AddMember("max_interval", rgate.max_interval, a);
+        m.AddMember("min_duration", rgate.min_duration, a);
+        m.AddMember("max_duration", rgate.max_duration, a);
+        m.AddMember("min_gain", rgate.min_gain, a);
+        m.AddMember("max_gain", rgate.max_gain, a);
+        m.AddMember("randomness", rgate.randomness, a);
+        m.AddMember("inverted", rgate.inverted, a);
+        modulesArray.PushBack(m, a);
 }
 
 void EntState::writeBitcrasher(Value& modulesArray,
@@ -507,27 +502,24 @@ void EntState::readCrackle(const Value& m, size_t id)
                 crackle[id].stereo_spread = m["stereo"].GetDouble();
 }
 
-void EntState::readGlitch(const Value& m, size_t id)
+void EntState::readGlitch(const Value& m)
 {
-        if (id >= std::size(glitch))
-                return;
-
         if (m.HasMember("enabled") && m["enabled"].IsBool())
-                glitch[id].enabled = m["enabled"].GetBool();
+                glitch.enabled = m["enabled"].GetBool();
         if (m.HasMember("repeats") && m["repeats"].IsInt())
-                glitch[id].repeats = m["repeats"].GetInt();
+                glitch.repeats = m["repeats"].GetInt();
         if (m.HasMember("probability") && m["probability"].IsDouble())
-                glitch[id].probability = m["probability"].GetDouble();
+                glitch.probability = m["probability"].GetDouble();
         if (m.HasMember("length") && m["length"].IsDouble())
-                glitch[id].length = m["length"].GetDouble();
+                glitch.length = m["length"].GetDouble();
         if (m.HasMember("min_jump") && m["min_jump"].IsDouble())
-                glitch[id].min_jump = m["min_jump"].GetDouble();
+                glitch.min_jump = m["min_jump"].GetDouble();
         if (m.HasMember("max_jump") && m["max_jump"].IsDouble())
-                glitch[id].max_jump = m["max_jump"].GetDouble();
+                glitch.max_jump = m["max_jump"].GetDouble();
         if (m.HasMember("dry") && m["dry"].IsDouble())
-                glitch[id].dry = m["dry"].GetDouble();
+                glitch.dry = m["dry"].GetDouble();
         if (m.HasMember("wet") && m["wet"].IsDouble())
-                glitch[id].wet = m["wet"].GetDouble();
+                glitch.wet = m["wet"].GetDouble();
 }
 
 void EntState::readRgate(const Value& m)

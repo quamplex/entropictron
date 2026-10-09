@@ -49,11 +49,6 @@ GlitchModel::GlitchModel(RkObject *parent,
                     this, enabled(b));
 }
 
-GlitchId GlitchModel::getId() const
-{
-        return dspGlitchProxy->getGlitchId();
-}
-
 void GlitchModel::enable(bool b)
 {
         if (dspGlitchProxy->enable(b))

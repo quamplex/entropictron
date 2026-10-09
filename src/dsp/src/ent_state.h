@@ -52,7 +52,7 @@ struct ent_state_crackle*
 ent_state_get_crackle(struct ent_state *state, size_t index);
 
 struct ent_state_glitch*
-ent_state_get_glitch(struct ent_state *state, size_t index);
+ent_state_get_glitch(struct ent_state *state);
 
 struct ent_state_rgate*
 ent_state_get_rgate(struct ent_state *state);
@@ -67,7 +67,7 @@ const struct ent_state_crackle*
 ent_state_get_crackle_const(const struct ent_state *state, size_t index);
 
 const struct ent_state_glitch*
-ent_state_get_glitch_const(const struct ent_state *state, size_t index);
+ent_state_get_glitch_const(const struct ent_state *state);
 
 const struct ent_state_rgate*
 ent_state_get_rgate_const(const struct ent_state *state);

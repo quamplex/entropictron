@@ -90,7 +90,7 @@ struct ent_state {
         _Atomic(float) entropy_depth;
         struct ent_state_noise noises[2];
         struct ent_state_crackle crackles[2];
-        struct ent_state_glitch glitches[2];
+        struct ent_state_glitch glitch;
         struct ent_state_rgate rgate;
         struct ent_state_bitcrasher bitcrasher;
 };

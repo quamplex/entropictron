@@ -33,7 +33,6 @@ class GlitchModel: public EntAbstractModel
 {
  public:
         explicit GlitchModel(RkObject *parent, DspGlitchProxy *dspGlitchProxy);
-        GlitchId getId() const;
         void enable(bool b = true);
         bool isEnabled() const;
         void setRepeats(int value);

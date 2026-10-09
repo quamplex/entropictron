@@ -30,31 +30,46 @@
 class EntropictronModel;
 class RkButton;
 class BitcrasherWidget;
+class RkContainer;
 
 class ModuleWidgetTab : public EntWidget
 {
 public:
+        enum ModuleType {
+                ModuleGenerator,
+                ModuleEffect
+        };
+
         explicit ModuleWidgetTab(EntWidget* parent,
                                  EntropictronModel *model,
-                                 size_t id);
-        void showNoise();
-        void showCrackle();
-        void showGlitch();
-        void showRgate();
-        void showBitcrasher();
-
-protected:
-        void createTabButtons();
+                                 ModuleType type = {});
 
 private:
-        size_t tabId;
+        enum Module {
+                ModuleNone,
+                Noise1,
+                Noise2,
+                Crackle1,
+                Crackle2,
+                Glitch,
+                Rgate,
+                Bitcrasher
+        };
+
+        void createTabButtons();
+        void createGeneratorsButtons(RkWidget* widget, RkContainer *container);
+        void createEffectsButtons(RkWidget* widget, RkContainer *container);
+        void showModuleControls(Module module);
+
         EntropictronModel *entModel;
-        EntWidget *moduleWidget;
-        RkButton *noiseTabButton;
-        RkButton *crackleTabButton;
-        RkButton *glitchTabButton;
-        RkButton *rgateTabButton;
-        RkButton *bitcrasherTabButton;
+        ModuleType moduleType {ModuleType::ModuleGenerator};
+        Module currentModule {Module::ModuleNone};
+        EntWidget *moduleWidget{nullptr};
+        RkButton *noiseTabButton[2]{nullptr};
+        RkButton *crackleTabButton[2]{nullptr};
+        RkButton *glitchTabButton{nullptr};
+        RkButton *rgateTabButton{nullptr};
+        RkButton *bitcrasherTabButton{nullptr};
 };
 
 #endif // ENT_MODULES_WIDGET_TAB_H

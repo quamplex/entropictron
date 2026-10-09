@@ -35,7 +35,7 @@ class EntState
 {
  public:
         struct Noise {
-                int id = 1;
+                int id = -1;
                 bool enabled = false;
                 int type = 0;
                 double density = 0.0;
@@ -48,7 +48,7 @@ class EntState
         };
 
         struct Crackle {
-                int id = 2;
+                int id = -1;
                 bool enabled = true;
                 double rate = 0.0;
                 double randomness = 0.0;
@@ -60,7 +60,6 @@ class EntState
         };
 
         struct Glitch {
-                int id = 3;
                 bool enabled = false;
                 int repeats = 0;
                 double probability = 0.0;
@@ -94,7 +93,7 @@ class EntState
 
         Noise noise[2];
         Crackle crackle[2];
-        Glitch glitch[2];
+        Glitch glitch;
         Rgate rgate;
         Bitcrasher bitcrasher;
 
@@ -136,7 +135,7 @@ class EntState
                               rapidjson::Document::AllocatorType& a) const;
         void readNoise(const rapidjson::Value& m, size_t id);
         void readCrackle(const rapidjson::Value& m, size_t id);
-        void readGlitch(const rapidjson::Value& m, size_t id);
+        void readGlitch(const rapidjson::Value& m);
         void readRgate(const rapidjson::Value& m);
         void readBitcrasher(const rapidjson::Value& m);
 

@@ -37,8 +37,7 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
         , noise2Model{new NoiseModel(this, dspProxy->getNoise(NoiseId::Noise2))}
         , crackle1Model{new CrackleModel(this, dspProxy->getCrackle(CrackleId::Crackle1))}
         , crackle2Model{new CrackleModel(this, dspProxy->getCrackle(CrackleId::Crackle2))}
-        , glitch1Model{new GlitchModel(this, dspProxy->getGlitch(GlitchId::Glitch1))}
-        , glitch2Model{new GlitchModel(this, dspProxy->getGlitch(GlitchId::Glitch2))}
+        , glitchModel{new GlitchModel(this, dspProxy->getGlitch())}
         , rgateModel{new RgateModel(this, dspProxy->getRgate())}
         , bitcrasherModel{new BitcrasherModel(this, dspProxy->getBitcrasher())}
 {
@@ -67,11 +66,7 @@ EntropictronModel::EntropictronModel(RkObject *parent, DspProxy *dspProxy)
         RK_ACT_BIND(dspProxy,
                     stateChanged,
                     RK_ACT_ARGS(),
-                    glitch1Model, modelUpdated());
-        RK_ACT_BIND(dspProxy,
-                    stateChanged,
-                    RK_ACT_ARGS(),
-                    glitch2Model, modelUpdated());
+                    glitchModel, modelUpdated());
         RK_ACT_BIND(dspProxy,
                     stateChanged,
                     RK_ACT_ARGS(),
@@ -123,17 +118,14 @@ bool EntropictronModel::loadPreset(const EntState *preset)
                 crackle[i]->setStereospread(preset->crackle[i].stereo_spread);
         }
 
-        std::vector<GlitchModel*> glitch = {glitch1Model, glitch2Model};
-        for (size_t i = 0; i < glitch.size(); i++) {
-                glitch[i]->enable(preset->glitch[i].enabled);
-                glitch[i]->setRepeats(preset->glitch[i].repeats);
-                glitch[i]->setProbability(preset->glitch[i].probability);
-                glitch[i]->setLength(preset->glitch[i].length);
-                glitch[i]->setMinJump(preset->glitch[i].min_jump);
-                glitch[i]->setMaxJump(preset->glitch[i].max_jump);
-                glitch[i]->setDry(preset->glitch[i].dry);
-                glitch[i]->setWet(preset->glitch[i].wet);
-        }
+        glitchModel->enable(preset->glitch.enabled);
+        glitchModel->setRepeats(preset->glitch.repeats);
+        glitchModel->setProbability(preset->glitch.probability);
+        glitchModel->setLength(preset->glitch.length);
+        glitchModel->setMinJump(preset->glitch.min_jump);
+        glitchModel->setMaxJump(preset->glitch.max_jump);
+        glitchModel->setDry(preset->glitch.dry);
+        glitchModel->setWet(preset->glitch.wet);
 
         rgateModel->enable(preset->rgate.enabled);
         rgateModel->setMinInterval(preset->rgate.min_interval);
@@ -214,14 +206,9 @@ CrackleModel* EntropictronModel::getCrackle2() const
         return  crackle2Model;
 }
 
-GlitchModel* EntropictronModel::getGlitch1() const
+GlitchModel* EntropictronModel::getGlitch() const
 {
-        return  glitch1Model;
-}
-
-GlitchModel* EntropictronModel::getGlitch2() const
-{
-        return  glitch2Model;
+        return  glitchModel;
 }
 
 RgateModel* EntropictronModel::getRgate() const

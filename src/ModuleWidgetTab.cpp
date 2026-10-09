@@ -32,43 +32,52 @@
 #include "RkButton.h"
 #include "RkContainer.h"
 
-RK_DECLARE_IMAGE_RC(tab_noise_button);
-RK_DECLARE_IMAGE_RC(tab_noise_button_hover);
-RK_DECLARE_IMAGE_RC(tab_noise_button_on);
-RK_DECLARE_IMAGE_RC(tab_noise_button_hover_on);
-RK_DECLARE_IMAGE_RC(tab_crackle_button);
-RK_DECLARE_IMAGE_RC(tab_crackle_button_hover);
-RK_DECLARE_IMAGE_RC(tab_crackle_button_on);
-RK_DECLARE_IMAGE_RC(tab_crackle_button_hover_on);
-RK_DECLARE_IMAGE_RC(tab_bitcrasher_button);
-RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_hover);
-RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_on);
-RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_hover_on);
-RK_DECLARE_IMAGE_RC(tab_rgate_button);
-RK_DECLARE_IMAGE_RC(tab_rgate_button_hover);
-RK_DECLARE_IMAGE_RC(tab_rgate_button_on);
-RK_DECLARE_IMAGE_RC(tab_rgate_button_hover_on);
+// Generators
+RK_DECLARE_IMAGE_RC(tab_noise1_button);
+RK_DECLARE_IMAGE_RC(tab_noise1_button_hover);
+RK_DECLARE_IMAGE_RC(tab_noise1_button_on);
+RK_DECLARE_IMAGE_RC(tab_noise1_button_hover_on);
+RK_DECLARE_IMAGE_RC(tab_noise2_button);
+RK_DECLARE_IMAGE_RC(tab_noise2_button_hover);
+RK_DECLARE_IMAGE_RC(tab_noise2_button_on);
+RK_DECLARE_IMAGE_RC(tab_noise2_button_hover_on);
+RK_DECLARE_IMAGE_RC(tab_crackle1_button);
+RK_DECLARE_IMAGE_RC(tab_crackle1_button_hover);
+RK_DECLARE_IMAGE_RC(tab_crackle1_button_on);
+RK_DECLARE_IMAGE_RC(tab_crackle1_button_hover_on);
+RK_DECLARE_IMAGE_RC(tab_crackle2_button);
+RK_DECLARE_IMAGE_RC(tab_crackle2_button_hover);
+RK_DECLARE_IMAGE_RC(tab_crackle2_button_on);
+RK_DECLARE_IMAGE_RC(tab_crackle2_button_hover_on);
+
+// Effects
 RK_DECLARE_IMAGE_RC(tab_glitch_button);
 RK_DECLARE_IMAGE_RC(tab_glitch_button_hover);
 RK_DECLARE_IMAGE_RC(tab_glitch_button_on);
 RK_DECLARE_IMAGE_RC(tab_glitch_button_hover_on);
+RK_DECLARE_IMAGE_RC(tab_rgate_button);
+RK_DECLARE_IMAGE_RC(tab_rgate_button_hover);
+RK_DECLARE_IMAGE_RC(tab_rgate_button_on);
+RK_DECLARE_IMAGE_RC(tab_rgate_button_hover_on);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_hover);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_on);
+RK_DECLARE_IMAGE_RC(tab_bitcrasher_button_hover_on);
 
 ModuleWidgetTab::ModuleWidgetTab(EntWidget* parent,
                                  EntropictronModel *model,
-                                 size_t id)
+                                 ModuleType type)
         : EntWidget(parent)
-        , tabId{id}
         , entModel{model}
-        , moduleWidget{nullptr}
-        , noiseTabButton{nullptr}
-        , crackleTabButton{nullptr}
-        , glitchTabButton{nullptr}
-        , rgateTabButton{nullptr}
-        , bitcrasherTabButton{nullptr}
+        , moduleType{type}
 {
         setFixedSize(350, 331);
         createTabButtons();
-        showNoise();
+
+        if (moduleType == ModuleType::ModuleGenerator)
+                showModuleControls(Module::Noise1);
+        else
+                showModuleControls(Module::Glitch);
 }
 
 void ModuleWidgetTab::createTabButtons()
@@ -78,90 +87,164 @@ void ModuleWidgetTab::createTabButtons()
         tabButtonWidget->setSize({width(), 24});
         auto tabButtonContianer = new RkContainer(tabButtonWidget);
 
-        // Noise
-        noiseTabButton = new RkButton(tabButtonWidget);
-        noiseTabButton->setBackgroundColor(tabButtonWidget->background());
-        noiseTabButton->setImage(RK_RC_IMAGE(tab_noise_button),
-                            RkButton::State::Unpressed);
-        noiseTabButton->setImage(RK_RC_IMAGE(tab_noise_button_on),
-                            RkButton::State::Pressed);
-        noiseTabButton->setImage(RK_RC_IMAGE(tab_noise_button_hover),
-                            RkButton::State::UnpressedHover);
-        noiseTabButton->setImage(RK_RC_IMAGE(tab_noise_button_hover_on),
-                            RkButton::State::PressedHover);
-        noiseTabButton->setCheckable(true);
-        noiseTabButton->show();
-        tabButtonContianer->addWidget(noiseTabButton);
-        RK_ACT_BIND(noiseTabButton,
-                    toggled,
-                    RK_ACT_ARGS(bool b),
-                    this,
-                    showNoise());
+        if (moduleType == ModuleType::ModuleGenerator)
+                createGeneratorsButtons(tabButtonWidget, tabButtonContianer);
+        else
+                createEffectsButtons(tabButtonWidget, tabButtonContianer);
+}
 
-        // Crackle
-        crackleTabButton = new RkButton(tabButtonWidget);
-        crackleTabButton->setBackgroundColor(tabButtonWidget->background());
-        crackleTabButton->setImage(RK_RC_IMAGE(tab_crackle_button),
-                            RkButton::State::Unpressed);
-        crackleTabButton->setImage(RK_RC_IMAGE(tab_crackle_button_on),
-                            RkButton::State::Pressed);
-        crackleTabButton->setImage(RK_RC_IMAGE(tab_crackle_button_hover),
-                            RkButton::State::UnpressedHover);
-        crackleTabButton->setImage(RK_RC_IMAGE(tab_crackle_button_hover_on),
-                            RkButton::State::PressedHover);
-        crackleTabButton->setCheckable(true);
-        crackleTabButton->show();
-        tabButtonContianer->addWidget(crackleTabButton);
-        RK_ACT_BIND(crackleTabButton,
-                    toggled,
-                    RK_ACT_ARGS(bool b),
-                    this,
-                    showCrackle());
+void ModuleWidgetTab::showModuleControls(ModuleWidgetTab::Module module)
+{
+        if (currentModule == module)
+                return;
 
+        currentModule = module;
+        if (moduleType == ModuleType::ModuleGenerator) {
+                for (size_t i = 0; i < 2; i++) {
+                        auto noise = i == 0 ? Module::Noise1 : Module::Noise2;
+                        auto crackle = i == 0 ? Module::Crackle1 : Module::Crackle2;
+                        noiseTabButton[i]->setPressed(currentModule == noise);
+                        crackleTabButton[i]->setPressed(currentModule == crackle);
+                }
+        } else {
+                glitchTabButton->setPressed(currentModule == Module::Glitch);
+                rgateTabButton->setPressed(currentModule == Module::Rgate);
+                bitcrasherTabButton->setPressed(currentModule == Module::Bitcrasher);
+        }
+
+        delete moduleWidget;
+        moduleWidget = nullptr;
+
+        switch (module) {
+        case Noise1:
+                moduleWidget = new NoiseWidget(this, entModel->getNoise1());
+                break;
+        case Noise2:
+                moduleWidget = new NoiseWidget(this, entModel->getNoise2());
+                break;
+        case Crackle1:
+                moduleWidget = new CrackleWidget(this, entModel->getCrackle1());
+                break;
+        case Crackle2:
+                moduleWidget = new CrackleWidget(this, entModel->getCrackle2());
+                break;
+        case Glitch:
+                moduleWidget = new GlitchWidget(this, entModel->getGlitch());
+                break;
+        case Rgate:
+                moduleWidget = new RgateWidget(this, entModel->getRgate());
+                break;
+        case Bitcrasher:
+                moduleWidget = new BitcrasherWidget(this, entModel->getBitcrasher());
+                break;
+        default:
+                break;
+        }
+
+        if (moduleWidget)
+                moduleWidget->setPosition(0, 29);
+}
+
+void ModuleWidgetTab::createGeneratorsButtons(RkWidget* widget, RkContainer *container)
+{
+        for (size_t i = 0; i < 2; i++) {
+                // Noise
+                noiseTabButton[i] = new RkButton(widget);
+                noiseTabButton[i]->setBackgroundColor(widget->background());
+                noiseTabButton[i]->setImage( i == 0 ? RK_RC_IMAGE(tab_noise1_button)
+                                             : RK_RC_IMAGE(tab_noise2_button),
+                                             RkButton::State::Unpressed);
+                noiseTabButton[i]->setImage( i == 0 ? RK_RC_IMAGE(tab_noise1_button_on)
+                                             : RK_RC_IMAGE(tab_noise2_button_on),
+                                             RkButton::State::Pressed);
+                noiseTabButton[i]->setImage( i == 0 ? RK_RC_IMAGE(tab_noise1_button_hover)
+                                             : RK_RC_IMAGE(tab_noise2_button_hover),
+                                             RkButton::State::UnpressedHover);
+                noiseTabButton[i]->setImage( i == 0 ? RK_RC_IMAGE(tab_noise1_button_hover_on)
+                                             : RK_RC_IMAGE(tab_noise2_button_hover_on),
+                                             RkButton::State::PressedHover);
+                noiseTabButton[i]->setCheckable(true);
+                noiseTabButton[i]->show();
+                container->addWidget(noiseTabButton[i]);
+                auto mod = i == 0 ? Module::Noise1 : Module::Noise2;
+                RK_ACT_BIND(noiseTabButton[i],
+                            toggled,
+                            RK_ACT_ARGS(bool b),
+                            this,
+                            showModuleControls(mod));
+
+                // Crackle
+                crackleTabButton[i] = new RkButton(widget);
+                crackleTabButton[i]->setBackgroundColor(widget->background());
+                crackleTabButton[i]->setImage(i == 0 ? RK_RC_IMAGE(tab_crackle1_button)
+                                              : RK_RC_IMAGE(tab_crackle2_button),
+                                              RkButton::State::Unpressed);
+                crackleTabButton[i]->setImage(i == 0 ? RK_RC_IMAGE(tab_crackle1_button_on)
+                                              : RK_RC_IMAGE(tab_crackle2_button_on),
+                                              RkButton::State::Pressed);
+                crackleTabButton[i]->setImage(i == 0 ? RK_RC_IMAGE(tab_crackle1_button_hover)
+                                              : RK_RC_IMAGE(tab_crackle2_button_hover),
+                                              RkButton::State::UnpressedHover);
+                crackleTabButton[i]->setImage(i == 0 ? RK_RC_IMAGE(tab_crackle1_button_hover_on)
+                                              : RK_RC_IMAGE(tab_crackle2_button_hover_on),
+                                              RkButton::State::PressedHover);
+                crackleTabButton[i]->setCheckable(true);
+                crackleTabButton[i]->show();
+                container->addWidget(crackleTabButton[i]);
+                mod = i == 0 ? Module::Crackle1 : Module::Crackle2;
+                RK_ACT_BIND(crackleTabButton[i],
+                            toggled,
+                            RK_ACT_ARGS(bool b),
+                            this,
+                            showModuleControls(mod));
+        }
+}
+
+void ModuleWidgetTab::createEffectsButtons(RkWidget *widget, RkContainer *container)
+{
         // Glitch
-        glitchTabButton = new RkButton(tabButtonWidget);
-        glitchTabButton->setBackgroundColor(tabButtonWidget->background());
+        glitchTabButton = new RkButton(widget);
+        glitchTabButton->setBackgroundColor(widget->background());
         glitchTabButton->setImage(RK_RC_IMAGE(tab_glitch_button),
-                            RkButton::State::Unpressed);
+                                  RkButton::State::Unpressed);
         glitchTabButton->setImage(RK_RC_IMAGE(tab_glitch_button_on),
-                            RkButton::State::Pressed);
+                                  RkButton::State::Pressed);
         glitchTabButton->setImage(RK_RC_IMAGE(tab_glitch_button_hover),
-                            RkButton::State::UnpressedHover);
+                                  RkButton::State::UnpressedHover);
         glitchTabButton->setImage(RK_RC_IMAGE(tab_glitch_button_hover_on),
-                            RkButton::State::PressedHover);
+                                  RkButton::State::PressedHover);
         glitchTabButton->setCheckable(true);
         glitchTabButton->show();
-        tabButtonContianer->addWidget(glitchTabButton);
+        container->addWidget(glitchTabButton);
         RK_ACT_BIND(glitchTabButton,
                     toggled,
                     RK_ACT_ARGS(bool b),
                     this,
-                    showGlitch());
+                    showModuleControls(Module::Glitch));
 
-        if (tabId == 1) {
-                // Rgate
-                rgateTabButton = new RkButton(tabButtonWidget);
-                rgateTabButton->setBackgroundColor(tabButtonWidget->background());
-                rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button),
-                                         RkButton::State::Unpressed);
-                rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button_on),
-                                         RkButton::State::Pressed);
-                rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button_hover),
-                                         RkButton::State::UnpressedHover);
-                rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button_hover_on),
-                                         RkButton::State::PressedHover);
-                rgateTabButton->setCheckable(true);
-                rgateTabButton->show();
-                tabButtonContianer->addWidget(rgateTabButton);
-                RK_ACT_BIND(rgateTabButton,
-                            toggled,
-                            RK_ACT_ARGS(bool b),
-                            this,
-                            showRgate());
-        }
+        // Rgate
+        rgateTabButton = new RkButton(widget);
+        rgateTabButton->setBackgroundColor(widget->background());
+        rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button),
+                                 RkButton::State::Unpressed);
+        rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button_on),
+                                 RkButton::State::Pressed);
+        rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button_hover),
+                                 RkButton::State::UnpressedHover);
+        rgateTabButton->setImage(RK_RC_IMAGE(tab_rgate_button_hover_on),
+                                 RkButton::State::PressedHover);
+        rgateTabButton->setCheckable(true);
+        rgateTabButton->show();
+        container->addWidget(rgateTabButton);
+        RK_ACT_BIND(rgateTabButton,
+                    toggled,
+                    RK_ACT_ARGS(bool b),
+                    this,
+                    showModuleControls(Module::Rgate));
 
-        bitcrasherTabButton = new RkButton(tabButtonWidget);
-        bitcrasherTabButton->setBackgroundColor(tabButtonWidget->background());
+        // Bitcrasher
+        bitcrasherTabButton = new RkButton(widget);
+        bitcrasherTabButton->setBackgroundColor(widget->background());
         bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_bitcrasher_button),
                                       RkButton::State::Unpressed);
         bitcrasherTabButton->setImage(RK_RC_IMAGE(tab_bitcrasher_button_on),
@@ -172,86 +255,10 @@ void ModuleWidgetTab::createTabButtons()
                                       RkButton::State::PressedHover);
         bitcrasherTabButton->setCheckable(true);
         bitcrasherTabButton->show();
-        tabButtonContianer->addWidget(bitcrasherTabButton);
+        container->addWidget(bitcrasherTabButton);
         RK_ACT_BIND(bitcrasherTabButton,
                     toggled,
                     RK_ACT_ARGS(bool b),
                     this,
-                    showBitcrasher());
-}
-
-void ModuleWidgetTab::showNoise()
-{
-        noiseTabButton->setPressed(true);
-        crackleTabButton->setPressed(false);
-        glitchTabButton->setPressed(false);
-        if (rgateTabButton)
-                rgateTabButton->setPressed(false);
-        bitcrasherTabButton->setPressed(false);
-
-        delete moduleWidget;
-        moduleWidget = new NoiseWidget(this,
-                                       tabId == 0 ? entModel->getNoise1()
-                                       : entModel->getNoise2());
-        moduleWidget->setPosition(0, 29);
-}
-
-void ModuleWidgetTab::showCrackle()
-{
-        noiseTabButton->setPressed(false);
-        crackleTabButton->setPressed(true);
-        glitchTabButton->setPressed(false);
-        if (rgateTabButton)
-                rgateTabButton->setPressed(false);
-        bitcrasherTabButton->setPressed(false);
-
-        delete moduleWidget;
-        moduleWidget = new CrackleWidget(this,
-                                         tabId == 0 ? entModel->getCrackle1()
-                                         : entModel->getCrackle2());
-        moduleWidget->setPosition(0, 29);
-}
-
-void ModuleWidgetTab::showGlitch()
-{
-        noiseTabButton->setPressed(false);
-        crackleTabButton->setPressed(false);
-        glitchTabButton->setPressed(true);
-        if (rgateTabButton)
-                rgateTabButton->setPressed(false);
-        bitcrasherTabButton->setPressed(false);
-
-        delete moduleWidget;
-        moduleWidget = new GlitchWidget(this,
-                                        tabId == 0 ? entModel->getGlitch1()
-                                        : entModel->getGlitch2());
-        moduleWidget->setPosition(0, 29);
-}
-
-void ModuleWidgetTab::showRgate()
-{
-        if (rgateTabButton) {
-                noiseTabButton->setPressed(false);
-                crackleTabButton->setPressed(false);
-                glitchTabButton->setPressed(false);
-                rgateTabButton->setPressed(true);
-                bitcrasherTabButton->setPressed(false);
-
-                delete moduleWidget;
-                moduleWidget = new RgateWidget(this, entModel->getRgate());
-                moduleWidget->setPosition(0, 29);
-        }
-}
-
-void ModuleWidgetTab::showBitcrasher()
-{
-        noiseTabButton->setPressed(false);
-        crackleTabButton->setPressed(false);
-        glitchTabButton->setPressed(false);
-        if (rgateTabButton)
-                rgateTabButton->setPressed(false);
-        bitcrasherTabButton->setPressed(true);
-        delete moduleWidget;
-        moduleWidget = new BitcrasherWidget(this, entModel->getBitcrasher());
-        moduleWidget->setPosition(0, 29);
+                    showModuleControls(Module::Bitcrasher));
 }

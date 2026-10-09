@@ -23,13 +23,7 @@
 
 #include "DspGlitchProxy.h"
 
-DspGlitchProxy::DspGlitchProxy(RkObject* parent, GlitchId id)
+DspGlitchProxy::DspGlitchProxy(RkObject* parent)
         : RkObject(parent)
-        , glitchId{id}
 {
-}
-
-GlitchId DspGlitchProxy::getGlitchId() const
-{
-        return glitchId;
 }

@@ -48,7 +48,7 @@ class DspProxy : public RkObject {
         virtual double getEntropy() const = 0;
         virtual DspNoiseProxy* getNoise(NoiseId id) const = 0;
         virtual DspCrackleProxy* getCrackle(CrackleId id) const = 0;
-        virtual DspGlitchProxy* getGlitch(GlitchId id) const = 0;
+        virtual DspGlitchProxy* getGlitch() const = 0;
         virtual DspRgateProxy* getRgate() const = 0;
         virtual DspBitcrasherProxy* getBitcrasher() const = 0;
 

@@ -60,7 +60,7 @@ public:
         void updateEntropy();
         DspWrapperNoise* getNoise(NoiseId id) const;
         DspWrapperCrackle* getCrackle(CrackleId id) const;
-        DspWrapperGlitch* getGlitch(GlitchId id) const;
+        DspWrapperGlitch* getGlitch() const;
         DspWrapperRgate* getRgate() const;
         DspWrapperBitcrasher* getBitcrasher() const;
         DspFrameTimer* getFrameTimer() const;
@@ -81,8 +81,7 @@ private:
         std::unique_ptr<DspWrapperNoise> dspNoise2;
         std::unique_ptr<DspWrapperCrackle> dspCrackle1;
         std::unique_ptr<DspWrapperCrackle> dspCrackle2;
-        std::unique_ptr<DspWrapperGlitch> dspGlitch1;
-        std::unique_ptr<DspWrapperGlitch> dspGlitch2;
+        std::unique_ptr<DspWrapperGlitch> dspGlitch;
         std::unique_ptr<DspWrapperRgate> dspRgate;
         std::unique_ptr<DspWrapperBitcrasher> dspBitcrasher;
 };

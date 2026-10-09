@@ -29,7 +29,8 @@
 #include "RkContainer.h"
 #include "RkButton.h"
 
-RK_DECLARE_IMAGE_RC(crackle_label);
+RK_DECLARE_IMAGE_RC(crackle1_label);
+RK_DECLARE_IMAGE_RC(crackle2_label);
 RK_DECLARE_IMAGE_RC(switch_button_on);
 RK_DECLARE_IMAGE_RC(switch_button_off);
 RK_DECLARE_IMAGE_RC(knob_big_size_bk);
@@ -80,6 +81,10 @@ CrackleWidget::~CrackleWidget()
 
 void CrackleWidget::createView()
 {
+        auto model = static_cast<CrackleModel*>(getModel());
+        if (!model)
+                return;
+
         auto mainContainer = new RkContainer(this, Rk::Orientation::Vertical);
         mainContainer->addSpace(8);
 
@@ -102,7 +107,9 @@ void CrackleWidget::createView()
         topContianer->addSpace(10);
         auto crackleLabel = new RkLabel(this);
         crackleLabel->setBackgroundColor(background());
-        crackleLabel->setImage(RK_RC_IMAGE(crackle_label));
+        crackleLabel->setImage(model->getId() == CrackleId::Crackle1
+                               ? RK_RC_IMAGE(crackle1_label)
+                               : RK_RC_IMAGE(crackle2_label));
         crackleLabel->show();
         topContianer->addWidget(crackleLabel);
 

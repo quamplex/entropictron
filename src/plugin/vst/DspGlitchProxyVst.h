@@ -36,8 +36,7 @@ class EntState;
 class DspGlitchProxyVst: public DspGlitchProxy {
  public:
         explicit DspGlitchProxyVst(RkObject* parent,
-                                    EntVstController *controller,
-                                    GlitchId id);
+                                   EntVstController *controller);
         ~DspGlitchProxyVst();
         bool enable(bool b = true) override;
         bool isEnabled() const override;

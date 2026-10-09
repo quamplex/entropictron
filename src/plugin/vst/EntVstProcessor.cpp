@@ -466,57 +466,30 @@ void EntVstProcessor::initCrackleParamMappings()
 
 void EntVstProcessor::initGlitchParamMappings()
 {
-        // Glitch 1
-        auto glitch = entropictronDsp->getGlitch(GlitchId::Glitch1);
-        paramMap[ParameterId::Glitch1EnabledId] = [glitch](ParamValue v) {
+        // Glitch
+        auto glitch = entropictronDsp->getGlitch();
+        paramMap[ParameterId::GlitchEnabledId] = [glitch](ParamValue v) {
                 glitch->enable(v > 0.5);
         };
-        paramMap[ParameterId::Glitch1ProbabilityId] = [glitch](ParamValue v) {
+        paramMap[ParameterId::GlitchProbabilityId] = [glitch](ParamValue v) {
                 glitch->setProbability(DspGlitchProxyVst::probabilityFromNormalized(v));
         };
-        paramMap[ParameterId::Glitch1MinJumpId] = [glitch](ParamValue v) {
+        paramMap[ParameterId::GlitchMinJumpId] = [glitch](ParamValue v) {
                 glitch->setJumpMin(DspGlitchProxyVst::minJumpFromNormalized(v));
         };
-        paramMap[ParameterId::Glitch1MaxJumpId] = [glitch](ParamValue v) {
+        paramMap[ParameterId::GlitchMaxJumpId] = [glitch](ParamValue v) {
                 glitch->setJumpMax(DspGlitchProxyVst::maxJumpFromNormalized(v));
         };
-        paramMap[ParameterId::Glitch1LengthId] = [glitch](ParamValue v) {
+        paramMap[ParameterId::GlitchLengthId] = [glitch](ParamValue v) {
                 glitch->setLength(DspGlitchProxyVst::lengthFromNormalized(v));
         };
-        paramMap[ParameterId::Glitch1RepeatsId] = [glitch](ParamValue v) {
+        paramMap[ParameterId::GlitchRepeatsId] = [glitch](ParamValue v) {
                 glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
         };
-        paramMap[ParameterId::Glitch1DryId] = [glitch](ParamValue v) {
+        paramMap[ParameterId::GlitchDryId] = [glitch](ParamValue v) {
                 glitch->setDry(DspGlitchProxyVst::dryFromNormalized(v));
         };
-        paramMap[ParameterId::Glitch1WetId] = [glitch](ParamValue v) {
-                glitch->setWet(DspGlitchProxyVst::wetFromNormalized(v));
-        };
-
-        // Glitch 2
-        glitch = entropictronDsp->getGlitch(GlitchId::Glitch2);
-        paramMap[ParameterId::Glitch2EnabledId] = [glitch](ParamValue v) {
-                glitch->enable(v > 0.5);
-        };
-        paramMap[ParameterId::Glitch1ProbabilityId] = [glitch](ParamValue v) {
-                glitch->setProbability(DspGlitchProxyVst::probabilityFromNormalized(v));
-        };
-        paramMap[ParameterId::Glitch2MinJumpId] = [glitch](ParamValue v) {
-                glitch->setJumpMin(DspGlitchProxyVst::minJumpFromNormalized(v));
-        };
-        paramMap[ParameterId::Glitch2MaxJumpId] = [glitch](ParamValue v) {
-                glitch->setJumpMax(DspGlitchProxyVst::maxJumpFromNormalized(v));
-        };
-        paramMap[ParameterId::Glitch2LengthId] = [glitch](ParamValue v) {
-                glitch->setLength(DspGlitchProxyVst::lengthFromNormalized(v));
-        };
-        paramMap[ParameterId::Glitch2RepeatsId] = [glitch](ParamValue v) {
-                glitch->setRepeatCount(DspGlitchProxyVst::repeatsFromNormalized(v));
-        };
-        paramMap[ParameterId::Glitch2DryId] = [glitch](ParamValue v) {
-                glitch->setDry(DspGlitchProxyVst::dryFromNormalized(v));
-        };
-        paramMap[ParameterId::Glitch2WetId] = [glitch](ParamValue v) {
+        paramMap[ParameterId::GlitchWetId] = [glitch](ParamValue v) {
                 glitch->setWet(DspGlitchProxyVst::wetFromNormalized(v));
         };
 }

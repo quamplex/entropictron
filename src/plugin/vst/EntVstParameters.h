@@ -78,26 +78,15 @@ enum ParameterId : Steinberg::Vst::ParamID
     Crackle2EnvelopeShapeId = 20207,
     Crackle2StereoSpreadId  = 20208,
 
-
     // Glitcher 1
-    Glitch1EnabledId        = 30101,
-    Glitch1ProbabilityId    = 30102,
-    Glitch1MinJumpId        = 30103,
-    Glitch1MaxJumpId        = 30104,
-    Glitch1LengthId         = 30105,
-    Glitch1RepeatsId        = 30106,
-    Glitch1DryId            = 30107,
-    Glitch1WetId            = 30108,
-
-    // Glitcher 2
-    Glitch2EnabledId        = 30201,
-    Glitch2ProbabilityId    = 30202,
-    Glitch2MinJumpId        = 30203,
-    Glitch2MaxJumpId        = 30204,
-    Glitch2LengthId         = 30205,
-    Glitch2RepeatsId        = 30206,
-    Glitch2DryId            = 30207,
-    Glitch2WetId            = 30208,
+    GlitchEnabledId        = 30101,
+    GlitchProbabilityId    = 30102,
+    GlitchMinJumpId        = 30103,
+    GlitchMaxJumpId        = 30104,
+    GlitchLengthId         = 30105,
+    GlitchRepeatsId        = 30106,
+    GlitchDryId            = 30107,
+    GlitchWetId            = 30108,
 
     // Rgate
     RgateEnabledId          = 30301,

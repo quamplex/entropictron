@@ -52,7 +52,7 @@ class DspProxyVst: public DspProxy {
         double getEntropy() const override;
         DspNoiseProxy* getNoise(NoiseId id) const override;
         DspCrackleProxy* getCrackle(CrackleId id) const override;
-        DspGlitchProxy* getGlitch(GlitchId id) const override;
+        DspGlitchProxy* getGlitch() const override;
         DspRgateProxy* getRgate() const override;
         DspBitcrasherProxy* getBitcrasher() const override;
 
@@ -70,8 +70,7 @@ protected:
         DspNoiseProxyVst *dspNoise2Proxy;
         DspCrackleProxyVst *dspCrackle1Proxy;
         DspCrackleProxyVst *dspCrackle2Proxy;
-        DspGlitchProxyVst *dspGlitch1Proxy;
-        DspGlitchProxyVst *dspGlitch2Proxy;
+        DspGlitchProxyVst *dspGlitchProxy;
         DspRgateProxyVst *dspRgateProxy;
         DspBitcrasherProxyVst *dspBitcrasherProxy;
 };

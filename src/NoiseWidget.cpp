@@ -29,7 +29,8 @@
 #include "RkContainer.h"
 #include "RkButton.h"
 
-RK_DECLARE_IMAGE_RC(noise_label);
+RK_DECLARE_IMAGE_RC(noise1_label);
+RK_DECLARE_IMAGE_RC(noise2_label);
 RK_DECLARE_IMAGE_RC(switch_button_on);
 RK_DECLARE_IMAGE_RC(switch_button_off);
 RK_DECLARE_IMAGE_RC(knob_big_size_bk);
@@ -95,6 +96,10 @@ NoiseWidget::~NoiseWidget()
 
 void NoiseWidget::createView()
 {
+        auto model = static_cast<NoiseModel*>(getModel());
+        if (!model)
+                return;
+
         auto mainContainer = new RkContainer(this, Rk::Orientation::Vertical);
         mainContainer->addSpace(8);
 
@@ -117,7 +122,9 @@ void NoiseWidget::createView()
         topContianer->addSpace(10);
         auto noiseLabel = new RkLabel(this);
         noiseLabel->setBackgroundColor(background());
-        noiseLabel->setImage(RK_RC_IMAGE(noise_label));
+        noiseLabel->setImage(model->getId() == NoiseId::Noise1
+                             ? RK_RC_IMAGE(noise1_label)
+                             : RK_RC_IMAGE(noise2_label));
         noiseLabel->show();
         topContianer->addWidget(noiseLabel);
 

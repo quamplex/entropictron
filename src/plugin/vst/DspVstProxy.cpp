@@ -47,12 +47,7 @@ DspProxyVst::DspProxyVst(EntVstController *controller)
         , dspCrackle2Proxy {new DspCrackleProxyVst(this,
                                                    controller,
                                                    CrackleId::Crackle2)}
-        , dspGlitch1Proxy {new DspGlitchProxyVst(this,
-                                                 controller,
-                                                 GlitchId::Glitch1)}
-        , dspGlitch2Proxy {new DspGlitchProxyVst(this,
-                                                 controller,
-                                                 GlitchId::Glitch2)}
+        , dspGlitchProxy {new DspGlitchProxyVst(this, controller)}
         , dspRgateProxy {new DspRgateProxyVst(this, controller)}
         , dspBitcrasherProxy {new DspBitcrasherProxyVst(this, controller)}
 {
@@ -151,16 +146,9 @@ DspCrackleProxy* DspProxyVst::getCrackle(CrackleId id) const
         }
 }
 
-DspGlitchProxy* DspProxyVst::getGlitch(GlitchId id) const
+DspGlitchProxy* DspProxyVst::getGlitch() const
 {
-        switch(id) {
-        case GlitchId::Glitch1:
-                return dspGlitch1Proxy;
-        case GlitchId::Glitch2:
-                return dspGlitch2Proxy;
-        default:
-                return nullptr;
-        }
+        return dspGlitchProxy;
 }
 
 DspRgateProxy* DspProxyVst::getRgate() const

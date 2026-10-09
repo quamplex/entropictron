@@ -147,38 +147,21 @@ EntVstController::initialize(FUnknown* context)
                            DspCrackleProxyVst::envelopeShapeToNormalized(CrackleEnvelopeShape::Exponential));
         setParamNormalized(ParameterId::Crackle2StereoSpreadId, 0.0);
 
-        // Glitch1
-        setParamNormalized(ParameterId::Glitch1EnabledId, 0);
-        setParamNormalized(ParameterId::Glitch1RepeatsId,
+        // Glitch
+        setParamNormalized(ParameterId::GlitchEnabledId, 0);
+        setParamNormalized(ParameterId::GlitchRepeatsId,
                            DspGlitchProxyVst::repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
-        setParamNormalized(ParameterId::Glitch1ProbabilityId,
+        setParamNormalized(ParameterId::GlitchProbabilityId,
                            DspGlitchProxyVst::probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
-        setParamNormalized(ParameterId::Glitch1LengthId,
+        setParamNormalized(ParameterId::GlitchLengthId,
                            DspGlitchProxyVst::lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
-        setParamNormalized(ParameterId::Glitch1MinJumpId,
+        setParamNormalized(ParameterId::GlitchMinJumpId,
                            DspGlitchProxyVst::minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
-        setParamNormalized(ParameterId::Glitch1MaxJumpId,
+        setParamNormalized(ParameterId::GlitchMaxJumpId,
                            DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
-        setParamNormalized(ParameterId::Glitch1DryId,
+        setParamNormalized(ParameterId::GlitchDryId,
                            DspGlitchProxyVst::dryToNormalized(ENT_GLITCH_DEFAULT_DRY));
-        setParamNormalized(ParameterId::Glitch1WetId,
-                           DspGlitchProxyVst::wetToNormalized(ENT_GLITCH_DEFAULT_WET));
-
-        // Glitch2
-        setParamNormalized(ParameterId::Glitch2EnabledId, 0);
-        setParamNormalized(ParameterId::Glitch2RepeatsId,
-                           DspGlitchProxyVst::repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS));
-        setParamNormalized(ParameterId::Glitch2ProbabilityId,
-                           DspGlitchProxyVst::probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB));
-        setParamNormalized(ParameterId::Glitch2LengthId,
-                           DspGlitchProxyVst::lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH));
-        setParamNormalized(ParameterId::Glitch2MinJumpId,
-                           DspGlitchProxyVst::minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP));
-        setParamNormalized(ParameterId::Glitch2MaxJumpId,
-                           DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP));
-        setParamNormalized(ParameterId::Glitch2DryId,
-                           DspGlitchProxyVst::dryToNormalized(ENT_GLITCH_DEFAULT_DRY));
-        setParamNormalized(ParameterId::Glitch2WetId,
+        setParamNormalized(ParameterId::GlitchWetId,
                            DspGlitchProxyVst::wetToNormalized(ENT_GLITCH_DEFAULT_WET));
 
         // Rgate
@@ -354,43 +337,22 @@ void EntVstController::setCrackleState(const EntState& state)
 
 void EntVstController::setGlitchState(const EntState &state)
 {
-        {
-                const auto& glitch = state.glitch[static_cast<size_t>(GlitchId::Glitch1)];
-                setParamNormalized (ParameterId::Glitch1EnabledId, glitch.enabled);
-                setParamNormalized (ParameterId::Glitch1RepeatsId,
-                                    DspGlitchProxyVst::repeatsToNormalized(glitch.repeats));
-                setParamNormalized (ParameterId::Glitch1ProbabilityId,
-                                    DspGlitchProxyVst::probabilityToNormalized(glitch.probability));
-                setParamNormalized (ParameterId::Glitch1LengthId,
-                                    DspGlitchProxyVst::lengthToNormalized(glitch.length));
-                setParamNormalized (ParameterId::Glitch1MinJumpId,
-                                    DspGlitchProxyVst::minJumpToNormalized(glitch.min_jump));
-                setParamNormalized (ParameterId::Glitch1MaxJumpId,
-                                    DspGlitchProxyVst::maxJumpToNormalized(glitch.max_jump));
-                setParamNormalized (ParameterId::Glitch1DryId,
-                                    DspGlitchProxyVst::dryToNormalized(glitch.dry));
-                setParamNormalized (ParameterId::Glitch1WetId,
-                                    DspGlitchProxyVst::dryToNormalized(glitch.wet));
-        }
-
-        {
-                const auto& glitch = state.glitch[static_cast<size_t>(GlitchId::Glitch2)];
-                setParamNormalized (ParameterId::Glitch2EnabledId, glitch.enabled);
-                setParamNormalized (ParameterId::Glitch2RepeatsId,
-                                    DspGlitchProxyVst::repeatsToNormalized(glitch.repeats));
-                setParamNormalized (ParameterId::Glitch2ProbabilityId,
-                                    DspGlitchProxyVst::probabilityToNormalized(glitch.probability));
-                setParamNormalized (ParameterId::Glitch2LengthId,
-                                    DspGlitchProxyVst::lengthToNormalized(glitch.length));
-                setParamNormalized (ParameterId::Glitch2MinJumpId,
-                                    DspGlitchProxyVst::minJumpToNormalized(glitch.min_jump));
-                setParamNormalized (ParameterId::Glitch2MaxJumpId,
-                                    DspGlitchProxyVst::maxJumpToNormalized(glitch.max_jump));
-                setParamNormalized (ParameterId::Glitch2DryId,
-                                    DspGlitchProxyVst::dryToNormalized(glitch.dry));
-                setParamNormalized (ParameterId::Glitch2WetId,
-                                    DspGlitchProxyVst::dryToNormalized(glitch.wet));
-        }
+        const auto& glitch = state.glitch;
+        setParamNormalized (ParameterId::GlitchEnabledId, glitch.enabled);
+        setParamNormalized (ParameterId::GlitchRepeatsId,
+                            DspGlitchProxyVst::repeatsToNormalized(glitch.repeats));
+        setParamNormalized (ParameterId::GlitchProbabilityId,
+                            DspGlitchProxyVst::probabilityToNormalized(glitch.probability));
+        setParamNormalized (ParameterId::GlitchLengthId,
+                            DspGlitchProxyVst::lengthToNormalized(glitch.length));
+        setParamNormalized (ParameterId::GlitchMinJumpId,
+                            DspGlitchProxyVst::minJumpToNormalized(glitch.min_jump));
+        setParamNormalized (ParameterId::GlitchMaxJumpId,
+                            DspGlitchProxyVst::maxJumpToNormalized(glitch.max_jump));
+        setParamNormalized (ParameterId::GlitchDryId,
+                            DspGlitchProxyVst::dryToNormalized(glitch.dry));
+        setParamNormalized (ParameterId::GlitchWetId,
+                            DspGlitchProxyVst::dryToNormalized(glitch.wet));
 }
 
 void EntVstController::setRgateState(const EntState &state)
@@ -621,111 +583,52 @@ void EntVstController::addCrackleParameters()
 
 void EntVstController::addGlitchParameters()
 {
-        // Glitch1 Enabled (On/Off)
-        parameters.addParameter(STR16("Glitch1 Enabled"),
+        parameters.addParameter(STR16("Glitch Enabled"),
                                 nullptr, 2, 0.0,
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch1EnabledId);
+                                ParameterId::GlitchEnabledId);
 
-        // Glitch1 Repeats
-        parameters.addParameter(STR16("Glitch1 Repeats"),
+        parameters.addParameter(STR16("Glitch Repeats"),
                                 nullptr, 10,
                                 DspGlitchProxyVst::repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS),
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch1RepeatsId);
+                                ParameterId::GlitchRepeatsId);
 
-        // Glitch1 Probability
-        parameters.addParameter(STR16("Glitch1 Probability"),
+        parameters.addParameter(STR16("Glitch Probability"),
                                 STR16("%"), 0,
                                 DspGlitchProxyVst::probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB),
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch1ProbabilityId);
+                                ParameterId::GlitchProbabilityId);
 
-        // Glitch1 Length (ms)
-        parameters.addParameter(STR16("Glitch1 Length"),
+        parameters.addParameter(STR16("Glitch Length"),
                                 STR16("ms"), 0,
                                 DspGlitchProxyVst::lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH),
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch1LengthId);
+                                ParameterId::GlitchLengthId);
 
-        // Glitch1 Min Jump Time (ms)
         parameters.addParameter(STR16("Min Jump Time"),
                                 STR16("ms"), 0,
                                 DspGlitchProxyVst::minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP),
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch1MinJumpId);
+                                ParameterId::GlitchMinJumpId);
 
-        // Glitch1 Max Jump Time (ms)
         parameters.addParameter(STR16("Max Jum Time"),
                                 STR16("ms"), 0,
                                 DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP),
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch1MaxJumpId);
+                                ParameterId::GlitchMaxJumpId);
 
-        parameters.addParameter(STR16("Glitch2 Dry"),
+        parameters.addParameter(STR16("Glitch Dry"),
                                 nullptr, 0,
                                 DspGlitchProxyVst::dryToNormalized(ENT_GLITCH_DEFAULT_DRY),
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch2DryId);
+                                ParameterId::GlitchDryId);
 
-        parameters.addParameter(STR16("Glitch2 Wet"),
+        parameters.addParameter(STR16("Glitch Wet"),
                                 nullptr, 0,
                                 DspGlitchProxyVst::wetToNormalized(ENT_GLITCH_DEFAULT_WET),
                                 ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch2WetId);
-
-        // Glitch2 Enabled (On/Off)
-        parameters.addParameter(STR16("Glitch2 Enabled"),
-                                nullptr, 2, 0.0,
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch2EnabledId);
-
-        // Glitch2 Repeats
-        parameters.addParameter(STR16("Glitch2 Repeats"),
-                                nullptr, 10,
-                                DspGlitchProxyVst::repeatsToNormalized(ENT_GLITCH_DEFAULT_REPEATS),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch2RepeatsId);
-
-        // Glitch2 Probability
-        parameters.addParameter(STR16("Glitch2 Probability"),
-                                STR16("%"), 0,
-                                DspGlitchProxyVst::probabilityToNormalized(ENT_GLITCH_DEFAULT_PROB),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch2ProbabilityId);
-
-        // Glitch2 Length (ms)
-        parameters.addParameter(STR16("Glitch2 Length"),
-                                STR16("ms"), 0,
-                                DspGlitchProxyVst::lengthToNormalized(ENT_GLITCH_DEFAULT_LENGH),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch2LengthId);
-
-        // Glitch2 Min Jump Time (ms)
-        parameters.addParameter(STR16("Glitch2 Min Jump Time"),
-                                STR16("ms"), 0,
-                                DspGlitchProxyVst::minJumpToNormalized(ENT_GLITCH_DEFAULT_MIN_JUMP),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch2MinJumpId);
-
-        // Glitch2 Max Jump Time (ms)
-        parameters.addParameter(STR16("Glitch2 Max Jum Time"),
-                                STR16("ms"), 0,
-                                DspGlitchProxyVst::maxJumpToNormalized(ENT_GLITCH_DEFAULT_MAX_JUMP),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch2MaxJumpId);
-
-        parameters.addParameter(STR16("Glitch2 Dry"),
-                                nullptr, 0,
-                                DspGlitchProxyVst::dryToNormalized(ENT_GLITCH_DEFAULT_DRY),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch2DryId);
-
-        parameters.addParameter(STR16("Glitch2 Wet"),
-                                nullptr, 0,
-                                DspGlitchProxyVst::wetToNormalized(ENT_GLITCH_DEFAULT_WET),
-                                ParameterInfo::kCanAutomate,
-                                ParameterId::Glitch2WetId);
+                                ParameterId::GlitchWetId);
 }
 
 void EntVstController::addRgateParameters()

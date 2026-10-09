@@ -16649,6 +16649,678 @@
        y1="153.87822"
        x2="56.51115"
        y2="161.07552" />
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-2-6-7-0-4-0-3-5-3"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-9-18-3-7-1-2-6-6-6" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-8-7-7-5-3-8-3-4-3"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-85-92-21-8-5-4-5-5-5" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter6448-1-0-3-7-6-3-6-2-6"
+       x="-0.19422723"
+       y="-0.51567722"
+       width="1.3884545"
+       height="2.0313544">
+      <feGaussianBlur
+         stdDeviation="1.3281853"
+         id="feGaussianBlur6450-5-23-4-0-5-1-2-5-29" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter9225-4-1"
+       x="-0.051629902"
+       y="-0.26351581"
+       width="1.1032598"
+       height="1.5270316">
+      <feGaussianBlur
+         stdDeviation="0.2294377"
+         id="feGaussianBlur9227-7-2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-2-6-7-0-4-0-3-5-8-7"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-9-18-3-7-1-2-6-6-4-0" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-8-7-7-5-3-8-3-4-9-3"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-85-92-21-8-5-4-5-5-2-6" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter6448-1-0-3-7-6-3-6-2-0-0"
+       x="-0.19422723"
+       y="-0.51567722"
+       width="1.3884545"
+       height="2.0313544">
+      <feGaussianBlur
+         stdDeviation="1.3281853"
+         id="feGaussianBlur6450-5-23-4-0-5-1-2-5-6-6" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter9225-4-8-2"
+       x="-0.051629902"
+       y="-0.26351581"
+       width="1.1032598"
+       height="1.5270316">
+      <feGaussianBlur
+         stdDeviation="0.2294377"
+         id="feGaussianBlur9227-7-9-6" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-2-6-7-0-4-0-3-5-4-1"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-9-18-3-7-1-2-6-6-8-8" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-8-7-7-5-3-8-3-4-2-9"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-85-92-21-8-5-4-5-5-7-2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter6448-1-0-3-7-6-3-6-2-2-0"
+       x="-0.19422723"
+       y="-0.51567722"
+       width="1.3884545"
+       height="2.0313544">
+      <feGaussianBlur
+         stdDeviation="1.3281853"
+         id="feGaussianBlur6450-5-23-4-0-5-1-2-5-2-2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter9225-4-6-3"
+       x="-0.047696422"
+       y="-0.26351581"
+       width="1.0953928"
+       height="1.5270316">
+      <feGaussianBlur
+         stdDeviation="0.2294377"
+         id="feGaussianBlur9227-7-1-7" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-70-2-1-0-0-1-5"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-93-4-4-25-9-7-9" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-60-0-9-6-3-1-2"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-62-5-1-9-6-1-8" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-70-2-1-2-1-0-5-9"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-93-4-4-2-9-6-9-7" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-60-0-9-0-7-2-7-6"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-62-5-1-4-6-6-6-1" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-2-6-7-0-4-0-3-5-4-3-2"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-9-18-3-7-1-2-6-6-8-6-9" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-8-7-7-5-3-8-3-4-2-5-3"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-85-92-21-8-5-4-5-5-7-6-1" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter6448-1-0-3-7-6-3-6-2-2-2-9"
+       x="-0.19422723"
+       y="-0.51567722"
+       width="1.3884545"
+       height="2.0313544">
+      <feGaussianBlur
+         stdDeviation="1.3281853"
+         id="feGaussianBlur6450-5-23-4-0-5-1-2-5-2-9-4" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter9225-4-6-1-7"
+       x="-0.047696422"
+       y="-0.26351581"
+       width="1.0953928"
+       height="1.5270316">
+      <feGaussianBlur
+         stdDeviation="0.2294377"
+         id="feGaussianBlur9227-7-1-2-8" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-70-2-1-0-0-4"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-93-4-4-25-9-5" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-60-0-9-6-3-3"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-62-5-1-9-6-6" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-70-2-1-2-1-0-1"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-93-4-4-2-9-6-0" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-60-0-9-0-7-2-3"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-62-5-1-4-6-6-2" />
+    </filter>
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient9"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient10"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient11"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient23"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient24"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient25"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient26"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient27"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-2-6-7-0-4-0-3-5-3-6"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-9-18-3-7-1-2-6-6-6-1" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-8-7-7-5-3-8-3-4-3-4"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-85-92-21-8-5-4-5-5-5-7" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter6448-1-0-3-7-6-3-6-2-6-6"
+       x="-0.19422723"
+       y="-0.51567722"
+       width="1.3884545"
+       height="2.0313544">
+      <feGaussianBlur
+         stdDeviation="1.3281853"
+         id="feGaussianBlur6450-5-23-4-0-5-1-2-5-29-5" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter9225-4-1-6"
+       x="-0.051734601"
+       y="-0.26351581"
+       width="1.1034692"
+       height="1.5270316">
+      <feGaussianBlur
+         stdDeviation="0.2294377"
+         id="feGaussianBlur9227-7-2-9" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-2-6-7-0-4-0-3-5-8-7-3"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-9-18-3-7-1-2-6-6-4-0-7" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-8-7-7-5-3-8-3-4-9-3-5"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-85-92-21-8-5-4-5-5-2-6-2" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter6448-1-0-3-7-6-3-6-2-0-0-5"
+       x="-0.19422723"
+       y="-0.51567722"
+       width="1.3884545"
+       height="2.0313544">
+      <feGaussianBlur
+         stdDeviation="1.3281853"
+         id="feGaussianBlur6450-5-23-4-0-5-1-2-5-6-6-4" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter9225-4-8-2-7"
+       x="-0.051734601"
+       y="-0.26351581"
+       width="1.1034692"
+       height="1.5270316">
+      <feGaussianBlur
+         stdDeviation="0.2294377"
+         id="feGaussianBlur9227-7-9-6-4" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-70-2-1-0-0-4-4"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-93-4-4-25-9-5-3" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-60-0-9-6-3-3-7"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-62-5-1-9-6-6-8" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-70-2-1-2-1-0-1-6"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-93-4-4-2-9-6-0-8" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-60-0-9-0-7-2-3-4"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-62-5-1-4-6-6-2-3" />
+    </filter>
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient28"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient29"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient30"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient31"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-2-6-7-0-4-0-3-5-4-1-1"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-9-18-3-7-1-2-6-6-8-8-0" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-8-7-7-5-3-8-3-4-2-9-5"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-85-92-21-8-5-4-5-5-7-2-9" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter6448-1-0-3-7-6-3-6-2-2-0-4"
+       x="-0.19422723"
+       y="-0.51567722"
+       width="1.3884545"
+       height="2.0313544">
+      <feGaussianBlur
+         stdDeviation="1.3281853"
+         id="feGaussianBlur6450-5-23-4-0-5-1-2-5-2-2-9" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter9225-4-6-3-0"
+       x="-0.047785762"
+       y="-0.26351581"
+       width="1.0955715"
+       height="1.5270316">
+      <feGaussianBlur
+         stdDeviation="0.2294377"
+         id="feGaussianBlur9227-7-1-7-9" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-70-2-1-0-0-1-5-1"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-93-4-4-25-9-7-9-7" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-60-0-9-6-3-1-2-1"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-62-5-1-9-6-1-8-1" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-70-2-1-2-1-0-5-9-5"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-93-4-4-2-9-6-9-7-9" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-60-0-9-0-7-2-7-6-7"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-62-5-1-4-6-6-6-1-6" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter5307-3-9-2-6-7-0-4-0-3-5-4-3-2-7"
+       x="-0.13909742"
+       y="-0.32456064"
+       width="1.2781948"
+       height="1.6491213">
+      <feGaussianBlur
+         stdDeviation="1.0547973"
+         id="feGaussianBlur5309-6-2-9-18-3-7-1-2-6-6-8-6-9-3" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter1673-5-8-8-7-7-5-3-8-3-4-2-5-3-5"
+       x="-0.027776653"
+       y="-0.067146836"
+       width="1.0555533"
+       height="1.1342937">
+      <feGaussianBlur
+         stdDeviation="0.17110957"
+         id="feGaussianBlur1675-6-9-85-92-21-8-5-4-5-5-7-6-1-6" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter6448-1-0-3-7-6-3-6-2-2-2-9-3"
+       x="-0.19422723"
+       y="-0.51567722"
+       width="1.3884545"
+       height="2.0313544">
+      <feGaussianBlur
+         stdDeviation="1.3281853"
+         id="feGaussianBlur6450-5-23-4-0-5-1-2-5-2-9-4-9" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter9225-4-6-1-7-4"
+       x="-0.047785762"
+       y="-0.26351581"
+       width="1.0955715"
+       height="1.5270316">
+      <feGaussianBlur
+         stdDeviation="0.2294377"
+         id="feGaussianBlur9227-7-1-2-8-8" />
+    </filter>
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient32"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient33"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient34"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
+    <linearGradient
+       xlink:href="#linearGradient1543"
+       id="linearGradient35"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0398424,0,0,1.0036878,-4.8190361,2.0266668)"
+       x1="56.619991"
+       y1="153.87822"
+       x2="56.51115"
+       y2="161.07552" />
   </defs>
   <g
      id="g1164" />
@@ -26906,13 +27578,13 @@
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:1.30212px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.261121;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
-     x="79.081635"
-     y="213.79883"
+     x="76.183403"
+     y="205.38014"
      id="text20130-6-9-9"><tspan
        id="tspan20128-0-7-2"
        style="fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.261121;stroke-opacity:1"
-       x="79.081635"
-       y="213.79883">CRACKLE</tspan></text>
+       x="76.183403"
+       y="205.38014">CRACKLE 2</tspan></text>
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:1.30212px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.261121;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
@@ -29821,292 +30493,6 @@
      ry="1.5875"
      fill="#3a3f47"
      stroke="#2a2e34"
-     id="rect18943-5-2-5-96-3-3-4-7-1-9-4"
-     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5)"
-     transform="matrix(0.1770453,0,0,0.13653895,107.17993,229.5489)" />
-  <rect
-     x="116.73832"
-     y="252.55418"
-     width="3.2648072"
-     height="1.0133313"
-     rx="0.27061984"
-     ry="0.27061984"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-9-0-3-6-1-1-6-1-2-3"
-     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
-  <rect
-     x="54.343487"
-     y="157.40337"
-     width="18.256878"
-     height="7.5523286"
-     rx="1.5135188"
-     ry="1.882265"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-3-1-3-85-1-2-1-3-4-0-0"
-     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient9318);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4)"
-     transform="matrix(0.1734912,0,0,0.13950331,107.3589,230.57578)" />
-  <rect
-     x="45.344532"
-     y="182.03563"
-     width="16.97802"
-     height="6.3946857"
-     rx="1.4073995"
-     ry="1.2368766"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-1-6-6-5-0-7-3-7-0-2-7"
-     style="opacity:0.961247;fill:#d9d900;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2)"
-     transform="matrix(0.17703163,0,0,0.15276794,108.84048,224.76321)" />
-  <text
-     x="64.59391"
-     y="163.00067"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="2.76279px"
-     fill="#cccccc"
-     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8"
-     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4)"
-     transform="matrix(0.22337084,0,0,0.22337084,103.93177,216.87591)">NOISE</text>
-  <text
-     x="118.36018"
-     y="253.28549"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="0.617127px"
-     fill="#cccccc"
-     id="text18945-78-6-6-5-3-7-5-6-1-3-68"
-     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273">NOISE</text>
-  <rect
-     x="53.633308"
-     y="168.09592"
-     width="19.150642"
-     height="8.2074184"
-     rx="1.5875"
-     ry="1.5875"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-5-2-5-96-3-3-4-7-1-9-4-6"
-     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-8)"
-     transform="matrix(0.1770453,0,0,0.13653895,107.17993,226.1799)" />
-  <rect
-     x="116.73832"
-     y="249.1852"
-     width="3.2648072"
-     height="1.0133313"
-     rx="0.27061984"
-     ry="0.27061984"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-9-0-3-6-1-1-6-1-2-3-6"
-     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
-  <rect
-     x="54.343487"
-     y="157.40337"
-     width="18.256878"
-     height="7.5523286"
-     rx="1.5135188"
-     ry="1.882265"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-3-1-3-85-1-2-1-3-4-0-0-4"
-     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient9416);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4-9)"
-     transform="matrix(0.1734912,0,0,0.13950331,107.3589,227.20678)" />
-  <rect
-     x="45.344532"
-     y="182.03563"
-     width="16.97802"
-     height="6.3946857"
-     rx="1.4073995"
-     ry="1.2368766"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-1-6-6-5-0-7-3-7-0-2-7-9"
-     style="opacity:0.961247;fill:#fbff00;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2-0)"
-     transform="matrix(0.17703163,0,0,0.15276794,108.84048,221.3942)" />
-  <text
-     x="64.59391"
-     y="147.91812"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="2.76279px"
-     fill="#cccccc"
-     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8-5"
-     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4-8)"
-     transform="matrix(0.22337084,0,0,0.22337084,103.93177,216.87591)">NOISE</text>
-  <text
-     x="118.36018"
-     y="249.9165"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="0.617127px"
-     fill="#cccccc"
-     id="text18945-78-6-6-5-3-7-5-6-1-3-68-0"
-     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273">NOISE</text>
-  <rect
-     x="53.633308"
-     y="168.09592"
-     width="19.150642"
-     height="8.2074184"
-     rx="1.5875"
-     ry="1.5875"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-5-2-5-96-3-3-4-7-1-9-4-3"
-     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-4)"
-     transform="matrix(0.1770453,0,0,0.13653895,115.5341,229.5489)" />
-  <rect
-     x="125.09248"
-     y="252.55418"
-     width="3.2648072"
-     height="1.0133313"
-     rx="0.27061984"
-     ry="0.27061984"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-9-0-3-6-1-1-6-1-2-3-65"
-     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
-  <rect
-     x="54.343487"
-     y="157.40337"
-     width="18.256878"
-     height="7.5523286"
-     rx="1.5135188"
-     ry="1.882265"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-3-1-3-85-1-2-1-3-4-0-0-6"
-     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient9708);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4-2)"
-     transform="matrix(0.1734912,0,0,0.13950331,115.71307,230.57578)" />
-  <rect
-     x="45.344532"
-     y="182.03563"
-     width="16.97802"
-     height="6.3946857"
-     rx="1.4073995"
-     ry="1.2368766"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-1-6-6-5-0-7-3-7-0-2-7-3"
-     style="opacity:0.961247;fill:#d9d900;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2-2)"
-     transform="matrix(0.17703163,0,0,0.15276794,117.19465,224.76321)" />
-  <text
-     x="101.6711"
-     y="161.86015"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="2.76279px"
-     fill="#cccccc"
-     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8-9"
-     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4-6)"
-     transform="matrix(0.22337084,0,0,0.22337084,104.01694,217.13067)">CRACKLE</text>
-  <text
-     x="126.7273"
-     y="253.28549"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="0.617127px"
-     fill="#cccccc"
-     id="text18945-78-6-6-5-3-7-5-6-1-3-68-4"
-     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273">CRACKLE</text>
-  <rect
-     x="53.633308"
-     y="168.09592"
-     width="19.150642"
-     height="8.2074184"
-     rx="1.5875"
-     ry="1.5875"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-5-2-5-93-7-7-0-3-5"
-     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-0-0-1)"
-     transform="matrix(0.1770453,0,0,0.13653895,115.5341,223.4371)" />
-  <rect
-     x="125.09248"
-     y="246.44238"
-     width="3.2648072"
-     height="1.0133313"
-     rx="0.27061984"
-     ry="0.27061984"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-9-0-19-4-6-9-6-0"
-     style="fill:#585858;fill-opacity:1;stroke-width:0.0383861;stroke-dasharray:none" />
-  <rect
-     x="54.343487"
-     y="157.40337"
-     width="18.256878"
-     height="7.5523286"
-     rx="1.5135188"
-     ry="1.882265"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-3-1-3-47-3-3-1-1-9"
-     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient9704);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-6-3-1)"
-     transform="matrix(0.1734912,0,0,0.13950331,115.71307,224.46398)" />
-  <text
-     x="126.7273"
-     y="247.17369"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="0.617127px"
-     fill="#cccccc"
-     id="text18945-78-6-8-5-5-24-2-6"
-     style="stroke-width:0.0514273">CRACKLE</text>
-  <rect
-     x="53.633308"
-     y="168.09592"
-     width="19.150642"
-     height="8.2074184"
-     rx="1.5875"
-     ry="1.5875"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-5-2-5-93-7-7-4-1-1-5"
-     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-2-1-0-5)"
-     transform="matrix(0.1770453,0,0,0.13653895,115.5341,220.25398)" />
-  <rect
-     x="125.09248"
-     y="243.25926"
-     width="3.2648072"
-     height="1.0133313"
-     rx="0.27061984"
-     ry="0.27061984"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-9-0-19-4-6-0-4-9-6"
-     style="stroke-width:0.0383861;stroke-dasharray:none" />
-  <rect
-     x="54.343487"
-     y="157.40337"
-     width="18.256878"
-     height="7.5523286"
-     rx="1.5135188"
-     ry="1.882265"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-3-1-3-47-3-3-3-4-4-1"
-     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient9706);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-0-7-2-7)"
-     transform="matrix(0.1734912,0,0,0.13950331,115.71307,221.28085)" />
-  <text
-     x="126.7273"
-     y="243.99057"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="0.617127px"
-     fill="#cccccc"
-     id="text18945-78-6-8-5-5-2-3-7-1"
-     style="stroke-width:0.0514273">CRACKLE</text>
-  <rect
-     x="53.633308"
-     y="168.09592"
-     width="19.150642"
-     height="8.2074184"
-     rx="1.5875"
-     ry="1.5875"
-     fill="#3a3f47"
-     stroke="#2a2e34"
      id="rect18943-5-2-5-96-3-3-4-7-1-9-4-7"
      style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-5)"
      transform="matrix(0.1770453,0,0,0.13653895,122.11369,229.54891)" />
@@ -30318,160 +30704,6 @@
      fill="#cccccc"
      id="text18945-78-6-8-5-5-2-3-7-4"
      style="stroke-width:0.0514273">GLITCH</text>
-  <rect
-     x="53.633308"
-     y="168.09592"
-     width="19.150642"
-     height="8.2074184"
-     rx="1.5875"
-     ry="1.5875"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-5-2-5-96-3-3-4-7-1-9-4-3-0"
-     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-4-3)"
-     transform="matrix(0.1770453,0,0,0.13653895,115.5341,226.1799)" />
-  <rect
-     x="125.09248"
-     y="249.1852"
-     width="3.2648072"
-     height="1.0133313"
-     rx="0.27061984"
-     ry="0.27061984"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-9-0-3-6-1-1-6-1-2-3-65-9"
-     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
-  <rect
-     x="54.343487"
-     y="157.40337"
-     width="18.256878"
-     height="7.5523286"
-     rx="1.5135188"
-     ry="1.882265"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-3-1-3-85-1-2-1-3-4-0-0-6-3"
-     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient4544);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4-2-5)"
-     transform="matrix(0.1734912,0,0,0.13950331,115.71307,227.20678)" />
-  <rect
-     x="45.344532"
-     y="182.03563"
-     width="16.97802"
-     height="6.3946857"
-     rx="1.4073995"
-     ry="1.2368766"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-1-6-6-5-0-7-3-7-0-2-7-3-6"
-     style="opacity:0.961247;fill:#fbff00;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2-2-2)"
-     transform="matrix(0.17703163,0,0,0.15276794,117.19465,221.3942)" />
-  <text
-     x="102.43613"
-     y="146.6403"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="2.76279px"
-     fill="#cccccc"
-     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8-9-0"
-     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4-6-1)"
-     transform="matrix(0.22337084,0,0,0.22337084,103.84605,217.16134)">CRACKLE</text>
-  <text
-     x="126.7273"
-     y="249.9165"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="0.617127px"
-     fill="#cccccc"
-     id="text18945-78-6-6-5-3-7-5-6-1-3-68-4-6"
-     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273">CRACKLE</text>
-  <rect
-     x="53.633308"
-     y="168.09592"
-     width="19.150642"
-     height="8.2074184"
-     rx="1.5875"
-     ry="1.5875"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-5-2-5-93-7-7-0-3"
-     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-0-0)"
-     transform="matrix(0.1770453,0,0,0.13653895,107.17993,223.4371)" />
-  <rect
-     x="116.73832"
-     y="246.44238"
-     width="3.2648072"
-     height="1.0133313"
-     rx="0.27061984"
-     ry="0.27061981"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-9-0-19-4-6-9-6"
-     style="fill:#585858;fill-opacity:1;stroke-width:0.038386;stroke-dasharray:none" />
-  <rect
-     x="54.343487"
-     y="157.40337"
-     width="18.256878"
-     height="7.5523286"
-     rx="1.5135188"
-     ry="1.882265"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-3-1-3-47-3-3-1-1"
-     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient4321);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-6-3)"
-     transform="matrix(0.17349119,0,0,0.13950331,107.3589,224.46398)" />
-  <text
-     x="118.36018"
-     y="247.17369"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="0.617127px"
-     fill="#cccccc"
-     id="text18945-78-6-8-5-5-24-2"
-     style="stroke-width:0.0514273">NOISE</text>
-  <rect
-     x="53.633308"
-     y="168.09592"
-     width="19.150642"
-     height="8.2074184"
-     rx="1.5875"
-     ry="1.5875"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-5-2-5-93-7-7-4-1-1"
-     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-2-1-0)"
-     transform="matrix(0.1770453,0,0,0.13653895,107.17993,220.25398)" />
-  <rect
-     x="116.73832"
-     y="243.25926"
-     width="3.2648072"
-     height="1.0133313"
-     rx="0.27061984"
-     ry="0.27061981"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-9-0-19-4-6-0-4-9"
-     style="stroke-width:0.038386;stroke-dasharray:none" />
-  <rect
-     x="54.343487"
-     y="157.40337"
-     width="18.256878"
-     height="7.5523286"
-     rx="1.5135188"
-     ry="1.882265"
-     fill="#3a3f47"
-     stroke="#2a2e34"
-     id="rect18943-3-1-3-47-3-3-3-4-4"
-     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient4323);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-0-7-2)"
-     transform="matrix(0.17349119,0,0,0.13950331,107.3589,221.28085)" />
-  <text
-     x="118.36018"
-     y="243.99057"
-     text-anchor="middle"
-     font-family="Inter, sans-serif"
-     font-size="0.617127px"
-     fill="#cccccc"
-     id="text18945-78-6-8-5-5-2-3-7"
-     style="stroke-width:0.0514273">NOISE</text>
   <g
      id="g22446-4-6-0-9-5-1-3"
      transform="matrix(0.22337084,0,0,0.22337084,96.883041,218.67857)">
@@ -32830,4 +33062,921 @@
      fill="#cccccc"
      id="text18945-78-6-6-5-3-7-5-6-1-3-68-3-7-2"
      style="fill:#000000;fill-opacity:1;stroke-width:0.0514273">BIT</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-96-3-3-4-7-1-9-4"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-3)"
+     transform="matrix(0.1770453,0,0,0.13653895,109.50942,251.55491)" />
+  <rect
+     x="119.06781"
+     y="274.56018"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-3-6-1-1-6-1-2-3"
+     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-85-1-2-1-3-4-0-0"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient9);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4-3)"
+     transform="matrix(0.1734912,0,0,0.13950331,109.68839,252.58179)" />
+  <rect
+     x="45.344532"
+     y="182.03563"
+     width="16.97802"
+     height="6.3946857"
+     rx="1.4073995"
+     ry="1.2368766"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-1-6-6-5-0-7-3-7-0-2-7"
+     style="opacity:0.961247;fill:#d9d900;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2-6)"
+     transform="matrix(0.17703163,0,0,0.15276794,111.16997,246.76922)" />
+  <text
+     x="64.59391"
+     y="163.00067"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="2.76279px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4-1)"
+     transform="matrix(0.22337084,0,0,0.22337084,106.26126,238.88192)">NOISE 1</text>
+  <text
+     x="120.68967"
+     y="275.2915"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-68"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273">NOISE 1</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-96-3-3-4-7-1-9-4-6"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-8-7)"
+     transform="matrix(0.1770453,0,0,0.13653895,109.50942,248.18591)" />
+  <rect
+     x="119.06781"
+     y="271.19119"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-3-6-1-1-6-1-2-3-6"
+     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-85-1-2-1-3-4-0-0-4"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient10);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4-9-3)"
+     transform="matrix(0.1734912,0,0,0.13950331,109.68839,249.21279)" />
+  <rect
+     x="45.344532"
+     y="182.03563"
+     width="16.97802"
+     height="6.3946857"
+     rx="1.4073995"
+     ry="1.2368766"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-1-6-6-5-0-7-3-7-0-2-7-9"
+     style="opacity:0.961247;fill:#fbff00;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2-0-0)"
+     transform="matrix(0.17703163,0,0,0.15276794,111.16997,243.40021)" />
+  <text
+     x="64.59391"
+     y="147.91812"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="2.76279px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8-5"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4-8-2)"
+     transform="matrix(0.22337084,0,0,0.22337084,106.26126,238.88192)">NOISE 1</text>
+  <text
+     x="120.68967"
+     y="271.92252"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-68-0"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273">NOISE 1</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-96-3-3-4-7-1-9-4-3"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-4-1)"
+     transform="matrix(0.1770453,0,0,0.13653895,123.66006,251.64692)" />
+  <rect
+     x="133.21843"
+     y="274.65219"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-3-6-1-1-6-1-2-3-65"
+     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-85-1-2-1-3-4-0-0-6"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient11);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4-2-9)"
+     transform="matrix(0.1734912,0,0,0.13950331,123.83903,252.6738)" />
+  <rect
+     x="45.344532"
+     y="182.03563"
+     width="16.97802"
+     height="6.3946857"
+     rx="1.4073995"
+     ry="1.2368766"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-1-6-6-5-0-7-3-7-0-2-7-3"
+     style="opacity:0.961247;fill:#d9d900;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2-2-0)"
+     transform="matrix(0.17703163,0,0,0.15276794,125.32061,246.86123)" />
+  <text
+     x="101.6711"
+     y="161.86015"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="2.76279px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8-9"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4-6-3)"
+     transform="matrix(0.22337084,0,0,0.22337084,112.1429,239.22869)">CRACK 1</text>
+  <text
+     x="134.85326"
+     y="275.38351"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-68-4"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273">CRACK 1</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-93-7-7-0-3-5"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-0-0-1-5)"
+     transform="matrix(0.1770453,0,0,0.13653895,123.66006,245.53512)" />
+  <rect
+     x="133.21843"
+     y="268.54041"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-19-4-6-9-6-0"
+     style="fill:#585858;fill-opacity:1;stroke-width:0.0383861;stroke-dasharray:none" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-47-3-3-1-1-9"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient23);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-6-3-1-2)"
+     transform="matrix(0.1734912,0,0,0.13950331,123.83903,246.562)" />
+  <text
+     x="134.85326"
+     y="269.2717"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-8-5-5-24-2-6"
+     style="stroke-width:0.0514273">CRACK 1</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-93-7-7-4-1-1-5"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-2-1-0-5-9)"
+     transform="matrix(0.1770453,0,0,0.13653895,123.66006,242.352)" />
+  <rect
+     x="133.21843"
+     y="265.35727"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-19-4-6-0-4-9-6"
+     style="stroke-width:0.0383861;stroke-dasharray:none" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-47-3-3-3-4-4-1"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient24);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-0-7-2-7-6)"
+     transform="matrix(0.1734912,0,0,0.13950331,123.83903,243.37887)" />
+  <text
+     x="134.85326"
+     y="266.08859"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-8-5-5-2-3-7-1"
+     style="stroke-width:0.0514273">CRACK 1</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-96-3-3-4-7-1-9-4-3-0"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-4-3-2)"
+     transform="matrix(0.1770453,0,0,0.13653895,123.66006,248.27792)" />
+  <rect
+     x="133.21843"
+     y="271.2832"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-3-6-1-1-6-1-2-3-65-9"
+     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-85-1-2-1-3-4-0-0-6-3"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient25);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4-2-5-3)"
+     transform="matrix(0.1734912,0,0,0.13950331,123.83903,249.3048)" />
+  <rect
+     x="45.344532"
+     y="182.03563"
+     width="16.97802"
+     height="6.3946857"
+     rx="1.4073995"
+     ry="1.2368766"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-1-6-6-5-0-7-3-7-0-2-7-3-6"
+     style="opacity:0.961247;fill:#fbff00;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2-2-2-9)"
+     transform="matrix(0.17703163,0,0,0.15276794,125.32061,243.49222)" />
+  <text
+     x="102.43613"
+     y="146.6403"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="2.76279px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8-9-0"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4-6-1-7)"
+     transform="matrix(0.22337084,0,0,0.22337084,111.97201,239.25936)">CRACK 1</text>
+  <text
+     x="134.85326"
+     y="272.01453"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-68-4-6"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273">CRACK 1</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-93-7-7-0-3"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-0-0-4)"
+     transform="matrix(0.1770453,0,0,0.13653895,109.50942,245.44311)" />
+  <rect
+     x="119.06781"
+     y="268.44839"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061981"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-19-4-6-9-6"
+     style="fill:#585858;fill-opacity:1;stroke-width:0.038386;stroke-dasharray:none" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-47-3-3-1-1"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient26);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-6-3-3)"
+     transform="matrix(0.17349119,0,0,0.13950331,109.68839,246.46999)" />
+  <text
+     x="120.68967"
+     y="269.17969"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-8-5-5-24-2"
+     style="stroke-width:0.0514273">NOISE 1</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-93-7-7-4-1-1"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-2-1-0-1)"
+     transform="matrix(0.1770453,0,0,0.13653895,109.50942,242.25999)" />
+  <rect
+     x="119.06781"
+     y="265.26526"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061981"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-19-4-6-0-4-9"
+     style="stroke-width:0.038386;stroke-dasharray:none" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-47-3-3-3-4-4"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient27);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-0-7-2-3)"
+     transform="matrix(0.17349119,0,0,0.13950331,109.68839,243.28686)" />
+  <text
+     x="120.68967"
+     y="265.99658"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-8-5-5-2-3-7"
+     style="stroke-width:0.0514273">NOISE 1</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-96-3-3-4-7-1-9-4-4"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-3-6)"
+     transform="matrix(0.1770453,0,0,0.13653895,115.74429,251.81973)" />
+  <rect
+     x="125.30268"
+     y="274.82501"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-3-6-1-1-6-1-2-3-9"
+     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-85-1-2-1-3-4-0-0-2"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient28);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4-3-4)"
+     transform="matrix(0.1734912,0,0,0.13950331,115.92326,252.84661)" />
+  <rect
+     x="45.344532"
+     y="182.03563"
+     width="16.97802"
+     height="6.3946857"
+     rx="1.4073995"
+     ry="1.2368766"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-1-6-6-5-0-7-3-7-0-2-7-0"
+     style="opacity:0.961247;fill:#d9d900;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2-6-6)"
+     transform="matrix(0.17703163,0,0,0.15276794,117.40484,247.03404)" />
+  <text
+     x="64.59391"
+     y="163.00067"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="2.76279px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8-6"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4-1-6)"
+     transform="matrix(0.22337084,0,0,0.22337084,112.49613,239.14674)">NOISE 2</text>
+  <text
+     x="126.92455"
+     y="275.55634"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-68-8"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273">NOISE 2</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-96-3-3-4-7-1-9-4-6-9"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-8-7-3)"
+     transform="matrix(0.1770453,0,0,0.13653895,115.74429,248.45073)" />
+  <rect
+     x="125.30268"
+     y="271.45602"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-3-6-1-1-6-1-2-3-6-2"
+     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-85-1-2-1-3-4-0-0-4-66"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient29);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4-9-3-5)"
+     transform="matrix(0.1734912,0,0,0.13950331,115.92326,249.47761)" />
+  <rect
+     x="45.344532"
+     y="182.03563"
+     width="16.97802"
+     height="6.3946857"
+     rx="1.4073995"
+     ry="1.2368766"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-1-6-6-5-0-7-3-7-0-2-7-9-49"
+     style="opacity:0.961247;fill:#fbff00;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2-0-0-5)"
+     transform="matrix(0.17703163,0,0,0.15276794,117.40484,243.66503)" />
+  <text
+     x="64.59391"
+     y="147.91812"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="2.76279px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8-5-5"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4-8-2-7)"
+     transform="matrix(0.22337084,0,0,0.22337084,112.49613,239.14674)">NOISE 2</text>
+  <text
+     x="126.92455"
+     y="272.18735"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-68-0-0"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273">NOISE 2</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-93-7-7-0-3-4"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-0-0-4-4)"
+     transform="matrix(0.1770453,0,0,0.13653895,115.74429,245.70793)" />
+  <rect
+     x="125.30268"
+     y="268.71323"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061981"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-19-4-6-9-6-8"
+     style="fill:#585858;fill-opacity:1;stroke-width:0.038386;stroke-dasharray:none" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-47-3-3-1-1-7"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient30);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-6-3-3-7)"
+     transform="matrix(0.17349119,0,0,0.13950331,115.92326,246.73481)" />
+  <text
+     x="126.92455"
+     y="269.44452"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-8-5-5-24-2-1"
+     style="stroke-width:0.0514273">NOISE 2</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-93-7-7-4-1-1-72"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-2-1-0-1-6)"
+     transform="matrix(0.1770453,0,0,0.13653895,115.74429,242.52481)" />
+  <rect
+     x="125.30268"
+     y="265.53009"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061981"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-19-4-6-0-4-9-72"
+     style="stroke-width:0.038386;stroke-dasharray:none" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-47-3-3-3-4-4-2"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient31);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-0-7-2-3-4)"
+     transform="matrix(0.17349119,0,0,0.13950331,115.92326,243.55168)" />
+  <text
+     x="126.92455"
+     y="266.26141"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-8-5-5-2-3-7-6"
+     style="stroke-width:0.0514273">NOISE 2</text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-96-3-3-4-7-1-9-4-3-2"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-4-1-1)"
+     transform="matrix(0.1770453,0,0,0.13653895,128.55942,249.43823)" />
+  <rect
+     x="138.1178"
+     y="272.44351"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-3-6-1-1-6-1-2-3-65-93"
+     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-85-1-2-1-3-4-0-0-6-9"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient32);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4-2-9-5)"
+     transform="matrix(0.1734912,0,0,0.13950331,128.73839,250.46511)" />
+  <rect
+     x="45.344532"
+     y="182.03563"
+     width="16.97802"
+     height="6.3946857"
+     rx="1.4073995"
+     ry="1.2368766"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-1-6-6-5-0-7-3-7-0-2-7-3-0"
+     style="opacity:0.961247;fill:#d9d900;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2-2-0-4)"
+     transform="matrix(0.17703163,0,0,0.15276794,130.21997,244.65254)" />
+  <text
+     x="101.6711"
+     y="161.86015"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="2.76279px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8-9-8"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4-6-3-0);-inkscape-font-specification:'Inter, sans-serif, Normal';font-family:Inter, sans-serif;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:2.76279px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle"
+     transform="matrix(0.22337084,0,0,0.22337084,117.04226,237.02)"><tspan
+       id="tspan41">CRACK 2</tspan></text>
+  <text
+     x="139.75262"
+     y="273.17484"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-68-4-8"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273;-inkscape-font-specification:'Inter, sans-serif, Normal';font-family:Inter, sans-serif;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:0.617127px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle"><tspan
+       id="tspan40">CRACK 2</tspan></text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-93-7-7-0-3-5-5"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-0-0-1-5-1)"
+     transform="matrix(0.1770453,0,0,0.13653895,128.55942,243.32643)" />
+  <rect
+     x="138.1178"
+     y="266.33173"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-19-4-6-9-6-0-0"
+     style="fill:#585858;fill-opacity:1;stroke-width:0.0383861;stroke-dasharray:none" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-47-3-3-1-1-9-9"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient33);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-6-3-1-2-1)"
+     transform="matrix(0.1734912,0,0,0.13950331,128.73839,244.35331)" />
+  <text
+     x="139.75262"
+     y="267.06302"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-8-5-5-24-2-6-6"
+     style="stroke-width:0.0514273;-inkscape-font-specification:'Inter, sans-serif, Normal';font-family:Inter, sans-serif;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:0.617127px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle;fill:#cccccc"><tspan
+       id="tspan36">CRACK 2</tspan></text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-93-7-7-4-1-1-5-3"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-70-2-1-2-1-0-5-9-5)"
+     transform="matrix(0.1770453,0,0,0.13653895,128.55942,240.14331)" />
+  <rect
+     x="138.1178"
+     y="263.14859"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-19-4-6-0-4-9-6-8"
+     style="stroke-width:0.0383861;stroke-dasharray:none" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-47-3-3-3-4-4-1-5"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient34);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-60-0-9-0-7-2-7-6-7)"
+     transform="matrix(0.1734912,0,0,0.13950331,128.73839,241.17018)" />
+  <text
+     x="139.75262"
+     y="263.87991"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-8-5-5-2-3-7-1-6"
+     style="stroke-width:0.0514273;-inkscape-font-specification:'Inter, sans-serif, Normal';font-family:Inter, sans-serif;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:0.617127px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle;fill:#cccccc"><tspan
+       id="tspan35">CRACK 2</tspan></text>
+  <rect
+     x="53.633308"
+     y="168.09592"
+     width="19.150642"
+     height="8.2074184"
+     rx="1.5875"
+     ry="1.5875"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-5-2-5-96-3-3-4-7-1-9-4-3-0-1"
+     style="opacity:0.340486;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.264583;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter5307-3-9-2-6-7-0-4-0-3-5-4-3-2-7)"
+     transform="matrix(0.1770453,0,0,0.13653895,128.55942,246.06923)" />
+  <rect
+     x="138.1178"
+     y="269.07452"
+     width="3.2648072"
+     height="1.0133313"
+     rx="0.27061984"
+     ry="0.27061984"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-9-0-3-6-1-1-6-1-2-3-65-9-1"
+     style="fill:#ff8c00;fill-opacity:1;stroke:#e4820b;stroke-width:0.0383861;stroke-dasharray:none;stroke-opacity:1" />
+  <rect
+     x="54.343487"
+     y="157.40337"
+     width="18.256878"
+     height="7.5523286"
+     rx="1.5135188"
+     ry="1.882265"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-3-1-3-85-1-2-1-3-4-0-0-6-3-5"
+     style="opacity:0.129192;fill:none;fill-opacity:1;stroke:url(#linearGradient35);stroke-width:0.192904;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1673-5-8-8-7-7-5-3-8-3-4-2-5-3-5)"
+     transform="matrix(0.1734912,0,0,0.13950331,128.73839,247.09611)" />
+  <rect
+     x="45.344532"
+     y="182.03563"
+     width="16.97802"
+     height="6.3946857"
+     rx="1.4073995"
+     ry="1.2368766"
+     fill="#3a3f47"
+     stroke="#2a2e34"
+     id="rect18943-1-6-6-5-0-7-3-7-0-2-7-3-6-9"
+     style="opacity:0.961247;fill:#fbff00;fill-opacity:1;stroke-width:0.219898;stroke-dasharray:none;filter:url(#filter6448-1-0-3-7-6-3-6-2-2-2-9-3)"
+     transform="matrix(0.17703163,0,0,0.15276794,130.21997,241.28353)" />
+  <text
+     x="102.43613"
+     y="146.6403"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="2.76279px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-6-8-9-0-8"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.230233;filter:url(#filter9225-4-6-1-7-4);-inkscape-font-specification:'Inter, sans-serif, Normal';font-family:Inter, sans-serif;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:2.76279px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle"
+     transform="matrix(0.22337084,0,0,0.22337084,116.87137,237.05067)"><tspan
+       id="tspan37">CRACK 2</tspan><tspan
+       id="tspan38"></tspan></text>
+  <text
+     x="139.75262"
+     y="269.80585"
+     text-anchor="middle"
+     font-family="Inter, sans-serif"
+     font-size="0.617127px"
+     fill="#cccccc"
+     id="text18945-78-6-6-5-3-7-5-6-1-3-68-4-6-4"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.0514273;-inkscape-font-specification:'Inter, sans-serif, Normal';font-family:Inter, sans-serif;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:0.617127px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-anchor:middle"><tspan
+       id="tspan39">CRACK 2</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:1.72656px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.346238;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="44.320511"
+     y="204.95502"
+     id="text20130-6-7-3-8-1"><tspan
+       id="tspan20128-0-9-6-3-8"
+       style="fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.346238;stroke-opacity:1"
+       x="44.320511"
+       y="204.95502">NOISE 1</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:1.72656px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.346238;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="55.880615"
+     y="205.81766"
+     id="text20130-6-7-3-8-9"><tspan
+       id="tspan20128-0-9-6-3-7"
+       style="fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.346238;stroke-opacity:1"
+       x="55.880615"
+       y="205.81766">NOISE 2</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-weight:bold;font-size:1.30212px;font-family:Quicksand;-inkscape-font-specification:'Quicksand Bold';opacity:0.927555;fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.261121;stroke-linecap:round;stroke-dasharray:none;stroke-opacity:1"
+     x="66.738289"
+     y="205.55629"
+     id="text20130-6-9-38"><tspan
+       id="tspan20128-0-7-83"
+       style="fill:#ffa800;fill-opacity:1;stroke:none;stroke-width:0.261121;stroke-opacity:1"
+       x="66.738289"
+       y="205.55629">CRACKLE 1</tspan></text>
 </svg>

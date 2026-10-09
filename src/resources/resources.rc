@@ -29,14 +29,22 @@ entropy_depth_knob_label.png
 
 # ---- Modules Widget Tabs ---
 
-tab_noise_button.png
-tab_noise_button_hover.png
-tab_noise_button_on.png
-tab_noise_button_hover_on.png
-tab_crackle_button.png
-tab_crackle_button_hover.png
-tab_crackle_button_on.png
-tab_crackle_button_hover_on.png
+tab_noise1_button.png
+tab_noise1_button_hover.png
+tab_noise1_button_on.png
+tab_noise1_button_hover_on.png
+tab_noise2_button.png
+tab_noise2_button_hover.png
+tab_noise2_button_on.png
+tab_noise2_button_hover_on.png
+tab_crackle1_button.png
+tab_crackle1_button_hover.png
+tab_crackle1_button_on.png
+tab_crackle1_button_hover_on.png
+tab_crackle2_button.png
+tab_crackle2_button_hover.png
+tab_crackle2_button_on.png
+tab_crackle2_button_hover_on.png
 tab_glitch_button.png
 tab_glitch_button_hover.png
 tab_glitch_button_on.png
@@ -52,7 +60,8 @@ tab_bitcrasher_button_hover_on.png
 
 # ---- NOISE -----
 
-noise_label.png
+noise1_label.png
+noise2_label.png
 noise_density_knob_label.png
 noise_brightness_knob_label.png
 noise_gain_knob_label.png
@@ -86,7 +95,8 @@ noise_highpass_button_hover_on.png
 
 # ---- CRAKCLE -----
 
-crackle_label.png
+crackle1_label.png
+crackle2_label.png
 crackle_rate_knob_label.png
 crackle_randomness_knob_label.png
 crackle_amplitude_knob_label.png
