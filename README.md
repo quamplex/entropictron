@@ -1,12 +1,14 @@
 # Entropictron
 
 **Entropictron** is a [free software](https://www.gnu.org/philosophy/free-sw.en.html)
-context generator and audio effect.
+ generator and audio effect.
 
 **Website:** [https://quamplex.com/entropictron](https://quamplex.com/entropictron)
 
 Entropictron can produce a variety of sound textures that can
 serve as background or contextual elements in music tracks.
+The name **Entropictron** derives from the root word *entropy*,
+which generally refers to something chaotic.
 
 **License:** GNU General Public License, Version 3
 
@@ -15,9 +17,6 @@ serve as background or contextual elements in music tracks.
 ![Screenshot](artwork/screenshot.png)
 
 ## Features
-
-Entropictron combines and mixes several sound generators and effects,
-allowing to layer Noise, Crackle, Bitcrasher, and Glitch in a single patch.
 
 ### Noise (×2)
 A noise generator producing various noise types with an integrated
@@ -88,12 +87,8 @@ Applies a sample-rate reduction & bit-depth reduction effect to the input sound.
 
 ### Global Entropy Modulation
 
-Entropy modulation affects the **Noise** module parameters:
-
-- Density
-- Gain
-- Filter cutoff
-- Resonance
+Entropy modulation affects the **Noise** (Density, Gain, Filter cutoff, Resonance)
+ and **Bitcrasher** (Chaos)
 
 **Global controls:**
 

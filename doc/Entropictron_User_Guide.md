@@ -25,21 +25,15 @@
 ### What is Entropictron
 
 Entropictron is a [free software](https://www.gnu.org/philosophy/free-sw.en.html)
-context generator and audio effect. Entropictron can produce a variety of sound
+ generator and audio effect. Entropictron can produce a variety of sound
 textures that can serve as background or contextual elements in music tracks.
-Useful for ambient music, sound effects, film and video production, game audio,
-and other. Entropictron is released under the GNU General Public License version 3 (and later),
-developed in C and C++, and utilizes the CMake build system. It can be used as an VST3 audio plugin.
-Can run on GNU/Linux and Windows.
+Useful for ambient music, sound effects and other. Entropictron is released under the GNU General Public License version 3 (and later),
+developed in C and C++, and utilizes the CMake build system. It can be used as an VST3 audio plugin. Can run on GNU/Linux and Windows.
 
 The name **Entropictron** derives from the root word *entropy*, which generally refers to something chaotic.
 
-### Block diagram
-
-Entropictron consists of several primary modules: a noise generator, a crackle generator,
-a bitcrasher effect, glitch effect, and a random gate effect.
-Each module can be tuned via its own set of parameters, and the processed
-signals are finally mixed to produce the output sound.
+Entropictron consists of several primary modules: noise generators, crackle generators,
+a bitcrasher effect, glitch effect, and a random gate effect. Each module can be tuned via its own set of parameters, and the processed signals are mixed to produce the output sound.
 
 ### Noise
 
@@ -135,14 +129,12 @@ By default, the plugin is loaded in **Playback** mode. The selected mode is save
 ### Global Entropy
 
 Global Entropy is a global random LFO (walker) that generates a value that changes over time.
-This entropy value modulates the **density**, **gain**, and **filter cutoff and resonance** of the Noise module.
+This entropy value modulates the **density**, **gain**, and **filter cutoff and resonance** of the Noise module and chaos parameter of the Bicrasher..
 
 The entropy is controlled by two parameters:
 
 - **Entropy** – sets the rate at which the entropy value changes.
 - **Depth** – sets the amount (depth) of the entropy modulation.
-
-The UI contains knobs to control these two parameters.
 
 There is also an entropy value graph that shows the current entropy value in real time.
 
