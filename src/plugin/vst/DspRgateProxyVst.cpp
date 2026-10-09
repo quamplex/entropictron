@@ -49,23 +49,6 @@ DspRgateProxyVst::DspRgateProxyVst(RkObject* parent,
                 ParameterId::RgateInvertedId,
         };
 
-        vstController->setParamNormalized(ParameterId::RgateEnabledId,
-                                          enabledToNormalized(false));
-        vstController->setParamNormalized(ParameterId::RgateMinIntervalId,
-                                          minIntervalToNormalized(ENT_RGATE_DEFAULT_MIN_INTERVAL));
-        vstController->setParamNormalized(ParameterId::RgateMaxIntervalId,
-                                          maxIntervalToNormalized(ENT_RGATE_DEFAULT_MAX_INTERVAL));
-        vstController->setParamNormalized(ParameterId::RgateMinDurationId,
-                                          minDurationToNormalized(ENT_RGATE_DEFAULT_MIN_DURATION));
-        vstController->setParamNormalized(ParameterId::RgateMaxDurationId,
-                                          maxDurationToNormalized(ENT_RGATE_DEFAULT_MAX_DURATION));
-        vstController->setParamNormalized(ParameterId::RgateMinGainId,
-                                          minGainToNormalized(ENT_RGATE_DEFAULT_MIN_GAIN));
-        vstController->setParamNormalized(ParameterId::RgateMaxGainId,
-                                          maxGainToNormalized(ENT_RGATE_DEFAULT_MAX_GAIN));
-        vstController->setParamNormalized(ParameterId::RgateInvertedId,
-                                          invertedToNormalized(ENT_RGATE_DEFAULT_INVERTED));
-
         for (const auto& paramId : params)
                 vstController->setParamterCallback(paramId, paramCallback);
 }
@@ -85,11 +68,8 @@ DspRgateProxyVst::~DspRgateProxyVst()
 
 bool DspRgateProxyVst::enable(bool b)
 {
-        vstController->getComponentHandler()->beginEdit(ParameterId::RgateEnabledId);
-        vstController->getComponentHandler()->performEdit(ParameterId::RgateEnabledId,
-                                                          enabledToNormalized(b));
-        vstController->getComponentHandler()->endEdit(ParameterId::RgateEnabledId);
-        return true;
+        return vstController->editParameter(ParameterId::RgateEnabledId,
+                                            enabledToNormalized(b));
 }
 
 bool DspRgateProxyVst::isEnabled() const
@@ -100,12 +80,8 @@ bool DspRgateProxyVst::isEnabled() const
 
 bool DspRgateProxyVst::setMinInterval(double value)
 {
-        auto handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::RgateMinIntervalId);
-        handler->performEdit(ParameterId::RgateMinIntervalId,
-                             minIntervalToNormalized(value));
-        handler->endEdit(ParameterId::RgateMinIntervalId);
-        return true;
+        return vstController->editParameter(ParameterId::RgateMinIntervalId,
+                                            minIntervalToNormalized(value));
 }
 
 double DspRgateProxyVst::getMinInterval() const
@@ -116,12 +92,8 @@ double DspRgateProxyVst::getMinInterval() const
 
 bool DspRgateProxyVst::setMaxInterval(double value)
 {
-        auto handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::RgateMaxIntervalId);
-        handler->performEdit(ParameterId::RgateMaxIntervalId,
-                             maxIntervalToNormalized(value));
-        handler->endEdit(ParameterId::RgateMaxIntervalId);
-        return true;
+        return vstController->editParameter(ParameterId::RgateMaxIntervalId,
+                                            maxIntervalToNormalized(value));
 }
 
 double DspRgateProxyVst::getMaxInterval() const
@@ -132,12 +104,8 @@ double DspRgateProxyVst::getMaxInterval() const
 
 bool DspRgateProxyVst::setMinDuration(double value)
 {
-        auto handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::RgateMinDurationId);
-        handler->performEdit(ParameterId::RgateMinDurationId,
-                             minDurationToNormalized(value));
-        handler->endEdit(ParameterId::RgateMinDurationId);
-        return true;
+        return vstController->editParameter(ParameterId::RgateMinDurationId,
+                                            minDurationToNormalized(value));
 }
 
 double DspRgateProxyVst::getMinDuration() const
@@ -148,12 +116,8 @@ double DspRgateProxyVst::getMinDuration() const
 
 bool DspRgateProxyVst::setMaxDuration(double value)
 {
-        auto handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::RgateMaxDurationId);
-        handler->performEdit(ParameterId::RgateMaxDurationId,
-                             maxDurationToNormalized(value));
-        handler->endEdit(ParameterId::RgateMaxDurationId);
-        return true;
+        return vstController->editParameter(ParameterId::RgateMaxDurationId,
+                                            maxDurationToNormalized(value));
 }
 
 double DspRgateProxyVst::getMaxDuration() const
@@ -167,12 +131,8 @@ bool DspRgateProxyVst::setMinGain(double value)
         if (value > getMaxGain())
                 setMaxGain(value);
 
-        auto handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::RgateMinGainId);
-        handler->performEdit(ParameterId::RgateMinGainId,
-                             minGainToNormalized(value));
-        handler->endEdit(ParameterId::RgateMinGainId);
-        return true;
+        return vstController->editParameter(ParameterId::RgateMinGainId,
+                                            minGainToNormalized(value));
 }
 
 double DspRgateProxyVst::getMinGain() const
@@ -186,11 +146,8 @@ bool DspRgateProxyVst::setMaxGain(double value)
         if (value < getMinGain())
                 setMinGain(value);
 
-        auto handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::RgateMaxGainId);
-        handler->performEdit(ParameterId::RgateMaxGainId, maxGainToNormalized(value));
-        handler->endEdit(ParameterId::RgateMaxGainId);
-        return true;
+        return vstController->editParameter(ParameterId::RgateMaxGainId,
+                                            maxGainToNormalized(value));
 }
 
 double DspRgateProxyVst::getMaxGain() const
@@ -201,12 +158,8 @@ double DspRgateProxyVst::getMaxGain() const
 
 bool DspRgateProxyVst::setRandomness(double value)
 {
-        auto handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::RgateRandomnessId);
-        handler->performEdit(ParameterId::RgateRandomnessId,
-                             randomnessToNormalized(value));
-        handler->endEdit(ParameterId::RgateRandomnessId);
-        return true;
+        return vstController->editParameter(ParameterId::RgateRandomnessId,
+                                            randomnessToNormalized(value));
 }
 
 double DspRgateProxyVst::getRandomness() const
@@ -217,12 +170,8 @@ double DspRgateProxyVst::getRandomness() const
 
 bool DspRgateProxyVst::setInverted(bool b)
 {
-        auto handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::RgateInvertedId);
-        handler->performEdit(ParameterId::RgateInvertedId,
-                             invertedToNormalized(b));
-        handler->endEdit(ParameterId::RgateInvertedId);
-        return true;
+        return vstController->editParameter(ParameterId::RgateInvertedId,
+                                            invertedToNormalized(b));
 }
 
 bool DspRgateProxyVst::getInverted() const

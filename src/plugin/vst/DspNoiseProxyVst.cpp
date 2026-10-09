@@ -97,10 +97,7 @@ bool DspNoiseProxyVst::enable(bool b)
 {
         auto paramId = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1EnabledId : ParameterId::Noise2EnabledId;
-        vstController->getComponentHandler()->beginEdit(paramId);
-        vstController->getComponentHandler()->performEdit(paramId, b ? 1.0 : 0.0);
-        vstController->getComponentHandler()->endEdit(paramId);
-        return true;
+        return vstController->editParameter(paramId, b ? 1.0 : 0.0);
 }
 
 bool DspNoiseProxyVst::isEnabled() const
@@ -114,10 +111,7 @@ bool DspNoiseProxyVst::setType(NoiseType type)
 {
         auto id = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1TypeId : ParameterId::Noise2TypeId;
-        vstController->getComponentHandler()->beginEdit(id);
-        vstController->getComponentHandler()->performEdit(id, noiseTypeToNormalized(type));
-        vstController->getComponentHandler()->endEdit(id);
-        return true;
+        return vstController->editParameter(id, noiseTypeToNormalized(type));
 }
 
 NoiseType DspNoiseProxyVst::noiseType() const
@@ -131,10 +125,7 @@ bool DspNoiseProxyVst::setDensity(double value)
 {
         auto id = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1DensityId : ParameterId::Noise2DensityId;
-        vstController->getComponentHandler()->beginEdit(id);
-        vstController->getComponentHandler()->performEdit(id, value);
-        vstController->getComponentHandler()->endEdit(id);
-        return true;
+        return vstController->editParameter(id, value);
 }
 
 double DspNoiseProxyVst::density() const
@@ -148,10 +139,7 @@ bool DspNoiseProxyVst::setBrightness(double value)
 {
         auto id = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1BrightnessId : ParameterId::Noise2BrightnessId;
-        vstController->getComponentHandler()->beginEdit(id);
-        vstController->getComponentHandler()->performEdit(id, value);
-        vstController->getComponentHandler()->endEdit(id);
-        return true;
+        return vstController->editParameter(id, value);
 }
 
 double DspNoiseProxyVst::brightness() const
@@ -165,10 +153,7 @@ bool DspNoiseProxyVst::setGain(double value)
 {
         auto id = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1GainId : ParameterId::Noise2GainId;
-        vstController->getComponentHandler()->beginEdit(id);
-        vstController->getComponentHandler()->performEdit(id, gainToNormalized(value));
-        vstController->getComponentHandler()->endEdit(id);
-        return true;
+        return vstController->editParameter(id, gainToNormalized(value));
 }
 
 double DspNoiseProxyVst::gain() const
@@ -182,10 +167,7 @@ bool DspNoiseProxyVst::setStereo(double value)
 {
         auto id = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1StereoId : ParameterId::Noise2StereoId;
-        vstController->getComponentHandler()->beginEdit(id);
-        vstController->getComponentHandler()->performEdit(id, value);
-        vstController->getComponentHandler()->endEdit(id);
-        return true;
+        return vstController->editParameter(id, value);
 }
 
 double DspNoiseProxyVst::stereo() const
@@ -199,10 +181,7 @@ bool DspNoiseProxyVst::setFilterType(FilterType type)
 {
         auto id = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1FilterTypeId : ParameterId::Noise2FilterTypeId;
-        vstController->getComponentHandler()->beginEdit(id);
-        vstController->getComponentHandler()->performEdit(id, filterTypeToNormalized(type));
-        vstController->getComponentHandler()->endEdit(id);
-        return true;
+        return vstController->editParameter(id, filterTypeToNormalized(type));
 }
 
 FilterType DspNoiseProxyVst::filterType() const
@@ -215,10 +194,7 @@ FilterType DspNoiseProxyVst::filterType() const
 bool DspNoiseProxyVst::setCutOff(double value)
 {
         auto id = (getNoiseId() == NoiseId::Noise1) ? ParameterId::Noise1CutOffId : ParameterId::Noise2CutOffId;
-        vstController->getComponentHandler()->beginEdit(id);
-        vstController->getComponentHandler()->performEdit(id, cutoffToNormalized(value));
-        vstController->getComponentHandler()->endEdit(id);
-        return true;
+        return vstController->editParameter(id, cutoffToNormalized(value));
 }
 
 double DspNoiseProxyVst::cutOff() const
@@ -232,10 +208,7 @@ bool DspNoiseProxyVst::setResonance(double value)
 {
         auto id = (getNoiseId() == NoiseId::Noise1) ?
                 ParameterId::Noise1ResonanceId : ParameterId::Noise2ResonanceId;
-        vstController->getComponentHandler()->beginEdit(id);
-        vstController->getComponentHandler()->performEdit(id, value);
-        vstController->getComponentHandler()->endEdit(id);
-        return true;
+        return vstController->editParameter(id, value);
 }
 
 double DspNoiseProxyVst::resonance() const

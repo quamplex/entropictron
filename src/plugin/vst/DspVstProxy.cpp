@@ -76,11 +76,8 @@ DspProxyVst::~DspProxyVst()
 
 bool DspProxyVst::setPlayMode(PlayMode mode)
 {
-        vstController->getComponentHandler()->beginEdit(ParameterId::PlayModeId);
-        vstController->getComponentHandler()->performEdit(ParameterId::PlayModeId,
-                                                          playModeToNormalized(mode));
-        vstController->getComponentHandler()->endEdit(ParameterId::PlayModeId);
-        return true;
+        return vstController->editParameter(ParameterId::PlayModeId,
+                                            playModeToNormalized(mode));
 }
 
 PlayMode DspProxyVst::playMode() const
@@ -91,11 +88,7 @@ PlayMode DspProxyVst::playMode() const
 
 bool DspProxyVst::setEntropyRate(double rate)
 {
-        vstController->getComponentHandler()->beginEdit(ParameterId::EntropyRateId);
-        vstController->getComponentHandler()->performEdit(ParameterId::EntropyRateId,
-                                                          rate);
-        vstController->getComponentHandler()->endEdit(ParameterId::EntropyRateId);
-        return true;
+        return vstController->editParameter(ParameterId::EntropyRateId, rate);
 }
 
 double DspProxyVst::getEntropyRate() const
@@ -105,11 +98,7 @@ double DspProxyVst::getEntropyRate() const
 
 bool DspProxyVst::setEntropyDepth(double depth)
 {
-        vstController->getComponentHandler()->beginEdit(ParameterId::EntropyDepthId);
-        vstController->getComponentHandler()->performEdit(ParameterId::EntropyDepthId,
-                                                          depth);
-        vstController->getComponentHandler()->endEdit(ParameterId::EntropyDepthId);
-        return true;
+        return vstController->editParameter(ParameterId::EntropyDepthId, depth);
 }
 
 double DspProxyVst::getEntropyDepth() const

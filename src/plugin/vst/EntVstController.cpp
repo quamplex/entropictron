@@ -352,7 +352,7 @@ void EntVstController::setGlitchState(const EntState &state)
         setParamNormalized (ParameterId::GlitchDryId,
                             DspGlitchProxyVst::dryToNormalized(glitch.dry));
         setParamNormalized (ParameterId::GlitchWetId,
-                            DspGlitchProxyVst::dryToNormalized(glitch.wet));
+                            DspGlitchProxyVst::wetToNormalized(glitch.wet));
 }
 
 void EntVstController::setRgateState(const EntState &state)
@@ -741,6 +741,22 @@ void EntVstController::removeParamterCallback(ParameterId id)
         parametersCallbacks.erase(id);
 }
 
+bool EntVstController::editParameter(ParameterId id, ParamValue value)
+{
+        if (setParamNormalized(id, value) != kResultOk)
+                return false;
+
+        auto* handler = getComponentHandler();
+        if (!handler)
+                return false;
+
+        handler->beginEdit(id);
+        handler->performEdit(id, value);
+        handler->endEdit(id);
+
+        return true;
+}
+
 void EntVstController::setStateCallback(StateCallback callback)
 {
         stateCallback = callback;
@@ -751,7 +767,7 @@ void EntVstController::clearStateCallback()
         stateCallback = {};
 }
 
-tresult EntVstController::setParamNormalized (ParamID tag, ParamValue value)
+tresult EntVstController::setParamNormalized(ParamID tag, ParamValue value)
 {
         auto result = EditControllerEx1::setParamNormalized(tag, value);
         if (result != kResultOk)
@@ -761,6 +777,7 @@ tresult EntVstController::setParamNormalized (ParamID tag, ParamValue value)
         auto res = parametersCallbacks.find(parameterId);
         if (res != parametersCallbacks.end())
                 res->second(parameterId, value);
+
         return result;
 }
 

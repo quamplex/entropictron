@@ -25,20 +25,6 @@ DspBitcrasherProxyVst::DspBitcrasherProxyVst(RkObject *parent,
         for (auto id : paramsId)
                 vstController->setParamterCallback(id, callback);
 
-        vstController->setParamNormalized(ParameterId::BitcrasherEnabledId, 0.0);
-        vstController->setParamNormalized(ParameterId::BitcrasherBitsId,
-                                          bitcrasherBitsToNormalized(ENT_BITCRASHER_DEFAULT_BITS));
-        vstController->setParamNormalized(ParameterId::BitcrasherRateId,
-                                          rateToNormalized(
-                                                  ENT_BITCRASHER_DEFAULT_RATE));
-        vstController->setParamNormalized(ParameterId::BitcrasherChaosId,
-                                          ENT_BITCRASHER_DEFAULT_CHAOS);
-        vstController->setParamNormalized(
-                ParameterId::BitcrasherGainId,
-                gainToNormalized(Entropictron::fromDecibel(
-                        ENT_BITCRASHER_DEFAULT_GAIN)));
-        vstController->setParamNormalized(ParameterId::BitcrasherMixId,
-                                          ENT_BITCRASHER_DEFAULT_MIX);
 }
 
 DspBitcrasherProxyVst::~DspBitcrasherProxyVst()
@@ -55,11 +41,8 @@ DspBitcrasherProxyVst::~DspBitcrasherProxyVst()
 
 bool DspBitcrasherProxyVst::enable(bool value)
 {
-        auto *handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::BitcrasherEnabledId);
-        handler->performEdit(ParameterId::BitcrasherEnabledId, value ? 1.0 : 0.0);
-        handler->endEdit(ParameterId::BitcrasherEnabledId);
-        return true;
+        return vstController->editParameter(ParameterId::BitcrasherEnabledId,
+                                            value ? 1.0 : 0.0);
 }
 
 bool DspBitcrasherProxyVst::isEnabled() const
@@ -69,12 +52,8 @@ bool DspBitcrasherProxyVst::isEnabled() const
 
 bool DspBitcrasherProxyVst::setBits(int value)
 {
-        auto *handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::BitcrasherBitsId);
-        handler->performEdit(ParameterId::BitcrasherBitsId,
-                             bitcrasherBitsToNormalized(value));
-        handler->endEdit(ParameterId::BitcrasherBitsId);
-        return true;
+        return vstController->editParameter(ParameterId::BitcrasherBitsId,
+                                            bitcrasherBitsToNormalized(value));
 }
 
 int DspBitcrasherProxyVst::bits() const
@@ -85,12 +64,8 @@ int DspBitcrasherProxyVst::bits() const
 
 bool DspBitcrasherProxyVst::setRate(double value)
 {
-        auto *handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::BitcrasherRateId);
-        handler->performEdit(ParameterId::BitcrasherRateId,
-                             rateToNormalized(value));
-        handler->endEdit(ParameterId::BitcrasherRateId);
-        return true;
+        return vstController->editParameter(ParameterId::BitcrasherRateId,
+                                            rateToNormalized(value));
 }
 
 double DspBitcrasherProxyVst::rate() const
@@ -101,11 +76,8 @@ double DspBitcrasherProxyVst::rate() const
 
 bool DspBitcrasherProxyVst::setChaos(double value)
 {
-        auto *handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::BitcrasherChaosId);
-        handler->performEdit(ParameterId::BitcrasherChaosId, value);
-        handler->endEdit(ParameterId::BitcrasherChaosId);
-        return true;
+        return vstController->editParameter(ParameterId::BitcrasherChaosId,
+                                            value);
 }
 
 double DspBitcrasherProxyVst::chaos() const
@@ -115,12 +87,8 @@ double DspBitcrasherProxyVst::chaos() const
 
 bool DspBitcrasherProxyVst::setGain(double value)
 {
-        auto *handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::BitcrasherGainId);
-        handler->performEdit(ParameterId::BitcrasherGainId,
-                             gainToNormalized(value));
-        handler->endEdit(ParameterId::BitcrasherGainId);
-        return true;
+        return vstController->editParameter(ParameterId::BitcrasherGainId,
+                                            gainToNormalized(value));
 }
 
 double DspBitcrasherProxyVst::gain() const
@@ -131,11 +99,7 @@ double DspBitcrasherProxyVst::gain() const
 
 bool DspBitcrasherProxyVst::setMix(double value)
 {
-        auto *handler = vstController->getComponentHandler();
-        handler->beginEdit(ParameterId::BitcrasherMixId);
-        handler->performEdit(ParameterId::BitcrasherMixId, value);
-        handler->endEdit(ParameterId::BitcrasherMixId);
-        return true;
+        return vstController->editParameter(ParameterId::BitcrasherMixId, value);
 }
 
 double DspBitcrasherProxyVst::mix() const
