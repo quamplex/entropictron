@@ -3,6 +3,7 @@
 ### Features
 
 - Added Bitcrasher module
+- New presets
 
 ### Fixes
 
