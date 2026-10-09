@@ -324,8 +324,6 @@ bool EntState::fromJson(const std::string& jsonStr)
         return false;
 
     for (const auto& m : doc["modules"].GetArray()) {
-            continue;
-
             if (!m.HasMember("name") || !m["name"].IsString())
                     continue;
 
