@@ -45,17 +45,7 @@ Generates short, irregular bursts with different shapes.
 - Duration
 - Stereo spread
 
-### Bitcrasher (×1)
-Applies a sample-rate reduction & bit-depth reduction effect to the input sound.
-
-**Parameters:**
-- Bits
-- Rate
-- Chaos
-- Gain
-- Mix
-
-### Glitch (×2)
+### Glitch
 Simulates memory-based glitches with adjustable length, randomness,
 and jump parameters, creating stutters and digital artifacts.
 
@@ -78,6 +68,17 @@ Randomly changes the audio level
 - Min/Max Gain
 - Randomness
 - Inverted mode
+
+### Bitcrasher
+
+Applies a sample-rate reduction & bit-depth reduction effect to the input sound.
+
+**Parameters:**
+- Bits
+- Rate
+- Chaos
+- Gain
+- Mix
 
 ### Play Mode
 

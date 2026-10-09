@@ -72,19 +72,6 @@ It has the following parameters:
 - **Stereo knob:** Creates a stochastic stereo effect, where bursts are spread randomly across both channels.
 - **EXP, LIN, TR buttons:** Select the burst shape - exponential decay (EXP), linear decay (LIN), or triangle (TR).
 
-### Bitcrasher
-
-The Bitcrasher introduces digital degradation by periodically sampling and
-quantizing the input signal to a lower bit depth.
-
-It has the following parameters:
-
-- **Bits knob:** Sets the bit depth used for quantization. Ranges from 1 to 10 bits.
-- **Rate knob:** Controls how often the input is sampled and held.
-- **Chaos knob:** Introduces random variations in the bit depth and timing, from 0% to 50%.
-- **Gain knob:** Adjusts the output gain of the bitcrashed signal, from -50 dB to +6 dB.
-- **Mix knob:** Blends the processed signal with the original dry signal, from 0% to 100%.
-
 ### Glitch
 
 The Glitch effect simulates memory glitch effects. It takes the audio input,
@@ -115,6 +102,19 @@ It has the following parameters:
 - **Min/Max Gain knobs:** Control the range of gain values that can be applied.
 - **Randomness knob:** Controls the amount of randomness applied to the interval, duration, and gain.
 - **Inverted switch:** Inverts the behavior.
+
+### Bitcrasher
+
+The Bitcrasher introduces digital degradation by periodically sampling and
+quantizing the input signal to a lower bit depth.
+
+It has the following parameters:
+
+- **Bits knob:** Sets the bit depth used for quantization. Ranges from 1 to 10 bits.
+- **Rate knob:** Controls how often the input is sampled and held.
+- **Chaos knob:** Introduces random variations in the bit depth and timing, from 0% to 50%.
+- **Gain knob:** Adjusts the output gain of the bitcrashed signal, from -50 dB to +6 dB.
+- **Mix knob:** Blends the processed signal with the original dry signal, from 0% to 100%.
 
 ### Factory Presets
 
