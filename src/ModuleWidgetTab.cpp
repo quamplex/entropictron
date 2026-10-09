@@ -95,23 +95,23 @@ void ModuleWidgetTab::createTabButtons()
 
 void ModuleWidgetTab::showModuleControls(ModuleWidgetTab::Module module)
 {
-        if (currentModule == module)
-                return;
-
-        currentModule = module;
         if (moduleType == ModuleType::ModuleGenerator) {
                 for (size_t i = 0; i < 2; i++) {
                         auto noise = i == 0 ? Module::Noise1 : Module::Noise2;
                         auto crackle = i == 0 ? Module::Crackle1 : Module::Crackle2;
-                        noiseTabButton[i]->setPressed(currentModule == noise);
-                        crackleTabButton[i]->setPressed(currentModule == crackle);
+                        noiseTabButton[i]->setPressed(module == noise);
+                        crackleTabButton[i]->setPressed(module == crackle);
                 }
         } else {
-                glitchTabButton->setPressed(currentModule == Module::Glitch);
-                rgateTabButton->setPressed(currentModule == Module::Rgate);
-                bitcrasherTabButton->setPressed(currentModule == Module::Bitcrasher);
+                glitchTabButton->setPressed(module == Module::Glitch);
+                rgateTabButton->setPressed(module == Module::Rgate);
+                bitcrasherTabButton->setPressed(module == Module::Bitcrasher);
         }
 
+        if (currentModule == module)
+                return;
+
+        currentModule = module;
         delete moduleWidget;
         moduleWidget = nullptr;
 
