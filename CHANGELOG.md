@@ -8,6 +8,11 @@
 
 - Fix Glitch module (add dry/wet knobs)
 
+### Changes
+
+- Separate in UI the generatros from effects
+- Only one glitch effect module
+
 ## [1.2.0]
 
 ### Features
