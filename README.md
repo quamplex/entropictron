@@ -137,13 +137,6 @@ Clone the Entropictron code repository, compile and install.
 To build on Windows, there is a need to install MSYS2/UCRT64 and follow
 the same steps as mentioned above.
 
-## Road map
-
-Here is kind of plan about what palnned to be devleope for Entropictrond
-
-First stage: Add dustortion and filer module, here adding effect and generator for now will stop
-Second stage: add Event stchastic enerator per mnodule that will influence selected modle parameters.
-
 ## Documentation
 
  [doc/Entropictron_User_Guide.md](doc/Entropictron_User_Guide.md)
