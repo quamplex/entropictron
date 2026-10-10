@@ -7,6 +7,7 @@
 
 ### Fixes
 
+- Fix parameter synchronization
 - Fix Glitch module (add dry/wet knobs)
 
 ### Changes
