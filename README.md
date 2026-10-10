@@ -102,6 +102,13 @@ In order Entropictron to run and operate correctly there is a need
  * GNU/Linux or Windows operating system.
  * A host that supports VST3 plugin format.
 
+## Hearing Safety
+
+Entropictron generates potentially unpredictable sounds,
+including sudden loud sounds. Lower your monitoring volume
+before use, especially when experimenting with settings
+or presets.
+
 ## Build & Install
 
 ##### Install dependencies

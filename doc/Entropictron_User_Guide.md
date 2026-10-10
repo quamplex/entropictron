@@ -35,6 +35,13 @@ The name **Entropictron** derives from the root word *entropy*, which generally 
 Entropictron consists of several primary modules: noise generators, crackle generators,
 a bitcrasher effect, glitch effect, and a random gate effect. Each module can be tuned via its own set of parameters, and the processed signals are mixed to produce the output sound.
 
+## Hearing Safety
+
+Entropictron generates potentially unpredictable sounds,
+including sudden loud sounds. Lower your monitoring volume
+before use, especially when experimenting with settings
+or presets.
+
 ### Noise
 
 The Noise generator can generate three types of noise: white, pink, and brownian.
