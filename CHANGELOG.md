@@ -12,7 +12,7 @@
 
 ### Changes
 
-- Separate in UI the generatros from effects
+- Separate in UI the generators from effects
 - Only one glitch effect module
 
 ## [1.2.0]
